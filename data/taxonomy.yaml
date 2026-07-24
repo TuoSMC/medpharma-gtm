@@ -6,7 +6,7 @@
 # in accounts/*.yaml.
 # ============================================================
 
-version: 3
+version: 4
 status: approved
 
 enums:
@@ -38,6 +38,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 3}
     infra_notes: "PB-scale archive, NVMe ingest tier, GPU if AI overlay; retention 10yr+ drives storage growth"
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx files
@@ -56,6 +57,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 3}
     infra_notes: "HPC CPU-dense + GPU nodes, NVMe scratch (burst I/O), object storage for cohorts; cloud-repatriation candidate at sustained load. Owns secondary + compute-heavy tertiary analysis; hands curated tertiary calls to clinical-genomics-reporting (SaaS interpretation)."
     play_refs: [play-b]
     vendor_refs: []
@@ -74,6 +76,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 1}
     infra_notes: "Redundant plant server pairs, industrial edge per line, DR site; GxP/Part 11 → validated-change documentation is part of the sale"
     play_refs: [play-c]
     vendor_refs: []
@@ -95,6 +98,7 @@ categories:
     hardware_buyer: [customer, operator]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 4}
     infra_notes: "Large HA database clusters, virtualization/VDI farms for clinician access, and full DR sites; sized by bed count, concurrent users, and uptime SLAs. Refresh cycles and DR site builds are the main deal triggers."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -115,6 +119,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 3}
     infra_notes: "Mostly rides on EHR or cloud infrastructure; emerging pull is on-prem GPU inference nodes where PHI rules force local hosting of clinical LLM/ambient-AI workloads. Sized by inference concurrency, not data volume."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -135,6 +140,7 @@ categories:
     hardware_buyer: [customer, operator]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 2}
     infra_notes: "Departmental servers plus fast-growing storage for cath/echo video and ECG waveforms; sized by procedure volume and retention rules. Frequently bundled into imaging-archive refresh projects, so ride those cycles."
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -155,6 +161,7 @@ categories:
     hardware_buyer: [customer, oem, hyperscaler, operator]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 2, oem: 2}
     infra_notes: "Per-OR edge capture/routing nodes plus central storage for 4K surgical video; GPU enters with intra-op video AI. Sized by OR count and video retention policy; strong OEM appliance angle with OR-integration ISVs."
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -173,9 +180,10 @@ categories:
       dimension: [clinical]
     hw_pull: 3
     hardware_buyer: [customer, oem]
-    primary_buyer: customer
+    primary_buyer: oem
     smc_reachable: true
-    infra_notes: "Redundant on-prem server pairs and bedside/edge gateways ingesting continuous waveforms; HA is mandatory since downtime is a patient-safety event. Sized by monitored beds and waveform retention; surveillance analytics adds compute."
+    hw_pull_by_buyer: {customer: 2, oem: 3}
+    infra_notes: "Redundant on-prem server pairs and bedside/edge gateways ingesting continuous waveforms; HA is mandatory since downtime is a patient-safety event. Sized by monitored beds and waveform retention; surveillance analytics adds compute. Central-station servers are spec'd/supplied through the monitoring device maker (Philips/GE/Draeger) as part of the FDA-cleared system → OEM design-win is the larger motion; hospital-owned surveillance analytics is the smaller customer pull."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
@@ -195,6 +203,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 1, operator: 1}
     infra_notes: "SaaS/public-cloud dominated; customer-side hardware is largely endpoints and carts. Niche exception: tele-ICU command centers with on-prem video walls and ingest servers — small, opportunistic deals only."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -215,6 +224,7 @@ categories:
     hardware_buyer: [customer, operator]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 1}
     infra_notes: "Dedicated dose-calculation servers (Monte Carlo / collapsed-cone, GPU-accelerated) with HA, plus OIS record-and-verify DB and DICOM-RT image storage. Calc-farm sizing driven by plan throughput; a discrete GPU/server project per cancer center."
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -235,6 +245,7 @@ categories:
     hardware_buyer: [customer, operator]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 2}
     infra_notes: "Server-side GPU volume-rendering farm (thin-client CT/MR/vascular/cardiac 3D, structural-heart planning). Distinct GPU pull from the PACS/VNA archive tier and from AI inference orchestration; sized by concurrent render sessions."
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -256,7 +267,8 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
-    infra_notes: "SaaS-dominant; residual hospital-hosted web/app (DMZ) tier where the portal or mobile-registration app tethers to an on-prem HIS. Sizing by registered-patient count and peak login bursts; customer hardware opportunity minimal."
+    hw_pull_by_buyer: {customer: 1, operator: 1}
+    infra_notes: "SaaS-dominant; residual hospital-hosted web/app (DMZ) tier where the portal or mobile-registration app tethers to an on-prem HIS. Sizing by registered-patient count and peak login bursts; customer hardware opportunity minimal. Operator is commodity multi-tenant portal SaaS on public cloud (hyperscaler-diluted), so operator pull is minimal — same principle as telehealth-platform (GxP-validated hosting would earn 2; this is not)."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
@@ -276,6 +288,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 2}
     infra_notes: "Runs as HA VMs alongside the HIS/EHR; check-in kiosks, queue displays and ticketing terminals are edge endpoints. Sizing driven by daily outpatient visit volume and the morning registration peak — downtime is front-door visible, so HA is non-negotiable."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -296,6 +309,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 3}
     infra_notes: "Transactional DB with heavy batch claim-generation/scrubbing runs, typically co-located with EHR patient accounting on-prem or hosted-private; HA + DR mandatory since a billing stoppage halts cash flow. AI claims-scrubbing/denials inference sits mostly at the ISV or BPO operator, not the hospital."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -316,6 +330,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 3}
     infra_notes: "Scanned-chart/document-imaging repositories with 7-15yr retention drive the storage footprint; legacy on-prem archives are refresh candidates. NLP computer-assisted/autonomous coding inference is mostly ISV-hosted GPU rather than customer-side."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -336,6 +351,7 @@ categories:
     hardware_buyer: [customer, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3}
     infra_notes: "Where on-prem (still common in APAC hospitals), a classic DB+app HA cluster with a DR pair and nightly close/batch windows; sized by transaction volume, bed count and concurrent users. Cloud-ERP migration is steadily eroding this footprint, so refresh cycles are the entry point."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -356,6 +372,7 @@ categories:
     hardware_buyer: [operator, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {operator: 1}
     infra_notes: "Overwhelmingly SaaS (nurse rostering, predictive staffing, float/agency marketplaces); time-clock and biometric attendance terminals are thin edge endpoints. Customer-side server opportunity is minimal beyond legacy time-and-attendance servers awaiting decommission."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -377,6 +394,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 1}
     infra_notes: "Bedside/unit edge gateways plus central integration engines in HA pairs feeding the EMR; vitals and waveform streams demand low-latency compute and growing time-series retention storage. Sizing driven by monitored-bed count, waveform capture depth, and alarm-routing uptime SLAs."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -397,6 +415,7 @@ categories:
     hardware_buyer: [customer, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2}
     infra_notes: "Facility-wide tag/sensor networks with edge receivers and an on-prem or hybrid location engine; analytics tiers increasingly cloud. Sizing driven by tag count, location-update frequency, and campus square footage."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -417,6 +436,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 1, operator: 1}
     infra_notes: "Overwhelmingly SaaS today; residual on-prem footprint only at legacy or air-gapped sites and it is small application/database servers, not scale-out infrastructure. Minimal direct hardware opportunity."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -437,6 +457,7 @@ categories:
     hardware_buyer: [customer, oem, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, oem: 2}
     infra_notes: "Dispensing cabinets, packaging and compounding robots run on embedded/edge controllers with on-prem central servers for formulary, inventory, and diversion analytics; management tiers shifting hybrid/cloud. Sizing driven by cabinet/robot fleet size and transaction volume."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -457,6 +478,7 @@ categories:
     hardware_buyer: [customer, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2}
     infra_notes: "Passive network collector/sensor appliances at each campus mirror device traffic; analytics and asset inventory mostly cloud, with fully on-prem builds only for high-security systems. Sizing driven by connected-device count, network segments, and traffic mirroring throughput."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -477,6 +499,7 @@ categories:
     hardware_buyer: [customer, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2}
     infra_notes: "HVAC, power, medical gas, and compliance-grade temperature/humidity monitoring run on proprietary edge controllers with modest on-prem supervisory/historian servers; energy-optimization analytics add small compute. Sizing driven by point count, campus size, and historian retention requirements."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -497,6 +520,7 @@ categories:
     hardware_buyer: [customer, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2}
     infra_notes: "Real-time bed/flow analytics over ADT and device feeds; flagship academic deployments keep on-site integration and real-time inference servers plus display-wall infrastructure, while the broader market is SaaS. Sizing driven by feed volume, bed count, and predictive-model refresh rates."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -517,6 +541,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler, oem]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 3, oem: 2}
     infra_notes: "Patient-room cameras and ambient sensors feed GPU inference servers at unit or campus edge (fall detection, virtual sitting, ambient clinical documentation), with substantial video retention storage. Sizing driven by camera/room count, streams per GPU, and video retention policy. OR-specific capture/routing lives in or-surgical-video (no double-count)."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -538,6 +563,7 @@ categories:
     hardware_buyer: [customer, operator]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 3}
     infra_notes: "On-prem transactional DB plus application servers with HA clustering and a DR site; sizing driven by test/order/result throughput, interface count, and long retention and uptime SLAs. No GPU."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -558,6 +584,7 @@ categories:
     hardware_buyer: [customer, oem]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, oem: 2}
     infra_notes: "On-prem/edge integration and real-time track-control servers sitting beside analyzers, HA for core-lab uptime; sizing driven by instrument count, result/transaction rate, and autoverification/QC rule load. No GPU."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -578,6 +605,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler, oem]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 3, oem: 2}
     infra_notes: "High-throughput scanner ingest, petabyte-scale tiered image storage, and GPU servers for AI inference and model training; sizing driven by slides/day, per-slide image size, and concurrent AI workload. Flagship compute+storage pull of the cluster."
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -596,6 +624,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 2}
     infra_notes: "Modest, transactional application tier for sample and sequencing-run tracking; deployable on-prem or as SaaS. It sits beside sequencers that stage terabyte-scale run output (BCL/FASTQ) locally, but that storage/compute pull belongs to the instruments and to downstream secondary analysis, not to the LIMS software itself. No GPU."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -614,6 +643,7 @@ categories:
     hardware_buyer: [operator, hyperscaler, customer]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 1, operator: 2}
     infra_notes: "SaaS-dominant interpretation/reporting layer: consumes tertiary variant calls handed off from bioinformatics-secondary (which owns the compute-heavy pipeline). Curated knowledge bases, variant annotation/classification, report generation; minimal customer-side hardware, any footprint is cloud at the operator. No on-prem GPU pull at the customer."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -633,6 +663,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 2}
     infra_notes: "Modest app-server and database footprint; storage grows with attached instrument files and specimen-linked datasets. GxP-grade high availability, backup and long-retention archive drive most of the sizing."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -651,6 +682,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 3}
     infra_notes: "GPU-dense and CPU-HPC clusters for molecular dynamics, docking and quantum-mechanical calculations. Low-latency interconnect and fast parallel scratch storage size the cluster; large campaigns burst to cloud."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -669,6 +701,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 4}
     infra_notes: "Large multi-GPU training clusters plus high-throughput inference nodes. Sizing is driven by model scale, curated multimodal datasets and data-pipeline throughput; frequently hybrid with cloud burst."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -687,6 +720,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 2}
     infra_notes: "Instruments emit terabytes of movie data per session, driving large fast-tier and archive storage plus high-bandwidth ingest. GPU nodes handle motion correction, CTF estimation and 2D/3D classification."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -705,6 +739,7 @@ categories:
     hardware_buyer: [operator, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {operator: 2}
     infra_notes: "Vendor-hosted multi-tenant SaaS; negligible sponsor- or site-side hardware. Any real compute or storage footprint sits with the software operator, not the customer."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -723,6 +758,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 1, operator: 2}
     infra_notes: "Predominantly SaaS or hosted case-processing and submission repositories; minimal customer on-prem beyond integration and archive nodes. AI-assisted case intake can add modest GPU at the operator."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -742,6 +778,7 @@ categories:
     hardware_buyer: [customer]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3}
     infra_notes: "Redundant real-time control server pairs per process area plus industrial edge I/O on a deterministic low-latency network; HA/failover and validated-change control drive sizing and refresh cycles."
     play_refs: [play-c]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -760,6 +797,7 @@ categories:
     hardware_buyer: [customer]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3}
     infra_notes: "High-ingest time-series store scaling with tag count and sampling rate; fast local NVMe for hot data plus capacity tier for multi-year retention. Storage grows continuously as lines and sensors are added."
     play_refs: [play-c]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -778,6 +816,7 @@ categories:
     hardware_buyer: [customer, operator]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 1}
     infra_notes: "On-prem lab servers plus instrument-attached acquisition workstations; chromatography and spectral raw files accumulate and pull validated storage and backup. Modest compute, storage-led growth."
     play_refs: [play-c]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -796,6 +835,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 1, operator: 2}
     infra_notes: "Predominantly validated SaaS/hosted; minimal customer-side hardware beyond integration and document retention. Calibration/CMMS modules add asset and schedule records, not compute."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -814,6 +854,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 2}
     infra_notes: "Site-level (L4) repository servers with HA to protect packaging-line uptime, integrating up to enterprise/regulatory (L5) hubs that are often managed/cloud; sizing follows line count and serialization event volume."
     play_refs: [play-c]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -832,6 +873,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 1}
     infra_notes: "On-prem/edge WMS plus environmental-monitoring gateways at plant and distribution sites; ruggedized edge nodes aggregate cold-chain and cleanroom sensor streams. Sizing driven by site count and sensor density, not heavy compute."
     play_refs: [play-c]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -850,6 +892,7 @@ categories:
     hardware_buyer: [customer]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3}
     infra_notes: "GPU/edge inference for real-time spectral models on the line plus GPU/HPC for bioprocess simulation and digital-twin runs; sizing scales with model complexity and number of monitored unit operations."
     play_refs: [play-c]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -868,6 +911,7 @@ categories:
     hardware_buyer: [customer, oem]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, oem: 3}
     infra_notes: "Deep-learning visual inspection of vials/syringes/finished devices; GPU inference node per fill-finish/packaging line edge under GxP validation. Edge-GPU count scales with line count; validated-change docs part of the sale."
     play_refs: [play-c]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -889,6 +933,7 @@ categories:
     hardware_buyer: [customer, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3}
     infra_notes: "High-capacity tiered storage (object plus fast analytics tier) and ETL/query compute; growing GPU demand for NLP/LLM over clinical notes. Sizing driven by bed count, retention years, and modality breadth (notes, waveforms, omics)."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -907,6 +952,7 @@ categories:
     hardware_buyer: [operator, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {operator: 1}
     infra_notes: "SaaS-dominant; negligible customer-site hardware. Residual pull sits with the operator: warehouse compute and storage for claims/EHR aggregation and risk-model scoring."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -925,6 +971,7 @@ categories:
     hardware_buyer: [operator, customer, hyperscaler]
     primary_buyer: operator
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 3}
     infra_notes: "Hardware lives mostly at the data operator: petabyte-class data lake storage plus GPU for NLP/LLM chart abstraction and clinico-genomic linkage; some pharma run private analytics enclaves. Sizing by covered lives and unstructured document volume."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -945,6 +992,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 2}
     infra_notes: "Modest general-purpose compute but strict HA/DR — message brokers cannot drop clinical feeds, so clustered pairs and dual-site failover are standard. Sizing by interface count and HL7/FHIR message volume; no meaningful GPU."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -965,6 +1013,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 4}
     infra_notes: "The prime hospital GPU hook: inference nodes (data-center or edge form factor) sited near PACS/modalities for PHI and latency, plus large GPU fleets at marketplace operators. Sizing by study volume, concurrent model count, and clinical-uptime HA requirements."
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -983,6 +1032,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, operator: 3}
     infra_notes: "High-availability transactional compute and database storage; nightly batch adjudication windows drive CPU sizing, and regulatory DR mandates push dual-site deployments. Legacy platform modernization (mainframe to x86) creates refresh events."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -1001,6 +1051,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 2, operator: 3}
     infra_notes: "UM and care management are SaaS-dominant; the hardware angle is fraud/waste/abuse ML at large or single-payer/government insurers, which run on-prem model training and scoring over full claims history. Sizing by claims volume and retraining cadence."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -1019,6 +1070,7 @@ categories:
     hardware_buyer: [oem, customer]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 3, oem: 3}
     infra_notes: "Two-sided pull: embedded/edge compute designed into devices as long-lifecycle, regulatory-locked BOMs (volume design wins), plus OEM-side V&V, simulation, and on-device AI model-training clusters. Sizing by device fleet volume and AI content per device."
     play_refs: [play-a]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
@@ -1037,6 +1089,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     smc_reachable: true
+    hw_pull_by_buyer: {customer: 4, operator: 4}
     infra_notes: "GPU/HPC scheduler + MLOps layer (batch queue / container orchestration / GPU partitioning) that anchors and sizes on-prem GPU/HPC clusters. The single most natural ISV co-sell for a GPU/server vendor; sizes to aggregate job concurrency."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-24 — per-buyer hw_pull (taxonomy v4) + icu flip + spec note
+Actioned all three open items from the hardware_buyer round ("三個都要"):
+1. **icu-central-monitoring** primary_buyer customer→**oem** — device-maker channel (Philips/GE/Draeger supply the FDA-cleared central-station servers) is the larger motion; hospital surveillance analytics is the smaller customer pull. (primary_buyer dist now 43 customer / 9 operator / 1 oem.)
+2. **Per-buyer `hw_pull_by_buyer`** (taxonomy → **v4**): each buyer scored independently (customer/operator/oem; hyperscaler never scored). Assigned by a 17-agent workflow (score → adversarial verify → consistency critic). Verify caught lazy customer→operator copies (or-surgical-video oem 3→2, workforce-management operator 2→1, etc.). Consistency critic → 1 fix applied: patient-portal-engagement operator 2→1 (commodity multi-tenant portal SaaS = hyperscaler-diluted; GxP-validated hosting is what earns operator 2 — principle now stated).
+3. **CLAUDE.md §3** documents the hardware_buyer axis + per-buyer pull + HOT lists.
+- Refined HOT lists (per-buyer, not blended): **HOT_customer 25** (customer pull≥3) · **HOT_operator 16** (operator pull≥3) · **OEM design-wins 8**. Now surfaces cases where operator > customer (e.g. cdss-clinical-ai customer 2 / operator 3; him-coding, rcm-billing-claims, payer-um-fraud-analytics, rwd-rwe-analytics all operator-3 / customer-2 — invisible under a blended score).
+- `tools/rollup.py` + `tools/drilldown.py` use per-buyer pull; `app` cards show per-buyer pull on each buyer badge (e.g. `CUSTOMER·4  operator·3`). Live-verified in browser.
+
 ## 2026-07-24 — hardware_buyer axis (taxonomy v3) + codex review actioned
 **Why:** codex (independent review) showed the deployment-only on-prem/cloud split conflated substrate, hardware buyer, service model and deal motion — and buried the operator (ISV/managed) hardware deals the playbook §3 explicitly wants. Decision (Tuo: "我都要 + 把 buyer 更明確排出"): make **who buys the iron** an explicit field.
 

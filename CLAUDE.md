@@ -31,6 +31,14 @@ No answer → not in pipeline. Software user ≠ hardware buyer.
 | Buying committee | 6 roles per opportunity: Business Owner · Application Owner · Infrastructure Owner · Data/AI Owner · Risk Approver · Economic Buyer. Keep v1's sales-cycle estimates and entry points. |
 | Triggers | Keep v1's operationalized list (each = signal + source + window + action); add the four from the framework doc. Full seed list in §6. |
 | Scoring | 100-pt weighted model (§4). The v1 priority stack is a hypothesis only — replaced by per-account scores. |
+### Taxonomy evolution — the `hardware_buyer` axis (added 2026-07-24, taxonomy v4)
+A second-opinion review showed the deployment tag conflated *substrate* with *who buys the iron*, and buried the operator (ISV/managed) deals the gate question is meant to surface. So the taxonomy now carries **`hardware_buyer`** — the authoritative answer to §3's gate — per category:
+- **customer** → SMCI **direct** (end org buys its own on-prem iron)
+- **operator** → **ISV / service-provider co-sell** (a vendor/CRO/CDMO runs dedicated single-tenant iron to deliver the software as a service)
+- **oem** → **OEM design-win** (software embedded in a device/instrument; per-unit BOM)
+- **hyperscaler** → out of scope (public cloud; hardware bought by the hyperscaler)
+
+Each buyer carries its **own** `hw_pull_by_buyer` score (a customer deal and an operator deal for the same category are sized independently). `deployment` survives only as a secondary substrate descriptor. Derived, single-source lenses live in `tools/rollup.py` and `tools/drilldown.py`; the app filters/groups on buyer. HOT lists: **HOT_customer** (customer pull≥3, direct), **HOT_operator** (operator pull≥3, co-sell), **OEM design-wins**.
 ## 4. Scoring model (100 pts)
 Each item scored 0–5, weighted score = (item ÷ 5) × weight.
 | Item | Weight |

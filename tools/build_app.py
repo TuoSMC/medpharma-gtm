@@ -208,8 +208,8 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   root.append(el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fGroup,fSpans,fTxt,cnt));
   // static buyer rollup summary (authoritative axis)
   const pb={customer:0,operator:0,oem:0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
-  const hotC=cats.filter(c=>c.hardware_buyer.includes('customer')&&c.hw_pull>=3).length,
-        hotO=cats.filter(c=>c.hardware_buyer.includes('operator')&&c.hw_pull>=3).length,
+  const hotC=cats.filter(c=>(c.hw_pull_by_buyer.customer||0)>=3).length,
+        hotO=cats.filter(c=>(c.hw_pull_by_buyer.operator||0)>=3).length,
         nOem=cats.filter(c=>c.hardware_buyer.includes('oem')).length;
   const sum=el('div',{class:'rollup'});
   sum.append('Hardware-buyer rollup (§3 gate — WHO buys the iron): primary ',
@@ -224,8 +224,8 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   function card(c){
     const cd=el('div',{class:'card'});
     const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hw_pull,title:'hw_pull'},String(c.hw_pull)),
-      el('span',{class:'by '+BUYER_C[c.primary_buyer],title:'primary hardware_buyer'},c.primary_buyer));
-    (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo',title:'also buys iron'},x)));
+      el('span',{class:'by '+BUYER_C[c.primary_buyer],title:'primary hardware_buyer · per-buyer hw_pull'},c.primary_buyer+(c.hw_pull_by_buyer[c.primary_buyer]?'·'+c.hw_pull_by_buyer[c.primary_buyer]:'')));
+    (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo',title:'also buys iron'},x+(c.hw_pull_by_buyer[x]?'·'+c.hw_pull_by_buyer[x]:''))));
     if(spansOf(c))head.append(el('span',{class:'byo',title:'deployment spans customer↔vendor'},'⇄'));
     (c.play_refs||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
     cd.append(head);
