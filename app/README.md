@@ -13,7 +13,7 @@ by hand** — it is generated (CLAUDE.md §8 rule 1). App code lives in
 `tools/build_app.py` and holds zero domain content.
 
 ## Tabs
-- **Taxonomy** — 53 categories; filter by segment / play / deployment / hw_pull + text search
+- **Taxonomy** — 53 categories; filter by **infra bucket (on-prem / cloud)** · segment · play · deployment · hw_pull · **spans-boundary** toggle + text search. Each card shows a derived infra-control bucket badge (green = on-prem = hardware opportunity; `⇄` = spans customer↔vendor boundary). Top rollup line summarises the split.
 - **Plays** — 3 solution plays (workloads, targets, hardware anchor, regulatory)
 - **Triggers** — 14 triggers, colour-coded by urgency
 - **Scoring** — the 100-pt model + interactive scorer (mirrors `tools/score.py`)

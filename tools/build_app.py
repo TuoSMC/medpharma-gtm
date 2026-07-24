@@ -94,6 +94,12 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .tagk{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-right:4px;align-self:center}
 .hw{display:inline-block;min-width:20px;text-align:center;font-weight:700;color:#fff;border-radius:6px;padding:1px 7px;font-size:11px}
 .hw1{background:var(--hw1)}.hw2{background:var(--hw2)}.hw3{background:var(--hw3)}.hw4{background:var(--hw4)}
+.bkt{font-size:10px;font-weight:700;padding:1px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px}
+.bon{background:var(--a);color:#fff}
+.bcl{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.rollup{font-size:12px;margin:-6px 0 12px;color:var(--muted)}
+.rollup b{color:var(--ink)}
+.ckbox{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
 .play{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
 .playa{background:var(--a)}.playb{background:var(--b)}.playc{background:var(--c)}
 .notes{color:var(--muted);font-size:12px;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
@@ -143,6 +149,12 @@ const clear=n=>n.replaceChildren();
 const playClass=p=>({'play-a':'playa','play-b':'playb','play-c':'playc'}[p]||'');
 const playName=p=>({'play-a':'A · Imaging/Path','play-b':'B · Genomics/AI','play-c':'C · GMP Edge'}[p]||p);
 
+// ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
+const ONPREM_SIDE=new Set(['on-prem','edge','private','OEM']);
+const CLOUD_SIDE=new Set(['public','SaaS','managed']);
+function bucketOf(c){for(const d of c.deployment){if(d==='hybrid')continue;return ONPREM_SIDE.has(d)?'on-prem':'cloud';}return 'hybrid';}
+function spansOf(c){const s=new Set(c.deployment);return s.has('hybrid')||([...s].some(x=>ONPREM_SIDE.has(x))&&[...s].some(x=>CLOUD_SIDE.has(x)));}
+
 // ---- header ----
 $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.status;
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
@@ -175,28 +187,47 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy');
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
     opts.forEach(o=>s.append(el('option',{value:o},o)));return s;};
-  const fSeg=mk('fSeg',E.segments,'all segments'),
+  const fBucket=mk('fBucket',['on-prem','cloud'],'all infra'),
+        fSeg=mk('fSeg',E.segments,'all segments'),
         fPlay=mk('fPlay',['play-a','play-b','play-c'],'all plays'),
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'hw_pull >='),
+        fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
-  root.append(el('div',{class:'filters'},fSeg,fPlay,fDep,fHw,fTxt,cnt));
+  const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
+  root.append(el('div',{class:'filters'},fBucket,fSeg,fPlay,fDep,fHw,fSpans,fTxt,cnt));
+  // static rollup summary
+  const nOn=cats.filter(c=>bucketOf(c)==='on-prem').length,
+        nCl=cats.filter(c=>bucketOf(c)==='cloud').length,
+        nSpan=cats.filter(spansOf).length,
+        nHot=cats.filter(c=>bucketOf(c)==='on-prem'&&c.hw_pull>=3).length;
+  const sum=el('div',{class:'rollup'});
+  sum.append('Infra-control rollup (derived, §3 gate): ',
+    el('b',{},String(nOn)),' on-prem · ',el('b',{},String(nCl)),' cloud · ',
+    el('b',{},'0'),' hybrid-primary — ',el('b',{},String(nSpan)),
+    ' span the customer↔vendor boundary. ',
+    el('b',{},String(nHot)),' HOT (on-prem & hw_pull≥3) = the real hardware list.');
+  root.append(sum);
   const grid=el('div',{class:'grid'});root.append(grid);
   function tagRow(k,arr){const r=el('div',{class:'row'});r.append(el('span',{class:'tagk'},k));
     (arr||[]).forEach(v=>r.append(el('span',{class:'chip dim'},v)));return r;}
   function render(){
-    const seg=fSeg.value,pl=fPlay.value,dep=fDep.value,hw=+fHw.value||0,q=fTxt.value.toLowerCase();
+    const bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,hw=+fHw.value||0,q=fTxt.value.toLowerCase();
     clear(grid);let n=0;
     cats.forEach(c=>{
+      if(bk&&bucketOf(c)!==bk)return;
+      if(sp&&!spansOf(c))return;
       if(seg&&!(c.segments||[]).includes(seg))return;
       if(pl&&!(c.play_refs||[]).includes(pl))return;
       if(dep&&!(c.deployment||[]).includes(dep))return;
       if(hw&&c.hw_pull<hw)return;
       if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infra_notes||'')).toLowerCase().includes(q)))return;
       n++;
+      const b=bucketOf(c);
       const card=el('div',{class:'card'});
-      const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hw_pull,title:'hw_pull'},String(c.hw_pull)));
+      const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hw_pull,title:'hw_pull'},String(c.hw_pull)),
+        el('span',{class:'bkt '+(b==='on-prem'?'bon':'bcl'),title:'infra-control bucket'+(spansOf(c)?' · spans boundary':'')},b+(spansOf(c)?' ⇄':'')));
       (c.play_refs||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
       card.append(head);
       card.append(el('h3',{},c.name_en));
@@ -214,7 +245,8 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     });
     cnt.textContent=n+' / '+cats.length+' shown';
   }
-  [fSeg,fPlay,fDep,fHw].forEach(x=>x.onchange=render);fTxt.oninput=render;render();
+  [fBucket,fSeg,fPlay,fDep,fHw].forEach(x=>x.onchange=render);
+  fSpansBox.onchange=render;fTxt.oninput=render;render();
 })();
 
 // ================= PLAYS =================
