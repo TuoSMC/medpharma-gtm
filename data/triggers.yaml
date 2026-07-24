@@ -1,0 +1,105 @@
+# Trigger seed list (CLAUDE.md §6)
+# Each: signal · category · urgency · window · source · action
+version: 1
+
+triggers:
+  # ---- from v1 ----
+  - id: ehr-golive
+    signal: New EHR go-live
+    category: clinical-it
+    urgency: high
+    window: "6-18 months before go-live (infra buy happens early)"
+    source: "KLAS reports, hospital press releases, Epic/Oracle Health announcements"
+    action: "Map infra operator; approach Infrastructure Owner re: compute/storage/VDI refresh"
+  - id: fda-ind
+    signal: FDA IND filing
+    category: pharma-rd
+    urgency: medium
+    window: "0-12 months post-filing"
+    source: "ClinicalTrials.gov new registrations"
+    action: "Flag account; R&D compute demand rising — probe genomics/AI workloads (Play B)"
+  - id: fda-approval
+    signal: FDA NDA/BLA approval
+    category: pharma-mfg
+    urgency: high
+    window: "0-6 months post-approval (commercial scale-up)"
+    source: "FDA approvals list, company PR"
+    action: "Manufacturing scale-up imminent — enter via Play C (MES/plant infra)"
+  - id: sequencer-purchase
+    signal: New sequencer purchase
+    category: genomics
+    urgency: critical
+    window: "90-day hardware window post-purchase"
+    source: "Illumina/PacBio/ONT PR, grant awards, conference posters"
+    action: "Immediate outreach — sequencer needs compute+storage behind it (Play B)"
+  - id: cloud-repatriation
+    signal: Cloud repatriation signals
+    category: infra-strategy
+    urgency: high
+    window: "Budget cycle following the statement"
+    source: "Earnings calls ('reducing cloud spend'), CIO interviews, job postings for on-prem roles"
+    action: "TCO conversation with Infrastructure Owner + Economic Buyer"
+  - id: hospital-ma
+    signal: Hospital M&A / consolidation
+    category: hospital-corp
+    urgency: medium
+    window: "12-24 months (IT consolidation follows close)"
+    source: "Healthcare M&A trackers, local business press"
+    action: "Consolidated datacenter/imaging archive opportunity; find surviving IT org"
+  - id: pharma-ai-strategy
+    signal: Pharma AI-strategy announcement
+    category: pharma-rd
+    urgency: high
+    window: "3-12 months post-announcement"
+    source: "Earnings calls, press releases, partnership announcements (NVIDIA etc.)"
+    action: "Probe: cloud or on-prem? If on-prem/hybrid → Play B GPU cluster pitch"
+  - id: new-campus
+    signal: New hospital campus / expansion
+    category: hospital-facility
+    urgency: medium
+    window: "12-36 months before opening"
+    source: "Certificate-of-need filings, construction news, hospital PR"
+    action: "New datacenter/edge closets get spec'd early — reach facility IT planning"
+  - id: hpc-job-postings
+    signal: HPC / bioinformatics job postings
+    category: talent-signal
+    urgency: low
+    window: "Rolling"
+    source: "LinkedIn, institution career pages"
+    action: "Evidence C only — never 'confirmed installed base'. Add to monitor list, seek corroboration"
+  - id: klas-himss
+    signal: KLAS / HIMSS rankings movement
+    category: clinical-it
+    urgency: low
+    window: "Annual cycles"
+    source: "KLAS reports, HIMSS analytics (EMRAM stage changes)"
+    action: "EMRAM stage jump = infra investment underway; qualify operator"
+  # ---- added from framework doc ----
+  - id: cyber-incident
+    signal: Cyber incident / ransomware
+    category: security
+    urgency: critical
+    window: "0-6 months post-incident (budget unlocked)"
+    source: "HHS breach portal, news, sector ISACs"
+    action: "DR/backup/rebuild conversation — air-gapped backup, immutable storage angle"
+  - id: plant-modernization
+    signal: Plant modernization or new plant
+    category: pharma-mfg
+    urgency: high
+    window: "12-24 months before validation"
+    source: "Capex announcements, EPC contract awards, local permits"
+    action: "Play C entry — automation SI mapping, MES vendor identification"
+  - id: serialization-mandate
+    signal: Serialization / traceability mandate
+    category: regulatory
+    urgency: medium
+    window: "Mandate deadline minus 12-18 months"
+    source: "DSCSA/EU FMD deadlines, market-specific regs"
+    action: "Serialization = plant-edge servers per line; bundle with Play C"
+  - id: cloud-cost-pressure
+    signal: Cloud cost pressure
+    category: infra-strategy
+    urgency: medium
+    window: "Budget planning season"
+    source: "Earnings calls, CFO commentary, layoff/efficiency announcements"
+    action: "Soft version of repatriation — plant TCO seed, nurture"

@@ -1,0 +1,56 @@
+# 3 solution plays — hard scope constraint (CLAUDE.md §5.1)
+# Default trio. Confirm or swap with Tuo in first session.
+version: 1
+
+plays:
+  - id: play-a
+    name: Medical Imaging + Digital Pathology
+    workloads:
+      - GPU inference (AI-assisted reads, pathology algorithms)
+      - NVMe ingest (whole-slide scanners, modality throughput)
+      - PB-scale archive (PACS/VNA long-term retention)
+    target_segments:
+      - Hospital / Health System
+      - Imaging centers
+      - Pathology labs (Diagnostic/Reference Lab)
+      - PACS / pathology ISVs
+    hardware_anchor:
+      - GPU servers (inference-optimized)
+      - NVMe storage servers
+      - High-density object/archive storage
+    regulatory_notes: "PHI always; SaMD flag if AI algorithms deployed clinically"
+
+  - id: play-b
+    name: Genomics / Bioinformatics / Research AI
+    workloads:
+      - HPC + GPU clusters (secondary/tertiary analysis, model training)
+      - NVMe scratch (pipeline burst I/O)
+      - Object storage (cohort/reference data lakes)
+      - Cloud repatriation (sustained-load workloads moving back on-prem)
+    target_segments:
+      - Academic Medical Center
+      - Biotech / Pharma R&D
+      - AI-native drug-discovery companies
+    hardware_anchor:
+      - HPC nodes (CPU-dense)
+      - GPU training servers
+      - NVMe scratch tiers + object storage
+    regulatory_notes: "Mostly research-side; PHI if clinical genomics, GxP if GLP pipelines"
+
+  - id: play-c
+    name: GMP Manufacturing Edge
+    workloads:
+      - MES / SCADA / Historian / EBR plant systems
+      - Redundant plant servers (HA pairs)
+      - Industrial edge compute
+      - DR / backup for validated systems
+    target_segments:
+      - Pharma plants
+      - Biologics facilities
+      - CDMO
+      - MES ISVs + automation SIs
+    hardware_anchor:
+      - Short-depth / industrial edge servers
+      - Redundant tower/rack pairs
+      - DR storage
+    regulatory_notes: "GxP + Part 11 core. Documentation IS the product: controlled BOM, firmware/driver matrix, change notification, lifecycle statement, hardening guide"

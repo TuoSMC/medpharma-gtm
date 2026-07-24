@@ -1,0 +1,48 @@
+# Scoring model — 100 pts weighted (CLAUDE.md §4)
+# Each item scored 0-5. Weighted score = (item / 5) * weight.
+version: 1
+scale:
+  min: 0
+  max: 5
+formula: "(item_score / 5) * weight"
+
+items:
+  - key: infra_control
+    label: Customer controls infrastructure
+    weight: 20
+    note: "Gate question. 0 = pure SaaS user, no control. 5 = fully self-operated on-prem."
+  - key: compute_storage_intensity
+    label: Compute / storage intensity
+    weight: 20
+  - key: refresh_trigger
+    label: Clear refresh or expansion trigger
+    weight: 15
+  - key: mission_criticality
+    label: Mission criticality / availability
+    weight: 10
+  - key: data_growth_retention
+    label: Data growth / retention
+    weight: 10
+  - key: multi_site_repeatability
+    label: Multi-site repeatability
+    weight: 10
+  - key: partner_access
+    label: ISV / SI partner access
+    weight: 10
+  - key: competitive_differentiation
+    label: Competitive differentiation
+    weight: 5
+
+tiers:
+  - min: 70
+    name: Active pursuit
+    action: "Full account card + pursue directly"
+  - min: 50
+    name: Nurture / partner-led
+    action: "Stay lite card; work via ISV/SI partner"
+  - min: 30
+    name: Monitor
+    action: "Watch triggers only"
+  - min: 0
+    name: Drop
+    action: "Out of pipeline"

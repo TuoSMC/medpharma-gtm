@@ -1,0 +1,6 @@
+# Vendor registry — names live HERE, never in code (CLAUDE.md §3)
+# Populated when v1 .jsx files land in /source/ (extract, don't retype)
+# Every entry needs: id, name, category_ref, deployment_models, confidence, source
+version: 1
+vendors: []
+# TODO: extract from /source/medpharma-gtm-playbook.jsx + hospital-software-taxonomy.jsx when dropped

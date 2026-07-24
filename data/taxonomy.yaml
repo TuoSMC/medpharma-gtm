@@ -1,0 +1,85 @@
+# ============================================================
+# TAXONOMY SCHEMA — PROPOSAL, PENDING TUO'S APPROVAL
+# Only 3 example entries below. Full fill blocked until approved
+# (CLAUDE.md §9 step 4).
+# ============================================================
+#
+# Design:
+# - `enums` block = single source of truth for the 4 mandatory dims (§3)
+#   + segments + hospital-matrix axes. App validates against these.
+# - Each category entry: id, names EN/ZH, 4-dim tags (multi-value where
+#   reality demands), hw_pull rollup (1-4, legacy summary only),
+#   infra_notes (what hardware this pulls), play_refs, vendor_refs
+#   (ids only — names live in vendors.yaml, never here).
+# - `hospital_view` sub-block ONLY on hospital-relevant categories
+#   → preserves v1 stakeholder × dimension drill-down matrix.
+# - segments = which of the 8 customer types run this software.
+
+version: 1
+status: PROPOSAL   # flip to `approved` after Tuo signs off
+
+enums:
+  lifecycle: [research, preclinical, clinical, manufacturing, commercial, post-market]
+  role: [system-of-record, workflow, data-acquisition, integration, analytics-AI, infra-platform, regulated-SaMD]
+  data_modality: [transactional, images, omics, time-series, documents, simulation, AI-models, RWD]
+  deployment: [on-prem, private, hybrid, public, SaaS, managed, OEM, edge]
+  segments: [hospital-health-system, diagnostic-reference-lab, academic-medical-center,
+             medtech-ivd, biotech-pharma, cro, cdmo, payer]
+  hospital_stakeholder: [patient, clinician, device, facility]
+  hospital_dimension: [clinical, ops, business, admin, regulatory]
+  hw_pull: [1, 2, 3, 4]   # 1=minimal … 4=heavy (rollup summary ONLY, §3)
+
+categories:
+  # ---- Example 1: hospital category with hospital_view drill-down ----
+  - id: pacs-vna
+    name_en: PACS / VNA (Medical Imaging Archive)
+    name_zh: 醫學影像儲傳系統 / 中立性影像典藏
+    lifecycle: [clinical, post-market]
+    role: [system-of-record, data-acquisition]
+    data_modality: [images]
+    deployment: [on-prem, private, hybrid, SaaS]
+    segments: [hospital-health-system, diagnostic-reference-lab, academic-medical-center]
+    hospital_view:
+      stakeholder: [clinician, device]
+      dimension: [clinical]
+    hw_pull: 4
+    infra_notes: "PB-scale archive, NVMe ingest tier, GPU if AI overlay; retention 10yr+ drives storage growth"
+    play_refs: [play-a]
+    vendor_refs: []    # TODO: extract from /source/ jsx files
+    evidence_note: null
+
+  # ---- Example 2: research-side category, no hospital_view ----
+  - id: bioinformatics-secondary
+    name_en: Bioinformatics Secondary/Tertiary Analysis
+    name_zh: 生物資訊二級/三級分析
+    lifecycle: [research, preclinical, clinical]
+    role: [analytics-AI, workflow]
+    data_modality: [omics, AI-models]
+    deployment: [on-prem, hybrid, public]
+    segments: [academic-medical-center, biotech-pharma, diagnostic-reference-lab, cro]
+    hospital_view: null
+    hw_pull: 4
+    infra_notes: "HPC CPU-dense + GPU nodes, NVMe scratch (burst I/O), object storage for cohorts; cloud-repatriation candidate at sustained load"
+    play_refs: [play-b]
+    vendor_refs: []
+    evidence_note: null
+
+  # ---- Example 3: manufacturing category, GxP-flavored ----
+  - id: mes-ebr
+    name_en: MES / EBR (Manufacturing Execution)
+    name_zh: 製造執行系統 / 電子批次紀錄
+    lifecycle: [manufacturing]
+    role: [system-of-record, workflow]
+    data_modality: [transactional, time-series, documents]
+    deployment: [on-prem, edge, private]
+    segments: [biotech-pharma, cdmo, medtech-ivd]
+    hospital_view: null
+    hw_pull: 3
+    infra_notes: "Redundant plant server pairs, industrial edge per line, DR site; GxP/Part 11 → validated-change documentation is part of the sale"
+    play_refs: [play-c]
+    vendor_refs: []
+    evidence_note: null
+
+# TODO (post-approval): fill ~35 hospital categories from
+# hospital-software-taxonomy.jsx + 10 v1 playbook categories from
+# medpharma-gtm-playbook.jsx — extract from /source/, don't retype.
