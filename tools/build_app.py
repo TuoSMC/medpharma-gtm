@@ -97,6 +97,9 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .bkt{font-size:10px;font-weight:700;padding:1px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px}
 .bon{background:var(--a);color:#fff}
 .bcl{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.by{font-size:10px;font-weight:700;padding:1px 7px;border-radius:6px;color:#fff;text-transform:uppercase;letter-spacing:.3px}
+.bcust{background:var(--a)}.boper{background:var(--b)}.boem{background:var(--c)}.bhyp{background:var(--hw1)}
+.byo{font-size:10px;padding:1px 6px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
 .rollup{font-size:12px;margin:-6px 0 12px;color:var(--muted)}
 .rollup b{color:var(--ink)}
 .ckbox{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
@@ -156,6 +159,8 @@ const ONPREM_SIDE=new Set(['on-prem','edge','private','OEM']);
 const CLOUD_SIDE=new Set(['public','SaaS','managed']);
 function bucketOf(c){for(const d of c.deployment){if(d==='hybrid')continue;return ONPREM_SIDE.has(d)?'on-prem':'cloud';}return 'hybrid';}
 function spansOf(c){const s=new Set(c.deployment);return s.has('hybrid')||([...s].some(x=>ONPREM_SIDE.has(x))&&[...s].some(x=>CLOUD_SIDE.has(x)));}
+// hardware_buyer = WHO buys the iron (authoritative §3 axis, taxonomy v3)
+const BUYER_C={customer:'bcust',operator:'boper',oem:'boem',hyperscaler:'bhyp'};
 
 // ---- header ----
 $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.status;
@@ -189,37 +194,39 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy');
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
     opts.forEach(o=>s.append(el('option',{value:o},o)));return s;};
-  const fBucket=mk('fBucket',['on-prem','cloud'],'all infra'),
+  const fBuyer=mk('fBuyer',['customer','operator','oem','hyperscaler'],'all buyers'),
+        fBucket=mk('fBucket',['on-prem','cloud'],'all substrate'),
         fSeg=mk('fSeg',E.segments,'all segments'),
         fPlay=mk('fPlay',['play-a','play-b','play-c'],'all plays'),
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'hw_pull >='),
-        fGroup=mk('fGroup',['hw_pull','play','segment','data_modality','role','bucket'],'no grouping'),
+        fGroup=mk('fGroup',['primary_buyer','hardware_buyer','hw_pull','play','segment','data_modality','role','bucket'],'no grouping'),
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
   const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
-  root.append(el('div',{class:'filters'},fBucket,fSeg,fPlay,fDep,fHw,fGroup,fSpans,fTxt,cnt));
-  // static rollup summary
-  const nOn=cats.filter(c=>bucketOf(c)==='on-prem').length,
-        nCl=cats.filter(c=>bucketOf(c)==='cloud').length,
-        nSpan=cats.filter(spansOf).length,
-        nHot=cats.filter(c=>bucketOf(c)==='on-prem'&&c.hw_pull>=3).length;
+  root.append(el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fGroup,fSpans,fTxt,cnt));
+  // static buyer rollup summary (authoritative axis)
+  const pb={customer:0,operator:0,oem:0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
+  const hotC=cats.filter(c=>c.hardware_buyer.includes('customer')&&c.hw_pull>=3).length,
+        hotO=cats.filter(c=>c.hardware_buyer.includes('operator')&&c.hw_pull>=3).length,
+        nOem=cats.filter(c=>c.hardware_buyer.includes('oem')).length;
   const sum=el('div',{class:'rollup'});
-  sum.append('Infra-control rollup (derived, §3 gate): ',
-    el('b',{},String(nOn)),' on-prem · ',el('b',{},String(nCl)),' cloud · ',
-    el('b',{},'0'),' hybrid-primary — ',el('b',{},String(nSpan)),
-    ' span the customer↔vendor boundary. ',
-    el('b',{},String(nHot)),' HOT (on-prem & hw_pull≥3) = the real hardware list.');
+  sum.append('Hardware-buyer rollup (§3 gate — WHO buys the iron): primary ',
+    el('b',{},String(pb.customer)),' customer · ',el('b',{},String(pb.operator)),' operator. ',
+    el('b',{},String(hotC)),' HOT_customer (direct) · ',
+    el('b',{},String(hotO)),' HOT_operator (ISV co-sell) · ',
+    el('b',{},String(nOem)),' OEM design-wins. Badge = primary buyer (green customer / purple operator / orange OEM).');
   root.append(sum);
   const host=el('div',{});root.append(host);
   function tagRow(k,arr){const r=el('div',{class:'row'});r.append(el('span',{class:'tagk'},k));
     (arr||[]).forEach(v=>r.append(el('span',{class:'chip dim'},v)));return r;}
   function card(c){
-    const b=bucketOf(c);
     const cd=el('div',{class:'card'});
     const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hw_pull,title:'hw_pull'},String(c.hw_pull)),
-      el('span',{class:'bkt '+(b==='on-prem'?'bon':'bcl'),title:'infra-control bucket'+(spansOf(c)?' · spans boundary':'')},b+(spansOf(c)?' ⇄':'')));
+      el('span',{class:'by '+BUYER_C[c.primary_buyer],title:'primary hardware_buyer'},c.primary_buyer));
+    (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo',title:'also buys iron'},x)));
+    if(spansOf(c))head.append(el('span',{class:'byo',title:'deployment spans customer↔vendor'},'⇄'));
     (c.play_refs||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
     cd.append(head);
     cd.append(el('h3',{},c.name_en));
@@ -238,13 +245,16 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   function groupsOf(c,axis){
     if(axis==='hw_pull')return [String(c.hw_pull)];
     if(axis==='bucket')return [bucketOf(c)];
+    if(axis==='primary_buyer')return [c.primary_buyer];
+    if(axis==='hardware_buyer')return c.hardware_buyer.slice();
     if(axis==='play')return (c.play_refs&&c.play_refs.length)?c.play_refs.slice():['(no play)'];
     return (c[axis]||[]).slice();
   }
   function render(){
-    const bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,
+    const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,
           hw=+fHw.value||0,gp=fGroup.value,q=fTxt.value.toLowerCase();
     const shown=cats.filter(c=>{
+      if(by&&!c.hardware_buyer.includes(by))return false;
       if(bk&&bucketOf(c)!==bk)return false;
       if(sp&&!spansOf(c))return false;
       if(seg&&!(c.segments||[]).includes(seg))return false;
@@ -268,7 +278,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       const grid=el('div',{class:'grid'});map.get(k).forEach(c=>grid.append(card(c)));host.append(grid);
     });
   }
-  [fBucket,fSeg,fPlay,fDep,fHw,fGroup].forEach(x=>x.onchange=render);
+  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fGroup].forEach(x=>x.onchange=render);
   fSpansBox.onchange=render;fTxt.oninput=render;render();
 })();
 

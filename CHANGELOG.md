@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 2026-07-24 — hardware_buyer axis (taxonomy v3) + codex review actioned
+**Why:** codex (independent review) showed the deployment-only on-prem/cloud split conflated substrate, hardware buyer, service model and deal motion — and buried the operator (ISV/managed) hardware deals the playbook §3 explicitly wants. Decision (Tuo: "我都要 + 把 buyer 更明確排出"): make **who buys the iron** an explicit field.
+
+**Changed:**
+- `data/taxonomy.yaml` → **v3**. New enum + per-category `hardware_buyer` (array of customer/operator/hyperscaler/oem), `primary_buyer`, `smc_reachable`. Assigned by a 17-agent workflow (per-cluster assign → adversarial verify → cross-cluster consistency critic). 5 consistency fixes applied (healthcare-cmms→operator primary; +oem smart-room; +operator or-surgical-video & radiation-oncology; icu-central-monitoring oem→customer primary for tie-break consistency — **the one debatable call, easy to flip**).
+- Distribution: primary_buyer 44 customer / 9 operator. **26 HOT_customer (SMCI direct), 18 HOT_operator (ISV co-sell — previously invisible), 8 OEM design-wins.** 53/53 reachable.
+- `tools/rollup.py` + `tools/drilldown.py` rewritten around hardware_buyer (buyer is now the authoritative "who controls hw" axis; deployment demoted to a guarded substrate descriptor — fixes codex's unknown→cloud and `['hybrid']` bugs).
+- `app`: Taxonomy tab gains a hardware_buyer filter, primary_buyer/hardware_buyer group-by, per-card primary-buyer badge + other-buyer chips; rollup summary is buyer-centric. Live-verified in browser (group-by primary_buyer → 44/9; counts match rollup.py).
+
+**Codex verdict was HOLD; actioned as:** applied the sharp/cheap fixes (OEM≠on-prem, explicit buyer replaces first-listed-deployment heuristic, substrate guards, operator co-sell surfaced). Did NOT accept codex's cloud-first reordering of ai-drug-discovery / clinical-data-lakehouse (fights Play B's on-prem + cloud-repatriation thesis).
+
+**Open (for Tuo):**
+1. `icu-central-monitoring` primary_buyer = customer (was oem) — flip back if the device-maker channel is really the bigger deal.
+2. Per-actor hw_pull (codex wanted HOT_customer vs HOT_operator scored separately) — worth splitting, or leave single hw_pull?
+3. Note hardware_buyer in CLAUDE.md §3 spec, or keep it as an evolved-in-repo field?
+
 ## 2026-07-24 — Cloud/hybrid/on-prem rollup lens (derived, schema unchanged)
 **Decision (Tuo-approved):** collapse the 8-value `deployment` enum into the §3 infra-control gate as **two mutually-exclusive buckets + one hybrid flag**, NOT three buckets. Mapping: on-prem side ← on-prem/edge/private/OEM; cloud side ← public/SaaS/managed; `hybrid` is the boundary marker only. Primary bucket = first-listed deployment; `spans_infra_boundary` = deployment set touches both sides (or literal hybrid).
 

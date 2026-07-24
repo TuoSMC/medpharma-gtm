@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
-"""Derived cloud / hybrid / on-prem rollup over taxonomy.yaml.
+"""Buyer-centric rollup over taxonomy.yaml (derived; needs hardware_buyer, v3+).
 
-This is a DERIVED lens, not stored data. The approved taxonomy schema is
-unchanged; each category keeps its 8-value `deployment` enum. This rollup
-answers the CLAUDE.md §3 gate ("who controls the infra?") by collapsing those
-8 values into two mutually-exclusive infra-control buckets plus one hybrid flag.
+A hardware-vendor GTM reviewer showed the deployment-only on-prem/cloud split
+conflated four things (substrate, buyer, service model, deal motion). The
+authoritative "who controls / buys the iron" axis is now the explicit
+`hardware_buyer` field. This rollup reports by buyer and splits the HOT list by
+sales motion:
 
-Mapping (Tuo-approved 2026-07-24):
-  on-prem side  <- on-prem, edge, private, OEM   (customer/operator controls hw)
-  cloud side    <- public, SaaS, managed         (vendor controls hw)
-  hybrid        <- the boundary marker itself (never a bucket)
+  customer     -> SMCI DIRECT          HOT if hw_pull>=3
+  operator     -> ISV / co-sell        HOT if hw_pull>=3
+  oem          -> OEM design-win       (embedded; listed regardless of hw_pull)
+  hyperscaler  -> out of scope (public cloud; hardware bought by the hyperscaler)
 
-Rules:
-  bucket(cat)  = side of the first-listed deployment (primary). If the first is
-                 'hybrid', fall through to the next non-hybrid value.
-  spans(cat)   = deployment set touches BOTH sides, or contains literal 'hybrid'
-                 => crosses the customer<->vendor infra boundary.
-  hot(cat)     = bucket == on-prem AND hw_pull >= 3  (real hardware deal)
+Deployment survives only as a secondary SUBSTRATE descriptor.
 
 Usage: python3 tools/rollup.py [--json]
 """
@@ -31,33 +27,50 @@ import yaml
 REPO = Path(__file__).resolve().parent.parent
 TAX = REPO / "data" / "taxonomy.yaml"
 
+# substrate descriptor only (NOT the buyer axis) — with codex-flagged guards
 ONPREM_SIDE = {"on-prem", "edge", "private", "OEM"}
 CLOUD_SIDE = {"public", "SaaS", "managed"}
+MOTION = {"customer": "direct", "operator": "ISV/co-sell",
+          "oem": "OEM design-win", "hyperscaler": "out of scope"}
 
 
-def bucket(dep):
+def substrate(dep):
+    """On-prem vs cloud vs hybrid, guarded. Informational only now."""
+    if not dep:
+        return "unknown"
+    s = set(dep)
+    if s <= {"hybrid"}:
+        return "hybrid"
     for d in dep:
         if d == "hybrid":
             continue
-        return "on-prem" if d in ONPREM_SIDE else "cloud"
-    return "hybrid"  # only if deployment is literally ['hybrid']
+        if d in ONPREM_SIDE:
+            return "on-prem"
+        if d in CLOUD_SIDE:
+            return "cloud"
+        return "unknown"  # guard: don't silently map unknown -> cloud
+    return "hybrid"
 
 
-def spans(dep):
-    s = set(dep)
-    return ("hybrid" in s) or (bool(s & ONPREM_SIDE) and bool(s & CLOUD_SIDE))
+def load():
+    doc = yaml.safe_load(open(TAX, encoding="utf-8"))
+    if doc.get("version", 0) < 3 or "hardware_buyer" not in doc["categories"][0]:
+        sys.exit("taxonomy.yaml has no hardware_buyer (need v3). Run assemble_buyer first.")
+    return doc["categories"]
 
 
-def compute(cats):
+def rows(cats):
     out = []
     for c in cats:
-        dep = c["deployment"]
-        b = bucket(dep)
+        hb = c["hardware_buyer"]
         out.append({
-            "id": c["id"], "name_en": c["name_en"], "bucket": b,
-            "spans": spans(dep), "hw_pull": c["hw_pull"],
-            "hot": b == "on-prem" and c["hw_pull"] >= 3,
-            "play_refs": c.get("play_refs", []), "deployment": dep,
+            "id": c["id"], "name_en": c["name_en"], "hardware_buyer": hb,
+            "primary_buyer": c["primary_buyer"], "smc_reachable": c["smc_reachable"],
+            "hw_pull": c["hw_pull"], "play_refs": c.get("play_refs", []),
+            "substrate": substrate(c["deployment"]),
+            "hot_customer": "customer" in hb and c["hw_pull"] >= 3,
+            "hot_operator": "operator" in hb and c["hw_pull"] >= 3,
+            "oem": "oem" in hb,
         })
     return out
 
@@ -66,34 +79,36 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
-
-    tax = yaml.safe_load(open(TAX, encoding="utf-8"))
-    rows = compute(tax["categories"])
-
+    rs = rows(load())
     if args.json:
-        print(json.dumps(rows, ensure_ascii=False, indent=2))
+        print(json.dumps(rs, ensure_ascii=False, indent=2))
         return
 
-    by_bucket = collections.Counter(r["bucket"] for r in rows)
-    spanning = sum(1 for r in rows if r["spans"])
-    hot = [r for r in rows if r["hot"]]
+    print(f"\n  Buyer rollup over {len(rs)} categories (derived from taxonomy.yaml v3)\n")
+    pb = collections.Counter(r["primary_buyer"] for r in rs)
+    print("  primary_buyer:")
+    for b in ("customer", "operator", "oem", "hyperscaler"):
+        print(f"    {b:<12}{pb[b]:>3}   -> {MOTION[b]}")
+    reach = sum(1 for r in rs if r["smc_reachable"])
+    print(f"\n  smc_reachable: {reach}/{len(rs)}  (hyperscaler-only skipped: {len(rs)-reach})")
 
-    print(f"\n  Rollup over {len(rows)} categories (derived from taxonomy.yaml)\n")
-    print(f"  {'Bucket':<10}{'Count':>7}   hw_pull distribution")
-    print(f"  {'-'*46}")
-    for b in ("on-prem", "cloud", "hybrid"):
-        rs = [r for r in rows if r["bucket"] == b]
-        if not rs and b == "hybrid":
-            print(f"  {b:<10}{0:>7}   (never a primary bucket — flag only)")
-            continue
-        dist = collections.Counter(r["hw_pull"] for r in rs)
-        dstr = "  ".join(f"{dist[k]}x hw{k}" for k in (4, 3, 2, 1) if dist[k])
-        print(f"  {b:<10}{len(rs):>7}   {dstr}")
-    print(f"\n  spans_infra_boundary (hybrid flag true): {spanning}/{len(rows)}")
-    print(f"\n  HOT (on-prem & hw_pull>=3): {len(hot)} categories")
-    for r in sorted(hot, key=lambda x: (-x["hw_pull"], x["id"])):
-        plays = ",".join(p[-1] for p in r["play_refs"]) or "-"
-        print(f"    hw{r['hw_pull']}  [{plays}]  {r['id']}")
+    def show(title, key, motion):
+        hot = [r for r in rs if r[key]]
+        print(f"\n  {title}: {len(hot)}  ({motion})")
+        for r in sorted(hot, key=lambda x: (-x["hw_pull"], x["id"])):
+            plays = ",".join(p[-1] for p in r["play_refs"]) or "-"
+            pr = "*" if r["primary_buyer"] in ("customer", "operator") and key.endswith(r["primary_buyer"]) else " "
+            print(f"    hw{r['hw_pull']} [{plays}] {pr} {r['id']}")
+
+    show("HOT_customer (hw>=3)", "hot_customer", MOTION["customer"])
+    show("HOT_operator (hw>=3)", "hot_operator", MOTION["operator"])
+    oem = [r for r in rs if r["oem"]]
+    print(f"\n  OEM design-wins: {len(oem)}  ({MOTION['oem']})")
+    for r in sorted(oem, key=lambda x: x["id"]):
+        print(f"    hw{r['hw_pull']}  {r['id']}")
+
+    sub = collections.Counter(r["substrate"] for r in rs)
+    print(f"\n  substrate (informational): {dict(sub)}")
     print()
 
 
