@@ -100,6 +100,8 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .rollup{font-size:12px;margin:-6px 0 12px;color:var(--muted)}
 .rollup b{color:var(--ink)}
 .ckbox{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
+.grouphdr{font-size:13px;font-weight:700;margin:18px 0 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
 .play{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
 .playa{background:var(--a)}.playb{background:var(--b)}.playc{background:var(--c)}
 .notes{color:var(--muted);font-size:12px;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
@@ -192,11 +194,12 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
         fPlay=mk('fPlay',['play-a','play-b','play-c'],'all plays'),
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'hw_pull >='),
+        fGroup=mk('fGroup',['hw_pull','play','segment','data_modality','role','bucket'],'no grouping'),
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
   const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
-  root.append(el('div',{class:'filters'},fBucket,fSeg,fPlay,fDep,fHw,fSpans,fTxt,cnt));
+  root.append(el('div',{class:'filters'},fBucket,fSeg,fPlay,fDep,fHw,fGroup,fSpans,fTxt,cnt));
   // static rollup summary
   const nOn=cats.filter(c=>bucketOf(c)==='on-prem').length,
         nCl=cats.filter(c=>bucketOf(c)==='cloud').length,
@@ -209,43 +212,63 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     ' span the customer↔vendor boundary. ',
     el('b',{},String(nHot)),' HOT (on-prem & hw_pull≥3) = the real hardware list.');
   root.append(sum);
-  const grid=el('div',{class:'grid'});root.append(grid);
+  const host=el('div',{});root.append(host);
   function tagRow(k,arr){const r=el('div',{class:'row'});r.append(el('span',{class:'tagk'},k));
     (arr||[]).forEach(v=>r.append(el('span',{class:'chip dim'},v)));return r;}
-  function render(){
-    const bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,hw=+fHw.value||0,q=fTxt.value.toLowerCase();
-    clear(grid);let n=0;
-    cats.forEach(c=>{
-      if(bk&&bucketOf(c)!==bk)return;
-      if(sp&&!spansOf(c))return;
-      if(seg&&!(c.segments||[]).includes(seg))return;
-      if(pl&&!(c.play_refs||[]).includes(pl))return;
-      if(dep&&!(c.deployment||[]).includes(dep))return;
-      if(hw&&c.hw_pull<hw)return;
-      if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infra_notes||'')).toLowerCase().includes(q)))return;
-      n++;
-      const b=bucketOf(c);
-      const card=el('div',{class:'card'});
-      const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hw_pull,title:'hw_pull'},String(c.hw_pull)),
-        el('span',{class:'bkt '+(b==='on-prem'?'bon':'bcl'),title:'infra-control bucket'+(spansOf(c)?' · spans boundary':'')},b+(spansOf(c)?' ⇄':'')));
-      (c.play_refs||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
-      card.append(head);
-      card.append(el('h3',{},c.name_en));
-      card.append(el('div',{class:'zh'},c.name_zh));
-      const segr=el('div',{class:'row'});(c.segments||[]).forEach(s=>segr.append(el('span',{class:'chip'},s)));
-      card.append(segr);
-      card.append(tagRow('lifecycle',c.lifecycle));
-      card.append(tagRow('role',c.role));
-      card.append(tagRow('data',c.data_modality));
-      card.append(tagRow('deploy',c.deployment));
-      if(c.hospital_view){card.append(tagRow('hosp-who',c.hospital_view.stakeholder));
-        card.append(tagRow('hosp-dim',c.hospital_view.dimension));}
-      if(c.infra_notes)card.append(el('div',{class:'notes'},c.infra_notes));
-      grid.append(card);
-    });
-    cnt.textContent=n+' / '+cats.length+' shown';
+  function card(c){
+    const b=bucketOf(c);
+    const cd=el('div',{class:'card'});
+    const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hw_pull,title:'hw_pull'},String(c.hw_pull)),
+      el('span',{class:'bkt '+(b==='on-prem'?'bon':'bcl'),title:'infra-control bucket'+(spansOf(c)?' · spans boundary':'')},b+(spansOf(c)?' ⇄':'')));
+    (c.play_refs||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
+    cd.append(head);
+    cd.append(el('h3',{},c.name_en));
+    cd.append(el('div',{class:'zh'},c.name_zh));
+    const segr=el('div',{class:'row'});(c.segments||[]).forEach(s=>segr.append(el('span',{class:'chip'},s)));
+    cd.append(segr);
+    cd.append(tagRow('lifecycle',c.lifecycle));
+    cd.append(tagRow('role',c.role));
+    cd.append(tagRow('data',c.data_modality));
+    cd.append(tagRow('deploy',c.deployment));
+    if(c.hospital_view){cd.append(tagRow('hosp-who',c.hospital_view.stakeholder));
+      cd.append(tagRow('hosp-dim',c.hospital_view.dimension));}
+    if(c.infra_notes)cd.append(el('div',{class:'notes'},c.infra_notes));
+    return cd;
   }
-  [fBucket,fSeg,fPlay,fDep,fHw].forEach(x=>x.onchange=render);
+  function groupsOf(c,axis){
+    if(axis==='hw_pull')return [String(c.hw_pull)];
+    if(axis==='bucket')return [bucketOf(c)];
+    if(axis==='play')return (c.play_refs&&c.play_refs.length)?c.play_refs.slice():['(no play)'];
+    return (c[axis]||[]).slice();
+  }
+  function render(){
+    const bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,
+          hw=+fHw.value||0,gp=fGroup.value,q=fTxt.value.toLowerCase();
+    const shown=cats.filter(c=>{
+      if(bk&&bucketOf(c)!==bk)return false;
+      if(sp&&!spansOf(c))return false;
+      if(seg&&!(c.segments||[]).includes(seg))return false;
+      if(pl&&!(c.play_refs||[]).includes(pl))return false;
+      if(dep&&!(c.deployment||[]).includes(dep))return false;
+      if(hw&&c.hw_pull<hw)return false;
+      if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infra_notes||'')).toLowerCase().includes(q)))return false;
+      return true;
+    });
+    clear(host);
+    cnt.textContent=shown.length+' / '+cats.length+' shown'+(gp?' · grouped by '+gp:'');
+    if(!gp){const grid=el('div',{class:'grid'});shown.forEach(c=>grid.append(card(c)));host.append(grid);return;}
+    const map=new Map();
+    shown.forEach(c=>groupsOf(c,gp).forEach(k=>{if(!map.has(k))map.set(k,[]);map.get(k).push(c);}));
+    let keys=[...map.keys()];
+    if(gp==='hw_pull')keys.sort((a,b)=>b-a);
+    else keys.sort((a,b)=>map.get(b).length-map.get(a).length);
+    keys.forEach(k=>{
+      const label=gp==='hw_pull'?('hw_pull '+k):(gp==='play'?playName(k):k);
+      host.append(el('div',{class:'grouphdr'},label,el('span',{class:'gcount'},String(map.get(k).length))));
+      const grid=el('div',{class:'grid'});map.get(k).forEach(c=>grid.append(card(c)));host.append(grid);
+    });
+  }
+  [fBucket,fSeg,fPlay,fDep,fHw,fGroup].forEach(x=>x.onchange=render);
   fSpansBox.onchange=render;fTxt.oninput=render;render();
 })();
 
