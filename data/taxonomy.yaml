@@ -49,7 +49,7 @@ categories:
     segments: [academic-medical-center, biotech-pharma, diagnostic-reference-lab, cro]
     hospital_view: null
     hw_pull: 4
-    infra_notes: "HPC CPU-dense + GPU nodes, NVMe scratch (burst I/O), object storage for cohorts; cloud-repatriation candidate at sustained load"
+    infra_notes: "HPC CPU-dense + GPU nodes, NVMe scratch (burst I/O), object storage for cohorts; cloud-repatriation candidate at sustained load. Owns secondary + compute-heavy tertiary analysis; hands curated tertiary calls to clinical-genomics-reporting (SaaS interpretation)."
     play_refs: [play-b]
     vendor_refs: []
     evidence_note: null
@@ -441,7 +441,7 @@ categories:
       stakeholder: [patient, device]
       dimension: [clinical, ops]
     hw_pull: 3
-    infra_notes: "Room/OR cameras and ambient sensors feed GPU inference servers at unit or campus edge (fall detection, virtual sitting, OR video routing and analytics), with substantial video retention storage. Sizing driven by camera/room count, streams per GPU, and video retention policy."
+    infra_notes: "Patient-room cameras and ambient sensors feed GPU inference servers at unit or campus edge (fall detection, virtual sitting, ambient clinical documentation), with substantial video retention storage. Sizing driven by camera/room count, streams per GPU, and video retention policy. OR-specific capture/routing lives in or-surgical-video (no double-count)."
     play_refs: []
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
@@ -523,7 +523,7 @@ categories:
     segments: [diagnostic-reference-lab, hospital-health-system, academic-medical-center, biotech-pharma]
     hospital_view: null
     hw_pull: 1
-    infra_notes: "SaaS-dominant, driven by curated knowledge bases, variant annotation/classification, and report generation; minimal customer-side hardware, any footprint is cloud at the operator. No on-prem GPU pull at the customer."
+    infra_notes: "SaaS-dominant interpretation/reporting layer: consumes tertiary variant calls handed off from bioinformatics-secondary (which owns the compute-heavy pipeline). Curated knowledge bases, variant annotation/classification, report generation; minimal customer-side hardware, any footprint is cloud at the operator. No on-prem GPU pull at the customer."
     play_refs: [play-b]
     vendor_refs: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
