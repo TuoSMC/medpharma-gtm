@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-24 — refinement round 3: vendors layer filled (196 vendors, web-researched)
+`5ca96df` RED (registry schema + foreign keys + ≥2-per-category invariants) → `1f78bab` GREEN.
+- 8 domain research agents (live web search) + 8 opus adversarial verifiers → **196 unique vendors**, every entry source-cited per §8. Confidence: 146 B / 50 C (verifiers downgraded ~25 entries whose only source was an aggregator blog).
+- **Verification caught one fabrication** (TriNetX "acquired by Roche" — false; Carlyle majority-owned) and stripped unverifiable revenue/date claims — the §8 no-fabrication rule enforced by machine, not trust.
+- Cloud-locked clinical SaaS (Veeva, Medidata, Benchling) carries the §5.4 co-sell-exclusion note.
+- Coverage: all 53 categories, 3-8 vendors each. Category vendor lists injected into taxonomy; app cards render vendor chips.
+- Tests 34 → **38** GREEN. Note: v1 `.jsx` extraction is now superseded — the researched registry is richer than the v1 vendor examples; drop the files in `/source/` anytime for a cross-check diff.
+
 ## 2026-07-24 — refinement round 2 (play-scope honesty + trigger foreign keys + market rulings)
 Same discipline loop (test-driven-development RED→GREEN, opus adjudication, codex+grok dual delta review). Commits: `e7868fa` RED → `c315a3e` GREEN → `9fd35dc` opus rulings → `2ff3b2a` dual-review actioned.
 
