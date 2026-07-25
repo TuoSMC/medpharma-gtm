@@ -656,7 +656,7 @@ categories:
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 2}
     infrastructure_notes: "Real-time bed/flow analytics over ADT and device feeds; flagship academic deployments keep on-site integration and real-time inference servers plus display-wall infrastructure, while the broader market is SaaS. Sizing driven by feed volume, bed count, and predictive-model refresh rates."
-    hardware_profile: []
+    hardware_profile: [high-performance-computing-cpu]
     plays: []
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
@@ -910,7 +910,7 @@ categories:
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {operator: 2}
     infrastructure_notes: "Vendor-hosted multi-tenant SaaS; negligible sponsor- or site-side hardware. Any real compute or storage footprint sits with the software operator, not the customer."
-    hardware_profile: []
+    hardware_profile: [nvme-performance-storage]
     plays: []
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
@@ -1156,7 +1156,7 @@ categories:
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {operator: 1}
     infrastructure_notes: "SaaS-dominant; negligible customer-site hardware. Residual pull sits with the operator: warehouse compute and storage for claims/EHR aggregation and risk-model scoring."
-    hardware_profile: [high-performance-computing-cpu]
+    hardware_profile: [high-performance-computing-cpu, capacity-archive-storage]
     plays: []
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
