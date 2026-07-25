@@ -245,6 +245,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     if(c.hospital_view){cd.append(tagRow('hosp-who',c.hospital_view.stakeholder));
       cd.append(tagRow('hosp-dim',c.hospital_view.dimension));}
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
+    if(c.play_exemption)cd.append(el('div',{class:'notes'},'Outside play scope: '+c.play_exemption));
     return cd;
   }
   function groupsOf(c,axis){
@@ -312,7 +313,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
 (function(){
   const root=$('#tab-triggers');
   const t=el('table');
-  t.append(el('thead',{},el('tr',{},...['Signal','Cat','Urgency','Window','Source','Action'].map(h=>el('th',{},h)))));
+  t.append(el('thead',{},el('tr',{},...['Signal','Cat','Urgency','Window','Source','Action','Related'].map(h=>el('th',{},h)))));
   const tb=el('tbody');
   DATA.triggers.triggers.forEach(x=>{
     tb.append(el('tr',{},
@@ -321,7 +322,10 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       el('td',{},el('span',{class:'u '+x.urgency},x.urgency)),
       el('td',{class:'muted'},x.window),
       el('td',{class:'muted'},x.source),
-      el('td',{},x.action)));
+      el('td',{},x.action),
+      el('td',{},el('div',{class:'row'},
+        ...(x.related_plays||[]).map(p=>el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])),
+        ...(x.related_categories||[]).map(c=>el('span',{class:'pill'},c))))));
   });
   t.append(tb);root.append(el('div',{class:'wrap'},t));
 })();

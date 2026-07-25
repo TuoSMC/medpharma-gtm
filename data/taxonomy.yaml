@@ -170,6 +170,7 @@ categories:
     infrastructure_notes: "Large HA database clusters, virtualization/VDI farms for clinician access, and full DR sites; sized by bed count, concurrent users, and uptime SLAs. Refresh cycles and DR site builds are the main deal triggers."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
+    play_exemption: "General datacenter refresh / disaster-recovery deal (high-availability database + virtual desktops); not an imaging, genomics, or manufacturing-edge motion — pursue as a standalone infrastructure deal"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -194,6 +195,7 @@ categories:
     infrastructure_notes: "Mostly rides on EHR or cloud infrastructure; emerging pull is on-prem GPU inference nodes where PHI rules force local hosting of clinical LLM/ambient-AI workloads. Sized by inference concurrency, not data volume."
     hardware_profile: [gpu-server]
     plays: []
+    play_exemption: "Clinical inference graphics-processing-unit capacity attaches to the electronic-health-record estate or the vendor's inference fleet; not a play-A/B/C motion"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -266,6 +268,7 @@ categories:
     infrastructure_notes: "Redundant on-prem server pairs and bedside/edge gateways ingesting continuous waveforms; HA is mandatory since downtime is a patient-safety event. Sized by monitored beds and waveform retention; surveillance analytics adds compute. Central-station servers are spec'd/supplied through the monitoring device maker (Philips/GE/Draeger) as part of the FDA-cleared system → OEM design-win is the larger motion; hospital-owned surveillance analytics is the smaller customer pull."
     hardware_profile: [nvme-performance-storage, edge-industrial, high-availability-redundant]
     plays: []
+    play_exemption: "Device-maker (original-equipment-manufacturer) channel deal for regulator-cleared central stations; outside the three solution plays"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -435,6 +438,7 @@ categories:
     infrastructure_notes: "Scanned-chart/document-imaging repositories with 7-15yr retention drive the storage footprint; legacy on-prem archives are refresh candidates. NLP computer-assisted/autonomous coding inference is mostly ISV-hosted GPU rather than customer-side."
     hardware_profile: [gpu-server, capacity-archive-storage]
     plays: []
+    play_exemption: "Operator-side coding natural-language-processing infrastructure; attaches to the revenue-cycle / electronic-health-record estate"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -459,6 +463,7 @@ categories:
     infrastructure_notes: "Where on-prem (still common in APAC hospitals), a classic DB+app HA cluster with a DR pair and nightly close/batch windows; sized by transaction volume, bed count and concurrent users. Cloud-ERP migration is steadily eroding this footprint, so refresh cycles are the entry point."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
+    play_exemption: "Back-office transactional high-availability cluster; standalone infrastructure refresh deal"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -508,6 +513,7 @@ categories:
     infrastructure_notes: "Bedside/unit edge gateways plus central integration engines in HA pairs feeding the EMR; vitals and waveform streams demand low-latency compute and growing time-series retention storage. Sizing driven by monitored-bed count, waveform capture depth, and alarm-routing uptime SLAs."
     hardware_profile: [nvme-performance-storage, edge-industrial, high-availability-redundant]
     plays: []
+    play_exemption: "Hospital integration-engine high-availability pairs; standalone clinical-information-technology infrastructure deal"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -676,6 +682,7 @@ categories:
     infrastructure_notes: "Patient-room cameras and ambient sensors feed GPU inference servers at unit or campus edge (fall detection, virtual sitting, ambient clinical documentation), with substantial video retention storage. Sizing driven by camera/room count, streams per GPU, and video retention policy. OR-specific capture/routing lives in or-surgical-video (no double-count)."
     hardware_profile: [gpu-server, capacity-archive-storage, edge-industrial]
     plays: []
+    play_exemption: "Ward video artificial-intelligence edge graphics capacity; emerging category, not yet a defined play"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -701,6 +708,7 @@ categories:
     infrastructure_notes: "On-prem transactional DB plus application servers with HA clustering and a DR site; sizing driven by test/order/result throughput, interface count, and long retention and uptime SLAs. No GPU."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
+    play_exemption: "Clinical laboratory transactional high-availability / disaster-recovery footprint; standalone infrastructure deal"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -1242,6 +1250,7 @@ categories:
     infrastructure_notes: "High-availability transactional compute and database storage; nightly batch adjudication windows drive CPU sizing, and regulatory DR mandates push dual-site deployments. Legacy platform modernization (mainframe to x86) creates refresh events."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
+    play_exemption: "Payer claims core; payer segment sits outside the three provider/pharma plays"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -1264,6 +1273,7 @@ categories:
     infrastructure_notes: "UM and care management are SaaS-dominant; the hardware angle is fraud/waste/abuse ML at large or single-payer/government insurers, which run on-prem model training and scoring over full claims history. Sizing by claims volume and retraining cadence."
     hardware_profile: [high-performance-computing-cpu]
     plays: []
+    play_exemption: "Payer analytics; payer segment sits outside the three provider/pharma plays"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 

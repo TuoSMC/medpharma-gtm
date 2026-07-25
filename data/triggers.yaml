@@ -15,6 +15,8 @@ triggers:
     window: "6-18 months before go-live (infra buy happens early)"
     source: "KLAS reports, hospital press releases, Epic/Oracle Health announcements"
     action: "Map infra operator; approach Infrastructure Owner re: compute/storage/VDI refresh"
+    related_categories: [ehr-emr-core]
+    related_plays: []
   - id: fda-ind
     signal: FDA IND filing
     category: pharmaceutical-research-development
@@ -22,6 +24,8 @@ triggers:
     window: "0-12 months post-filing"
     source: "ClinicalTrials.gov new registrations"
     action: "Flag account; R&D compute demand rising — probe genomics/AI workloads (Play B)"
+    related_categories: [clinical-trial-suite, bioinformatics-secondary, ai-drug-discovery]
+    related_plays: [play-b]
   - id: fda-approval
     signal: FDA NDA/BLA approval
     category: pharmaceutical-manufacturing
@@ -29,6 +33,8 @@ triggers:
     window: "0-6 months post-approval (commercial scale-up)"
     source: "FDA approvals list, company PR"
     action: "Manufacturing scale-up imminent — enter via Play C (MES/plant infra)"
+    related_categories: [mes-ebr, scada-dcs, serialization-track-trace]
+    related_plays: [play-c]
   - id: sequencer-purchase
     signal: New sequencer purchase
     category: genomics
@@ -36,6 +42,8 @@ triggers:
     window: "90-day hardware window post-purchase"
     source: "Illumina/PacBio/ONT PR, grant awards, conference posters"
     action: "Immediate outreach — sequencer needs compute+storage behind it (Play B)"
+    related_categories: [bioinformatics-secondary, ngs-lab-lims]
+    related_plays: [play-b]
   - id: cloud-repatriation
     signal: Cloud repatriation signals
     category: infrastructure-strategy
@@ -43,6 +51,8 @@ triggers:
     window: "Budget cycle following the statement"
     source: "Earnings calls ('reducing cloud spend'), CIO interviews, job postings for on-prem roles"
     action: "TCO conversation with Infrastructure Owner + Economic Buyer"
+    related_categories: [ai-hpc-orchestration, bioinformatics-secondary, clinical-data-lakehouse]
+    related_plays: [play-b]
   - id: hospital-ma
     signal: Hospital M&A / consolidation
     category: hospital-corporate-activity
@@ -50,6 +60,8 @@ triggers:
     window: "12-24 months (IT consolidation follows close)"
     source: "Healthcare M&A trackers, local business press"
     action: "Consolidated datacenter/imaging archive opportunity; find surviving IT org"
+    related_categories: [pacs-vna, ehr-emr-core, clinical-data-lakehouse]
+    related_plays: [play-a]
   - id: pharma-ai-strategy
     signal: Pharma AI-strategy announcement
     category: pharmaceutical-research-development
@@ -57,6 +69,8 @@ triggers:
     window: "3-12 months post-announcement"
     source: "Earnings calls, press releases, partnership announcements (NVIDIA etc.)"
     action: "Probe: cloud or on-prem? If on-prem/hybrid → Play B GPU cluster pitch"
+    related_categories: [ai-drug-discovery, ai-hpc-orchestration, comp-chem-simulation]
+    related_plays: [play-b]
   - id: new-campus
     signal: New hospital campus / expansion
     category: hospital-facility-expansion
@@ -64,6 +78,8 @@ triggers:
     window: "12-36 months before opening"
     source: "Certificate-of-need filings, construction news, hospital PR"
     action: "New datacenter/edge closets get spec'd early — reach facility IT planning"
+    related_categories: [ehr-emr-core, pacs-vna, hospital-bms, medical-device-integration]
+    related_plays: [play-a]
   - id: hpc-job-postings
     signal: HPC / bioinformatics job postings
     category: talent-signal
@@ -71,6 +87,8 @@ triggers:
     window: "Rolling"
     source: "LinkedIn, institution career pages"
     action: "Evidence C only — never 'confirmed installed base'. Add to monitor list, seek corroboration"
+    related_categories: [bioinformatics-secondary, ai-hpc-orchestration]
+    related_plays: [play-b]
   - id: klas-himss
     signal: KLAS / HIMSS rankings movement
     category: clinical-information-technology
@@ -78,6 +96,8 @@ triggers:
     window: "Annual cycles"
     source: "KLAS reports, HIMSS analytics (EMRAM stage changes)"
     action: "EMRAM stage jump = infra investment underway; qualify operator"
+    related_categories: [ehr-emr-core]
+    related_plays: []
   # ---- added from framework doc ----
   - id: cyber-incident
     signal: Cyber incident / ransomware
@@ -86,6 +106,8 @@ triggers:
     window: "0-6 months post-incident (budget unlocked)"
     source: "HHS breach portal, news, sector ISACs"
     action: "DR/backup/rebuild conversation — air-gapped backup, immutable storage angle"
+    related_categories: [ehr-emr-core, pacs-vna, hospital-erp]
+    related_plays: []
   - id: plant-modernization
     signal: Plant modernization or new plant
     category: pharmaceutical-manufacturing
@@ -93,6 +115,8 @@ triggers:
     window: "12-24 months before validation"
     source: "Capex announcements, EPC contract awards, local permits"
     action: "Play C entry — automation SI mapping, MES vendor identification"
+    related_categories: [mes-ebr, scada-dcs, plant-historian, automated-visual-inspection]
+    related_plays: [play-c]
   - id: serialization-mandate
     signal: Serialization / traceability mandate
     category: regulatory-mandate
@@ -100,6 +124,8 @@ triggers:
     window: "Mandate deadline minus 12-18 months"
     source: "DSCSA/EU FMD deadlines, market-specific regs"
     action: "Serialization = plant-edge servers per line; bundle with Play C"
+    related_categories: [serialization-track-trace]
+    related_plays: [play-c]
   - id: cloud-cost-pressure
     signal: Cloud cost pressure
     category: infrastructure-strategy
@@ -107,3 +133,5 @@ triggers:
     window: "Budget planning season"
     source: "Earnings calls, CFO commentary, layoff/efficiency announcements"
     action: "Soft version of repatriation — plant TCO seed, nurture"
+    related_categories: [ai-hpc-orchestration, clinical-data-lakehouse]
+    related_plays: [play-b]
