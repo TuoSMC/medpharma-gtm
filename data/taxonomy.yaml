@@ -438,7 +438,7 @@ categories:
     infrastructure_notes: "Scanned-chart/document-imaging repositories with 7-15yr retention drive the storage footprint; legacy on-prem archives are refresh candidates. NLP computer-assisted/autonomous coding inference is mostly ISV-hosted GPU rather than customer-side."
     hardware_profile: [gpu-server, capacity-archive-storage]
     plays: []
-    play_exemption: "Operator-side coding natural-language-processing infrastructure; attaches to the revenue-cycle / electronic-health-record estate"
+    play_exemption: "Operator-side coding natural-language-processing plus the customer-side scanned-chart archive refresh (7-15 year retention); attaches to the revenue-cycle / electronic-health-record estate rather than a play motion"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -656,7 +656,7 @@ categories:
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 2}
     infrastructure_notes: "Real-time bed/flow analytics over ADT and device feeds; flagship academic deployments keep on-site integration and real-time inference servers plus display-wall infrastructure, while the broader market is SaaS. Sizing driven by feed volume, bed count, and predictive-model refresh rates."
-    hardware_profile: [high-performance-computing-cpu]
+    hardware_profile: []
     plays: []
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
@@ -682,7 +682,7 @@ categories:
     infrastructure_notes: "Patient-room cameras and ambient sensors feed GPU inference servers at unit or campus edge (fall detection, virtual sitting, ambient clinical documentation), with substantial video retention storage. Sizing driven by camera/room count, streams per GPU, and video retention policy. OR-specific capture/routing lives in or-surgical-video (no double-count)."
     hardware_profile: [gpu-server, capacity-archive-storage, edge-industrial]
     plays: []
-    play_exemption: "Ward video artificial-intelligence edge graphics capacity; emerging category, not yet a defined play"
+    play_exemption: "Clinical video artificial intelligence adjacent to Play A but outside the fixed three-play scope; pursue as a standalone ward-video edge deal alongside the imaging estate"
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null
 
@@ -910,7 +910,7 @@ categories:
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {operator: 2}
     infrastructure_notes: "Vendor-hosted multi-tenant SaaS; negligible sponsor- or site-side hardware. Any real compute or storage footprint sits with the software operator, not the customer."
-    hardware_profile: [nvme-performance-storage]
+    hardware_profile: []
     plays: []
     vendors: []    # TODO: extract from /source/ jsx when dropped
     evidence_note: null

@@ -15,7 +15,7 @@ triggers:
     window: "6-18 months before go-live (infra buy happens early)"
     source: "KLAS reports, hospital press releases, Epic/Oracle Health announcements"
     action: "Map infra operator; approach Infrastructure Owner re: compute/storage/VDI refresh"
-    related_categories: [ehr-emr-core]
+    related_categories: [ehr-emr-core, medical-device-integration]
     related_plays: []
   - id: fda-ind
     signal: FDA IND filing
@@ -24,7 +24,7 @@ triggers:
     window: "0-12 months post-filing"
     source: "ClinicalTrials.gov new registrations"
     action: "Flag account; R&D compute demand rising — probe genomics/AI workloads (Play B)"
-    related_categories: [clinical-trial-suite, bioinformatics-secondary, ai-drug-discovery]
+    related_categories: [ai-drug-discovery, bioinformatics-secondary]
     related_plays: [play-b]
   - id: fda-approval
     signal: FDA NDA/BLA approval
@@ -33,7 +33,7 @@ triggers:
     window: "0-6 months post-approval (commercial scale-up)"
     source: "FDA approvals list, company PR"
     action: "Manufacturing scale-up imminent — enter via Play C (MES/plant infra)"
-    related_categories: [mes-ebr, scada-dcs, serialization-track-trace]
+    related_categories: [mes-ebr, scada-dcs, serialization-track-trace, plant-historian]
     related_plays: [play-c]
   - id: sequencer-purchase
     signal: New sequencer purchase
@@ -42,7 +42,7 @@ triggers:
     window: "90-day hardware window post-purchase"
     source: "Illumina/PacBio/ONT PR, grant awards, conference posters"
     action: "Immediate outreach — sequencer needs compute+storage behind it (Play B)"
-    related_categories: [bioinformatics-secondary, ngs-lab-lims]
+    related_categories: [bioinformatics-secondary]
     related_plays: [play-b]
   - id: cloud-repatriation
     signal: Cloud repatriation signals
@@ -51,8 +51,8 @@ triggers:
     window: "Budget cycle following the statement"
     source: "Earnings calls ('reducing cloud spend'), CIO interviews, job postings for on-prem roles"
     action: "TCO conversation with Infrastructure Owner + Economic Buyer"
-    related_categories: [ai-hpc-orchestration, bioinformatics-secondary, clinical-data-lakehouse]
-    related_plays: [play-b]
+    related_categories: [ai-hpc-orchestration, bioinformatics-secondary, clinical-data-lakehouse, ehr-emr-core, pacs-vna]
+    related_plays: [play-a, play-b]
   - id: hospital-ma
     signal: Hospital M&A / consolidation
     category: hospital-corporate-activity
@@ -61,7 +61,7 @@ triggers:
     source: "Healthcare M&A trackers, local business press"
     action: "Consolidated datacenter/imaging archive opportunity; find surviving IT org"
     related_categories: [pacs-vna, ehr-emr-core, clinical-data-lakehouse]
-    related_plays: [play-a]
+    related_plays: [play-a, play-b]
   - id: pharma-ai-strategy
     signal: Pharma AI-strategy announcement
     category: pharmaceutical-research-development
@@ -78,7 +78,7 @@ triggers:
     window: "12-36 months before opening"
     source: "Certificate-of-need filings, construction news, hospital PR"
     action: "New datacenter/edge closets get spec'd early — reach facility IT planning"
-    related_categories: [ehr-emr-core, pacs-vna, hospital-bms, medical-device-integration]
+    related_categories: [ehr-emr-core, pacs-vna, medical-device-integration]
     related_plays: [play-a]
   - id: hpc-job-postings
     signal: HPC / bioinformatics job postings
@@ -124,7 +124,7 @@ triggers:
     window: "Mandate deadline minus 12-18 months"
     source: "DSCSA/EU FMD deadlines, market-specific regs"
     action: "Serialization = plant-edge servers per line; bundle with Play C"
-    related_categories: [serialization-track-trace]
+    related_categories: [serialization-track-trace, mes-ebr]
     related_plays: [play-c]
   - id: cloud-cost-pressure
     signal: Cloud cost pressure
@@ -133,5 +133,5 @@ triggers:
     window: "Budget planning season"
     source: "Earnings calls, CFO commentary, layoff/efficiency announcements"
     action: "Soft version of repatriation — plant TCO seed, nurture"
-    related_categories: [ai-hpc-orchestration, clinical-data-lakehouse]
+    related_categories: [ai-hpc-orchestration, clinical-data-lakehouse, ehr-emr-core]
     related_plays: [play-b]

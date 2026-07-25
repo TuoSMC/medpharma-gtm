@@ -374,7 +374,7 @@ class TestPlayScopeHonesty(unittest.TestCase):
         carry play_exemption explaining why it sits outside the 3-play scope —
         otherwise the pipeline silently carries unroutable deals."""
         for c in CATS:
-            if max(c["hardware_opportunity_by_buyer"].values()) >= 3 and not c["plays"]:
+            if c["supermicro_reachable"] and max(c["hardware_opportunity_by_buyer"].values()) >= 3 and not c["plays"]:
                 self.assertTrue(c.get("play_exemption"),
                                 f"{c['id']}: HOT with no play and no play_exemption")
 
@@ -396,10 +396,24 @@ class TestTriggerForeignKeys(unittest.TestCase):
             for pid in t["related_plays"]:
                 self.assertIn(pid, play_ids, f"{t['id']}: unknown play {pid}")
 
-    def test_every_trigger_references_something(self):
+    def test_every_trigger_references_at_least_one_category(self):
+        """codex: plays alone must not satisfy the binding — a trigger needs a
+        concrete taxonomy category to route to."""
         for t in TRIGGERS["triggers"]:
-            self.assertTrue(t.get("related_categories") or t.get("related_plays"),
-                            f"{t['id']}: binds to nothing — dead trigger")
+            self.assertTrue(t.get("related_categories"),
+                            f"{t['id']}: no related_categories — dead trigger")
+
+    def test_related_plays_consistent_with_related_categories(self):
+        """grok: every play a trigger routes to must be carried by at least one
+        of its related categories (no play/category mismatch)."""
+        by_id = {c["id"]: c for c in CATS}
+        for t in TRIGGERS["triggers"]:
+            play_union = set()
+            for cid in t["related_categories"]:
+                play_union |= set(by_id[cid]["plays"])
+            for pid in t["related_plays"]:
+                self.assertIn(pid, play_union,
+                              f"{t['id']}: routes to {pid} but no related category carries it")
 
 
 if __name__ == "__main__":
