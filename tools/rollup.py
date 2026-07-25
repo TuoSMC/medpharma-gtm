@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Buyer-centric rollup over taxonomy.yaml (derived; needs hardware_opportunity_by_buyer, v4+).
+"""Buyer-centric rollup over taxonomy.yaml (derived; needs hardware_opportunity_by_buyer, v6+).
 
 The authoritative "who buys the iron" axis is `hardware_buyer`, and each buyer
 now carries its OWN hardware-pull score (`hardware_opportunity_by_buyer`) — a customer deal
@@ -35,17 +35,16 @@ MOTION = {"customer": "direct", "operator": "ISV/co-sell",
 def substrate(dep):
     if not dep:
         return "unknown"
-    if set(dep) <= {"hybrid"}:
+    vals = set(dep) - {"hybrid"}
+    if not vals:
         return "hybrid"
-    for d in dep:
-        if d == "hybrid":
-            continue
-        if d in ONPREM_SIDE:
-            return "on-prem"
-        if d in CLOUD_SIDE:
-            return "cloud"
+    on = bool(vals & ONPREM_SIDE)
+    cl = bool(vals & CLOUD_SIDE)
+    if vals - ONPREM_SIDE - CLOUD_SIDE:
         return "unknown"
-    return "hybrid"
+    if on and cl:
+        return "hybrid"
+    return "on-prem" if on else "cloud"
 
 
 def load():
@@ -99,9 +98,9 @@ def main():
     show("HOT_customer", "hot_customer", MOTION["customer"])
     show("HOT_operator", "hot_operator", MOTION["operator"])
     oem = [r for r in rs if r["oem"]]
-    print(f"\n  OEM design-wins: {len(oem)}  ({MOTION['oem']})")
+    print(f"\n  OEM design-wins: {len(oem)}  ({MOTION['original-equipment-manufacturer']})")
     for r in sorted(oem, key=lambda x: (-x["pull"].get("original-equipment-manufacturer", 0), x["id"])):
-        print(f"    oem{r['pull'].get('oem','?')}  {r['id']}")
+        print(f"    oem{r['pull'].get('original-equipment-manufacturer','?')}  {r['id']}")
 
     sub = collections.Counter(r["substrate"] for r in rs)
     print(f"\n  substrate (informational): {dict(sub)}\n")

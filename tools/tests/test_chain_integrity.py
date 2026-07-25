@@ -35,7 +35,7 @@ TARGET_ENUMS = {
     "data_modality": {"transactional", "images", "omics", "time-series", "documents",
                       "simulation", "artificial-intelligence-models", "real-world-data"},
     "deployment": {"on-premises", "private-cloud", "hybrid", "public-cloud",
-                   "software-as-a-service", "vendor-managed", "original-equipment-manufacturer", "edge"},
+                   "software-as-a-service", "vendor-managed", "edge"},
     "segments": {"hospital-health-system", "diagnostic-reference-laboratory",
                  "academic-medical-center", "medical-technology-in-vitro-diagnostics",
                  "biotechnology-pharmaceutical", "contract-research-organization",
@@ -47,7 +47,7 @@ TARGET_ENUMS = {
     "domain": {"hospital-clinical-core", "hospital-business-administration",
                "hospital-device-facility-operations", "diagnostics-laboratory",
                "pharmaceutical-research-clinical-development", "manufacturing-quality-supply-chain",
-               "data-analytics-payer-platforms"},
+               "data-analytics-payer-platforms", "medical-technology-device-software"},
 }
 FORBIDDEN_ABBREVIATED_VALUES = {
     # old value -> replacement (kept here as documentation of the wave-1 rename)
@@ -189,6 +189,177 @@ class TestTriggersClassified(unittest.TestCase):
         for t in TRIGGERS["triggers"]:
             self.assertIn(t["category"], cat_enum, t["id"])
             self.assertIn(t["urgency"], urg_enum, t["id"])
+
+
+
+
+# ============================================================
+# v2 invariants — added after codex + grok dual review
+# ============================================================
+import subprocess
+
+APPROVED_IDS = {
+    "pacs-vna", "bioinformatics-secondary", "mes-ebr", "ehr-emr-core", "cdss-clinical-ai",
+    "ris-cvis-workflow", "or-surgical-video", "icu-central-monitoring", "telehealth-platform",
+    "radiation-oncology-tps-ois", "advanced-visualization-3d", "patient-portal-engagement",
+    "patient-access-scheduling", "rcm-billing-claims", "him-coding", "hospital-erp",
+    "workforce-management", "medical-device-integration", "rtls-asset-tracking", "healthcare-cmms",
+    "pharmacy-automation", "medical-iot-security", "hospital-bms", "capacity-command-center",
+    "smart-room-ambient-ai", "lis", "lab-middleware-automation", "digital-pathology",
+    "ngs-lab-lims", "clinical-genomics-reporting", "rd-lab-informatics", "comp-chem-simulation",
+    "ai-drug-discovery", "cryo-em-structural-bio", "clinical-trial-suite", "pv-regulatory-information",
+    "scada-dcs", "plant-historian", "qc-lims-cds", "eqms-calibration", "serialization-track-trace",
+    "warehouse-cold-chain", "pat-process-twin", "automated-visual-inspection", "clinical-data-lakehouse",
+    "population-health-analytics", "rwd-rwe-analytics", "hie-interoperability-engine",
+    "imaging-ai-deployment", "payer-core-admin", "payer-um-fraud-analytics",
+    "samd-embedded-oem-platform", "ai-hpc-orchestration",
+}
+
+APPROVED_DOMAIN = {
+    "pacs-vna": "hospital-clinical-core", "bioinformatics-secondary": "pharmaceutical-research-clinical-development",
+    "mes-ebr": "manufacturing-quality-supply-chain", "ehr-emr-core": "hospital-clinical-core",
+    "cdss-clinical-ai": "hospital-clinical-core", "ris-cvis-workflow": "hospital-clinical-core",
+    "or-surgical-video": "hospital-clinical-core", "icu-central-monitoring": "hospital-clinical-core",
+    "telehealth-platform": "hospital-clinical-core", "radiation-oncology-tps-ois": "hospital-clinical-core",
+    "advanced-visualization-3d": "hospital-clinical-core", "patient-portal-engagement": "hospital-business-administration",
+    "patient-access-scheduling": "hospital-business-administration", "rcm-billing-claims": "hospital-business-administration",
+    "him-coding": "hospital-business-administration", "hospital-erp": "hospital-business-administration",
+    "workforce-management": "hospital-business-administration", "medical-device-integration": "hospital-device-facility-operations",
+    "rtls-asset-tracking": "hospital-device-facility-operations", "healthcare-cmms": "hospital-device-facility-operations",
+    "pharmacy-automation": "hospital-device-facility-operations", "medical-iot-security": "hospital-device-facility-operations",
+    "hospital-bms": "hospital-device-facility-operations", "capacity-command-center": "hospital-device-facility-operations",
+    "smart-room-ambient-ai": "hospital-device-facility-operations", "lis": "diagnostics-laboratory",
+    "lab-middleware-automation": "diagnostics-laboratory", "digital-pathology": "diagnostics-laboratory",
+    "ngs-lab-lims": "diagnostics-laboratory", "clinical-genomics-reporting": "diagnostics-laboratory",
+    "rd-lab-informatics": "pharmaceutical-research-clinical-development", "comp-chem-simulation": "pharmaceutical-research-clinical-development",
+    "ai-drug-discovery": "pharmaceutical-research-clinical-development", "cryo-em-structural-bio": "pharmaceutical-research-clinical-development",
+    "clinical-trial-suite": "pharmaceutical-research-clinical-development", "pv-regulatory-information": "pharmaceutical-research-clinical-development",
+    "scada-dcs": "manufacturing-quality-supply-chain", "plant-historian": "manufacturing-quality-supply-chain",
+    "qc-lims-cds": "manufacturing-quality-supply-chain", "eqms-calibration": "manufacturing-quality-supply-chain",
+    "serialization-track-trace": "manufacturing-quality-supply-chain", "warehouse-cold-chain": "manufacturing-quality-supply-chain",
+    "pat-process-twin": "manufacturing-quality-supply-chain", "automated-visual-inspection": "manufacturing-quality-supply-chain",
+    "clinical-data-lakehouse": "data-analytics-payer-platforms", "population-health-analytics": "data-analytics-payer-platforms",
+    "rwd-rwe-analytics": "data-analytics-payer-platforms", "hie-interoperability-engine": "data-analytics-payer-platforms",
+    "imaging-ai-deployment": "hospital-clinical-core", "payer-core-admin": "data-analytics-payer-platforms",
+    "payer-um-fraud-analytics": "data-analytics-payer-platforms", "samd-embedded-oem-platform": "medical-technology-device-software",
+    "ai-hpc-orchestration": "pharmaceutical-research-clinical-development",
+}
+
+REQUIRED_GLOSSARY_KEYS = {
+    "gpu-server", "high-performance-computing-cpu", "nvme-performance-storage",
+    "pacs", "vna", "ehr", "emr", "cdss", "ris", "cvis", "or", "icu", "tps", "ois",
+    "rcm", "him", "erp", "hr", "rtls", "cmms", "iomt", "ot", "bms", "lis", "lims",
+    "ngs", "eln", "edc", "ctms", "etmf", "rtsm", "pv", "scada", "dcs", "qc", "cds",
+    "eqms", "wms", "pat", "gxp", "hie", "rwd", "rwe", "samd", "oem", "mlops", "hpc",
+    "ai", "cryo-em",
+}
+
+TRIGGER_CATEGORIES = {
+    "clinical-information-technology", "genomics", "hospital-corporate-activity",
+    "hospital-facility-expansion", "infrastructure-strategy", "pharmaceutical-manufacturing",
+    "pharmaceutical-research-development", "regulatory-mandate", "security-incident", "talent-signal",
+}
+CLOUD_SUBSTRATE = {"public-cloud", "software-as-a-service", "hybrid", "vendor-managed"}
+
+
+class TestInventoryLocked(unittest.TestCase):
+    def test_exactly_53_categories_with_approved_ids(self):
+        ids = {c["id"] for c in CATS}
+        self.assertEqual(len(CATS), 53)
+        self.assertEqual(ids, APPROVED_IDS)
+
+    def test_domain_fixture_locked(self):
+        for c in CATS:
+            self.assertEqual(c["domain"], APPROVED_DOMAIN[c["id"]],
+                             f"{c['id']}: domain moved without updating the approved fixture")
+
+
+class TestTagsAgainstDeclaredEnums(unittest.TestCase):
+    def test_every_tag_value_is_member_of_declared_enum(self):
+        for c in CATS:
+            for field, enum_key in [("lifecycle", "lifecycle"), ("role", "role"),
+                                    ("data_modality", "data_modality"), ("deployment", "deployment"),
+                                    ("segments", "segments"), ("hardware_buyer", "hardware_buyer"),
+                                    ("hardware_profile", "hardware_profile")]:
+                declared = set(ENUMS[enum_key])
+                for v in c[field]:
+                    self.assertIn(v, declared, f"{c['id']}.{field}: '{v}' not in declared enum")
+            self.assertIn(c["primary_buyer"], set(ENUMS["hardware_buyer"]), c["id"])
+            self.assertIn(c["domain"], set(ENUMS["domain"]), c["id"])
+
+
+class TestBuyerCoherence(unittest.TestCase):
+    def test_primary_buyer_is_among_argmax(self):
+        for c in CATS:
+            obb = c["hardware_opportunity_by_buyer"]
+            mx = max(obb.values())
+            argmax = {b for b, v in obb.items() if v == mx}
+            self.assertIn(c["primary_buyer"], argmax,
+                          f"{c['id']}: primary_buyer {c['primary_buyer']} not among max-opportunity buyers {argmax}")
+
+    def test_hyperscaler_buyer_implies_cloud_substrate(self):
+        for c in CATS:
+            if "hyperscaler" in c["hardware_buyer"]:
+                self.assertTrue(set(c["deployment"]) & CLOUD_SUBSTRATE,
+                                f"{c['id']}: hyperscaler buyer but no cloud substrate in deployment")
+
+    def test_oem_buyer_has_edge_substrate_or_embedded_notes(self):
+        for c in CATS:
+            if "original-equipment-manufacturer" in c["hardware_buyer"]:
+                ok = ("edge" in c["deployment"]) or any(
+                    k in c["infrastructure_notes"].lower()
+                    for k in ("embedded", "scanner", "bill-of-materials", "device maker", "appliance"))
+                self.assertTrue(ok, f"{c['id']}: oem buyer without edge substrate or embedded-path notes")
+
+
+class TestGlossaryCoverage(unittest.TestCase):
+    def test_all_required_keys_present_with_both_languages(self):
+        gl = TAX["glossary"]
+        missing = REQUIRED_GLOSSARY_KEYS - set(gl)
+        self.assertFalse(missing, f"glossary missing: {sorted(missing)}")
+        for k in REQUIRED_GLOSSARY_KEYS:
+            self.assertTrue(gl[k].get("full_en"), k)
+            self.assertTrue(gl[k].get("full_zh"), k)
+
+    def test_full_zh_contains_no_latin(self):
+        for k, v in TAX["glossary"].items():
+            self.assertFalse(re.search(r"[A-Za-z]", v["full_zh"]),
+                             f"glossary.{k}.full_zh contains Latin characters: {v['full_zh']}")
+
+
+class TestTriggersLocked(unittest.TestCase):
+    def test_fixed_vocabulary_and_required_fields(self):
+        self.assertEqual(set(TRIGGERS["enums"]["category"]), TRIGGER_CATEGORIES)
+        ids = [t["id"] for t in TRIGGERS["triggers"]]
+        self.assertEqual(len(ids), len(set(ids)), "duplicate trigger ids")
+        for t in TRIGGERS["triggers"]:
+            for f in ("id", "signal", "category", "urgency", "window", "source", "action"):
+                self.assertIn(f, t, f"trigger {t.get('id','?')} missing {f}")
+            self.assertIn(t["category"], TRIGGER_CATEGORIES, t["id"])
+
+
+class TestToolsSmoke(unittest.TestCase):
+    def _run(self, *args):
+        r = subprocess.run([sys.executable, *args], capture_output=True, text=True,
+                           cwd=str(REPO), timeout=60)
+        blob = r.stdout + r.stderr
+        self.assertEqual(r.returncode, 0, f"{args}: exit {r.returncode}\n{blob[-800:]}")
+        for bad in ("Traceback", "KeyError"):
+            self.assertNotIn(bad, blob, f"{args}: {bad} in output")
+        return r.stdout
+
+    def test_rollup_runs_clean(self):
+        out = self._run("tools/rollup.py")
+        self.assertIn("OEM design-wins", out)
+        self.assertNotIn("oem?", out)
+
+    def test_drilldown_runs_clean(self):
+        out = self._run("tools/drilldown.py", "--axis", "component")
+        self.assertIn("gpu-server", out)
+
+    def test_score_runs_clean(self):
+        out = self._run("tools/score.py", "data/accounts/example-riverbend-pathology.yaml")
+        self.assertIn("Tier:", out)
 
 
 if __name__ == "__main__":

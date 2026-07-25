@@ -13,7 +13,7 @@ enums:
   lifecycle: [research, preclinical, clinical, manufacturing, commercial, post-market]
   role: [system-of-record, workflow, data-acquisition, integration, analytics-artificial-intelligence, infrastructure-platform, regulated-software-as-a-medical-device]
   data_modality: [transactional, images, omics, time-series, documents, simulation, artificial-intelligence-models, real-world-data]
-  deployment: [on-premises, private-cloud, hybrid, public-cloud, software-as-a-service, vendor-managed, original-equipment-manufacturer, edge]
+  deployment: [on-premises, private-cloud, hybrid, public-cloud, software-as-a-service, vendor-managed, edge]
   segments: [hospital-health-system, diagnostic-reference-laboratory, academic-medical-center,
              medical-technology-in-vitro-diagnostics, biotechnology-pharmaceutical, contract-research-organization, contract-development-manufacturing-organization, payer]
   hospital_stakeholder: [patient, clinician, device, facility]
@@ -23,32 +23,66 @@ enums:
   hardware_profile: [gpu-server, high-performance-computing-cpu, nvme-performance-storage, capacity-archive-storage, high-memory, edge-industrial, high-availability-redundant, disaster-recovery-backup] # SMCI components a category pulls (bridge to product)
   domain: [hospital-clinical-core, hospital-business-administration, hospital-device-facility-operations,
            diagnostics-laboratory, pharmaceutical-research-clinical-development,
-           manufacturing-quality-supply-chain, data-analytics-payer-platforms]
+           manufacturing-quality-supply-chain, data-analytics-payer-platforms,
+           medical-technology-device-software]
 
 glossary:
-  # Every surviving acronym, written out — canonical expansion (D1)
+  # Canonical expansion of every acronym used in this file (D1) — EN + Traditional Chinese
   gpu-server: {full_en: Graphics Processing Unit Server, full_zh: 圖形處理器伺服器}
   high-performance-computing-cpu: {full_en: High-Performance Computing Central Processing Unit Node, full_zh: 高效能運算中央處理器節點}
-  nvme-performance-storage: {full_en: Non-Volatile Memory Express High-Performance Storage, full_zh: NVMe 高效能儲存}
+  nvme-performance-storage: {full_en: Non-Volatile Memory Express High-Performance Storage, full_zh: 高效能非揮發性記憶體儲存}
   pacs: {full_en: Picture Archiving and Communication System, full_zh: 醫學影像儲傳系統}
-  vna: {full_en: Vendor-Neutral Archive, full_zh: 中立性影像典藏}
+  vna: {full_en: Vendor-Neutral Archive, full_zh: 廠商中立影像儲存庫}
   ehr: {full_en: Electronic Health Record, full_zh: 電子健康紀錄}
   emr: {full_en: Electronic Medical Record, full_zh: 電子病歷}
   cdss: {full_en: Clinical Decision Support System, full_zh: 臨床決策支援系統}
-  mes: {full_en: Manufacturing Execution System, full_zh: 製造執行系統}
-  ebr: {full_en: Electronic Batch Record, full_zh: 電子批次紀錄}
+  ris: {full_en: Radiology Information System, full_zh: 放射科資訊系統}
+  cvis: {full_en: Cardiovascular Information System, full_zh: 心血管資訊系統}
+  or: {full_en: Operating Room, full_zh: 手術室}
+  icu: {full_en: Intensive Care Unit, full_zh: 加護病房}
+  tps: {full_en: Treatment Planning System, full_zh: 治療計畫系統}
+  ois: {full_en: Oncology Information System, full_zh: 腫瘤資訊系統}
+  rcm: {full_en: Revenue Cycle Management, full_zh: 營收循環管理}
+  him: {full_en: Health Information Management, full_zh: 病歷資訊管理}
+  erp: {full_en: Enterprise Resource Planning, full_zh: 企業資源規劃}
+  hr: {full_en: Human Resources, full_zh: 人力資源}
+  rtls: {full_en: Real-Time Location System, full_zh: 即時定位系統}
+  cmms: {full_en: Computerized Maintenance Management System, full_zh: 電腦化維護管理系統}
+  iomt: {full_en: Internet of Medical Things, full_zh: 醫療物聯網}
+  ot: {full_en: Operational Technology, full_zh: 營運科技}
+  bms: {full_en: Building Management System, full_zh: 建築管理系統}
   lis: {full_en: Laboratory Information System, full_zh: 檢驗資訊系統}
   lims: {full_en: Laboratory Information Management System, full_zh: 實驗室資訊管理系統}
   ngs: {full_en: Next-Generation Sequencing, full_zh: 次世代定序}
+  eln: {full_en: Electronic Laboratory Notebook, full_zh: 電子實驗紀錄簿}
+  edc: {full_en: Electronic Data Capture, full_zh: 電子資料擷取}
+  ctms: {full_en: Clinical Trial Management System, full_zh: 臨床試驗管理系統}
+  etmf: {full_en: Electronic Trial Master File, full_zh: 電子試驗主檔}
+  rtsm: {full_en: Randomization and Trial Supply Management, full_zh: 隨機分派與試驗用藥供應管理}
+  pv: {full_en: Pharmacovigilance, full_zh: 藥物安全監視}
   scada: {full_en: Supervisory Control and Data Acquisition, full_zh: 監控與資料擷取系統}
+  dcs: {full_en: Distributed Control System, full_zh: 分散式控制系統}
+  qc: {full_en: Quality Control, full_zh: 品質管制}
+  cds: {full_en: Chromatography Data System, full_zh: 層析資料系統}
+  eqms: {full_en: Electronic Quality Management System, full_zh: 電子品質管理系統}
+  wms: {full_en: Warehouse Management System, full_zh: 倉儲管理系統}
+  pat: {full_en: Process Analytical Technology, full_zh: 製程分析技術}
+  gxp: {full_en: Good Practice Regulations (Manufacturing / Laboratory / Clinical), full_zh: 優良作業規範（總稱）}
+  hie: {full_en: Health Information Exchange, full_zh: 健康資訊交換}
+  rwd: {full_en: Real-World Data, full_zh: 真實世界數據}
+  rwe: {full_en: Real-World Evidence, full_zh: 真實世界證據}
   samd: {full_en: Software as a Medical Device, full_zh: 醫療器材軟體}
-  cryo-em: {full_en: Cryogenic Electron Microscopy, full_zh: 冷凍電子顯微鏡}
+  oem: {full_en: Original Equipment Manufacturer, full_zh: 原廠設備製造商}
+  mlops: {full_en: Machine Learning Operations, full_zh: 機器學習維運}
+  hpc: {full_en: High-Performance Computing, full_zh: 高效能運算}
+  ai: {full_en: Artificial Intelligence, full_zh: 人工智慧}
+  cryo-em: {full_en: Cryogenic Electron Microscopy, full_zh: 冷凍電子顯微術}
 
 categories:
   # ======== pre-approved schema examples ========
   - id: pacs-vna
     name_en: PACS / VNA (Medical Imaging Archive)
-    name_zh: 醫學影像儲傳系統 / 中立性影像典藏
+    name_zh: 醫學影像儲傳系統／廠商中立影像儲存庫
     name_full: Picture Archiving and Communication System / Vendor-Neutral Archive (medical imaging archive)
     domain: hospital-clinical-core
     lifecycle: [clinical, post-market]
@@ -64,7 +98,7 @@ categories:
     primary_buyer: customer
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 4, operator: 3}
-    infrastructure_notes: "PB-scale archive, NVMe ingest tier, GPU if AI overlay; retention 10yr+ drives storage growth"
+    infrastructure_notes: "PB-scale archive, NVMe ingest tier (artificial-intelligence overlay GPU lives in imaging-ai-deployment); retention 10yr+ drives storage growth"
     hardware_profile: [nvme-performance-storage, capacity-archive-storage]
     plays: [play-a]
     vendors: []    # TODO: extract from /source/ jsx files
@@ -100,7 +134,7 @@ categories:
     lifecycle: [manufacturing]
     role: [system-of-record, workflow]
     data_modality: [transactional, time-series, documents]
-    deployment: [on-premises, edge, private-cloud]
+    deployment: [on-premises, edge, private-cloud, software-as-a-service]
     segments: [biotechnology-pharmaceutical, contract-development-manufacturing-organization, medical-technology-in-vitro-diagnostics]
     hospital_view: null
     hardware_opportunity: 3
@@ -154,7 +188,7 @@ categories:
       dimension: [clinical]
     hardware_opportunity: 3
     hardware_buyer: [customer, operator, hyperscaler]
-    primary_buyer: customer
+    primary_buyer: operator
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 2, operator: 3}
     infrastructure_notes: "Mostly rides on EHR or cloud infrastructure; emerging pull is on-prem GPU inference nodes where PHI rules force local hosting of clinical LLM/ambient-AI workloads. Sized by inference concurrency, not data volume."
@@ -358,7 +392,7 @@ categories:
 
   - id: rcm-billing-claims
     name_en: Revenue Cycle Management / Billing & Claims
-    name_zh: 營收循環管理（批價計費與健保申報）
+    name_zh: 營收循環管理（帳務計費與理賠申報）
     name_full: Revenue Cycle Management, Billing and Claims Processing
     domain: hospital-business-administration
     lifecycle: [commercial]
@@ -369,11 +403,11 @@ categories:
     hospital_view:
       stakeholder: [patient, facility]
       dimension: [business]
-    hardware_opportunity: 3
+    hardware_opportunity: 2
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: operator
     supermicro_reachable: true
-    hardware_opportunity_by_buyer: {customer: 2, operator: 3}
+    hardware_opportunity_by_buyer: {customer: 2, operator: 2}
     infrastructure_notes: "Transactional DB with heavy batch claim-generation/scrubbing runs, typically co-located with EHR patient accounting on-prem or hosted-private; HA + DR mandatory since a billing stoppage halts cash flow. AI claims-scrubbing/denials inference sits mostly at the ISV or BPO operator, not the hospital."
     hardware_profile: [gpu-server, nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
@@ -395,7 +429,7 @@ categories:
       dimension: [admin, business]
     hardware_opportunity: 3
     hardware_buyer: [customer, operator, hyperscaler]
-    primary_buyer: customer
+    primary_buyer: operator
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 2, operator: 3}
     infrastructure_notes: "Scanned-chart/document-imaging repositories with 7-15yr retention drive the storage footprint; legacy on-prem archives are refresh candidates. NLP computer-assisted/autonomous coding inference is mostly ISV-hosted GPU rather than customer-side."
@@ -406,7 +440,7 @@ categories:
 
   - id: hospital-erp
     name_en: Hospital ERP (Finance / Supply Chain / HR)
-    name_zh: 醫院ERP（財務/供應鏈/人資）
+    name_zh: 醫院企業資源規劃系統（財務／供應鏈／人力資源）
     name_full: Hospital Enterprise Resource Planning (finance, supply chain, human resources)
     domain: hospital-business-administration
     lifecycle: [commercial]
@@ -551,7 +585,7 @@ categories:
 
   - id: medical-iot-security
     name_en: Medical IoT / OT Security
-    name_zh: 醫療物聯網(IoMT)與 OT 資安
+    name_zh: 醫療物聯網與營運科技資安
     name_full: Medical Internet-of-Things and Operational Technology Security
     domain: hospital-device-facility-operations
     lifecycle: [clinical]
@@ -581,7 +615,7 @@ categories:
     lifecycle: [clinical]
     role: [data-acquisition, workflow]
     data_modality: [time-series]
-    deployment: [on-premises, edge]
+    deployment: [on-premises, edge, software-as-a-service]
     segments: [hospital-health-system, academic-medical-center]
     hospital_view:
       stakeholder: [facility]
@@ -712,7 +746,7 @@ categories:
     primary_buyer: customer
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 4, operator: 3, original-equipment-manufacturer: 2}
-    infrastructure_notes: "High-throughput scanner ingest, petabyte-scale tiered image storage, and GPU servers for AI inference and model training; sizing driven by slides/day, per-slide image size, and concurrent AI workload. Flagship compute+storage pull of the cluster."
+    infrastructure_notes: "High-throughput scanner ingest, petabyte-scale tiered image storage, and GPU servers for AI inference and model training; sizing driven by slides/day, per-slide image size, and concurrent AI workload. Flagship compute+storage pull of the cluster. Scanner-embedded ingest/inference workstation is the original-equipment-manufacturer bill-of-materials path."
     hardware_profile: [gpu-server, nvme-performance-storage, capacity-archive-storage]
     plays: [play-a]
     vendors: []    # TODO: extract from /source/ jsx when dropped
@@ -853,8 +887,8 @@ categories:
 
   - id: clinical-trial-suite
     name_en: Clinical Trial Systems Suite (EDC / CTMS / eTMF / RTSM)
-    name_zh: 臨床試驗系統套件（電子資料擷取／CTMS／eTMF／RTSM）
-    name_full: Clinical Trial Systems Suite (electronic data capture, trial management, trial master file, randomization)
+    name_zh: 臨床試驗系統套件（電子資料擷取、試驗管理、試驗主檔、隨機分派與試驗用藥供應管理）
+    name_full: Clinical Trial Systems Suite (electronic data capture, clinical trial management system, electronic trial master file, randomization and trial supply management)
     domain: pharmaceutical-research-clinical-development
     lifecycle: [clinical]
     role: [system-of-record, workflow]
@@ -965,7 +999,7 @@ categories:
   - id: eqms-calibration
     name_en: eQMS & Calibration / Maintenance Management (GxP Quality)
     name_zh: 電子品質管理系統（eQMS）與校正／維護管理（GxP 品質合規）
-    name_full: Electronic Quality Management System and Calibration Management
+    name_full: Electronic Quality Management System, Calibration and Maintenance Management
     domain: manufacturing-quality-supply-chain
     lifecycle: [manufacturing, post-market]
     role: [system-of-record, workflow]
@@ -1008,8 +1042,8 @@ categories:
 
   - id: warehouse-cold-chain
     name_en: Warehouse & Cold-Chain Management (WMS / Environmental Monitoring)
-    name_zh: 倉儲管理與冷鏈監控（WMS／環境監測）
-    name_full: Warehouse and Cold-Chain Management
+    name_zh: 倉儲管理系統與冷鏈環境監測
+    name_full: Warehouse Management System and Cold-Chain Environmental Monitoring
     domain: manufacturing-quality-supply-chain
     lifecycle: [manufacturing, commercial]
     role: [system-of-record, data-acquisition, workflow]
@@ -1169,7 +1203,7 @@ categories:
     name_en: Imaging AI Deployment Platform (Inference Orchestration / Marketplace)
     name_zh: 醫療影像 AI 部署與推論調度平台
     name_full: Medical Imaging Artificial Intelligence Deployment Platform (inference orchestration)
-    domain: data-analytics-payer-platforms
+    domain: hospital-clinical-core
     lifecycle: [clinical]
     role: [infrastructure-platform, analytics-artificial-intelligence]
     data_modality: [images, artificial-intelligence-models]
@@ -1237,16 +1271,16 @@ categories:
     name_en: SaMD & Embedded Device Software Platform (OEM)
     name_zh: 醫療器材軟體（SaMD）與嵌入式裝置軟體平台
     name_full: Software as a Medical Device and Embedded Device Software Platform (original equipment manufacturer)
-    domain: data-analytics-payer-platforms
+    domain: medical-technology-device-software
     lifecycle: [preclinical, clinical, post-market]
     role: [regulated-software-as-a-medical-device, infrastructure-platform]
     data_modality: [time-series, images, simulation, artificial-intelligence-models]
-    deployment: [original-equipment-manufacturer, edge, software-as-a-service]
+    deployment: [edge, software-as-a-service]
     segments: [medical-technology-in-vitro-diagnostics]
     hospital_view: null
     hardware_opportunity: 3
     hardware_buyer: [original-equipment-manufacturer, customer]
-    primary_buyer: customer
+    primary_buyer: original-equipment-manufacturer
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 3, original-equipment-manufacturer: 3}
     infrastructure_notes: "Two-sided pull: embedded/edge compute designed into devices as long-lifecycle, regulatory-locked BOMs (volume design wins), plus OEM-side V&V, simulation, and on-device AI model-training clusters. Sizing by device fleet volume and AI content per device."
@@ -1259,18 +1293,18 @@ categories:
     name_en: AI / HPC Workload Orchestration & MLOps (cluster scheduling)
     name_zh: AI／高效能運算工作負載調度與 MLOps 平台
     name_full: Artificial Intelligence and High-Performance Computing Workload Orchestration and Machine Learning Operations
-    domain: data-analytics-payer-platforms
+    domain: pharmaceutical-research-clinical-development
     lifecycle: [research, preclinical, clinical]
     role: [infrastructure-platform, workflow]
     data_modality: [artificial-intelligence-models]
-    deployment: [on-premises, hybrid, private-cloud]
+    deployment: [on-premises, hybrid, private-cloud, software-as-a-service]
     segments: [academic-medical-center, biotechnology-pharmaceutical, contract-research-organization, diagnostic-reference-laboratory]
     hospital_view: null
-    hardware_opportunity: 4
+    hardware_opportunity: 3
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     supermicro_reachable: true
-    hardware_opportunity_by_buyer: {customer: 4, operator: 4}
+    hardware_opportunity_by_buyer: {customer: 3, operator: 3}
     infrastructure_notes: "GPU/HPC scheduler + MLOps layer (batch queue / container orchestration / GPU partitioning) that anchors and sizes on-prem GPU/HPC clusters. The single most natural ISV co-sell for a GPU/server vendor; sizes to aggregate job concurrency."
     hardware_profile: [gpu-server, high-performance-computing-cpu]
     plays: [play-b]
