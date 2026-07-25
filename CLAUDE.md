@@ -7,8 +7,8 @@
 - My separate financial-analysis system (~6,000 companies) can later feed the account universe — design the account data layer so bulk import is possible.
 - Working language: English for data/terminology; Traditional Chinese for docs when I ask.
 ## 2. What already exists (v1, built in Claude chat)
-1. `medpharma-gtm-playbook.jsx` — 5-tab React artifact: software map (10 categories with HW-pull ratings), 8-phase research workflow, buyer personas, 10 trigger signals, 5-stage sales motion + priority stack.
-2. `hospital-software-taxonomy.jsx` — hospital software matrix: stakeholder (patient / clinician / device / facility) × dimension (clinical / ops / business / admin / regulatory), ~35 categories with EN/ZH terms, vendor examples, HW-pull ratings.
+1. `medpharma-gtm-playbook.jsx` — 5-tab React artifact: software map (10 categories with hardware-opportunity ratings), 8-phase research workflow, buyer personas, 10 trigger signals, 5-stage sales motion + priority stack.
+2. `hospital-software-taxonomy.jsx` — hospital software matrix: stakeholder (patient / clinician / device / facility) × dimension (clinical / ops / business / admin / regulatory), ~35 categories with EN/ZH terms, vendor examples, hardware-opportunity ratings.
 3. An external strategy framework (text doc) contributing: the 8-factor account formula, deployment-operator decision tree, 4 GTM motions, 6-role buying committee, 10-phase research workflow, 100-pt opportunity scoring, 7 solution plays, facility-level granularity, A–D evidence confidence.
 4. A merge analysis was completed. The decisions in §3 are **FINAL** — implement them, don't relitigate.
 If I drop the two `.jsx` files into `/source/`, **extract their category and vendor data** into the data layer instead of retyping.
@@ -26,7 +26,7 @@ No answer → not in pipeline. Software user ≠ hardware buyer.
 | Segments | 8 customer types: Hospital/Health System · Diagnostic/Reference Lab · Academic Medical Center · MedTech/IVD · Biotech/Pharma · CRO · CDMO · Payer |
 | Software taxonomy | Every entry tagged on 4 dims: **lifecycle** (research→post-market), **role** (system-of-record / workflow / data-acquisition / integration / analytics-AI / infra-platform / regulated-SaMD), **data modality** (transactional / images / omics / time-series / documents / simulation / AI-models / RWD), **deployment** (on-prem / private / hybrid / public / SaaS / managed / OEM / edge). Hospital matrix (stakeholder × dimension) kept as the hospital drill-down view. Vendor names live in **data files, never in code** — they go stale. |
 | Deployment operator | Decision tree drives GTM motion: customer-operated → **direct** · SaaS → **ISV platform team** · CRO/CDMO-run → **service provider** · embedded-in-device → **OEM** |
-| Workload | Quantified fields per account: data/day, total capacity, growth %, retention, GPU type+qty, train/inference, IOPS, throughput, latency, concurrency, RTO/RPO, platform (bare-metal/VM/K8s/HPC). The old 4-level "pull" rating survives only as a rollup summary. |
+| Workload | Quantified fields per account: data/day, total capacity, growth %, retention, GPU type+qty, train/inference, IOPS, throughput, latency, concurrency, RTO/RPO, platform (bare-metal/VM/K8s/HPC). The 4-level `hardware_opportunity` rating (1 minimal · 2 modest · 3 significant · 4 flagship) survives only as a rollup summary. |
 | Regulatory | **Cross-cutting field, not a category**: PHI / GxP / Part 11 / SaMD flags per account. In regulated deals, documentation IS the product: controlled BOM, firmware/driver matrix, change notification, lifecycle statement, hardening guide. |
 | Buying committee | 6 roles per opportunity: Business Owner · Application Owner · Infrastructure Owner · Data/AI Owner · Risk Approver · Economic Buyer. Keep v1's sales-cycle estimates and entry points. |
 | Triggers | Keep v1's operationalized list (each = signal + source + window + action); add the four from the framework doc. Full seed list in §6. |
@@ -38,7 +38,7 @@ A second-opinion review showed the deployment tag conflated *substrate* with *wh
 - **oem** → **OEM design-win** (software embedded in a device/instrument; per-unit BOM)
 - **hyperscaler** → out of scope (public cloud; hardware bought by the hyperscaler)
 
-Each buyer carries its **own** `hw_pull_by_buyer` score (a customer deal and an operator deal for the same category are sized independently). `deployment` survives only as a secondary substrate descriptor. Derived, single-source lenses live in `tools/rollup.py` and `tools/drilldown.py`; the app filters/groups on buyer. HOT lists: **HOT_customer** (customer pull≥3, direct), **HOT_operator** (operator pull≥3, co-sell), **OEM design-wins**.
+Each buyer carries its **own** `hardware_opportunity_by_buyer` score (a customer deal and an operator deal for the same category are sized independently; scale 1 minimal · 2 modest · 3 significant · 4 flagship). `deployment` survives only as a secondary substrate descriptor. Derived, single-source lenses live in `tools/rollup.py` and `tools/drilldown.py`; the app filters/groups on buyer. HOT lists: **HOT_customer** (customer opportunity≥3, direct), **HOT_operator** (operator opportunity≥3, co-sell), **OEM design-wins**.
 ## 4. Scoring model (100 pts)
 Each item scored 0–5, weighted score = (item ÷ 5) × weight.
 | Item | Weight |

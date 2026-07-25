@@ -161,6 +161,7 @@ function bucketOf(c){for(const d of c.deployment){if(d==='hybrid')continue;retur
 function spansOf(c){const s=new Set(c.deployment);return s.has('hybrid')||([...s].some(x=>ONPREM_SIDE.has(x))&&[...s].some(x=>CLOUD_SIDE.has(x)));}
 // hardware_buyer = WHO buys the iron (authoritative §3 axis, taxonomy v3)
 const BUYER_C={customer:'bcust',operator:'boper',oem:'boem',hyperscaler:'bhyp'};
+const OPP={1:'minimal',2:'modest',3:'significant',4:'flagship'};
 
 // ---- header ----
 $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.status;
@@ -199,8 +200,8 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
         fSeg=mk('fSeg',E.segments,'all segments'),
         fPlay=mk('fPlay',['play-a','play-b','play-c'],'all plays'),
         fDep=mk('fDep',E.deployment,'all deployments'),
-        fHw=mk('fHw',['1','2','3','4'],'hw_pull >='),
-        fGroup=mk('fGroup',['primary_buyer','hardware_buyer','hw_pull','play','segment','data_modality','role','bucket'],'no grouping'),
+        fHw=mk('fHw',['1','2','3','4'],'opportunity ≥'),
+        fGroup=mk('fGroup',['primary_buyer','hardware_buyer','hardware_opportunity','play','segment','data_modality','role','bucket'],'no grouping'),
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
@@ -208,24 +209,25 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   root.append(el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fGroup,fSpans,fTxt,cnt));
   // static buyer rollup summary (authoritative axis)
   const pb={customer:0,operator:0,oem:0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
-  const hotC=cats.filter(c=>(c.hw_pull_by_buyer.customer||0)>=3).length,
-        hotO=cats.filter(c=>(c.hw_pull_by_buyer.operator||0)>=3).length,
+  const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
+        hotO=cats.filter(c=>(c.hardware_opportunity_by_buyer.operator||0)>=3).length,
         nOem=cats.filter(c=>c.hardware_buyer.includes('oem')).length;
   const sum=el('div',{class:'rollup'});
   sum.append('Hardware-buyer rollup (§3 gate — WHO buys the iron): primary ',
     el('b',{},String(pb.customer)),' customer · ',el('b',{},String(pb.operator)),' operator. ',
     el('b',{},String(hotC)),' HOT_customer (direct) · ',
     el('b',{},String(hotO)),' HOT_operator (ISV co-sell) · ',
-    el('b',{},String(nOem)),' OEM design-wins. Badge = primary buyer (green customer / purple operator / orange OEM).');
+    el('b',{},String(nOem)),' OEM design-wins. Badge = primary buyer (green customer / purple operator / orange OEM). Opportunity scale 1 minimal · 2 modest · 3 significant · 4 flagship.');
   root.append(sum);
   const host=el('div',{});root.append(host);
   function tagRow(k,arr){const r=el('div',{class:'row'});r.append(el('span',{class:'tagk'},k));
     (arr||[]).forEach(v=>r.append(el('span',{class:'chip dim'},v)));return r;}
   function card(c){
     const cd=el('div',{class:'card'});
-    const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hw_pull,title:'hw_pull'},String(c.hw_pull)),
-      el('span',{class:'by '+BUYER_C[c.primary_buyer],title:'primary hardware_buyer · per-buyer hw_pull'},c.primary_buyer+(c.hw_pull_by_buyer[c.primary_buyer]?'·'+c.hw_pull_by_buyer[c.primary_buyer]:'')));
-    (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo',title:'also buys iron'},x+(c.hw_pull_by_buyer[x]?'·'+c.hw_pull_by_buyer[x]:''))));
+    const pbP=c.hardware_opportunity_by_buyer[c.primary_buyer];
+    const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hardware_opportunity,title:'hardware opportunity: '+OPP[c.hardware_opportunity]+' ('+c.hardware_opportunity+'/4)'},String(c.hardware_opportunity)),
+      el('span',{class:'by '+BUYER_C[c.primary_buyer],title:'primary buyer '+c.primary_buyer+(pbP?' · '+OPP[pbP]+' opportunity':'')},c.primary_buyer+(pbP?'·'+pbP:'')));
+    (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo',title:x+' buys iron'+(c.hardware_opportunity_by_buyer[x]?' · '+OPP[c.hardware_opportunity_by_buyer[x]]+' opportunity':'')},x+(c.hardware_opportunity_by_buyer[x]?'·'+c.hardware_opportunity_by_buyer[x]:''))));
     if(spansOf(c))head.append(el('span',{class:'byo',title:'deployment spans customer↔vendor'},'⇄'));
     (c.play_refs||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
     cd.append(head);
@@ -243,7 +245,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     return cd;
   }
   function groupsOf(c,axis){
-    if(axis==='hw_pull')return [String(c.hw_pull)];
+    if(axis==='hardware_opportunity')return [String(c.hardware_opportunity)];
     if(axis==='bucket')return [bucketOf(c)];
     if(axis==='primary_buyer')return [c.primary_buyer];
     if(axis==='hardware_buyer')return c.hardware_buyer.slice();
@@ -260,7 +262,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       if(seg&&!(c.segments||[]).includes(seg))return false;
       if(pl&&!(c.play_refs||[]).includes(pl))return false;
       if(dep&&!(c.deployment||[]).includes(dep))return false;
-      if(hw&&c.hw_pull<hw)return false;
+      if(hw&&c.hardware_opportunity<hw)return false;
       if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infra_notes||'')).toLowerCase().includes(q)))return false;
       return true;
     });
@@ -270,10 +272,10 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     const map=new Map();
     shown.forEach(c=>groupsOf(c,gp).forEach(k=>{if(!map.has(k))map.set(k,[]);map.get(k).push(c);}));
     let keys=[...map.keys()];
-    if(gp==='hw_pull')keys.sort((a,b)=>b-a);
+    if(gp==='hardware_opportunity')keys.sort((a,b)=>b-a);
     else keys.sort((a,b)=>map.get(b).length-map.get(a).length);
     keys.forEach(k=>{
-      const label=gp==='hw_pull'?('hw_pull '+k):(gp==='play'?playName(k):k);
+      const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):k);
       host.append(el('div',{class:'grouphdr'},label,el('span',{class:'gcount'},String(map.get(k).length))));
       const grid=el('div',{class:'grid'});map.get(k).forEach(c=>grid.append(card(c)));host.append(grid);
     });

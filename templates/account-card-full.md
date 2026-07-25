@@ -23,7 +23,7 @@ Extends lite card. Additional YAML sections:
 | `rto_rpo` | hours / minutes |
 | `platform` | bare-metal / VM / K8s / HPC |
 
-`hw_pull_rollup`: 1-4 summary rating (legacy v1 rollup only)
+`hardware_opportunity_rollup`: 1-4 summary rating (legacy v1 rollup only)
 
 ## `regulatory` — cross-cutting flags
 `phi` / `gxp` / `part11` / `samd` — booleans + notes.

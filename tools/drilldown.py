@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Buyer-aware drill-down over taxonomy.yaml (derived; needs hw_pull_by_buyer, v4+).
+"""Buyer-aware drill-down over taxonomy.yaml (derived; needs hardware_opportunity_by_buyer, v4+).
 
 Lenses (HOT uses the per-buyer pull, not a blended number):
   1. HOT_customer tree  : customer pull>=3  ->  pull -> play -> segment
@@ -18,17 +18,18 @@ import yaml
 
 REPO = Path(__file__).resolve().parent.parent
 TAX = REPO / "data" / "taxonomy.yaml"
+OPP = {1: "minimal", 2: "modest", 3: "significant", 4: "flagship"}
 
 
 def load():
     doc = yaml.safe_load(open(TAX, encoding="utf-8"))
-    if doc.get("version", 0) < 4 or "hw_pull_by_buyer" not in doc["categories"][0]:
-        sys.exit("taxonomy.yaml has no hw_pull_by_buyer (need v4). Run assemble_pull first.")
+    if doc.get("version", 0) < 4 or "hardware_opportunity_by_buyer" not in doc["categories"][0]:
+        sys.exit("taxonomy.yaml has no hardware_opportunity_by_buyer (need v4). Run assemble_pull first.")
     return doc["categories"]
 
 
 def pull(c, b):
-    return c["hw_pull_by_buyer"].get(b, 0)
+    return c["hardware_opportunity_by_buyer"].get(b, 0)
 
 
 def play_label(refs):
@@ -37,13 +38,13 @@ def play_label(refs):
 
 def customer_tree(cats):
     hot = [c for c in cats if pull(c, "customer") >= 3]
-    print(f"\n=== HOT_customer (SMCI direct): customer pull>=3  ({len(hot)}) ===")
-    print("    customer_pull -> play -> segment\n")
+    print(f"\n=== HOT_customer (SMCI direct): customer opportunity>=3  ({len(hot)}) ===")
+    print("    customer opportunity -> play -> segment\n")
     for hw in (4, 3):
         tier = [c for c in hot if pull(c, "customer") == hw]
         if not tier:
             continue
-        print(f"  customer_pull {hw}  ({len(tier)})")
+        print(f"  opportunity {hw} ({OPP[hw]})  ({len(tier)})")
         by_play = collections.defaultdict(list)
         for c in tier:
             by_play[play_label(c.get("play_refs"))].append(c)
@@ -58,7 +59,7 @@ def buyer_list(cats, b, title, motion, require_hw=True):
     sel = [c for c in cats if b in c["hardware_buyer"] and (not require_hw or pull(c, b) >= 3)]
     print(f"=== {title}: {len(sel)}  ({motion}) ===")
     for c in sorted(sel, key=lambda x: (-pull(x, b), x["id"])):
-        other = " ".join(f"{k[:4]}{v}" for k, v in c["hw_pull_by_buyer"].items() if k != b)
+        other = " ".join(f"{k[:4]}{v}" for k, v in c["hardware_opportunity_by_buyer"].items() if k != b)
         print(f"  {b[:4]}{pull(c,b)}  {c['id']:<28} [{', '.join(c['segments'])}]  (also {other or '-'})")
     print()
 
@@ -72,7 +73,7 @@ def by_axis(cats, axis, title):
         for v in c[axis]:
             t = tally[v]
             t["n"] += 1
-            t["hw"][c["hw_pull"]] += 1
+            t["hw"][c["hardware_opportunity"]] += 1
             if chot:
                 t["hot"] += 1
     print(f"  {'value':<20}{'total':>6}{'cHOT':>6}")

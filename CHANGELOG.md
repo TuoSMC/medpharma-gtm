@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-07-24 — rename hw_pull → hardware_opportunity (clarity)
+Field name `hw_pull` was internal jargon. Renamed across data + tools + app + spec to read professionally and pair with `hardware_buyer`:
+- `hw_pull` → **`hardware_opportunity`**; `hw_pull_by_buyer` → **`hardware_opportunity_by_buyer`**; `hw_pull_rollup` → `hardware_opportunity_rollup`.
+- Added the 1–4 scale in words everywhere: **1 minimal · 2 modest · 3 significant · 4 flagship** (taxonomy enum comment, CLAUDE.md §3, app summary legend, CLI, per-badge tooltips).
+- App: filter now reads `opportunity ≥`, group-by shows `opportunity 4 (flagship)`, badges tooltip the tier word.
+- 141 token replacements across taxonomy.yaml + 3 tools + templates + README; CLAUDE.md prose reworded. 0 residual `hw_pull`. Tools + app re-verified (v4, 53 cats; HOT_customer 25 / HOT_operator 16 / OEM 8 unchanged; browser-checked).
+
 ## 2026-07-24 — per-buyer hw_pull (taxonomy v4) + icu flip + spec note
 Actioned all three open items from the hardware_buyer round ("三個都要"):
 1. **icu-central-monitoring** primary_buyer customer→**oem** — device-maker channel (Philips/GE/Draeger supply the FDA-cleared central-station servers) is the larger motion; hospital surveillance analytics is the smaller customer pull. (primary_buyer dist now 43 customer / 9 operator / 1 oem.)

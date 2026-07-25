@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Buyer-centric rollup over taxonomy.yaml (derived; needs hw_pull_by_buyer, v4+).
+"""Buyer-centric rollup over taxonomy.yaml (derived; needs hardware_opportunity_by_buyer, v4+).
 
 The authoritative "who buys the iron" axis is `hardware_buyer`, and each buyer
-now carries its OWN hardware-pull score (`hw_pull_by_buyer`) — a customer deal
+now carries its OWN hardware-pull score (`hardware_opportunity_by_buyer`) — a customer deal
 and an operator deal for the same category are sized independently. HOT lists
 use the per-buyer pull, not a single blended number:
 
-  customer     -> SMCI DIRECT       HOT if hw_pull_by_buyer.customer >= 3
-  operator     -> ISV / co-sell     HOT if hw_pull_by_buyer.operator >= 3
+  customer     -> SMCI DIRECT       HOT if hardware_opportunity_by_buyer.customer >= 3
+  operator     -> ISV / co-sell     HOT if hardware_opportunity_by_buyer.operator >= 3
   oem          -> OEM design-win     listed if oem buyer present (pull shown)
   hyperscaler  -> out of scope (public cloud)
 
@@ -50,8 +50,8 @@ def substrate(dep):
 
 def load():
     doc = yaml.safe_load(open(TAX, encoding="utf-8"))
-    if doc.get("version", 0) < 4 or "hw_pull_by_buyer" not in doc["categories"][0]:
-        sys.exit("taxonomy.yaml has no hw_pull_by_buyer (need v4). Run assemble_pull first.")
+    if doc.get("version", 0) < 4 or "hardware_opportunity_by_buyer" not in doc["categories"][0]:
+        sys.exit("taxonomy.yaml has no hardware_opportunity_by_buyer (need v4). Run assemble_pull first.")
     return doc["categories"]
 
 
@@ -59,7 +59,7 @@ def rows(cats):
     out = []
     for c in cats:
         hb = c["hardware_buyer"]
-        p = c["hw_pull_by_buyer"]
+        p = c["hardware_opportunity_by_buyer"]
         out.append({
             "id": c["id"], "name_en": c["name_en"], "hardware_buyer": hb,
             "primary_buyer": c["primary_buyer"], "smc_reachable": c["smc_reachable"],
