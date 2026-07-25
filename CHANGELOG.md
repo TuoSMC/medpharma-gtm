@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2026-07-24 — six-layer chain refinement (taxonomy v6) — TDD + grill-me + superpowers + codex/grok dual review
+Pipeline per Tuo's directive: three disciplines (test-driven-development · grill-me · using-superpowers), opus refinement agents, codex reviewing this repo + grok reviewing a dedicated worktree (`/Volumes/ClaudeNVME/medical-software-grok-review`).
+
+**Commits:** `398cc59` RED (17 tests, 10 failing) → `828a56f` GREEN v6 → `00849a5` opus audit fixes → `36d8c40` dual-review hardening.
+
+1. **Grill decision D1 (Tuo)**: ids stay compact; every category gains `name_full` (zero-abbreviation full name); enum values + field names expand; `glossary` block (now 49 entries, EN+ZH, Latin-free zh) canonically expands every surviving acronym.
+2. **Abbreviations opened everywhere**: `cro`→`contract-research-organization`, `on-prem`→`on-premises`, `SaaS`→`software-as-a-service`, `oem`→`original-equipment-manufacturer`, `dr-backup`→`disaster-recovery-backup`, trigger categories, tool constants, …
+3. **Everything classified**: `domain` field (8-value closed enum, was comments); triggers gained closed enums; headline opportunity = max(per-buyer) rule.
+4. **Opus layer audit** (6 agents, high effort): 7 accepted fixes — payer added to hie (CMS-0057-F), digital-pathology +biotechnology-pharmaceutical, advanced-visualization-3d de-labbed, 3 name_full fixes, payer-um per-buyer scores un-inverted.
+5. **Dual external review**: codex 11 P1 + 4 P2; grok P1/P2 sets. Overlap (highest confidence): rollup.py OEM KeyError crash (real, reproduced — earlier verification had truncated output with `head`, hiding it), no smoke tests, samd domain misfiled, name_full under-expansion, thin glossary. All P1s actioned; market fixes: ai-hpc deflated (GPU double-count), rcm operator deflated, primary_buyer=argmax rule (him-coding/cdss→operator, samd→oem), hyperscaler-buyer↔cloud-substrate coherence, OEM removed from deployment enum.
+6. **Test suite v2**: 17 → **29 tests** — inventory lock (53 + exact ids), id→domain fixture, enum membership (not blacklist), primary=argmax, buyer-substrate coherence, glossary coverage + Latin-free zh, trigger vocabulary lock, subprocess smoke tests for rollup/drilldown/score. **29/29 GREEN.**
+
+**Open (for Tuo):** grok P2 backlog not yet actioned (rd-lab modality omics?, ai-drug-discovery high-memory?, population-health storage, HOT-without-play marker, trigger↔category foreign keys) — next refinement loop candidates.
+
 ## 2026-07-24 — hardware_profile: category → SMCI component bridge (v5)
 Next drill-down layer: what hardware each category actually pulls, structured from the prose `infrastructure_notes` into a controlled component set — the bridge from software category to Supermicro product line.
 - `data/taxonomy.yaml` → **v5**. New enum + per-category `hardware_profile` (subset of `gpu-server · hpc-cpu · nvme-performance · capacity-archive · high-memory · edge-industrial · ha-redundant · dr-backup`). Assigned by a 17-agent workflow (profile → adversarial verify → consistency critic). Verify pruned speculative tags (pacs-vna dropped gpu-server — GPU belongs to imaging-ai-deployment; comp-chem dropped then re-added high-memory). 7 consistency fixes applied (icu +nvme; workforce/patient-access dropped thin-terminal edge; ngs-lims + genomics-reporting nvme→[]; comp-chem + cryo-em +high-memory).
