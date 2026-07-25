@@ -292,7 +292,7 @@ categories:
     role: [workflow, analytics-artificial-intelligence]
     data_modality: [images]
     deployment: [on-premises, private-cloud]
-    segments: [hospital-health-system, academic-medical-center, diagnostic-reference-laboratory]
+    segments: [hospital-health-system, academic-medical-center]
     hospital_view:
       stakeholder: [clinician]
       dimension: [clinical]
@@ -703,7 +703,7 @@ categories:
     role: [workflow, data-acquisition, analytics-artificial-intelligence, regulated-software-as-a-medical-device]
     data_modality: [images, artificial-intelligence-models]
     deployment: [on-premises, private-cloud, hybrid]
-    segments: [hospital-health-system, diagnostic-reference-laboratory, academic-medical-center, medical-technology-in-vitro-diagnostics]
+    segments: [hospital-health-system, diagnostic-reference-laboratory, academic-medical-center, medical-technology-in-vitro-diagnostics, biotechnology-pharmaceutical]
     hospital_view:
       stakeholder: [clinician, device]
       dimension: [clinical, ops]
@@ -832,7 +832,7 @@ categories:
   - id: cryo-em-structural-bio
     name_en: Structural Biology / Cryo-EM Image Processing
     name_zh: 結構生物學與冷凍電子顯微鏡（Cryo-EM）影像處理
-    name_full: Cryogenic Electron Microscopy and Structural Biology Processing
+    name_full: Structural Biology and Cryogenic Electron Microscopy Image Processing
     domain: pharmaceutical-research-clinical-development
     lifecycle: [research, preclinical]
     role: [data-acquisition, analytics-artificial-intelligence]
@@ -1150,7 +1150,7 @@ categories:
     role: [integration]
     data_modality: [transactional, documents]
     deployment: [on-premises, private-cloud, hybrid, software-as-a-service]
-    segments: [hospital-health-system, academic-medical-center, diagnostic-reference-laboratory]
+    segments: [hospital-health-system, academic-medical-center, diagnostic-reference-laboratory, payer]
     hospital_view:
       stakeholder: [facility]
       dimension: [ops]
@@ -1226,7 +1226,7 @@ categories:
     hardware_buyer: [customer, operator, hyperscaler]
     primary_buyer: customer
     supermicro_reachable: true
-    hardware_opportunity_by_buyer: {customer: 2, operator: 3}
+    hardware_opportunity_by_buyer: {customer: 3, operator: 2}
     infrastructure_notes: "UM and care management are SaaS-dominant; the hardware angle is fraud/waste/abuse ML at large or single-payer/government insurers, which run on-prem model training and scoring over full claims history. Sizing by claims volume and retraining cadence."
     hardware_profile: [high-performance-computing-cpu]
     plays: []
@@ -1236,7 +1236,7 @@ categories:
   - id: samd-embedded-oem-platform
     name_en: SaMD & Embedded Device Software Platform (OEM)
     name_zh: 醫療器材軟體（SaMD）與嵌入式裝置軟體平台
-    name_full: Software as a Medical Device and Embedded Device Software Platform
+    name_full: Software as a Medical Device and Embedded Device Software Platform (original equipment manufacturer)
     domain: data-analytics-payer-platforms
     lifecycle: [preclinical, clinical, post-market]
     role: [regulated-software-as-a-medical-device, infrastructure-platform]
@@ -1258,7 +1258,7 @@ categories:
   - id: ai-hpc-orchestration
     name_en: AI / HPC Workload Orchestration & MLOps (cluster scheduling)
     name_zh: AI／高效能運算工作負載調度與 MLOps 平台
-    name_full: Artificial Intelligence and High-Performance Computing Workload Orchestration
+    name_full: Artificial Intelligence and High-Performance Computing Workload Orchestration and Machine Learning Operations
     domain: data-analytics-payer-platforms
     lifecycle: [research, preclinical, clinical]
     role: [infrastructure-platform, workflow]
