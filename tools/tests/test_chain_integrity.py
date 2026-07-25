@@ -362,5 +362,45 @@ class TestToolsSmoke(unittest.TestCase):
         self.assertIn("Tier:", out)
 
 
+
+
+# ============================================================
+# Round-2 invariants: play-scope honesty + trigger foreign keys
+# ============================================================
+
+class TestPlayScopeHonesty(unittest.TestCase):
+    def test_hot_categories_have_play_or_exemption(self):
+        """A reachable-HOT category (any buyer opportunity >= 3) with no play must
+        carry play_exemption explaining why it sits outside the 3-play scope —
+        otherwise the pipeline silently carries unroutable deals."""
+        for c in CATS:
+            if max(c["hardware_opportunity_by_buyer"].values()) >= 3 and not c["plays"]:
+                self.assertTrue(c.get("play_exemption"),
+                                f"{c['id']}: HOT with no play and no play_exemption")
+
+    def test_exemption_only_where_meaningful(self):
+        for c in CATS:
+            if c.get("play_exemption"):
+                self.assertFalse(c["plays"], f"{c['id']}: has both plays and play_exemption")
+
+
+class TestTriggerForeignKeys(unittest.TestCase):
+    def test_triggers_bind_to_taxonomy_and_plays(self):
+        cat_ids = {c["id"] for c in CATS}
+        play_ids = {p["id"] for p in PLAYS["plays"]}
+        for t in TRIGGERS["triggers"]:
+            self.assertIn("related_categories", t, f"{t['id']}: no related_categories")
+            self.assertIn("related_plays", t, f"{t['id']}: no related_plays")
+            for cid in t["related_categories"]:
+                self.assertIn(cid, cat_ids, f"{t['id']}: unknown category {cid}")
+            for pid in t["related_plays"]:
+                self.assertIn(pid, play_ids, f"{t['id']}: unknown play {pid}")
+
+    def test_every_trigger_references_something(self):
+        for t in TRIGGERS["triggers"]:
+            self.assertTrue(t.get("related_categories") or t.get("related_plays"),
+                            f"{t['id']}: binds to nothing — dead trigger")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
