@@ -8,7 +8,7 @@ segment: Hospital / Health System
 software:
   domain: Digital Pathology (WSI scanning + AI-assisted primary diagnosis)
   vendor: null                      # TODO: vendors.yaml entry when real
-deployment: on-prem
+deployment: on-premises
 operator: customer-operated             # → GTM motion: direct
 trigger:
   id: pathology-golive                  # not in triggers.yaml — example-local

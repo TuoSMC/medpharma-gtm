@@ -83,8 +83,9 @@ def by_axis(cats, axis, title):
     print()
 
 
-COMPONENTS = ["gpu-server", "hpc-cpu", "nvme-performance", "capacity-archive",
-              "high-memory", "edge-industrial", "ha-redundant", "dr-backup"]
+COMPONENTS = ["gpu-server", "high-performance-computing-cpu", "nvme-performance-storage",
+              "capacity-archive-storage", "high-memory", "edge-industrial",
+              "high-availability-redundant", "disaster-recovery-backup"]
 
 
 def component_pipelines(cats):
@@ -112,7 +113,7 @@ def main():
     if a in (None, "operator"):
         buyer_list(cats, "operator", "HOT_operator (ISV co-sell)", "vendor buys dedicated iron")
     if a in (None, "oem"):
-        buyer_list(cats, "oem", "OEM design-wins", "embedded BOM", require_hw=False)
+        buyer_list(cats, "original-equipment-manufacturer", "OEM design-wins", "embedded BOM", require_hw=False)
     if a in (None, "component"):
         component_pipelines(cats)
     if a in (None, "modality"):

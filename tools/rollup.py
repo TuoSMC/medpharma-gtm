@@ -26,10 +26,10 @@ import yaml
 REPO = Path(__file__).resolve().parent.parent
 TAX = REPO / "data" / "taxonomy.yaml"
 
-ONPREM_SIDE = {"on-prem", "edge", "private", "OEM"}
-CLOUD_SIDE = {"public", "SaaS", "managed"}
+ONPREM_SIDE = {"on-premises", "edge", "private-cloud", "original-equipment-manufacturer"}
+CLOUD_SIDE = {"public-cloud", "software-as-a-service", "vendor-managed"}
 MOTION = {"customer": "direct", "operator": "ISV/co-sell",
-          "oem": "OEM design-win", "hyperscaler": "out of scope"}
+          "original-equipment-manufacturer": "OEM design-win", "hyperscaler": "out of scope"}
 
 
 def substrate(dep):
@@ -67,7 +67,7 @@ def rows(cats):
             "substrate": substrate(c["deployment"]),
             "hot_customer": p.get("customer", 0) >= 3,
             "hot_operator": p.get("operator", 0) >= 3,
-            "oem": "oem" in hb,
+            "oem": "original-equipment-manufacturer" in hb,
         })
     return out
 
@@ -84,7 +84,7 @@ def main():
     print(f"\n  Per-buyer rollup over {len(rs)} categories (taxonomy.yaml v4)\n")
     pb = collections.Counter(r["primary_buyer"] for r in rs)
     print("  primary_buyer:")
-    for b in ("customer", "operator", "oem", "hyperscaler"):
+    for b in ("customer", "operator", "original-equipment-manufacturer", "hyperscaler"):
         print(f"    {b:<12}{pb[b]:>3}   -> {MOTION[b]}")
 
     def show(title, key, motion):
@@ -100,7 +100,7 @@ def main():
     show("HOT_operator", "hot_operator", MOTION["operator"])
     oem = [r for r in rs if r["oem"]]
     print(f"\n  OEM design-wins: {len(oem)}  ({MOTION['oem']})")
-    for r in sorted(oem, key=lambda x: (-x["pull"].get("oem", 0), x["id"])):
+    for r in sorted(oem, key=lambda x: (-x["pull"].get("original-equipment-manufacturer", 0), x["id"])):
         print(f"    oem{r['pull'].get('oem','?')}  {r['id']}")
 
     sub = collections.Counter(r["substrate"] for r in rs)

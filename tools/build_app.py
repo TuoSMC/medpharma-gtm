@@ -156,12 +156,12 @@ const playClass=p=>({'play-a':'playa','play-b':'playb','play-c':'playc'}[p]||'')
 const playName=p=>({'play-a':'A · Imaging/Path','play-b':'B · Genomics/AI','play-c':'C · GMP Edge'}[p]||p);
 
 // ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
-const ONPREM_SIDE=new Set(['on-prem','edge','private','OEM']);
-const CLOUD_SIDE=new Set(['public','SaaS','managed']);
+const ONPREM_SIDE=new Set(['on-premises','edge','private-cloud','original-equipment-manufacturer']);
+const CLOUD_SIDE=new Set(['public-cloud','software-as-a-service','vendor-managed']);
 function bucketOf(c){for(const d of c.deployment){if(d==='hybrid')continue;return ONPREM_SIDE.has(d)?'on-prem':'cloud';}return 'hybrid';}
 function spansOf(c){const s=new Set(c.deployment);return s.has('hybrid')||([...s].some(x=>ONPREM_SIDE.has(x))&&[...s].some(x=>CLOUD_SIDE.has(x)));}
 // hardware_buyer = WHO buys the iron (authoritative §3 axis, taxonomy v3)
-const BUYER_C={customer:'bcust',operator:'boper',oem:'boem',hyperscaler:'bhyp'};
+const BUYER_C={customer:'bcust',operator:'boper','original-equipment-manufacturer':'boem',hyperscaler:'bhyp'};
 const OPP={1:'minimal',2:'modest',3:'significant',4:'flagship'};
 
 // ---- header ----
@@ -196,13 +196,13 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy');
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
     opts.forEach(o=>s.append(el('option',{value:o},o)));return s;};
-  const fBuyer=mk('fBuyer',['customer','operator','oem','hyperscaler'],'all buyers'),
+  const fBuyer=mk('fBuyer',['customer','operator','original-equipment-manufacturer','hyperscaler'],'all buyers'),
         fBucket=mk('fBucket',['on-prem','cloud'],'all substrate'),
         fSeg=mk('fSeg',E.segments,'all segments'),
         fPlay=mk('fPlay',['play-a','play-b','play-c'],'all plays'),
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'opportunity ≥'),
-        fProfile=mk('fProfile',['gpu-server','hpc-cpu','nvme-performance','capacity-archive','high-memory','edge-industrial','ha-redundant','dr-backup'],'all hardware'),
+        fProfile=mk('fProfile',['gpu-server','high-performance-computing-cpu','nvme-performance-storage','capacity-archive-storage','high-memory','edge-industrial','high-availability-redundant','disaster-recovery-backup'],'all hardware'),
         fGroup=mk('fGroup',['primary_buyer','hardware_buyer','hardware_opportunity','hardware_profile','play','segment','data_modality','role','bucket'],'no grouping'),
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
@@ -210,10 +210,10 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
   root.append(el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup,fSpans,fTxt,cnt));
   // static buyer rollup summary (authoritative axis)
-  const pb={customer:0,operator:0,oem:0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
+  const pb={customer:0,operator:0,'original-equipment-manufacturer':0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
         hotO=cats.filter(c=>(c.hardware_opportunity_by_buyer.operator||0)>=3).length,
-        nOem=cats.filter(c=>c.hardware_buyer.includes('oem')).length;
+        nOem=cats.filter(c=>c.hardware_buyer.includes('original-equipment-manufacturer')).length;
   const sum=el('div',{class:'rollup'});
   sum.append('Hardware-buyer rollup (§3 gate — WHO buys the iron): primary ',
     el('b',{},String(pb.customer)),' customer · ',el('b',{},String(pb.operator)),' operator. ',
