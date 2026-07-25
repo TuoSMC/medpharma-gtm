@@ -416,5 +416,49 @@ class TestTriggerForeignKeys(unittest.TestCase):
                               f"{t['id']}: routes to {pid} but no related category carries it")
 
 
+
+
+# ============================================================
+# Round-3 invariants: vendors layer
+# ============================================================
+VENDORS_DOC = yaml.safe_load(open(REPO / "data" / "vendors.yaml", encoding="utf-8"))
+
+
+class TestVendorsLayer(unittest.TestCase):
+    def test_registry_schema(self):
+        """Every vendors.yaml entry: id, name, deployment_models, confidence (A-D),
+        source (citation URL or named public source). §8: never fabricate."""
+        vendors = VENDORS_DOC["vendors"]
+        self.assertTrue(vendors, "vendors registry is empty")
+        ids = [v["id"] for v in vendors]
+        self.assertEqual(len(ids), len(set(ids)), "duplicate vendor ids")
+        for v in vendors:
+            for f in ("id", "name", "deployment_models", "confidence", "source"):
+                self.assertIn(f, v, f"vendor {v.get('id','?')} missing {f}")
+            self.assertRegex(v["id"], ID_RE)
+            self.assertIn(v["confidence"], ("A", "B", "C", "D"), v["id"])
+            self.assertTrue(str(v["source"]).strip(), f"{v['id']}: empty source")
+            for d in v["deployment_models"]:
+                self.assertIn(d, TARGET_ENUMS["deployment"], f"{v['id']}: bad deployment {d}")
+
+    def test_category_vendor_foreign_keys(self):
+        vids = {v["id"] for v in VENDORS_DOC["vendors"]}
+        for c in CATS:
+            for vid in c["vendors"]:
+                self.assertIn(vid, vids, f"{c['id']}: unknown vendor {vid}")
+
+    def test_every_category_has_vendors(self):
+        for c in CATS:
+            self.assertGreaterEqual(len(c["vendors"]), 2,
+                                    f"{c['id']}: fewer than 2 vendors")
+
+    def test_every_vendor_referenced(self):
+        used = set()
+        for c in CATS:
+            used |= set(c["vendors"])
+        for v in VENDORS_DOC["vendors"]:
+            self.assertIn(v["id"], used, f"vendor {v['id']} referenced by no category")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
