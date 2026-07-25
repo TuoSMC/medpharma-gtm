@@ -62,8 +62,8 @@ def rows(cats):
         p = c["hardware_opportunity_by_buyer"]
         out.append({
             "id": c["id"], "name_en": c["name_en"], "hardware_buyer": hb,
-            "primary_buyer": c["primary_buyer"], "smc_reachable": c["smc_reachable"],
-            "pull": p, "play_refs": c.get("play_refs", []),
+            "primary_buyer": c["primary_buyer"], "supermicro_reachable": c["supermicro_reachable"],
+            "pull": p, "plays": c.get("plays", []),
             "substrate": substrate(c["deployment"]),
             "hot_customer": p.get("customer", 0) >= 3,
             "hot_operator": p.get("operator", 0) >= 3,
@@ -92,7 +92,7 @@ def main():
         print(f"\n  {title}: {len(hot)}  ({motion})")
         for r in sorted(hot, key=lambda x: (-x["pull"][key.split('_')[1]], x["id"])):
             b = key.split('_')[1]
-            plays = ",".join(p[-1] for p in r["play_refs"]) or "-"
+            plays = ",".join(p[-1] for p in r["plays"]) or "-"
             other = " ".join(f"{k[:4]}{v}" for k, v in r["pull"].items() if k != b)
             print(f"    {b[:4]}{r['pull'][b]} [{plays}]  {r['id']:<28} (also {other or '-'})")
 

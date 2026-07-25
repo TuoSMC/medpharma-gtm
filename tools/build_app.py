@@ -229,7 +229,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       el('span',{class:'by '+BUYER_C[c.primary_buyer],title:'primary buyer '+c.primary_buyer+(pbP?' · '+OPP[pbP]+' opportunity':'')},c.primary_buyer+(pbP?'·'+pbP:'')));
     (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo',title:x+' buys iron'+(c.hardware_opportunity_by_buyer[x]?' · '+OPP[c.hardware_opportunity_by_buyer[x]]+' opportunity':'')},x+(c.hardware_opportunity_by_buyer[x]?'·'+c.hardware_opportunity_by_buyer[x]:''))));
     if(spansOf(c))head.append(el('span',{class:'byo',title:'deployment spans customer↔vendor'},'⇄'));
-    (c.play_refs||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
+    (c.plays||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
     cd.append(head);
     cd.append(el('h3',{},c.name_en));
     cd.append(el('div',{class:'zh'},c.name_zh));
@@ -241,7 +241,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     cd.append(tagRow('deploy',c.deployment));
     if(c.hospital_view){cd.append(tagRow('hosp-who',c.hospital_view.stakeholder));
       cd.append(tagRow('hosp-dim',c.hospital_view.dimension));}
-    if(c.infra_notes)cd.append(el('div',{class:'notes'},c.infra_notes));
+    if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
     return cd;
   }
   function groupsOf(c,axis){
@@ -249,7 +249,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     if(axis==='bucket')return [bucketOf(c)];
     if(axis==='primary_buyer')return [c.primary_buyer];
     if(axis==='hardware_buyer')return c.hardware_buyer.slice();
-    if(axis==='play')return (c.play_refs&&c.play_refs.length)?c.play_refs.slice():['(no play)'];
+    if(axis==='play')return (c.plays&&c.plays.length)?c.plays.slice():['(no play)'];
     return (c[axis]||[]).slice();
   }
   function render(){
@@ -260,10 +260,10 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       if(bk&&bucketOf(c)!==bk)return false;
       if(sp&&!spansOf(c))return false;
       if(seg&&!(c.segments||[]).includes(seg))return false;
-      if(pl&&!(c.play_refs||[]).includes(pl))return false;
+      if(pl&&!(c.plays||[]).includes(pl))return false;
       if(dep&&!(c.deployment||[]).includes(dep))return false;
       if(hw&&c.hardware_opportunity<hw)return false;
-      if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infra_notes||'')).toLowerCase().includes(q)))return false;
+      if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infrastructure_notes||'')).toLowerCase().includes(q)))return false;
       return true;
     });
     clear(host);
@@ -363,7 +363,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     const card=el('div',{class:'card'});card.style.marginBottom='12px';
     const head=el('div',{class:'row'},
       el('span',{class:'tierbadge',style:'background:'+tierColor(r.tier.name)},r.total+' - '+r.tier.name));
-    (a.play_refs?[a.play_refs]:(a.play?[a.play]:[])).flat().forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p))));
+    (a.plays?[a.plays]:(a.play?[a.play]:[])).flat().forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p))));
     if(a.fictional)head.append(el('span',{class:'pill'},'fictional / demo'));
     card.append(head);
     card.append(el('h3',{},(a.company||'?')+' - '+(a.facility||'?')));
@@ -372,8 +372,8 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     add('Segment',a.segment);
     add('Software',a.software&&(a.software.domain||''));
     add('Deployment',a.deployment);add('Operator',a.operator);
-    add('Trigger',a.trigger&&(a.trigger.detail||a.trigger.ref));
-    add('Infra control',a.infra_control);
+    add('Trigger',a.trigger&&(a.trigger.detail||a.trigger.id));
+    add('Infra control',a.infrastructure_control);
     add('Next step',a.next_step);
     card.append(kv);
     const bd=el('div',{});bd.style.marginTop='10px';

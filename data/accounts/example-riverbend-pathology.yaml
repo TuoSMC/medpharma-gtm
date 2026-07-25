@@ -7,14 +7,14 @@ facility: Riverbend Central — Digital Pathology Lab
 segment: Hospital / Health System
 software:
   domain: Digital Pathology (WSI scanning + AI-assisted primary diagnosis)
-  vendor_ref: null                      # TODO: vendors.yaml entry when real
+  vendor: null                      # TODO: vendors.yaml entry when real
 deployment: on-prem
 operator: customer-operated             # → GTM motion: direct
 trigger:
-  ref: pathology-golive                 # not in triggers.yaml — example-local
+  id: pathology-golive                  # not in triggers.yaml — example-local
   detail: "Announced go-live of digital pathology primary diagnosis, 2 campuses"
   window: "Scanner fleet installed; archive + inference infra buy expected within 2 quarters"
-infra_control: "Y"
+infrastructure_control: "Y"
 evidence:
   - claim: "Runs pathology scanners producing ~1.5 TB/day WSI"
     source: "Inference from announced scanner count x typical WSI output"
@@ -43,7 +43,7 @@ regulatory:
 
 # ---- scoring: 8 items, 0-5 (keys from data/scoring.yaml) ----
 scoring:
-  infra_control: 5              # customer-operated on-prem (D — verify first)
+  infrastructure_control: 5              # customer-operated on-prem (D — verify first)
   compute_storage_intensity: 4  # ~1.5 TB/day WSI + GPU inference
   refresh_trigger: 4            # go-live announced, infra buy window open
   mission_criticality: 4        # primary diagnosis = clinical production

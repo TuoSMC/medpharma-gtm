@@ -47,7 +47,7 @@ def customer_tree(cats):
         print(f"  opportunity {hw} ({OPP[hw]})  ({len(tier)})")
         by_play = collections.defaultdict(list)
         for c in tier:
-            by_play[play_label(c.get("play_refs"))].append(c)
+            by_play[play_label(c.get("plays"))].append(c)
         for play in sorted(by_play, key=lambda k: (k == "(no play)", k)):
             print(f"    {play}")
             for c in sorted(by_play[play], key=lambda x: x["id"]):
@@ -65,7 +65,7 @@ def buyer_list(cats, b, title, motion, require_hw=True):
 
 
 def by_axis(cats, axis, title):
-    reach = [c for c in cats if c["smc_reachable"]]
+    reach = [c for c in cats if c["supermicro_reachable"]]
     print(f"=== by {title} (reachable {len(reach)}; multi-valued; cHOT=customer pull>=3) ===\n")
     tally = collections.defaultdict(lambda: {"n": 0, "hot": 0, "hw": collections.Counter()})
     for c in reach:

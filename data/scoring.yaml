@@ -7,7 +7,7 @@ scale:
 formula: "(item_score / 5) * weight"
 
 items:
-  - key: infra_control
+  - key: infrastructure_control
     label: Customer controls infrastructure
     weight: 20
     note: "Gate question. 0 = pure SaaS user, no control. 5 = fully self-operated on-prem."

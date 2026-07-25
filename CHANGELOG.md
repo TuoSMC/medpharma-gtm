@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-07-24 — tidy remaining abbreviated field names
+Renamed jargon/abbreviated fields across data + tools + app + spec for readability:
+- `smc_reachable` → `supermicro_reachable`
+- `play_refs` → `plays` · `vendor_refs` → `vendors` · `vendor_ref` → `vendor`
+- `infra_control` → `infrastructure_control` (account lite field + scoring item key)
+- `infra_notes` → `infrastructure_notes`
+- account `trigger.ref` → `trigger.id`
+- 234 + 56 token replacements across taxonomy.yaml, scoring.yaml, accounts/*, score.py, rollup.py, drilldown.py, build_app.py, templates. 0 residual abbreviations. Re-verified: score.py → 77.0 Active pursuit (unchanged); rollup/drilldown/build green; app renders (no console errors, taxonomy cards + badges intact).
+
 ## 2026-07-24 — rename hw_pull → hardware_opportunity (clarity)
 Field name `hw_pull` was internal jargon. Renamed across data + tools + app + spec to read professionally and pair with `hardware_buyer`:
 - `hw_pull` → **`hardware_opportunity`**; `hw_pull_by_buyer` → **`hardware_opportunity_by_buyer`**; `hw_pull_rollup` → `hardware_opportunity_rollup`.

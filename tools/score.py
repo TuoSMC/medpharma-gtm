@@ -20,7 +20,7 @@ SCORING_FILE = REPO_ROOT / "data" / "scoring.yaml"
 # Lite card required fields (templates/account-card-lite.md)
 LITE_FIELDS = [
     "company", "facility", "segment", "software", "deployment",
-    "operator", "trigger", "infra_control", "evidence", "next_step",
+    "operator", "trigger", "infrastructure_control", "evidence", "next_step",
 ]
 
 FULL_CARD_THRESHOLD = 70
