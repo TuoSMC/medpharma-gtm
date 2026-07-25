@@ -163,6 +163,7 @@ function spansOf(c){const s=new Set(c.deployment);return s.has('hybrid')||([...s
 // hardware_buyer = WHO buys the iron (authoritative §3 axis, taxonomy v3)
 const BUYER_C={customer:'bcust',operator:'boper','original-equipment-manufacturer':'boem',hyperscaler:'bhyp'};
 const OPP={1:'minimal',2:'modest',3:'significant',4:'flagship'};
+const VNAME={};(DATA.vendors.vendors||[]).forEach(v=>VNAME[v.id]=v.name);
 
 // ---- header ----
 $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.status;
@@ -242,6 +243,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     cd.append(tagRow('data',c.data_modality));
     cd.append(tagRow('deploy',c.deployment));
     if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},'hardware'));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc'},h)));cd.append(hr);}
+    if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},'vendors'));c.vendors.forEach(v=>vr.append(el('span',{class:'pill'},VNAME[v]||v)));cd.append(vr);}
     if(c.hospital_view){cd.append(tagRow('hosp-who',c.hospital_view.stakeholder));
       cd.append(tagRow('hosp-dim',c.hospital_view.dimension));}
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));

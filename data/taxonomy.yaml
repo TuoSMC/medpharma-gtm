@@ -101,7 +101,7 @@ categories:
     infrastructure_notes: "PB-scale archive, NVMe ingest tier (artificial-intelligence overlay GPU lives in imaging-ai-deployment); retention 10yr+ drives storage growth"
     hardware_profile: [nvme-performance-storage, capacity-archive-storage]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx files
+    vendors: [agfa-healthcare, fujifilm-healthcare, infinitt-healthcare, intelerad, merative, sectra, visage-imaging]
     evidence_note: null
 
   - id: bioinformatics-secondary
@@ -123,7 +123,7 @@ categories:
     infrastructure_notes: "HPC CPU-dense + GPU nodes, NVMe scratch (burst I/O), object storage for cohorts; cloud-repatriation candidate at sustained load. Owns secondary + compute-heavy tertiary analysis; hands curated tertiary calls to clinical-genomics-reporting (SaaS interpretation)."
     hardware_profile: [gpu-server, high-performance-computing-cpu, nvme-performance-storage, capacity-archive-storage]
     plays: [play-b]
-    vendors: []
+    vendors: [dnanexus, illumina, nvidia, qiagen, sentieon, seqera]
     evidence_note: null
 
   - id: mes-ebr
@@ -145,7 +145,7 @@ categories:
     infrastructure_notes: "Redundant plant server pairs, industrial edge per line, DR site; GxP/Part 11 → validated-change documentation is part of the sale"
     hardware_profile: [edge-industrial, high-availability-redundant, disaster-recovery-backup]
     plays: [play-c]
-    vendors: []
+    vendors: [emerson, koerber, mastercontrol, rockwell-automation, siemens]
     evidence_note: null
 
   # ======== hospital clinical core ========
@@ -171,7 +171,7 @@ categories:
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
     play_exemption: "General datacenter refresh / disaster-recovery deal (high-availability database + virtual desktops); not an imaging, genomics, or manufacturing-edge motion — pursue as a standalone infrastructure deal"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [altera-digital-health, epic-systems, meditech, oracle-health]
     evidence_note: null
 
   - id: cdss-clinical-ai
@@ -196,7 +196,7 @@ categories:
     hardware_profile: [gpu-server]
     plays: []
     play_exemption: "Clinical inference graphics-processing-unit capacity attaches to the electronic-health-record estate or the vendor's inference fleet; not a play-A/B/C motion"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [abridge, aidoc, microsoft-nuance, wolters-kluwer-health]
     evidence_note: null
 
   - id: ris-cvis-workflow
@@ -220,7 +220,7 @@ categories:
     infrastructure_notes: "Departmental servers plus fast-growing storage for cath/echo video and ECG waveforms; sized by procedure volume and retention rules. Frequently bundled into imaging-archive refresh projects, so ride those cycles."
     hardware_profile: [capacity-archive-storage]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [fujifilm-healthcare, infinitt-healthcare, merative, philips-healthcare, scimage, siemens-healthineers]
     evidence_note: null
 
   - id: or-surgical-video
@@ -244,7 +244,7 @@ categories:
     infrastructure_notes: "Per-OR edge capture/routing nodes plus central storage for 4K surgical video; GPU enters with intra-op video AI. Sized by OR count and video retention policy; strong OEM appliance angle with OR-integration ISVs."
     hardware_profile: [gpu-server, capacity-archive-storage, edge-industrial]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [artisight, caresyntax, karl-storz, stryker]
     evidence_note: null
 
   - id: icu-central-monitoring
@@ -269,7 +269,7 @@ categories:
     hardware_profile: [nvme-performance-storage, edge-industrial, high-availability-redundant]
     plays: []
     play_exemption: "Device-maker (original-equipment-manufacturer) channel deal for regulator-cleared central stations; outside the three solution plays"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [etiometry, ge-healthcare, medical-informatics-corp, philips-healthcare]
     evidence_note: null
 
   - id: telehealth-platform
@@ -293,7 +293,7 @@ categories:
     infrastructure_notes: "SaaS/public-cloud dominated; customer-side hardware is largely endpoints and carts. Niche exception: tele-ICU command centers with on-prem video walls and ingest servers — small, opportunistic deals only."
     hardware_profile: []
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [amwell, caregility, keycare, philips-healthcare, teladoc-health]
     evidence_note: null
 
   - id: radiation-oncology-tps-ois
@@ -317,7 +317,7 @@ categories:
     infrastructure_notes: "Dedicated dose-calculation servers (Monte Carlo / collapsed-cone, GPU-accelerated) with HA, plus OIS record-and-verify DB and DICOM-RT image storage. Calc-farm sizing driven by plan throughput; a discrete GPU/server project per cancer center."
     hardware_profile: [gpu-server, high-availability-redundant]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [brainlab, elekta, raysearch-laboratories, varian-medical-systems]
     evidence_note: null
 
   - id: advanced-visualization-3d
@@ -341,7 +341,7 @@ categories:
     infrastructure_notes: "Server-side GPU volume-rendering farm (thin-client CT/MR/vascular/cardiac 3D, structural-heart planning). Distinct GPU pull from the PACS/VNA archive tier and from AI inference orchestration; sized by concurrent render sessions."
     hardware_profile: [gpu-server]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [canon-medical, circle-cvi, ge-healthcare, philips-healthcare, siemens-healthineers, terarecon, visage-imaging, ziosoft]
     evidence_note: null
 
   # ======== hospital patient / business / admin ========
@@ -366,7 +366,7 @@ categories:
     infrastructure_notes: "SaaS-dominant; residual hospital-hosted web/app (DMZ) tier where the portal or mobile-registration app tethers to an on-prem HIS. Sizing by registered-patient count and peak login bursts; customer hardware opportunity minimal. Operator is commodity multi-tenant portal SaaS on public cloud (hyperscaler-diluted), so operator pull is minimal — same principle as telehealth-platform (GxP-validated hosting would earn 2; this is not)."
     hardware_profile: []
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [epic-systems, intelichart, luma-health, meditech, oracle-health]
     evidence_note: null
 
   - id: patient-access-scheduling
@@ -390,7 +390,7 @@ categories:
     infrastructure_notes: "Runs as HA VMs alongside the HIS/EHR; check-in kiosks, queue displays and ticketing terminals are edge endpoints. Sizing driven by daily outpatient visit volume and the morning registration peak — downtime is front-door visible, so HA is non-negotiable."
     hardware_profile: [high-availability-redundant]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [epic-systems, experian-health, kyruus-health, luma-health, meditech, phreesia]
     evidence_note: null
 
   - id: rcm-billing-claims
@@ -414,7 +414,7 @@ categories:
     infrastructure_notes: "Transactional DB with heavy batch claim-generation/scrubbing runs, typically co-located with EHR patient accounting on-prem or hosted-private; HA + DR mandatory since a billing stoppage halts cash flow. AI claims-scrubbing/denials inference sits mostly at the ISV or BPO operator, not the hospital."
     hardware_profile: [gpu-server, nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [epic-systems, finthrive, oracle-health, ssi-group, trubridge, waystar]
     evidence_note: null
 
   - id: him-coding
@@ -439,7 +439,7 @@ categories:
     hardware_profile: [gpu-server, capacity-archive-storage]
     plays: []
     play_exemption: "Operator-side coding natural-language-processing plus the customer-side scanned-chart archive refresh (7-15 year retention); attaches to the revenue-cycle / electronic-health-record estate rather than a play motion"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [dolbey, optum, solventum, trubridge]
     evidence_note: null
 
   - id: hospital-erp
@@ -464,7 +464,7 @@ categories:
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
     play_exemption: "Back-office transactional high-availability cluster; standalone infrastructure refresh deal"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [infor, microsoft, oracle-health, sap, workday]
     evidence_note: null
 
   - id: workforce-management
@@ -488,7 +488,7 @@ categories:
     infrastructure_notes: "Overwhelmingly SaaS (nurse rostering, predictive staffing, float/agency marketplaces); time-clock and biometric attendance terminals are thin edge endpoints. Customer-side server opportunity is minimal beyond legacy time-and-attendance servers awaiting decommission."
     hardware_profile: []
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [healthstream, qgenda, symplr, ukg]
     evidence_note: null
 
   # ======== hospital device / facility / ops ========
@@ -514,7 +514,7 @@ categories:
     hardware_profile: [nvme-performance-storage, edge-industrial, high-availability-redundant]
     plays: []
     play_exemption: "Hospital integration-engine high-availability pairs; standalone clinical-information-technology infrastructure deal"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [ascom, connexall, ge-healthcare, philips, spok, stryker]
     evidence_note: null
 
   - id: rtls-asset-tracking
@@ -538,7 +538,7 @@ categories:
     infrastructure_notes: "Facility-wide tag/sensor networks with edge receivers and an on-prem or hybrid location engine; analytics tiers increasingly cloud. Sizing driven by tag count, location-update frequency, and campus square footage."
     hardware_profile: [edge-industrial]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [centrak, cognosos, kontakt-io, midmark, securitas-healthcare, zebra-technologies]
     evidence_note: null
 
   - id: healthcare-cmms
@@ -562,7 +562,7 @@ categories:
     infrastructure_notes: "Overwhelmingly SaaS today; residual on-prem footprint only at legacy or air-gapped sites and it is small application/database servers, not scale-out infrastructure. Minimal direct hardware opportunity."
     hardware_profile: []
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [accruent, eq2, medimizer, nuvolo, phoenix-data-systems]
     evidence_note: null
 
   - id: pharmacy-automation
@@ -586,7 +586,7 @@ categories:
     infrastructure_notes: "Dispensing cabinets, packaging and compounding robots run on embedded/edge controllers with on-prem central servers for formulary, inventory, and diversion analytics; management tiers shifting hybrid/cloud. Sizing driven by cabinet/robot fleet size and transaction volume."
     hardware_profile: [edge-industrial]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [arxium, bd, omnicell, scriptpro, swisslog-healthcare]
     evidence_note: null
 
   - id: medical-iot-security
@@ -610,7 +610,7 @@ categories:
     infrastructure_notes: "Passive network collector/sensor appliances at each campus mirror device traffic; analytics and asset inventory mostly cloud, with fully on-prem builds only for high-security systems. Sizing driven by connected-device count, network segments, and traffic mirroring throughput."
     hardware_profile: [edge-industrial]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [armis, asimily, claroty, cynerio, ordr]
     evidence_note: null
 
   - id: hospital-bms
@@ -634,7 +634,7 @@ categories:
     infrastructure_notes: "HVAC, power, medical gas, and compliance-grade temperature/humidity monitoring run on proprietary edge controllers with modest on-prem supervisory/historian servers; energy-optimization analytics add small compute. Sizing driven by point count, campus size, and historian retention requirements."
     hardware_profile: [edge-industrial]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [honeywell, johnson-controls, schneider-electric, siemens]
     evidence_note: null
 
   - id: capacity-command-center
@@ -658,7 +658,7 @@ categories:
     infrastructure_notes: "Real-time bed/flow analytics over ADT and device feeds; flagship academic deployments keep on-site integration and real-time inference servers plus display-wall infrastructure, while the broader market is SaaS. Sizing driven by feed volume, bed count, and predictive-model refresh rates."
     hardware_profile: []
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [ge-healthcare, leantaas, qventus, teletracking]
     evidence_note: null
 
   - id: smart-room-ambient-ai
@@ -683,7 +683,7 @@ categories:
     hardware_profile: [gpu-server, capacity-archive-storage, edge-industrial]
     plays: []
     play_exemption: "Clinical video artificial intelligence adjacent to Play A but outside the fixed three-play scope; pursue as a standalone ward-video edge deal alongside the imaging estate"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [artisight, avasure, lookdeep-health, stryker, virtusense]
     evidence_note: null
 
   # ======== diagnostics & laboratory ========
@@ -709,7 +709,7 @@ categories:
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
     play_exemption: "Clinical laboratory transactional high-availability / disaster-recovery footprint; standalone infrastructure deal"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [clinisys, epic-systems, ligolab, oracle-health, orchard-software]
     evidence_note: null
 
   - id: lab-middleware-automation
@@ -733,7 +733,7 @@ categories:
     infrastructure_notes: "On-prem/edge integration and real-time track-control servers sitting beside analyzers, HA for core-lab uptime; sizing driven by instrument count, result/transaction rate, and autoverification/QC rule load. No GPU."
     hardware_profile: [edge-industrial, high-availability-redundant]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [beckman-coulter, data-innovations, roche, siemens-healthineers]
     evidence_note: null
 
   - id: digital-pathology
@@ -757,7 +757,7 @@ categories:
     infrastructure_notes: "High-throughput scanner ingest, petabyte-scale tiered image storage, and GPU servers for AI inference and model training; sizing driven by slides/day, per-slide image size, and concurrent AI workload. Flagship compute+storage pull of the cluster. Scanner-embedded ingest/inference workstation is the original-equipment-manufacturer bill-of-materials path."
     hardware_profile: [gpu-server, nvme-performance-storage, capacity-archive-storage]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [leica-biosystems, paige-ai, philips, proscia, roche, sectra]
     evidence_note: null
 
   - id: ngs-lab-lims
@@ -779,7 +779,7 @@ categories:
     infrastructure_notes: "Modest, transactional application tier for sample and sequencing-run tracking; deployable on-prem or as SaaS. It sits beside sequencers that stage terabyte-scale run output (BCL/FASTQ) locally, but that storage/compute pull belongs to the instruments and to downstream secondary analysis, not to the LIMS software itself. No GPU."
     hardware_profile: []
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [illumina, l7-informatics, labcollector, ovation]
     evidence_note: null
 
   - id: clinical-genomics-reporting
@@ -801,7 +801,7 @@ categories:
     infrastructure_notes: "SaaS-dominant interpretation/reporting layer: consumes tertiary variant calls handed off from bioinformatics-secondary (which owns the compute-heavy pipeline). Curated knowledge bases, variant annotation/classification, report generation; minimal customer-side hardware, any footprint is cloud at the operator. No on-prem GPU pull at the customer."
     hardware_profile: []
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [congenica, fabric-genomics, golden-helix, qiagen, sophia-genetics]
     evidence_note: null
 
   # ======== pharma R&D + clinical development ========
@@ -824,7 +824,7 @@ categories:
     infrastructure_notes: "Modest app-server and database footprint; storage grows with attached instrument files and specimen-linked datasets. GxP-grade high availability, backup and long-retention archive drive most of the sizing."
     hardware_profile: [capacity-archive-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [benchling, dotmatics, labvantage, labware, sapio-sciences, thermo-fisher-scientific]
     evidence_note: null
 
   - id: comp-chem-simulation
@@ -846,7 +846,7 @@ categories:
     infrastructure_notes: "GPU-dense and CPU-HPC clusters for molecular dynamics, docking and quantum-mechanical calculations. Low-latency interconnect and fast parallel scratch storage size the cluster; large campaigns burst to cloud."
     hardware_profile: [gpu-server, high-performance-computing-cpu, nvme-performance-storage, high-memory]
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [cadence-design-systems, chemical-computing-group, cresset, dassault-systemes, schrodinger]
     evidence_note: null
 
   - id: ai-drug-discovery
@@ -868,7 +868,7 @@ categories:
     infrastructure_notes: "Large multi-GPU training clusters plus high-throughput inference nodes. Sizing is driven by model scale, curated multimodal datasets and data-pipeline throughput; frequently hybrid with cloud burst."
     hardware_profile: [gpu-server, nvme-performance-storage]
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [cadence-design-systems, chemical-computing-group, cresset, nvidia, schrodinger]
     evidence_note: null
 
   - id: cryo-em-structural-bio
@@ -890,7 +890,7 @@ categories:
     infrastructure_notes: "Instruments emit terabytes of movie data per session, driving large fast-tier and archive storage plus high-bandwidth ingest. GPU nodes handle motion correction, CTF estimation and 2D/3D classification."
     hardware_profile: [gpu-server, nvme-performance-storage, capacity-archive-storage, high-memory]
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [gatan, structura-biotechnology, thermo-fisher-scientific]
     evidence_note: null
 
   - id: clinical-trial-suite
@@ -912,7 +912,7 @@ categories:
     infrastructure_notes: "Vendor-hosted multi-tenant SaaS; negligible sponsor- or site-side hardware. Any real compute or storage footprint sits with the software operator, not the customer."
     hardware_profile: []
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [advarra, ennov, medidata, openclinica, oracle-life-sciences, veeva-systems]
     evidence_note: null
 
   - id: pv-regulatory-information
@@ -934,7 +934,7 @@ categories:
     infrastructure_notes: "Predominantly SaaS or hosted case-processing and submission repositories; minimal customer on-prem beyond integration and archive nodes. AI-assisted case intake can add modest GPU at the operator."
     hardware_profile: [gpu-server, capacity-archive-storage]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [arisglobal, ennov, extedo, iqvia, oracle-life-sciences, veeva-systems]
     evidence_note: null
 
   # ======== GMP manufacturing / quality / supply ========
@@ -957,7 +957,7 @@ categories:
     infrastructure_notes: "Redundant real-time control server pairs per process area plus industrial edge I/O on a deterministic low-latency network; HA/failover and validated-change control drive sizing and refresh cycles."
     hardware_profile: [edge-industrial, high-availability-redundant]
     plays: [play-c]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [aveva, emerson, honeywell, rockwell-automation, siemens, yokogawa]
     evidence_note: null
 
   - id: plant-historian
@@ -979,7 +979,7 @@ categories:
     infrastructure_notes: "High-ingest time-series store scaling with tag count and sampling rate; fast local NVMe for hot data plus capacity tier for multi-year retention. Storage grows continuously as lines and sensors are added."
     hardware_profile: [nvme-performance-storage, capacity-archive-storage]
     plays: [play-c]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [aspentech, aveva, canary-labs, ge-vernova]
     evidence_note: null
 
   - id: qc-lims-cds
@@ -1001,7 +1001,7 @@ categories:
     infrastructure_notes: "On-prem lab servers plus instrument-attached acquisition workstations; chromatography and spectral raw files accumulate and pull validated storage and backup. Modest compute, storage-led growth."
     hardware_profile: [capacity-archive-storage, disaster-recovery-backup]
     plays: [play-c]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [agilent-technologies, labvantage, labware, starlims, thermo-fisher-scientific, waters]
     evidence_note: null
 
   - id: eqms-calibration
@@ -1023,7 +1023,7 @@ categories:
     infrastructure_notes: "Predominantly validated SaaS/hosted; minimal customer-side hardware beyond integration and document retention. Calibration/CMMS modules add asset and schedule records, not compute."
     hardware_profile: [capacity-archive-storage]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [assurx, etq, ideagen, iqvia, mastercontrol, veeva-systems]
     evidence_note: null
 
   - id: serialization-track-trace
@@ -1045,7 +1045,7 @@ categories:
     infrastructure_notes: "Site-level (L4) repository servers with HA to protect packaging-line uptime, integrating up to enterprise/regulatory (L5) hubs that are often managed/cloud; sizing follows line count and serialization event volume."
     hardware_profile: [high-availability-redundant]
     plays: [play-c]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [antares-vision, optel-group, sap, systech, tracelink]
     evidence_note: null
 
   - id: warehouse-cold-chain
@@ -1067,7 +1067,7 @@ categories:
     infrastructure_notes: "On-prem/edge WMS plus environmental-monitoring gateways at plant and distribution sites; ruggedized edge nodes aggregate cold-chain and cleanroom sensor streams. Sizing driven by site count and sensor density, not heavy compute."
     hardware_profile: [edge-industrial]
     plays: [play-c]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [blue-yonder, ellab, koerber, manhattan-associates, sap, vaisala]
     evidence_note: null
 
   - id: pat-process-twin
@@ -1089,7 +1089,7 @@ categories:
     infrastructure_notes: "GPU/edge inference for real-time spectral models on the line plus GPU/HPC for bioprocess simulation and digital-twin runs; sizing scales with model complexity and number of monitored unit operations."
     hardware_profile: [gpu-server, high-performance-computing-cpu, edge-industrial]
     plays: [play-c]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [aspentech, bruker, sartorius, siemens]
     evidence_note: null
 
   - id: automated-visual-inspection
@@ -1111,7 +1111,7 @@ categories:
     infrastructure_notes: "Deep-learning visual inspection of vials/syringes/finished devices; GPU inference node per fill-finish/packaging line edge under GxP validation. Edge-GPU count scales with line count; validated-change docs part of the sale."
     hardware_profile: [gpu-server, edge-industrial]
     plays: [play-c]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [antares-vision, cognex, keyence, koerber, optel-group, syntegon]
     evidence_note: null
 
   # ======== data platforms / analytics / payer / MedTech OEM ========
@@ -1136,7 +1136,7 @@ categories:
     infrastructure_notes: "High-capacity tiered storage (object plus fast analytics tier) and ETL/query compute; growing GPU demand for NLP/LLM over clinical notes. Sizing driven by bed count, retention years, and modality breadth (notes, waveforms, omics)."
     hardware_profile: [gpu-server, high-performance-computing-cpu, nvme-performance-storage, capacity-archive-storage]
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [databricks, health-catalyst, intersystems, snowflake]
     evidence_note: null
 
   - id: population-health-analytics
@@ -1158,7 +1158,7 @@ categories:
     infrastructure_notes: "SaaS-dominant; negligible customer-site hardware. Residual pull sits with the operator: warehouse compute and storage for claims/EHR aggregation and risk-model scoring."
     hardware_profile: [high-performance-computing-cpu, capacity-archive-storage]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [arcadia, health-catalyst, innovaccer, lightbeam-health, milliman-medinsight]
     evidence_note: null
 
   - id: rwd-rwe-analytics
@@ -1180,7 +1180,7 @@ categories:
     infrastructure_notes: "Hardware lives mostly at the data operator: petabyte-class data lake storage plus GPU for NLP/LLM chart abstraction and clinico-genomic linkage; some pharma run private analytics enclaves. Sizing by covered lives and unstructured document volume."
     hardware_profile: [gpu-server, capacity-archive-storage]
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [aetion, iqvia, komodo-health, trinetx, truveta]
     evidence_note: null
 
   - id: hie-interoperability-engine
@@ -1204,7 +1204,7 @@ categories:
     infrastructure_notes: "Modest general-purpose compute but strict HA/DR — message brokers cannot drop clinical feeds, so clustered pairs and dual-site failover are standard. Sizing by interface count and HL7/FHIR message volume; no meaningful GPU."
     hardware_profile: [high-availability-redundant, disaster-recovery-backup]
     plays: []
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [intersystems, nextgen-healthcare, orion-health, rhapsody]
     evidence_note: null
 
   - id: imaging-ai-deployment
@@ -1228,7 +1228,7 @@ categories:
     infrastructure_notes: "The prime hospital GPU hook: inference nodes (data-center or edge form factor) sited near PACS/modalities for PHI and latency, plus large GPU fleets at marketplace operators. Sizing by study volume, concurrent model count, and clinical-uptime HA requirements."
     hardware_profile: [gpu-server, edge-industrial, high-availability-redundant]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [aidoc, blackford-analysis, carpl-ai, deepc, sectra]
     evidence_note: null
 
   - id: payer-core-admin
@@ -1251,7 +1251,7 @@ categories:
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     plays: []
     play_exemption: "Payer claims core; payer segment sits outside the three provider/pharma plays"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [cognizant-trizetto, healthedge, plexis-healthcare-systems]
     evidence_note: null
 
   - id: payer-um-fraud-analytics
@@ -1274,7 +1274,7 @@ categories:
     hardware_profile: [high-performance-computing-cpu]
     plays: []
     play_exemption: "Payer analytics; payer segment sits outside the three provider/pharma plays"
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [codoxo, cotiviti, sas, zeomega]
     evidence_note: null
 
   - id: samd-embedded-oem-platform
@@ -1296,7 +1296,7 @@ categories:
     infrastructure_notes: "Two-sided pull: embedded/edge compute designed into devices as long-lifecycle, regulatory-locked BOMs (volume design wins), plus OEM-side V&V, simulation, and on-device AI model-training clusters. Sizing by device fleet volume and AI content per device."
     hardware_profile: [gpu-server, high-performance-computing-cpu, edge-industrial]
     plays: [play-a]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [blackberry-qnx, brightinsight, green-hills-software, nvidia, wind-river]
     evidence_note: null
 
   - id: ai-hpc-orchestration
@@ -1318,5 +1318,5 @@ categories:
     infrastructure_notes: "GPU/HPC scheduler + MLOps layer (batch queue / container orchestration / GPU partitioning) that anchors and sizes on-prem GPU/HPC clusters. The single most natural ISV co-sell for a GPU/server vendor; sizes to aggregate job concurrency."
     hardware_profile: [gpu-server, high-performance-computing-cpu]
     plays: [play-b]
-    vendors: []    # TODO: extract from /source/ jsx when dropped
+    vendors: [altair, hewlett-packard-enterprise, ibm, nvidia, seqera]
     evidence_note: null
