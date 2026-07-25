@@ -83,9 +83,27 @@ def by_axis(cats, axis, title):
     print()
 
 
+COMPONENTS = ["gpu-server", "hpc-cpu", "nvme-performance", "capacity-archive",
+              "high-memory", "edge-industrial", "ha-redundant", "dr-backup"]
+
+
+def component_pipelines(cats):
+    print("\n=== SMCI hardware-component pipelines (which categories pull each component) ===")
+    print("    * = customer opportunity>=3 (direct-sale HOT)\n")
+    for comp in COMPONENTS:
+        sel = [c for c in cats if comp in c.get("hardware_profile", [])]
+        hot = [c for c in sel if pull(c, "customer") >= 3]
+        print(f"  {comp}  —  {len(sel)} categories, {len(hot)} customer-HOT")
+        for c in sorted(sel, key=lambda x: (-pull(x, "customer"), x["id"])):
+            mark = "*" if pull(c, "customer") >= 3 else " "
+            plays = ",".join(p[-1] for p in c.get("plays", [])) or "-"
+            print(f"    {mark} cust{pull(c,'customer')} [{plays}]  {c['id']}")
+        print()
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--axis", choices=["customer", "operator", "oem", "modality", "role"])
+    ap.add_argument("--axis", choices=["customer", "operator", "oem", "modality", "role", "component"])
     args = ap.parse_args()
     cats = load()
     a = args.axis
@@ -95,6 +113,8 @@ def main():
         buyer_list(cats, "operator", "HOT_operator (ISV co-sell)", "vendor buys dedicated iron")
     if a in (None, "oem"):
         buyer_list(cats, "oem", "OEM design-wins", "embedded BOM", require_hw=False)
+    if a in (None, "component"):
+        component_pipelines(cats)
     if a in (None, "modality"):
         by_axis(cats, "data_modality", "data_modality")
     if a in (None, "role"):

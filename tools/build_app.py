@@ -91,6 +91,7 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .row{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0}
 .chip{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--accentbg);color:var(--accent);white-space:nowrap}
 .chip.dim{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.hwc{font-size:10px;padding:1px 7px;border-radius:6px;background:var(--accentbg);color:var(--accent);font-weight:600;white-space:nowrap}
 .tagk{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-right:4px;align-self:center}
 .hw{display:inline-block;min-width:20px;text-align:center;font-weight:700;color:#fff;border-radius:6px;padding:1px 7px;font-size:11px}
 .hw1{background:var(--hw1)}.hw2{background:var(--hw2)}.hw3{background:var(--hw3)}.hw4{background:var(--hw4)}
@@ -201,12 +202,13 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
         fPlay=mk('fPlay',['play-a','play-b','play-c'],'all plays'),
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'opportunity ≥'),
-        fGroup=mk('fGroup',['primary_buyer','hardware_buyer','hardware_opportunity','play','segment','data_modality','role','bucket'],'no grouping'),
+        fProfile=mk('fProfile',['gpu-server','hpc-cpu','nvme-performance','capacity-archive','high-memory','edge-industrial','ha-redundant','dr-backup'],'all hardware'),
+        fGroup=mk('fGroup',['primary_buyer','hardware_buyer','hardware_opportunity','hardware_profile','play','segment','data_modality','role','bucket'],'no grouping'),
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
   const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
-  root.append(el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fGroup,fSpans,fTxt,cnt));
+  root.append(el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup,fSpans,fTxt,cnt));
   // static buyer rollup summary (authoritative axis)
   const pb={customer:0,operator:0,oem:0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
@@ -239,6 +241,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     cd.append(tagRow('role',c.role));
     cd.append(tagRow('data',c.data_modality));
     cd.append(tagRow('deploy',c.deployment));
+    if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},'hardware'));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc'},h)));cd.append(hr);}
     if(c.hospital_view){cd.append(tagRow('hosp-who',c.hospital_view.stakeholder));
       cd.append(tagRow('hosp-dim',c.hospital_view.dimension));}
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
@@ -250,13 +253,15 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     if(axis==='primary_buyer')return [c.primary_buyer];
     if(axis==='hardware_buyer')return c.hardware_buyer.slice();
     if(axis==='play')return (c.plays&&c.plays.length)?c.plays.slice():['(no play)'];
+    if(axis==='hardware_profile')return (c.hardware_profile&&c.hardware_profile.length)?c.hardware_profile.slice():['(no hardware)'];
     return (c[axis]||[]).slice();
   }
   function render(){
     const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,
-          hw=+fHw.value||0,gp=fGroup.value,q=fTxt.value.toLowerCase();
+          hw=+fHw.value||0,prof=fProfile.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
     const shown=cats.filter(c=>{
       if(by&&!c.hardware_buyer.includes(by))return false;
+      if(prof&&!(c.hardware_profile||[]).includes(prof))return false;
       if(bk&&bucketOf(c)!==bk)return false;
       if(sp&&!spansOf(c))return false;
       if(seg&&!(c.segments||[]).includes(seg))return false;
@@ -280,7 +285,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       const grid=el('div',{class:'grid'});map.get(k).forEach(c=>grid.append(card(c)));host.append(grid);
     });
   }
-  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fGroup].forEach(x=>x.onchange=render);
+  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=render);
   fSpansBox.onchange=render;fTxt.oninput=render;render();
 })();
 

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-07-24 — hardware_profile: category → SMCI component bridge (v5)
+Next drill-down layer: what hardware each category actually pulls, structured from the prose `infrastructure_notes` into a controlled component set — the bridge from software category to Supermicro product line.
+- `data/taxonomy.yaml` → **v5**. New enum + per-category `hardware_profile` (subset of `gpu-server · hpc-cpu · nvme-performance · capacity-archive · high-memory · edge-industrial · ha-redundant · dr-backup`). Assigned by a 17-agent workflow (profile → adversarial verify → consistency critic). Verify pruned speculative tags (pacs-vna dropped gpu-server — GPU belongs to imaging-ai-deployment; comp-chem dropped then re-added high-memory). 7 consistency fixes applied (icu +nvme; workforce/patient-access dropped thin-terminal edge; ngs-lims + genomics-reporting nvme→[]; comp-chem + cryo-em +high-memory).
+- Component pipelines (categories pulling each): **gpu-server 20 (15 customer-HOT)**, edge-industrial 16, ha-redundant 16, nvme-performance 15, capacity-archive 15, dr-backup 9, hpc-cpu 8, high-memory 2. 8 SaaS-light categories carry an empty profile (honest).
+- `tools/drilldown.py --axis component` prints the pipelines; `app` gains a hardware filter, hardware_profile group-by, and per-card component chips. CLAUDE.md §3 documents it. Live-verified in browser (no console errors; chips render; pacs-vna correctly GPU-free).
+
 ## 2026-07-24 — tidy remaining abbreviated field names
 Renamed jargon/abbreviated fields across data + tools + app + spec for readability:
 - `smc_reachable` → `supermicro_reachable`

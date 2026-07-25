@@ -39,6 +39,8 @@ A second-opinion review showed the deployment tag conflated *substrate* with *wh
 - **hyperscaler** → out of scope (public cloud; hardware bought by the hyperscaler)
 
 Each buyer carries its **own** `hardware_opportunity_by_buyer` score (a customer deal and an operator deal for the same category are sized independently; scale 1 minimal · 2 modest · 3 significant · 4 flagship). `deployment` survives only as a secondary substrate descriptor. Derived, single-source lenses live in `tools/rollup.py` and `tools/drilldown.py`; the app filters/groups on buyer. HOT lists: **HOT_customer** (customer opportunity≥3, direct), **HOT_operator** (operator opportunity≥3, co-sell), **OEM design-wins**.
+
+Each category also carries **`hardware_profile`** (taxonomy v5) — the SMCI component set it pulls, the bridge from software category to product line: `gpu-server · hpc-cpu · nvme-performance · capacity-archive · high-memory · edge-industrial · ha-redundant · dr-backup`. `tools/drilldown.py --axis component` prints the per-component pipelines (e.g. gpu-server = 20 categories, 15 customer-HOT); the app filters/groups on it. SaaS-light categories legitimately carry an empty profile.
 ## 4. Scoring model (100 pts)
 Each item scored 0–5, weighted score = (item ÷ 5) × weight.
 | Item | Weight |
