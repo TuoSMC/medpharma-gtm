@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-07-24 — refinement round 2 (play-scope honesty + trigger foreign keys + market rulings)
+Same discipline loop (test-driven-development RED→GREEN, opus adjudication, codex+grok dual delta review). Commits: `e7868fa` RED → `c315a3e` GREEN → `9fd35dc` opus rulings → `2ff3b2a` dual-review actioned.
+
+1. **Play-scope honesty**: 10 reachable-HOT categories outside the three plays now carry an explicit `play_exemption` reason — no silent unroutable pipeline.
+2. **Trigger foreign keys**: all 14 triggers bind `related_categories` + `related_plays` (validated; every trigger routes to ≥1 category; every routed play must be carried by a related category).
+3. **Opus market rulings** on the 9-item grok backlog: 3 accepts / 6 evidence-rule rejects (per-buyer score = per-deal size, not market share; graphics-memory ≠ system memory).
+4. **Dual delta review**: grok found 5 trigger-binding P1s + 2 weak exemption texts + 7 test escapes; codex found 4 P2s including a dead-binding test gap. **Cross-model consensus overrode two opus accepts** (clinical-trial-suite NVMe, capacity-command-center HPC-CPU — profiles reverted to empty; §5.4 co-sell exclusion + wrong component semantics). 9 trigger bindings fixed; 2 exemptions rewritten.
+5. **Test suite: 33 → 34**, all GREEN. App renders trigger Related column + exemption notes.
+
+**Open:** grok's declined suggestions logged (action-text↔play string matching — fragile; exemption-quality semantic checks — not mechanically testable).
+
 ## 2026-07-24 — six-layer chain refinement (taxonomy v6) — TDD + grill-me + superpowers + codex/grok dual review
 Pipeline per Tuo's directive: three disciplines (test-driven-development · grill-me · using-superpowers), opus refinement agents, codex reviewing this repo + grok reviewing a dedicated worktree (`/Volumes/ClaudeNVME/medical-software-grok-review`).
 
