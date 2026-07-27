@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2026-07-27 — refinement round 4: component sizing + vendor dual-review (registry v3)
+Two parallel tracks, same TDD + dual-review discipline. `1cf8339` RED → `c09559f` sizing GREEN → `f132f15` vendor fixes.
+
+**Per-component sizing** (`hardware_profile_sizing`): node / rack / cluster deployment scale per component → each category maps to a Supermicro quote size. Opus sizer + opus verifier (18 agents); 2 inflations deflated. Tiers: 50 node, 37 rack, 15 cluster. Test enforces sizing keys == profile and flagship-customer → ≥1 rack/cluster component. App chips show the tier.
+
+**Vendor dual review** (codex on repo + grok on worktree, both web-search + citations):
+- Acquisition/ownership updates with cited close dates: AspenTech→Emerson, Dotmatics→Siemens, Nuvolo→Trane, Paige→Tempus AI, Intelerad→GE HealthCare, Fabric Genomics→GeneDx, Congenica→SeqOne, AVEVA→Schneider, Wind River→Aptiv; Siemens scope corrected.
+- Deployment corrections (MasterControl/Nuvolo cloud-only, TeraRecon +SaaS, DNAnexus overclaim dropped); blackford-analysis Bayer wind-down noted.
+- Removed brightinsight (cloud SaaS mis-filed as embedded-OEM); merged duplicate philips-healthcare→philips.
+- Market gaps filled: GE HealthCare & Philips added to pacs-vna; new vendors PathAI (digital-pathology) and Tempus AI (real-world-data + clinical genomics).
+- §8 hygiene: 6 unverifiable note claims stripped; 24 confidence B→C downgrades where the sole source was a listicle/blog.
+- Registry v3, 196 vendors, every category still ≥2. Tests 41 → **42** GREEN.
+
+**Still blocked:** v1 `.jsx` cross-check — `/source/` empty; drop the files to run a diff of v1 vendor/category data against the current 196 vendors + 53 categories.
+
 ## 2026-07-24 — refinement round 3: vendors layer filled (196 vendors, web-researched)
 `5ca96df` RED (registry schema + foreign keys + ≥2-per-category invariants) → `1f78bab` GREEN.
 - 8 domain research agents (live web search) + 8 opus adversarial verifiers → **196 unique vendors**, every entry source-cited per §8. Confidence: 146 B / 50 C (verifiers downgraded ~25 entries whose only source was an aggregator blog).
