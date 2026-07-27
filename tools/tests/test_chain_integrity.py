@@ -369,6 +369,14 @@ class TestToolsSmoke(unittest.TestCase):
             self.assertIn(play, md, f"hunting guide missing play {play}")
         self.assertIn("Trigger", md)
 
+    def test_glossary_md_generated_from_taxonomy(self):
+        out = self._run("tools/glossary_md.py")
+        self.assertIn("glossary.md", out)
+        md = (REPO / "docs" / "glossary.md").read_text(encoding="utf-8")
+        # every taxonomy glossary key must appear in the rendered doc
+        for key in TAX["glossary"]:
+            self.assertIn(f"`{key}`", md, f"glossary.md missing {key}")
+
 
 
 
