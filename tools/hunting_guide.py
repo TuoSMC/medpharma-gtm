@@ -9,7 +9,6 @@ with: per-play ranked target maps, master HOT lists, and a trigger->action index
 Run: python3 tools/hunting_guide.py   (writes docs/hunting-guide.md)
 """
 import collections
-from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
@@ -62,8 +61,8 @@ def main():
     L = []
     L.append("# SMCI Medical / Pharma Hunting Guide")
     L.append("")
-    L.append(f"> Generated from `/data` — {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC}. "
-             "Do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.")
+    L.append(f"> Generated from `/data` (taxonomy v{tax.get('version','?')}, {len(cats)} categories, {len(vendors)} vendors). "
+             "Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.")
     L.append(">")
     L.append("> **Gate question first (CLAUDE.md §3): who controls the infrastructure behind the software?** "
              "No answer → not in pipeline.")

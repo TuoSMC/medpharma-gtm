@@ -49,8 +49,8 @@ def substrate(dep):
 
 def load():
     doc = yaml.safe_load(open(TAX, encoding="utf-8"))
-    if doc.get("version", 0) < 4 or "hardware_opportunity_by_buyer" not in doc["categories"][0]:
-        sys.exit("taxonomy.yaml has no hardware_opportunity_by_buyer (need v4). Run assemble_pull first.")
+    if doc.get("version", 0) < 6 or "hardware_opportunity_by_buyer" not in doc["categories"][0]:
+        sys.exit("taxonomy.yaml has no hardware_opportunity_by_buyer (need v6). Rebuild data first.")
     return doc["categories"]
 
 
@@ -80,7 +80,7 @@ def main():
         print(json.dumps(rs, ensure_ascii=False, indent=2))
         return
 
-    print(f"\n  Per-buyer rollup over {len(rs)} categories (taxonomy.yaml v4)\n")
+    print(f"\n  Per-buyer rollup over {len(rs)} categories (taxonomy.yaml v{load.__doc__ or 6})\n".replace("v"+str(load.__doc__ or 6),"v6"))
     pb = collections.Counter(r["primary_buyer"] for r in rs)
     print("  primary_buyer:")
     for b in ("customer", "operator", "original-equipment-manufacturer", "hyperscaler"):
