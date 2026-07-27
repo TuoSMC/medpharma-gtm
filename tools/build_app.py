@@ -242,7 +242,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     cd.append(tagRow('role',c.role));
     cd.append(tagRow('data',c.data_modality));
     cd.append(tagRow('deploy',c.deployment));
-    if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},'hardware'));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc'},h)));cd.append(hr);}
+    if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},'hardware'));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc',title:'deployment scale'},h+((c.hardware_profile_sizing||{})[h]?' · '+c.hardware_profile_sizing[h]:''))));cd.append(hr);}
     if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},'vendors'));c.vendors.forEach(v=>vr.append(el('span',{class:'pill'},VNAME[v]||v)));cd.append(vr);}
     if(c.hospital_view){cd.append(tagRow('hosp-who',c.hospital_view.stakeholder));
       cd.append(tagRow('hosp-dim',c.hospital_view.dimension));}
