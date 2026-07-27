@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-07-27 — hunting guide: the sales-facing deliverable
+The payoff — four rounds of verified six-layer data synthesized into the artifact an account manager hunts with. `688391b`.
+- `tools/hunting_guide.py` → `docs/hunting-guide.md` (single-source from `/data`): per-play ranked target maps (category × opportunity × what-to-quote [component·sizing] × co-sell/incumbent vendors), cross-play standalone deals, master HOT lists, trigger→action index, component pipelines.
+- App gains a **Hunt** tab rendering the per-play ranked view (quote + vendors); browser-verified.
+- Correctness fix the guide surfaced: `clinical-data-lakehouse` dropped `play-b` (it's a clinical data warehouse, not genomics/research-AI — grok flagged this in round 1) → `play_exemption`; `hospital-ma` trigger `related_plays` → `[play-a]`.
+- Tests 42 → **43** (hunting-guide smoke test). All GREEN.
+
 ## 2026-07-27 — refinement round 4: component sizing + vendor dual-review (registry v3)
 Two parallel tracks, same TDD + dual-review discipline. `1cf8339` RED → `c09559f` sizing GREEN → `f132f15` vendor fixes.
 
