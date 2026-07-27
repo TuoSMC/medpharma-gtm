@@ -508,5 +508,52 @@ class TestComponentSizing(unittest.TestCase):
                                 f"{c['id']}: flagship customer but no rack/cluster-scale component")
 
 
+
+
+# ============================================================
+# Round-5 invariants: vendor enrichment (name/HQ/leadership/history/market)
+# §8: every enrichment claim carries a source; unverifiable -> honest null.
+# ============================================================
+_VDOC = yaml.safe_load(open(REPO / "data" / "vendors.yaml", encoding="utf-8"))
+ENRICH_FIELDS = ["headquarters", "founded", "leadership", "history", "market_position", "sources"]
+UNKNOWN = {None, "", "unknown", "not publicly disclosed", "n/a", "not disclosed"}
+
+
+class TestVendorEnrichment(unittest.TestCase):
+    def test_every_vendor_has_enrichment_fields(self):
+        for v in _VDOC["vendors"]:
+            missing = [f for f in ENRICH_FIELDS if f not in v]
+            self.assertFalse(missing, f"vendor {v['id']}: missing enrichment {missing}")
+
+    def test_founded_is_year_or_null(self):
+        for v in _VDOC["vendors"]:
+            f = v.get("founded")
+            self.assertTrue(f is None or (isinstance(f, int) and 1800 <= f <= 2026),
+                            f"{v['id']}: founded {f!r} not a plausible year or null")
+
+    def test_history_non_empty(self):
+        for v in _VDOC["vendors"]:
+            self.assertTrue(str(v.get("history", "")).strip(), f"{v['id']}: empty history")
+
+    def test_claims_are_sourced(self):
+        """§8: a named leader, a market-position claim, or a history statement
+        requires at least one source. Honest nulls need none."""
+        for v in _VDOC["vendors"]:
+            claims = bool(str(v.get("history", "")).strip())
+            if v.get("leadership") not in UNKNOWN:
+                claims = True
+            if v.get("market_position") not in UNKNOWN:
+                claims = True
+            if claims:
+                srcs = v.get("sources") or []
+                self.assertTrue(isinstance(srcs, list) and any(str(x).strip() for x in srcs),
+                                f"{v['id']}: makes claims but has no source (§8 fabrication guard)")
+
+    def test_leadership_shape(self):
+        for v in _VDOC["vendors"]:
+            ld = v.get("leadership")
+            self.assertTrue(ld is None or isinstance(ld, str), f"{v['id']}: leadership not str/null")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
