@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-07-27 — v1.0 freeze: docs + deliverable dual-review + tag
+Closed the loop on the deliverable and froze a stable release.
+- **Docs**: `docs/glossary.md` now generated from `taxonomy.yaml` glossary (49 terms, single source, `tools/glossary_md.py`); `docs/workflow.md` per-phase checklists expanded to reference the real artifacts; `hunting_guide.py` made deterministic (version+counts, not wall-clock) so the smoke test no longer dirties the tree; `rollup.py` v4→v6 drift fixed.
+- **Deliverable dual-review** (codex + grok on `hunting-guide.md`, web-search): actioned P1s — OEM master-HOT filter bug (8→3), §5.4-excluded vendors now marked ⊘, trigger index shows category→play/standalone, fail-closed generator validation; play re-routing (samd off play-a, rwd/ngs-lims/genomics-reporting off play-b); radiation-oncology +storage; NVIDIA product-line name fixed; cloud-cost-pressure action + trigger category opens.
+- **Tests 43 → 44** GREEN; determinism proven (repeat runs leave the tree clean).
+- **Tag `v1.0`** — taxonomy v6, 53 categories × six-layer chain + domain + name_full + glossary + hardware_profile + sizing, 196 sourced vendors, 14 triggers with foreign keys, the hunting guide, and a 44-test regression net.
+
+### Open backlog (post-v1.0, not blockers)
+- Vendor enrichment: market-gap adds flagged by grok (Epic Radiant on ris-cvis; Viz.ai / GE / Siemens / Philips on imaging-ai-deployment; Hyland Acuo on pacs-vna; Flatiron on rwd-rwe; Hamamatsu/Indica on digital-pathology; ABB on scada-dcs). Each needs a cited source per §8.
+- Per-buyer "what to quote" (customer vs operator vs OEM hardware split).
+- ris-cvis-workflow profile/score (grok flagged; prior opus ruling stands — revisit with evidence).
+- v1 `.jsx` cross-check — still blocked on `/source/` file drop.
+
 ## 2026-07-27 — hunting guide: the sales-facing deliverable
 The payoff — four rounds of verified six-layer data synthesized into the artifact an account manager hunts with. `688391b`.
 - `tools/hunting_guide.py` → `docs/hunting-guide.md` (single-source from `/data`): per-play ranked target maps (category × opportunity × what-to-quote [component·sizing] × co-sell/incumbent vendors), cross-play standalone deals, master HOT lists, trigger→action index, component pipelines.
