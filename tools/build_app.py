@@ -130,6 +130,28 @@ tr:last-child td{border-bottom:0}
 .kv dt{color:var(--muted)}
 .muted{color:var(--muted)}
 .pill{font-size:11px;border:1px solid var(--line);border-radius:20px;padding:1px 9px;color:var(--muted)}
+.hero{padding:6px 0 16px}
+.hero h2{margin:0 0 4px;font-size:22px;letter-spacing:.2px}
+.hero p{margin:0;color:var(--muted);font-size:13px;max-width:760px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:border-color .12s,transform .12s}
+.tile:hover{border-color:var(--accent);transform:translateY(-2px)}
+.tile h3{margin:0 0 2px;font-size:15px}
+.tile .anchor{color:var(--muted);font-size:11px;margin-bottom:10px}
+.tile .cat{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:4px 0;border-top:1px dashed var(--line)}
+.tile .cat b{color:var(--ink)}
+.tile .go{margin-top:10px;color:var(--accent);font-weight:600;font-size:12px}
+.statbar{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
+.stat{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.stat:hover{border-color:var(--accent)}
+.stat .n{font-size:26px;font-weight:800;line-height:1}
+.stat .l{color:var(--muted);font-size:11px;margin-top:2px}
+.trigrow{display:flex;gap:8px;align-items:baseline;font-size:12px;padding:5px 0;border-top:1px dashed var(--line)}
+.refine>summary{cursor:pointer;font-weight:600;font-size:12px;color:var(--muted);padding:6px 0;list-style:none}
+.refine>summary::-webkit-details-marker{display:none}
+.refine>summary::before{content:"\25B8 ";color:var(--accent)}
+.refine[open]>summary::before{content:"\25BE "}
+.section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:20px 0 8px}
 </style>
 </head>
 <body>
@@ -139,7 +161,8 @@ tr:last-child td{border-bottom:0}
 </header>
 <nav id="nav"></nav>
 <main>
-  <section class="tab on" id="tab-taxonomy"></section>
+  <section class="tab on" id="tab-home"></section>
+  <section class="tab" id="tab-taxonomy"></section>
   <section class="tab" id="tab-hunt"></section>
   <section class="tab" id="tab-plays"></section>
   <section class="tab" id="tab-triggers"></section>
@@ -172,13 +195,19 @@ $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.st
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
 
 // ---- tabs ----
-const TABS=[['taxonomy','Taxonomy'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors']];
+const TABS=[['home','Home'],['taxonomy','Explore'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors']];
 const nav=$('#nav');
+const NAVBTN={};
+function goTab(id){
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  if(NAVBTN[id])NAVBTN[id].classList.add('on');
+  const sec=$('#tab-'+id); if(sec)sec.classList.add('on');
+  window.scrollTo(0,0);
+}
 TABS.forEach(([id,label],i)=>{
   const b=el('button',{class:i===0?'on':''},label);
-  b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
-    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-    b.classList.add('on');$('#tab-'+id).classList.add('on');};
+  NAVBTN[id]=b; b.onclick=()=>goTab(id);
   nav.append(b);
 });
 
@@ -194,6 +223,50 @@ function scoreAccount(acc){
 }
 function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-led':'var(--u-med)','Monitor':'var(--u-low)','Drop':'var(--u-crit)'}[name]||'var(--muted)';}
 
+// ================= HOME (guided funnel) =================
+(function(){
+  const root=$('#tab-home'), cats=DATA.taxonomy.categories, plays=DATA.plays.plays, trigs=DATA.triggers.triggers;
+  const cust=c=>c.hardware_opportunity_by_buyer.customer||0, oper=c=>c.hardware_opportunity_by_buyer.operator||0;
+  const oem=c=>c.hardware_opportunity_by_buyer['original-equipment-manufacturer']||0;
+  const mx=c=>Math.max(...Object.values(c.hardware_opportunity_by_buyer));
+  const hero=el('div',{class:'hero'});
+  hero.append(el('h2',{},'Where do you want to hunt?'));
+  hero.append(el('p',{},'Gate question first (§3): who controls the infrastructure behind the software? Pick a play to see its ranked hardware targets — what to quote and who to co-sell with — or act on a fired trigger.'));
+  root.append(hero);
+  const hc=cats.filter(c=>cust(c)>=3).length, ho=cats.filter(c=>oper(c)>=3).length, ho2=cats.filter(c=>oem(c)>=3).length;
+  const bar=el('div',{class:'statbar'});
+  [['HOT_customer',hc,'direct sale'],['HOT_operator',ho,'ISV / co-sell'],['OEM design-wins',ho2,'embedded per-unit']].forEach(([lab,n,sub])=>{
+    const st=el('div',{class:'stat'},el('div',{class:'n'},String(n)),el('div',{class:'l'},lab+' · '+sub));
+    st.onclick=()=>goTab('hunt'); bar.append(st);
+  });
+  root.append(bar);
+  root.append(el('div',{class:'section-title'},'The three plays — pick your motion'));
+  const tiles=el('div',{class:'tiles'});
+  plays.forEach(p=>{
+    const letter=p.id.split('-')[1].toUpperCase();
+    const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>mx(b)-mx(a)||cust(b)-cust(a)).slice(0,4);
+    const t=el('div',{class:'tile'});
+    t.append(el('div',{class:'row'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter)));
+    t.append(el('h3',{},p.name));
+    t.append(el('div',{class:'anchor'},(p.hardware_anchor||[]).join(' · ')));
+    members.forEach(c=>t.append(el('div',{class:'cat'},el('span',{},c.name_en.length>42?c.name_en.slice(0,42)+'…':c.name_en),el('b',{},'cust·'+cust(c)))));
+    t.append(el('div',{class:'go'},'Open ranked targets →'));
+    t.onclick=()=>goTab('hunt');
+    tiles.append(t);
+  });
+  root.append(tiles);
+  root.append(el('div',{class:'section-title'},'A trigger fired? — act on the window'));
+  const tp=el('div',{class:'card'});
+  const rank={critical:0,high:1,medium:2,low:3};
+  trigs.slice().sort((a,b)=>rank[a.urgency]-rank[b.urgency]).slice(0,4).forEach(t=>{
+    tp.append(el('div',{class:'trigrow'},el('span',{class:'u '+t.urgency},t.urgency),el('b',{},t.signal),
+      el('span',{class:'muted'},'→ '+(t.related_categories||[]).slice(0,3).join(', '))));
+  });
+  const more=el('div',{class:'go',style:'cursor:pointer;margin-top:8px'},'All 14 triggers →');more.onclick=()=>goTab('triggers');tp.append(more);
+  root.append(tp);
+  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},'Or browse & filter all 53 categories in Explore →');ex.onclick=()=>goTab('taxonomy');root.append(ex);
+})();
+
 // ================= TAXONOMY =================
 (function(){
   const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy');
@@ -206,12 +279,12 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'opportunity ≥'),
         fProfile=mk('fProfile',['gpu-server','high-performance-computing-cpu','nvme-performance-storage','capacity-archive-storage','high-memory','edge-industrial','high-availability-redundant','disaster-recovery-backup'],'all hardware'),
-        fGroup=mk('fGroup',['primary_buyer','hardware_buyer','hardware_opportunity','hardware_profile','play','segment','data_modality','role','bucket'],'no grouping'),
+        fGroup=mk('fGroup',['domain','primary_buyer','hardware_buyer','hardware_opportunity','hardware_profile','play','segment','data_modality','role','bucket'],'no grouping'),
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
   const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
-  root.append(el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup,fSpans,fTxt,cnt));
+  root.append(el('details',{class:'refine'},el('summary',{},'Refine — filters & grouping'),el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup,fSpans,fTxt,cnt)));
   // static buyer rollup summary (authoritative axis)
   const pb={customer:0,operator:0,'original-equipment-manufacturer':0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
@@ -259,6 +332,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     if(axis==='hardware_buyer')return c.hardware_buyer.slice();
     if(axis==='play')return (c.plays&&c.plays.length)?c.plays.slice():['(no play)'];
     if(axis==='hardware_profile')return (c.hardware_profile&&c.hardware_profile.length)?c.hardware_profile.slice():['(no hardware)'];
+    if(axis==='domain')return [c.domain];
     return (c[axis]||[]).slice();
   }
   function render(){
@@ -291,7 +365,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     });
   }
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=render);
-  fSpansBox.onchange=render;fTxt.oninput=render;render();
+  fSpansBox.onchange=render;fTxt.oninput=render;fGroup.value='domain';render();
 })();
 
 // ================= HUNT (per-play ranked target map) =================

@@ -578,7 +578,7 @@ class TestAppGuidance(unittest.TestCase):
                          "Taxonomy/Explore filter grid must not be the landing tab")
 
     def test_home_registered_first_in_nav(self):
-        self.assertRegex(self.html, r"const TABS=\[\['home'", "Home must be first in TABS")
+        self.assertIn("const TABS=[['home',", self.html, "Home must be first in TABS")
 
     def test_home_surfaces_the_three_plays(self):
         for name in ("Medical Imaging", "Genomics", "GMP Manufacturing"):
@@ -592,8 +592,8 @@ class TestAppGuidance(unittest.TestCase):
     def test_explore_filters_are_collapsible(self):
         """Classification cleanup: the 8 filters live in a collapsible Refine panel,
         not sprayed across the landing view."""
-        self.assertIn("<details", self.html,
-                      "Explore filters must sit in a collapsible <details> Refine panel")
+        self.assertIn("el('details'", self.html,
+                      "Explore filters must be built into a collapsible <details> Refine panel")
 
 
 if __name__ == "__main__":
