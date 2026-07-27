@@ -460,5 +460,37 @@ class TestVendorsLayer(unittest.TestCase):
             self.assertIn(v["id"], used, f"vendor {v['id']} referenced by no category")
 
 
+
+
+# ============================================================
+# Round-4 invariants: per-component sizing
+# ============================================================
+SIZING_TIERS = {"node", "rack", "cluster"}
+
+
+class TestComponentSizing(unittest.TestCase):
+    def test_sizing_keys_match_hardware_profile(self):
+        """Every component in hardware_profile carries a deployment-scale tier
+        (node < rack < cluster) so a quote can be sized. Empty profile -> empty."""
+        for c in CATS:
+            sizing = c.get("hardware_profile_sizing", {})
+            self.assertEqual(set(sizing), set(c["hardware_profile"]),
+                             f"{c['id']}: sizing keys {set(sizing)} != profile {set(c['hardware_profile'])}")
+
+    def test_sizing_tiers_valid(self):
+        for c in CATS:
+            for comp, tier in (c.get("hardware_profile_sizing") or {}).items():
+                self.assertIn(tier, SIZING_TIERS, f"{c['id']}.{comp}: bad tier {tier}")
+
+    def test_flagship_customer_has_a_large_tier(self):
+        """A flagship customer deal (customer opportunity 4) must pull at least one
+        rack- or cluster-scale component — otherwise the score is unsupported."""
+        for c in CATS:
+            if c["hardware_opportunity_by_buyer"].get("customer", 0) == 4:
+                tiers = set((c.get("hardware_profile_sizing") or {}).values())
+                self.assertTrue(tiers & {"rack", "cluster"},
+                                f"{c['id']}: flagship customer but no rack/cluster-scale component")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
