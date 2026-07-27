@@ -61,7 +61,7 @@ triggers:
     source: "Healthcare M&A trackers, local business press"
     action: "Consolidated datacenter/imaging archive opportunity; find surviving IT org"
     related_categories: [pacs-vna, ehr-emr-core, clinical-data-lakehouse]
-    related_plays: [play-a, play-b]
+    related_plays: [play-a]
   - id: pharma-ai-strategy
     signal: Pharma AI-strategy announcement
     category: pharmaceutical-research-development

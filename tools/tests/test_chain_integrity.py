@@ -361,6 +361,14 @@ class TestToolsSmoke(unittest.TestCase):
         out = self._run("tools/score.py", "data/accounts/example-riverbend-pathology.yaml")
         self.assertIn("Tier:", out)
 
+    def test_hunting_guide_runs_clean(self):
+        out = self._run("tools/hunting_guide.py")
+        self.assertIn("hunting-guide.md", out)
+        md = (REPO / "docs" / "hunting-guide.md").read_text(encoding="utf-8")
+        for play in ("Medical Imaging", "Genomics", "GMP Manufacturing"):
+            self.assertIn(play, md, f"hunting guide missing play {play}")
+        self.assertIn("Trigger", md)
+
 
 
 

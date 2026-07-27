@@ -140,6 +140,7 @@ tr:last-child td{border-bottom:0}
 <nav id="nav"></nav>
 <main>
   <section class="tab on" id="tab-taxonomy"></section>
+  <section class="tab" id="tab-hunt"></section>
   <section class="tab" id="tab-plays"></section>
   <section class="tab" id="tab-triggers"></section>
   <section class="tab" id="tab-scoring"></section>
@@ -170,7 +171,7 @@ $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.st
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
 
 // ---- tabs ----
-const TABS=[['taxonomy','Taxonomy'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts']];
+const TABS=[['taxonomy','Taxonomy'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts']];
 const nav=$('#nav');
 TABS.forEach(([id,label],i)=>{
   const b=el('button',{class:i===0?'on':''},label);
@@ -290,6 +291,35 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   }
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=render);
   fSpansBox.onchange=render;fTxt.oninput=render;render();
+})();
+
+// ================= HUNT (per-play ranked target map) =================
+(function(){
+  const root=$('#tab-hunt'), cats=DATA.taxonomy.categories, plays=DATA.plays.plays;
+  const VN={};(DATA.vendors.vendors||[]).forEach(v=>VN[v.id]=v.name);
+  const opp=(c,b)=>c.hardware_opportunity_by_buyer[b]||0;
+  const maxo=c=>Math.max(...Object.values(c.hardware_opportunity_by_buyer));
+  const rig=c=>(c.hardware_profile||[]).map(h=>h+'·'+((c.hardware_profile_sizing||{})[h]||'?')).join('  ')||'—';
+  root.append(el('div',{class:'rollup'},'Per-play ranked target map — what to quote (component·scale) and who to co-sell with. Opportunity 1 minimal → 4 flagship. Full printable version: docs/hunting-guide.md'));
+  plays.forEach(p=>{
+    const letter=p.id.split('-')[1].toUpperCase();
+    const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>maxo(b)-maxo(a)||opp(b,'customer')-opp(a,'customer'));
+    root.append(el('div',{class:'grouphdr'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),p.name,el('span',{class:'gcount'},String(members.length))));
+    members.forEach(c=>{
+      const card=el('div',{class:'card'});card.style.marginBottom='8px';
+      const head=el('div',{class:'row'},
+        el('span',{class:'by bcust',title:'customer opportunity'},'cust·'+opp(c,'customer')),
+        el('span',{class:'by boper',title:'operator opportunity'},'oper·'+opp(c,'operator')));
+      if(opp(c,'original-equipment-manufacturer'))head.append(el('span',{class:'by boem'},'oem·'+opp(c,'original-equipment-manufacturer')));
+      card.append(head);
+      card.append(el('h3',{},c.name_en));
+      const q=el('div',{class:'row'});q.append(el('span',{class:'tagk'},'quote'));(c.hardware_profile||[]).forEach(h=>q.append(el('span',{class:'hwc'},h+'·'+((c.hardware_profile_sizing||{})[h]||'?'))));
+      if(c.hardware_profile&&c.hardware_profile.length)card.append(q);
+      const v=el('div',{class:'row'});v.append(el('span',{class:'tagk'},'vendors'));(c.vendors||[]).forEach(x=>v.append(el('span',{class:'pill'},VN[x]||x)));
+      if(c.vendors&&c.vendors.length)card.append(v);
+      root.append(card);
+    });
+  });
 })();
 
 // ================= PLAYS =================

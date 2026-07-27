@@ -1180,7 +1180,8 @@ categories:
     infrastructure_notes: "High-capacity tiered storage (object plus fast analytics tier) and ETL/query compute; growing GPU demand for NLP/LLM over clinical notes. Sizing driven by bed count, retention years, and modality breadth (notes, waveforms, omics)."
     hardware_profile: [gpu-server, high-performance-computing-cpu, nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: node, high-performance-computing-cpu: rack, nvme-performance-storage: rack, capacity-archive-storage: rack}
-    plays: [play-b]
+    plays: []
+    play_exemption: "Cross-cutting clinical data warehouse / lakehouse — a standalone data-platform infrastructure deal (object + fast-analytics tier + growing clinical-note NLP GPU), not the sequencing/research-AI motion of Play B"
     vendors: [databricks, health-catalyst, intersystems, snowflake]
     evidence_note: null
 
