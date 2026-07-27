@@ -555,5 +555,46 @@ class TestVendorEnrichment(unittest.TestCase):
             self.assertTrue(ld is None or isinstance(ld, str), f"{v['id']}: leadership not str/null")
 
 
+
+
+# ============================================================
+# Round-6 invariants: app guided-home wayfinding (Q1 locked = funnel front door)
+# ============================================================
+
+class TestAppGuidance(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import subprocess
+        subprocess.run([sys.executable, "tools/build_app.py"], cwd=str(REPO),
+                       capture_output=True, text=True, timeout=60)
+        cls.html = (REPO / "app" / "index.html").read_text(encoding="utf-8")
+
+    def test_default_tab_is_home(self):
+        """The guided Home funnel is the landing tab, not the 8-filter grid."""
+        self.assertIn('class="tab on" id="tab-home"', self.html,
+                      "Home must be the default-active tab (id=tab-home, class 'tab on')")
+        # the old filter grid must NOT be the default-on tab
+        self.assertNotIn('class="tab on" id="tab-taxonomy"', self.html,
+                         "Taxonomy/Explore filter grid must not be the landing tab")
+
+    def test_home_registered_first_in_nav(self):
+        self.assertRegex(self.html, r"const TABS=\[\['home'", "Home must be first in TABS")
+
+    def test_home_surfaces_the_three_plays(self):
+        for name in ("Medical Imaging", "Genomics", "GMP Manufacturing"):
+            self.assertIn(name, self.html, f"Home must surface play '{name}'")
+
+    def test_home_surfaces_hot_entry_points(self):
+        # the guided funnel must expose the HOT lists + a trigger entry
+        for marker in ("HOT_customer", "HOT_operator", "tab-triggers"):
+            self.assertIn(marker, self.html, f"Home missing guidance entry '{marker}'")
+
+    def test_explore_filters_are_collapsible(self):
+        """Classification cleanup: the 8 filters live in a collapsible Refine panel,
+        not sprayed across the landing view."""
+        self.assertIn("<details", self.html,
+                      "Explore filters must sit in a collapsible <details> Refine panel")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
