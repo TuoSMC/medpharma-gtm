@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-07-27 — guided Home funnel + classified Explore (wayfinding redesign)
+The app landing was a filter-wall (8 dropdowns + 53 flat cards) — no guidance. Grilled (Tuo, Q1 → funnel front door). `5b19eb9` RED → `9453037` GREEN.
+- **Home** tab (new default): "Where do you want to hunt?" + §3 gate; 3 HOT stat cards (26/14/8); three Play tiles with their top categories → Hunt; a fired-trigger panel → Triggers. `goTab()` wires the funnel.
+- **Taxonomy → Explore** (demoted): 8 filters collapsed into a "Refine" `<details>` panel; defaults to **group-by-domain** (8 clean buckets), never a flat 53-wall. `domain` added as a group-by axis.
+- Tests 48 → **53** (Home-is-default + surfaces plays/HOT/trigger + Explore filters collapsible). Browser-verified.
+
 ## 2026-07-27 — vendor enrichment: HQ / leadership / history / market (registry v4)
 Every vendor now carries the profile a salesperson needs, all sourced. `5fb4dde` RED → `61ffc6a` GREEN.
 - 8 web-research agents + 8 opus adversarial verifiers over all **196 vendors** (419 web searches). Added `headquarters`, `founded`, `leadership`, `history`, `market_position`, `sources[]`.
