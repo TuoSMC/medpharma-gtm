@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-27 — vendor enrichment: HQ / leadership / history / market (registry v4)
+Every vendor now carries the profile a salesperson needs, all sourced. `5fb4dde` RED → `61ffc6a` GREEN.
+- 8 web-research agents + 8 opus adversarial verifiers over all **196 vendors** (419 web searches). Added `headquarters`, `founded`, `leadership`, `history`, `market_position`, `sources[]`.
+- **§8 fabrication guard, machine-enforced**: unsourced revenue figures → "not publicly disclosed" (InterSystems, Thermo Fisher, Veeva, Yokogawa, Cotiviti…); unconfirmable or stale CEO names → nulled/corrected (Cognex Willett→Moschner; Optum Conway[OptumRx]→Cianfrocco; Ordr/Infinitt/Ziosoft/Connexall/Körber nulled); 404 and copy-paste-error source URLs dropped. Honest nulls beat guesses.
+- Coverage: HQ 187/196 · founded 178 · leadership 173 · market_position disclosed 107 (89 honestly "not publicly disclosed" — private companies without public share data).
+- Tests 44 → **48**: enrichment schema + the §8 sourcing invariant (any named leader / market claim / history requires ≥1 source). App gains a **Vendors** tab (searchable registry, clickable sources); browser-verified.
+- Note: `v1.0` tag predates this; the enriched registry is a superset — re-tag as `v1.1` when the vendor-market-gap adds also land.
+
 ## 2026-07-27 — v1.0 freeze: docs + deliverable dual-review + tag
 Closed the loop on the deliverable and froze a stable release.
 - **Docs**: `docs/glossary.md` now generated from `taxonomy.yaml` glossary (49 terms, single source, `tools/glossary_md.py`); `docs/workflow.md` per-phase checklists expanded to reference the real artifacts; `hunting_guide.py` made deterministic (version+counts, not wall-clock) so the smoke test no longer dirties the tree; `rollup.py` v4→v6 drift fixed.
