@@ -102,7 +102,7 @@ categories:
     hardware_profile: [nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {nvme-performance-storage: rack, capacity-archive-storage: cluster}
     plays: [play-a]
-    vendors: [agfa-healthcare, fujifilm-healthcare, infinitt-healthcare, intelerad, merative, sectra, visage-imaging]
+    vendors: [agfa-healthcare, fujifilm-healthcare, ge-healthcare, infinitt-healthcare, intelerad, merative, philips, sectra, visage-imaging]
     evidence_note: null
 
   - id: bioinformatics-secondary
@@ -226,7 +226,7 @@ categories:
     hardware_profile: [capacity-archive-storage]
     hardware_profile_sizing: {capacity-archive-storage: rack}
     plays: [play-a]
-    vendors: [fujifilm-healthcare, infinitt-healthcare, merative, philips-healthcare, scimage, siemens-healthineers]
+    vendors: [fujifilm-healthcare, infinitt-healthcare, merative, philips, scimage, siemens-healthineers]
     evidence_note: null
 
   - id: or-surgical-video
@@ -277,7 +277,7 @@ categories:
     hardware_profile_sizing: {nvme-performance-storage: node, edge-industrial: node, high-availability-redundant: node}
     plays: []
     play_exemption: "Device-maker (original-equipment-manufacturer) channel deal for regulator-cleared central stations; outside the three solution plays"
-    vendors: [etiometry, ge-healthcare, medical-informatics-corp, philips-healthcare]
+    vendors: [etiometry, ge-healthcare, medical-informatics-corp, philips]
     evidence_note: null
 
   - id: telehealth-platform
@@ -302,7 +302,7 @@ categories:
     hardware_profile: []
     hardware_profile_sizing: {}
     plays: []
-    vendors: [amwell, caregility, keycare, philips-healthcare, teladoc-health]
+    vendors: [amwell, caregility, keycare, philips, teladoc-health]
     evidence_note: null
 
   - id: radiation-oncology-tps-ois
@@ -352,7 +352,7 @@ categories:
     hardware_profile: [gpu-server]
     hardware_profile_sizing: {gpu-server: rack}
     plays: [play-a]
-    vendors: [canon-medical, circle-cvi, ge-healthcare, philips-healthcare, siemens-healthineers, terarecon, visage-imaging, ziosoft]
+    vendors: [canon-medical, circle-cvi, ge-healthcare, philips, siemens-healthineers, terarecon, visage-imaging, ziosoft]
     evidence_note: null
 
   # ======== hospital patient / business / admin ========
@@ -785,7 +785,7 @@ categories:
     hardware_profile: [gpu-server, nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: cluster, nvme-performance-storage: rack, capacity-archive-storage: cluster}
     plays: [play-a]
-    vendors: [leica-biosystems, paige-ai, philips, proscia, roche, sectra]
+    vendors: [leica-biosystems, paige-ai, pathai, philips, proscia, roche, sectra]
     evidence_note: null
 
   - id: ngs-lab-lims
@@ -831,7 +831,7 @@ categories:
     hardware_profile: []
     hardware_profile_sizing: {}
     plays: [play-b]
-    vendors: [congenica, fabric-genomics, golden-helix, qiagen, sophia-genetics]
+    vendors: [congenica, fabric-genomics, golden-helix, qiagen, sophia-genetics, tempus]
     evidence_note: null
 
   # ======== pharma R&D + clinical development ========
@@ -1227,7 +1227,7 @@ categories:
     hardware_profile: [gpu-server, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: rack, capacity-archive-storage: cluster}
     plays: [play-b]
-    vendors: [aetion, iqvia, komodo-health, trinetx, truveta]
+    vendors: [aetion, iqvia, komodo-health, tempus, trinetx, truveta]
     evidence_note: null
 
   - id: hie-interoperability-engine
@@ -1348,7 +1348,7 @@ categories:
     hardware_profile: [gpu-server, high-performance-computing-cpu, edge-industrial]
     hardware_profile_sizing: {gpu-server: rack, high-performance-computing-cpu: rack, edge-industrial: node}
     plays: [play-a]
-    vendors: [blackberry-qnx, brightinsight, green-hills-software, nvidia, wind-river]
+    vendors: [blackberry-qnx, green-hills-software, nvidia, wind-river]
     evidence_note: null
 
   - id: ai-hpc-orchestration

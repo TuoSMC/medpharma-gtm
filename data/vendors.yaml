@@ -1,7 +1,7 @@
 # Vendor registry — names live HERE, never in code (CLAUDE.md §3, §8)
-# Every entry web-researched + adversarially verified; source cited; A-D confidence.
+# Every entry web-researched + adversarially verified (codex + grok); source cited; A-D confidence.
 # Cloud-locked clinical SaaS carries the §5.4 co-sell-exclusion note.
-version: 2
+version: 3
 
 vendors:
   - id: abridge
@@ -24,7 +24,6 @@ vendors:
     deployment_models: [on-premises, vendor-managed, software-as-a-service]
     confidence: B
     source: "https://www.advarra.com/solutions/sites/ctms/oncore/"
-    note: "OnCore CTMS is the de facto standard at US academic medical centers and cancer centers (130+ institutions, e.g. UAMS, WashU, Mount Sinai). Historically institution-installed on customer infrastructure; newer deployments are Advarra-hosted. Site/AMC-side CTMS is the segment where clinical-trial software still lands on customer-owned servers."
   - id: aetion
     name: Aetion, Inc. (a Datavant company)
     categories: [rwd-rwe-analytics]
@@ -36,7 +35,7 @@ vendors:
     name: Agfa HealthCare (Agfa-Gevaert Group)
     categories: [pacs-vna]
     deployment_models: [on-premises, hybrid, public-cloud]
-    confidence: B
+    confidence: C
     source: "https://www.marketsandmarkets.com/ResearchInsight/vendor-neutral-archive-vna-pacs-market.asp (named leading VNA/PACS player; Enterprise Imaging platform, shifting toward cloud but large installed on-prem base)"
   - id: agilent-technologies
     name: Agilent Technologies, Inc.
@@ -47,7 +46,7 @@ vendors:
     note: "OpenLab CDS and SLIMS; instrument-attached acquisition plus lab-server LIMS"
   - id: aidoc
     name: Aidoc
-    categories: [imaging-ai-deployment, cdss-clinical-ai]
+    categories: [cdss-clinical-ai, imaging-ai-deployment]
     deployment_models: [public-cloud, hybrid, edge]
     confidence: B
     source: "https://www.aidoc.com/about/news/aidoc-secures-150m-for-its-healthcare-foundation-model/ (aiOS clinical AI operating system on CARE foundation model; ~2,000 hospitals, 60M cases/yr; $150M Series E with NVIDIA/NVentures and AWS partnerships)"
@@ -73,7 +72,7 @@ vendors:
     source: "https://business.amwell.com/digital-care-platform (Converge hybrid care platform with in-hospital Carepoint devices; EHR-embedded deployments incl. Oracle Cerner)"
   - id: antares-vision
     name: Antares Vision Group S.p.A.
-    categories: [serialization-track-trace, automated-visual-inspection]
+    categories: [automated-visual-inspection, serialization-track-trace]
     deployment_models: [on-premises, edge, private-cloud, hybrid, software-as-a-service]
     confidence: C
     source: "https://tracxn.com/d/trending-business-models/startups-in-pharma-track-trace-solutions/__VcKWxlyAfHWeVH8Wv5wu371mzC6AtWy-hxkVyI0gMD8/companies"
@@ -91,7 +90,6 @@ vendors:
     deployment_models: [software-as-a-service]
     confidence: B
     source: "https://www.arisglobal.com/lifesphere/safety/ and https://www.arisglobal.com/lifesphere/regulatory/"
-    note: "LifeSphere Safety/MultiVigilance (successor to ARISg) is the #2 safety database with customers including AstraZeneca, Teva, Roche; LifeSphere RIM covers regulatory information management. Rebuilt as cloud-native multi-tenant SaaS — legacy on-prem ARISg installed base is migrating off customer iron; hardware pull sits with the operator."
   - id: armis
     name: Armis
     categories: [medical-iot-security]
@@ -112,12 +110,11 @@ vendors:
     deployment_models: [on-premises, edge]
     confidence: C
     source: "https://www.newstrail.com/pharmacy-automation-systems-market-eyeing-bigger-moves-omnicell-arxium-scriptpro/"
-    note: "RIVA IV compounding robots and AutoPharm central-fill automation; deployed at enterprise health systems processing 5,000-15,000 scripts/day."
   - id: ascom
     name: Ascom Holding AG
     categories: [medical-device-integration]
     deployment_models: [on-premises, edge, hybrid]
-    confidence: B
+    confidence: C
     source: "https://www.fortunebusinessinsights.com/clinical-alarm-management-market-111697"
     note: "Ascom Healthcare Platform for alarm distribution and clinical workflow; 2025 integration agreement with AvaSure; predominantly on-prem hospital deployments."
   - id: asimily
@@ -128,8 +125,8 @@ vendors:
     source: "https://klasresearch.com/report/healthcare-iot-security-2026-vendors-pushing-beyond-device-visibility-to-drive-measurable-outcomes/3313"
     note: "Top KLAS 2026 healthcare IoT security score (96.6); IoMT discovery and risk intelligence with on-prem sensor appliances."
   - id: aspentech
-    name: Aspen Technology, Inc.
-    categories: [plant-historian, pat-process-twin]
+    name: AspenTech (Emerson)
+    categories: [pat-process-twin, plant-historian]
     deployment_models: [on-premises, private-cloud, hybrid]
     confidence: B
     source: "https://www.aspentech.com/en/products/msc/aspen-infoplus21"
@@ -138,7 +135,7 @@ vendors:
     name: AssurX, Inc.
     categories: [eqms-calibration]
     deployment_models: [on-premises, private-cloud, software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://intuitionlabs.ai/articles/gxp-compliance-software-eqms-comparison"
     note: "Integrated QMS connecting quality, risk and EHS; on-prem deployable challenger"
   - id: avasure
@@ -149,8 +146,8 @@ vendors:
     source: "https://avasure.com/blog/how-avasure-builds-ai-for-patient-safety/"
     note: "TeleSitter virtual sitting/virtual nursing market leader with AI-augmented monitoring; 2025 integration agreement with Ascom; in-room devices plus monitoring infrastructure."
   - id: aveva
-    name: AVEVA Group Limited
-    categories: [scada-dcs, plant-historian]
+    name: AVEVA (Schneider Electric)
+    categories: [plant-historian, scada-dcs]
     deployment_models: [on-premises, private-cloud, hybrid, edge]
     confidence: B
     source: "https://realtatechnologies.com/data-historians-life-sciences/"
@@ -159,7 +156,7 @@ vendors:
     name: Becton, Dickinson and Company (BD)
     categories: [pharmacy-automation]
     deployment_models: [on-premises, edge, hybrid]
-    confidence: B
+    confidence: C
     source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
     note: "Pyxis ES/MedStation automated dispensing; also owns Parata retail/LTC automation; cabinet fleets backed by on-prem servers."
   - id: beckman-coulter
@@ -184,10 +181,10 @@ vendors:
     source: "https://www.volersystems.com/blog/5-essential-embedded-operating-systems-for-medical-devices"
     note: "Safety-certified RTOS (IEC 62304) widely designed into regulated medical devices; embedded OEM BOM play, long-lifecycle design wins. Confidence C: only a third-party blog cited, no QNX/BlackBerry primary medical page."
   - id: blackford-analysis
-    name: Blackford Analysis (a Bayer company)
+    name: Blackford Analysis (Bayer — imaging-AI platform business winding down)
     categories: [imaging-ai-deployment]
     deployment_models: [on-premises, public-cloud, hybrid]
-    confidence: B
+    confidence: C
     source: "https://blackfordanalysis.com/ (enterprise AI platform — curated marketplace and single-integration deployment of third-party imaging AI into clinical workflows)"
   - id: blue-yonder
     name: Blue Yonder Group, Inc.
@@ -200,15 +197,8 @@ vendors:
     name: Brainlab AG
     categories: [radiation-oncology-tps-ois]
     deployment_models: [on-premises, hybrid]
-    confidence: B
+    confidence: C
     source: "https://www.thebusinessresearchcompany.com/report/radiation-oncology-treatment-planning-software-global-market-report (listed among major radiation oncology treatment planning software companies — Elements planning suite)"
-  - id: brightinsight
-    name: BrightInsight, Inc.
-    categories: [samd-embedded-oem-platform]
-    deployment_models: [software-as-a-service, public-cloud]
-    confidence: B
-    source: "https://brightinsight.com/"
-    note: "ISO 13485/MDSAP-certified regulated digital health platform for biopharma/medtech SaMD and connected combination products (Roche, Novo Nordisk, AstraZeneca); cloud-hosted managed platform — co-sell excluded per playbook §5.4."
   - id: bruker
     name: Bruker Corporation (Optimal Industrial Technologies)
     categories: [pat-process-twin]
@@ -218,7 +208,7 @@ vendors:
     note: "synTQ vendor-agnostic PAT knowledge-management platform; on-prem/edge process integration"
   - id: cadence-design-systems
     name: Cadence Design Systems, Inc. (OpenEye)
-    categories: [comp-chem-simulation, ai-drug-discovery]
+    categories: [ai-drug-discovery, comp-chem-simulation]
     deployment_models: [on-premises, hybrid, public-cloud]
     confidence: C
     source: "https://intuitionlabs.ai/articles/cheminformatics-platforms-comparison"
@@ -264,7 +254,7 @@ vendors:
     note: "Healthcare RTLS market leader; presented AI-enhanced AssetsRT software and DuressRT at HIMSS 2026; on-prem/hybrid location engines with facility-wide sensor networks."
   - id: chemical-computing-group
     name: Chemical Computing Group ULC
-    categories: [comp-chem-simulation, ai-drug-discovery]
+    categories: [ai-drug-discovery, comp-chem-simulation]
     deployment_models: [on-premises, hybrid]
     confidence: C
     source: "https://intuitionlabs.ai/articles/cheminformatics-platforms-comparison"
@@ -286,9 +276,8 @@ vendors:
     name: Clinisys
     categories: [lis]
     deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://www.softwareworld.co/laboratory-information-systems-software/"
-    note: "Market leader by installed base; consolidation of Sunquest (clinical LIS) + WinPath + PowerPath (AP). Enterprise on-prem estates pull HA DB + DR iron per lis infrastructure_notes."
   - id: codoxo
     name: Codoxo, Inc.
     categories: [payer-um-fraud-analytics]
@@ -300,7 +289,7 @@ vendors:
     name: Cognex Corporation
     categories: [automated-visual-inspection]
     deployment_models: [edge, on-premises]
-    confidence: B
+    confidence: C
     source: "https://intuitionlabs.ai/articles/computer-vision-in-pharmaceutical-quality-control-vendors-applications-and-trends"
     note: "Embedded deep-learning machine-vision; edge inspection appliances on the line"
   - id: cognizant-trizetto
@@ -318,7 +307,7 @@ vendors:
     source: "https://cognosos.com/healthcare/hospital-rtls/"
     note: "AI/cloud-first challenger with reduced on-site hardware footprint; acquired Cox Prosight (Oct 2024) to build full-stack hospital RTLS. Cloud-led architecture limits customer-prem server pull."
   - id: congenica
-    name: Congenica
+    name: Congenica (SeqOne Genomics)
     categories: [clinical-genomics-reporting]
     deployment_models: [software-as-a-service, private-cloud, on-premises]
     confidence: C
@@ -340,7 +329,7 @@ vendors:
     note: "Market leader in payment integrity and FWA analytics (~$15B suspect claims identified in 2023); analytics run on Cotiviti-operated infrastructure — operator-iron pull."
   - id: cresset
     name: Cresset Group
-    categories: [comp-chem-simulation, ai-drug-discovery]
+    categories: [ai-drug-discovery, comp-chem-simulation]
     deployment_models: [on-premises, hybrid, public-cloud]
     confidence: C
     source: "https://intuitionlabs.ai/articles/cheminformatics-platforms-comparison"
@@ -382,7 +371,7 @@ vendors:
   - id: dnanexus
     name: DNAnexus, Inc.
     categories: [bioinformatics-secondary]
-    deployment_models: [private-cloud, hybrid, public-cloud]
+    deployment_models: [hybrid, public-cloud]
     confidence: B
     source: "https://blog.dnanexus.com/2020-05-14-nvidia-parabricks-accelerate-ngs"
     note: "Cloud-centric secondary/tertiary platform with validated Illumina/Sentieon/Parabricks apps; deployable into customer private-cloud/hybrid environments."
@@ -394,7 +383,7 @@ vendors:
     source: "https://www.dolbey.com/solutions/coding/fusion-cac/"
     note: "Fusion CAC, Best in KLAS for computer-assisted coding 2017-2025; integrates with 3M/Optum/TruCode encoders. On-premises availability inferred from secondary/reseller evidence — verify in discovery."
   - id: dotmatics
-    name: Dotmatics, Inc.
+    name: Dotmatics (Siemens)
     categories: [rd-lab-informatics]
     deployment_models: [on-premises, hybrid, public-cloud, software-as-a-service]
     confidence: C
@@ -432,7 +421,7 @@ vendors:
     name: Epic Systems
     categories: [ehr-emr-core, lis, patient-access-scheduling, patient-portal-engagement, rcm-billing-claims]
     deployment_models: [hybrid, on-premises, private-cloud, vendor-managed]
-    confidence: B
+    confidence: C
     source: "https://www.softwareworld.co/laboratory-information-systems-software/"
     note: "Beaker LIS, default for Epic EHR hospitals; deployed on customer/private on-prem estates alongside the EHR database cluster."
   - id: eq2
@@ -470,7 +459,7 @@ vendors:
     source: "https://www.extedo.com/software/extedopulse"
     note: "EXTEDOpulse modular RIMS (RIM, eCTD submission publishing, IDMP/XEVMPD, PV/ICSR module) used by 850+ organizations and ~80% of eCTD-accepting regulatory agencies. Vendor explicitly offers cloud or on-premise deployment — one of the strongest on-prem challengers in the RIM segment, including regulator-side (agency) installations."
   - id: fabric-genomics
-    name: Fabric Genomics
+    name: Fabric Genomics (GeneDx)
     categories: [clinical-genomics-reporting]
     deployment_models: [software-as-a-service, private-cloud, hybrid]
     confidence: C
@@ -498,7 +487,7 @@ vendors:
     note: "DigitalMicrograph / Latitude detector and acquisition software at the microscope; on-prem/edge compute. Secondary evidence."
   - id: ge-healthcare
     name: GE HealthCare
-    categories: [advanced-visualization-3d, capacity-command-center, icu-central-monitoring, medical-device-integration]
+    categories: [advanced-visualization-3d, capacity-command-center, icu-central-monitoring, medical-device-integration, pacs-vna]
     deployment_models: [edge, hybrid, on-premises, software-as-a-service]
     confidence: B
     source: "https://www.gehealthcare.com/en-us/products/patient-monitoring/patient-monitors/carescape-central-station (CARESCAPE Central Station critical-care monitoring) and https://www.diagnosticimaging.com/view/advanced-visualization-aims-expand-enterprise (participates in advanced visualization market)"
@@ -582,7 +571,7 @@ vendors:
     note: "Clarity LIMS (ex-GenoLogics), purpose-built NGS wet-lab LIMS with 60+ preconfigured workflows; deployable on-prem/private-cloud beside sequencers."
   - id: infinitt-healthcare
     name: INFINITT Healthcare
-    categories: [ris-cvis-workflow, pacs-vna]
+    categories: [pacs-vna, ris-cvis-workflow]
     deployment_models: [on-premises, hybrid, private-cloud]
     confidence: B
     source: "https://cardiovascularbusiness.com/topics/health-it/cvis/2026-best-klas-rankings-examine-cardiovascular-information-systems-hemodynamic-solutions (INFINITT Cardiology Suite Best in KLAS CVIS 2026, score 89; INFINITT also a PACS vendor per market listings)"
@@ -590,7 +579,7 @@ vendors:
     name: Infor (Koch Industries)
     categories: [hospital-erp]
     deployment_models: [public-cloud, software-as-a-service, on-premises]
-    confidence: B
+    confidence: C
     source: "https://www.erpresearch.com/en-us/best-erp-for-healthcare"
     note: "CloudSuite Healthcare is the most common supply-chain/financials ERP alongside Epic or Oracle Health in large systems; new deployments are AWS-hosted, but large legacy Lawson estates remain customer-hosted."
   - id: innovaccer
@@ -601,7 +590,7 @@ vendors:
     source: "https://innovaccer.com/products/population-health-analytics"
     note: "Healthcare AI/data-activation platform with population health analytics for providers and payers; 2026 Databricks partnership confirms cloud-native delivery — hardware pull is operator-side."
   - id: intelerad
-    name: Intelerad Medical Systems
+    name: Intelerad Medical Systems (GE HealthCare)
     categories: [pacs-vna]
     deployment_models: [on-premises, private-cloud, software-as-a-service, hybrid]
     confidence: C
@@ -650,14 +639,14 @@ vendors:
     name: Keyence Corporation
     categories: [automated-visual-inspection]
     deployment_models: [edge, on-premises]
-    confidence: B
+    confidence: C
     source: "https://intuitionlabs.ai/articles/computer-vision-in-pharmaceutical-quality-control-vendors-applications-and-trends"
     note: "Deep-learning-enabled machine vision for automated QC inspection"
   - id: koerber
     name: Körber AG (Körber Pharma / Werum)
-    categories: [mes-ebr, warehouse-cold-chain, automated-visual-inspection]
+    categories: [automated-visual-inspection, mes-ebr, warehouse-cold-chain]
     deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service, edge]
-    confidence: B
+    confidence: C
     source: "https://intuitionlabs.ai/articles/pharma-mes-software-guide"
     note: "Werum PAS-X is the de facto MES/EBR standard; K.Motion WMS for pharma warehousing; Seidenader for automated visual inspection — multi-category on-prem/edge anchor"
   - id: komodo-health
@@ -746,7 +735,7 @@ vendors:
     note: "Cloud-native continuous video AI for inpatient monitoring with in-room edge cameras; challenger — cloud-led architecture tempers customer-prem pull."
   - id: luma-health
     name: Luma Health, Inc.
-    categories: [patient-portal-engagement, patient-access-scheduling]
+    categories: [patient-access-scheduling, patient-portal-engagement]
     deployment_models: [software-as-a-service]
     confidence: C
     source: "https://www.appintent.com/software/health/patient-engagement-solutions/"
@@ -760,9 +749,9 @@ vendors:
     note: "Manhattan Active WMS for high-SKU regulated distribution"
   - id: mastercontrol
     name: MasterControl Solutions, Inc.
-    categories: [mes-ebr, eqms-calibration]
-    deployment_models: [software-as-a-service, private-cloud, on-premises]
-    confidence: B
+    categories: [eqms-calibration, mes-ebr]
+    deployment_models: [software-as-a-service, vendor-managed]
+    confidence: C
     source: "https://www.marketsandmarkets.com/ResearchInsight/pharmaceutical-quality-management-software-market.asp"
     note: "Leading pharma eQMS (document control, CAPA, training) plus Mx MES (Manufacturing Excellence); ARR figure unverifiable so removed"
   - id: medical-informatics-corp
@@ -810,7 +799,7 @@ vendors:
     name: Microsoft (Nuance DAX Copilot)
     categories: [cdss-clinical-ai]
     deployment_models: [public-cloud, software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://www.iatrox.com/compare/abridge-vs-nuance-dax (DAX Copilot — Microsoft-owned incumbent ambient documentation, deeply integrated into Epic; Azure-hosted)"
     note: "co-sell excluded per playbook §5.4"
   - id: midmark
@@ -835,9 +824,9 @@ vendors:
     source: "https://www.nextgen.com/solutions/interoperability/mirth-integration-engine"
     note: "Mirth Connect powers roughly one third of US public HIEs; moved to a commercial license from v4.6 (2025), typically self-hosted on customer infrastructure."
   - id: nuvolo
-    name: Nuvolo
+    name: Nuvolo (Trane Technologies)
     categories: [healthcare-cmms]
-    deployment_models: [software-as-a-service, private-cloud]
+    deployment_models: [software-as-a-service]
     confidence: B
     source: "https://24x7mag.com/medical-equipment/software/cmms/cmms-competitors-standardize-medical-device-failure-codes/"
     note: "Connected Workplace CMMS built natively on ServiceNow; cloud-delivered, minimal customer hardware pull."
@@ -852,7 +841,7 @@ vendors:
     name: Omnicell, Inc.
     categories: [pharmacy-automation]
     deployment_models: [on-premises, edge, hybrid, software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
     note: "Top-3 pharmacy automation vendor (XT cabinets, central pharmacy robotics); embedded/edge controllers plus on-prem central servers, management tier shifting hybrid."
   - id: openclinica
@@ -861,10 +850,9 @@ vendors:
     deployment_models: [on-premises, private-cloud, software-as-a-service]
     confidence: B
     source: "https://www.openclinica.com/community-edition-open-source-edc-2/ and https://github.com/OpenClinica/OpenClinica"
-    note: "Open-source EDC/CDM challenger with ~10.8% CTMS-space share per 6sense-derived rankings. Community Edition is explicitly self-hosted for on-prem/private-cloud data-sovereignty deployments (strong academic and public-health installed base); Enterprise edition is vendor SaaS. One of the few clinical-suite vendors that directly pulls customer iron."
   - id: optel-group
     name: OPTEL Group
-    categories: [serialization-track-trace, automated-visual-inspection]
+    categories: [automated-visual-inspection, serialization-track-trace]
     deployment_models: [on-premises, edge, private-cloud, hybrid]
     confidence: C
     source: "https://tracxn.com/d/trending-business-models/startups-in-pharma-track-trace-solutions/__VcKWxlyAfHWeVH8Wv5wu371mzC6AtWy-hxkVyI0gMD8/companies"
@@ -880,7 +868,7 @@ vendors:
     name: Oracle Health (Cerner)
     categories: [ehr-emr-core, hospital-erp, lis, patient-portal-engagement, rcm-billing-claims]
     deployment_models: [hybrid, on-premises, private-cloud, public-cloud, software-as-a-service, vendor-managed]
-    confidence: B
+    confidence: C
     source: "https://www.softwareworld.co/laboratory-information-systems-software/"
     note: "Millennium PathNet, established high-volume/reference-lab LIS. On-prem and hosted-private footprints; Oracle steering toward vendor-managed OCI over time."
   - id: oracle-life-sciences
@@ -919,26 +907,25 @@ vendors:
     source: "https://www.ovation.io/deciding-between-on-premises-or-cloud-based-lims/"
     note: "Cloud-native molecular/NGS LIMS (Series A funded, real diagnostic-lab customers). Vendor site markets a cloud-only SaaS platform; the cited page is a generic educational blog and does not substantiate any on-prem/private-cloud offering, so deployment corrected to SaaS-only and confidence downgraded."
   - id: paige-ai
-    name: Paige
+    name: Paige (Tempus AI)
     categories: [digital-pathology]
     deployment_models: [software-as-a-service, private-cloud, on-premises]
     confidence: B
     source: "https://link.springer.com/article/10.1007/s00428-026-04480-8"
     note: "AI-first computational pathology (Paige Prostate, first FDA-authorized AI in pathology); primarily SaaS but deploys private-cloud/on-prem GPU inference for PHI-constrained labs."
+  - id: pathai
+    name: PathAI
+    categories: [digital-pathology]
+    deployment_models: [software-as-a-service, on-premises, hybrid]
+    confidence: B
+    source: "https://www.pathai.com — clinical AI pathology (AISight); co-leads with Paige/Ibex"
   - id: philips
-    name: Philips
-    categories: [digital-pathology, medical-device-integration]
+    name: Philips (Koninklijke Philips N.V.)
+    categories: [advanced-visualization-3d, digital-pathology, icu-central-monitoring, medical-device-integration, pacs-vna, ris-cvis-workflow, telehealth-platform]
     deployment_models: [edge, hybrid, on-premises, private-cloud]
     confidence: B
     source: "https://link.springer.com/article/10.1007/s00428-026-04480-8"
     note: "IntelliSite Pathology Solution — first FDA 510(k) clearance for primary diagnosis (2017), maintained through 2025. Flagship WSI ingest + tiered storage on customer iron."
-  - id: philips-healthcare
-    name: Philips (Koninklijke Philips N.V.)
-    categories: [icu-central-monitoring, ris-cvis-workflow, telehealth-platform, advanced-visualization-3d]
-    deployment_models: [on-premises, hybrid, private-cloud, edge]
-    confidence: B
-    source: "https://www.usa.philips.com/healthcare/product/HCNOCTN171/patient-information-center-ix-pic-ix (PIC iX central monitoring, Capsule MDIP clinical surveillance, eICU tele-ICU, IntelliSpace Cardiovascular ranked in 2026 KLAS CVIS)"
-    note: "central-station servers spec'd through Philips as part of FDA-cleared system — OEM design-win motion per taxonomy"
   - id: phoenix-data-systems
     name: Phoenix Data Systems
     categories: [healthcare-cmms]
@@ -1004,7 +991,7 @@ vendors:
     note: "Market-leading integration engines (Rhapsody + Best-in-KLAS Corepoint), explicitly available on premises and as cloud service; classic clustered HA customer-site deployment."
   - id: roche
     name: Roche Diagnostics
-    categories: [lab-middleware-automation, digital-pathology]
+    categories: [digital-pathology, lab-middleware-automation]
     deployment_models: [on-premises, private-cloud, hybrid]
     confidence: B
     source: "https://diagnostics.roche.com/us/en/products/product-category/lab-type/pathology-lab/digital-pathology.html"
@@ -1013,7 +1000,7 @@ vendors:
     name: Rockwell Automation, Inc.
     categories: [mes-ebr, scada-dcs]
     deployment_models: [on-premises, edge, hybrid, private-cloud]
-    confidence: B
+    confidence: C
     source: "https://processcontrolguide.com/dcs-in-pharmaceutical/"
     note: "PharmaSuite MES plus PlantPAx DCS / FactoryTalk — customer-iron on-prem control and execution"
   - id: sap
@@ -1053,7 +1040,7 @@ vendors:
     note: "EcoStruxure Building Operation for hospital campuses; AI/IoT analytics tiers layering on on-prem controllers."
   - id: schrodinger
     name: Schrodinger, Inc.
-    categories: [comp-chem-simulation, ai-drug-discovery]
+    categories: [ai-drug-discovery, comp-chem-simulation]
     deployment_models: [on-premises, private-cloud, hybrid, public-cloud]
     confidence: B
     source: "https://www.schrodinger.com/"
@@ -1094,13 +1081,13 @@ vendors:
     note: "CPU-efficient secondary-analysis (alignment/variant calling); 30x WGS in ~1hr on a 64-core server. Strong on-prem HPC pull."
   - id: seqera
     name: Seqera Labs, S.L.
-    categories: [bioinformatics-secondary, ai-hpc-orchestration]
+    categories: [ai-hpc-orchestration, bioinformatics-secondary]
     deployment_models: [on-premises, hybrid, public-cloud, software-as-a-service]
     confidence: B
     source: "https://seqera.io/blog/best-practices-deploying-pipelines-with-hpc-workload-managers/"
     note: "Nextflow + Seqera Platform orchestrate genomics/bioinformatics pipelines over on-prem Slurm/LSF/Grid Engine clusters; workflow layer that sizes cluster concurrency."
   - id: siemens
-    name: Siemens (Smart Infrastructure)
+    name: Siemens AG (Smart Infrastructure / Digital Industries)
     categories: [hospital-bms, mes-ebr, pat-process-twin, scada-dcs]
     deployment_models: [edge, hybrid, on-premises, private-cloud]
     confidence: B
@@ -1166,14 +1153,13 @@ vendors:
     name: Stryker
     categories: [medical-device-integration, or-surgical-video, smart-room-ambient-ai]
     deployment_models: [edge, hybrid, on-premises]
-    confidence: B
+    confidence: C
     source: "https://apella.io/blog/exploring-the-or-status-camera-landscape-stryker-karl-storz-sst-or-black-box-artisight-proximie-and-apella (Endosuite integrated OR with 350+ rooms installed; ~80% of surgical video market shared with Karl Storz)"
-    note: "Vocera clinical communication/alarm platform plus care.ai (acquired Sept 2024) smart-room ambient sensors and virtual care; care.ai edge sensor fleet is a direct edge-compute hardware pull."
   - id: swisslog-healthcare
     name: Swisslog Healthcare (KUKA AG)
     categories: [pharmacy-automation]
     deployment_models: [on-premises, edge, hybrid]
-    confidence: B
+    confidence: C
     source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
     note: "Omnia robotic pharmacy automation plus pneumatic-tube transport; heavily on-prem/edge deployments in hospital pharmacies."
   - id: symplr
@@ -1208,13 +1194,19 @@ vendors:
     name: TeleTracking Technologies, Inc.
     categories: [capacity-command-center]
     deployment_models: [on-premises, hybrid, software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://www.fortunebusinessinsights.com/ai-in-patient-flow-management-market-118105"
     note: "Category pioneer in real-time bed visibility, transfer centers, and command centers; large legacy on-prem installed base migrating to TeleTracking IQ cloud."
+  - id: tempus
+    name: Tempus AI
+    categories: [clinical-genomics-reporting, rwd-rwe-analytics]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.tempus.com — multi-modal real-world data + clinical genomics platform"
   - id: terarecon
     name: TeraRecon (ConcertAI)
     categories: [advanced-visualization-3d]
-    deployment_models: [on-premises, public-cloud, hybrid]
+    deployment_models: [on-premises, public-cloud, hybrid, software-as-a-service, vendor-managed]
     confidence: B
     source: "https://www.diagnosticimaging.com/view/advanced-visualization-aims-expand-enterprise (named among five stand-out advanced visualization vendors; server-side rendering with thin-client viewers)"
   - id: thermo-fisher-scientific
@@ -1228,7 +1220,7 @@ vendors:
     name: TraceLink Inc.
     categories: [serialization-track-trace]
     deployment_models: [software-as-a-service, public-cloud]
-    confidence: B
+    confidence: C
     source: "https://intuitionlabs.ai/articles/pharmaceutical-serialization-software-regulations"
     note: "co-sell excluded per playbook §5.4 — cloud-locked SaaS supply-chain network; listed for registry completeness"
   - id: trinetx
@@ -1240,7 +1232,7 @@ vendors:
     note: "Federated clinical research network linking health-system EHR data to pharma sponsors; federated model implies data nodes at member health systems. Majority-owned by The Carlyle Group since 2020 (strategic growth investment); the previously drafted Roche acquisition claim was unverifiable and has been removed. Confidence C: secondary source only."
   - id: trubridge
     name: TruBridge, Inc. (formerly CPSI)
-    categories: [rcm-billing-claims, him-coding]
+    categories: [him-coding, rcm-billing-claims]
     deployment_models: [on-premises, software-as-a-service, vendor-managed]
     confidence: B
     source: "https://saasrat.com/products/trubridge ; https://www.businesswire.com/news/home/20231004536696/en"
@@ -1256,7 +1248,7 @@ vendors:
     name: UKG Inc.
     categories: [workforce-management]
     deployment_models: [software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://peoplemanagingpeople.com/tools/best-workforce-management-software-for-healthcare/"
     note: "Market-leading suite (ex-Kronos) for scheduling, time/attendance, payroll in large health systems. SaaS delivered from UKG-operated data centers (migrating to Google Cloud) — operator-iron angle; legacy on-prem Workforce Central is sunset."
   - id: vaisala
@@ -1276,7 +1268,7 @@ vendors:
     name: Veeva Systems Inc.
     categories: [clinical-trial-suite, eqms-calibration, pv-regulatory-information]
     deployment_models: [public-cloud, software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://www.marketsandmarkets.com/ResearchInsight/pharmaceutical-quality-management-software-market.asp"
     note: "co-sell excluded per playbook §5.4 — Vault Quality is cloud-locked (AWS-committed) SaaS; listed for registry completeness"
   - id: virtusense
@@ -1288,7 +1280,7 @@ vendors:
     note: "LiDAR-based ambient fall-prevention AI (VSTAlert) processing at the edge without viewable patient imagery."
   - id: visage-imaging
     name: Visage Imaging (Pro Medicus)
-    categories: [pacs-vna, advanced-visualization-3d]
+    categories: [advanced-visualization-3d, pacs-vna]
     deployment_models: [on-premises, public-cloud, hybrid]
     confidence: B
     source: "https://intuitionlabs.ai/articles/enterprise-pacs-klas-comparison and https://www.diagnosticimaging.com/view/advanced-visualization-aims-expand-enterprise (Visage 7 enterprise imaging gaining KLAS ground; named among five stand-out advanced-visualization vendors; server-side GPU streaming architecture)"
@@ -1307,7 +1299,7 @@ vendors:
     source: "https://www.waystar.com/our-platform/"
     note: "Cloud-native claims/denials/payments platform, AI denial prevention; recognized RCM market leader. Cloud-locked SaaS; co-sell excluded per playbook §5.4."
   - id: wind-river
-    name: Wind River Systems (VxWorks)
+    name: Wind River (Aptiv)
     categories: [samd-embedded-oem-platform]
     deployment_models: [edge]
     confidence: B
@@ -1323,7 +1315,7 @@ vendors:
     name: Workday, Inc.
     categories: [hospital-erp]
     deployment_models: [software-as-a-service]
-    confidence: B
+    confidence: C
     source: "https://www.erpresearch.com/compare/oracle-erp-cloud-vs-workday-for-healthcare"
     note: "Chosen by large, people-intensive health systems for finance/HR modernization. SaaS-only, but Workday operates its own data centers — operator-iron rather than customer-iron opportunity."
   - id: yokogawa
