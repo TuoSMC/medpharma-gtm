@@ -145,6 +145,7 @@ tr:last-child td{border-bottom:0}
   <section class="tab" id="tab-triggers"></section>
   <section class="tab" id="tab-scoring"></section>
   <section class="tab" id="tab-accounts"></section>
+  <section class="tab" id="tab-vendors"></section>
 </main>
 <script>
 const DATA = /*__DATA__*/null;
@@ -171,7 +172,7 @@ $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.st
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
 
 // ---- tabs ----
-const TABS=[['taxonomy','Taxonomy'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts']];
+const TABS=[['taxonomy','Taxonomy'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors']];
 const nav=$('#nav');
 TABS.forEach(([id,label],i)=>{
   const b=el('button',{class:i===0?'on':''},label);
@@ -320,6 +321,44 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       root.append(card);
     });
   });
+})();
+
+// ================= VENDORS (enriched registry) =================
+(function(){
+  const root=$('#tab-vendors'), vs=(DATA.vendors.vendors||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const conf=(DATA.vendors.version)||'?';
+  const cnt=el('span',{class:'count'});
+  const q=el('input',{type:'search',placeholder:'search vendor / HQ / leader / category...'});
+  root.append(el('div',{class:'rollup'},'Vendor registry v'+conf+' — '+vs.length+' vendors, web-researched + adversarially verified. Every claim sourced; unverifiable fields are honest nulls / "not publicly disclosed" (§8).'));
+  root.append(el('div',{class:'filters'},q,cnt));
+  const host=el('div',{});root.append(host);
+  function excl(v){return "exclud" in Object.assign({},v)?false:/exclud/i.test(v.note||'');}
+  function card(v){
+    const c=el('div',{class:'card'});c.style.marginBottom='8px';
+    const h=el('div',{class:'row'},el('h3',{style:'margin:0'},v.name));
+    if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
+    c.append(h);
+    const kv=el('dl',{class:'kv'});
+    const add=(k,x)=>{if(x==null||x==='')return;kv.append(el('dt',{},k),el('dd',{},String(x)));};
+    add('HQ',v.headquarters); add('Founded',v.founded); add('Leadership',v.leadership);
+    add('Market position',v.market_position); add('Deployment',(v.deployment_models||[]).join(', '));
+    c.append(kv);
+    const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>seg.append(el('span',{class:'chip'},x)));c.append(seg);
+    if(v.history)c.append(el('div',{class:'notes'},v.history));
+    const srcs=(v.sources&&v.sources.length)?v.sources:(v.source?[v.source]:[]);
+    if(srcs.length){const sr=el('div',{class:'row'});sr.append(el('span',{class:'tagk'},'sources'));
+      srcs.forEach(u=>{const isurl=/^https?:\/\//.test(u);
+        sr.append(isurl?el('a',{href:u,target:'_blank',class:'pill'},u.replace(/^https?:\/\//,'').split('/')[0]):el('span',{class:'pill'},u.slice(0,40)));});
+      c.append(sr);}
+    return c;
+  }
+  function render(){
+    const s=q.value.toLowerCase();
+    const shown=vs.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,(v.categories||[]).join(' ')]).toLowerCase().includes(s));
+    clear(host);shown.forEach(v=>host.append(card(v)));
+    cnt.textContent=shown.length+' / '+vs.length+' shown';
+  }
+  q.oninput=render;render();
 })();
 
 // ================= PLAYS =================
