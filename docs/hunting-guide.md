@@ -4,7 +4,7 @@
 >
 > **Gate question first (CLAUDE.md §3): who controls the infrastructure behind the software?** No answer → not in pipeline.
 
-**Opportunity scale** 1 minimal · 2 modest · 3 significant · 4 flagship. **Sizing** node < rack < cluster. **Buyer motions**: customer = direct · operator = ISV/co-sell · OEM = design-win · hyperscaler = out of scope.
+**Opportunity scale** 1 minimal · 2 modest · 3 significant · 4 flagship. **Sizing** node < rack < cluster. **Buyer motions**: customer = direct · operator = ISV/co-sell · OEM = design-win · hyperscaler = out of scope. *What to quote* is the category's aggregate hardware pull (per-buyer split lives in the taxonomy). Vendors marked ⊘ are co-sell-excluded per §5.4 (cloud-locked clinical SaaS).
 
 ## 1 · The three plays — ranked target maps
 
@@ -19,9 +19,8 @@
 | **PACS / VNA (Medical Imaging Archive)** <br><small>pacs-vna</small> | 4 | 3 | · | nvme-performance-storage (rack), capacity-archive-storage (cluster) | Agfa HealthCare (Agfa-Gevaert Group), FUJIFILM Healthcare Americas Corporation, GE HealthCare, INFINITT Healthcare, Intelerad Medical Systems (GE HealthCare), Merative (Merge Healthcare), Philips (Koninklijke Philips N.V.), Sectra, Visage Imaging (Pro Medicus) |
 | **Advanced Visualization / 3D Image Post-Processing** <br><small>advanced-visualization-3d</small> | 3 | 2 | · | gpu-server (rack) | Canon Medical Systems (Canon Medical Informatics / Vital Images), Circle Cardiovascular Imaging (Circle CVI), GE HealthCare, Philips (Koninklijke Philips N.V.), Siemens Healthineers, TeraRecon (ConcertAI), Visage Imaging (Pro Medicus), Ziosoft |
 | **OR Management & Surgical Video Platform** <br><small>or-surgical-video</small> | 3 | 2 | 2 | gpu-server (node), capacity-archive-storage (rack), edge-industrial (node) | Artisight, Caresyntax, KARL STORZ, Stryker |
-| **Radiation Oncology — Treatment Planning (TPS) & Oncology Information System (OIS)** <br><small>radiation-oncology-tps-ois</small> | 3 | 1 | · | gpu-server (rack), high-availability-redundant (node) | Brainlab AG, Elekta AB, RaySearch Laboratories AB, Varian Medical Systems (a Siemens Healthineers company) |
+| **Radiation Oncology — Treatment Planning (TPS) & Oncology Information System (OIS)** <br><small>radiation-oncology-tps-ois</small> | 3 | 1 | · | gpu-server (rack), capacity-archive-storage (rack), high-availability-redundant (node) | Brainlab AG, Elekta AB, RaySearch Laboratories AB, Varian Medical Systems (a Siemens Healthineers company) |
 | **Radiology & Cardiology Information Systems (RIS/CVIS)** <br><small>ris-cvis-workflow</small> | 3 | 2 | · | capacity-archive-storage (rack) | FUJIFILM Healthcare Americas Corporation, INFINITT Healthcare, Merative (Merge Healthcare), Philips (Koninklijke Philips N.V.), ScImage, Siemens Healthineers |
-| **SaMD & Embedded Device Software Platform (OEM)** <br><small>samd-embedded-oem-platform</small> | 3 | · | 3 | gpu-server (rack), high-performance-computing-cpu (rack), edge-industrial (node) | BlackBerry QNX, Green Hills Software (INTEGRITY), NVIDIA Corporation (IGX / Holoscan), Wind River (Aptiv) |
 
 ### Genomics / Bioinformatics / Research AI  (`play-b`)
 *Hardware anchor:* HPC nodes (CPU-dense), GPU training servers, NVMe scratch tiers + object storage
@@ -29,14 +28,11 @@
 
 | Category | Cust | Oper | OEM | What to quote (component · scale) | Co-sell / incumbent vendors |
 |---|:--:|:--:|:--:|---|---|
-| **AI Drug Discovery Platform** <br><small>ai-drug-discovery</small> | 4 | 4 | · | gpu-server (cluster), nvme-performance-storage (rack) | Cadence Design Systems, Inc. (OpenEye), Chemical Computing Group ULC, Cresset Group, NVIDIA Corporation (IGX / Holoscan), Schrodinger, Inc. |
-| **Bioinformatics Secondary/Tertiary Analysis** <br><small>bioinformatics-secondary</small> | 4 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster), nvme-performance-storage (rack), capacity-archive-storage (cluster) | DNAnexus, Inc., Illumina, NVIDIA Corporation (IGX / Holoscan), QIAGEN Digital Insights, Sentieon Inc., Seqera Labs, S.L. |
+| **AI Drug Discovery Platform** <br><small>ai-drug-discovery</small> | 4 | 4 | · | gpu-server (cluster), nvme-performance-storage (rack) | Cadence Design Systems, Inc. (OpenEye), Chemical Computing Group ULC, Cresset Group, NVIDIA Corporation, Schrodinger, Inc. |
+| **Bioinformatics Secondary/Tertiary Analysis** <br><small>bioinformatics-secondary</small> | 4 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster), nvme-performance-storage (rack), capacity-archive-storage (cluster) | DNAnexus, Inc., Illumina, NVIDIA Corporation, QIAGEN Digital Insights, Sentieon Inc., Seqera Labs, S.L. |
 | **Computational Chemistry / Molecular Modeling & Simulation** <br><small>comp-chem-simulation</small> | 4 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster), nvme-performance-storage (rack), high-memory (rack) | Cadence Design Systems, Inc. (OpenEye), Chemical Computing Group ULC, Cresset Group, Dassault Systemes SE (BIOVIA), Schrodinger, Inc. |
 | **Structural Biology / Cryo-EM Image Processing** <br><small>cryo-em-structural-bio</small> | 4 | 2 | · | gpu-server (rack), nvme-performance-storage (rack), capacity-archive-storage (cluster), high-memory (node) | Gatan, Inc. (AMETEK), Structura Biotechnology Inc., Thermo Fisher Scientific Inc. |
-| **AI / HPC Workload Orchestration & MLOps (cluster scheduling)** <br><small>ai-hpc-orchestration</small> | 3 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster) | Altair Engineering (Siemens), Hewlett Packard Enterprise Company, IBM Corporation, NVIDIA Corporation (IGX / Holoscan), Seqera Labs, S.L. |
-| **RWD/RWE Analytics Platform** <br><small>rwd-rwe-analytics</small> | 2 | 3 | · | gpu-server (rack), capacity-archive-storage (cluster) | Aetion, Inc. (a Datavant company), IQVIA Holdings Inc., Komodo Health, Inc., Tempus AI, TriNetX, LLC, Truveta, Inc. |
-| **NGS Wet-Lab LIMS (run & sample tracking)** <br><small>ngs-lab-lims</small> | 2 | 2 | · | — | Illumina, L7 Informatics, AgileBio (LabCollector), Ovation.io |
-| **Clinical Genomics Interpretation & Reporting** <br><small>clinical-genomics-reporting</small> | 1 | 2 | · | — | Congenica (SeqOne Genomics), Fabric Genomics (GeneDx), Golden Helix, QIAGEN Digital Insights, SOPHiA GENETICS, Tempus AI |
+| **AI / HPC Workload Orchestration & MLOps (cluster scheduling)** <br><small>ai-hpc-orchestration</small> | 3 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster) | Altair Engineering (Siemens), Hewlett Packard Enterprise Company, IBM Corporation, NVIDIA Corporation, Seqera Labs, S.L. |
 
 ### GMP Manufacturing Edge  (`play-c`)
 *Hardware anchor:* Short-depth / industrial edge servers, Redundant tower/rack pairs, DR storage
@@ -50,7 +46,7 @@
 | **Plant Historian (Time-Series Data)** <br><small>plant-historian</small> | 3 | · | · | nvme-performance-storage (node), capacity-archive-storage (rack) | AspenTech (Emerson), AVEVA (Schneider Electric), Canary Labs, Inc., GE Vernova (Proficy) |
 | **SCADA / DCS (Process Control)** <br><small>scada-dcs</small> | 3 | · | · | edge-industrial (node), high-availability-redundant (node) | AVEVA (Schneider Electric), Emerson Electric Co., Honeywell, Rockwell Automation, Inc., Siemens AG (Smart Infrastructure / Digital Industries), Yokogawa Electric Corporation |
 | **QC Lab Informatics (LIMS / Chromatography Data)** <br><small>qc-lims-cds</small> | 2 | 1 | · | capacity-archive-storage (node), disaster-recovery-backup (node) | Agilent Technologies, Inc., LabVantage Solutions, Inc., LabWare, Inc., STARLIMS Corporation, Thermo Fisher Scientific Inc., Waters Corporation |
-| **Serialization / Track-and-Trace (L4-L5)** <br><small>serialization-track-trace</small> | 2 | 2 | · | high-availability-redundant (node) | Antares Vision Group S.p.A., OPTEL Group, SAP SE, Systech International (a Dover company), TraceLink Inc. |
+| **Serialization / Track-and-Trace (L4-L5)** <br><small>serialization-track-trace</small> | 2 | 2 | · | high-availability-redundant (node) | Antares Vision Group S.p.A., OPTEL Group, SAP SE, Systech International (a Dover company), TraceLink Inc. ⊘ |
 | **Warehouse & Cold-Chain Management (WMS / Environmental Monitoring)** <br><small>warehouse-cold-chain</small> | 2 | 1 | · | edge-industrial (node) | Blue Yonder Group, Inc., Ellab A/S, Körber AG (Körber Pharma / Werum), Manhattan Associates, Inc., SAP SE, Vaisala Oyj |
 
 ## 2 · Cross-play standalone deals (reachable-HOT, outside the three plays)
@@ -67,6 +63,8 @@
 | **Medical Device Integration & Alarm Management** <br><small>medical-device-integration</small> | 3 | 1 | · | nvme-performance-storage (rack), edge-industrial (node), high-availability-redundant (node) | Hospital integration-engine high-availability pairs; standalone clinical-information-technology infrastructure deal |
 | **Payer Core Administration (Claims Adjudication)** <br><small>payer-core-admin</small> | 3 | 3 | · | nvme-performance-storage (rack), high-availability-redundant (rack), disaster-recovery-backup (rack) | Payer claims core; payer segment sits outside the three provider/pharma plays |
 | **Payer Care/Utilization Management & Fraud Analytics** <br><small>payer-um-fraud-analytics</small> | 3 | 2 | · | high-performance-computing-cpu (rack) | Payer analytics; payer segment sits outside the three provider/pharma plays |
+| **RWD/RWE Analytics Platform** <br><small>rwd-rwe-analytics</small> | 2 | 3 | · | gpu-server (rack), capacity-archive-storage (cluster) | Operator-side real-world-data / claims analytics platform (warehouse + software-as-a-service); a data-platform co-sell, not the sequencing / research-AI motion of Play B |
+| **SaMD & Embedded Device Software Platform (OEM)** <br><small>samd-embedded-oem-platform</small> | 3 | · | 3 | gpu-server (rack), high-performance-computing-cpu (rack), edge-industrial (node) | OEM embedded design-win — medtech / in-vitro-diagnostics device software; a per-unit board/edge bill-of-materials channel deal, not a hospital imaging/genomics/manufacturing play |
 | **Smart-Room Ambient Sensing & Clinical Video AI** <br><small>smart-room-ambient-ai</small> | 3 | 3 | 2 | gpu-server (rack), capacity-archive-storage (rack), edge-industrial (node) | Clinical video artificial intelligence adjacent to Play A but outside the fixed three-play scope; pursue as a standalone ward-video edge deal alongside the imaging estate |
 
 ## 3 · Master HOT lists
@@ -95,7 +93,7 @@
 - **3** [C] `plant-historian` — Plant Historian (Time-Series Data)
 - **3** [A] `radiation-oncology-tps-ois` — Radiation Oncology — Treatment Planning (TPS) & Oncology Information System (OIS)
 - **3** [A] `ris-cvis-workflow` — Radiology & Cardiology Information Systems (RIS/CVIS)
-- **3** [A] `samd-embedded-oem-platform` — SaMD & Embedded Device Software Platform (OEM)
+- **3** [cross-play] `samd-embedded-oem-platform` — SaMD & Embedded Device Software Platform (OEM)
 - **3** [C] `scada-dcs` — SCADA / DCS (Process Control)
 - **3** [cross-play] `smart-room-ambient-ai` — Smart-Room Ambient Sensing & Clinical Video AI
 
@@ -112,44 +110,39 @@
 - **3** [cross-play] `lis` — Laboratory Information System (LIS)
 - **3** [A] `pacs-vna` — PACS / VNA (Medical Imaging Archive)
 - **3** [cross-play] `payer-core-admin` — Payer Core Administration (Claims Adjudication)
-- **3** [B] `rwd-rwe-analytics` — RWD/RWE Analytics Platform
+- **3** [cross-play] `rwd-rwe-analytics` — RWD/RWE Analytics Platform
 - **3** [cross-play] `smart-room-ambient-ai` — Smart-Room Ambient Sensing & Clinical Video AI
 
-### OEM design-wins — 8 categories (OEM design-win)
+### OEM design-wins — 3 categories (OEM design-win)
 - **3** `automated-visual-inspection` — Automated Visual Inspection / Machine-Vision QC (deep learning)
 - **3** `icu-central-monitoring` — ICU Central Monitoring & Clinical Surveillance
 - **3** `samd-embedded-oem-platform` — SaMD & Embedded Device Software Platform (OEM)
-- **2** `digital-pathology` — Digital Pathology Platform (WSI workflow + AI-assisted diagnosis)
-- **2** `lab-middleware-automation` — Lab Middleware & Automation Orchestration
-- **2** `or-surgical-video` — OR Management & Surgical Video Platform
-- **2** `pharmacy-automation` — Pharmacy Automation & Medication Management
-- **2** `smart-room-ambient-ai` — Smart-Room Ambient Sensing & Clinical Video AI
 
 ## 4 · Trigger → action index
 
-| Signal | Urgency | Window | Opens (categories) | Play | Action |
-|---|---|---|---|:--:|---|
-| **New sequencer purchase** | critical | 90-day hardware window post-purchase | `bioinformatics-secondary` | B | Immediate outreach — sequencer needs compute+storage behind it (Play B) |
-| **Cyber incident / ransomware** | critical | 0-6 months post-incident (budget unlocked) | `ehr-emr-core`, `pacs-vna`, `hospital-erp` | — | DR/backup/rebuild conversation — air-gapped backup, immutable storage angle |
-| **New EHR go-live** | high | 6-18 months before go-live (infra buy happens early) | `ehr-emr-core`, `medical-device-integration` | — | Map infra operator; approach Infrastructure Owner re: compute/storage/VDI refresh |
-| **FDA NDA/BLA approval** | high | 0-6 months post-approval (commercial scale-up) | `mes-ebr`, `scada-dcs`, `serialization-track-trace`, `plant-historian` | C | Manufacturing scale-up imminent — enter via Play C (MES/plant infra) |
-| **Cloud repatriation signals** | high | Budget cycle following the statement | `ai-hpc-orchestration`, `bioinformatics-secondary`, `clinical-data-lakehouse`, `ehr-emr-core`, `pacs-vna` | A,B | TCO conversation with Infrastructure Owner + Economic Buyer |
-| **Pharma AI-strategy announcement** | high | 3-12 months post-announcement | `ai-drug-discovery`, `ai-hpc-orchestration`, `comp-chem-simulation` | B | Probe: cloud or on-prem? If on-prem/hybrid → Play B GPU cluster pitch |
-| **Plant modernization or new plant** | high | 12-24 months before validation | `mes-ebr`, `scada-dcs`, `plant-historian`, `automated-visual-inspection` | C | Play C entry — automation SI mapping, MES vendor identification |
-| **FDA IND filing** | medium | 0-12 months post-filing | `ai-drug-discovery`, `bioinformatics-secondary` | B | Flag account; R&D compute demand rising — probe genomics/AI workloads (Play B) |
-| **Hospital M&A / consolidation** | medium | 12-24 months (IT consolidation follows close) | `pacs-vna`, `ehr-emr-core`, `clinical-data-lakehouse` | A | Consolidated datacenter/imaging archive opportunity; find surviving IT org |
-| **New hospital campus / expansion** | medium | 12-36 months before opening | `ehr-emr-core`, `pacs-vna`, `medical-device-integration` | A | New datacenter/edge closets get spec'd early — reach facility IT planning |
-| **Serialization / traceability mandate** | medium | Mandate deadline minus 12-18 months | `serialization-track-trace`, `mes-ebr` | C | Serialization = plant-edge servers per line; bundle with Play C |
-| **Cloud cost pressure** | medium | Budget planning season | `ai-hpc-orchestration`, `clinical-data-lakehouse`, `ehr-emr-core` | B | Soft version of repatriation — plant TCO seed, nurture |
-| **HPC / bioinformatics job postings** | low | Rolling | `bioinformatics-secondary`, `ai-hpc-orchestration` | B | Evidence C only — never 'confirmed installed base'. Add to monitor list, seek corroboration |
-| **KLAS / HIMSS rankings movement** | low | Annual cycles | `ehr-emr-core` | — | EMRAM stage jump = infra investment underway; qualify operator |
+| Signal | Urgency | Window | Opens (category → play / standalone) | Action |
+|---|---|---|---|---|
+| **New sequencer purchase** | critical | 90-day hardware window post-purchase | `bioinformatics-secondary` (B), `ngs-lab-lims` (standalone) | Immediate outreach — sequencer needs compute+storage behind it (Play B) |
+| **Cyber incident / ransomware** | critical | 0-6 months post-incident (budget unlocked) | `ehr-emr-core` (standalone), `pacs-vna` (A), `hospital-erp` (standalone), `scada-dcs` (C), `mes-ebr` (C), `plant-historian` (C), `lis` (standalone) | DR/backup/rebuild conversation — air-gapped backup, immutable storage angle |
+| **New EHR go-live** | high | 6-18 months before go-live (infra buy happens early) | `ehr-emr-core` (standalone), `medical-device-integration` (standalone) | Map infra operator; approach Infrastructure Owner re: compute/storage/VDI refresh |
+| **FDA NDA/BLA approval** | high | 0-6 months post-approval (commercial scale-up) | `mes-ebr` (C), `scada-dcs` (C), `serialization-track-trace` (C), `plant-historian` (C) | Manufacturing scale-up imminent — enter via Play C (MES/plant infra) |
+| **Cloud repatriation signals** | high | Budget cycle following the statement | `ai-hpc-orchestration` (B), `bioinformatics-secondary` (B), `clinical-data-lakehouse` (standalone), `ehr-emr-core` (standalone), `pacs-vna` (A) | TCO conversation with Infrastructure Owner + Economic Buyer |
+| **Pharma AI-strategy announcement** | high | 3-12 months post-announcement | `ai-drug-discovery` (B), `ai-hpc-orchestration` (B), `comp-chem-simulation` (B) | Probe: cloud or on-prem? If on-prem/hybrid → Play B GPU cluster pitch |
+| **Plant modernization or new plant** | high | 12-24 months before validation | `mes-ebr` (C), `scada-dcs` (C), `plant-historian` (C), `automated-visual-inspection` (C) | Play C entry — automation SI mapping, MES vendor identification |
+| **FDA IND filing** | medium | 0-12 months post-filing | `ai-drug-discovery` (B), `bioinformatics-secondary` (B) | Flag account; R&D compute demand rising — probe genomics/AI workloads (Play B) |
+| **Hospital M&A / consolidation** | medium | 12-24 months (IT consolidation follows close) | `pacs-vna` (A), `ehr-emr-core` (standalone), `clinical-data-lakehouse` (standalone) | Consolidated datacenter/imaging archive opportunity; find surviving IT org |
+| **New hospital campus / expansion** | medium | 12-36 months before opening | `ehr-emr-core` (standalone), `pacs-vna` (A), `medical-device-integration` (standalone) | New datacenter/edge closets get spec'd early — reach facility IT planning |
+| **Serialization / traceability mandate** | medium | Mandate deadline minus 12-18 months | `serialization-track-trace` (C), `mes-ebr` (C) | Serialization = plant-edge servers per line; bundle with Play C |
+| **Cloud cost pressure** | medium | Budget planning season | `ai-hpc-orchestration` (B), `clinical-data-lakehouse` (standalone), `ehr-emr-core` (standalone) | Soft repatriation signal — total-cost-of-ownership conversation with Infrastructure Owner + Economic Buyer; nurture |
+| **HPC / bioinformatics job postings** | low | Rolling | `bioinformatics-secondary` (B), `ai-hpc-orchestration` (B) | Evidence C only — never 'confirmed installed base'. Add to monitor list, seek corroboration |
+| **KLAS / HIMSS rankings movement** | low | Annual cycles | `ehr-emr-core` (standalone) | EMRAM stage jump = infra investment underway; qualify operator |
 
 ## 5 · Component pipelines (which categories feed each SMCI product line)
 
 - **gpu-server** — 20 categories, 15 customer-HOT: `ai-drug-discovery`, `bioinformatics-secondary`, `comp-chem-simulation`, `cryo-em-structural-bio`, `digital-pathology`, `imaging-ai-deployment`, `advanced-visualization-3d`, `ai-hpc-orchestration` …
 - **high-performance-computing-cpu** — 8 categories, 7 customer-HOT: `bioinformatics-secondary`, `comp-chem-simulation`, `ai-hpc-orchestration`, `clinical-data-lakehouse`, `pat-process-twin`, `payer-um-fraud-analytics`, `samd-embedded-oem-platform`, `population-health-analytics`
 - **nvme-performance-storage** — 15 categories, 13 customer-HOT: `ai-drug-discovery`, `bioinformatics-secondary`, `comp-chem-simulation`, `cryo-em-structural-bio`, `digital-pathology`, `ehr-emr-core`, `pacs-vna`, `clinical-data-lakehouse` …
-- **capacity-archive-storage** — 16 categories, 9 customer-HOT: `bioinformatics-secondary`, `cryo-em-structural-bio`, `digital-pathology`, `pacs-vna`, `clinical-data-lakehouse`, `or-surgical-video`, `plant-historian`, `ris-cvis-workflow` …
+- **capacity-archive-storage** — 17 categories, 10 customer-HOT: `bioinformatics-secondary`, `cryo-em-structural-bio`, `digital-pathology`, `pacs-vna`, `clinical-data-lakehouse`, `or-surgical-video`, `plant-historian`, `radiation-oncology-tps-ois` …
 - **high-memory** — 2 categories, 2 customer-HOT: `comp-chem-simulation`, `cryo-em-structural-bio`
 - **edge-industrial** — 16 categories, 9 customer-HOT: `imaging-ai-deployment`, `automated-visual-inspection`, `medical-device-integration`, `mes-ebr`, `or-surgical-video`, `pat-process-twin`, `samd-embedded-oem-platform`, `scada-dcs` …
 - **high-availability-redundant** — 16 categories, 9 customer-HOT: `ehr-emr-core`, `imaging-ai-deployment`, `hospital-erp`, `lis`, `medical-device-integration`, `mes-ebr`, `payer-core-admin`, `radiation-oncology-tps-ois` …

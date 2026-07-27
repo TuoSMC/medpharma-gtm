@@ -32,6 +32,11 @@ def main():
     vendors = {v["id"]: v for v in load("vendors.yaml")["vendors"]}
     triggers = load("triggers.yaml")["triggers"]
     plays = {p["id"]: p for p in load("plays.yaml")["plays"]}
+    _ids = [c["id"] for c in tax["categories"]]
+    assert len(_ids) == len(set(_ids)), "duplicate category ids"
+    for _c in tax["categories"]:
+        for _v in _c["vendors"]:
+            assert _v in vendors, f"{_c['id']}: unknown vendor {_v}"
 
     def cust(c):
         return c["hardware_opportunity_by_buyer"].get("customer", 0)
@@ -52,8 +57,15 @@ def main():
         return ", ".join(parts) if parts else "—"
 
     def vends(c):
-        names = [vendors[v]["name"] for v in c["vendors"] if v in vendors]
-        return ", ".join(names) if names else "—"
+        out = []
+        for v in c["vendors"]:
+            if v not in vendors:
+                continue
+            nm = vendors[v]["name"]
+            if "exclud" in (vendors[v].get("note", "") or "").lower():
+                nm += " ⊘"
+            out.append(nm)
+        return ", ".join(out) if out else "—"
 
     def trigs(cid):
         return [t for t in triggers if cid in t.get("related_categories", [])]
@@ -69,7 +81,9 @@ def main():
     L.append("")
     L.append("**Opportunity scale** 1 minimal · 2 modest · 3 significant · 4 flagship. "
              "**Sizing** node < rack < cluster. "
-             "**Buyer motions**: customer = direct · operator = ISV/co-sell · OEM = design-win · hyperscaler = out of scope.")
+             "**Buyer motions**: customer = direct · operator = ISV/co-sell · OEM = design-win · hyperscaler = out of scope. "
+             "*What to quote* is the category's aggregate hardware pull (per-buyer split lives in the taxonomy). "
+             "Vendors marked ⊘ are co-sell-excluded per §5.4 (cloud-locked clinical SaaS).")
     L.append("")
 
     # ---- Part 1: per-play ranked target maps ----
@@ -118,7 +132,7 @@ def main():
         L.append("")
     master("HOT_customer (direct sale)", cust, MOTION["customer"])
     master("HOT_operator (ISV co-sell)", oper, MOTION["operator"])
-    oemlist = sorted((c for c in cats.values() if "original-equipment-manufacturer" in c["hardware_buyer"]),
+    oemlist = sorted((c for c in cats.values() if oem(c) >= 3),
                      key=lambda c: (-oem(c), c["id"]))
     L.append(f"### OEM design-wins — {len(oemlist)} categories ({MOTION['original-equipment-manufacturer']})")
     for c in oemlist:
@@ -128,13 +142,17 @@ def main():
     # ---- Part 4: trigger -> action index ----
     L.append("## 4 · Trigger → action index")
     L.append("")
-    L.append("| Signal | Urgency | Window | Opens (categories) | Play | Action |")
-    L.append("|---|---|---|---|:--:|---|")
+    L.append("| Signal | Urgency | Window | Opens (category → play / standalone) | Action |")
+    L.append("|---|---|---|---|---|")
     urg_rank = {"critical": 0, "high": 1, "medium": 2, "low": 3}
     for t in sorted(triggers, key=lambda t: urg_rank.get(t["urgency"], 9)):
-        rc = ", ".join(f"`{x}`" for x in t.get("related_categories", [])) or "—"
-        rp = ",".join(x[-1].upper() for x in t.get("related_plays", [])) or "—"
-        L.append(f"| **{t['signal']}** | {t['urgency']} | {t['window']} | {rc} | {rp} | {t['action']} |")
+        opens = []
+        for cid in t.get("related_categories", []):
+            c = cats.get(cid)
+            pl = ",".join(x[-1].upper() for x in c["plays"]) if (c and c["plays"]) else "standalone"
+            opens.append(f"`{cid}` ({pl})")
+        oc = ", ".join(opens) or "—"
+        L.append(f"| **{t['signal']}** | {t['urgency']} | {t['window']} | {oc} | {t['action']} |")
     L.append("")
 
     # ---- footer: component pipelines ----

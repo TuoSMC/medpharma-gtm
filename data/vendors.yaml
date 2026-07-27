@@ -831,7 +831,7 @@ vendors:
     source: "https://24x7mag.com/medical-equipment/software/cmms/cmms-competitors-standardize-medical-device-failure-codes/"
     note: "Connected Workplace CMMS built natively on ServiceNow; cloud-delivered, minimal customer hardware pull."
   - id: nvidia
-    name: NVIDIA Corporation (IGX / Holoscan)
+    name: NVIDIA Corporation
     categories: [ai-drug-discovery, ai-hpc-orchestration, bioinformatics-secondary, samd-embedded-oem-platform]
     deployment_models: [edge, hybrid, on-premises, private-cloud, public-cloud]
     confidence: B

@@ -324,8 +324,8 @@ categories:
     supermicro_reachable: true
     hardware_opportunity_by_buyer: {customer: 3, operator: 1}
     infrastructure_notes: "Dedicated dose-calculation servers (Monte Carlo / collapsed-cone, GPU-accelerated) with HA, plus OIS record-and-verify DB and DICOM-RT image storage. Calc-farm sizing driven by plan throughput; a discrete GPU/server project per cancer center."
-    hardware_profile: [gpu-server, high-availability-redundant]
-    hardware_profile_sizing: {gpu-server: rack, high-availability-redundant: node}
+    hardware_profile: [gpu-server, capacity-archive-storage, high-availability-redundant]
+    hardware_profile_sizing: {gpu-server: rack, capacity-archive-storage: rack, high-availability-redundant: node}
     plays: [play-a]
     vendors: [brainlab, elekta, raysearch-laboratories, varian-medical-systems]
     evidence_note: null
@@ -807,7 +807,7 @@ categories:
     infrastructure_notes: "Modest, transactional application tier for sample and sequencing-run tracking; deployable on-prem or as SaaS. It sits beside sequencers that stage terabyte-scale run output (BCL/FASTQ) locally, but that storage/compute pull belongs to the instruments and to downstream secondary analysis, not to the LIMS software itself. No GPU."
     hardware_profile: []
     hardware_profile_sizing: {}
-    plays: [play-b]
+    plays: []
     vendors: [illumina, l7-informatics, labcollector, ovation]
     evidence_note: null
 
@@ -830,7 +830,7 @@ categories:
     infrastructure_notes: "SaaS-dominant interpretation/reporting layer: consumes tertiary variant calls handed off from bioinformatics-secondary (which owns the compute-heavy pipeline). Curated knowledge bases, variant annotation/classification, report generation; minimal customer-side hardware, any footprint is cloud at the operator. No on-prem GPU pull at the customer."
     hardware_profile: []
     hardware_profile_sizing: {}
-    plays: [play-b]
+    plays: []
     vendors: [congenica, fabric-genomics, golden-helix, qiagen, sophia-genetics, tempus]
     evidence_note: null
 
@@ -1227,7 +1227,8 @@ categories:
     infrastructure_notes: "Hardware lives mostly at the data operator: petabyte-class data lake storage plus GPU for NLP/LLM chart abstraction and clinico-genomic linkage; some pharma run private analytics enclaves. Sizing by covered lives and unstructured document volume."
     hardware_profile: [gpu-server, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: rack, capacity-archive-storage: cluster}
-    plays: [play-b]
+    plays: []
+    play_exemption: "Operator-side real-world-data / claims analytics platform (warehouse + software-as-a-service); a data-platform co-sell, not the sequencing / research-AI motion of Play B"
     vendors: [aetion, iqvia, komodo-health, tempus, trinetx, truveta]
     evidence_note: null
 
@@ -1348,7 +1349,8 @@ categories:
     infrastructure_notes: "Two-sided pull: embedded/edge compute designed into devices as long-lifecycle, regulatory-locked BOMs (volume design wins), plus OEM-side V&V, simulation, and on-device AI model-training clusters. Sizing by device fleet volume and AI content per device."
     hardware_profile: [gpu-server, high-performance-computing-cpu, edge-industrial]
     hardware_profile_sizing: {gpu-server: rack, high-performance-computing-cpu: rack, edge-industrial: node}
-    plays: [play-a]
+    plays: []
+    play_exemption: "OEM embedded design-win — medtech / in-vitro-diagnostics device software; a per-unit board/edge bill-of-materials channel deal, not a hospital imaging/genomics/manufacturing play"
     vendors: [blackberry-qnx, green-hills-software, nvidia, wind-river]
     evidence_note: null
 

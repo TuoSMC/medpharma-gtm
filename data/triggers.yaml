@@ -42,7 +42,7 @@ triggers:
     window: "90-day hardware window post-purchase"
     source: "Illumina/PacBio/ONT PR, grant awards, conference posters"
     action: "Immediate outreach — sequencer needs compute+storage behind it (Play B)"
-    related_categories: [bioinformatics-secondary]
+    related_categories: [bioinformatics-secondary, ngs-lab-lims]
     related_plays: [play-b]
   - id: cloud-repatriation
     signal: Cloud repatriation signals
@@ -106,7 +106,7 @@ triggers:
     window: "0-6 months post-incident (budget unlocked)"
     source: "HHS breach portal, news, sector ISACs"
     action: "DR/backup/rebuild conversation — air-gapped backup, immutable storage angle"
-    related_categories: [ehr-emr-core, pacs-vna, hospital-erp]
+    related_categories: [ehr-emr-core, pacs-vna, hospital-erp, scada-dcs, mes-ebr, plant-historian, lis]
     related_plays: []
   - id: plant-modernization
     signal: Plant modernization or new plant
@@ -132,6 +132,6 @@ triggers:
     urgency: medium
     window: "Budget planning season"
     source: "Earnings calls, CFO commentary, layoff/efficiency announcements"
-    action: "Soft version of repatriation — plant TCO seed, nurture"
+    action: "Soft repatriation signal — total-cost-of-ownership conversation with Infrastructure Owner + Economic Buyer; nurture"
     related_categories: [ai-hpc-orchestration, clinical-data-lakehouse, ehr-emr-core]
     related_plays: [play-b]
