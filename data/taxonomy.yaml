@@ -77,6 +77,11 @@ glossary:
   hpc: {full_en: High-Performance Computing, full_zh: 高效能運算}
   ai: {full_en: Artificial Intelligence, full_zh: 人工智慧}
   cryo-em: {full_en: Cryogenic Electron Microscopy, full_zh: 冷凍電子顯微術}
+  llm: {full_en: Large Language Model, full_zh: 大型語言模型}
+  pk-pd: {full_en: Pharmacokinetics and Pharmacodynamics, full_zh: 藥物動力學與藥效學}
+  pbpk: {full_en: Physiologically-Based Pharmacokinetics, full_zh: 生理基礎藥物動力學}
+  qsp: {full_en: Quantitative Systems Pharmacology, full_zh: 定量系統藥理學}
+  mass-spectrometry: {full_en: Mass Spectrometry, full_zh: 質譜分析}
 
 categories:
   # ======== pre-approved schema examples ========
@@ -1376,3 +1381,120 @@ categories:
     plays: [play-b]
     vendors: [altair, hewlett-packard-enterprise, ibm, nvidia, seqera]
     evidence_note: null
+
+  # ======== completeness-audit additions (2026-07-28, opus-verified gaps) ========
+  - id: pharmacometrics-modeling-simulation
+    name_en: Pharmacometrics & Clinical Pharmacology Modeling & Simulation
+    name_zh: 藥物計量學與臨床藥理建模模擬
+    name_full: Pharmacometrics and Clinical Pharmacology Modeling and Simulation (population pharmacokinetics and pharmacodynamics, physiologically-based pharmacokinetics, quantitative systems pharmacology, clinical-trial simulation)
+    domain: pharmaceutical-research-clinical-development
+    lifecycle: [preclinical, clinical]
+    role: [analytics-artificial-intelligence, workflow]
+    data_modality: [simulation, transactional]
+    deployment: [on-premises, private-cloud, hybrid]
+    segments: [biotechnology-pharmaceutical, contract-research-organization, academic-medical-center]
+    hospital_view: null
+    hardware_opportunity: 3
+    hardware_buyer: [customer, operator]
+    primary_buyer: customer
+    supermicro_reachable: true
+    hardware_opportunity_by_buyer: {customer: 3, operator: 2}
+    hardware_profile: [high-performance-computing-cpu, high-memory]
+    hardware_profile_sizing: {high-performance-computing-cpu: rack, high-memory: node}
+    infrastructure_notes: "Embarrassingly-parallel population pharmacokinetic/pharmacodynamic estimation (NONMEM/NLME), covariate searches, bootstrap and virtual-population trial simulation fan out across CPU cores; quantitative-systems-pharmacology and physiologically-based models add large-memory nodes. Validated on-prem/private grids for licensing and regulatory compliance. Sized by concurrent estimation jobs."
+    plays: [play-b]
+    vendors: []
+    evidence_note: "Added via completeness audit (opus-verified gap); distinct from comp-chem-simulation and clinical-trial-suite."
+
+  - id: ms-proteomics-metabolomics
+    name_en: Mass-Spectrometry Proteomics & Metabolomics Informatics
+    name_zh: 質譜蛋白體與代謝體資訊分析
+    name_full: Mass-Spectrometry Proteomics and Metabolomics Informatics
+    domain: pharmaceutical-research-clinical-development
+    lifecycle: [research, preclinical, clinical]
+    role: [analytics-artificial-intelligence, data-acquisition]
+    data_modality: [omics, artificial-intelligence-models]
+    deployment: [on-premises, private-cloud, hybrid]
+    segments: [biotechnology-pharmaceutical, academic-medical-center, diagnostic-reference-laboratory, contract-research-organization]
+    hospital_view: null
+    hardware_opportunity: 3
+    hardware_buyer: [customer, operator]
+    primary_buyer: customer
+    supermicro_reachable: true
+    hardware_opportunity_by_buyer: {customer: 3, operator: 2}
+    hardware_profile: [high-performance-computing-cpu, high-memory, nvme-performance-storage, capacity-archive-storage]
+    hardware_profile_sizing: {high-performance-computing-cpu: rack, high-memory: node, nvme-performance-storage: rack, capacity-archive-storage: rack}
+    infrastructure_notes: "Parallel spectral-library and database search plus data-independent-acquisition deconvolution (MaxQuant / DIA-NN / Spectronaut / FragPipe) are CPU-bound with large-memory nodes; NVMe scratch; accumulating raw instrument files drive archive growth; emerging GPU for deep-learning spectral and retention-time prediction. Sized by sample throughput. Distinct from NGS-scoped bioinformatics-secondary."
+    plays: [play-b]
+    vendors: []
+    evidence_note: "Added via completeness audit (opus-verified gap)."
+
+  - id: spatial-biology-omics
+    name_en: Spatial Biology / Spatial-Omics Analysis
+    name_zh: 空間生物學／空間體學分析
+    name_full: Spatial Biology and Spatial-Omics Analysis (spatial transcriptomics and multiplex tissue proteomics)
+    domain: pharmaceutical-research-clinical-development
+    lifecycle: [research, preclinical]
+    role: [analytics-artificial-intelligence, data-acquisition]
+    data_modality: [images, omics, artificial-intelligence-models]
+    deployment: [on-premises, private-cloud, hybrid]
+    segments: [academic-medical-center, biotechnology-pharmaceutical, diagnostic-reference-laboratory]
+    hospital_view: null
+    hardware_opportunity: 3
+    hardware_buyer: [customer, operator]
+    primary_buyer: customer
+    supermicro_reachable: true
+    hardware_opportunity_by_buyer: {customer: 3, operator: 2}
+    hardware_profile: [gpu-server, nvme-performance-storage, capacity-archive-storage]
+    hardware_profile_sizing: {gpu-server: rack, nvme-performance-storage: rack, capacity-archive-storage: cluster}
+    infrastructure_notes: "Deep-learning cell segmentation, image registration and stitching, and spatial modeling on GPU (Xenium / Visium / CosMx / PhenoCycler / MERFISH); NVMe working tier; multiplex whole-slide image and transcript stacks (hundreds of gigabytes to multiple terabytes per run) drive petabyte archive. Mirrors the cryogenic-electron-microscopy profile. Sized by run volume."
+    plays: [play-b]
+    vendors: []
+    evidence_note: "Added via completeness audit (opus-verified gap); distinct from digital-pathology, bioinformatics-secondary, cryo-em-structural-bio."
+
+  - id: healthcare-llm-serving
+    name_en: Healthcare Foundation-Model / LLM Serving Platform
+    name_zh: 醫療基礎模型／大型語言模型服務平台
+    name_full: Healthcare Foundation-Model and Large Language Model Serving Platform (private on-premises generative-artificial-intelligence inference gateway)
+    domain: data-analytics-payer-platforms
+    lifecycle: [clinical, commercial]
+    role: [infrastructure-platform, analytics-artificial-intelligence]
+    data_modality: [artificial-intelligence-models, documents, transactional]
+    deployment: [on-premises, private-cloud, hybrid]
+    segments: [hospital-health-system, academic-medical-center, biotechnology-pharmaceutical]
+    hospital_view: null
+    hardware_opportunity: 4
+    hardware_buyer: [customer, operator, hyperscaler]
+    primary_buyer: customer
+    supermicro_reachable: true
+    hardware_opportunity_by_buyer: {customer: 4, operator: 3}
+    hardware_profile: [gpu-server, high-memory]
+    hardware_profile_sizing: {gpu-server: cluster, high-memory: rack}
+    infrastructure_notes: "Large-video-memory multi-GPU tensor-parallel serving of 70-billion-parameter and larger foundation models sited on-prem for protected-health-information residency and latency (ambient documentation, chart summarization, coding assist, agentic clinical workflows). The serving/infrastructure layer beneath the decision-support apps (cdss-clinical-ai) — the same app-versus-infrastructure split as ai-drug-discovery versus ai-hpc-orchestration. Sized by concurrent token throughput and number of models hosted."
+    plays: [play-b]
+    vendors: []
+    evidence_note: "Added via completeness audit (opus-verified gap); the text/multimodal analogue of imaging-ai-deployment."
+
+  - id: payer-actuarial-hpc
+    name_en: Payer Actuarial & Underwriting Risk Modeling
+    name_zh: 保險精算與核保風險建模
+    name_full: Payer Actuarial and Underwriting Risk Modeling (high-performance-computing grid)
+    domain: data-analytics-payer-platforms
+    lifecycle: [commercial]
+    role: [analytics-artificial-intelligence]
+    data_modality: [simulation, transactional]
+    deployment: [on-premises, private-cloud, hybrid]
+    segments: [payer]
+    hospital_view: null
+    hardware_opportunity: 3
+    hardware_buyer: [customer]
+    primary_buyer: customer
+    supermicro_reachable: true
+    hardware_opportunity_by_buyer: {customer: 3}
+    hardware_profile: [high-performance-computing-cpu, high-memory]
+    hardware_profile_sizing: {high-performance-computing-cpu: rack, high-memory: node}
+    infrastructure_notes: "CPU-dense grid for large stochastic / Monte-Carlo actuarial runs (thousands of scenarios over millions of policies on tight overnight batch windows); regulatory reserving and reporting deadlines drive grid refresh and expansion. Sized by scenario count and policy volume."
+    plays: []
+    play_exemption: "Payer actuarial / underwriting compute grid; the payer segment sits outside the three provider/pharma solution plays"
+    vendors: []
+    evidence_note: "Added via completeness audit (opus-verified gap); distinct from payer-core-admin and payer-um-fraud-analytics."

@@ -213,6 +213,8 @@ APPROVED_IDS = {
     "population-health-analytics", "rwd-rwe-analytics", "hie-interoperability-engine",
     "imaging-ai-deployment", "payer-core-admin", "payer-um-fraud-analytics",
     "samd-embedded-oem-platform", "ai-hpc-orchestration",
+    "pharmacometrics-modeling-simulation", "ms-proteomics-metabolomics",
+    "spatial-biology-omics", "healthcare-llm-serving", "payer-actuarial-hpc",
 }
 
 APPROVED_DOMAIN = {
@@ -243,6 +245,11 @@ APPROVED_DOMAIN = {
     "imaging-ai-deployment": "hospital-clinical-core", "payer-core-admin": "data-analytics-payer-platforms",
     "payer-um-fraud-analytics": "data-analytics-payer-platforms", "samd-embedded-oem-platform": "medical-technology-device-software",
     "ai-hpc-orchestration": "pharmaceutical-research-clinical-development",
+    "pharmacometrics-modeling-simulation": "pharmaceutical-research-clinical-development",
+    "ms-proteomics-metabolomics": "pharmaceutical-research-clinical-development",
+    "spatial-biology-omics": "pharmaceutical-research-clinical-development",
+    "healthcare-llm-serving": "data-analytics-payer-platforms",
+    "payer-actuarial-hpc": "data-analytics-payer-platforms",
 }
 
 REQUIRED_GLOSSARY_KEYS = {
@@ -265,7 +272,7 @@ CLOUD_SUBSTRATE = {"public-cloud", "software-as-a-service", "hybrid", "vendor-ma
 class TestInventoryLocked(unittest.TestCase):
     def test_exactly_53_categories_with_approved_ids(self):
         ids = {c["id"] for c in CATS}
-        self.assertEqual(len(CATS), 53)
+        self.assertEqual(len(CATS), 58)
         self.assertEqual(ids, APPROVED_IDS)
 
     def test_domain_fixture_locked(self):

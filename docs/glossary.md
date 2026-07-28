@@ -1,6 +1,6 @@
 # Glossary — EN / 繁體中文（術語表）
 
-> Generated from `data/taxonomy.yaml` `glossary:` block (49 terms). Single source of truth — do not hand-edit; regenerate with `python3 tools/glossary_md.py`.
+> Generated from `data/taxonomy.yaml` `glossary:` block (54 terms). Single source of truth — do not hand-edit; regenerate with `python3 tools/glossary_md.py`.
 > Working language: English for data, Traditional Chinese for docs.
 
 | Acronym / key | English | 繁體中文 |
@@ -32,17 +32,22 @@
 | `iomt` | Internet of Medical Things | 醫療物聯網 |
 | `lims` | Laboratory Information Management System | 實驗室資訊管理系統 |
 | `lis` | Laboratory Information System | 檢驗資訊系統 |
+| `llm` | Large Language Model | 大型語言模型 |
 | `mlops` | Machine Learning Operations | 機器學習維運 |
+| `mass-spectrometry` | Mass Spectrometry | 質譜分析 |
 | `ngs` | Next-Generation Sequencing | 次世代定序 |
 | `nvme-performance-storage` | Non-Volatile Memory Express High-Performance Storage | 高效能非揮發性記憶體儲存 |
 | `ois` | Oncology Information System | 腫瘤資訊系統 |
 | `or` | Operating Room | 手術室 |
 | `ot` | Operational Technology | 營運科技 |
 | `oem` | Original Equipment Manufacturer | 原廠設備製造商 |
+| `pk-pd` | Pharmacokinetics and Pharmacodynamics | 藥物動力學與藥效學 |
 | `pv` | Pharmacovigilance | 藥物安全監視 |
+| `pbpk` | Physiologically-Based Pharmacokinetics | 生理基礎藥物動力學 |
 | `pacs` | Picture Archiving and Communication System | 醫學影像儲傳系統 |
 | `pat` | Process Analytical Technology | 製程分析技術 |
 | `qc` | Quality Control | 品質管制 |
+| `qsp` | Quantitative Systems Pharmacology | 定量系統藥理學 |
 | `ris` | Radiology Information System | 放射科資訊系統 |
 | `rtsm` | Randomization and Trial Supply Management | 隨機分派與試驗用藥供應管理 |
 | `rtls` | Real-Time Location System | 即時定位系統 |

@@ -1,6 +1,6 @@
 # SMCI Medical / Pharma Hunting Guide
 
-> Generated from `/data` (taxonomy v6, 53 categories, 207 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
+> Generated from `/data` (taxonomy v6, 58 categories, 207 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
 >
 > **Gate question first (CLAUDE.md §3): who controls the infrastructure behind the software?** No answer → not in pipeline.
 
@@ -32,7 +32,11 @@
 | **Bioinformatics Secondary/Tertiary Analysis** <br><small>bioinformatics-secondary</small> | 4 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster), nvme-performance-storage (rack), capacity-archive-storage (cluster) | DNAnexus, Inc., Illumina, NVIDIA Corporation, QIAGEN Digital Insights, Sentieon Inc., Seqera Labs, S.L., Velsera |
 | **Computational Chemistry / Molecular Modeling & Simulation** <br><small>comp-chem-simulation</small> | 4 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster), nvme-performance-storage (rack), high-memory (rack) | Cadence Design Systems, Inc. (OpenEye), Chemical Computing Group ULC, Cresset Group, Dassault Systemes SE (BIOVIA), Schrodinger, Inc. |
 | **Structural Biology / Cryo-EM Image Processing** <br><small>cryo-em-structural-bio</small> | 4 | 2 | · | gpu-server (rack), nvme-performance-storage (rack), capacity-archive-storage (cluster), high-memory (node) | Gatan, Inc. (AMETEK), Structura Biotechnology Inc., Thermo Fisher Scientific Inc. |
+| **Healthcare Foundation-Model / LLM Serving Platform** <br><small>healthcare-llm-serving</small> | 4 | 3 | · | gpu-server (cluster), high-memory (rack) | — |
 | **AI / HPC Workload Orchestration & MLOps (cluster scheduling)** <br><small>ai-hpc-orchestration</small> | 3 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster) | Altair Engineering (Siemens), Hewlett Packard Enterprise Company, IBM Corporation, NVIDIA Corporation, Seqera Labs, S.L. |
+| **Mass-Spectrometry Proteomics & Metabolomics Informatics** <br><small>ms-proteomics-metabolomics</small> | 3 | 2 | · | high-performance-computing-cpu (rack), high-memory (node), nvme-performance-storage (rack), capacity-archive-storage (rack) | — |
+| **Pharmacometrics & Clinical Pharmacology Modeling & Simulation** <br><small>pharmacometrics-modeling-simulation</small> | 3 | 2 | · | high-performance-computing-cpu (rack), high-memory (node) | — |
+| **Spatial Biology / Spatial-Omics Analysis** <br><small>spatial-biology-omics</small> | 3 | 2 | · | gpu-server (rack), nvme-performance-storage (rack), capacity-archive-storage (cluster) | — |
 
 ### GMP Manufacturing Edge  (`play-c`)
 *Hardware anchor:* Short-depth / industrial edge servers, Redundant tower/rack pairs, DR storage
@@ -61,6 +65,7 @@
 | **ICU Central Monitoring & Clinical Surveillance** <br><small>icu-central-monitoring</small> | 2 | · | 3 | nvme-performance-storage (node), edge-industrial (node), high-availability-redundant (node) | Device-maker (original-equipment-manufacturer) channel deal for regulator-cleared central stations; outside the three solution plays |
 | **Laboratory Information System (LIS)** <br><small>lis</small> | 3 | 3 | · | nvme-performance-storage (node), high-availability-redundant (rack), disaster-recovery-backup (node) | Clinical laboratory transactional high-availability / disaster-recovery footprint; standalone infrastructure deal |
 | **Medical Device Integration & Alarm Management** <br><small>medical-device-integration</small> | 3 | 1 | · | nvme-performance-storage (rack), edge-industrial (node), high-availability-redundant (node) | Hospital integration-engine high-availability pairs; standalone clinical-information-technology infrastructure deal |
+| **Payer Actuarial & Underwriting Risk Modeling** <br><small>payer-actuarial-hpc</small> | 3 | · | · | high-performance-computing-cpu (rack), high-memory (node) | Payer actuarial / underwriting compute grid; the payer segment sits outside the three provider/pharma solution plays |
 | **Payer Core Administration (Claims Adjudication)** <br><small>payer-core-admin</small> | 3 | 3 | · | nvme-performance-storage (rack), high-availability-redundant (rack), disaster-recovery-backup (rack) | Payer claims core; payer segment sits outside the three provider/pharma plays |
 | **Payer Care/Utilization Management & Fraud Analytics** <br><small>payer-um-fraud-analytics</small> | 3 | 2 | · | high-performance-computing-cpu (rack) | Payer analytics; payer segment sits outside the three provider/pharma plays |
 | **RWD/RWE Analytics Platform** <br><small>rwd-rwe-analytics</small> | 2 | 3 | · | gpu-server (rack), capacity-archive-storage (cluster) | Operator-side real-world-data / claims analytics platform (warehouse + software-as-a-service); a data-platform co-sell, not the sequencing / research-AI motion of Play B |
@@ -69,13 +74,14 @@
 
 ## 3 · Master HOT lists
 
-### HOT_customer (direct sale) — 26 categories (direct sale)
+### HOT_customer (direct sale) — 31 categories (direct sale)
 - **4** [B] `ai-drug-discovery` — AI Drug Discovery Platform
 - **4** [B] `bioinformatics-secondary` — Bioinformatics Secondary/Tertiary Analysis
 - **4** [B] `comp-chem-simulation` — Computational Chemistry / Molecular Modeling & Simulation
 - **4** [B] `cryo-em-structural-bio` — Structural Biology / Cryo-EM Image Processing
 - **4** [A] `digital-pathology` — Digital Pathology Platform (WSI workflow + AI-assisted diagnosis)
 - **4** [cross-play] `ehr-emr-core` — EHR/EMR Core System
+- **4** [B] `healthcare-llm-serving` — Healthcare Foundation-Model / LLM Serving Platform
 - **4** [A] `imaging-ai-deployment` — Imaging AI Deployment Platform (Inference Orchestration / Marketplace)
 - **4** [A] `pacs-vna` — PACS / VNA (Medical Imaging Archive)
 - **3** [A] `advanced-visualization-3d` — Advanced Visualization / 3D Image Post-Processing
@@ -86,18 +92,22 @@
 - **3** [cross-play] `lis` — Laboratory Information System (LIS)
 - **3** [cross-play] `medical-device-integration` — Medical Device Integration & Alarm Management
 - **3** [C] `mes-ebr` — MES / EBR (Manufacturing Execution)
+- **3** [B] `ms-proteomics-metabolomics` — Mass-Spectrometry Proteomics & Metabolomics Informatics
 - **3** [A] `or-surgical-video` — OR Management & Surgical Video Platform
 - **3** [C] `pat-process-twin` — PAT & Process Digital Twin (Process Development Analytics / Simulation)
+- **3** [cross-play] `payer-actuarial-hpc` — Payer Actuarial & Underwriting Risk Modeling
 - **3** [cross-play] `payer-core-admin` — Payer Core Administration (Claims Adjudication)
 - **3** [cross-play] `payer-um-fraud-analytics` — Payer Care/Utilization Management & Fraud Analytics
+- **3** [B] `pharmacometrics-modeling-simulation` — Pharmacometrics & Clinical Pharmacology Modeling & Simulation
 - **3** [C] `plant-historian` — Plant Historian (Time-Series Data)
 - **3** [A] `radiation-oncology-tps-ois` — Radiation Oncology — Treatment Planning (TPS) & Oncology Information System (OIS)
 - **3** [A] `ris-cvis-workflow` — Radiology & Cardiology Information Systems (RIS/CVIS)
 - **3** [cross-play] `samd-embedded-oem-platform` — SaMD & Embedded Device Software Platform (OEM)
 - **3** [C] `scada-dcs` — SCADA / DCS (Process Control)
 - **3** [cross-play] `smart-room-ambient-ai` — Smart-Room Ambient Sensing & Clinical Video AI
+- **3** [B] `spatial-biology-omics` — Spatial Biology / Spatial-Omics Analysis
 
-### HOT_operator (ISV co-sell) — 14 categories (ISV / service-provider co-sell)
+### HOT_operator (ISV co-sell) — 15 categories (ISV / service-provider co-sell)
 - **4** [B] `ai-drug-discovery` — AI Drug Discovery Platform
 - **4** [cross-play] `ehr-emr-core` — EHR/EMR Core System
 - **4** [A] `imaging-ai-deployment` — Imaging AI Deployment Platform (Inference Orchestration / Marketplace)
@@ -106,6 +116,7 @@
 - **3** [cross-play] `cdss-clinical-ai` — Clinical Decision Support & Clinical AI (CDSS)
 - **3** [B] `comp-chem-simulation` — Computational Chemistry / Molecular Modeling & Simulation
 - **3** [A] `digital-pathology` — Digital Pathology Platform (WSI workflow + AI-assisted diagnosis)
+- **3** [B] `healthcare-llm-serving` — Healthcare Foundation-Model / LLM Serving Platform
 - **3** [cross-play] `him-coding` — Health Information Management & Coding
 - **3** [cross-play] `lis` — Laboratory Information System (LIS)
 - **3** [A] `pacs-vna` — PACS / VNA (Medical Imaging Archive)
@@ -139,11 +150,11 @@
 
 ## 5 · Component pipelines (which categories feed each SMCI product line)
 
-- **gpu-server** — 20 categories, 15 customer-HOT: `ai-drug-discovery`, `bioinformatics-secondary`, `comp-chem-simulation`, `cryo-em-structural-bio`, `digital-pathology`, `imaging-ai-deployment`, `advanced-visualization-3d`, `ai-hpc-orchestration` …
-- **high-performance-computing-cpu** — 8 categories, 7 customer-HOT: `bioinformatics-secondary`, `comp-chem-simulation`, `ai-hpc-orchestration`, `clinical-data-lakehouse`, `pat-process-twin`, `payer-um-fraud-analytics`, `samd-embedded-oem-platform`, `population-health-analytics`
-- **nvme-performance-storage** — 15 categories, 13 customer-HOT: `ai-drug-discovery`, `bioinformatics-secondary`, `comp-chem-simulation`, `cryo-em-structural-bio`, `digital-pathology`, `ehr-emr-core`, `pacs-vna`, `clinical-data-lakehouse` …
-- **capacity-archive-storage** — 17 categories, 10 customer-HOT: `bioinformatics-secondary`, `cryo-em-structural-bio`, `digital-pathology`, `pacs-vna`, `clinical-data-lakehouse`, `or-surgical-video`, `plant-historian`, `radiation-oncology-tps-ois` …
-- **high-memory** — 2 categories, 2 customer-HOT: `comp-chem-simulation`, `cryo-em-structural-bio`
+- **gpu-server** — 22 categories, 17 customer-HOT: `ai-drug-discovery`, `bioinformatics-secondary`, `comp-chem-simulation`, `cryo-em-structural-bio`, `digital-pathology`, `healthcare-llm-serving`, `imaging-ai-deployment`, `advanced-visualization-3d` …
+- **high-performance-computing-cpu** — 11 categories, 10 customer-HOT: `bioinformatics-secondary`, `comp-chem-simulation`, `ai-hpc-orchestration`, `clinical-data-lakehouse`, `ms-proteomics-metabolomics`, `pat-process-twin`, `payer-actuarial-hpc`, `payer-um-fraud-analytics` …
+- **nvme-performance-storage** — 17 categories, 15 customer-HOT: `ai-drug-discovery`, `bioinformatics-secondary`, `comp-chem-simulation`, `cryo-em-structural-bio`, `digital-pathology`, `ehr-emr-core`, `pacs-vna`, `clinical-data-lakehouse` …
+- **capacity-archive-storage** — 19 categories, 12 customer-HOT: `bioinformatics-secondary`, `cryo-em-structural-bio`, `digital-pathology`, `pacs-vna`, `clinical-data-lakehouse`, `ms-proteomics-metabolomics`, `or-surgical-video`, `plant-historian` …
+- **high-memory** — 6 categories, 6 customer-HOT: `comp-chem-simulation`, `cryo-em-structural-bio`, `healthcare-llm-serving`, `ms-proteomics-metabolomics`, `payer-actuarial-hpc`, `pharmacometrics-modeling-simulation`
 - **edge-industrial** — 16 categories, 9 customer-HOT: `imaging-ai-deployment`, `automated-visual-inspection`, `medical-device-integration`, `mes-ebr`, `or-surgical-video`, `pat-process-twin`, `samd-embedded-oem-platform`, `scada-dcs` …
 - **high-availability-redundant** — 16 categories, 9 customer-HOT: `ehr-emr-core`, `imaging-ai-deployment`, `hospital-erp`, `lis`, `medical-device-integration`, `mes-ebr`, `payer-core-admin`, `radiation-oncology-tps-ois` …
 - **disaster-recovery-backup** — 9 categories, 5 customer-HOT: `ehr-emr-core`, `hospital-erp`, `lis`, `mes-ebr`, `payer-core-admin`, `hie-interoperability-engine`, `qc-lims-cds`, `rcm-billing-claims` …
