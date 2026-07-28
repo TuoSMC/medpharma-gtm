@@ -102,9 +102,37 @@ def component_pipelines(cats):
         print()
 
 
+# workload_envelope slices: sales-relevant bands read STRAIGHT from the stored
+# envelope (never recomputed here — tools/workload_ceiling.py + INV-14 own the
+# derivation; this reader must not become a second, drifting definition).
+WORKLOAD_LENSES = ["gpu_role", "capacity_band", "concurrency", "availability_class"]
+
+
+def workload_slices(cats):
+    reach = [c for c in cats if c["supermicro_reachable"]]
+    if not any("workload_envelope" in c for c in cats):
+        print("  (no workload_envelope — needs taxonomy v7; run the quantify-fields skill)\n")
+        return
+    print(f"\n=== workload_envelope slices (reachable {len(reach)}; cHOT=customer opportunity>=3) ===")
+    print("    typical hardware demand per category — what to size, who is multi-tenant\n")
+    for lens in WORKLOAD_LENSES:
+        tally = collections.defaultdict(list)
+        for c in reach:
+            v = (c.get("workload_envelope") or {}).get(lens) or "(none)"
+            tally[v].append(c)
+        print(f"  by {lens}:")
+        for v, cs in sorted(tally.items(),
+                            key=lambda kv: (-sum(pull(c, "customer") >= 3 for c in kv[1]),
+                                            -len(kv[1]), str(kv[0]))):
+            hot = sorted(c["id"] for c in cs if pull(c, "customer") >= 3)
+            print(f"    {str(v):<24} total {len(cs):>2}  cHOT {len(hot):>2}  | HOT: {', '.join(hot) or '-'}")
+        print()
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--axis", choices=["customer", "operator", "oem", "modality", "role", "component"])
+    ap.add_argument("--axis", choices=["customer", "operator", "oem", "modality", "role",
+                                        "component", "workload"])
     args = ap.parse_args()
     cats = load()
     a = args.axis
@@ -116,6 +144,8 @@ def main():
         buyer_list(cats, "original-equipment-manufacturer", "OEM design-wins", "embedded BOM", require_hw=False)
     if a in (None, "component"):
         component_pipelines(cats)
+    if a in (None, "workload"):
+        workload_slices(cats)
     if a in (None, "modality"):
         by_axis(cats, "data_modality", "data_modality")
     if a in (None, "role"):

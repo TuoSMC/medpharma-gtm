@@ -399,6 +399,14 @@ class TestToolsSmoke(unittest.TestCase):
         out = self._run("tools/drilldown.py", "--axis", "component")
         self.assertIn("gpu-server", out)
 
+    def test_drilldown_workload_axis(self):
+        """v7: --axis workload slices reachable categories by envelope bands
+        (reads stored envelope values — never recomputes; INV-14 owns derivation)."""
+        out = self._run("tools/drilldown.py", "--axis", "workload")
+        for lens in ("gpu_role", "capacity_band", "concurrency", "availability_class"):
+            self.assertIn(lens, out, f"workload axis missing '{lens}' slice")
+        self.assertIn("petabyte-plus", out)  # a real band value must appear
+
     def test_score_runs_clean(self):
         out = self._run("tools/score.py", "data/accounts/example-riverbend-pathology.yaml")
         self.assertIn("Tier:", out)
