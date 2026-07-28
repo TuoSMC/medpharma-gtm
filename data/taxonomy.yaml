@@ -129,8 +129,8 @@ categories:
       io_pattern: mixed
       concurrency: high
       retention_horizon: long
-      per_unit_data_size: {value_low: 0.1, value_high: 1.5, unit: "GB per imaging study", confidence: C, source: "Purview, 'Is Cloud Storage Right for My Medical Imaging Modality?' (https://www.purview.net/blog/is-cloud-storage-right-for-my-medical-imaging-modality)"}
-      sources: ["42 CFR 482.24(b)(1) CMS Condition of Participation: Medical record services — hospitals must retain medical records at least five years (eCFR: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.24)", "MQSA / ACR mammography record-keeping: retain at least five years, or ten years if no subsequent exam at the facility (ACR Accreditation Support: https://accreditationsupport.acr.org/support/solutions/articles/11000051613-record-keeping-mammography-revised-12-12-19-)", "Purview, 'Is Cloud Storage Right for My Medical Imaging Modality?' (https://www.purview.net/blog/is-cloud-storage-right-for-my-medical-imaging-modality)", "AuntMinnie, 'CT, MR, CR, and digital mammo are critical to archive storage forecasts' (https://www.auntminnie.com/imaging-informatics/enterprise-imaging/pacs-vna/article/15582698)"]
+      per_unit_data_size: null
+      sources: ["42 CFR 482.24(b)(1) CMS Condition of Participation: Medical record services — hospitals must retain medical records at least five years (eCFR: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.24)", "MQSA / ACR mammography record-keeping: retain at least five years, or ten years if no subsequent exam at the facility (ACR Accreditation Support: https://accreditationsupport.acr.org/support/solutions/articles/11000051613-record-keeping-mammography-revised-12-12-19-)"]
       notes: null
 
   - id: bioinformatics-secondary
@@ -198,7 +198,7 @@ categories:
       gpu_role: none
       capacity_band: none
       availability_class: mission-critical
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: moderate
       io_pattern: random-transactional
       concurrency: moderate
@@ -348,10 +348,10 @@ categories:
     evidence_note: null
     workload_envelope:
       scaling_driver: "operating-room count and per-case video resolution and retention policy"
-      gpu_role: visualization
+      gpu_role: inference
       capacity_band: hundreds-of-terabytes
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: high
       io_pattern: sequential-throughput
       concurrency: moderate
@@ -390,7 +390,7 @@ categories:
       gpu_role: none
       capacity_band: terabyte
       availability_class: high-availability
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: moderate
       io_pattern: sequential-throughput
       concurrency: moderate
@@ -463,7 +463,7 @@ categories:
     evidence_note: null
     workload_envelope:
       scaling_driver: "treatment plans computed per day and dose-calculation grid complexity"
-      gpu_role: visualization
+      gpu_role: mixed
       capacity_band: hundreds-of-terabytes
       availability_class: high-availability
       latency_class: interactive
@@ -508,7 +508,7 @@ categories:
       availability_class: standard
       latency_class: interactive
       data_growth: low
-      io_pattern: random-transactional
+      io_pattern: mixed
       concurrency: high
       retention_horizon: null
       per_unit_data_size: null
@@ -775,7 +775,7 @@ categories:
       gpu_role: none
       capacity_band: hundreds-of-terabytes
       availability_class: high-availability
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: high
       io_pattern: sequential-throughput
       concurrency: high
@@ -813,7 +813,7 @@ categories:
       gpu_role: none
       capacity_band: none
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: random-transactional
       concurrency: moderate
@@ -927,7 +927,7 @@ categories:
       gpu_role: none
       capacity_band: none
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: sequential-throughput
       concurrency: moderate
@@ -965,7 +965,7 @@ categories:
       gpu_role: none
       capacity_band: none
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: random-transactional
       concurrency: low
@@ -1044,7 +1044,7 @@ categories:
       gpu_role: inference
       capacity_band: hundreds-of-terabytes
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: high
       io_pattern: sequential-throughput
       concurrency: high
@@ -1120,7 +1120,7 @@ categories:
       gpu_role: none
       capacity_band: none
       availability_class: high-availability
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: random-transactional
       concurrency: moderate
@@ -1163,8 +1163,8 @@ categories:
       io_pattern: high-throughput-parallel
       concurrency: high
       retention_horizon: long
-      per_unit_data_size: {value_low: 1, value_high: 4, unit: "GB per compressed whole-slide image", confidence: B, source: "Digital Pathology Association FAQ — compressed whole-slide images are typically on the order of one to a few gigabytes per slide. https://digitalpathologyassociation.org/faq"}
-      sources: ["Digital Pathology Association FAQ — compressed whole-slide images are typically on the order of one to a few gigabytes per slide. https://digitalpathologyassociation.org/faq", "42 CFR 493.1105 (CLIA) — pathology test reports retained a minimum of ten years after reporting. https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-493/subpart-J/section-493.1105", "College of American Pathologists (CAP) Laboratory Accreditation — surgical pathology slides, blocks, and reports retained ten years."]
+      per_unit_data_size: null
+      sources: ["42 CFR 493.1105 (CLIA) — pathology test reports retained a minimum of ten years after reporting. https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-493/subpart-J/section-493.1105"]
       notes: "Ingest bursts at scan time onto the fast tier; GPU inference and model training share that tier before images migrate to the capacity archive."
 
   - id: ngs-lab-lims
@@ -1484,7 +1484,7 @@ categories:
       gpu_role: none
       capacity_band: none
       availability_class: high-availability
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: random-transactional
       concurrency: moderate
@@ -1558,7 +1558,7 @@ categories:
       availability_class: high-availability
       latency_class: real-time
       data_growth: moderate
-      io_pattern: random-transactional
+      io_pattern: mixed
       concurrency: moderate
       retention_horizon: medium
       per_unit_data_size: null
@@ -1664,7 +1664,7 @@ categories:
       gpu_role: none
       capacity_band: none
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: random-transactional
       concurrency: moderate
@@ -1697,10 +1697,10 @@ categories:
     evidence_note: null
     workload_envelope:
       scaling_driver: "monitored unit operations and real-time process-model complexity"
-      gpu_role: inference
+      gpu_role: mixed
       capacity_band: none
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: mixed
       concurrency: moderate
@@ -2033,10 +2033,10 @@ categories:
     evidence_note: null
     workload_envelope:
       scaling_driver: "units shipped per year and the artificial-intelligence inference content designed into each device"
-      gpu_role: inference
+      gpu_role: mixed
       capacity_band: none
       availability_class: standard
-      latency_class: deterministic-real-time
+      latency_class: real-time
       data_growth: low
       io_pattern: mixed
       concurrency: moderate
@@ -2120,7 +2120,7 @@ categories:
 
   - id: ms-proteomics-metabolomics
     name_en: Mass-Spectrometry Proteomics & Metabolomics Informatics
-    name_zh: 質譜蛋白體與代謝體資訊分析
+    name_zh: 質譜蛋白質體學與代謝體學資訊分析
     name_full: Mass-Spectrometry Proteomics and Metabolomics Informatics
     domain: pharmaceutical-research-clinical-development
     lifecycle: [research, preclinical, clinical]

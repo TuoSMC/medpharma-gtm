@@ -730,9 +730,18 @@ class TestWorkloadEnvelope(unittest.TestCase):
             if pu is None:
                 continue
             self.assertIsInstance(pu, dict, f"{cid}.per_unit_data_size must be mapping or null")
-            for k in ("value_low", "value_high", "unit", "confidence", "source"):
-                self.assertIn(k, pu, f"{cid}.per_unit_data_size missing {k}")
+            self.assertEqual(set(pu), {"value_low", "value_high", "unit", "confidence", "source"},
+                             f"{cid}.per_unit_data_size must have EXACTLY the 5 keys, got {sorted(pu)}")
+            for nk in ("value_low", "value_high"):
+                v = pu[nk]
+                self.assertTrue(isinstance(v, (int, float)) and not isinstance(v, bool),
+                                f"{cid}.per_unit_data_size.{nk} must be a finite number")
+                self.assertEqual(v, v, f"{cid}.{nk} is NaN")           # NaN != NaN
+                self.assertNotIn(v, (float("inf"), float("-inf")), f"{cid}.{nk} is infinite")
+            self.assertGreaterEqual(pu["value_low"], 0, f"{cid}: value_low must be >= 0")
             self.assertLessEqual(pu["value_low"], pu["value_high"], f"{cid}: value_low>value_high")
+            self.assertTrue(isinstance(pu["unit"], str) and pu["unit"].strip(),
+                            f"{cid}.per_unit_data_size.unit must be a non-empty string")
             self.assertIn(pu["confidence"], {"A", "B", "C"}, f"{cid}: per_unit confidence must be A/B/C")
             src = pu["source"]
             self.assertTrue(isinstance(src, str) and src and src not in WE_PLACEHOLDER_SOURCES,
@@ -889,14 +898,18 @@ class TestWorkloadEnvelope(unittest.TestCase):
                   or we.get("io_pattern") == "high-throughput-parallel")
             self.assertTrue(ok, f"{c['id']}: flagship envelope is degenerate")
 
-    # INV-18 concurrency <-> scale
+    # INV-18 concurrency <-> scale (codex: couple to a serving/compute tier, not
+    # arbitrary sizing — archive storage does not serve thousands of sessions)
     def test_concurrency_scale(self):
+        SERVING = ("gpu-server", "high-performance-computing-cpu",
+                   "high-memory", "high-availability-redundant")
         for c in CATS:
             we = c.get("workload_envelope")
             if isinstance(we, dict) and we.get("concurrency") == "massive":
-                siz = set((c.get("hardware_profile_sizing") or {}).values())
-                self.assertTrue({"rack", "cluster"} & siz,
-                                f"{c['id']}: 'massive' concurrency needs a rack/cluster-sized component")
+                siz = c.get("hardware_profile_sizing") or {}
+                ok = any(siz.get(comp) in ("rack", "cluster") for comp in SERVING)
+                self.assertTrue(ok, f"{c['id']}: 'massive' concurrency needs a rack/cluster-sized "
+                                    f"compute/GPU/HA tier (not archive-only)")
 
 
 if __name__ == "__main__":

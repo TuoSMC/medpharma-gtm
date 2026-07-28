@@ -29,18 +29,23 @@ _STORAGE = ("nvme-performance-storage", "capacity-archive-storage")
 
 
 def _gpu_role(profile, sizing, modality, role):
+    # Deterministic typical-default (a framework judgment encoded once, not a
+    # claim of sound deduction). Dual-review (codex+grok) killed the old
+    # `images && !AI -> visualization` heuristic: it mislabelled GPU dose-calc
+    # (radiation-oncology) and video-AI (surgical) as visualisation. The helper
+    # no longer guesses `visualization` — that value is reserved for a manual
+    # tag-driven override. A category whose real GPU role differs from this
+    # default is fixed at the TAG layer, never by hand-editing the envelope.
     if "gpu-server" not in profile:
         return "none"
-    ai = ("analytics-artificial-intelligence" in role) or ("infrastructure-platform" in role)
-    # pure visualisation: a GPU pulled only to render/display images, with no
-    # AI-compute role and no model modality (surgical video, TPS/OIS, 3D viz).
-    if ("images" in modality) and not ai and ("artificial-intelligence-models" not in modality):
-        return "visualization"
-    # AI compute: cluster-scale GPU = a train+infer development platform (mixed);
-    # node/rack GPU = a serving / accelerated-inference deployment.
+    # simulation modality = GPU compute+model work (Monte Carlo dose calc,
+    # comp-chem, process twins) -> a train+infer mix, never pure inference/viz.
+    if "simulation" in modality:
+        return "mixed"
+    # cluster-scale GPU = a train+infer development platform.
     if sizing.get("gpu-server") == "cluster":
         return "mixed"
-    return "inference"
+    return "inference"  # node/rack GPU = serving / accelerated inference
 
 
 def _capacity_band(profile, sizing, modality, role):
@@ -76,9 +81,12 @@ def _latency_class(profile, sizing, modality, role):
     # deployment is intentionally NOT in the helper's signature (kept minimal);
     # edge-deployment latency is captured via the edge-industrial profile
     # component, which every edge category carries.
+    # Dual-review (codex) killed the old `edge-industrial + time-series ->
+    # deterministic-real-time` rule: it over-claimed hard-real-time control for
+    # soft edge telemetry (asset tracking, cold-chain). The helper no longer
+    # emits `deterministic-real-time` — that strict class is a manual override
+    # reserved for genuine control-loop categories (SCADA/DCS, MES), set via tags.
     edge_ind = "edge-industrial" in profile
-    if edge_ind and "time-series" in modality:
-        return "deterministic-real-time"  # OT / control-loop
     if edge_ind or ("time-series" in modality):
         return "real-time"
     if ("transactional" in modality) or ("documents" in modality):
