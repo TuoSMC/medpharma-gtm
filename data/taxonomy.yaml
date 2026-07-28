@@ -6,7 +6,7 @@
 # in accounts/*.yaml.
 # ============================================================
 
-version: 6
+version: 7
 status: approved
 
 enums:
@@ -119,6 +119,19 @@ categories:
     plays: [play-a]
     vendors: [agfa-healthcare, fujifilm-healthcare, ge-healthcare, hyland-acuo-vna, infinitt-healthcare, intelerad, merative, philips, sectra, visage-imaging]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "imaging studies archived per day and average study size across modalities"
+      gpu_role: none
+      capacity_band: petabyte-plus
+      availability_class: standard
+      latency_class: interactive
+      data_growth: high
+      io_pattern: mixed
+      concurrency: high
+      retention_horizon: long
+      per_unit_data_size: {value_low: 0.1, value_high: 1.5, unit: "GB per imaging study", confidence: C, source: "Purview, 'Is Cloud Storage Right for My Medical Imaging Modality?' (https://www.purview.net/blog/is-cloud-storage-right-for-my-medical-imaging-modality)"}
+      sources: ["42 CFR 482.24(b)(1) CMS Condition of Participation: Medical record services — hospitals must retain medical records at least five years (eCFR: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.24)", "MQSA / ACR mammography record-keeping: retain at least five years, or ten years if no subsequent exam at the facility (ACR Accreditation Support: https://accreditationsupport.acr.org/support/solutions/articles/11000051613-record-keeping-mammography-revised-12-12-19-)", "Purview, 'Is Cloud Storage Right for My Medical Imaging Modality?' (https://www.purview.net/blog/is-cloud-storage-right-for-my-medical-imaging-modality)", "AuntMinnie, 'CT, MR, CR, and digital mammo are critical to archive storage forecasts' (https://www.auntminnie.com/imaging-informatics/enterprise-imaging/pacs-vna/article/15582698)"]
+      notes: null
 
   - id: bioinformatics-secondary
     name_en: Bioinformatics Secondary/Tertiary Analysis
@@ -142,6 +155,19 @@ categories:
     plays: [play-b]
     vendors: [dnanexus, illumina, nvidia, qiagen, sentieon, seqera, velsera]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "genomes sequenced per week and per-sample coverage depth"
+      gpu_role: mixed
+      capacity_band: petabyte-plus
+      availability_class: standard
+      latency_class: batch
+      data_growth: explosive
+      io_pattern: high-throughput-parallel
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: {value_low: 80, value_high: 200, unit: "GB per human whole-genome sample, aligned BAM through full fileset", confidence: C, source: "massgenomics.org, 'Brace Yourself for Large-Scale Whole Genome Sequencing' (2014) — http://massgenomics.org/2014/11/brace-yourself-for-large-scale-whole-genome-sequencing.html"}
+      sources: ["massgenomics.org, 'Brace Yourself for Large-Scale Whole Genome Sequencing' (2014) — http://massgenomics.org/2014/11/brace-yourself-for-large-scale-whole-genome-sequencing.html"]
+      notes: null
 
   - id: mes-ebr
     name_en: MES / EBR (Manufacturing Execution)
@@ -167,6 +193,19 @@ categories:
     evidence_note: null
 
   # ======== hospital clinical core ========
+    workload_envelope:
+      scaling_driver: "concurrent production lines and electronic-batch-record steps executed per shift"
+      gpu_role: none
+      capacity_band: none
+      availability_class: mission-critical
+      latency_class: deterministic-real-time
+      data_growth: moderate
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: medium
+      per_unit_data_size: null
+      sources: ["FDA 21 CFR 211.180 — any production, control, or distribution record specifically associated with a batch shall be retained for at least one year after the batch expiration date (eCFR: https://www.ecfr.gov/current/title-21/chapter-I/subchapter-C/part-211/subpart-J/section-211.180)"]
+      notes: null
   - id: ehr-emr-core
     name_en: EHR/EMR Core System
     name_zh: 電子病歷核心系統（EHR/EMR）
@@ -192,6 +231,19 @@ categories:
     play_exemption: "General datacenter refresh / disaster-recovery deal (high-availability database + virtual desktops); not an imaging, genomics, or manufacturing-edge motion — pursue as a standalone infrastructure deal"
     vendors: [altera-digital-health, epic-systems, meditech, oracle-health]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "concurrent clinicians and staffed bed count"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: mission-critical
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: random-transactional
+      concurrency: high
+      retention_horizon: long
+      per_unit_data_size: null
+      sources: ["42 CFR 482.24(b)(1) CMS Condition of Participation: Medical record services — hospitals must retain medical records at least five years (eCFR: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.24)"]
+      notes: null
 
   - id: cdss-clinical-ai
     name_en: Clinical Decision Support & Clinical AI (CDSS)
@@ -218,6 +270,19 @@ categories:
     play_exemption: "Clinical inference graphics-processing-unit capacity attaches to the electronic-health-record estate or the vendor's inference fleet; not a play-A/B/C motion"
     vendors: [abridge, aidoc, microsoft-nuance, wolters-kluwer-health]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "concurrent inference requests and number of deployed clinical models"
+      gpu_role: inference
+      capacity_band: none
+      availability_class: standard
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: ris-cvis-workflow
     name_en: Radiology & Cardiology Information Systems (RIS/CVIS)
@@ -243,6 +308,19 @@ categories:
     plays: [play-a]
     vendors: [epic-systems, fujifilm-healthcare, infinitt-healthcare, merative, philips, scimage, siemens-healthineers]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "procedures per day and per-study video and waveform size"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: real-time
+      data_growth: high
+      io_pattern: mixed
+      concurrency: moderate
+      retention_horizon: long
+      per_unit_data_size: null
+      sources: ["42 CFR 482.24(b)(1) CMS Condition of Participation: Medical record services — hospitals must retain medical records at least five years (eCFR: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.24)"]
+      notes: null
 
   - id: or-surgical-video
     name_en: OR Management & Surgical Video Platform
@@ -268,6 +346,19 @@ categories:
     plays: [play-a]
     vendors: [artisight, brainlab, caresyntax, karl-storz, medtronic, olympus, stryker]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "operating-room count and per-case video resolution and retention policy"
+      gpu_role: visualization
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: high
+      io_pattern: sequential-throughput
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: icu-central-monitoring
     name_en: ICU Central Monitoring & Clinical Surveillance
@@ -294,6 +385,19 @@ categories:
     play_exemption: "Device-maker (original-equipment-manufacturer) channel deal for regulator-cleared central stations; outside the three solution plays"
     vendors: [etiometry, ge-healthcare, medical-informatics-corp, philips]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "monitored bed count and continuous waveform sampling rate"
+      gpu_role: none
+      capacity_band: terabyte
+      availability_class: high-availability
+      latency_class: deterministic-real-time
+      data_growth: moderate
+      io_pattern: sequential-throughput
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: telehealth-platform
     name_en: Telehealth / Virtual Care Platform
@@ -319,6 +423,19 @@ categories:
     plays: []
     vendors: [amwell, caregility, keycare, philips, teladoc-health]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "not hardware-bearing at the customer; SaaS endpoints and virtual-care sessions only"
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: real-time
+      data_growth: low
+      io_pattern: light
+      concurrency: low
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: radiation-oncology-tps-ois
     name_en: Radiation Oncology — Treatment Planning (TPS) & Oncology Information System (OIS)
@@ -344,6 +461,19 @@ categories:
     plays: [play-a]
     vendors: [brainlab, elekta, raysearch-laboratories, varian-medical-systems]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "treatment plans computed per day and dose-calculation grid complexity"
+      gpu_role: visualization
+      capacity_band: hundreds-of-terabytes
+      availability_class: high-availability
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: mixed
+      concurrency: moderate
+      retention_horizon: long
+      per_unit_data_size: null
+      sources: ["42 CFR 482.24(b)(1) CMS Condition of Participation: Medical record services — hospitals must retain medical records at least five years (eCFR: https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.24)"]
+      notes: null
 
   - id: advanced-visualization-3d
     name_en: Advanced Visualization / 3D Image Post-Processing
@@ -371,6 +501,19 @@ categories:
     evidence_note: null
 
   # ======== hospital patient / business / admin ========
+    workload_envelope:
+      scaling_driver: "concurrent thin-client rendering sessions and per-study volume size"
+      gpu_role: inference
+      capacity_band: none
+      availability_class: standard
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
   - id: patient-portal-engagement
     name_en: Patient Portal & Engagement
     name_zh: 病人入口網站與互動服務
@@ -395,6 +538,19 @@ categories:
     plays: []
     vendors: [epic-systems, intelichart, luma-health, meditech, oracle-health]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "registered patient count and peak concurrent portal login burst"
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: interactive
+      data_growth: low
+      io_pattern: light
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: patient-access-scheduling
     name_en: Patient Access & Scheduling
@@ -420,6 +576,19 @@ categories:
     plays: []
     vendors: [epic-systems, experian-health, kyruus-health, luma-health, meditech, phreesia]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "daily outpatient visit volume and morning registration peak concurrency"
+      gpu_role: none
+      capacity_band: none
+      availability_class: high-availability
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: rcm-billing-claims
     name_en: Revenue Cycle Management / Billing & Claims
@@ -445,6 +614,19 @@ categories:
     plays: []
     vendors: [epic-systems, finthrive, oracle-health, ssi-group, trubridge, waystar]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "annual claim and charge-transaction volume plus concurrent batch scrubbing jobs"
+      gpu_role: inference
+      capacity_band: terabyte
+      availability_class: mission-critical
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: mixed
+      concurrency: high
+      retention_horizon: long
+      per_unit_data_size: null
+      sources: ["https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-B/part-424/subpart-P/section-424.516"]
+      notes: null
 
   - id: him-coding
     name_en: Health Information Management & Coding
@@ -471,6 +653,19 @@ categories:
     play_exemption: "Operator-side coding natural-language-processing plus the customer-side scanned-chart archive refresh (7-15 year retention); attaches to the revenue-cycle / electronic-health-record estate rather than a play motion"
     vendors: [dolbey, optum, solventum, trubridge]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "encounters coded per day and scanned-chart retention duration"
+      gpu_role: inference
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: mixed
+      concurrency: high
+      retention_horizon: long
+      per_unit_data_size: null
+      sources: ["https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-482/subpart-C/section-482.24"]
+      notes: null
 
   - id: hospital-erp
     name_en: Hospital ERP (Finance / Supply Chain / HR)
@@ -497,6 +692,19 @@ categories:
     play_exemption: "Back-office transactional high-availability cluster; standalone infrastructure refresh deal"
     vendors: [infor, microsoft, oracle-health, sap, workday]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "transaction volume, concurrent users, and bed count"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: mission-critical
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: mixed
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: workforce-management
     name_en: Workforce Management & Staffing
@@ -524,6 +732,19 @@ categories:
     evidence_note: null
 
   # ======== hospital device / facility / ops ========
+    workload_envelope:
+      scaling_driver: "employee headcount and shift-roster transaction volume"
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: real-time
+      data_growth: low
+      io_pattern: light
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
   - id: medical-device-integration
     name_en: Medical Device Integration & Alarm Management
     name_zh: 醫療設備整合與臨床警報管理
@@ -549,6 +770,19 @@ categories:
     play_exemption: "Hospital integration-engine high-availability pairs; standalone clinical-information-technology infrastructure deal"
     vendors: [ascom, connexall, ge-healthcare, philips, spok, stryker]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "number of monitored beds and per-device waveform capture depth"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: high-availability
+      latency_class: deterministic-real-time
+      data_growth: high
+      io_pattern: sequential-throughput
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: rtls-asset-tracking
     name_en: RTLS / Asset & Patient Flow Tracking
@@ -574,6 +808,19 @@ categories:
     plays: []
     vendors: [centrak, cognosos, kontakt-io, midmark, securitas-healthcare, zebra-technologies]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "tracked-tag and sensor count and location-update frequency"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: healthcare-cmms
     name_en: Healthcare CMMS / Biomedical Asset Maintenance
@@ -599,6 +846,19 @@ categories:
     plays: []
     vendors: [accruent, eq2, medimizer, nuvolo, phoenix-data-systems]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "work-order volume and count of managed biomedical assets"
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: interactive
+      data_growth: low
+      io_pattern: light
+      concurrency: low
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: pharmacy-automation
     name_en: Pharmacy Automation & Medication Management
@@ -624,6 +884,19 @@ categories:
     plays: []
     vendors: [arxium, bd, omnicell, scriptpro, swisslog-healthcare]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "dispensing-cabinet and robot fleet size and medication transaction volume"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: medical-iot-security
     name_en: Medical IoT / OT Security
@@ -649,6 +922,19 @@ categories:
     plays: []
     vendors: [armis, asimily, claroty, cynerio, ordr]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "connected medical-device count and mirrored network-traffic throughput"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: sequential-throughput
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: hospital-bms
     name_en: Hospital Building Management & Environmental Monitoring
@@ -674,6 +960,19 @@ categories:
     plays: []
     vendors: [honeywell, johnson-controls, schneider-electric, siemens]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "monitored building-automation point count and historian sampling rate"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: low
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: capacity-command-center
     name_en: Hospital Capacity Command Center & Patient Flow
@@ -699,6 +998,19 @@ categories:
     plays: []
     vendors: [ge-healthcare, leantaas, qventus, teletracking]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "real-time admit-discharge-transfer and device feed volume and monitored bed count"
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: smart-room-ambient-ai
     name_en: Smart-Room Ambient Sensing & Clinical Video AI
@@ -727,6 +1039,19 @@ categories:
     evidence_note: null
 
   # ======== diagnostics & laboratory ========
+    workload_envelope:
+      scaling_driver: "patient-room camera count, video streams per inference server, and video retention depth"
+      gpu_role: inference
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: high
+      io_pattern: sequential-throughput
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
   - id: lis
     name_en: Laboratory Information System (LIS)
     name_zh: 檢驗資訊系統 (LIS)
@@ -752,6 +1077,19 @@ categories:
     play_exemption: "Clinical laboratory transactional high-availability / disaster-recovery footprint; standalone infrastructure deal"
     vendors: [clinisys, epic-systems, ligolab, oracle-health, orchard-software]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "tests resulted per day and instrument-interface feed count"
+      gpu_role: none
+      capacity_band: terabyte
+      availability_class: mission-critical
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: random-transactional
+      concurrency: high
+      retention_horizon: medium
+      per_unit_data_size: null
+      sources: ["42 CFR 493.1105 (CLIA) — Standard: Retention requirements; laboratory test records and reports retained a minimum of two years after reporting. https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-493/subpart-J/section-493.1105"]
+      notes: "Autoverification and quality-control rule evaluation add transactional compute; footprint is storage-led as result and order records accumulate under retention rules."
 
   - id: lab-middleware-automation
     name_en: Lab Middleware & Automation Orchestration
@@ -777,6 +1115,19 @@ categories:
     plays: []
     vendors: [beckman-coulter, data-innovations, roche, siemens-healthineers]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "connected analyzer count and result messages per hour"
+      gpu_role: none
+      capacity_band: none
+      availability_class: high-availability
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Real-time autoverification and track-control logic beside the analyzers, not a long-term store; the record of truth persists in the laboratory information system."
 
   - id: digital-pathology
     name_en: Digital Pathology Platform (WSI workflow + AI-assisted diagnosis)
@@ -802,6 +1153,19 @@ categories:
     plays: [play-a]
     vendors: [hamamatsu-photonics, indica-labs, leica-biosystems, paige-ai, pathai, philips, proscia, roche, sectra]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "whole-slide images scanned per day and per-slide image size"
+      gpu_role: mixed
+      capacity_band: petabyte-plus
+      availability_class: standard
+      latency_class: interactive
+      data_growth: explosive
+      io_pattern: high-throughput-parallel
+      concurrency: high
+      retention_horizon: long
+      per_unit_data_size: {value_low: 1, value_high: 4, unit: "GB per compressed whole-slide image", confidence: B, source: "Digital Pathology Association FAQ — compressed whole-slide images are typically on the order of one to a few gigabytes per slide. https://digitalpathologyassociation.org/faq"}
+      sources: ["Digital Pathology Association FAQ — compressed whole-slide images are typically on the order of one to a few gigabytes per slide. https://digitalpathologyassociation.org/faq", "42 CFR 493.1105 (CLIA) — pathology test reports retained a minimum of ten years after reporting. https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-493/subpart-J/section-493.1105", "College of American Pathologists (CAP) Laboratory Accreditation — surgical pathology slides, blocks, and reports retained ten years."]
+      notes: "Ingest bursts at scan time onto the fast tier; GPU inference and model training share that tier before images migrate to the capacity archive."
 
   - id: ngs-lab-lims
     name_en: NGS Wet-Lab LIMS (run & sample tracking)
@@ -825,6 +1189,19 @@ categories:
     plays: []
     vendors: [illumina, l7-informatics, labcollector, ovation]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "samples and sequencing runs tracked per week"
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Transactional sample and run tracking only; the terabyte-scale run output belongs to the sequencers and to downstream secondary analysis, not to this software."
 
   - id: clinical-genomics-reporting
     name_en: Clinical Genomics Interpretation & Reporting
@@ -850,6 +1227,19 @@ categories:
     evidence_note: null
 
   # ======== pharma R&D + clinical development ========
+    workload_envelope:
+      scaling_driver: "genomic cases interpreted and reported per month"
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Interpretation and reporting layer; the compute-heavy variant calling sits upstream in bioinformatics-secondary and any real footprint is cloud at the operator."
   - id: rd-lab-informatics
     name_en: R&D Lab Informatics (ELN / research LIMS / biobank & sample management)
     name_zh: 研發實驗室資訊系統（電子實驗紀錄簿／實驗室資訊管理系統／生物樣本庫）
@@ -872,6 +1262,19 @@ categories:
     plays: []
     vendors: [benchling, dotmatics, labvantage, labware, sapio-sciences, thermo-fisher-scientific]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "instrument files and specimen records accumulated per site"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: mission-critical
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: comp-chem-simulation
     name_en: Computational Chemistry / Molecular Modeling & Simulation
@@ -895,6 +1298,19 @@ categories:
     plays: [play-b]
     vendors: [cadence-design-systems, chemical-computing-group, cresset, dassault-systemes, schrodinger]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "concurrent simulation jobs and modeled system atom count"
+      gpu_role: mixed
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: batch
+      data_growth: moderate
+      io_pattern: high-throughput-parallel
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: ai-drug-discovery
     name_en: AI Drug Discovery Platform
@@ -918,6 +1334,19 @@ categories:
     plays: [play-b]
     vendors: [cadence-design-systems, chemical-computing-group, cresset, nvidia, schrodinger]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "model parameter scale and curated training-set throughput"
+      gpu_role: mixed
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: batch
+      data_growth: high
+      io_pattern: high-throughput-parallel
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: cryo-em-structural-bio
     name_en: Structural Biology / Cryo-EM Image Processing
@@ -941,6 +1370,19 @@ categories:
     plays: [play-b]
     vendors: [gatan, structura-biotechnology, thermo-fisher-scientific]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "microscope movies collected per day and per-movie frame size"
+      gpu_role: inference
+      capacity_band: petabyte-plus
+      availability_class: standard
+      latency_class: batch
+      data_growth: explosive
+      io_pattern: high-throughput-parallel
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: {value_low: 1, value_high: 5, unit: "TB per single-particle dataset collection session", confidence: B, source: "Baldwin et al., 'Big data in cryoEM,' Curr Opin Microbiol 2018 — https://pmc.ncbi.nlm.nih.gov/articles/PMC6067001/"}
+      sources: ["Baldwin et al., 'Big data in cryoEM,' Curr Opin Microbiol 2018 — https://pmc.ncbi.nlm.nih.gov/articles/PMC6067001/"]
+      notes: null
 
   - id: clinical-trial-suite
     name_en: Clinical Trial Systems Suite (EDC / CTMS / eTMF / RTSM)
@@ -964,6 +1406,19 @@ categories:
     plays: []
     vendors: [advarra, ennov, medidata, openclinica, oracle-life-sciences, veeva-systems]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: null
+      gpu_role: none
+      capacity_band: none
+      availability_class: best-effort
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: long
+      per_unit_data_size: null
+      sources: ["Regulation (EU) No 536/2014 (Clinical Trials Regulation), Article 58 — trial master file archived at least 25 years after end of trial; EMA 'Guideline on the content, management and archiving of the clinical trial master file' — https://www.ema.europa.eu/en/documents/scientific-guideline/guideline-content-management-and-archiving-clinical-trial-master-file-paper-andor-electronic_en.pdf"]
+      notes: null
 
   - id: pv-regulatory-information
     name_en: Pharmacovigilance & Regulatory Information Management (PV / RIM)
@@ -989,6 +1444,19 @@ categories:
     evidence_note: null
 
   # ======== GMP manufacturing / quality / supply ========
+    workload_envelope:
+      scaling_driver: "adverse-event case volume processed per period"
+      gpu_role: inference
+      capacity_band: tens-of-terabytes
+      availability_class: standard
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: long
+      per_unit_data_size: null
+      sources: ["Commission Implementing Regulation (EU) No 520/2012, Article 12 — pharmacovigilance data/documentation retained for the life of the marketing authorisation and at least 10 years after it ceases; EMA GVP Module VI — https://www.ema.europa.eu/en/human-regulatory-overview/post-authorisation/pharmacovigilance-post-authorisation/good-pharmacovigilance-practices-gvp"]
+      notes: null
   - id: scada-dcs
     name_en: SCADA / DCS (Process Control)
     name_zh: 監控與資料擷取（SCADA）／分散式控制系統（DCS，製程控制）
@@ -1011,6 +1479,19 @@ categories:
     plays: [play-c]
     vendors: [abb, aveva, emerson, honeywell, rockwell-automation, siemens, yokogawa]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "control tag and input/output point count per process area"
+      gpu_role: none
+      capacity_band: none
+      availability_class: high-availability
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Deterministic control loop; long-term storage is offloaded to the plant historian rather than held in the control tier."
 
   - id: plant-historian
     name_en: Plant Historian (Time-Series Data)
@@ -1034,6 +1515,19 @@ categories:
     plays: [play-c]
     vendors: [aspentech, aveva, canary-labs, ge-vernova]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "historized tag count and sampling frequency per site"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: real-time
+      data_growth: high
+      io_pattern: sequential-throughput
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Hot data on fast local storage with a capacity tier for multi-year retention; footprint grows as lines and sensors are added."
 
   - id: qc-lims-cds
     name_en: QC Lab Informatics (LIMS / Chromatography Data)
@@ -1057,6 +1551,19 @@ categories:
     plays: [play-c]
     vendors: [agilent-technologies, labvantage, labware, starlims, thermo-fisher-scientific, waters]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "quality-control samples tested per day and instrument raw-file volume"
+      gpu_role: none
+      capacity_band: tens-of-terabytes
+      availability_class: high-availability
+      latency_class: real-time
+      data_growth: moderate
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: medium
+      per_unit_data_size: null
+      sources: ["FDA 21 CFR 211.194 (complete laboratory records) with retention per 21 CFR 211.180 — batch-associated laboratory records retained at least one year after batch expiration (eCFR: https://www.ecfr.gov/current/title-21/chapter-I/subchapter-C/part-211/subpart-J/section-211.180)"]
+      notes: null
 
   - id: eqms-calibration
     name_en: eQMS & Calibration / Maintenance Management (GxP Quality)
@@ -1080,6 +1587,19 @@ categories:
     plays: []
     vendors: [assurx, etq, ideagen, iqvia, mastercontrol, veeva-systems]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "controlled quality records and documents managed per site"
+      gpu_role: none
+      capacity_band: tens-of-terabytes
+      availability_class: standard
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: medium
+      per_unit_data_size: null
+      sources: ["FDA 21 CFR 211.180 — GMP records maintained under this part retained at least one year after the associated batch expiration date; readily available for inspection during the retention period (eCFR: https://www.ecfr.gov/current/title-21/chapter-I/subchapter-C/part-211/subpart-J/section-211.180)"]
+      notes: null
 
   - id: serialization-track-trace
     name_en: Serialization / Track-and-Trace (L4-L5)
@@ -1103,6 +1623,19 @@ categories:
     plays: [play-c]
     vendors: [antares-vision, optel-group, sap, systech, tracelink]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "packaging lines and serialization events generated per line"
+      gpu_role: none
+      capacity_band: none
+      availability_class: high-availability
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: medium
+      per_unit_data_size: null
+      sources: ["Drug Supply Chain Security Act, 21 U.S.C. 582 — trading partners must retain transaction information and transaction statements for at least six years after the transaction (FDA DSCSA: https://www.fda.gov/drugs/drug-supply-chain-security-act-dscsa)"]
+      notes: null
 
   - id: warehouse-cold-chain
     name_en: Warehouse & Cold-Chain Management (WMS / Environmental Monitoring)
@@ -1126,6 +1659,19 @@ categories:
     plays: [play-c]
     vendors: [blue-yonder, ellab, koerber, manhattan-associates, sap, vaisala]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "distribution and storage sites and environmental-monitoring sensor count"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Ruggedized edge gateways aggregate cold-chain and cleanroom sensor streams alongside on-prem or edge warehouse management."
 
   - id: pat-process-twin
     name_en: PAT & Process Digital Twin (Process Development Analytics / Simulation)
@@ -1149,6 +1695,19 @@ categories:
     plays: [play-c]
     vendors: [aspentech, bruker, sartorius, siemens, tulip-interfaces]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "monitored unit operations and real-time process-model complexity"
+      gpu_role: inference
+      capacity_band: none
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: mixed
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Real-time spectral inference at the line paired with GPU/HPC bioprocess simulation and digital-twin runs."
 
   - id: automated-visual-inspection
     name_en: Automated Visual Inspection / Machine-Vision QC (deep learning)
@@ -1174,6 +1733,19 @@ categories:
     evidence_note: null
 
   # ======== data platforms / analytics / payer / MedTech OEM ========
+    workload_envelope:
+      scaling_driver: "fill-finish and packaging lines and images inspected per line"
+      gpu_role: inference
+      capacity_band: none
+      availability_class: standard
+      latency_class: real-time
+      data_growth: low
+      io_pattern: light
+      concurrency: low
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Deep-learning inspection of vials, syringes and finished devices; edge GPU inference node per line under GxP validation."
   - id: clinical-data-lakehouse
     name_en: Clinical Data Warehouse / Health Data Lakehouse
     name_zh: 臨床資料倉儲／健康資料湖倉
@@ -1199,6 +1771,19 @@ categories:
     play_exemption: "Cross-cutting clinical data warehouse / lakehouse — a standalone data-platform infrastructure deal (object + fast-analytics tier + growing clinical-note NLP GPU), not the sequencing/research-AI motion of Play B"
     vendors: [databricks, health-catalyst, intersystems, snowflake]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "data-modality breadth ingested and total retained clinical record volume across the covered patient population"
+      gpu_role: inference
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: real-time
+      data_growth: high
+      io_pattern: mixed
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Warehouse compute mixes interactive analyst query with heavy batch extract-transform-load and emerging language-model passes over clinical notes."
 
   - id: population-health-analytics
     name_en: Population Health & Risk Analytics
@@ -1222,6 +1807,19 @@ categories:
     plays: []
     vendors: [arcadia, health-catalyst, innovaccer, lightbeam-health, milliman-medinsight]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "covered lives and depth of claims and encounter history aggregated"
+      gpu_role: none
+      capacity_band: tens-of-terabytes
+      availability_class: standard
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: mixed
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "SaaS-dominant; the residual iron is operator-side warehouse compute for claims and record aggregation and risk-model scoring."
 
   - id: rwd-rwe-analytics
     name_en: RWD/RWE Analytics Platform
@@ -1246,6 +1844,19 @@ categories:
     play_exemption: "Operator-side real-world-data / claims analytics platform (warehouse + software-as-a-service); a data-platform co-sell, not the sequencing / research-AI motion of Play B"
     vendors: [aetion, flatiron-health, iqvia, komodo-health, tempus, trinetx, truveta]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "covered lives and volume of unstructured clinical documents linked and abstracted"
+      gpu_role: inference
+      capacity_band: petabyte-plus
+      availability_class: standard
+      latency_class: interactive
+      data_growth: high
+      io_pattern: mixed
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Hardware concentrates at the data operator; petabyte-class lake plus language-model chart abstraction and clinico-genomic linkage."
 
   - id: hie-interoperability-engine
     name_en: HIE / Interoperability Engine
@@ -1271,6 +1882,19 @@ categories:
     plays: []
     vendors: [intersystems, nextgen-healthcare, orion-health, rhapsody]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "interface count and inbound clinical message volume"
+      gpu_role: none
+      capacity_band: none
+      availability_class: mission-critical
+      latency_class: interactive
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Message brokering with strict clustered high-availability and dual-site failover; storage is transient, not the sizing axis."
 
   - id: imaging-ai-deployment
     name_en: Imaging AI Deployment Platform (Inference Orchestration / Marketplace)
@@ -1296,6 +1920,19 @@ categories:
     plays: [play-a]
     vendors: [aidoc, blackford-analysis, carpl-ai, deepc, ge-healthcare, philips, sectra, siemens-healthineers, viz-ai]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "imaging studies per day and number of concurrently served AI models"
+      gpu_role: mixed
+      capacity_band: none
+      availability_class: high-availability
+      latency_class: real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: payer-core-admin
     name_en: Payer Core Administration (Claims Adjudication)
@@ -1320,6 +1957,19 @@ categories:
     play_exemption: "Payer claims core; payer segment sits outside the three provider/pharma plays"
     vendors: [cognizant-trizetto, healthedge, plexis-healthcare-systems]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "claims transaction volume and covered member count"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: mission-critical
+      latency_class: interactive
+      data_growth: high
+      io_pattern: mixed
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Transactional adjudication database with nightly batch windows and mandatory dual-site disaster recovery."
 
   - id: payer-um-fraud-analytics
     name_en: Payer Care/Utilization Management & Fraud Analytics
@@ -1344,6 +1994,19 @@ categories:
     play_exemption: "Payer analytics; payer segment sits outside the three provider/pharma plays"
     vendors: [codoxo, cotiviti, sas, zeomega]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "total claims volume scored and model retraining cadence"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: interactive
+      data_growth: moderate
+      io_pattern: high-throughput-parallel
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Utilization management is SaaS-dominant; the iron is fraud, waste and abuse model training and scoring at large or government payers."
 
   - id: samd-embedded-oem-platform
     name_en: SaMD & Embedded Device Software Platform (OEM)
@@ -1368,6 +2031,19 @@ categories:
     play_exemption: "OEM embedded design-win — medtech / in-vitro-diagnostics device software; a per-unit board/edge bill-of-materials channel deal, not a hospital imaging/genomics/manufacturing play"
     vendors: [blackberry-qnx, green-hills-software, nvidia, wind-river]
     evidence_note: null
+    workload_envelope:
+      scaling_driver: "units shipped per year and the artificial-intelligence inference content designed into each device"
+      gpu_role: inference
+      capacity_band: none
+      availability_class: standard
+      latency_class: deterministic-real-time
+      data_growth: low
+      io_pattern: mixed
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "The embedded per-unit bill-of-materials and the original-equipment-manufacturer verification, simulation and model-training clusters size as two independent motions."
 
   - id: ai-hpc-orchestration
     name_en: AI / HPC Workload Orchestration & MLOps (cluster scheduling)
@@ -1393,6 +2069,19 @@ categories:
     evidence_note: null
 
   # ======== completeness-audit additions (2026-07-28, opus-verified gaps) ========
+    workload_envelope:
+      scaling_driver: "aggregate concurrent GPU jobs across the cluster"
+      gpu_role: mixed
+      capacity_band: none
+      availability_class: standard
+      latency_class: batch
+      data_growth: low
+      io_pattern: mixed
+      concurrency: massive
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
   - id: pharmacometrics-modeling-simulation
     name_en: Pharmacometrics & Clinical Pharmacology Modeling & Simulation
     name_zh: 藥物計量學與臨床藥理建模模擬
@@ -1415,6 +2104,19 @@ categories:
     plays: [play-b]
     vendors: [certara, icon-plc, metrum-research-group, open-systems-pharmacology, simulations-plus]
     evidence_note: "Added via completeness audit (opus-verified gap); distinct from comp-chem-simulation and clinical-trial-suite."
+    workload_envelope:
+      scaling_driver: "concurrent estimation and bootstrap replicate jobs"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: interactive
+      data_growth: low
+      io_pattern: high-throughput-parallel
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: ms-proteomics-metabolomics
     name_en: Mass-Spectrometry Proteomics & Metabolomics Informatics
@@ -1438,6 +2140,19 @@ categories:
     plays: [play-b]
     vendors: [biognosys, bruker, matrix-science, nonlinear-dynamics-waters, sciex, thermo-fisher-scientific]
     evidence_note: "Added via completeness audit (opus-verified gap)."
+    workload_envelope:
+      scaling_driver: "samples analyzed per day and per-run raw file size"
+      gpu_role: none
+      capacity_band: hundreds-of-terabytes
+      availability_class: standard
+      latency_class: batch
+      data_growth: high
+      io_pattern: high-throughput-parallel
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: spatial-biology-omics
     name_en: Spatial Biology / Spatial-Omics Analysis
@@ -1461,6 +2176,19 @@ categories:
     plays: [play-b]
     vendors: [10x-genomics, akoya-biosciences, bruker-spatial-biology, indica-labs, vizgen]
     evidence_note: "Added via completeness audit (opus-verified gap); distinct from digital-pathology, bioinformatics-secondary, cryo-em-structural-bio."
+    workload_envelope:
+      scaling_driver: "spatial runs per week and per-run image and transcript volume"
+      gpu_role: inference
+      capacity_band: petabyte-plus
+      availability_class: standard
+      latency_class: batch
+      data_growth: explosive
+      io_pattern: high-throughput-parallel
+      concurrency: moderate
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: null
 
   - id: healthcare-llm-serving
     name_en: Healthcare Foundation-Model / LLM Serving Platform
@@ -1484,6 +2212,19 @@ categories:
     plays: [play-b]
     vendors: [aidoc, hippocratic-ai, john-snow-labs, microsoft-nuance-dax, nvidia-nim-bionemo]
     evidence_note: "Added via completeness audit (opus-verified gap); the text/multimodal analogue of imaging-ai-deployment."
+    workload_envelope:
+      scaling_driver: "concurrent token throughput and number of foundation models hosted"
+      gpu_role: mixed
+      capacity_band: none
+      availability_class: standard
+      latency_class: interactive
+      data_growth: low
+      io_pattern: light
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Compute-bound tensor-parallel inference gateway sited on-premises for protected-health-information residency; storage input-output is not the driver."
 
   - id: payer-actuarial-hpc
     name_en: Payer Actuarial & Underwriting Risk Modeling
@@ -1508,3 +2249,16 @@ categories:
     play_exemption: "Payer actuarial / underwriting compute grid; the payer segment sits outside the three provider/pharma solution plays"
     vendors: [fis-prophet, milliman, moodys-analytics, wtw]
     evidence_note: "Added via completeness audit (opus-verified gap); distinct from payer-core-admin and payer-um-fraud-analytics."
+    workload_envelope:
+      scaling_driver: "stochastic scenario count and total policy volume per reserving run"
+      gpu_role: none
+      capacity_band: none
+      availability_class: standard
+      latency_class: interactive
+      data_growth: low
+      io_pattern: high-throughput-parallel
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Central-processing-unit-dense grid for Monte-Carlo reserving on tight overnight batch windows; scratch data is transient, not accumulating."

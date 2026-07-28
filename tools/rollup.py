@@ -80,7 +80,8 @@ def main():
         print(json.dumps(rs, ensure_ascii=False, indent=2))
         return
 
-    print(f"\n  Per-buyer rollup over {len(rs)} categories (taxonomy.yaml v{load.__doc__ or 6})\n".replace("v"+str(load.__doc__ or 6),"v6"))
+    ver = yaml.safe_load(open(TAX, encoding="utf-8")).get("version", "?")
+    print(f"\n  Per-buyer rollup over {len(rs)} categories (taxonomy.yaml v{ver})\n")
     pb = collections.Counter(r["primary_buyer"] for r in rs)
     print("  primary_buyer:")
     for b in ("customer", "operator", "original-equipment-manufacturer", "hyperscaler"):

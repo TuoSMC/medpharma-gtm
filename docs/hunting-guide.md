@@ -1,6 +1,6 @@
 # SMCI Medical / Pharma Hunting Guide
 
-> Generated from `/data` (taxonomy v6, 58 categories, 228 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
+> Generated from `/data` (taxonomy v7, 58 categories, 228 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
 >
 > **Gate question first (CLAUDE.md §3): who controls the infrastructure behind the software?** No answer → not in pipeline.
 
