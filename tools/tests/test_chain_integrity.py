@@ -595,6 +595,30 @@ class TestAppGuidance(unittest.TestCase):
         self.assertIn("el('details'", self.html,
                       "Explore filters must be built into a collapsible <details> Refine panel")
 
+    def test_gotab_is_parameterized_for_deeplinks(self):
+        """codex+grok P1: goTab must accept options so tiles/cards deep-link
+        (scroll to a play, prefilter Explore) instead of dumping to a generic tab."""
+        self.assertIn("function goTab(id,opts", self.html,
+                      "goTab must take an opts arg for deep-linking")
+
+    def test_play_tiles_deeplink_to_their_play(self):
+        self.assertIn("goTab('hunt',{scrollTo", self.html,
+                      "play tiles must deep-link/scroll to their own play section, not generic Hunt")
+
+    def test_hot_cards_prefilter_explore(self):
+        self.assertIn("exploreFilter", self.html,
+                      "HOT stat cards must prefilter Explore to the buyer + opportunity>=3, not open unfiltered Hunt")
+
+    def test_home_counts_are_dynamic_not_hardcoded(self):
+        for lie in ("All 14 triggers", "all 53 categories"):
+            self.assertNotIn(lie, self.html, f"Home hardcodes '{lie}' — will drift; use array length")
+
+    def test_trigger_panel_label_is_honest(self):
+        """grok P1: the panel is a static urgency-sorted slice, not fired CRM signals."""
+        self.assertNotIn("A trigger fired", self.html,
+                         "misleading 'trigger fired' label implies CRM state it does not have")
+        self.assertIn("Highest-urgency signals", self.html)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=1)
