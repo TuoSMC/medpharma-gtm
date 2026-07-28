@@ -1,6 +1,6 @@
 # SMCI Medical / Pharma Hunting Guide
 
-> Generated from `/data` (taxonomy v6, 58 categories, 207 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
+> Generated from `/data` (taxonomy v6, 58 categories, 228 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
 >
 > **Gate question first (CLAUDE.md §3): who controls the infrastructure behind the software?** No answer → not in pipeline.
 
@@ -32,11 +32,11 @@
 | **Bioinformatics Secondary/Tertiary Analysis** <br><small>bioinformatics-secondary</small> | 4 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster), nvme-performance-storage (rack), capacity-archive-storage (cluster) | DNAnexus, Inc., Illumina, NVIDIA Corporation, QIAGEN Digital Insights, Sentieon Inc., Seqera Labs, S.L., Velsera |
 | **Computational Chemistry / Molecular Modeling & Simulation** <br><small>comp-chem-simulation</small> | 4 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster), nvme-performance-storage (rack), high-memory (rack) | Cadence Design Systems, Inc. (OpenEye), Chemical Computing Group ULC, Cresset Group, Dassault Systemes SE (BIOVIA), Schrodinger, Inc. |
 | **Structural Biology / Cryo-EM Image Processing** <br><small>cryo-em-structural-bio</small> | 4 | 2 | · | gpu-server (rack), nvme-performance-storage (rack), capacity-archive-storage (cluster), high-memory (node) | Gatan, Inc. (AMETEK), Structura Biotechnology Inc., Thermo Fisher Scientific Inc. |
-| **Healthcare Foundation-Model / LLM Serving Platform** <br><small>healthcare-llm-serving</small> | 4 | 3 | · | gpu-server (cluster), high-memory (rack) | — |
+| **Healthcare Foundation-Model / LLM Serving Platform** <br><small>healthcare-llm-serving</small> | 4 | 3 | · | gpu-server (cluster), high-memory (rack) | Aidoc, Hippocratic AI, John Snow Labs, Microsoft (Nuance Dragon / DAX Copilot), NVIDIA (NIM / BioNeMo) |
 | **AI / HPC Workload Orchestration & MLOps (cluster scheduling)** <br><small>ai-hpc-orchestration</small> | 3 | 3 | · | gpu-server (cluster), high-performance-computing-cpu (cluster) | Altair Engineering (Siemens), Hewlett Packard Enterprise Company, IBM Corporation, NVIDIA Corporation, Seqera Labs, S.L. |
-| **Mass-Spectrometry Proteomics & Metabolomics Informatics** <br><small>ms-proteomics-metabolomics</small> | 3 | 2 | · | high-performance-computing-cpu (rack), high-memory (node), nvme-performance-storage (rack), capacity-archive-storage (rack) | — |
-| **Pharmacometrics & Clinical Pharmacology Modeling & Simulation** <br><small>pharmacometrics-modeling-simulation</small> | 3 | 2 | · | high-performance-computing-cpu (rack), high-memory (node) | — |
-| **Spatial Biology / Spatial-Omics Analysis** <br><small>spatial-biology-omics</small> | 3 | 2 | · | gpu-server (rack), nvme-performance-storage (rack), capacity-archive-storage (cluster) | — |
+| **Mass-Spectrometry Proteomics & Metabolomics Informatics** <br><small>ms-proteomics-metabolomics</small> | 3 | 2 | · | high-performance-computing-cpu (rack), high-memory (node), nvme-performance-storage (rack), capacity-archive-storage (rack) | Biognosys, Bruker Corporation (Optimal Industrial Technologies), Matrix Science, Nonlinear Dynamics (Waters Corporation), SCIEX (Danaher), Thermo Fisher Scientific Inc. |
+| **Pharmacometrics & Clinical Pharmacology Modeling & Simulation** <br><small>pharmacometrics-modeling-simulation</small> | 3 | 2 | · | high-performance-computing-cpu (rack), high-memory (node) | Certara, ICON plc, Metrum Research Group, Open Systems Pharmacology (PK-Sim/MoBi, originated at Bayer), Simulations Plus |
+| **Spatial Biology / Spatial-Omics Analysis** <br><small>spatial-biology-omics</small> | 3 | 2 | · | gpu-server (rack), nvme-performance-storage (rack), capacity-archive-storage (cluster) | 10x Genomics, Akoya Biosciences (a Quanterix company), Bruker Spatial Biology (NanoString / CosMx), Indica Labs, Vizgen |
 
 ### GMP Manufacturing Edge  (`play-c`)
 *Hardware anchor:* Short-depth / industrial edge servers, Redundant tower/rack pairs, DR storage

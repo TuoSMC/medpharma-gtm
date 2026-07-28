@@ -1403,7 +1403,7 @@ categories:
     hardware_profile_sizing: {high-performance-computing-cpu: rack, high-memory: node}
     infrastructure_notes: "Embarrassingly-parallel population pharmacokinetic/pharmacodynamic estimation (NONMEM/NLME), covariate searches, bootstrap and virtual-population trial simulation fan out across CPU cores; quantitative-systems-pharmacology and physiologically-based models add large-memory nodes. Validated on-prem/private grids for licensing and regulatory compliance. Sized by concurrent estimation jobs."
     plays: [play-b]
-    vendors: []
+    vendors: [certara, icon-plc, metrum-research-group, open-systems-pharmacology, simulations-plus]
     evidence_note: "Added via completeness audit (opus-verified gap); distinct from comp-chem-simulation and clinical-trial-suite."
 
   - id: ms-proteomics-metabolomics
@@ -1426,7 +1426,7 @@ categories:
     hardware_profile_sizing: {high-performance-computing-cpu: rack, high-memory: node, nvme-performance-storage: rack, capacity-archive-storage: rack}
     infrastructure_notes: "Parallel spectral-library and database search plus data-independent-acquisition deconvolution (MaxQuant / DIA-NN / Spectronaut / FragPipe) are CPU-bound with large-memory nodes; NVMe scratch; accumulating raw instrument files drive archive growth; emerging GPU for deep-learning spectral and retention-time prediction. Sized by sample throughput. Distinct from NGS-scoped bioinformatics-secondary."
     plays: [play-b]
-    vendors: []
+    vendors: [biognosys, bruker, matrix-science, nonlinear-dynamics-waters, sciex, thermo-fisher-scientific]
     evidence_note: "Added via completeness audit (opus-verified gap)."
 
   - id: spatial-biology-omics
@@ -1449,7 +1449,7 @@ categories:
     hardware_profile_sizing: {gpu-server: rack, nvme-performance-storage: rack, capacity-archive-storage: cluster}
     infrastructure_notes: "Deep-learning cell segmentation, image registration and stitching, and spatial modeling on GPU (Xenium / Visium / CosMx / PhenoCycler / MERFISH); NVMe working tier; multiplex whole-slide image and transcript stacks (hundreds of gigabytes to multiple terabytes per run) drive petabyte archive. Mirrors the cryogenic-electron-microscopy profile. Sized by run volume."
     plays: [play-b]
-    vendors: []
+    vendors: [10x-genomics, akoya-biosciences, bruker-spatial-biology, indica-labs, vizgen]
     evidence_note: "Added via completeness audit (opus-verified gap); distinct from digital-pathology, bioinformatics-secondary, cryo-em-structural-bio."
 
   - id: healthcare-llm-serving
@@ -1472,7 +1472,7 @@ categories:
     hardware_profile_sizing: {gpu-server: cluster, high-memory: rack}
     infrastructure_notes: "Large-video-memory multi-GPU tensor-parallel serving of 70-billion-parameter and larger foundation models sited on-prem for protected-health-information residency and latency (ambient documentation, chart summarization, coding assist, agentic clinical workflows). The serving/infrastructure layer beneath the decision-support apps (cdss-clinical-ai) — the same app-versus-infrastructure split as ai-drug-discovery versus ai-hpc-orchestration. Sized by concurrent token throughput and number of models hosted."
     plays: [play-b]
-    vendors: []
+    vendors: [aidoc, hippocratic-ai, john-snow-labs, microsoft-nuance-dax, nvidia-nim-bionemo]
     evidence_note: "Added via completeness audit (opus-verified gap); the text/multimodal analogue of imaging-ai-deployment."
 
   - id: payer-actuarial-hpc
@@ -1496,5 +1496,5 @@ categories:
     infrastructure_notes: "CPU-dense grid for large stochastic / Monte-Carlo actuarial runs (thousands of scenarios over millions of policies on tight overnight batch windows); regulatory reserving and reporting deadlines drive grid refresh and expansion. Sized by scenario count and policy volume."
     plays: []
     play_exemption: "Payer actuarial / underwriting compute grid; the payer segment sits outside the three provider/pharma solution plays"
-    vendors: []
+    vendors: [fis-prophet, milliman, moodys-analytics, wtw]
     evidence_note: "Added via completeness audit (opus-verified gap); distinct from payer-core-admin and payer-um-fraud-analytics."

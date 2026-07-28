@@ -1,9 +1,24 @@
 # Vendor registry — names live HERE, never in code (CLAUDE.md §3, §8)
 # Web-researched + adversarially verified (codex + grok + opus). Every claim sourced;
 # unverifiable fields are honest nulls / 'not publicly disclosed' — never fabricated.
-version: 5
+version: 6
 
 vendors:
+  - id: 10x-genomics
+    name: 10x Genomics
+    categories: [spatial-biology-omics]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://www.10xgenomics.com/platforms/xenium"
+    headquarters: "Pleasanton, California, USA"
+    founded: 2012
+    leadership: "Serge Saxonov — Co-founder & CEO"
+    history: "Founded 2012 in Pleasanton by Serge Saxonov, Ben Hindson and Kevin Ness; pioneered single-cell and spatial platforms including Chromium, Visium and the Xenium in-situ analyzer."
+    market_position: "Market leader in single-cell and spatial biology; publicly traded (Nasdaq: TXG). Its Xenium in-situ platform surpassed 100+ analyzer shipments per 2025 reporting; instruments and analysis run on customer-owned on-prem compute."
+    sources:
+      - "https://www.10xgenomics.com/platforms/xenium"
+      - "https://endpoints.news/exclusive-10x-genomics-ceo-touts-incredible-traction-with-newest-launch-shipping-over-100-spatial-biology-analyzers/"
+      - "https://www.prnewswire.com/news-releases/10x-genomics-launches-xenium-protein-advancing-spatial-biology-by-enabling-same-cell-rna-and-protein-analysis-302532774.html"
   - id: abb
     name: ABB
     categories: [scada-dcs]
@@ -114,7 +129,7 @@ vendors:
       - "https://www.sec.gov/Archives/edgar/data/1090872/000095012324003692/a-ex99_1.htm"
   - id: aidoc
     name: Aidoc
-    categories: [cdss-clinical-ai, imaging-ai-deployment]
+    categories: [cdss-clinical-ai, healthcare-llm-serving, imaging-ai-deployment]
     deployment_models: [public-cloud, hybrid, edge]
     confidence: B
     source: "https://www.aidoc.com/about/news/aidoc-secures-150m-for-its-healthcare-foundation-model/ (aiOS clinical AI operating system on CARE foundation model; ~2,000 hospitals, 60M cases/yr; $150M Series E with NVIDIA/NVentures and AWS partnerships)"
@@ -128,6 +143,21 @@ vendors:
       - "https://en.wikipedia.org/wiki/Aidoc"
       - "https://www.aidoc.com/about/leadership/elad-walach/"
       - "https://www.aidoc.com/about/news/aidoc-secures-150m-for-its-healthcare-foundation-model/"
+  - id: akoya-biosciences
+    name: Akoya Biosciences (a Quanterix company)
+    categories: [spatial-biology-omics]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://ir.quanterix.com/news-releases/news-release-details/quanterix-acquire-akoya-biosciences-creating-first-integrated"
+    headquarters: "Marlborough, Massachusetts, USA"
+    founded: 2015
+    leadership: "Masoud Toloue — CEO, Quanterix (Akoya's parent)"
+    history: "Founded 2015 in Marlborough on Stanford's CODEX technology; commercialized PhenoCycler and PhenoImager spatial platforms; acquired by Quanterix in an all-stock deal completed July 2025."
+    market_position: "Spatial-proteomics specialist (PhenoCycler/CODEX, PhenoImager); now part of Quanterix, combining tissue spatial biology with ultrasensitive Simoa blood-biomarker detection. Instruments run on customer on-prem compute."
+    sources:
+      - "https://ir.quanterix.com/news-releases/news-release-details/quanterix-acquire-akoya-biosciences-creating-first-integrated"
+      - "https://finance.yahoo.com/news/quanterix-completes-acquisition-akoya-biosciences-130700411.html"
+      - "https://www.sec.gov/Archives/edgar/data/1711933/000110465925059539/tm2517868-1_defm14a.htm"
   - id: altair
     name: Altair Engineering (Siemens)
     categories: [ai-hpc-orchestration]
@@ -408,6 +438,21 @@ vendors:
       - "https://research.contrary.com/company/benchling"
       - "https://tracxn.com/d/companies/benchling/__ydo8O2nLPIwT3Lr_xCT-60HH5G0gXw6eFkpppgV7hYM"
       - "https://www.forbes.com/companies/benchling/"
+  - id: biognosys
+    name: Biognosys
+    categories: [ms-proteomics-metabolomics]
+    deployment_models: [on-premises]
+    confidence: B
+    source: "https://biognosys.com/news/biognosys-announces-release-of-spectronaut/"
+    headquarters: "Schlieren (Zurich), Switzerland"
+    founded: 2008
+    leadership: "Oliver Rinner — CEO"
+    history: "Founded 2008 as an ETH Zurich spin-off from Ruedi Aebersold's lab. Develops Spectronaut for data-independent-acquisition (DIA) proteomics; Bruker acquired a majority stake in January 2023, with Rinner continuing as CEO."
+    market_position: "Proteomics technology company; Spectronaut is a widely used software for DIA mass-spectrometry proteomics data analysis."
+    sources:
+      - "https://biognosys.com/news/biognosys-announces-release-of-spectronaut/"
+      - "https://en.wikipedia.org/wiki/Biognosys"
+      - "https://www.greaterzuricharea.com/en/news/bruker-acquires-majority-share-biognosys"
   - id: blackberry-qnx
     name: BlackBerry QNX
     categories: [samd-embedded-oem-platform]
@@ -469,7 +514,7 @@ vendors:
       - "https://www.brainlab.com/press-releases-landingpage/brainlab-se-conversion-into-european-stock-corporation-completed/"
   - id: bruker
     name: Bruker Corporation (Optimal Industrial Technologies)
-    categories: [pat-process-twin]
+    categories: [ms-proteomics-metabolomics, pat-process-twin]
     deployment_models: [on-premises, edge, private-cloud, hybrid]
     confidence: B
     source: "https://www.bruker.com/en/news-and-events/news/2022/bruker-acquires-optimal-companies-for-pharma-pat-software-and-bi.html"
@@ -483,6 +528,22 @@ vendors:
       - "https://en.wikipedia.org/wiki/Bruker"
       - "https://en.wikipedia.org/wiki/Frank_Laukien"
       - "https://www.bruker.com/en/news-and-events/news/2022/bruker-acquires-optimal-companies-for-pharma-pat-software-and-bi.html"
+  - id: bruker-spatial-biology
+    name: Bruker Spatial Biology (NanoString / CosMx)
+    categories: [spatial-biology-omics]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://www.bruker.com/en/news-and-events/news/2024/bruker-announces-formation-of-spatial-biology-division.html"
+    headquarters: "Seattle, Washington, USA (NanoString site); Bruker Corp. HQ Billerica, Massachusetts"
+    founded: 2003
+    leadership: "Frank Laukien — President & CEO, Bruker Corporation"
+    history: "NanoString, founded 2003 in Seattle, developed nCounter and CosMx spatial imagers; Bruker acquired its assets in May 2024, forming the Bruker Spatial Biology division."
+    market_position: "Major spatial-multiomics platform vendor; the CosMx Spatial Molecular Imager competes with 10x Xenium and Vizgen MERSCOPE. Imaging and analysis run on on-prem instruments and local compute."
+    sources:
+      - "https://www.bruker.com/en/news-and-events/news/2024/bruker-announces-formation-of-spatial-biology-division.html"
+      - "https://ir.bruker.com/press-releases/press-release-details/2024/Bruker-Completes-Asset-Acquisition-of-NanoString-Business/default.aspx"
+      - "https://en.wikipedia.org/wiki/NanoString_Technologies"
+      - "https://brukerspatialbiology.com/about-us/"
   - id: cadence-design-systems
     name: Cadence Design Systems, Inc. (OpenEye)
     categories: [ai-drug-discovery, comp-chem-simulation]
@@ -588,6 +649,22 @@ vendors:
       - "https://centrak.com/news/andrew-robinson-appointed-ceo"
       - "https://www.halma.com/news/press-releases/2016/05-02-2016"
       - "https://centrak.com/company/about"
+  - id: certara
+    name: Certara
+    categories: [pharmacometrics-modeling-simulation]
+    deployment_models: [on-premises, public-cloud, software-as-a-service]
+    confidence: B
+    source: "https://www.certara.com/software/phoenix-nlme/"
+    headquarters: "Radnor, Pennsylvania, USA"
+    founded: 2008
+    leadership: "Jon Resnick — CEO (effective Jan 1, 2026)"
+    history: "Formed in 2008 from Pharsight and Tripos assets; grew via acquisitions into a biosimulation leader. Phoenix WinNonlin/NLME are its core pharmacometrics tools."
+    market_position: "Global leader in model-informed drug development (MIDD) and biosimulation; Phoenix WinNonlin/NLME is the de facto standard for non-compartmental and population PK/PD analysis."
+    sources:
+      - "https://www.certara.com/software/phoenix-nlme/"
+      - "https://www.certara.com/software/phoenix-winnonlin/"
+      - "https://ir.certara.com/news-releases/news-release-details/certara-appoints-jon-resnick-chief-executive-officer"
+      - "https://finance.yahoo.com/quote/CERT/profile/"
   - id: chemical-computing-group
     name: Chemical Computing Group ULC
     categories: [ai-drug-discovery, comp-chem-simulation]
@@ -1095,6 +1172,21 @@ vendors:
     sources:
       - "https://finthrive.com/about-us/elt"
       - "https://www.cbinsights.com/company/finthrive"
+  - id: fis-prophet
+    name: FIS (Prophet)
+    categories: [payer-actuarial-hpc]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.fisglobal.com/products/fis-insurance-risk-suite"
+    headquarters: "Jacksonville, Florida, USA"
+    founded: 1968
+    leadership: "Stephanie Ferris — CEO"
+    history: "Fidelity National Information Services (FIS) acquired SunGard in 2015, gaining the Prophet actuarial-modeling platform now central to its Insurance Risk Suite for valuation, pricing and IFRS 17."
+    market_position: "Prophet is a widely deployed enterprise actuarial-modeling engine for life and P&C insurers; runs on compute-intensive on-prem HPC grids or FIS-managed cloud/SaaS, a strong actuarial-HPC target."
+    sources:
+      - "https://www.fisglobal.com/products/fis-insurance-risk-suite"
+      - "https://en.wikipedia.org/wiki/FIS_(company)"
+      - "https://directory.actuary.com/directory/prophet/"
   - id: flatiron-health
     name: Flatiron Health (Roche)
     categories: [rwd-rwe-analytics]
@@ -1280,6 +1372,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Hewlett_Packard_Enterprise"
       - "https://www.hpe.com/us/en/leadership-bios/antonio-neri.html"
+  - id: hippocratic-ai
+    name: Hippocratic AI
+    categories: [healthcare-llm-serving]
+    deployment_models: [software-as-a-service, vendor-managed, private-cloud]
+    confidence: B
+    source: "https://www.businesswire.com/news/home/20250109643850/en/Hippocratic-AI-Completes-$141MM-Series-B-Financing-Round-Led-by-Kleiner-Perkins-Valuing-the-Company-at-$1.64B"
+    headquarters: "Palo Alto, California, USA"
+    founded: 2023
+    leadership: "Munjal Shah — Co-founder & CEO"
+    history: "Founded 2023 in Palo Alto by Munjal Shah; builds a safety-focused healthcare LLM powering generative-AI clinical agents for non-diagnostic patient calls; raised $141M Series B at $1.64B valuation."
+    market_position: "High-profile healthcare-LLM startup; delivers vendor-managed AI patient-care agents rather than on-premises software (operator model). Backed by NVIDIA NVentures, a16z, General Catalyst and Kleiner Perkins."
+    sources:
+      - "https://www.businesswire.com/news/home/20250109643850/en/Hippocratic-AI-Completes-$141MM-Series-B-Financing-Round-Led-by-Kleiner-Perkins-Valuing-the-Company-at-$1.64B"
+      - "https://www.businesswire.com/news/home/20240919304919/en/Hippocratic-AI-Receives-Investment-From-NVentures-to-Build-Generative-AI-Healthcare-Agents"
+      - "https://research.contrary.com/company/hippocratic-ai"
   - id: honeywell
     name: Honeywell
     categories: [hospital-bms, scada-dcs]
@@ -1326,6 +1433,22 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/IBM"
       - "https://www.ibm.com/history/arvind-krishna"
+  - id: icon-plc
+    name: ICON plc
+    categories: [pharmacometrics-modeling-simulation]
+    deployment_models: [on-premises, private-cloud]
+    confidence: B
+    source: "https://www.iconplc.com/solutions/technologies/nonmem"
+    headquarters: "Dublin, Ireland"
+    founded: 1990
+    leadership: "Barry Balfe — CEO (effective Oct 1, 2025)"
+    history: "CRO founded 1990 in Dublin. Through its acquisition of GloboMax/ICON Development Solutions it maintains and distributes NONMEM, the standard nonlinear mixed-effects modeling package for population PK/PD."
+    market_position: "Owner and distributor of NONMEM, used by the majority of population-pharmacokinetics groups; NONMEM runs on workstations and HPC clusters for pharmacometric analysis."
+    sources:
+      - "https://www.iconplc.com/solutions/technologies/nonmem"
+      - "https://en.wikipedia.org/wiki/NONMEM"
+      - "https://en.wikipedia.org/wiki/ICON_PLC"
+      - "https://investor.iconplc.com/news-releases/news-release-details/icon-announces-ceo-transition"
   - id: ideagen
     name: Ideagen Limited
     categories: [eqms-calibration]
@@ -1358,7 +1481,7 @@ vendors:
       - "https://www.illumina.com/content/dam/illumina-marketing/documents/company/illumina-at-a-glance.pdf"
   - id: indica-labs
     name: Indica Labs
-    categories: [digital-pathology]
+    categories: [digital-pathology, spatial-biology-omics]
     deployment_models: [on-premises, private-cloud, hybrid]
     confidence: B
     source: "https://indicalab.com/"
@@ -1475,6 +1598,21 @@ vendors:
       - "https://en.wikipedia.org/wiki/IQVIA"
       - "https://www.barchart.com/story/news/41527/iqvia-reports-fourth-quarter-and-full-year-2025-results-issues-full-year-2026-guidance"
       - "https://ir.iqvia.com/governance/board-of-directors/default.aspx"
+  - id: john-snow-labs
+    name: John Snow Labs
+    categories: [healthcare-llm-serving]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.johnsnowlabs.com/healthcare-llm/"
+    headquarters: "Lewes, Delaware, USA"
+    founded: 2015
+    leadership: "David Talby — CEO"
+    history: "Founded 2015; develops Spark NLP and domain-specific Medical LLMs for healthcare and life sciences, deployable on-premises or air-gapped."
+    market_position: "Industry leader in medical language models and healthcare NLP; emphasizes on-premises / private deployment of Medical LLMs, differentiating from cloud-only clinical AI vendors — a strong on-prem serving co-sell target."
+    sources:
+      - "https://www.johnsnowlabs.com/healthcare-llm/"
+      - "https://www.johnsnowlabs.com/"
+      - "https://www.johnsnowlabs.com/our-story/"
   - id: johnson-controls
     name: Johnson Controls
     categories: [hospital-bms]
@@ -1781,6 +1919,21 @@ vendors:
       - "https://www.prnewswire.com/news-releases/mastercontrol-appoints-david-edwards-as-ceo-to-drive-next-phase-of-growth-302737707.html"
       - "https://www.ksl.com/article/50582388/utah-company-mastercontrol-has-quietly-become-a-software-leader-worth-13b"
       - "https://www.mastercontrol.com/news/mastercontrol-acquires-qualer/"
+  - id: matrix-science
+    name: Matrix Science
+    categories: [ms-proteomics-metabolomics]
+    deployment_models: [on-premises]
+    confidence: B
+    source: "https://www.matrixscience.com/about.html"
+    headquarters: "London, United Kingdom (offices in Boston and Tokyo)"
+    founded: 1998
+    leadership: null
+    history: "Founded 1998 by John Cottrell and David Creasy. Develops Mascot, a search engine matching mass-spectrometry data against sequence databases for protein identification, plus Mascot Distiller and Insight."
+    market_position: "Long-standing market-leading vendor of the Mascot protein-identification search engine, one of the most widely used tools in MS-based proteomics."
+    sources:
+      - "https://www.matrixscience.com/about.html"
+      - "https://www.matrixscience.com/blog/25-years-of-matrix-science.html"
+      - "https://finance.yahoo.com/news/matrix-science-introduces-mascot-r-100000794.html"
   - id: medical-informatics-corp
     name: Medical Informatics Corp (Sickbay)
     categories: [icu-central-monitoring]
@@ -1873,6 +2026,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Merative"
       - "https://healthexec.com/topics/healthcare-management/mergers-and-acquisitions/francisco-partners-completes-1b-buyout-ibm"
+  - id: metrum-research-group
+    name: Metrum Research Group
+    categories: [pharmacometrics-modeling-simulation]
+    deployment_models: [on-premises, public-cloud, software-as-a-service]
+    confidence: B
+    source: "https://www.metrumrg.com/"
+    headquarters: "Tariffville, Connecticut, USA"
+    founded: 2004
+    leadership: null
+    history: "Founded 2004; pharmacometrics and QSP consultancy that develops open-source R tools (e.g., mrgsolve) and the Metworx cloud computation platform for model-informed drug development."
+    market_position: "Specialist pharmacometrics/QSP consultancy and developer of widely used open-source modeling tools plus the Metworx cloud modeling-and-simulation platform."
+    sources:
+      - "https://www.metrumrg.com/"
+      - "https://github.com/metrumresearchgroup"
+      - "https://intuitionlabs.ai/companies/cro/metrum-research-group"
   - id: microsoft
     name: Microsoft Corporation
     categories: [hospital-erp]
@@ -1903,6 +2071,20 @@ vendors:
     sources:
       - "https://www.healthcaredive.com/news/nuance-dax-copilot-epic-available-artificial-intelligence-clinical-documentation/705026/"
       - "https://hmacademy.com/insights/AI-Catalyst/health-technology/microsoft-nuance-ai-powered-clinical-documentation-vendor-snapshot"
+  - id: microsoft-nuance-dax
+    name: Microsoft (Nuance Dragon / DAX Copilot)
+    categories: [healthcare-llm-serving]
+    deployment_models: [public-cloud, software-as-a-service]
+    confidence: B
+    source: "https://www.healthcaredive.com/news/dax-copilot-nuance-automated-doctor-tool-artificial-intelligence-healthcare/694818/"
+    headquarters: "Redmond, Washington, USA"
+    founded: 1975
+    leadership: "Satya Nadella — Chairman & CEO"
+    history: "Microsoft acquired Nuance Communications in 2022; its Dragon Ambient eXperience (DAX) Copilot delivers GPT-4-powered ambient clinical documentation via Microsoft Azure to 500+ health systems."
+    market_position: "Dominant ambient-clinical-documentation vendor via Nuance DAX/Dragon Copilot, but CLOUD-LOCKED to Microsoft Azure with no on-premises serving option — effectively out of scope for direct on-prem hardware co-sell."
+    sources:
+      - "https://www.healthcaredive.com/news/dax-copilot-nuance-automated-doctor-tool-artificial-intelligence-healthcare/694818/"
+      - "https://marketplace.microsoft.com/en-us/product/web-apps/nuance_gskaff.dax_copilot_usa?tab=overview"
   - id: midmark
     name: Midmark Corporation (Midmark RTLS)
     categories: [rtls-asset-tracking]
@@ -1919,6 +2101,22 @@ vendors:
       - "https://en.wikipedia.org/wiki/Midmark"
       - "https://www.midmark.com/about-us/our-history-and-culture"
       - "https://familybusinessmagazine.com/ownership/shareholder-relations/midmark-corporation/"
+  - id: milliman
+    name: Milliman
+    categories: [payer-actuarial-hpc]
+    deployment_models: [on-premises, private-cloud, public-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://integrate.milliman.com/en/About-us"
+    headquarters: "Seattle, Washington, USA"
+    founded: 1947
+    leadership: "Dermot Corry — President & CEO"
+    history: "Founded 1947 in Seattle; global actuarial and consulting firm; its Integrate cloud actuarial-modeling platform and MG-ALFA serve insurers; divested the Arius reserving software to Akur8 in September 2024."
+    market_position: "Leading independent actuarial firm; Integrate provides compute-intensive cloud/grid actuarial modeling. Note: the Arius reserving product was divested to Akur8 (2024) and is no longer a Milliman offering."
+    sources:
+      - "https://integrate.milliman.com/en/About-us"
+      - "https://www.milliman.com/en/consultants/corry-dermot"
+      - "https://en.wikipedia.org/wiki/Milliman"
+      - "https://fintech.global/2024/09/09/akur8-acquires-arius-from-milliman-to-enhance-its-actuarial-capabilities/"
   - id: milliman-medinsight
     name: Milliman MedInsight
     categories: [population-health-analytics]
@@ -1934,6 +2132,22 @@ vendors:
     sources:
       - "https://medinsight.com/healthcare-data-analytics-about/press-releases/milliman-medinsight-integrates-ai-and-next-generation-analytics-to-strengthen-value-based-care-decision-making/"
       - "https://www.linkedin.com/company/milliman-medinsight"
+  - id: moodys-analytics
+    name: Moody's (Moody's Analytics — RMS, AXIS)
+    categories: [payer-actuarial-hpc]
+    deployment_models: [public-cloud, software-as-a-service, on-premises, hybrid]
+    confidence: B
+    source: "https://ir.moodys.com/press-releases/news-details/2021/Moodys-to-Acquire-RMS-Leader-in-Climate--Natural-Disaster-Risk/default.aspx"
+    headquarters: "New York, New York, USA"
+    founded: 1909
+    leadership: "Robert Fauber — President & CEO"
+    history: "Moody's Analytics acquired actuarial-software firm GGY (AXIS) in 2016 and catastrophe-risk modeler RMS for $2B in 2021, building an insurance risk-and-actuarial analytics platform."
+    market_position: "Major insurance risk-analytics vendor; RMS catastrophe models (Intelligent Risk Platform, cloud/SaaS) and the AXIS actuarial system (grid/HPC) serve P&C and life insurers and reinsurers."
+    sources:
+      - "https://ir.moodys.com/press-releases/news-details/2021/Moodys-to-Acquire-RMS-Leader-in-Climate--Natural-Disaster-Risk/default.aspx"
+      - "https://www.artemis.bm/news/rms-sold-to-moodys-2-billion/"
+      - "https://www.lexpert.ca/big-deals/moodys-analytics-acquires-ggy/350440"
+      - "https://www.moodys.com/web/en/us/about-us/leadership/robert-fauber.html"
   - id: nextgen-healthcare
     name: NextGen Healthcare (Mirth Connect)
     categories: [hie-interoperability-engine]
@@ -1950,6 +2164,21 @@ vendors:
       - "https://www.nextgen.com/company/newsroom/press-release/nextgen-healthcare-completes-ceo-transition-ahead-of-annual-user-group-meeting"
       - "https://www.thomabravo.com/press-releases/thoma-bravo-completes-acquisition-of-nextgen-healthcare"
       - "https://www.modernhealthcare.com/mergers-acquisitions/thoma-bravo-nextgen-healthcare-deal/"
+  - id: nonlinear-dynamics-waters
+    name: Nonlinear Dynamics (Waters Corporation)
+    categories: [ms-proteomics-metabolomics]
+    deployment_models: [on-premises]
+    confidence: B
+    source: "https://www.nonlinear.com/progenesis/"
+    headquarters: "Newcastle upon Tyne, United Kingdom"
+    founded: 1989
+    leadership: null
+    history: "Founded 1989 by Will Dracup; developed the Progenesis LC-MS software for proteomics and metabolomics/lipidomics. Acquired by Waters Corporation (2013) and operated as a Waters company."
+    market_position: "Developer of Progenesis QI, a widely used LC-MS software for label-free proteomics and metabolomics analysis; a Waters subsidiary (Waters CEO Udit Batra)."
+    sources:
+      - "https://www.nonlinear.com/progenesis/"
+      - "https://www.technologynetworks.com/proteomics/news/waters-acquires-nonlinear-dynamics-213840"
+      - "https://www.chromatographyonline.com/view/waters-acquires-proteomics-software-development-company"
   - id: nuvolo
     name: Nuvolo (Trane Technologies)
     categories: [healthcare-cmms]
@@ -1980,6 +2209,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Nvidia"
       - "https://nvidianews.nvidia.com/bios/jensen-huang"
+  - id: nvidia-nim-bionemo
+    name: NVIDIA (NIM / BioNeMo)
+    categories: [healthcare-llm-serving]
+    deployment_models: [on-premises, private-cloud, hybrid, public-cloud, edge]
+    confidence: B
+    source: "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/"
+    headquarters: "Santa Clara, California, USA"
+    founded: 1993
+    leadership: "Jensen Huang — Founder, President & CEO"
+    history: "Founded 1993 in Santa Clara; NVIDIA's NIM inference microservices and BioNeMo platform package optimized LLM/biomodel serving in containers deployable on-premises, at edge, or in cloud."
+    market_position: "Dominant AI-compute supplier; NIM/BioNeMo provide the on-premises and hybrid inference-serving stack for healthcare and drug-discovery LLMs and biomodels, self-hostable via Docker/Kubernetes on GPU servers."
+    sources:
+      - "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/"
+      - "https://www.nvidia.com/en-us/clara/bionemo/"
+      - "https://developer.nvidia.com/blog/nvidia-nim-offers-optimized-inference-microservices-for-deploying-ai-models-at-scale/"
   - id: olympus
     name: Olympus Corporation
     categories: [or-surgical-video]
@@ -2010,6 +2254,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Omnicell"
       - "https://www.omnicell.com/leadership/randall-lipps/"
+  - id: open-systems-pharmacology
+    name: Open Systems Pharmacology (PK-Sim/MoBi, originated at Bayer)
+    categories: [pharmacometrics-modeling-simulation]
+    deployment_models: [on-premises]
+    confidence: B
+    source: "https://github.com/open-systems-pharmacology/pk-sim"
+    headquarters: "Germany (originated at Bayer Technology Services, Leverkusen); now a distributed open-source community"
+    founded: null
+    leadership: null
+    history: "PK-Sim and MoBi were developed over 25+ years at Bayer Technology Services, then released as free open-source PBPK/QSP software under the Open Systems Pharmacology community in 2017."
+    market_position: "Leading open-source, whole-body PBPK and quantitative-systems-pharmacology platform used across academia, regulators, and industry."
+    sources:
+      - "https://github.com/open-systems-pharmacology/pk-sim"
+      - "https://www.open-systems-pharmacology.org/"
+      - "https://pmc.ncbi.nlm.nih.gov/articles/PMC6930856/"
   - id: openclinica
     name: OpenClinica
     categories: [clinical-trial-suite]
@@ -2453,6 +2712,21 @@ vendors:
       - "https://en.wikipedia.org/wiki/Schr%C3%B6dinger,_Inc."
       - "https://www.crunchbase.com/organization/schrodinger"
       - "https://www.statnews.com/2024/11/20/schrodinger-ramy-farid-drug-discovery-ai-physics/"
+  - id: sciex
+    name: SCIEX (Danaher)
+    categories: [ms-proteomics-metabolomics]
+    deployment_models: [on-premises, software-as-a-service]
+    confidence: B
+    source: "https://sciex.com/products/software/sciex-os-software"
+    headquarters: "Framingham, Massachusetts, USA"
+    founded: null
+    leadership: null
+    history: "Mass-spectrometry business operating within Danaher's life-sciences segment. SCIEX OS controls its instruments and processes proteomics/metabolomics data, integrating tools such as PEAKS, DIA-NN, and MS-DIAL."
+    market_position: "Leading mass-spectrometry vendor (ZenoTOF, QTRAP); SCIEX OS is a unified acquisition and processing platform for proteomics, metabolomics, and lipidomics. Operating company of Danaher (CEO Rainer M. Blair)."
+    sources:
+      - "https://sciex.com/products/software/sciex-os-software"
+      - "https://lifesciences.danaher.com/us/en/products/mass-spectrometers/mass-spectrometry-software.html"
+      - "https://lifesciences.danaher.com/us/en/news/sciex-bsi-peaks-software-collaboration.html"
   - id: scimage
     name: ScImage
     categories: [ris-cvis-workflow]
@@ -2572,6 +2846,23 @@ vendors:
       - "https://en.wikipedia.org/wiki/Siemens_Healthineers"
       - "https://www.siemens-healthineers.com/company/management/bernd-montag"
       - "https://www.siemens-healthineers.com/press/releases/pr-20181005033shs.html"
+  - id: simulations-plus
+    name: Simulations Plus
+    categories: [pharmacometrics-modeling-simulation]
+    deployment_models: [on-premises, software-as-a-service]
+    confidence: B
+    source: "https://www.simulations-plus.com/software/monolix/"
+    headquarters: "Research Triangle Park, North Carolina, USA (founded in Lancaster, California)"
+    founded: 1996
+    leadership: "Shawn O'Connor — CEO"
+    history: "Founded 1996 by Walter Woltosz. Acquired Lixoft (MonolixSuite) and Cognigen; develops GastroPlus PBPK and Monolix population-modeling software. Agreed to be acquired by Altaris (~$375M, $18.50/share) in June 2026."
+    market_position: "Leading vendor of PBPK (GastroPlus) and nonlinear mixed-effects (MonolixSuite) modeling and simulation software for drug discovery and development."
+    sources:
+      - "https://www.simulations-plus.com/software/monolix/"
+      - "https://www.simulations-plus.com/software/gastroplus/"
+      - "https://en.wikipedia.org/wiki/Simulations_Plus"
+      - "https://www.simulations-plus.com/people/shawn-oconnor/"
+      - "https://www.businesswire.com/news/home/20260616126655/en/Simulations-Plus-to-Be-Acquired-by-Altaris-For-Approximately-$375-Million"
   - id: snowflake
     name: Snowflake Inc.
     categories: [clinical-data-lakehouse]
@@ -2816,7 +3107,7 @@ vendors:
       - "https://www.auntminnie.com/imaging-informatics/advanced-visualization/article/15629630/terarecon-joins-concertai-network"
   - id: thermo-fisher-scientific
     name: Thermo Fisher Scientific Inc.
-    categories: [cryo-em-structural-bio, qc-lims-cds, rd-lab-informatics]
+    categories: [cryo-em-structural-bio, ms-proteomics-metabolomics, qc-lims-cds, rd-lab-informatics]
     deployment_models: [edge, hybrid, on-premises, private-cloud, software-as-a-service]
     confidence: B
     source: "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html"
@@ -3024,6 +3315,22 @@ vendors:
       - "https://www.viz.ai/"
       - "https://www.mobihealthnews.com/news/stroke-care-coordination-company-vizai-lands-100m"
       - "https://www.forbes.com/sites/amyfeldman/2023/11/22/how-vizai-uses-artificial-intelligence-to-speed-help-to-stroke-patients/"
+  - id: vizgen
+    name: Vizgen
+    categories: [spatial-biology-omics]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://vizgen.com/about-us/"
+    headquarters: "Cambridge, Massachusetts, USA"
+    founded: 2019
+    leadership: "Rob Carson — CEO & President"
+    history: "Founded 2019 near Boston commercializing Harvard's MERFISH as the MERSCOPE spatial-transcriptomics platform; merged with proteomics firm Ultivue in October 2024 to pursue spatial multiomics."
+    market_position: "Privately held spatial-transcriptomics vendor; MERSCOPE/MERFISH competes with 10x Xenium and Bruker CosMx. Closed a $48M financing in January 2026 (led by ARCH Venture Partners) post-Ultivue merger; imaging runs on on-prem workstations."
+    sources:
+      - "https://vizgen.com/about-us/"
+      - "https://vizgen.com/vizgen-and-ultivue-merge-to-enable-deeper-insights-into-disease-mechanisms-and-drive-innovation-in-spatial-multiomics/"
+      - "https://vizgen.com/vizgen-announces-48-million-financing/"
+      - "https://endpoints.news/vizgen-raises-48m-for-push-in-spatial-biology-and-multiomics-tools/"
   - id: waters
     name: Waters Corporation
     categories: [qc-lims-cds]
@@ -3100,6 +3407,21 @@ vendors:
       - "https://en.wikipedia.org/wiki/Workday,_Inc."
       - "https://www.danvillesanramon.com/business/2026/02/09/workday-ceo-out-as-co-founder-returns-to-lead-pleasanton-company/"
       - "https://www.companieshistory.com/workday-inc/"
+  - id: wtw
+    name: WTW (RiskAgility / ResQ)
+    categories: [payer-actuarial-hpc]
+    deployment_models: [on-premises, private-cloud, hybrid]
+    confidence: B
+    source: "https://www.wtwco.com/en-us/solutions/products/riskagility-financial-modeler"
+    headquarters: "London, United Kingdom"
+    founded: 2016
+    leadership: "Carl Hess — CEO"
+    history: "Willis Towers Watson (WTW), formed by the 2016 Willis–Towers Watson merger, offers RiskAgility Financial Modeler for actuarial modeling and ResQ for P&C loss reserving."
+    market_position: "Leading actuarial-software vendor; RiskAgility FM (valuation, pricing, capital, VM-22) and ResQ reserving run compute-intensive workloads on-prem or private cloud, orchestrated via WTW Unify — an actuarial-HPC target."
+    sources:
+      - "https://www.wtwco.com/en-us/solutions/products/riskagility-financial-modeler"
+      - "https://www.wtwco.com/en-th/solutions/products/resq"
+      - "https://en.wikipedia.org/wiki/Willis_Towers_Watson"
   - id: yokogawa
     name: Yokogawa Electric Corporation
     categories: [scada-dcs]

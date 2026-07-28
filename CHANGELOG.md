@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-07-28 — completeness-audit categories 53→58 (taxonomy v6) + v1.2
+The v1 `.jsx` cross-check stayed blocked (files never on disk — Spotlight/find both empty). Pivoted to its actual purpose — *did we miss anything?* — via a 4-lens opus completeness audit (research-lifecycle · data-modality · role · AI-infra finders + adversarial verifier). 10 candidates surfaced, **5 confirmed genuine gaps**, 5 rejected with reasons.
+- **+5 categories** (full six-layer, each aligned to every chain invariant): `pharmacometrics-modeling-simulation`, `ms-proteomics-metabolomics`, `spatial-biology-omics`, `healthcare-llm-serving`, `payer-actuarial-hpc`. These are pharma/omics/AI-infra targets the v1 hospital matrix never covered — `healthcare-llm-serving` (fastest-growing GPU buy) and spatial/MS omics are net-new hunting ground, so the pivot beat the diff it replaced.
+- **+21 new vendors** (§8 web-researched + opus verify): Certara, Simulations Plus, ICON, Metrum, Open Systems Pharmacology; Biognosys, SCIEX, Bruker Spatial, Matrix Science, Nonlinear Dynamics (Waters); 10x Genomics, Akoya, Vizgen; NVIDIA NIM/BioNeMo, John Snow Labs, Hippocratic AI, Microsoft/Nuance DAX; Milliman, Moody's Analytics, FIS Prophet, WTW. **+4 category-adds** to existing (Thermo Fisher, Bruker, Indica Labs, Aidoc). Registry now **228 vendors (v6)**.
+- RED `eb37cf4` (58 fixtures + 5 glossary terms, vendors:[] pending) → GREEN. **58 tests** pass; every new category ≥4 vendors, headline==max per-buyer, primary∈argmax, sizing keys==profile, payer carries play-exemption. Browser: Home 31/15, all 5 cats + vendors render, zero console errors.
+- **Tagged `v1.2`.**
+
 ## 2026-07-28 — vendor market-gap adds (registry v5) + v1.1
 Closed the vendor-gap backlog flagged by the codex/grok reviews. Same §8 web-research + opus verify discipline.
 - **+11 new vendors**: Viz.ai, Hyland Acuo (VNA), Hamamatsu, Indica Labs (HALO), Flatiron Health (Roche), Velsera (Seven Bridges), ABB, Critical Manufacturing, Tulip, Olympus, Medtronic. **+5 category-adds** to existing enriched vendors (Epic Radiant → ris-cvis; GE / Philips / Siemens Healthineers → imaging-ai-deployment; Brainlab → or-surgical-video). Registry now **207 vendors (v5)**.
