@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-07-27 — Home-UX dual review actioned (deep-links + honesty)
+codex + grok reviewed the new Home funnel; consensus P1s = the funnel made false promises. `8859aa1` RED → `9b367d6` GREEN (58 tests).
+- **Deep-links, not dumps**: `goTab(id, opts)` parameterized; play tiles scroll to their own Play section in Hunt (`hunt-play-*` anchors); HOT stat cards prefilter Explore to the exact per-buyer HOT list.
+- **Card count == delivered count**: clicking HOT_customer shows 26, operator 14, OEM 3. The first cut filtered on headline opportunity and wrongly showed 30 — caught by live JS eval (TUo #1: verify against reality), then fixed with a per-buyer opportunity filter.
+- **Consistency + honesty**: Explore OEM count now opp≥3 (3, matching Home + guide, was 8); "A trigger fired?" → "Highest-urgency signals" (it is a static slice, not CRM state); hardcoded 14/53 → dynamic lengths; play tiles show operator/OEM opportunity + a ranking tie-break.
+
 ## 2026-07-27 — guided Home funnel + classified Explore (wayfinding redesign)
 The app landing was a filter-wall (8 dropdowns + 53 flat cards) — no guidance. Grilled (Tuo, Q1 → funnel front door). `5b19eb9` RED → `9453037` GREEN.
 - **Home** tab (new default): "Where do you want to hunt?" + §3 gate; 3 HOT stat cards (26/14/8); three Play tiles with their top categories → Hunt; a fired-trigger panel → Triggers. `goTab()` wires the funnel.
