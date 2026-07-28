@@ -14,7 +14,6 @@ Open:  app/index.html directly in a browser (file:// works — data is embedded)
 """
 import glob
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
@@ -43,7 +42,7 @@ def main():
         "scoring": load(DATA / "scoring.yaml"),
         "vendors": load(DATA / "vendors.yaml"),
         "accounts": accounts,
-        "built": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "built": f"taxonomy v{load(DATA / 'taxonomy.yaml').get('version', '?')} · vendors v{load(DATA / 'vendors.yaml').get('version', '?')}",
     }
 
     html = TEMPLATE.replace("/*__DATA__*/null", json.dumps(data, ensure_ascii=False))
