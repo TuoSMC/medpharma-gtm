@@ -62,8 +62,43 @@ REQUIRED_CATEGORY_FIELDS = [
     "data_modality", "deployment", "segments", "hardware_opportunity",
     "hardware_buyer", "primary_buyer", "supermicro_reachable",
     "hardware_opportunity_by_buyer", "hardware_profile", "infrastructure_notes",
-    "plays", "vendors", "evidence_note",
+    "plays", "vendors", "evidence_note", "workload_envelope",
 ]
+
+# ---- taxonomy v7: per-category workload_envelope (see .claude/skills/quantify-fields) ----
+sys.path.insert(0, str(REPO / "tools"))
+import workload_ceiling  # noqa: E402  the SINGLE source of truth for DERIVED bands
+
+WORKLOAD_ENUMS = {
+    "workload_gpu_role": {"none", "inference", "training", "mixed", "visualization"},
+    "workload_capacity_band": {"none", "terabyte", "tens-of-terabytes",
+                               "hundreds-of-terabytes", "petabyte-plus"},
+    "workload_availability_class": {"best-effort", "standard", "high-availability",
+                                    "mission-critical"},
+    "workload_latency_class": {"batch", "interactive", "real-time", "deterministic-real-time"},
+    "workload_data_growth": {"static", "low", "moderate", "high", "explosive"},
+    "workload_io_pattern": {"light", "random-transactional", "sequential-throughput",
+                            "high-throughput-parallel", "mixed"},
+    "workload_concurrency": {"single", "low", "moderate", "high", "massive"},
+    "workload_retention_horizon": {"transient", "short", "medium", "long", "permanent"},
+}
+WE_DERIVED = ("gpu_role", "capacity_band", "availability_class", "latency_class")
+WE_JUDGMENT = ("data_growth", "io_pattern", "concurrency")
+WE_SOURCED = ("retention_horizon", "per_unit_data_size")
+WE_KEYS = ("scaling_driver",) + WE_DERIVED + WE_JUDGMENT + WE_SOURCED + ("sources", "notes")
+WE_ENUM_OF = {  # envelope field -> which WORKLOAD_ENUMS key governs it
+    "gpu_role": "workload_gpu_role", "capacity_band": "workload_capacity_band",
+    "availability_class": "workload_availability_class", "latency_class": "workload_latency_class",
+    "data_growth": "workload_data_growth", "io_pattern": "workload_io_pattern",
+    "concurrency": "workload_concurrency", "retention_horizon": "workload_retention_horizon",
+}
+WE_CUT_KEYS = {"iops", "throughput", "total_capacity", "gpu_type_and_qty", "gpu_quantity",
+               "accelerator_count_band", "rto_minutes", "rpo_minutes", "retention_years",
+               "growth_pct_per_year", "data_ingested_per_day", "train_vs_inference_split",
+               "ingest_rate_band", "compute_platform", "basis"}
+WE_PLACEHOLDER_SOURCES = {"structural-inference", "TODO", "derived", "inference", "", "n/a"}
+_DIGIT = re.compile(r"\d")
+_STORAGE_COMPONENTS = {"nvme-performance-storage", "capacity-archive-storage"}
 
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
@@ -625,6 +660,235 @@ class TestAppGuidance(unittest.TestCase):
         self.assertNotIn("A trigger fired", self.html,
                          "misleading 'trigger fired' label implies CRM state it does not have")
         self.assertIn("Highest-urgency signals", self.html)
+
+
+class TestWorkloadEnvelope(unittest.TestCase):
+    """taxonomy v7 — per-category workload_envelope (12 keys). Provenance is FIXED
+    by field identity: derived (== workload_ceiling helper, no citation) /
+    framework-judgment (expert ordinal, no citation) / sourced (real citation).
+    Spec: .claude/skills/quantify-fields/reference/workload-envelope-spec.json."""
+
+    def _envs(self):
+        """(id, envelope) pairs for categories that carry a dict envelope. INV-1 is
+        the presence gate; the coherence INVs iterate only well-formed envelopes."""
+        return [(c["id"], c["workload_envelope"]) for c in CATS
+                if isinstance(c.get("workload_envelope"), dict)]
+
+    # INV-1 presence + exact key set
+    def test_every_category_has_envelope_with_all_keys(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            self.assertIsInstance(we, dict, f"{c['id']}: workload_envelope missing/not a mapping")
+            missing = [k for k in WE_KEYS if k not in we]
+            self.assertFalse(missing, f"{c['id']}: envelope missing keys {missing}")
+            extra = [k for k in we if k not in WE_KEYS]
+            self.assertFalse(extra, f"{c['id']}: envelope has unexpected keys {extra}")
+
+    # INV-2 enum declaration + membership
+    def test_enum_membership(self):
+        for ek, want in WORKLOAD_ENUMS.items():
+            have = set(ENUMS.get(ek, []))
+            self.assertEqual(have, want, f"enums.{ek}: {sorted(have ^ want)} differ")
+        for cid, we in self._envs():
+            for field, ek in WE_ENUM_OF.items():
+                v = we.get(field)
+                if v is None:
+                    continue
+                self.assertIn(v, WORKLOAD_ENUMS[ek], f"{cid}.{field}='{v}' not in {ek}")
+
+    # INV-3 no fabricated precision (only per_unit value_low/high may be numeric)
+    def test_no_fabricated_precision(self):
+        def walk(node, path):
+            if isinstance(node, bool):
+                return
+            if isinstance(node, (int, float)):
+                self.fail(f"{path}: raw number {node} outside per_unit_data_size")
+            if isinstance(node, dict):
+                for k, v in node.items():
+                    walk(v, f"{path}.{k}")
+            elif isinstance(node, list):
+                for i, v in enumerate(node):
+                    walk(v, f"{path}[{i}]")
+        for cid, we in self._envs():
+            for k, v in we.items():
+                if k == "per_unit_data_size":
+                    continue
+                walk(v, f"{cid}.{k}")
+
+    # INV-4 per_unit shape + real cross-listed source
+    def test_per_unit_shape_and_source(self):
+        for cid, we in self._envs():
+            pu = we.get("per_unit_data_size")
+            if pu is None:
+                continue
+            self.assertIsInstance(pu, dict, f"{cid}.per_unit_data_size must be mapping or null")
+            for k in ("value_low", "value_high", "unit", "confidence", "source"):
+                self.assertIn(k, pu, f"{cid}.per_unit_data_size missing {k}")
+            self.assertLessEqual(pu["value_low"], pu["value_high"], f"{cid}: value_low>value_high")
+            self.assertIn(pu["confidence"], {"A", "B", "C"}, f"{cid}: per_unit confidence must be A/B/C")
+            src = pu["source"]
+            self.assertTrue(isinstance(src, str) and src and src not in WE_PLACEHOLDER_SOURCES,
+                            f"{cid}: per_unit source empty/placeholder ('{src}')")
+            self.assertIn(src, we.get("sources") or [],
+                          f"{cid}: per_unit source not cross-listed in sources")
+
+    # INV-4b retention source-quality (symmetric to INV-4; A/B is fill convention —
+    # a flat sources list can only machine-enforce a real, non-placeholder citation)
+    def test_retention_source_quality(self):
+        for cid, we in self._envs():
+            if we.get("retention_horizon") is None:
+                continue
+            good = [s for s in (we.get("sources") or [])
+                    if isinstance(s, str) and s and s not in WE_PLACEHOLDER_SOURCES]
+            self.assertTrue(good, f"{cid}: retention_horizon set but no real citation in sources")
+
+    # INV-5 GPU crown + totality
+    def test_gpu_crown_and_totality(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if not isinstance(we, dict):
+                continue
+            gr = we.get("gpu_role")
+            has_gpu = "gpu-server" in (c.get("hardware_profile") or [])
+            self.assertEqual(gr not in ("none", None), has_gpu,
+                             f"{c['id']}: gpu_role={gr} but gpu-server-in-profile={has_gpu}")
+            if gr == "training":
+                self.assertIn((c.get("hardware_profile_sizing") or {}).get("gpu-server"),
+                              {"rack", "cluster"}, f"{c['id']}: training gpu must be rack/cluster")
+
+    # INV-6 capacity <-> storage + sizing
+    def test_capacity_storage_sizing(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if not isinstance(we, dict):
+                continue
+            prof = c.get("hardware_profile") or []
+            siz = c.get("hardware_profile_sizing") or {}
+            cb = we.get("capacity_band")
+            storage = [s for s in _STORAGE_COMPONENTS if s in prof]
+            if cb == "petabyte-plus":
+                self.assertTrue(storage, f"{c['id']}: petabyte-plus but no storage component")
+                self.assertIn("cluster", {siz.get(s) for s in storage},
+                              f"{c['id']}: petabyte-plus needs a cluster-sized storage tier")
+            if cb == "none":
+                self.assertFalse(storage, f"{c['id']}: capacity 'none' but storage present")
+
+    # INV-7 io <-> nvme/hpc
+    def test_io_nvme_hpc(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if isinstance(we, dict) and we.get("io_pattern") == "high-throughput-parallel":
+                prof = set(c.get("hardware_profile") or [])
+                self.assertTrue({"nvme-performance-storage", "high-performance-computing-cpu"} & prof,
+                                f"{c['id']}: high-throughput-parallel needs nvme or hpc-cpu")
+
+    # INV-8 growth <-> storage
+    def test_growth_storage(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if isinstance(we, dict) and we.get("data_growth") == "explosive":
+                self.assertTrue(_STORAGE_COMPONENTS & set(c.get("hardware_profile") or []),
+                                f"{c['id']}: explosive growth needs a storage component")
+
+    # INV-10 availability <-> HA/DR (one-directional)
+    def test_availability_ha_dr(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if isinstance(we, dict) and we.get("availability_class") == "mission-critical":
+                self.assertTrue({"high-availability-redundant", "disaster-recovery-backup"}
+                                & set(c.get("hardware_profile") or []),
+                                f"{c['id']}: mission-critical needs HA or DR component")
+
+    # INV-11 latency <-> edge / time-series
+    def test_latency_edge_timeseries(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if not isinstance(we, dict):
+                continue
+            lat = we.get("latency_class")
+            prof = set(c.get("hardware_profile") or [])
+            mod = set(c.get("data_modality") or [])
+            dep = set(c.get("deployment") or [])
+            if lat in ("real-time", "deterministic-real-time"):
+                self.assertTrue(("time-series" in mod) or ("edge" in dep) or ("edge-industrial" in prof),
+                                f"{c['id']}: {lat} needs time-series/edge/edge-industrial")
+            if lat == "deterministic-real-time":
+                self.assertIn("edge-industrial", prof, f"{c['id']}: deterministic needs edge-industrial")
+
+    # INV-12 SaaS-light degenerate (concurrency intentionally unconstrained)
+    def test_saas_light_degenerate(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if c.get("hardware_profile") or not isinstance(we, dict):
+                continue
+            self.assertIn(we.get("gpu_role"), ("none", None), c["id"])
+            self.assertIn(we.get("capacity_band"), ("none", None), c["id"])
+            self.assertIn(we.get("data_growth"), ("static", "low", None), c["id"])
+            self.assertIn(we.get("availability_class"), ("best-effort", "standard", None), c["id"])
+            self.assertIsNone(we.get("per_unit_data_size"), c["id"])
+
+    # INV-13 scaling_driver presence
+    def test_scaling_driver_presence(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if not isinstance(we, dict):
+                continue
+            sd = we.get("scaling_driver")
+            if c.get("hardware_profile"):
+                self.assertTrue(isinstance(sd, str) and sd.strip(),
+                                f"{c['id']}: scaling_driver required (non-empty hardware_profile)")
+
+    # INV-14 provenance gate — derived == pure-helper(tags), exactly
+    def test_provenance_gate(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if not isinstance(we, dict):
+                continue
+            derived = workload_ceiling.derive_for_category(c)
+            for f in WE_DERIVED:
+                self.assertIn(f, derived, f"helper produced no rule for derived '{f}' ({c['id']})")
+                self.assertEqual(we.get(f), derived[f],
+                                 f"{c['id']}.{f}={we.get(f)} != helper {derived[f]} (derived must equal ceiling)")
+
+    def test_helper_signature_is_tag_only(self):
+        import inspect
+        params = set(inspect.signature(workload_ceiling.derive_bands).parameters)
+        self.assertFalse(params & {"workload_envelope", "envelope"},
+                         "helper signature leaks the envelope — positive-equality would go vacuous")
+        self.assertTrue(params <= set(workload_ceiling.TAG_PARAMS),
+                        f"helper takes non-tag params: {params - set(workload_ceiling.TAG_PARAMS)}")
+
+    # INV-15 no cut/precision keys + prose digit guard
+    def test_no_cut_keys_and_prose_digit_guard(self):
+        for cid, we in self._envs():
+            bad = WE_CUT_KEYS & set(we.keys())
+            self.assertFalse(bad, f"{cid}: resurrected cut/precision keys {bad}")
+            for pf in ("scaling_driver", "notes"):
+                v = we.get(pf)
+                if isinstance(v, str):
+                    self.assertIsNone(_DIGIT.search(v),
+                                      f"{cid}.{pf} contains a raw digit — spell magnitudes out")
+
+    # INV-16 flagship non-degenerate
+    def test_flagship_non_degenerate(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if c.get("hardware_opportunity") != 4 or not isinstance(we, dict):
+                continue
+            ok = (we.get("gpu_role") in ("inference", "training", "mixed")
+                  or we.get("capacity_band") == "petabyte-plus"
+                  or we.get("availability_class") == "mission-critical"
+                  or we.get("io_pattern") == "high-throughput-parallel")
+            self.assertTrue(ok, f"{c['id']}: flagship envelope is degenerate")
+
+    # INV-18 concurrency <-> scale
+    def test_concurrency_scale(self):
+        for c in CATS:
+            we = c.get("workload_envelope")
+            if isinstance(we, dict) and we.get("concurrency") == "massive":
+                siz = set((c.get("hardware_profile_sizing") or {}).values())
+                self.assertTrue({"rack", "cluster"} & siz,
+                                f"{c['id']}: 'massive' concurrency needs a rack/cluster-sized component")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,73 @@
+{
+  "block_name": "workload_envelope",
+  "status": "FINAL — design-next-step wf (survives=False, 3 field-scoped fails) adjudicated by owner; re-verified by verify-workload-spec wf (survives=True, 0 blockers, grounded on real repo). Nits folded in. concurrency added per Tuo.",
+  "provenance_model": {
+    "principle": "Provenance is a FIXED property of each field (by field identity), never a mislabelable per-category flag. Three classes:",
+    "derived": {
+      "fields": ["gpu_role", "capacity_band", "availability_class", "latency_class"],
+      "rule": "value == tools/workload_ceiling.py(tags) EXACTLY (positive equality, both directions). No citation. To raise a value, fix the TAGS not the envelope. Helper is a PURE function of tags only (never reads the envelope) — a test asserts its signature.",
+      "citation": "none"
+    },
+    "framework-judgment": {
+      "fields": ["data_growth", "io_pattern", "concurrency"],
+      "rule": "Expert ordinal, NOT reconstructable from any tag. Same epistemic class as the already-unsourced hardware_opportunity(1-4) (the taxonomy header explicitly designates that 'framework content, not account/market claims'). sources=[], no citation, but honestly labelled a judgment — never called 'derived'. The ceiling helper has NO rule for these; the test does NOT recompute a ceiling for them.",
+      "citation": "none"
+    },
+    "sourced": {
+      "fields": ["retention_horizon", "per_unit_data_size"],
+      "rule": "Asserts an external real-world fact. Non-null REQUIRES a real citation in `sources` at confidence A/B (retention) or A/B/C (per_unit). null wherever no category-wide fact exists (never guess).",
+      "citation": "required-when-non-null"
+    }
+  },
+  "fields": [
+    {"name": "scaling_driver", "class": "framework-prose", "type": "string", "rule": "The ONE metric a category's iron scales with (the SE discovery question). Non-empty wherever hardware_profile is non-empty; null only when hardware_profile==[]. Contains NO digit character (spelled-out magnitudes only, like the existing infrastructure_notes). ~12/58 cats can lift the phrase from an infrastructure_notes 'sized by ...' clause (delete it from prose in the same edit); the other ~38 non-empty-profile cats need a freshly authored phrase."},
+    {"name": "gpu_role", "class": "derived", "enum": ["none", "inference", "training", "mixed", "visualization"]},
+    {"name": "capacity_band", "class": "derived", "enum": ["none", "terabyte", "tens-of-terabytes", "hundreds-of-terabytes", "petabyte-plus"]},
+    {"name": "availability_class", "class": "derived", "enum": ["best-effort", "standard", "high-availability", "mission-critical"]},
+    {"name": "latency_class", "class": "derived", "enum": ["batch", "interactive", "real-time", "deterministic-real-time"], "fill_note": "spot-check: a genuinely latency-sensitive category that is neither edge nor time-series tagged must not be artificially capped at 'interactive' by INV-11 — if the sales story needs 'real-time', add the edge/time-series tag that justifies it rather than under-rating latency."},
+    {"name": "data_growth", "class": "framework-judgment", "enum": ["static", "low", "moderate", "high", "explosive"]},
+    {"name": "io_pattern", "class": "framework-judgment", "enum": ["light", "random-transactional", "sequential-throughput", "high-throughput-parallel", "mixed"]},
+    {"name": "concurrency", "class": "framework-judgment", "enum": ["single", "low", "moderate", "high", "massive"], "meaning": "typical simultaneous users/sessions/jobs the category's deployment serves. single=one operator/station; low=small team, single-digit; moderate=department, tens; high=enterprise, hundreds; massive=multi-tenant/thousands (SaaS-operator platform, VDI farm, multi-tenant inference). Orthogonal to facility size beyond the category's intrinsic multi-tenancy, which is exactly why it is a standalone queryable band. NOT constrained by an empty hardware_profile — a SaaS-light category can be 'massive'."},
+    {"name": "retention_horizon", "class": "sourced", "enum": ["transient", "short", "medium", "long", "permanent"], "rule": "Band ONLY where a category-wide legal/standard retention window genuinely exists (imaging retention statutes, GxP/Part 11 records, HIM chart law) + a confidence A/B citation in sources. Else null. NO coupling to capacity-archive presence (INV-9 dropped — retention is orthogonal to owning an archive tier)."},
+    {"name": "per_unit_data_size", "class": "sourced", "type": "mapping-or-null", "shape": {"value_low": "number", "value_high": "number", "unit": "string", "confidence": "A|B|C", "source": "real-citation-string"}, "rule": "The ONLY numeric atom. Non-null => value_low<=value_high AND confidence in {A,B,C} (never D) AND source is a real citation NOT in {structural-inference,TODO,derived,inference,'',n/a} AND source appears in `sources`. Else null."},
+    {"name": "sources", "class": "citations", "type": "list", "rule": "Citations backing the sourced fields (retention_horizon, per_unit_data_size). [] when both are null. Nothing else consumes it."},
+    {"name": "notes", "class": "framework-prose", "type": "string-or-null", "rule": "Non-sizing prose only. Contains NO digit character."}
+  ],
+  "dropped_from_original": ["basis (replaced by fixed field-class provenance — nothing to mislabel)", "compute_platform (sales-useless: actionable values duplicate hardware_profile+gpu_role, unique values vary per-account)"],
+  "test_invariants": [
+    "INV-1 PRESENCE: add 'workload_envelope' to REQUIRED_CATEGORY_FIELDS; TestWorkloadEnvelope asserts every category carries the block with keys {scaling_driver,gpu_role,capacity_band,availability_class,latency_class,data_growth,io_pattern,concurrency,retention_horizon,per_unit_data_size,sources,notes}. Purely additive.",
+    "INV-2 ENUM MEMBERSHIP: declare enums.workload_{gpu_role,capacity_band,availability_class,latency_class,data_growth,io_pattern,concurrency,retention_horizon}; every band member of its enum. (No workload_basis, no workload_compute_platform.)",
+    "INV-3 NO-FABRICATED-PRECISION: recursively walk block; no int/float EXCEPT value_low/value_high inside a non-null per_unit_data_size.",
+    "INV-4 PER-UNIT SHAPE+SOURCE: non-null per_unit_data_size => {value_low<=value_high, unit, confidence in {A,B,C}, source non-empty AND source not in {structural-inference,TODO,derived,inference,'',n/a}} AND source in sources.",
+    "INV-4b RETENTION SOURCE-QUALITY (symmetric to INV-4): retention_horizon non-null => at least one citation in sources is confidence A or B and not in the placeholder set. Prevents a retention band shipping on a weak/D/placeholder cite while the field rule verbally demands A/B.",
+    "INV-5 GPU COHERENCE (crown) + TOTALITY: (gpu_role not in {none,null}) IFF 'gpu-server' in hardware_profile; gpu_role=='training' => hardware_profile_sizing['gpu-server'] in {rack,cluster}; AND the helper is TOTAL over gpu-server categories (defaults 'inference', no 'else none' branch) so no gpu-server category maps to none.",
+    "INV-6 CAPACITY<->STORAGE+SIZING: 'petabyte-plus' => nvme-performance-storage OR capacity-archive-storage in profile AND sized cluster; 'none' => no storage component.",
+    "INV-7 IO<->NVME/HPC: io_pattern=='high-throughput-parallel' => nvme-performance-storage OR high-performance-computing-cpu in profile.",
+    "INV-8 GROWTH<->STORAGE: data_growth=='explosive' => a storage component in profile.",
+    "INV-9 DROPPED (retention<->archive coupling was unsound).",
+    "INV-10 AVAILABILITY<->HA/DR (one-directional): 'mission-critical' => high-availability-redundant OR disaster-recovery-backup in profile. Clinical/GxP cats without HA/DR are intentionally capped 'standard' — documented so 'standard' is not read as 'not uptime-sensitive'.",
+    "INV-11 LATENCY<->EDGE/TIME-SERIES: 'real-time'/'deterministic-real-time' => time-series in data_modality OR edge in deployment OR edge-industrial in profile; 'deterministic-real-time' => edge-industrial in profile.",
+    "INV-12 SAAS-LIGHT DEGENERATE: hardware_profile==[] => gpu_role in {none,null} AND capacity_band in {none,null} AND data_growth in {static,low,null} AND availability_class in {best-effort,standard,null} AND per_unit_data_size null. concurrency is NOT constrained (a multi-tenant SaaS-light category can be 'massive'). Documented rationale: where the degenerate data_growth cap (static/low) overrides an honest 'moderate' (e.g. ngs-lab-lims), the heavy compute genuinely lives in a sibling category (bioinformatics-secondary), not the record system.",
+    "INV-13 SCALING_DRIVER PRESENCE: non-empty phrase wherever hardware_profile non-empty; null only when hardware_profile==[].",
+    "INV-14 PROVENANCE GATE (§8 core): DERIVED fields (gpu_role,capacity_band,availability_class,latency_class) == workload_ceiling.py(tags) EXACTLY and carry no citation; the helper is a PURE function of tags (a test asserts it is invoked with tags only, never the envelope, so positive-equality cannot go vacuous); JUDGMENT fields (data_growth,io_pattern,concurrency) are enum ordinals the helper does NOT recompute and carry no citation; SOURCED non-null (retention_horizon,per_unit_data_size) REQUIRE a citation in sources. A test fails if any DERIVED dimension has no helper rule (a labelled-derived value the helper cannot produce = the laundering vector).",
+    "INV-15 NO CUT SCALAR KEYS + PROSE DIGIT GUARD: none of {iops,throughput,total_capacity,gpu_type_and_qty,gpu_quantity,accelerator_count_band,rto_minutes,rpo_minutes,retention_years,growth_pct_per_year,data_ingested_per_day,train_vs_inference_split,ingest_rate_band,compute_platform,basis} appears as a key anywhere in the block; AND scaling_driver and notes contain NO digit character (regex \\d — digit-anchored, catches '500 studies/day'/'3-fold'/'10yr' while never false-positiving on prose words like 'administration'/'terms'). Spelled-out magnitudes are the accepted residual, same latitude as existing infrastructure_notes. (concurrency/concurrency_band are NO LONGER cut — concurrency is a real field now.)",
+    "INV-16 FLAGSHIP NON-DEGENERATE: hardware_opportunity==4 => gpu_role in {inference,training,mixed} OR capacity_band=='petabyte-plus' OR availability_class=='mission-critical' OR io_pattern=='high-throughput-parallel'. (Verified satisfiable for all 9 real flagships incl. non-gpu pacs-vna via petabyte-plus and ehr-emr-core via mission-critical.)",
+    "INV-17 TOOLS INERT: no consumer code paths added this wave. Version bump 6->7 needs NO gate edits (VERIFIED: rollup.py gates <6 line 52, drilldown.py gates <4 line 26, both pass at 7; build_app.py only displays the string lines 45/193; TestToolsSmoke does not pin the version). Only cosmetic display strings change.",
+    "INV-18 CONCURRENCY<->SCALE (soft coherence): concurrency=='massive' => at least one hardware_profile component is sized in {rack,cluster} (thousands of concurrent sessions cannot be served on a single node)."
+  ],
+  "fill_method": "Per category, deterministic + fabrication-proof. STEP1 read tags (hardware_profile, hardware_profile_sizing, data_modality, deployment, role, hardware_opportunity, infrastructure_notes). STEP2 DERIVED fields = workload_ceiling.py(tags) exactly — helper is TOTAL over gpu-server categories (gpu-server present => never 'none': default 'inference'; 'training'/'mixed' when sized cluster + training/foundation-model role/notes; 'visualization' for pure-viz cats e.g. or-surgical-video, radiation-oncology-tps-ois). STEP2b JUDGMENT fields (data_growth, io_pattern, concurrency) = expert ordinal assigned per category with a one-line documented rationale (same act as assigning hardware_opportunity), sources=[]. STEP3 scaling_driver: for the ~12 cats whose infrastructure_notes carry a 'sized by ...' clause, promote it and DELETE from prose; for the other ~38 non-empty-profile cats author a fresh metric phrase (no digits). STEP4 retention_horizon: set the band ONLY where a category-wide legal/standard window exists + add the A/B statute citation to sources; else null. STEP5 per_unit_data_size: add {value_low,value_high,unit,confidence in A/B/C,source} with a REAL citation added to sources; else null. STEP6 SaaS-light (hardware_profile==[]): degenerate template (gpu_role none, storage bands none, data_growth static/low, availability best-effort/standard, per_unit null; concurrency assigned honestly, may be massive).",
+  "build_plan": [
+    "1. Add enums.workload_{gpu_role,capacity_band,availability_class,latency_class,data_growth,io_pattern,concurrency,retention_horizon} to the enums block; add 'workload_envelope' to REQUIRED_CATEGORY_FIELDS in test_chain_integrity.py.",
+    "2. Write tools/workload_ceiling.py — the single deterministic helper: derive(tags)->{gpu_role,capacity_band,availability_class,latency_class} PURE (tags only, never the envelope), TOTAL (honest-None only where genuinely no rule). Imported by BOTH fill and test.",
+    "3. Write TestWorkloadEnvelope (INV-1..INV-18) and run RED (no envelopes yet).",
+    "4. Auto-generate DERIVED fields for all 58 cats from the helper + assign JUDGMENT fields (data_growth,io_pattern,concurrency) per category; structural INVs flip RED->GREEN with zero fabricated non-nulls.",
+    "5. scaling_driver: promote the ~12 'sized by' clauses + author the ~38 fresh phrases; re-run INV-13/INV-15.",
+    "6. Apply SaaS-light degenerate template to empty-hardware_profile cats; re-run INV-12.",
+    "7. Hand-add SOURCED fields: retention_horizon (A/B regulation cite) + per_unit_data_size (A/B/C instrument cite) to the handful with a genuine sourced fact; re-run INV-4/INV-4b/INV-14.",
+    "8. Bump taxonomy 6->7 + cosmetic version-string display ONLY (NO gate edits — verified); re-run TestToolsSmoke (INV-17); rebuild app + hunting guide.",
+    "9. (Deferred, separate wave) drilldown.py --axis workload (group by gpu_role / capacity_band / concurrency / availability_class) — MUST import workload_ceiling.py, never recompute inline.",
+    "10. CHANGELOG entry."
+  ],
+  "packaging": "Delivered as a reusable Skill (per Tuo): .claude/skills/quantify-fields/ (SKILL.md + tools/workload_ceiling.py). Re-running the skill on a newly-added category auto-fills its derived fields and scaffolds the judgment/sourced fields — so category 59+ gets an envelope for free.",
+  "deferred_future_symmetry": ["scaling_driver is free-text (per-category value kept; not portfolio-groupable — inherent).", "memory_class band could be added later for internal symmetry (memory intensity currently carried only structurally via hardware_profile:high-memory, already exposed by --axis component)."]
+}

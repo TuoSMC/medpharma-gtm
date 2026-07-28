@@ -25,6 +25,16 @@ enums:
            diagnostics-laboratory, pharmaceutical-research-clinical-development,
            manufacturing-quality-supply-chain, data-analytics-payer-platforms,
            medical-technology-device-software]
+  # v7 workload_envelope band vocabularies (see .claude/skills/quantify-fields). Provenance fixed by field:
+  # derived = tools/workload_ceiling.py(tags); framework-judgment = expert ordinal; sourced = real citation.
+  workload_gpu_role: [none, inference, training, mixed, visualization]                       # derived
+  workload_capacity_band: [none, terabyte, tens-of-terabytes, hundreds-of-terabytes, petabyte-plus]  # derived
+  workload_availability_class: [best-effort, standard, high-availability, mission-critical]   # derived
+  workload_latency_class: [batch, interactive, real-time, deterministic-real-time]            # derived
+  workload_data_growth: [static, low, moderate, high, explosive]                              # framework-judgment
+  workload_io_pattern: [light, random-transactional, sequential-throughput, high-throughput-parallel, mixed]  # framework-judgment
+  workload_concurrency: [single, low, moderate, high, massive]                                # framework-judgment
+  workload_retention_horizon: [transient, short, medium, long, permanent]                     # sourced (regulation)
 
 glossary:
   # Canonical expansion of every acronym used in this file (D1) — EN + Traditional Chinese
