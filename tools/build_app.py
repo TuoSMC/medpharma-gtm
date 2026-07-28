@@ -198,11 +198,12 @@ $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxono
 const TABS=[['home','Home'],['taxonomy','Explore'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors']];
 const nav=$('#nav');
 const NAVBTN={};
-function goTab(id){
+function goTab(id,opts){opts=opts||{};
   document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
   if(NAVBTN[id])NAVBTN[id].classList.add('on');
   const sec=$('#tab-'+id); if(sec)sec.classList.add('on');
+  if(opts.scrollTo){const t=document.getElementById(opts.scrollTo);if(t){t.scrollIntoView({behavior:'smooth',block:'start'});return;}}
   window.scrollTo(0,0);
 }
 TABS.forEach(([id,label],i)=>{
@@ -235,36 +236,37 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   root.append(hero);
   const hc=cats.filter(c=>cust(c)>=3).length, ho=cats.filter(c=>oper(c)>=3).length, ho2=cats.filter(c=>oem(c)>=3).length;
   const bar=el('div',{class:'statbar'});
-  [['HOT_customer',hc,'direct sale'],['HOT_operator',ho,'ISV / co-sell'],['OEM design-wins',ho2,'embedded per-unit']].forEach(([lab,n,sub])=>{
+  [['HOT_customer',hc,'direct sale','customer'],['HOT_operator',ho,'ISV / co-sell','operator'],['OEM design-wins',ho2,'embedded per-unit','original-equipment-manufacturer']].forEach(([lab,n,sub,bk])=>{
     const st=el('div',{class:'stat'},el('div',{class:'n'},String(n)),el('div',{class:'l'},lab+' · '+sub));
-    st.onclick=()=>goTab('hunt'); bar.append(st);
+    st.onclick=()=>{goTab('taxonomy');if(window.exploreFilter)window.exploreFilter(bk,3);}; bar.append(st);
   });
   root.append(bar);
   root.append(el('div',{class:'section-title'},'The three plays — pick your motion'));
   const tiles=el('div',{class:'tiles'});
   plays.forEach(p=>{
     const letter=p.id.split('-')[1].toUpperCase();
-    const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>mx(b)-mx(a)||cust(b)-cust(a)).slice(0,4);
+    const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>mx(b)-mx(a)||cust(b)-cust(a)||a.id.localeCompare(b.id)).slice(0,4);
     const t=el('div',{class:'tile'});
     t.append(el('div',{class:'row'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter)));
     t.append(el('h3',{},p.name));
     t.append(el('div',{class:'anchor'},(p.hardware_anchor||[]).join(' · ')));
-    members.forEach(c=>t.append(el('div',{class:'cat'},el('span',{},c.name_en.length>42?c.name_en.slice(0,42)+'…':c.name_en),el('b',{},'cust·'+cust(c)))));
+    members.forEach(c=>{const m=['cust·'+cust(c)];if(oper(c)>=3)m.push('oper·'+oper(c));if(oem(c)>=3)m.push('oem·'+oem(c));
+      t.append(el('div',{class:'cat'},el('span',{},c.name_en.length>42?c.name_en.slice(0,42)+'…':c.name_en),el('b',{},m.join('  '))));});
     t.append(el('div',{class:'go'},'Open ranked targets →'));
-    t.onclick=()=>goTab('hunt');
+    t.onclick=()=>goTab('hunt',{scrollTo:'hunt-'+p.id});
     tiles.append(t);
   });
   root.append(tiles);
-  root.append(el('div',{class:'section-title'},'A trigger fired? — act on the window'));
+  root.append(el('div',{class:'section-title'},'Highest-urgency signals — act on the window'));
   const tp=el('div',{class:'card'});
   const rank={critical:0,high:1,medium:2,low:3};
   trigs.slice().sort((a,b)=>rank[a.urgency]-rank[b.urgency]).slice(0,4).forEach(t=>{
     tp.append(el('div',{class:'trigrow'},el('span',{class:'u '+t.urgency},t.urgency),el('b',{},t.signal),
       el('span',{class:'muted'},'→ '+(t.related_categories||[]).slice(0,3).join(', '))));
   });
-  const more=el('div',{class:'go',style:'cursor:pointer;margin-top:8px'},'All 14 triggers →');more.onclick=()=>goTab('triggers');tp.append(more);
+  const more=el('div',{class:'go',style:'cursor:pointer;margin-top:8px'},'All '+trigs.length+' triggers →');more.onclick=()=>goTab('triggers');tp.append(more);
   root.append(tp);
-  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},'Or browse & filter all 53 categories in Explore →');ex.onclick=()=>goTab('taxonomy');root.append(ex);
+  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},'Or browse & filter all '+cats.length+' categories in Explore →');ex.onclick=()=>goTab('taxonomy');root.append(ex);
 })();
 
 // ================= TAXONOMY =================
@@ -289,7 +291,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   const pb={customer:0,operator:0,'original-equipment-manufacturer':0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
         hotO=cats.filter(c=>(c.hardware_opportunity_by_buyer.operator||0)>=3).length,
-        nOem=cats.filter(c=>c.hardware_buyer.includes('original-equipment-manufacturer')).length;
+        nOem=cats.filter(c=>(c.hardware_opportunity_by_buyer['original-equipment-manufacturer']||0)>=3).length;
   const sum=el('div',{class:'rollup'});
   sum.append('Hardware-buyer rollup (§3 gate — WHO buys the iron): primary ',
     el('b',{},String(pb.customer)),' customer · ',el('b',{},String(pb.operator)),' operator. ',
@@ -335,10 +337,12 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     if(axis==='domain')return [c.domain];
     return (c[axis]||[]).slice();
   }
+  let hotFilter=null;
   function render(){
     const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,
           hw=+fHw.value||0,prof=fProfile.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
     const shown=cats.filter(c=>{
+      if(hotFilter&&(c.hardware_opportunity_by_buyer[hotFilter.buyer]||0)<hotFilter.min)return false;
       if(by&&!c.hardware_buyer.includes(by))return false;
       if(prof&&!(c.hardware_profile||[]).includes(prof))return false;
       if(bk&&bucketOf(c)!==bk)return false;
@@ -351,7 +355,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       return true;
     });
     clear(host);
-    cnt.textContent=shown.length+' / '+cats.length+' shown'+(gp?' · grouped by '+gp:'');
+    cnt.textContent=shown.length+' / '+cats.length+' shown'+(hotFilter?' · HOT_'+hotFilter.buyer+' (opp≥'+hotFilter.min+')':(gp?' · grouped by '+gp:''));
     if(!gp){const grid=el('div',{class:'grid'});shown.forEach(c=>grid.append(card(c)));host.append(grid);return;}
     const map=new Map();
     shown.forEach(c=>groupsOf(c,gp).forEach(k=>{if(!map.has(k))map.set(k,[]);map.get(k).push(c);}));
@@ -364,8 +368,9 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
       const grid=el('div',{class:'grid'});map.get(k).forEach(c=>grid.append(card(c)));host.append(grid);
     });
   }
-  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=render);
-  fSpansBox.onchange=render;fTxt.oninput=render;fGroup.value='domain';render();
+  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;render();});
+  window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};fBuyer.value='';fBucket.value='';fSeg.value='';fPlay.value='';fDep.value='';fHw.value='';fProfile.value='';fSpansBox.checked=false;fTxt.value='';fGroup.value='';render();window.scrollTo(0,0);};
+  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};fGroup.value='domain';render();
 })();
 
 // ================= HUNT (per-play ranked target map) =================
@@ -379,7 +384,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   plays.forEach(p=>{
     const letter=p.id.split('-')[1].toUpperCase();
     const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>maxo(b)-maxo(a)||opp(b,'customer')-opp(a,'customer'));
-    root.append(el('div',{class:'grouphdr'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),p.name,el('span',{class:'gcount'},String(members.length))));
+    root.append(el('div',{class:'grouphdr',id:'hunt-'+p.id},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),p.name,el('span',{class:'gcount'},String(members.length))));
     members.forEach(c=>{
       const card=el('div',{class:'card'});card.style.marginBottom='8px';
       const head=el('div',{class:'row'},
