@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2026-07-28 — vendor market-gap adds (registry v5) + v1.1
+Closed the vendor-gap backlog flagged by the codex/grok reviews. Same §8 web-research + opus verify discipline.
+- **+11 new vendors**: Viz.ai, Hyland Acuo (VNA), Hamamatsu, Indica Labs (HALO), Flatiron Health (Roche), Velsera (Seven Bridges), ABB, Critical Manufacturing, Tulip, Olympus, Medtronic. **+5 category-adds** to existing enriched vendors (Epic Radiant → ris-cvis; GE / Philips / Siemens Healthineers → imaging-ai-deployment; Brainlab → or-surgical-video). Registry now **207 vendors (v5)**.
+- §8 caught a resigned exec: Olympus CEO draft "Stefan Kaufmann" (resigned Oct 2024) → corrected to Bob White (current, June 2025); Flatiron/ABB sources swapped to verify current CEOs. Honest-null discipline held.
+- imaging-ai-deployment went from a thin/aging list to 9 vendors incl. the major platform channels; ris-cvis gained Epic Radiant. Tests 58 GREEN.
+- Also: app build made deterministic (dropped wall-clock "built" timestamp — same fix as hunting_guide; rebuild is now byte-identical run-to-run).
+- **Tagged `v1.1`.**
+
+### Still blocked
+- v1 `.jsx` cross-check — `/source/` remains empty; drop the two files to diff v1 vendor/category data against the current 207 vendors + 53 categories.
+
+
 ## 2026-07-27 — Home-UX dual review actioned (deep-links + honesty)
 codex + grok reviewed the new Home funnel; consensus P1s = the funnel made false promises. `8859aa1` RED → `9b367d6` GREEN (58 tests).
 - **Deep-links, not dumps**: `goTab(id, opts)` parameterized; play tiles scroll to their own Play section in Hunt (`hunt-play-*` anchors); HOT stat cards prefilter Explore to the exact per-buyer HOT list.

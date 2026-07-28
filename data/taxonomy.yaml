@@ -102,7 +102,7 @@ categories:
     hardware_profile: [nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {nvme-performance-storage: rack, capacity-archive-storage: cluster}
     plays: [play-a]
-    vendors: [agfa-healthcare, fujifilm-healthcare, ge-healthcare, infinitt-healthcare, intelerad, merative, philips, sectra, visage-imaging]
+    vendors: [agfa-healthcare, fujifilm-healthcare, ge-healthcare, hyland-acuo-vna, infinitt-healthcare, intelerad, merative, philips, sectra, visage-imaging]
     evidence_note: null
 
   - id: bioinformatics-secondary
@@ -125,7 +125,7 @@ categories:
     hardware_profile: [gpu-server, high-performance-computing-cpu, nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: cluster, high-performance-computing-cpu: cluster, nvme-performance-storage: rack, capacity-archive-storage: cluster}
     plays: [play-b]
-    vendors: [dnanexus, illumina, nvidia, qiagen, sentieon, seqera]
+    vendors: [dnanexus, illumina, nvidia, qiagen, sentieon, seqera, velsera]
     evidence_note: null
 
   - id: mes-ebr
@@ -148,7 +148,7 @@ categories:
     hardware_profile: [edge-industrial, high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {edge-industrial: node, high-availability-redundant: node, disaster-recovery-backup: node}
     plays: [play-c]
-    vendors: [emerson, koerber, mastercontrol, rockwell-automation, siemens]
+    vendors: [critical-manufacturing, emerson, koerber, mastercontrol, rockwell-automation, siemens, tulip-interfaces]
     evidence_note: null
 
   # ======== hospital clinical core ========
@@ -226,7 +226,7 @@ categories:
     hardware_profile: [capacity-archive-storage]
     hardware_profile_sizing: {capacity-archive-storage: rack}
     plays: [play-a]
-    vendors: [fujifilm-healthcare, infinitt-healthcare, merative, philips, scimage, siemens-healthineers]
+    vendors: [epic-systems, fujifilm-healthcare, infinitt-healthcare, merative, philips, scimage, siemens-healthineers]
     evidence_note: null
 
   - id: or-surgical-video
@@ -251,7 +251,7 @@ categories:
     hardware_profile: [gpu-server, capacity-archive-storage, edge-industrial]
     hardware_profile_sizing: {gpu-server: node, capacity-archive-storage: rack, edge-industrial: node}
     plays: [play-a]
-    vendors: [artisight, caresyntax, karl-storz, stryker]
+    vendors: [artisight, brainlab, caresyntax, karl-storz, medtronic, olympus, stryker]
     evidence_note: null
 
   - id: icu-central-monitoring
@@ -785,7 +785,7 @@ categories:
     hardware_profile: [gpu-server, nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: cluster, nvme-performance-storage: rack, capacity-archive-storage: cluster}
     plays: [play-a]
-    vendors: [leica-biosystems, paige-ai, pathai, philips, proscia, roche, sectra]
+    vendors: [hamamatsu-photonics, indica-labs, leica-biosystems, paige-ai, pathai, philips, proscia, roche, sectra]
     evidence_note: null
 
   - id: ngs-lab-lims
@@ -994,7 +994,7 @@ categories:
     hardware_profile: [edge-industrial, high-availability-redundant]
     hardware_profile_sizing: {edge-industrial: node, high-availability-redundant: node}
     plays: [play-c]
-    vendors: [aveva, emerson, honeywell, rockwell-automation, siemens, yokogawa]
+    vendors: [abb, aveva, emerson, honeywell, rockwell-automation, siemens, yokogawa]
     evidence_note: null
 
   - id: plant-historian
@@ -1132,7 +1132,7 @@ categories:
     hardware_profile: [gpu-server, high-performance-computing-cpu, edge-industrial]
     hardware_profile_sizing: {gpu-server: rack, high-performance-computing-cpu: rack, edge-industrial: node}
     plays: [play-c]
-    vendors: [aspentech, bruker, sartorius, siemens]
+    vendors: [aspentech, bruker, sartorius, siemens, tulip-interfaces]
     evidence_note: null
 
   - id: automated-visual-inspection
@@ -1229,7 +1229,7 @@ categories:
     hardware_profile_sizing: {gpu-server: rack, capacity-archive-storage: cluster}
     plays: []
     play_exemption: "Operator-side real-world-data / claims analytics platform (warehouse + software-as-a-service); a data-platform co-sell, not the sequencing / research-AI motion of Play B"
-    vendors: [aetion, iqvia, komodo-health, tempus, trinetx, truveta]
+    vendors: [aetion, flatiron-health, iqvia, komodo-health, tempus, trinetx, truveta]
     evidence_note: null
 
   - id: hie-interoperability-engine
@@ -1279,7 +1279,7 @@ categories:
     hardware_profile: [gpu-server, edge-industrial, high-availability-redundant]
     hardware_profile_sizing: {gpu-server: cluster, edge-industrial: node, high-availability-redundant: rack}
     plays: [play-a]
-    vendors: [aidoc, blackford-analysis, carpl-ai, deepc, sectra]
+    vendors: [aidoc, blackford-analysis, carpl-ai, deepc, ge-healthcare, philips, sectra, siemens-healthineers, viz-ai]
     evidence_note: null
 
   - id: payer-core-admin

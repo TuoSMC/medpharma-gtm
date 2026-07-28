@@ -1,9 +1,24 @@
 # Vendor registry — names live HERE, never in code (CLAUDE.md §3, §8)
 # Web-researched + adversarially verified (codex + grok + opus). Every claim sourced;
 # unverifiable fields are honest nulls / 'not publicly disclosed' — never fabricated.
-version: 4
+version: 5
 
 vendors:
+  - id: abb
+    name: ABB
+    categories: [scada-dcs]
+    deployment_models: [on-premises, edge, hybrid]
+    confidence: B
+    source: "https://new.abb.com/control-systems/system-800xa/800xa-dcs"
+    headquarters: "Zurich, Switzerland"
+    founded: 1988
+    leadership: "Morten Wierod — CEO"
+    history: "Formed 1988 by merger of Sweden's ASEA (1883) and Switzerland's Brown, Boveri & Cie (1891). Its System 800xA is a flagship distributed control system (DCS) for process automation. Morten Wierod has been CEO since August 2024."
+    market_position: "Global top-tier DCS/process-automation vendor (System 800xA); one of the largest industrial automation companies worldwide."
+    sources:
+      - "https://new.abb.com/control-systems/system-800xa/800xa-dcs"
+      - "https://en.wikipedia.org/wiki/ABB"
+      - "https://new.abb.com/news/detail/112917/abb-appoints-morten-wierod-to-succeed-bjorn-rosengren-as-ceo"
   - id: abridge
     name: Abridge
     categories: [cdss-clinical-ai]
@@ -439,7 +454,7 @@ vendors:
       - "https://blueyonder.com/about/leadership/duncan-angove"
   - id: brainlab
     name: Brainlab AG
-    categories: [radiation-oncology-tps-ois]
+    categories: [or-surgical-video, radiation-oncology-tps-ois]
     deployment_models: [on-premises, hybrid]
     confidence: C
     source: "https://www.thebusinessresearchcompany.com/report/radiation-oncology-treatment-planning-software-global-market-report (listed among major radiation oncology treatment planning software companies — Elements planning suite)"
@@ -760,6 +775,21 @@ vendors:
       - "https://cresset-group.com/about/people/"
       - "https://cresset-group.com/about/news/ceo-end-of-year-message-2024/"
       - "https://cresset-group.com/about/board-management/"
+  - id: critical-manufacturing
+    name: Critical Manufacturing (ASMPT)
+    categories: [mes-ebr]
+    deployment_models: [on-premises, private-cloud, hybrid]
+    confidence: B
+    source: "https://www.criticalmanufacturing.com/company/who-we-are/"
+    headquarters: "Maia, Portugal"
+    founded: 2009
+    leadership: "Francisco Almada Lobo — CEO"
+    history: "Founded 2009 in Maia, Portugal; Industry 4.0 MES for semiconductor, electronics and medical devices. Became a subsidiary of ASMPT in 2018. Francisco Almada Lobo has been CEO since founding (2010)."
+    market_position: "not publicly disclosed"
+    sources:
+      - "https://en.wikipedia.org/wiki/Critical_Manufacturing"
+      - "https://www.criticalmanufacturing.com/company/leadership/"
+      - "https://www.criticalmanufacturing.com/company/who-we-are/"
   - id: cynerio
     name: Cynerio (Axonius)
     categories: [medical-iot-security]
@@ -943,7 +973,7 @@ vendors:
       - "https://www.businesswire.com/news/home/20260518090659/en/Ennov-Announces-Strategic-Growth-Investment-from-Bregal-Sagemount-and-Ardian"
   - id: epic-systems
     name: Epic Systems
-    categories: [ehr-emr-core, lis, patient-access-scheduling, patient-portal-engagement, rcm-billing-claims]
+    categories: [ehr-emr-core, lis, patient-access-scheduling, patient-portal-engagement, rcm-billing-claims, ris-cvis-workflow]
     deployment_models: [hybrid, on-premises, private-cloud, vendor-managed]
     confidence: C
     source: "https://www.softwareworld.co/laboratory-information-systems-software/"
@@ -1065,6 +1095,21 @@ vendors:
     sources:
       - "https://finthrive.com/about-us/elt"
       - "https://www.cbinsights.com/company/finthrive"
+  - id: flatiron-health
+    name: Flatiron Health (Roche)
+    categories: [rwd-rwe-analytics]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://flatiron.com/about-us"
+    headquarters: "New York, USA"
+    founded: 2012
+    leadership: "Nathan Hubbard — CEO"
+    history: "Founded 2012 by Nat Turner and Zach Weinberg (ex-Google); oncology EHR (OncoEMR) and real-world evidence. Acquired by Roche for $1.9B in 2018, operates as independent affiliate. Nathan Hubbard appointed CEO August 2025, succeeding Carolyn Starrett."
+    market_position: "Market leader in oncology-specific EHR and real-world oncology data; acquired by Roche for $1.9 billion (2018)."
+    sources:
+      - "https://flatiron.com/about-us"
+      - "https://www.biopharmadive.com/news/roche-buys-cancer-data-company-flatiron-health-for-19b/517285/"
+      - "https://www.businesswire.com/news/home/20250806534261/en/Flatiron-Health-Appoints-Nathan-Hubbard-as-Chief-Executive-Officer"
   - id: fujifilm-healthcare
     name: FUJIFILM Healthcare Americas Corporation
     categories: [pacs-vna, ris-cvis-workflow]
@@ -1097,7 +1142,7 @@ vendors:
       - "https://www.gatan.com/company/news/ametek-acquire-gatan-roper-technologies"
   - id: ge-healthcare
     name: GE HealthCare
-    categories: [advanced-visualization-3d, capacity-command-center, icu-central-monitoring, medical-device-integration, pacs-vna]
+    categories: [advanced-visualization-3d, capacity-command-center, icu-central-monitoring, imaging-ai-deployment, medical-device-integration, pacs-vna]
     deployment_models: [edge, hybrid, on-premises, software-as-a-service]
     confidence: B
     source: "https://www.gehealthcare.com/en-us/products/patient-monitoring/patient-monitors/carescape-central-station (CARESCAPE Central Station critical-care monitoring) and https://www.diagnosticimaging.com/view/advanced-visualization-aims-expand-enterprise (participates in advanced visualization market)"
@@ -1158,6 +1203,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Green_Hills_Software"
       - "https://www.ghs.com/corporate/management_team.html"
+  - id: hamamatsu-photonics
+    name: Hamamatsu Photonics
+    categories: [digital-pathology]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://nanozoomer.hamamatsu.com/"
+    headquarters: "Hamamatsu City, Shizuoka, Japan"
+    founded: 1953
+    leadership: "Tadashi Maruno — President & CEO"
+    history: "Founded 1953; publicly traded photonics maker (TSE: 6965); NanoZoomer whole-slide scanner family is its digital-pathology / WSI acquisition instrument line."
+    market_position: "not publicly disclosed"
+    sources:
+      - "https://nanozoomer.hamamatsu.com/"
+      - "https://www.hamamatsu.com/us/en/our-company/history.html"
+      - "https://en.wikipedia.org/wiki/Hamamatsu_Photonics"
   - id: health-catalyst
     name: Health Catalyst, Inc.
     categories: [clinical-data-lakehouse, population-health-analytics]
@@ -1236,6 +1296,21 @@ vendors:
       - "https://en.wikipedia.org/wiki/Honeywell"
       - "https://businessnc.com/honeywell-picks-its-new-charlotte-headquarters-home/"
       - "https://www.axios.com/local/charlotte/2025/02/06/honeywell-split-uptown-headquarters-fortune-500"
+  - id: hyland-acuo-vna
+    name: Acuo VNA (Hyland)
+    categories: [pacs-vna]
+    deployment_models: [on-premises, private-cloud, hybrid]
+    confidence: B
+    source: "https://www.hyland.com/en/solutions/products/acuo"
+    headquarters: "Westlake, Ohio, USA"
+    founded: 1991
+    leadership: "Jitesh Ghai — President & CEO"
+    history: "Acuo VNA is Hyland Healthcare's vendor-neutral archive; Hyland (founded 1991, maker of OnBase) acquired Acuo via the Perceptive/Lexmark business in 2017; Hyland is Thoma Bravo-owned."
+    market_position: "not publicly disclosed"
+    sources:
+      - "https://www.hyland.com/en/solutions/products/acuo"
+      - "https://en.wikipedia.org/wiki/Hyland_Software"
+      - "https://www.hyland.com/en/company/about/exec-team"
   - id: ibm
     name: IBM Corporation
     categories: [ai-hpc-orchestration]
@@ -1281,6 +1356,21 @@ vendors:
     sources:
       - "https://www.prnewswire.com/news-releases/illuminas-board-appoints-jacob-thaysen-phd-as-its-new-chief-executive-officer-301917362.html"
       - "https://www.illumina.com/content/dam/illumina-marketing/documents/company/illumina-at-a-glance.pdf"
+  - id: indica-labs
+    name: Indica Labs
+    categories: [digital-pathology]
+    deployment_models: [on-premises, private-cloud, hybrid]
+    confidence: B
+    source: "https://indicalab.com/"
+    headquarters: "Albuquerque, New Mexico, USA"
+    founded: 2011
+    leadership: "Steven Hashagen — Founder & CEO"
+    history: "Founded 2011; maker of the HALO and HALO AI quantitative image-analysis platform plus HALO AP enterprise digital-pathology software for primary diagnosis."
+    market_position: "Self-described global leader in computational pathology; surpassed 3,000 HALO deployments worldwide since 2013"
+    sources:
+      - "https://indicalab.com/"
+      - "https://indicalab.com/company-indica-labs/"
+      - "https://indicalab.com/news/press-release/indica-labs-surpasses-3000-deployments-of-halo-digital-pathology-software-worldwide-since-2013/"
   - id: infinitt-healthcare
     name: INFINITT Healthcare
     categories: [pacs-vna, ris-cvis-workflow]
@@ -1754,6 +1844,21 @@ vendors:
       - "https://en.wikipedia.org/wiki/Meditech"
       - "https://www.beckershospitalreview.com/ehrs/meet-the-c-suite-of-meditech-15-execs-to-know.html"
       - "https://www.healthcareitnews.com/news/meditech-founder-neil-pappalardo-dies-83"
+  - id: medtronic
+    name: Medtronic
+    categories: [or-surgical-video]
+    deployment_models: [software-as-a-service, public-cloud, edge]
+    confidence: B
+    source: "https://www.medtronic.com/en-us/healthcare-professionals/specialties/touch-surgery.html"
+    headquarters: "Dublin, Ireland"
+    founded: 1949
+    leadership: "Geoff Martha — Chairman & CEO"
+    history: "Founded 1949 in Minneapolis (operational HQ), incorporated in Dublin. Touch Surgery surgical-video ecosystem came via the 2020 acquisition of London-based Digital Surgery. Geoff Martha has been Chairman & CEO since 2020."
+    market_position: "One of the world's largest medical-device companies; Touch Surgery Enterprise is a leading AI surgical-video platform."
+    sources:
+      - "https://www.medtronic.com/en-us/healthcare-professionals/specialties/touch-surgery.html"
+      - "https://www.fiercebiotech.com/medtech/medtronic-to-bolster-its-ai-and-surgical-robotics-work-digital-surgery-acquisition"
+      - "https://en.wikipedia.org/wiki/Touch_Surgery"
   - id: merative
     name: Merative (Merge Healthcare)
     categories: [pacs-vna, ris-cvis-workflow]
@@ -1875,6 +1980,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Nvidia"
       - "https://nvidianews.nvidia.com/bios/jensen-huang"
+  - id: olympus
+    name: Olympus Corporation
+    categories: [or-surgical-video]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://www.olympus-global.com/news/2025/nr02932.html"
+    headquarters: "Tokyo, Japan"
+    founded: 1919
+    leadership: "Bob White — Representative Executive Officer, President and CEO (effective June 1, 2025)"
+    history: "Established 1919 in Tokyo; global endoscopy leader. Surgical imaging / OR integration (endoscopy systems, EASYSUITE OR integration) building beyond hardware toward integrated care. Bob White (ex-Medtronic) appointed President & CEO effective June 1, 2025, following the October 2024 resignation of Stefan Kaufmann and an interim period under chairman Yasuo Takeuchi."
+    market_position: "Global market leader in flexible endoscopy with a large installed base of endoscopy systems."
+    sources:
+      - "https://www.olympus-global.com/news/2025/nr02932.html"
+      - "https://medical.olympusamerica.com/articles/olympus-appoints-new-ceo"
+      - "https://medical.olympusamerica.com/articles/olympus-unveils-corporate-strategy"
   - id: omnicell
     name: Omnicell, Inc.
     categories: [pharmacy-automation]
@@ -2057,7 +2177,7 @@ vendors:
       - "https://www.pathai.com/careers/"
   - id: philips
     name: Philips (Koninklijke Philips N.V.)
-    categories: [advanced-visualization-3d, digital-pathology, icu-central-monitoring, medical-device-integration, pacs-vna, ris-cvis-workflow, telehealth-platform]
+    categories: [advanced-visualization-3d, digital-pathology, icu-central-monitoring, imaging-ai-deployment, medical-device-integration, pacs-vna, ris-cvis-workflow, telehealth-platform]
     deployment_models: [edge, hybrid, on-premises, private-cloud]
     confidence: B
     source: "https://link.springer.com/article/10.1007/s00428-026-04480-8"
@@ -2438,7 +2558,7 @@ vendors:
       - "https://www.siemens.com/en-us/corporate-information/"
   - id: siemens-healthineers
     name: Siemens Healthineers
-    categories: [advanced-visualization-3d, lab-middleware-automation, ris-cvis-workflow]
+    categories: [advanced-visualization-3d, imaging-ai-deployment, lab-middleware-automation, ris-cvis-workflow]
     deployment_models: [hybrid, on-premises, public-cloud]
     confidence: B
     source: "https://cardiovascularbusiness.com/topics/health-it/cvis/2026-best-klas-rankings-examine-cardiovascular-information-systems-hemodynamic-solutions (syngo Dynamics ranked in 2026 KLAS CVIS) and https://www.diagnosticimaging.com/view/advanced-visualization-aims-expand-enterprise (participates in advanced visualization market — syngo.via)"
@@ -2771,6 +2891,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Truveta"
       - "https://www.truveta.com/leadership/"
+  - id: tulip-interfaces
+    name: Tulip Interfaces
+    categories: [mes-ebr, pat-process-twin]
+    deployment_models: [software-as-a-service, edge, hybrid]
+    confidence: B
+    source: "https://tulip.co/platform/"
+    headquarters: "Somerville, USA"
+    founded: 2014
+    leadership: "Natan Linder — Co-founder & CEO"
+    history: "Founded 2014 by Natan Linder and Rony Kubat, spun out of MIT Media Lab (Pattie Maes). No-code frontline operations / composable MES platform with edge connectivity."
+    market_position: "not publicly disclosed"
+    sources:
+      - "https://tulip.co/platform/"
+      - "https://tulip.co/frontline-operations/"
+      - "https://startupsavant.com/news/natan-linder-and-trond-undheim"
   - id: ukg
     name: UKG Inc.
     categories: [workforce-management]
@@ -2830,6 +2965,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Veeva_Systems"
       - "https://www.marketsandmarkets.com/ResearchInsight/pharmaceutical-quality-management-software-market.asp"
+  - id: velsera
+    name: Velsera
+    categories: [bioinformatics-secondary]
+    deployment_models: [software-as-a-service, public-cloud, hybrid, on-premises]
+    confidence: B
+    source: "https://velsera.com/products/seven-bridges-platform/"
+    headquarters: "Boston, USA"
+    founded: 2023
+    leadership: "Jamie Coffin — Chief Executive Officer"
+    history: "Formed January 2023 by Summa Equity merging Seven Bridges (bioinformatics, founded 2009), PierianDx (clinical genomics) and UgenTec (lab AI). Runs the Seven Bridges multi-cloud genomics platform. Jamie Coffin appointed CEO effective February 1, 2026."
+    market_position: "not publicly disclosed"
+    sources:
+      - "https://www.genomeweb.com/business-news/pierian-seven-bridges-ugentec-acquired-merged-become-velsera"
+      - "https://velsera.com/velsera-appoints-jamie-coffin-phd-as-chief-executive-officer/"
+      - "https://velsera.com/products/seven-bridges-platform/"
   - id: virtusense
     name: VirtuSense Technologies
     categories: [smart-room-ambient-ai]
@@ -2859,6 +3009,21 @@ vendors:
     market_position: "Wholly owned subsidiary of publicly listed Pro Medicus (ASX: PME)."
     sources:
       - "https://visageimaging.com/company/"
+  - id: viz-ai
+    name: Viz.ai
+    categories: [imaging-ai-deployment]
+    deployment_models: [software-as-a-service, public-cloud, hybrid]
+    confidence: B
+    source: "https://www.viz.ai/"
+    headquarters: "San Francisco, USA"
+    founded: 2016
+    leadership: "Chris Mansi — Co-founder & CEO"
+    history: "Founded 2016 by neurosurgeon Chris Mansi; FDA De Novo clearance 2018 for Viz LVO stroke-detection; independent, venture-backed."
+    market_position: "Category leader in AI care coordination; deployed in 1,800+ hospitals; reached >$1.2B valuation at 2022 Series D"
+    sources:
+      - "https://www.viz.ai/"
+      - "https://www.mobihealthnews.com/news/stroke-care-coordination-company-vizai-lands-100m"
+      - "https://www.forbes.com/sites/amyfeldman/2023/11/22/how-vizai-uses-artificial-intelligence-to-speed-help-to-stroke-patients/"
   - id: waters
     name: Waters Corporation
     categories: [qc-lims-cds]
