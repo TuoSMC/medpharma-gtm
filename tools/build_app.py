@@ -231,7 +231,11 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .pitem:hover{background:var(--accentbg)}
 .pitem .pnm{font-weight:600;font-size:12.5px;flex:0 0 auto}
 .pitem .pgl{color:var(--muted);font-size:11.5px;flex:1;min-width:0}
-.pitem .pct{font-weight:700;color:var(--muted);font-size:11px;flex:0 0 auto}
+.pitem .pct{font-weight:700;color:var(--muted);font-size:11px;flex:0 0 auto;white-space:nowrap}
+.mklist{display:flex;flex-direction:column;gap:3px;margin-top:5px}
+.mkitem{display:flex;align-items:center;gap:7px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:12.5px}
+.mkitem:hover{background:var(--accentbg);border-color:var(--accent)}
+.mkitem .mknm{flex:1;font-weight:600;overflow-wrap:anywhere}
 .dstep{display:flex;gap:8px;margin:3px 0;font-size:13px}
 .dstep b{color:var(--accent);flex:0 0 auto}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
@@ -478,6 +482,32 @@ function renderTaxonomy(){
     if(!c){detailPane.append(el('div',{class:'muted',style:'padding:24px 4px'},T('Select a category on the left.','在左邊選一個類別。')));return;}
     detailPane.append(detailCard(c));
     [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===c.id));}
+  // trigger brief: a signal, organized — window · where to catch · the move · the markets it opens
+  function triggerBrief(t){
+    const cd=el('div',{class:'card'});
+    cd.append(el('div',{class:'row',style:'align-items:center'},
+      el('span',{class:'u '+t.urgency,style:'font-weight:800;text-transform:uppercase;font-size:12px'},t.urgency),
+      el('span',{class:'tagk'},T('trigger','觸發訊號')),
+      ...(t.related_plays||[]).map(pid=>el('span',{class:'play play'+pid.split('-')[1].toLowerCase()},'Play '+pid.split('-')[1].toUpperCase()))));
+    cd.append(el('h3',{style:'margin:6px 0 4px'},t.signal));
+    const bc=el('div',{class:'battle'});
+    const brow=(lab,val)=>{const r=el('div',{class:'brow'});r.append(el('div',{class:'blab'},lab));r.append(el('div',{class:'bval'},val||'—'));bc.append(r);};
+    brow(T('Window','時機窗口'),t.window);
+    brow(T('Where to catch','哪裡抓'),t.source);
+    brow(T('The move','該做什麼'),t.action);
+    cd.append(bc);
+    const ms=el('div',{class:'dsec'});ms.append(el('div',{class:'dsh'},T('Markets this opens — click for the battle card','開哪些市場 — 點看戰卡')));
+    const mw=el('div',{class:'mklist'});
+    (t.related_categories||[]).map(id=>CATBYID[id]).filter(Boolean)
+      .sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity).forEach(c=>{
+      const it=el('div',{class:'mkitem'},el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px'},String(c.hardware_opportunity)),el('span',{class:'mknm'},nm(c)));
+      if(isFlag(c))it.append(el('span',{class:'cb f'},T('flagship','旗艦')));
+      if(isHot(c))it.append(el('span',{class:'cb h'},T('direct','直銷')));
+      it.onclick=()=>showDetail(c);mw.append(it);});
+    if(!(t.related_categories||[]).length)mw.append(el('div',{class:'muted'},'—'));
+    ms.append(mw);cd.append(ms);
+    return cd;
+  }
   function catRow(c){const r=el('div',{class:'trow','data-id':c.id});
     r.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
     r.append(el('span',{class:'tname'},nm(c)));
@@ -622,8 +652,9 @@ function renderTaxonomy(){
     sb.oninput=()=>{fTxt.value=sb.value;catFilter=null;hotFilter=null;render();};
     box.append(sb);
     const note=el('div',{class:'hnote'});box.append(note);
-    const openDoor=(labelNode,ids)=>{catFilter=ids;hotFilter=null;fTxt.value='';render();
+    const openDoor=(labelNode,ids,brief)=>{catFilter=ids;hotFilter=null;fTxt.value='';render();
       clear(note);if(labelNode)note.append(labelNode);
+      if(brief){selected=null;clear(detailPane);detailPane.append(brief);}
       const tp=document.getElementById('twopane');if(tp)tp.scrollIntoView({behavior:'smooth',block:'start'});};
     const URANK={critical:0,high:1,medium:2,low:3};
     // door: SMCI product line (facet 1) — grouped by role + plain gloss, not acronym soup
@@ -641,12 +672,22 @@ function renderTaxonomy(){
     });
     box.append(plist);
     box.append(el('div',{class:'muted',style:'font-size:11px;margin:1px 0 4px'},T('Counts overlap — a category often pulls several boxes.','數字會重疊 — 一個類別常拉多台機箱。')));
-    // door: trigger (facet 3) — signal -> affected markets -> the action
-    const trow=el('div',{class:'drow'});trow.append(el('span',{class:'dlab'},T('Trigger','觸發訊號')));
-    (DATA.triggers.triggers||[]).slice().sort((a,b)=>URANK[a.urgency]-URANK[b.urgency]).forEach(t=>{
-      const ids=(t.related_categories||[]);const chip=el('button',{class:'dchip'},el('span',{class:'u '+t.urgency,style:'font-weight:700'},'●'),' '+t.signal);
-      chip.onclick=()=>openDoor(el('span',{},el('span',{class:'u '+t.urgency,style:'font-weight:700;text-transform:uppercase'},t.urgency+' · '),el('b',{},t.signal),'  → '+t.action),ids);trow.append(chip);});
-    box.append(trow);
+    // door: trigger (facet 3) — grouped by urgency; each row -> an organized brief
+    box.append(el('div',{class:'dhdr'},T('Trigger — a signal that starts a deal (click for the brief)','觸發訊號 — 啟動一單的訊號(點看簡報)')));
+    const URG=[['critical',T('Critical','危急')],['high',T('High','高')],['medium',T('Medium','中')],['low',T('Low','低')]];
+    const tlist=el('div',{class:'plist'});
+    URG.forEach(([uk,ulab])=>{
+      const ts=(DATA.triggers.triggers||[]).filter(t=>t.urgency===uk);if(!ts.length)return;
+      tlist.append(el('div',{class:'pgrp u '+uk},ulab+' · '+ts.length));
+      ts.forEach(t=>{const ids=(t.related_categories||[]);
+        const pg=el('span',{class:'pgl',style:'display:flex;gap:4px;justify-content:flex-end;align-items:baseline'});
+        (t.related_plays||[]).forEach(pid=>{const L=pid.split('-')[1].toUpperCase();pg.append(el('span',{class:'play play'+L.toLowerCase()},'Play '+L));});
+        const it=el('div',{class:'pitem'},el('span',{class:'u '+t.urgency,style:'font-weight:700'},'●'),el('span',{class:'pnm'},t.signal),pg,
+          el('span',{class:'pct'},ids.length+T(' mkts ▸',' 市場 ▸')));
+        it.onclick=()=>openDoor(el('span',{},el('span',{class:'u '+t.urgency,style:'font-weight:700;text-transform:uppercase'},t.urgency+' · '),el('b',{},t.signal),T(' — brief on the right','— 右側簡報')),ids,triggerBrief(t));
+        tlist.append(it);});
+    });
+    box.append(tlist);
     // door: play
     const prow=el('div',{class:'drow'});prow.append(el('span',{class:'dlab'},T('Play','打法')));
     DATA.plays.plays.forEach(p=>{const letter=p.id.split('-')[1].toUpperCase();const ids=cats.filter(c=>(c.plays||[]).includes(p.id)).map(c=>c.id);

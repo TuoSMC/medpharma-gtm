@@ -801,6 +801,22 @@ class TestAppGuidance(unittest.TestCase):
         self.assertIn("related_categories||[]).includes(c.id)", self.html,
                       "trigger-to-watch must be derived from the category's triggers")
 
+    def test_trigger_door_is_grouped_and_opens_an_organized_brief(self):
+        """v3.3: the trigger door is grouped by urgency (not a flat chip row), and a
+        click renders an organized brief — window · where to catch · the move · the
+        markets it opens (each drilling to a battle card), all from trigger data."""
+        self.assertIn("function triggerBrief(", self.html, "clicking a trigger must open an organized brief")
+        for row in ("Window", "Where to catch", "The move", "Markets this opens"):
+            self.assertIn(row, self.html, f"trigger brief missing '{row}'")
+        # the brief is built from the real trigger fields, not hardcoded
+        for field in ("t.window", "t.source", "t.action", "t.related_categories"):
+            self.assertIn(field, self.html, f"brief must render trigger field '{field}'")
+        # the door is grouped by urgency, and every seed trigger is present
+        self.assertIn("t.urgency===uk", self.html, "trigger door must group by urgency")
+        for sig in ("New sequencer purchase", "Cyber incident", "FDA IND filing",
+                    "Serialization", "Cloud repatriation", "Plant modernization"):
+            self.assertIn(sig, self.html, f"trigger '{sig}' must be present")
+
     def test_detail_does_not_conflate_leaderboard_with_cosell_motion(self):
         """codex-lens finding: leaderboard rank is a VENDOR standing signal, not the
         co-sell MOTION (which is set by hardware_buyer). The old 'co-sell' label on
