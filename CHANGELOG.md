@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-07-28 — relationship fusion across Home · Explore · Vendors · Leaderboards + v1.9
+Wove the four browsing tabs into one connected graph instead of four separate lists, per Tuo ("關係統整以及融合").
+- **Foreign key: leaderboard → registry.** `data/leaderboards.yaml` v2 adds `vendor_id` to every entry — **71 / 155** entries resolve to a registry vendor (name/alias/parenthetical matching); the other 84 are leaders not (yet) in the 231-vendor registry (mostly pure-AI startups — Qure.ai, Lunit, HeartFlow…) and stay honest `null`. This FK is what fuses Leaderboards ↔ Vendors ↔ Explore.
+- **Bidirectional cross-navigation** (JS helpers `goVendor` / `goCategory` + the `LB_BY_VID` rank map): Explore vendor pills are now click-through to the vendor card (and carry a 🏆 badge when that vendor is a market leader); Vendors category chips show the real category name and click through to Explore; Vendors cards show a 🏆 `AI #n` / `No-AI #n` rank badge (63 cards) linking to the board; linked leaderboard rows (↩, 71 of them) click through to the vendor card; Home gains a 🏆 link to the leaderboards. Every link works both directions and in both languages.
+- Tests: `test_vendor_id_foreign_key` (every entry has vendor_id; non-null ⇒ real registry id; ≥1 linked) + `test_cross_tab_fusion_wired` (goVendor/goCategory/lbBadge/LB_BY_VID present). **84 tests GREEN**; app deterministic; browser clean, cross-nav verified (Explore→vendor, leaderboard→vendor, vendor→category all jump correctly).
+- **Tagged `v1.9`.**
+
 ## 2026-07-28 — market vendor leaderboards (AI + No-AI, ranked, sourced) + v1.8
 Two market-wide leaderboards of the leading medical/pharma software vendors, ranked by market share / installed base, per Tuo (asked for ~100 each; "fewer is fine — don't pad").
 - **`data/leaderboards.yaml`**: **AI board 66 · No-AI board 89** (155 total), every entry §8-sourced — a real cited figure or a sourced market position, no fabrication. Built by the `market-leaderboards` workflow (16 sub-segment researchers + 16 adversarial verifiers = 32 agents); the verify pass caught and fixed real errors (e.g. Qure.ai's "105 countries" was a TIME100 artifact → corrected to 100+). Grouped by sub-market and ranked by installed base / share within each: AI led by Aidoc (31 FDA clearances, ~2,000 hospitals), Qure.ai (4,800+ sites), Lunit (KOSDAQ-audited revenue); No-AI led by Epic, Oracle Health, MEDITECH (KLAS acute-care EHR share). Dual-play vendors (GE, Philips) appear on both boards.

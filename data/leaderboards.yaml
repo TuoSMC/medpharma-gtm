@@ -1,7 +1,8 @@
 # Market vendor leaderboards — AI vs No-AI medical/pharma software, ranked by market
 # share / installed base. Web-researched + adversarially verified (§8): every entry
-# carries a sourced market_basis or an honest null. Names live in data, never in code.
-version: 1
+# carries a sourced market_basis or an honest null. vendor_id links to data/vendors.yaml
+# (null = leader not (yet) in the registry). Names live in data, never in code.
+version: 2
 
 leaderboards:
   ai:
@@ -15,396 +16,462 @@ leaderboards:
         segment_zh: "醫學影像 AI"
         market_basis: "Most-deployed pure-play radiology AI vendor: 31 FDA-cleared radiology algorithms — 6th overall by clearance count (behind only scanner OEMs GE, Siemens, Philips, Canon, United Imaging), 1st among pure-plays. Company-reported ~2,000 hospitals and >60M patient cases analyzed/year."
         source: "https://theimagingwire.com/2026/03/11/numbers-from-the-fda-show-radiology-is-maintaining-its-lead/"
+        vendor_id: aidoc
       - rank: 2
         name: "Qure.ai"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Named to TIME100 Most Influential Companies 2025; deployed at 4,800+ sites across 100+ countries (chest X-ray/CT, TB, lung, stroke) — one of the largest global installed footprints in radiology AI; 18 FDA clearances (most for lung-cancer AI). NOTE: original '105+ countries' was an error (105 = number of TIME100 companies; actual footprint is 100+ countries)."
         source: "https://time.com/collections/time100-companies-2025/7289652/qure-ai/"
+        vendor_id: null
       - rank: 3
         name: "Lunit"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Lunit INSIGHT (chest X-ray, mammography) used in 4,800+ medical institutions across 55+ countries; KOSDAQ-listed (328130) with audited 2024 revenue of KRW 54.2B (+116% YoY, ~88% overseas) — rare public financial evidence in this segment."
         source: "https://stockanalysis.com/quote/kosdaq/328130/"
+        vendor_id: null
       - rank: 4
         name: "RapidAI"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Stroke/neurovascular AI deployed in 2,000+ hospitals (company reports up to ~2,250) across 100+ countries, ~14,000 scans/day; category leader in stroke imaging triage."
         source: "https://www.rapidai.com/press-release/rapidai-celebrates-international-adoption-of-ai-powered-stroke-care"
+        vendor_id: null
       - rank: 5
         name: "Viz.ai"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Care-coordination/stroke AI: 1,400+ hospitals at Series D (2022), since expanded to ~1,700 hospitals and health systems in the U.S. and Europe; raised $100M Series D at a $1.2B valuation (Tiger Global / Insight Partners, 2022)."
         source: "https://www.viz.ai/news/viz-ai-raises-100-million-in-series-d-funding"
+        vendor_id: viz-ai
       - rank: 6
         name: "DeepHealth (RadNet)"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "28 FDA-cleared radiology AI algorithms — 7th overall by clearance count (incl. acquired Quantib and iCAD); commercialized across RadNet's ~400-center U.S. imaging network."
         source: "https://theimagingwire.com/2026/03/11/numbers-from-the-fda-show-radiology-is-maintaining-its-lead/"
+        vendor_id: null
       - rank: 7
         name: "HeartFlow"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Leading cardiac FFR-CT AI: platform used to assess coronary artery disease in 400,000+ patients (132,000 in 2024 alone); completed ~$364.2M Nasdaq IPO (HTFL) Aug 2025."
         source: "https://xtalks.com/heartflow-closes-364m-ipo-for-ai-driven-cardiac-imaging-4376/"
+        vendor_id: null
       - rank: 8
         name: "Annalise.ai"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Comprehensive chest X-ray (124 findings) and non-contrast head CT (130 findings) triage; ~3,500 clinicians across 1,000+ sites on four continents; preferred supplier under NHS England AI Diagnostic Fund (supports ~1/3 of England's chest X-rays). REVISED: original cited a marketing-blog listing with 'no installed-base figure'; real deployment figures now sourced."
         source: "https://www.austrade.gov.au/en/news-and-analysis/news/annalise-ai-helps-improve-patient-care-worldwide"
+        vendor_id: null
       - rank: 9
         name: "Nanox.AI (Zebra Medical Vision)"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Opportunistic-screening imaging AI (cardiac, bone, fatty-liver) with 8 FDA clearances; Zebra installed base of ~1,100 customers (hospitals/institutes/universities) across the U.S., Europe, Australia, LATAM and India; part of Nasdaq-listed Nanox (NNOX). REVISED: replaced marketing-blog citation with the acquisition disclosure of the ~1,100-customer installed base."
         source: "https://www.mobihealthnews.com/news/digital-x-ray-company-nanox-scoops-ai-developer-zebra-medical-vision"
+        vendor_id: null
       - rank: 10
         name: "Gleamer"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Fracture/bone-detection leader (BoneView): first FDA/CE-cleared fracture-detection AI; used by 3,500+ radiologists/emergency physicians across 300+ institutions in 30+ countries, ~7M images/year; distributed via Bayer's Calantic platform."
         source: "https://www.mobihealthnews.com/news/gleamer-scores-fda-510k-ai-enabled-fracture-detection"
+        vendor_id: null
       - rank: 11
         name: "Riverain Technologies"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Chest/lung imaging AI (ClearRead CT/Xray, bone-suppression/nodule-detection): >4M exams processed annually, deployed VA-wide across every VISN plus AMCs/IDNs/DoD. REVISED: replaced marketing-blog citation with sourced deployment/throughput figures; no clean total-site count disclosed."
         source: "https://www.einpresswire.com/article/690884912/riverain-technologies-brings-clearread-ai-powered-lung-cancer-detection-to-hospitals-and-va-medical-centers"
+        vendor_id: null
       - rank: 12
         name: "Cleerly"
         segment: medical-imaging-ai
         segment_zh: "醫學影像 AI"
         market_basis: "Coronary CCTA plaque-analysis AI; raised $106M Series C extension Dec 2024 (led by Insight Partners) — funding/momentum evidence only, no disclosed installed-base or market-share figure, so ranked below vendors with numeric deployment evidence."
         source: "https://www.medtechdive.com/news/cleerly-series-c-funding-round-insight-partners/734818/"
+        vendor_id: null
       - rank: 13
         name: "Indica Labs (HALO / HALO AP)"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "Surpassed 3,000 deployments of HALO digital-pathology software worldwide across 35 countries (announced Mar 2026); deployed across all 20 top pharma companies; cited in 2,600+ peer-reviewed articles. Largest quantified installed base among AI pathology software vendors."
         source: "https://indicalab.com/news/press-release/indica-labs-surpasses-3000-deployments-of-halo-digital-pathology-software-worldwide-since-2013/"
+        vendor_id: indica-labs
       - rank: 14
         name: "Proscia (Concentriq)"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "16 of the top 20 pharmaceutical companies use Concentriq; 22,000+ patients diagnosed per day on the platform; $130M total funding raised ($50M 2025 round led by Insight Partners). Second-largest quantified deployment footprint."
         source: "https://proscia.com/press-releases/proscia-raises-50m-to-advance-ai-driven-pathology-and-deliver-the-future-of-precision-medicine/"
+        vendor_id: proscia
       - rank: 15
         name: "Visiopharm"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "Over 750 customer accounts across 40+ countries; nine diagnostic algorithms cleared under IVDR (acquired by Grundium 2026). Only other vendor besides Indica/Proscia with a published installed-base count."
         source: "https://visiopharm.com/about-us/"
+        vendor_id: null
       - rank: 16
         name: "PathAI (AISight)"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "AISight image-management system adopted by Labcorp and Quest Diagnostics (the two largest US reference labs); agreed acquisition by Roche for up to $1.05B ($750M upfront + $300M milestones, May 2026), a market-leadership validation. No single published installed-base count."
         source: "https://www.roche.com/media/releases/med-cor-2026-05-07"
+        vendor_id: pathai
       - rank: 17
         name: "Paige (Paige Prostate / FullFocus)"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "First-ever FDA De Novo-authorized AI product in digital pathology (Paige Prostate, 2021); widely cited regulatory leader in AI diagnostic pathology; $220M+ total funding. Regulatory-leadership position, no public installed-base count."
         source: "https://www.businesswire.com/news/home/20210922005369/en/Paige-Receives-First-Ever-FDA-Approval-for-AI-Product-in-Digital-Pathology"
+        vendor_id: paige-ai
       - rank: 18
         name: "Ibex Medical Analytics (Galen)"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "First FDA 510(k) clearance for Ibex Prostate Detect (Feb 2025, formerly Galen Second Read); Galen Prostate/Breast/Gastric in routine clinical use across US and European labs. Sourced regulatory/clinical-deployment position, no global count published."
         source: "https://www.businesswire.com/news/home/20250210014120/en/Ibex-Medical-Analytics-Receives-First-FDA-510k-Clearance"
+        vendor_id: null
       - rank: 19
         name: "Owkin (MSIntuit CRC)"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "CE-IVD-certified MSIntuit CRC MSI biomarker AI diagnostic, integrated on Roche navify Digital Pathology and Proscia Concentriq; $300M+ total funding from biopharma and VCs. Partnership/certification evidence, not a share figure."
         source: "https://www.owkin.com/newsfeed/owkin-announces-msintuit-r-crc-v2-a-next-generation-ai-diagnostic-aimed-at-transforming-the-detection-and-treatment-of-colorectal-cancer"
+        vendor_id: null
       - rank: 20
         name: "Aiforia Technologies"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "Publicly listed (Nasdaq First North Helsinki, IPO Dec 2021); described as the leading provider of CE-IVD-marked AI-powered digital pathology solutions in Europe; multiple CE-IVD models deployed. Sourced regional-leadership position, no global installed-base number."
         source: "https://www.360dx.com/informatics/finnish-bioinformatics-firm-aiforia-seeks-automate-digital-pathology-workflows-ai"
+        vendor_id: null
       - rank: 21
         name: "Mindpeak"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "Portfolio of CE-IVD-marked AI products (breast HER2/ER/PR/Ki-67, lung PD-L1) in clinical routine diagnostics; distributed via PathAI and Pathomation platforms. Product-portfolio/clinical-use leadership; no public deployment count."
         source: "https://www.mindpeak.ai/for-diagnostic-labs"
+        vendor_id: null
       - rank: 22
         name: "Deep Bio (DeepDx Prostate)"
         segment: digital-pathology-ai
         segment_zh: "數位病理 AI"
         market_basis: "DeepDx-Prostate Pro (per company) the world's first AI IVD approved to classify prostate cancer severity (Korea MFDS Class 3); CE-marked; integrated into Roche navify Digital Pathology. Regulatory-first position; RUO in the US, no installed-base count."
         source: "https://www.koreabiomed.com/news/articleView.html?idxno=12554"
+        vendor_id: null
       - rank: 23
         name: "Microsoft (Nuance DAX Copilot / Dragon Copilot)"
         segment: ambient-clinical-ai
         segment_zh: "臨床環境／文書 AI"
         market_basis: "#1 market-share leader, ~33% of the ~$600M ambient-scribe market (2025); incumbent Nuance is deployed across ~77% of US hospitals. VERIFIED: the 33% figure is from Menlo Ventures' '2025: The State of AI in Healthcare' report (the original submission mis-cited a KLAS/healthsystemcio article and a Microsoft blog that do not contain this share figure). Nuance acquired by Microsoft for $19.7B."
         source: "https://menlovc.com/perspective/2025-the-state-of-ai-in-healthcare/"
+        vendor_id: microsoft
       - rank: 24
         name: "Abridge"
         segment: ambient-clinical-ai
         segment_zh: "臨床環境／文書 AI"
         market_basis: "#2 at ~30% market share of the ~$600M ambient-scribe market (Menlo Ventures, 2025 State of AI in Healthcare); Best in KLAS for Ambient AI 2025 and 2026 (#1 Market Leader two years running). Deployed at 100+ health systems."
         source: "https://menlovc.com/perspective/2025-the-state-of-ai-in-healthcare/ ; https://www.abridge.com/best-in-klas"
+        vendor_id: abridge
       - rank: 25
         name: "Ambience Healthcare"
         segment: ambient-clinical-ai
         segment_zh: "臨床環境／文書 AI"
         market_basis: "#3 at ~13% market share of the ~$600M ambient-scribe market (Menlo Ventures, 2025 State of AI in Healthcare); third-largest ambient vendor; ~$1.25B valuation (Series C)."
         source: "https://menlovc.com/perspective/2025-the-state-of-ai-in-healthcare/"
+        vendor_id: null
       - rank: 26
         name: "Nabla"
         segment: ambient-clinical-ai
         segment_zh: "臨床環境／文書 AI"
         market_basis: "No published market-share % (part of the ~24% long tail behind the top 3). Sourced installed-base position: company-reported 130+ healthcare organizations and 85,000 clinicians (Series C release, 2025). KLAS-validated ambient vendor."
         source: "https://www.prnewswire.com/news-releases/nabla-raises-70m-series-c-to-deliver-agentic-ai-to-the-heart-of-clinical-workflows-bringing-total-funding-to-120m-302483646.html"
+        vendor_id: null
       - rank: 27
         name: "DeepScribe"
         segment: ambient-clinical-ai
         segment_zh: "臨床環境／文書 AI"
         market_basis: "No published market-share % (long-tail / mid-market). Sourced position: KLAS overall score 98.8 (2025) and 2025 KLAS Emerging Solutions Top 20 recognition; company-reported 1,500+ organizations (company marketing, treat as company-reported not independently verified)."
         source: "https://klasresearch.com/report/deepscribe-ambient-ai-2025-enhancing-clinician-experience-and-efficiency-through-ambient-speech-ai/3402"
+        vendor_id: null
       - rank: 28
         name: "Suki"
         segment: ambient-clinical-ai
         segment_zh: "臨床環境／文書 AI"
         market_basis: "No published market-share % (mid-market). Sourced leadership position: athenahealth's preferred ambient-AI partner, powering athenahealth Ambient Notes; $70M Series D (Oct 2024). KLAS-validated ambient vendor."
         source: "https://www.businesswire.com/news/home/20241010687252/en/Suki-Secures-$70M-Series-D-Funding-as-Demand-Surges-Expands-Strategic-Partnership-with-MedStar-Health"
+        vendor_id: null
       - rank: 29
         name: "Corti"
         segment: ambient-clinical-ai
         segment_zh: "臨床環境／文書 AI"
         market_basis: "No published market-share % (adjacent ambient/clinical-conversation AI infrastructure vendor). Sourced usage position: company-reported 250,000+ patient interactions per day across hospitals in Europe and the US; $94.5M total funding."
         source: "https://www.corti.ai/stories/corti-raises-60m-in-series-b-funding-to-accelerate-healthcare-ai-innovation-and-expand-work-in-public-safety"
+        vendor_id: null
       - rank: 30
         name: "Schrödinger (SDGR)"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "Segment software-revenue leader — the only pure-play selling drug-discovery SOFTWARE at scale: FY2025 total revenue $256M (+23% YoY), software revenue $200M (+11%), software ACV $198M; NasdaqGS-listed physics-based + ML computational platform"
         source: "https://ir.schrodinger.com/press-releases/news-details/2026/Schrdinger-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx"
+        vendor_id: null
       - rank: 31
         name: "Recursion Pharmaceuticals (RXRX)"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "Largest public AI-native drug-discovery company by real revenue: FY2025 revenue $74.7M (+27% YoY, includes Exscientia which merged in Nov 2024), ~$2.5B market cap; Roche/Genentech and Sanofi collaborations"
         source: "https://ir.recursion.com/news-releases/news-release-details/recursion-reports-fourth-quarter-and-full-year-2025-financial"
+        vendor_id: null
       - rank: 32
         name: "Isomorphic Labs"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "Best-capitalized pure-play (no product revenue disclosed — funding/deal-value basis): $2.1B Series B closed May 12 2026 (Thrive Capital-led; Alphabet, GV, Temasek) — largest AI-drug-discovery raise on record; DeepMind spinout with Lilly, Novartis and J&J partnerships"
         source: "https://www.fiercebiotech.com/biotech/alphabets-ai-biotech-isomorphic-labs-bags-21b-series-b-fuel-next-gen-drug-design-model"
+        vendor_id: null
       - rank: 33
         name: "Insilico Medicine"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "Public generative-AI drug discovery (HKEX 3696): 2025's largest Hong Kong biotech IPO — HK$2.28B (~US$293M) Dec 30 2025, ~HK$16.7B (~US$2.1B) debut market cap; Lilly/Sanofi/Menarini partnerships (market-cap / IPO-scale basis)"
         source: "https://pharmaphorum.com/news/insilico-ends-2025-293m-hong-kong-ipo"
+        vendor_id: null
       - rank: 34
         name: "Insitro"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "Private ML + human-genetics drug discovery: ~$643M raised across Series A–C, including a $400M Series C (Mar 2021, led by CPP Investments); founded by Daphne Koller (funding-scale basis; valuation not disclosed)"
         source: "https://www.fiercebiotech.com/medtech/insitro-raises-400m-for-machine-learning-powered-drug-discovery-efforts"
+        vendor_id: null
       - rank: 35
         name: "Genesis Therapeutics"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "GEMS generative-AI platform: oversubscribed $200M Series B (Aug 2023, a16z co-led; NVIDIA/Fidelity/BlackRock backers), over $280M total raised; Lilly collaboration (funding-scale basis)"
         source: "https://www.businesswire.com/news/home/20230821419353/en/Genesis-Therapeutics-Closes-Oversubscribed-$200-Million-Series-B"
+        vendor_id: null
       - rank: 36
         name: "Iambic Therapeutics"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "AI-discovered oncology pipeline (lead IAM1363, HER2; plus KIF18A and CDK2/4 programs): raised >$100M in an oversubscribed round Nov 10 2025 (ARK, Regeneron, Sequoia, Illumina Ventures); NVIDIA collaboration (funding-scale basis)"
         source: "https://www.iambic.ai/post/iambic-raises-over-100-million"
+        vendor_id: null
       - rank: 37
         name: "Absci (ABSI)"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "Public generative-AI antibody design (Integrated Drug Creation): FY2024 revenue $4.53M (FY2025 $2.80M), ~$1.4B market cap (Jul 2026); lead ABS-201 (anti-PRLR) in Phase 1 (public revenue / market-cap basis)"
         source: "https://investors.absci.com/news-releases/news-release-details/absci-reports-business-updates-and-fourth-quarter-and-full-0"
+        vendor_id: null
       - rank: 38
         name: "BenevolentAI"
         segment: drug-discovery-ai
         segment_zh: "AI 藥物發現"
         market_basis: "Former listed AI drug-discovery leader (AstraZeneca partnership); delisted from Euronext Amsterdam via merger into Osaka Holdings S.à r.l. (renamed BenevolentAI), effective Mar 13 2025 after funding gap — diminished, no longer public (sourced leadership position only, no current market figure)"
         source: "https://live.euronext.com/en/products/equities/company-news/2025-03-12-result-extraordinary-general-meeting-and-delisting"
+        vendor_id: null
       - rank: 39
         name: "Tempus AI (Tempus One / xT / algorithmic diagnostics)"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "Largest AI-driven precision-medicine/genomics platform by revenue: FY2024 total revenue $693.4M (+30.4% YoY), of which the Genomics segment was $451.7M (~65%). Publicly traded (Nasdaq: TEM); multimodal clinical + molecular data at scale. VERIFIED against official IR/8-K release."
         source: "https://investors.tempus.com/news-releases/news-release-details/tempus-reports-fourth-quarter-and-full-year-2024-results"
+        vendor_id: paige-ai
       - rank: 40
         name: "SOPHiA GENETICS (SOPHiA DDM)"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "AI multimodal genomic-analytics platform with a broad installed base: 800+ institutions across 70+ countries (2.2M+ patient cases analyzed) and $65.2M FY2024 revenue (record 92 new customers signed in 2024). Publicly traded (Nasdaq: SOPH). VERIFIED against Q4/FY2024 earnings release."
         source: "https://www.prnewswire.com/news-releases/sophia-genetics-reports-fourth-quarter-and-full-year-2024-results-302390692.html"
+        vendor_id: sophia-genetics
       - rank: 41
         name: "Fabric Genomics (GeneDx; GEM / ACE AI)"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "AI-driven clinical variant classification and automated clinical reporting (GEM/ACE); recognized clinical-genomics interpretation player; acquired by GeneDx (2025) and run as an independent subsidiary. Vendor-sourced leadership position only; no public market-share figure."
         source: "https://fabricgenomics.com/about-fabric/"
+        vendor_id: fabric-genomics
       - rank: 42
         name: "Congenica (SeqOne Genomics)"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "AI-powered genomic interpretation / clinical decision-support (rare disease, oncology; Congenica used in the Genomics England 100,000 Genomes Project). SeqOne acquired Congenica (2025). Note: the 'global leader in AI-powered genomic medicine' language is the acquirer's aspirational framing, not an independently evidenced market position. No public market-share figure."
         source: "https://www.seqone.com/news-insights/seqone-acquires-congenica-to-create-a-global-leader-in-ai-powered-genomic-medicine"
+        vendor_id: congenica
       - rank: 43
         name: "Nucleai"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "Spatial-biomarker / tissue-intelligence AI (spatial-omics adjacent, borderline to core genomics-ai); collaborations cited with 60%+ of top-20 biopharma; ~$50M total funding (Series B $33M; backers incl. Sanofi Ventures, M Ventures/Merck, Section 32). Vendor/PR-sourced leadership claim only; smallest scale of the set; no public market-share figure."
         source: "https://nucleai.ai/mercks-corporate-venture-m-ventures-arm-backs-nucleai-to-advance-its-first-in-class-spatial-ai-biomarker-in-active-clinical-enrollment/"
+        vendor_id: null
       - rank: 44
         name: "OpenEvidence"
         segment: healthcare-llm-foundation
         segment_zh: "醫療大模型／基礎模型"
         market_basis: "Dominant installed base among US physicians: 757,000+ verified doctors registered and used daily by ~40% of US physicians across 10,000+ hospitals; billed as the fastest-growing application for physicians in history; ~$100M ARR reached by Jan 2026; valuation climbed $3.5B (Jul 2025) to $6B (Oct 2025) to $12B (Series D, Jan 2026). Genuine #1 by clinician installed base."
         source: "https://www.beckershospitalreview.com/healthcare-information-technology/ai/openevidence-6-things-to-know-about-the-ai-tool-used-by-half-of-physicians/ ; https://www.cnbc.com/2026/01/21/openevidence-chatgpt-for-doctors-doubles-valuation-to-12-billion.html"
+        vendor_id: null
       - rank: 45
         name: "Microsoft (Azure AI Foundry healthcare models / Dragon Copilot)"
         segment: healthcare-llm-foundation
         segment_zh: "醫療大模型／基礎模型"
         market_basis: "Largest sourced healthcare-LLM deployment after OpenEvidence: Dragon Copilot used by ~170,000 clinicians, processing ~28M patient encounters in a single recent quarter; Azure AI Foundry catalog of 50+ first/third-party healthcare AI foundation models (MedImageInsight, CXRReportGen, MedImageParse). Named key player; no single clean healthcare-LLM share %."
         source: "https://www.microsoft.com/en-us/microsoft-cloud/blog/healthcare/2025/11/24/driving-a-unified-ai-experience-at-rsna-2025-microsoft-dragon-copilot-expands-to-radiologists-transforming-the-reporting-workflow/ ; https://www.microsoft.com/en-us/microsoft-cloud/blog/healthcare/2025/03/03/meet-microsoft-dragon-copilot-your-new-ai-assistant-for-clinical-workflow/"
+        vendor_id: microsoft
       - rank: 46
         name: "John Snow Labs (Medical LLM / Healthcare NLP)"
         segment: healthcare-llm-foundation
         segment_zh: "醫療大模型／基礎模型"
         market_basis: "Ranked highest in the Progressive Companies quadrant of the MarketsandMarkets 360Quadrants NLP in Healthcare & Life Sciences Startups/SMEs assessment (190+ companies evaluated, top 25 recognized); production-proven across 500+ enterprise customers; 3,000+ pre-trained medical models; reported top-ranked provider on 15 clinical/biomedical AI benchmarks vs frontier models. Analyst leadership position, not a share %."
         source: "https://www.johnsnowlabs.com/john-snow-labs-ranked-highest-in-the-marketsandmarkets-360quadrant-for-nlp-in-healthcare-and-life-sciences/ ; https://www.prnewswire.com/news-releases/john-snow-labs-ranked-highest-in-the-marketsandmarkets-360quadrant-for-nlp-in-healthcare-and-life-sciences-302827426.html"
+        vendor_id: john-snow-labs
       - rank: 47
         name: "Hippocratic AI (patient-facing healthcare LLM agents)"
         segment: healthcare-llm-foundation
         segment_zh: "醫療大模型／基礎模型"
         market_basis: "115M+ completed clinical patient interactions and 1,000+ clinical use cases; partnerships with 50+ health systems, payors and pharma clients across 6 countries; $3.5B valuation after $126M Series C (Nov 2025), $404M total raised. Usage/adoption metrics, not a share %."
         source: "https://www.businesswire.com/news/home/20251103432446/en/Hippocratic-AI-Raises-$126-Million-in-Series-C-at-$3.5-Billion-Valuation-Led-by-Avenir-Growth-to-Expand-Clinically-Safe-Generative-AI-Agents-Across-Healthcare ; https://www.fiercehealthcare.com/ai-and-machine-learning/hippocratic-ai-lands-126m-series-c-expand-patient-facing-ai-agents-fuel-ma"
+        vendor_id: hippocratic-ai
       - rank: 48
         name: "Google (MedLM / Med-PaLM on Vertex AI)"
         segment: healthcare-llm-foundation
         segment_zh: "醫療大模型／基礎模型"
         market_basis: "Named key player (Google Cloud / DeepMind) in the healthcare-LLM market; MedLM foundation models (built on Med-PaLM 2 / Gemini) available to US Google Cloud customers via Vertex AI, with early adopters HCA Healthcare, Augmedix, BenchSci, Deloitte. Sourced leadership position; no published healthcare-LLM share or installed-base number."
         source: "https://www.fiercehealthcare.com/ai-and-machine-learning/google-unveils-medlm-generative-ai-models-healthcare-hca-augmedix-and"
+        vendor_id: null
       - rank: 49
         name: "NVIDIA (BioNeMo / Clara)"
         segment: healthcare-llm-foundation
         segment_zh: "醫療大模型／基礎模型"
         market_basis: "Leading foundation-model platform for life sciences; BioNeMo adopted by life-sciences leaders (Basecamp Research, Chai Discovery, Boltz, OpenFold, Dyno/Terray Therapeutics) plus an up-to-$1B co-innovation AI lab with Eli Lilly (2026). Platform-leadership position; no published single-market share or installed-base figure."
         source: "https://nvidianews.nvidia.com/news/nvidia-bionemo-platform-adopted-by-life-sciences-leaders-to-accelerate-ai-driven-drug-discovery ; https://investor.lilly.com/news-releases/news-release-details/nvidia-and-lilly-announce-co-innovation-ai-lab-reinvent-drug"
+        vendor_id: nvidia
       - rank: 50
         name: "Biofourmis"
         segment: predictive-monitoring-ai
         segment_zh: "預測式遠距監測 AI"
         market_basis: "Category leader in AI remote patient monitoring / hospital-at-home; reached $1.3B unicorn valuation on a $300M Series D led by General Atlantic (total funding $445M), with 100+ enterprise customers and an FDA-cleared analytics engine. Widely characterized as an RPM/digital-health market leader."
         source: "https://www.forbes.com/sites/katiejennings/2022/04/26/health-ai-startup-biofourmis-hits-13-billion-valuation-with-series-d-funding/"
+        vendor_id: null
       - rank: 51
         name: "Eko Health (SENSORA / AI stethoscope platform)"
         segment: predictive-monitoring-ai
         segment_zh: "預測式遠距監測 AI"
         market_basis: "Market leader in AI-assisted auscultation with a large deployed base of AI-enabled digital stethoscopes across health systems; holds multiple FDA clearances including the first AI tool cleared for earlier heart-failure (low ejection-fraction) detection, plus structural-murmur and AFib algorithms. SENSORA efficacy shown in a Lancet RCT across 200+ NHS primary-care practices."
         source: "https://www.ajmc.com/view/fda-approves-first-ai-tool-for-earlier-heart-failure-detection"
+        vendor_id: null
       - rank: 52
         name: "Current Health (a Best Buy Health company)"
         segment: predictive-monitoring-ai
         segment_zh: "預測式遠距監測 AI"
         market_basis: "Leading remote patient monitoring & hospital-at-home platform; acquired by Best Buy for ~$400M (2021); enterprise deployments at Mass General Brigham, Geisinger and UC Davis. ML-based biosensor monitoring with deterioration alerting."
         source: "https://www.mobihealthnews.com/news/retail-giant-best-buy-snaps-remote-monitoring-company-current-health"
+        vendor_id: null
       - rank: 53
         name: "Bayesian Health (TREWS)"
         segment: predictive-monitoring-ai
         segment_zh: "預測式遠距監測 AI"
         market_basis: "ML sepsis early-warning deployed across multiple US health systems; Nature Medicine prospective multi-site study monitored 590,736 patients across 5 hospitals and was associated with ~18% reduction in sepsis mortality and earlier antibiotic timing."
         source: "https://www.nature.com/articles/s41591-022-01894-0"
+        vendor_id: null
       - rank: 54
         name: "Etiometry (T3 platform / Risk Analytics Engine)"
         segment: predictive-monitoring-ai
         segment_zh: "預測式遠距監測 AI"
         market_basis: "Established installed base in pediatric/cardiac ICU predictive analytics; FDA 510(k)-cleared T3 data-aggregation software and IDO2 (Inadequate Oxygen Delivery) Index powered by its Risk Analytics Engine, validated in multi-center studies including Boston Children's Hospital. (Aggregator claims of '10 clearances / 150M+ ICU hours' were not primary-verifiable and are omitted.)"
         source: "https://www.etiometry.com/resources/etiometry-receives-fda-510k-clearance-on-its-first-algorithm-the-ido2-index-powered-by-the-risk-analytics-engine/"
+        vendor_id: etiometry
       - rank: 55
         name: "CLEW Medical (CLEWICU)"
         segment: predictive-monitoring-ai
         segment_zh: "預測式遠距監測 AI"
         market_basis: "First FDA-cleared AI predictive-analytics device for adult ICU patient deterioration (hemodynamic instability up to 8 hours in advance), cleared Feb 2021 after a 2020 EUA; platform still active and expanded to all inpatient settings in 2024 (named to Newsweek World's Best Digital Health Companies 2024)."
         source: "https://www.healthcareitnews.com/news/fda-issues-landmark-clearance-ai-driven-icu-predictive-tool"
+        vendor_id: null
       - rank: 56
         name: "Excel Medical (WAVE Clinical Platform / Visensia)"
         segment: predictive-monitoring-ai
         segment_zh: "預測式遠距監測 AI"
         market_basis: "First FDA-cleared patient-deterioration predictive-algorithm platform targeted at acute-care hospitals (2017), using the Oxford-derived (ML kernel-density) Visensia Safety Index for continuous multi-vital-sign risk scoring with mobile/EHR alerting."
         source: "https://cardiovascularbusiness.com/topics/patient-care/excel-medicals-wave-clinical-platform-receives-fda-clearance"
+        vendor_id: null
       - rank: 57
         name: "IQVIA (Real-World Evidence / Technology & Analytics Solutions)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Largest life-sciences data & analytics vendor and RWD/RWE revenue leader: FY2025 total revenue $16.31B, of which Technology & Analytics Solutions $6.63B (+7.6% YoY), per company results."
         source: "https://ir.iqvia.com/press-releases/press-release-details/2026/IQVIA-Reports-Fourth-Quarter-and-Full-Year-2025-Results-Issues-Full-Year-2026-Guidance/default.aspx"
+        vendor_id: iqvia
       - rank: 58
         name: "Optum (Optum Insight / Life Sciences & Health analytics)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Ranked #2 in the Health Analytics category on 6sense at 24.66%, behind IQVIA (29.95%) — note this is 6sense's technographic share (share of tracked companies using the tool), not revenue share. Optum Insight is UnitedHealth Group's health data & analytics arm."
         source: "https://6sense.com/tech/health-analytics/optum-market-share"
+        vendor_id: optum
       - rank: 59
         name: "Flatiron Health (oncology RWD / OncoEMR)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Recognized market leader in oncology real-world data; network of 280+ community-oncology partners plus academic centers, OncoEMR-based dataset spanning 22+ tumor types."
         source: "https://www.ajmc.com/view/in-data-race-flatiron-health-touts-tripling-of-global-oncology-research-network"
+        vendor_id: flatiron-health
       - rank: 60
         name: "Komodo Health (Healthcare Map / Marmot AI)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "AI 'Healthcare Map' tracks 325M+ de-identified patient journeys; $3.3B valuation from a $220M Series E (2021, Tiger Global-led); launched the Marmot healthcare-native AI engine Aug 2025."
         source: "https://www.mobihealthnews.com/news/health-data-analytics-startup-komodo-healths-220m-series-e-propels-it-33b-valuation"
+        vendor_id: komodo-health
       - rank: 61
         name: "Truveta (health-system EHR RWD)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Collective of 30 US health systems; regulatory-grade de-identified EHR data on 120M+ patients (~1/3 of the US) plus linked closed claims on 200M+ patients; runs the Truveta Language Model."
         source: "https://www.globenewswire.com/news-release/2025/02/13/3025934/0/en/Truveta-Data-expands-beyond-EHR-data-with-linked-closed-claims-for-more-than-200-million-patients.html"
+        vendor_id: truveta
       - rank: 62
         name: "Innovaccer (population-health Data & AI platform)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "2026 Best in KLAS 'Data & AI Platform for Providers' (93.2) and Data Analytics Platform for Payers (90.5); 80M+ patient records across 130+ organizations, used by six of the top 10 US health systems."
         source: "https://innovaccer.com/blogs/top-population-health-management-software"
+        vendor_id: innovaccer
       - rank: 63
         name: "Health Catalyst (data operating system / analytics)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Publicly traded (NASDAQ: HCAT) healthcare data & analytics platform with recurring Best in KLAS positions in data & analytics platforms; recurring revenue >90% of total."
         source: "https://klasresearch.com/best-in-klas-ranking/data-and-analytics-platforms/2025/97"
+        vendor_id: health-catalyst
       - rank: 64
         name: "Aetion (regulatory-grade RWE / causal AI)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Causal-inference RWE platform whose customers include the FDA, EMA and Canada's CADTH plus most top-20 pharma; acquired by Datavant (May 2025) as a leading RWE platform."
         source: "https://www.datavant.com/press-release/datavant-to-acquire-leading-real-world-evidence-rwe-platform-aetion"
+        vendor_id: aetion
       - rank: 65
         name: "Lightbeam Health Solutions (population-health analytics)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Cloud population-health/risk-stratification platform across ACO REACH, MSSP, Medicare Advantage, Medicaid and commercial; NCQA PHM prevalidation and 2025 Best in KLAS for RPM."
         source: "https://www.prnewswire.com/news-releases/lightbeam-achieves-ncqa-prevalidation-for-population-health-management-platform-302637148.html"
+        vendor_id: lightbeam-health
       - rank: 66
         name: "Notable"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "AI-native healthcare automation vendor (scheduling, intake, referrals); company-reported deployment across 10,000+ sites of care and 1M+ daily workflows — self-reported, NOT an independent market-share figure; cited among AI vendors gaining traction with health systems. (Beckers source could not be independently re-verified.)"
         source: "https://www.beckershospitalreview.com/healthcare-information-technology/ai/10-ai-vendors-gaining-traction-with-health-systems/"
+        vendor_id: null
   no_ai:
     label_en: "Conventional (No-AI) medical / pharma software — market leaders"
     label_zh: "傳統(非 AI)醫療／藥廠軟體 — 市場領導者"
@@ -416,531 +483,620 @@ leaderboards:
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#1 US acute-care EHR: 43.7% of US hospitals and 56.9% of hospital beds (KLAS US Acute Care EHR Market Share 2026, contracts through Dec 2025); also #1 US ambulatory EHR ~19.5% (16,295 installs, Definitive Healthcare Oct 2025)"
         source: "https://healthsystemcio.com/2026/05/14/acute-care-ehr-market-share-2026/"
+        vendor_id: epic-systems
       - rank: 2
         name: "Oracle Health (Cerner)"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#2 US acute-care EHR: 21.9% of US hospitals and 20.4% of hospital beds (KLAS US Acute Care EHR Market Share 2026); #4 US ambulatory ~5.4% (4,490 installs, Definitive Healthcare Oct 2025)"
         source: "https://healthsystemcio.com/2026/05/14/acute-care-ehr-market-share-2026/"
+        vendor_id: oracle-health
       - rank: 3
         name: "MEDITECH"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#3 US acute-care EHR: 14.7% of US hospitals and 12.5% of hospital beds (KLAS US Acute Care EHR Market Share 2026)"
         source: "https://healthsystemcio.com/2026/05/14/acute-care-ehr-market-share-2026/"
+        vendor_id: meditech
       - rank: 4
         name: "eClinicalWorks"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#2 US ambulatory EHR: ~11.9% market share, 9,966 installations (Definitive Healthcare, Oct 2025)"
         source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+        vendor_id: null
       - rank: 5
         name: "TruBridge (CPSI)"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#4 US acute-care EHR: 7.6% of US hospitals (KLAS US Acute Care EHR Market Share 2026); community/rural hospital focus"
         source: "https://healthsystemcio.com/2026/05/14/acute-care-ehr-market-share-2026/"
+        vendor_id: trubridge
       - rank: 6
         name: "athenahealth"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#3 US ambulatory EHR: ~6.9% market share, 5,801 installations (Definitive Healthcare, Oct 2025)"
         source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+        vendor_id: null
       - rank: 7
         name: "NextGen Healthcare"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#5 US ambulatory EHR: ~4.2% market share, 3,510 installations (Definitive Healthcare, Oct 2025)"
         source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+        vendor_id: nextgen-healthcare
       - rank: 8
         name: "ModMed (Modernizing Medicine)"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#6 US ambulatory EHR: ~3.6% market share, 2,987 installations (Definitive Healthcare, Oct 2025); specialty-focused leader (derm, ophthalmology, ortho, GI)"
         source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+        vendor_id: null
       - rank: 9
         name: "Veradigm (Allscripts)"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "US ambulatory EHR: Veradigm Inc ~3.1% (2,580 installs) plus Practice Fusion ~3.1% (2,563 installs) (Definitive Healthcare, Oct 2025)"
         source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+        vendor_id: null
       - rank: 10
         name: "Altera Digital Health"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "US acute-care EHR: 2.9% of US hospitals (KLAS US Acute Care EHR Market Share 2026)"
         source: "https://healthsystemcio.com/2026/05/14/acute-care-ehr-market-share-2026/"
+        vendor_id: altera-digital-health
       - rank: 11
         name: "Nextech Systems"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "#9 US ambulatory EHR: ~2.3% market share, 1,892 installations (Definitive Healthcare, Oct 2025); Best in KLAS Ambulatory Specialty EHR (derm/ophthalmology)"
         source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+        vendor_id: null
       - rank: 12
         name: "Greenway Health"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "US ambulatory EHR top-10: ~2.2% market share, 1,846 installations (Definitive Healthcare, Oct 2025)"
         source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+        vendor_id: null
       - rank: 13
         name: "Dedalus"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "KLAS: 3rd-largest EHR vendor globally by inpatient hospitals outside the US (1,848 hospitals); most newly contracted beds outside the US for 3 consecutive years (KLAS Global Acute Care EHR Market Share)"
         source: "https://digitalhealth.org.au/blog/dedalus-identified-as-ehr-vendor-with-most-contracted-beds-outside-the-us-for-3-consecutive-years-by-klas-research/"
+        vendor_id: null
       - rank: 14
         name: "InterSystems (TrakCare)"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "2025 Best in KLAS awards (Acute Care EHR and Shared Care Record/HIE, global regions) per vendor release; global (non-US) EMR leader — sourced leadership position, no public share %"
         source: "https://www.intersystems.com/news/intersystems-wins-two-best-in-klas-awards-for-2025/"
+        vendor_id: intersystems
       - rank: 15
         name: "WellSky"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "Leading post-acute EHR for home health, hospice and palliative care; 20,000+ client sites (vendor-stated leadership position, no public share %)"
         source: "https://wellsky.com/bringing-healthcare-home/"
+        vendor_id: null
       - rank: 16
         name: "Netsmart"
         segment: ehr-emr
         segment_zh: "電子病歷 EHR/EMR"
         market_basis: "Leading behavioral-health and human-services EHR; first behavioral-health EHR to attain ONC Health IT certification (segment leadership position, no public share %)"
         source: "https://www.ntst.com/company/news/news-release-netsmart-is-first-and-only-behavioral-health-ehr-to-attain-onc-health-it-certification"
+        vendor_id: null
       - rank: 17
         name: "GE HealthCare (Centricity / True Enterprise Imaging)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "Signify Research names GE HealthCare among the top-3 imaging-IT (PACS/enterprise imaging) vendors by revenue/market share; global imaging IT market grew ~5.5% in 2023 to exceed $5.5bn, with GE, Philips and Fujifilm cited as the top-3 leaders. (Note: KLAS Decision Insights shows GE with negative new-purchase momentum — installed base > new selections.)"
         source: "https://www.signifyresearch.net/insights/opportunities-for-growth-in-the-imaging-it-market/"
+        vendor_id: ge-healthcare
       - rank: 18
         name: "Philips (Vue PACS / IntelliSpace)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "Signify Research lists Philips among the top-3 imaging-IT vendors by market share (2023, >$5.5bn market). (Note: KLAS market-energy analysis shows Philips with negative momentum — more potential replacements than net-new selections; ranked here on installed-base/revenue share.)"
         source: "https://www.signifyresearch.net/insights/opportunities-for-growth-in-the-imaging-it-market/"
+        vendor_id: philips
       - rank: 19
         name: "Fujifilm (Synapse PACS / VNA)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "Signify Research names Fujifilm in the top-3 imaging-IT vendors by market share (2023); KLAS 2025 large-PACS performance score 84.9, and positive new-selection momentum per KLAS Decision Insights (consolidated PACS/cardiology platform)."
         source: "https://www.signifyresearch.net/insights/opportunities-for-growth-in-the-imaging-it-market/"
+        vendor_id: null
       - rank: 20
         name: "Sectra (Sectra PACS / VNA)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "Best in KLAS #1 in both large and small PACS (large 91.0, small ~93.0 in 2025), the highest-satisfaction PACS for 11 consecutive years, and #1 in KLAS Decision Insights 'market energy' — seriously considered in nearly 60% of new large-PACS decisions and leading in selections; Signify notes Sectra gaining share."
         source: "https://medical.sectra.com/about-sectra/sectra-pacs-best-in-klas/"
+        vendor_id: sectra
       - rank: 21
         name: "Merative (Merge PACS)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "KLAS large-PACS performance 80.3 (2024) rising to 82.8 (2025); ranked among top large-PACS performers and strong in KLAS Decision Insights selections among its legacy installed base (large, historically IBM/Merge base)."
         source: "https://hitconsultant.net/2025/04/28/klas-pacs-2025-report/"
+        vendor_id: merative
       - rank: 22
         name: "Agfa HealthCare (Enterprise Imaging)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "KLAS 2025 large-PACS performance score 87.2 (2nd behind Sectra) and Best in KLAS small-PACS runner-up (~90.3); KLAS Decision Insights notes new-selection considerations nearly tripled year-over-year after stabilizing."
         source: "https://hitconsultant.net/2025/04/28/klas-pacs-2025-report/"
+        vendor_id: agfa-healthcare
       - rank: 23
         name: "Change Healthcare / Enterprise Imaging (now Optum)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "KLAS-rated large and small PACS vendor (large ~74.8, small ~79.4 in 2024) with a large legacy installed base; KLAS Decision Insights (as 'Optum') shows declining scores and negative momentum but a substantial installed base."
         source: "https://intuitionlabs.ai/articles/enterprise-pacs-klas-comparison"
+        vendor_id: null
       - rank: 24
         name: "Intelerad"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "Named in KLAS Decision Insights 'market energy' as an active vendor expanding via M&A-driven deployments (in the momentum group behind Sectra/Visage/Merge/Fujifilm/Agfa); large North American installed base built through acquisitions."
         source: "https://engage.klasresearch.com/blog/the-us-imaging-market-is-hot-which-pacs-vendors-are-the-most-competitive/8348/"
+        vendor_id: intelerad
       - rank: 25
         name: "Visage Imaging (Visage 7)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "Signify Research identifies Visage Imaging as a vendor gaining imaging-IT market share; KLAS Decision Insights ranks Visage #2 in net-new PACS selections (behind Sectra), especially strong among medium-to-very-large organizations. Installed base still smaller than the legacy majors, hence ranked below them."
         source: "https://engage.klasresearch.com/blog/the-us-imaging-market-is-hot-which-pacs-vendors-are-the-most-competitive/8348/"
+        vendor_id: visage-imaging
       - rank: 26
         name: "Hyland (Acuo VNA / NilRead)"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "KLAS-ranked Vendor Neutral Archive (Acuo 73.7 in 2024 Best in KLAS VNA; that year's VNA #1 was Fujifilm Synapse VNA at 86.7). Acuo subsequently recognized as 2026 Best in KLAS VNA; a widely deployed independent VNA. (Prior 'leading VNA by studies managed' claim was unsourced and removed.)"
         source: "https://klasresearch.com/best-in-klas-ranking/vendor-neutral-archive-vna/2024/235"
+        vendor_id: hyland-acuo-vna
       - rank: 27
         name: "INFINITT Healthcare"
         segment: pacs-enterprise-imaging
         segment_zh: "PACS／企業影像"
         market_basis: "KLAS-ranked small-PACS vendor (~79.3 in 2024 rising to ~88.8 in 2025) with a global installed base; among named 2026 Best in KLAS radiology vendors."
         source: "https://intuitionlabs.ai/articles/enterprise-pacs-klas-comparison"
+        vendor_id: infinitt-healthcare
       - rank: 28
         name: "Oracle Health (Cerner) — Millennium PathNet"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "~22% global LIS market share per a single Verified Market Research blog ('Oracle Health maintains a 22% Market Share globally') — figure confirmed present at the cited URL but sourced only to that one dubious blog; corroborated qualitatively by Oracle's $28.3B Cerner acquisition and its leading US acute-care LIS installed base."
         source: "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+        vendor_id: oracle-health
       - rank: 29
         name: "Epic Beaker"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "Sourced leadership position (no clean standalone LIS %): Epic is the dominant US acute-care EHR and Beaker is the default LIS for Epic health systems; Epic won Overall Best in KLAS 2025 for the 15th consecutive year, driving a large-system LIS installed base."
         source: "https://engage.klasresearch.com/press-release/epic-athenahealth-chartis-and-evergreen-healthcare-partners-win-2025-overall-best-in-klas-awards/"
+        vendor_id: null
       - rank: 30
         name: "STARLIMS (Francisco Partners; ex-Abbott Informatics)"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "~16.4% share of the high-complexity lab segment per the same single Verified Market Research blog (listed as Abbott Informatics) — figure confirmed at the cited URL but single-source; independently, STARLIMS holds the #1 LIMS Leader position on the G2 Winter 2024 Grid (verified on starlims.com/G2)."
         source: "https://www.starlims.com/resources/winter-2024-starlims-maintains-lims-leader-g2-ranking/"
+        vendor_id: starlims
       - rank: 31
         name: "Thermo Fisher Scientific — SampleManager LIMS"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "~11.5% LIS/LIMS share per a single Verified Market Research blog comparison table (confirmed present at cited URL, single-source); Thermo Fisher is consistently named among the leading global LIMS suppliers in market reports."
         source: "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+        vendor_id: null
       - rank: 32
         name: "LabWare"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "~10.8% share with the highest customer retention (98%) in-study per a single Verified Market Research blog (confirmed at cited URL, single-source); consistently ranked among the top global LIMS suppliers."
         source: "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+        vendor_id: labware
       - rank: 33
         name: "Clinisys (Sunquest / PowerPath)"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "~9.2% LIS share per a single Verified Market Research blog (confirmed at cited URL, single-source); consolidation of Sunquest, CliniSys, Horizon and ApolloLIMS brands, and named a leading clinical LIS platform in NovoPath's 2026 top-LIS list."
         source: "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+        vendor_id: clinisys
       - rank: 34
         name: "LabVantage Solutions"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "Sourced leadership position (no clean single %): named among the dominating global LIMS suppliers by the Fortune Business Insights LIMS report, and listed (as LabVantage Medical Suite) among leading LIS/pathology vendors in NovoPath's 2026 top-LIS list."
         source: "https://www.fortunebusinessinsights.com/laboratory-information-management-system-lims--114329"
+        vendor_id: null
       - rank: 35
         name: "SCC Soft Computer"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "Sourced leadership position (no %): named among the laboratory information system vendors (alongside McKesson) in the Verified Market Research LIS vendor review; a long-standing LIS supplier for large reference/hospital labs. (Prior NovoPath citation dropped — NovoPath's list does not name SCC.)"
         source: "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+        vendor_id: null
       - rank: 36
         name: "Orchard Software"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "Sourced leadership position (no %): named a leading LIS for independent, reference and hospital-affiliated labs (now part of Clinisys) in NovoPath's 2026 top-LIS list."
         source: "https://www.novopath.com/resources/blog/top-lis-companies/"
+        vendor_id: orchard-software
       - rank: 37
         name: "LigoLab Information Systems"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "Sourced leadership position (no %): named a top LIS + revenue-cycle-management platform for high-volume independent and pathology labs in NovoPath's 2026 top-LIS list."
         source: "https://www.novopath.com/resources/blog/top-lis-companies/"
+        vendor_id: ligolab
       - rank: 38
         name: "MEDITECH — Expanse Laboratory"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "Sourced leadership position (no clean LIS %): MEDITECH is a major US acute-care EHR whose Expanse lab/pathology solution is named among leading LIS options for hospitals running Expanse in NovoPath's 2026 top-LIS list."
         source: "https://www.novopath.com/resources/blog/top-lis-companies/"
+        vendor_id: null
       - rank: 39
         name: "CompuGroup Medical (CGM LABDAQ / SCHUYLAB / AP EASY)"
         segment: lis-lims-lab
         segment_zh: "實驗室資訊 LIS/LIMS"
         market_basis: "Sourced leadership position (no %): CGM's LABDAQ / AP EASY / SCHUYLAB portfolio named among leading LIS providers for reference and AP labs in NovoPath's 2026 top-LIS list."
         source: "https://www.novopath.com/resources/blog/top-lis-companies/"
+        vendor_id: null
       - rank: 40
         name: "Optum / Change Healthcare (claims clearinghouse)"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "Largest medical claims clearinghouse in the US; state/federal antitrust filings describe it processing roughly half of all US medical claims (~15B transactions/yr representing ~$1.5T in claims). Acquired by UnitedHealth/Optum, 2022."
         source: "https://www.ag.state.mn.us/Office/Communications/2022/02/24_UnitedHealthGroup.asp"
+        vendor_id: null
       - rank: 41
         name: "Waystar"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "2025 Best in KLAS for Claims Management & Clearinghouse (91.8, #1 in segment — verified via KLAS/TechTarget). FY2024 platform processed 6B+ payment transactions and $1.8T+ annual gross claims across ~1M+ providers / ~30,000 clients (per company FY2024 results)."
         source: "https://www.waystar.com/news/waystar-reports-fourth-quarter-and-fiscal-year-2024-results/"
+        vendor_id: waystar
       - rank: 42
         name: "Availity"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "Self-described nation's largest real-time health information network; ~3.4M connected providers with ~95% payer connectivity (per Availity network page). Also #1 KLAS for ambulatory claims management/physician clearinghouse; Availity Essentials Pro ranked #2 (90.6) in 2025 KLAS Claims Management & Clearinghouse."
         source: "https://www.availity.com/clearinghouse-and-trading-partner-network/"
+        vendor_id: null
       - rank: 43
         name: "R1 RCM"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "Largest end-to-end RCM outsourcing provider; works with 95 of the top 100 US health systems and manages $55B+ in net patient revenue; named top-performing RCM outsourcing provider in the 2024 Black Book Health Systems Client Survey. (~$2.5B+ annual revenue; taken private 2024.)"
         source: "https://www.newswire.com/news/r1-rcm-named-top-performing-revenue-cycle-management-outsourcing-22387006"
+        vendor_id: null
       - rank: 44
         name: "Experian Health (ClaimSource)"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "Serves more than 60% of US hospitals plus 7,500+ practices/labs/pharmacies (company claim); ClaimSource was 2024 Best in KLAS for Claims Management & Clearinghouse and ranked 4th (88.4) in the 2025 KLAS Claims Management ranking; 2025 Best in KLAS for Contract Management."
         source: "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+        vendor_id: experian-health
       - rank: 45
         name: "FinThrive"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "Major RCM technology platform; FinThrive Claims Manager scored 88.0 (5th) in the 2025 KLAS Claims Management & Clearinghouse ranking; 2025 Best in KLAS for Insurance Discovery (multi-year) and named to KLAS 2025 Consistent High Performers report. No public market-share figure — sourced KLAS leadership positions only."
         source: "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+        vendor_id: finthrive
       - rank: 46
         name: "TruBridge (formerly CPSI)"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "RCM + EHR for rural/community hospitals; 1,500+ clients across the US; RCM segment revenue $193.9M in 2023 (57.1% of company revenue, per annual report). Exclusive RCM referral partnership with PointClickCare (2024)."
         source: "https://www.sec.gov/Archives/edgar/data/1169445/000119312525063330/d872552dars.pdf"
+        vendor_id: trubridge
       - rank: 47
         name: "The SSI Group"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "Established national healthcare claims clearinghouse (founded 1988); SSI Claims Management scored 83.4 (6th) in the 2025 KLAS Claims Management & Clearinghouse ranking — a sourced top-tier position. No public share/volume figure."
         source: "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+        vendor_id: null
       - rank: 48
         name: "Quadax (Xpeditor)"
         segment: rcm-billing
         segment_zh: "營收循環／帳單理賠"
         market_basis: "Claims management / clearinghouse; Xpeditor scored 89.4 (3rd) in the 2025 KLAS Claims Management ranking, ahead of Experian ClaimSource — a sourced top-tier leadership position. No public share/volume figure."
         source: "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+        vendor_id: null
       - rank: 49
         name: "Oracle (Oracle Health / Oracle Fusion Cloud ERP, HCM, SCM)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "Named among the key players in the healthcare ERP competitive landscape by Grand View Research and Mordor Intelligence; largest combined EHR-ERP footprint reinforced by the $28.3B Cerner acquisition (2022). Global Fusion ERP/HCM/SCM incumbent."
         source: "https://www.grandviewresearch.com/industry-analysis/healthcare-erp-market-report"
+        vendor_id: oracle-life-sciences
       - rank: 50
         name: "Workday (Financial Management, HCM, Supply Chain Management for Healthcare)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "Named Best in KLAS for ERP (Large Organizations) for the 9th consecutive year (announced Feb 4, 2026), ranking #1 for ERP among large US health systems; dominant ERP suite among large health systems (Advocate, Intermountain, Corewell, Bon Secours Mercy)."
         source: "https://newsroom.workday.com/2026-02-04-Workday-Named-Best-in-KLAS-for-ERP-for-Large-Organizations-for-Ninth-Consecutive-Year"
+        vendor_id: workday
       - rank: 51
         name: "SAP (SAP S/4HANA / Healthcare ERP)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "Named among the top prominent participants in the healthcare ERP market by Grand View Research and Mordor Intelligence; global enterprise ERP incumbent, strong in pharma/manufacturing S/4HANA with serialization and 21 CFR Part 11 validation."
         source: "https://www.mordorintelligence.com/industry-reports/healthcare-erp-market"
+        vendor_id: sap
       - rank: 52
         name: "Microsoft (Dynamics 365 Finance & Supply Chain on Azure)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "Explicitly named a top prominent participant in the healthcare ERP market by Grand View Research (alongside Oracle, SAP, Workday), bundling ERP, CRM and collaboration via Dynamics 365 and Azure."
         source: "https://www.grandviewresearch.com/industry-analysis/healthcare-erp-market-report"
+        vendor_id: microsoft
       - rank: 53
         name: "Infor (CloudSuite Healthcare - finance, supply chain, HR/workforce)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "Named a prominent healthcare ERP participant by Grand View / Mordor; CloudSuite Healthcare installed base includes named large health systems (CHRISTUS Health, MaineHealth, Yale New Haven Health, Boston Medical Center, ProMedica). No published hospital count."
         source: "https://www.appsruntheworld.com/customers-database/products/view/infor-cloudsuite-healthcare"
+        vendor_id: infor
       - rank: 54
         name: "symplr (Healthcare Operations Platform - workforce management, provider data/credentialing, GRC)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "States deployment in 9 of 10 US hospitals and 400+ US health plans (company site); symplr Smart Square named 2026 Best in KLAS for Nurse and Staff Scheduling (2nd consecutive year). Broad installed base in operations/credentialing."
         source: "https://www.symplr.com/"
+        vendor_id: symplr
       - rank: 55
         name: "Premier, Inc. (GPO + supply chain services)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "GPO alliance of ~4,350 US hospitals/health systems and 300,000+ other providers; FY2025 total net revenue ~$1.01B (SEC 8-K), with Supply Chain Services as its largest segment."
         source: "https://www.sec.gov/Archives/edgar/data/1577916/000119312525005690/d870188dex991.htm"
+        vendor_id: null
       - rank: 56
         name: "QGenda (healthcare workforce management - physician / nurse / staff scheduling, credentialing)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "Used by 4,000+ organizations across 45+ specialties, including ~90-93 of Becker's 100 Greatest Hospitals; repeatedly awarded Best in KLAS for Physician and for Nurse & Staff Scheduling (2021-2022); positioned as market-leading healthcare workforce management platform."
         source: "https://www.businesswire.com/news/home/20220208005831/en/QGenda-Awarded-Best-in-KLAS-for-Physician-Nurse-and-Staff-Scheduling-for-2022"
+        vendor_id: qgenda
       - rank: 57
         name: "Tecsys (Elite Healthcare supply chain execution / WMS)"
         segment: hospital-erp-supply
         segment_zh: "醫院 ERP／供應鏈"
         market_basis: "Named a Challenger in the 2026 Gartner Magic Quadrant for Warehouse Management Systems (15th appearance in the report); recognized healthcare supply chain execution / WMS vendor. Position reflects vision/execution, not a published market-share figure."
         source: "https://www.prnewswire.com/news-releases/tecsys-named-a-challenger-in-2026-gartner-magic-quadrant-for-warehouse-management-systems-302761448.html"
+        vendor_id: null
       - rank: 58
         name: "athenahealth (athenaPatient / athenaOne patient engagement)"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "Patient engagement (athenaPatient app, portal, self-scheduling, reminders, check-in) embedded in athenaOne across ~160,000 providers on the athenahealth network — largest installed base among engagement-capable EHR platforms. Basis is athenahealth's stated network scale (vendor source), not an independent market-share %."
         source: "https://www.athenahealth.com/solutions/patient-engagement"
+        vendor_id: null
       - rank: 59
         name: "Phreesia"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "Public company (NYSE: PHR); ~4,203 average healthcare-services clients in FY2025 (+~17% YoY) per company reporting; broadest market presence in Patient Intake Management (KLAS-recognized adoption). Real sourced installed-base/adoption position."
         source: "https://www.phreesia.com/compare/"
+        vendor_id: phreesia
       - rank: 60
         name: "Relatient (Dash)"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "Company-reported ~50,000 providers; ~50M+ unique patients engaged and ~150M appointments facilitated in 2025 — one of the largest self-scheduling/patient-access installed bases (self-reported vendor figure)."
         source: "https://www.relatient.com/about/"
+        vendor_id: null
       - rank: 61
         name: "Solutionreach"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "Company-reported 50,000+ customer installations with 400+ PM/EHR integrations and ~2M SMS/day; large independent- and group-practice base (self-reported vendor figure)."
         source: "https://www.solutionreach.com/"
+        vendor_id: null
       - rank: 62
         name: "Artera (formerly WELL Health)"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "VERIFIED: #1 Best in KLAS for Patient Communications in the 2026 Best in KLAS Awards (89.8 overall score); 1,000+ provider organizations, ~2B patient communications and ~200M patients reached annually, $100M CARR. (Note: the pre-Sept-2022 'WELL Health / wellapp.com' entity is the same company, not a separate vendor.)"
         source: "https://www.prnewswire.com/news-releases/artera-named-1-best-in-klas-for-patient-communications-302699189.html"
+        vendor_id: null
       - rank: 63
         name: "Luma Health"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "550+ health systems, hospitals, FQHCs and clinic networks; raised $130M Series C — sizable US patient-engagement platform (independent trade-press source)."
         source: "https://www.fiercehealthcare.com/digital-health/patient-engagement-platform-luma-health-picks-up-130m-to-automate-provider-patient"
+        vendor_id: luma-health
       - rank: 64
         name: "Klara (ModMed)"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "Conversational patient-communication platform, part of ModMed, used by healthcare teams across 40+ specialties — qualitative vendor position; no hard market-share or installed-base number available."
         source: "https://www.klara.com/"
+        vendor_id: null
       - rank: 65
         name: "Simple Interact"
         segment: patient-engagement
         segment_zh: "病人互動／掛號"
         market_basis: "VERIFIED: 2026 Best in KLAS winner for Patient Intake Management, overall performance score 98.4 (klasresearch.com), second consecutive year — sourced category-leadership (satisfaction) position; smaller market share than the numerically-evidenced leaders above."
         source: "https://klasresearch.com/best-in-klas-ranking/patient-intake-management/2026/341"
+        vendor_id: null
       - rank: 66
         name: "BD (Pyxis MedStation ES)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "2025 Best in KLAS #1 in Automated Dispensing Cabinets, verified score 84.6 (B+) from 62 unique organizations vs Omnicell 77.5 from 37 orgs (market avg 81.6); BD's fifth consecutive year at #1. Named by Mordor Intelligence as one of the five suppliers (Omnicell, BD, Baxter, McKesson, Swisslog) controlling ~60% of pharmacy-automation revenue, with Omnicell/BD cited as dominating hospital cabinets. Co-leader of the US ADC near-duopoly."
         source: "https://klasresearch.com/best-in-klas-ranking/automated-dispensing-cabinets/2025/25"
+        vendor_id: bd
       - rank: 67
         name: "Omnicell (XT Automated Dispensing Cabinets / XR2 robotics)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "~$1.1B FY2024 total revenue (pure-play pharmacy automation, per 10-K); ranked #2 in 2025 Best in KLAS ADC with verified score 77.5 (from 37 orgs, +6% YoY). Named by Mordor Intelligence among the five suppliers controlling ~60% of pharmacy-automation revenue and, with BD, cited as dominating hospital cabinets. (Prior '35-40% NA ADC share' claim dropped — no independent source.)"
         source: "https://www.sec.gov/Archives/edgar/data/926326/000092632625000003/omcl-20241231.htm"
+        vendor_id: omnicell
       - rank: 68
         name: "Swisslog Healthcare (BoxPicker, PillPick; KUKA-owned)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Named by Mordor Intelligence among the five suppliers (Omnicell, BD, Baxter, McKesson, Swisslog Healthcare) that control ~60% of pharmacy-automation revenue; also profiled as a major player (via parent KUKA) in the BCC Research 2024-2028 report. Company self-reports installation in 3,000+ healthcare institutions (confidence C, vendor claim)."
         source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
+        vendor_id: swisslog-healthcare
       - rank: 69
         name: "Baxter International (medication management / IV automation, DoseEdge)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Named by Mordor Intelligence among the five suppliers (Omnicell, BD, Baxter, McKesson, Swisslog) that control ~60% of pharmacy-automation revenue; also named one of the four major players (BD, Baxter, Omnicell, KUKA) in the BCC Research 2024-2028 Pharmacy Automation report."
         source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
+        vendor_id: null
       - rank: 70
         name: "McKesson (EnterpriseRx, Supplylogix)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Named by Mordor Intelligence among the five suppliers (Omnicell, BD, Baxter, McKesson, Swisslog) that together control ~60% of pharmacy-automation market revenue; positioned in pharmacy workflow / medication management software."
         source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
+        vendor_id: null
       - rank: 71
         name: "Parata Systems (retail/LTC pouch packaging & robotics; BD-owned since 2022)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Acquired by BD for confirmed $1.525B cash (completed July 2022), giving BD entry to a ~$600M retail/hospital/LTC pharmacy-automation software+technology segment; leader in the pouch-packaging/central-fill niche. Also listed by Mordor Intelligence among top named pharmacy-automation companies. Note: now a BD subsidiary (see rank 1)."
         source: "https://www.prnewswire.com/news-releases/bd-completes-acquisition-of-parata-systems-301587798.html"
+        vendor_id: null
       - rank: 72
         name: "ScriptPro LLC"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Named by Mordor Intelligence among the top pharmacy-automation companies (robotic prescription dispensing / central-fill for retail and outpatient pharmacy). Listed as a major player 'in no particular order' — no independent market-share figure published, so ranked below the numerically-evidenced leaders."
         source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market/companies"
+        vendor_id: null
       - rank: 73
         name: "Capsa Healthcare"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Named by Mordor Intelligence among the top pharmacy-automation companies (listed alongside Omnicell, Parata, ScriptPro, ARxIUM) serving retail, hospital and LTC medication dispensing/management. Identified as a major player 'in no particular order' — no independent share figure, so ranked on a named-player basis."
         source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market/companies"
+        vendor_id: null
       - rank: 74
         name: "ARxIUM (central-fill, IV automation, RIVA)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Named by Mordor Intelligence among the top pharmacy-automation companies (central-fill and IV compounding robotics); also profiled in Spherical Insights vendor coverage. No independent market-share figure published, so ranked below numerically-evidenced leaders on a named-player basis."
         source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market/companies"
+        vendor_id: arxium
       - rank: 75
         name: "Oracle Health / Cerner (pharmacy / medication management module)"
         segment: pharmacy-medmgmt
         segment_zh: "藥局自動化／用藥管理"
         market_basis: "Named ('Oracle Health') by Mordor Intelligence among profiled pharmacy-automation / medication-management vendors — EHR-embedded pharmacy workflow software rather than dispensing hardware. No standalone market-share figure, so ranked lowest on a named-player basis."
         source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market/companies"
+        vendor_id: oracle-health
       - rank: 76
         name: "Availity (Health Information Network / EDI Clearinghouse)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "Largest U.S. real-time health information network by transaction volume: 4B+ clinical/administrative/financial transactions annually, 2M+ providers, 2,000+ payers (company-stated, widely cited). Independent third-party position: ranked #1 Best in KLAS for physician clearinghouse / ambulatory claims management (2019 KLAS award — dated but real)."
         source: "https://www.availity.com/ ; https://www.prnewswire.com/news-releases/availity-ranks-1-for-ambulatory-claims-management-and-physician-clearinghouse-solutions-300869996.html"
+        vendor_id: null
       - rank: 77
         name: "Epic — Care Everywhere / Epic Nexus (TEFCA QHIN)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "Largest clinical-data exchange network by volume. CORRECTED figure: Care Everywhere exchanges 20M+ patient records/day (2024) rising to ~30M/day (2025) per Healthcare IT News — the review's '16M/day' understated it. Epic Nexus was a first-wave TEFCA QHIN (Dec 2023); Epic customers reach ~70% of U.S. hospitals via Carequality."
         source: "https://www.healthcareitnews.com/news/epics-care-everywhere-interoperability-platform-shows-big-jump-data-exchange ; https://www.epic.com/epic/post/epic-providers-approved-among-first-tefca-participants/"
+        vendor_id: null
       - rank: 78
         name: "Datavant (health data exchange / de-identification network)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "Largest neutral health data ecosystem (post Ciox merger). VERIFIED against cited press release: connected to 80,000+ hospitals and clinics, 75% of the 100 largest U.S. health systems, 350+ real-world-data partners; also largest Release-of-Information provider (~65% of top-200 systems)."
         source: "https://www.datavant.com/press-release/datavant-leads-in-health-data-exchange-surpasses-digital-connections-to-70-000-hospitals-and-clinics-acquires-healthjump ; https://www.datavant.com/about"
+        vendor_id: null
       - rank: 79
         name: "InterSystems (IRIS for Health / HealthShare / Ensemble)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "Leading integration-platform vendor by revenue (~$1.1B annual, deployed in 80+ countries). Named a Leader in the IDC MarketScape: U.S. Healthcare Data Platform for Providers 2024–2025, and a 2025 Best in KLAS Interoperability Platforms winner (KLAS category-name detail not independently re-verified in this pass; revenue and IDC-Leader position are solid)."
         source: "https://www.intersystems.com/resources/idc-marketscape-us-healthcare-data-platform-providers-vendor-assessment/ ; https://www.intersystems.com/news/intersystems-wins-two-best-in-klas-awards-for-2025/"
+        vendor_id: intersystems
       - rank: 80
         name: "eHealth Exchange (health information network / QHIN)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "One of the nation's oldest/largest HINs: connects ~75% of U.S. hospitals, 60+ regional/state HIEs, and is the only network connecting to five federal agencies. Among the first TEFCA QHINs designated (Dec 2023) — a verifiable designation, not a claimed share."
         source: "https://www.globenewswire.com/news-release/2023/12/12/2794902/0/en/eHealth-Exchange-Among-First-To-Achieve-TEFCA-Qualified-Health-Information-Network-QHIN-Designation.html"
+        vendor_id: null
       - rank: 81
         name: "Rhapsody (Rhapsody / Corepoint / Lyniate — integration engines)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "Category leader in provider-side interface engines. VERIFIED: Corepoint ranked #1 Best in KLAS Integration Engines for 16 consecutive years (95.2 in the 2025 report) with Rhapsody Integration #2 in the same 2025 category — both now under Rhapsody Health (2026 report extends the streak to 17 years)."
         source: "https://rhapsody.health/blog/rhapsody-named-top-integration-engine-in-2025-best-in-klas-report/ ; https://klasresearch.com/best-in-klas-ranking/integration-engines/2025/19"
+        vendor_id: rhapsody
       - rank: 82
         name: "Redox (integration-as-a-service / EHR API)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "Leading modern integration-as-a-service layer for digital-health apps. Company-stated (not third-party) scale: ~10,000 healthcare organizations, 12,000+ active integrations across 100+ EHR vendors, 20M+ transactions/day (2025). Positional leadership, no independent market-share figure."
         source: "https://redoxengine.com/use-cases/connect-with-provider-ehrs/"
+        vendor_id: null
       - rank: 83
         name: "NextGen Healthcare — Mirth Connect (integration engine)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "Most widely deployed open-source HL7 interface engine; consistently cited as one of the three dominant interface engines in North America (with Rhapsody/Corepoint and Iguana). Positioned by installed-base breadth — no published market-share % (honestly flagged, not invented)."
         source: "https://intuitionlabs.ai/articles/mirth-connect-architecture-integration-engine-guide"
+        vendor_id: nextgen-healthcare
       - rank: 84
         name: "Health Gorilla (clinical data network / QHIN)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "TEFCA-designated Qualified Health Information Network (QHIN designation Dec 2023, live 2024) — a verifiable federal designation. FHIR-first national clinical-data network. Leadership positioned via QHIN status rather than a published share number."
         source: "https://www.healthgorilla.com/home/company/qhin"
+        vendor_id: null
       - rank: 85
         name: "1upHealth (FHIR data platform)"
         segment: interop-hie
         segment_zh: "互通／HIE／整合"
         market_basis: "FHIR-first data platform focused on payer CMS-compliance interoperability. Company-stated position: offers the most extensive set of CMS APIs in the industry, 80+ health organizations live, 150+ payer (Patient Access / Payer-to-Payer) endpoints. Self-reported leadership, no third-party market-share %."
         source: "https://1up.health/news/1uphealth-reports-2023-as-record-year-of-growth-company-now-offers-largest-set-of-cms-apis-in-the-industry/"
+        vendor_id: null
       - rank: 86
         name: "Foundation Medicine (FoundationOne CDx / Liquid CDx)"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "Market leader in comprehensive genomic profiling (CGP); FoundationOne CDx was the first FDA-approved broad CGP companion diagnostic; Roche Diagnostics subsidiary with one of the largest CGP test volumes. Sourced leadership position (no standalone revenue disclosed). Core is NGS molecular diagnostics, not an AI/ML platform."
         source: "https://en.wikipedia.org/wiki/Foundation_Medicine"
+        vendor_id: null
       - rank: 87
         name: "Datavant (RWD tokenization / data connectivity)"
         segment: rwd-population-ai
         segment_zh: "真實世界資料／人口健康 AI"
         market_basis: "Dominant US health-data tokenization/linkage layer: connects records across 80,000+ hospitals/clinics, ~75% of the 100 largest US health systems and 350+ real-world-data partners; acquired Aetion in 2025."
         source: "https://www.datavant.com/"
+        vendor_id: null
       - rank: 88
         name: "DNAnexus"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "Widely adopted cloud genomics/bioinformatics data platform serving large biobanks and precision-health programs; recipient of Frost & Sullivan's 2024 Global Enabling Technology Leadership Award for integrating clinical + multi-omics data. VERIFIED award (replaces prior Tracxn funding-only citation). Core is cloud data/pipeline infrastructure (AI-enabled), not an AI-first product; no public revenue/share figure."
         source: "https://www.prnewswire.com/news-releases/dnanexus-recognized-by-frost--sullivan-for-ability-to-integrate-and-synchronize-diverse-clinical-and-multi-omics-data-302334757.html"
+        vendor_id: dnanexus
       - rank: 89
         name: "Velsera (Seven Bridges Genomics platform)"
         segment: genomics-ai
         segment_zh: "基因體 AI"
         market_basis: "Positions Seven Bridges as an industry-leading unified bioinformatics platform (950+ built-in tools/workflows) used by leading academic, pharma, biotech and government entities; Global Data Network cited at 175M+ patient records. Vendor-sourced leadership position only; no independent market-share/revenue figure."
         source: "https://velsera.com/products/seven-bridges-platform/"
+        vendor_id: velsera

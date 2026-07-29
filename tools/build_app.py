@@ -197,6 +197,16 @@ function spansOf(c){const s=new Set(c.deployment);return s.has('hybrid')||([...s
 const BUYER_C={customer:'bcust',operator:'boper','original-equipment-manufacturer':'boem',hyperscaler:'bhyp'};
 const OPP={1:'minimal',2:'modest',3:'significant',4:'flagship'};
 const VNAME={};(DATA.vendors.vendors||[]).forEach(v=>VNAME[v.id]=v.name);
+// ---- relationship fusion: cross-tab lookups (category <-> vendor <-> leaderboard) ----
+const VBYID={};(DATA.vendors.vendors||[]).forEach(v=>VBYID[v.id]=v);
+const CATBYID={};(DATA.taxonomy.categories||[]).forEach(c=>CATBYID[c.id]=c);
+const LB_BY_VID={};
+(function(){const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;if(!LB)return;
+  [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([bk,b])=>{if(!b)return;(b.entries||[]).forEach(e=>{
+    if(e.vendor_id){(LB_BY_VID[e.vendor_id]=LB_BY_VID[e.vendor_id]||[]).push({board:bk,rank:e.rank});}});});})();
+const lbBadge=vid=>{const r=LB_BY_VID[vid];return r?r.map(x=>(x.board==='ai'?'AI':'No-AI')+' #'+x.rank).join(' · '):null;};
+function goVendor(id){goTab('vendors');const q=$('#tab-vendors input[type=search]');const v=VBYID[id];if(q&&v){q.value=v.name;q.dispatchEvent(new Event('input'));}}
+function goCategory(id){goTab('taxonomy');const ft=$('#fTxt');const c=CATBYID[id];if(ft&&c){ft.value=c.name_en;ft.dispatchEvent(new Event('input'));}}
 
 // ---- header ----
 $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.status;
@@ -241,6 +251,7 @@ function renderHome(){
   hero.append(el('h2',{},T('Who uses the software?','誰在用這些軟體?')));
   hero.append(el('p',{},T('The software universe by point-of-care stakeholder — each split AI-driven vs conventional (for now). Click a category to open it in Explore; hunt by hardware buyer & play there.','以照護現場的使用者切分軟體宇宙 — 每格再分 AI 驅動 vs 傳統(暫定)。點類別到 Explore 開啟;在那裡依硬體買家與 play 狩獵。')));
   root.append(hero);
+  const lbLink=el('div',{class:'go',style:'cursor:pointer;margin:2px 0 14px'},T('🏆 See the market leaderboards — who leads AI vs conventional →','🏆 看市場榜單 — AI 對傳統誰領先 →'));lbLink.onclick=()=>goTab('leaderboards');root.append(lbLink);
   const GROUPS=[['facility',T('Facility','設施'),'🏥'],['doctor',T('Doctor','醫生'),'🩺'],
                 ['nurse',T('Nurse','護理'),'🩹'],['patient',T('Patient','病人'),'🧑'],['other',T('Others','其他'),'⚙️']];
   const openCat=c=>{goTab('taxonomy');const ft=$('#fTxt');if(ft){ft.value=c.name_en;ft.dispatchEvent(new Event('input'));}};
@@ -316,7 +327,10 @@ function renderTaxonomy(){
     cd.append(tagRow(T('data','資料型態'),c.data_modality));
     cd.append(tagRow(T('deploy','部署'),c.deployment));
     if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},T('hardware','硬體')));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc',title:'deployment scale'},h+((c.hardware_profile_sizing||{})[h]?' · '+c.hardware_profile_sizing[h]:''))));cd.append(hr);}
-    if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));c.vendors.forEach(v=>vr.append(el('span',{class:'pill'},VNAME[v]||v)));cd.append(vr);}
+    if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));
+      c.vendors.forEach(v=>{const bd=lbBadge(v);const p=el('span',{class:'pill',style:'cursor:pointer'},(VNAME[v]||v)+(bd?' 🏆':''));
+        p.title=bd?(T('market leader: ','市場領導 ')+bd+' — '+T('view vendor','看廠商')):T('view vendor','看廠商');p.onclick=()=>goVendor(v);vr.append(p);});
+      cd.append(vr);}
     if(c.hospital_view){cd.append(tagRow(T('hosp-who','醫院·誰'),c.hospital_view.stakeholder));
       cd.append(tagRow(T('hosp-dim','醫院·面向'),c.hospital_view.dimension));}
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
@@ -413,6 +427,8 @@ function renderVendors(){
   function card(v){
     const c=el('div',{class:'card'});c.style.marginBottom='8px';
     const h=el('div',{class:'row'},el('h3',{style:'margin:0'},v.name));
+    const bd=lbBadge(v.id);
+    if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},'🏆 '+bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goTab('leaderboards');h.append(lp);}
     if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
     c.append(h);
     const kv=el('dl',{class:'kv'});
@@ -421,7 +437,7 @@ function renderVendors(){
     add(T('Market position','市場地位'),v.market_position); add(T('Market share','市佔'),v.market_share);
     add(T('Deployment','部署'),(v.deployment_models||[]).join(', '));
     c.append(kv);
-    const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>seg.append(el('span',{class:'chip'},x)));c.append(seg);
+    const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>{const cc=CATBYID[x];const ch=el('span',{class:'chip',style:'cursor:pointer'},cc?nm(cc):x);ch.title=T('view category','看類別');ch.onclick=()=>goCategory(x);seg.append(ch);});c.append(seg);
     if(v.history)c.append(el('div',{class:'notes'},v.history));
     const srcs=(v.sources&&v.sources.length)?v.sources:(v.source?[v.source]:[]);
     if(srcs.length){const sr=el('div',{class:'row'});sr.append(el('span',{class:'tagk'},T('sources','來源')));
@@ -570,7 +586,9 @@ function renderLeaderboards(){
       if(e.segment!==curSeg){curSeg=e.segment;
         col.append(el('div',{class:'tagk',style:'display:block;margin:12px 0 2px'},(LANG==='zh'?e.segment_zh:e.segment)));}
       const row=el('div',{style:'padding:6px 0;border-top:1px solid var(--line)'});
-      row.append(el('div',{class:'row'},el('b',{style:'color:var(--accent);min-width:34px'},'#'+e.rank),el('span',{style:'font-weight:600'},e.name)));
+      const nmEl=el('span',{style:'font-weight:600'+(e.vendor_id?';cursor:pointer;text-decoration:underline dotted var(--accent)':'')},e.name+(e.vendor_id?' ↩':''));
+      if(e.vendor_id){nmEl.title=T('in the registry — view vendor card','在登錄中 — 看廠商卡');nmEl.onclick=()=>goVendor(e.vendor_id);}
+      row.append(el('div',{class:'row'},el('b',{style:'color:var(--accent);min-width:34px'},'#'+e.rank),nmEl));
       row.append(el('div',{class:'muted',style:'font-size:11px;margin:3px 0'},e.market_basis));
       if(e.source){const isurl=/^https?:\/\//.test(e.source);
         row.append(isurl?el('a',{href:e.source,target:'_blank',class:'pill'},T('source','來源')+' ↗'):el('span',{class:'pill'},String(e.source).slice(0,60)));}

@@ -660,6 +660,20 @@ class TestLeaderboards(unittest.TestCase):
             self.assertGreaterEqual(sourced, 0.8 * len(entries),
                                     f"{board}: only {sourced}/{len(entries)} sourced — below §8 bar")
 
+    def test_vendor_id_foreign_key(self):
+        """Fusion FK: every entry carries vendor_id (a real registry id, or null
+        when the leader is not in the registry). Links Leaderboards <-> Vendors."""
+        vids = {v["id"] for v in _VDOC["vendors"]}
+        linked = 0
+        for board in ("ai", "no_ai"):
+            for e in _LB["leaderboards"][board]["entries"]:
+                self.assertIn("vendor_id", e, f"{board} #{e['rank']}: no vendor_id key")
+                if e["vendor_id"] is not None:
+                    self.assertIn(e["vendor_id"], vids,
+                                  f"{board} #{e['rank']} {e['name']}: vendor_id '{e['vendor_id']}' not in registry")
+                    linked += 1
+        self.assertGreater(linked, 0, "no leaderboard entries link to the registry — fusion FK is dead")
+
 
 
 
@@ -706,6 +720,12 @@ class TestAppGuidance(unittest.TestCase):
         (scroll to a play, prefilter Explore) instead of dumping to a generic tab."""
         self.assertIn("function goTab(id,opts", self.html,
                       "goTab must take an opts arg for deep-linking")
+
+    def test_cross_tab_fusion_wired(self):
+        """Home/Explore/Vendors/Leaderboards are fused: category<->vendor<->
+        leaderboard navigation helpers + the leaderboard-rank badge exist."""
+        for marker in ("function goVendor(", "function goCategory(", "lbBadge", "LB_BY_VID"):
+            self.assertIn(marker, self.html, f"fusion wiring missing '{marker}'")
 
     def test_home_groups_by_stakeholder_and_ai(self):
         """Home organises the universe by point-of-care stakeholder (facility /
