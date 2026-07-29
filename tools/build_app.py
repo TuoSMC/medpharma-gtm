@@ -229,51 +229,38 @@ function scoreAccount(acc){
 }
 function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-led':'var(--u-med)','Monitor':'var(--u-low)','Drop':'var(--u-crit)'}[name]||'var(--muted)';}
 
-// ================= HOME (guided funnel) =================
+// ================= HOME (software universe by point-of-care stakeholder x AI) =================
+const isAI=c=>(c.role||[]).includes('analytics-artificial-intelligence')||(c.data_modality||[]).includes('artificial-intelligence-models')||(c.hardware_profile||[]).includes('gpu-server');
 function renderHome(){
   const root=$('#tab-home'); clear(root);
-  const cats=DATA.taxonomy.categories, plays=DATA.plays.plays, trigs=DATA.triggers.triggers;
-  const cust=c=>c.hardware_opportunity_by_buyer.customer||0, oper=c=>c.hardware_opportunity_by_buyer.operator||0;
-  const oem=c=>c.hardware_opportunity_by_buyer['original-equipment-manufacturer']||0;
-  const mx=c=>Math.max(...Object.values(c.hardware_opportunity_by_buyer));
+  const cats=DATA.taxonomy.categories;
   const hero=el('div',{class:'hero'});
-  hero.append(el('h2',{},T('Where do you want to hunt?','要在哪裡狩獵?')));
-  hero.append(el('p',{},T('Gate question first (§3): who controls the infrastructure behind the software? Pick a play to see its ranked hardware targets — what to quote and who to co-sell with — or act on a fired trigger.','先問關卡問題(§3):軟體背後的基礎設施由誰掌控?挑一個 play 看它的排序硬體目標——報什麼、和誰共同銷售——或對已觸發的訊號行動。')));
+  hero.append(el('h2',{},T('Who uses the software?','誰在用這些軟體?')));
+  hero.append(el('p',{},T('The software universe by point-of-care stakeholder — each split AI-driven vs conventional (for now). Click a category to open it in Explore; hunt by hardware buyer & play there.','以照護現場的使用者切分軟體宇宙 — 每格再分 AI 驅動 vs 傳統(暫定)。點類別到 Explore 開啟;在那裡依硬體買家與 play 狩獵。')));
   root.append(hero);
-  const hc=cats.filter(c=>cust(c)>=3).length, ho=cats.filter(c=>oper(c)>=3).length, ho2=cats.filter(c=>oem(c)>=3).length;
-  const bar=el('div',{class:'statbar'});
-  [['HOT_customer',hc,'direct sale','customer'],['HOT_operator',ho,'ISV / co-sell','operator'],['OEM design-wins',ho2,'embedded per-unit','original-equipment-manufacturer']].forEach(([lab,n,sub,bk])=>{
-    const st=el('div',{class:'stat'},el('div',{class:'n'},String(n)),el('div',{class:'l'},lab+' · '+sub));
-    st.onclick=()=>{goTab('taxonomy');if(window.exploreFilter)window.exploreFilter(bk,3);}; bar.append(st);
+  const GROUPS=[['facility',T('Facility','設施'),'🏥'],['doctor',T('Doctor','醫生'),'🩺'],
+                ['nurse',T('Nurse','護理'),'🩹'],['patient',T('Patient','病人'),'🧑'],['other',T('Others','其他'),'⚙️']];
+  const openCat=c=>{goTab('taxonomy');const ft=$('#fTxt');if(ft){ft.value=c.name_en;ft.dispatchEvent(new Event('input'));}};
+  GROUPS.forEach(([key,label,icon])=>{
+    const members=cats.filter(c=>c.home_stakeholder===key);
+    if(!members.length)return;
+    const ai=members.filter(isAI), noai=members.filter(c=>!isAI(c));
+    root.append(el('div',{class:'section-title'},icon+' '+label+' · '+members.length+'  ('+T('AI','AI')+' '+ai.length+' · '+T('No-AI','非 AI')+' '+noai.length+')'));
+    const grid=el('div',{class:'tiles'});
+    [[T('AI-driven','AI 驅動'),ai,'playa'],[T('No-AI','非 AI'),noai,'playc']].forEach(([sub,list,cls])=>{
+      const col=el('div',{class:'tile'});
+      col.append(el('div',{class:'row'},el('span',{class:'play '+cls},sub),el('b',{},String(list.length))));
+      list.slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(c=>{
+        const nn=nm(c);
+        const row=el('div',{class:'cat',style:'cursor:pointer'},el('span',{},nn.length>40?nn.slice(0,40)+'…':nn),el('b',{title:'hardware opportunity'},'hw·'+c.hardware_opportunity));
+        row.onclick=()=>openCat(c); col.append(row);
+      });
+      if(!list.length)col.append(el('div',{class:'muted',style:'font-size:12px;padding:4px 0'},'—'));
+      grid.append(col);
+    });
+    root.append(grid);
   });
-  root.append(bar);
-  root.append(el('div',{class:'section-title'},T('The three plays — pick your motion','三個 play — 挑你的打法')));
-  const tiles=el('div',{class:'tiles'});
-  plays.forEach(p=>{
-    const letter=p.id.split('-')[1].toUpperCase();
-    const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>mx(b)-mx(a)||cust(b)-cust(a)||a.id.localeCompare(b.id)).slice(0,4);
-    const t=el('div',{class:'tile'});
-    t.append(el('div',{class:'row'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter)));
-    t.append(el('h3',{},p.name));
-    t.append(el('div',{class:'anchor'},(p.hardware_anchor||[]).join(' · ')));
-    members.forEach(c=>{const m=['cust·'+cust(c)];if(oper(c)>=3)m.push('oper·'+oper(c));if(oem(c)>=3)m.push('oem·'+oem(c));
-      const nn=nm(c);
-      t.append(el('div',{class:'cat'},el('span',{},nn.length>42?nn.slice(0,42)+'…':nn),el('b',{},m.join('  '))));});
-    t.append(el('div',{class:'go'},T('Open ranked targets →','看排序目標 →')));
-    t.onclick=()=>goTab('hunt',{scrollTo:'hunt-'+p.id});
-    tiles.append(t);
-  });
-  root.append(tiles);
-  root.append(el('div',{class:'section-title'},T('Highest-urgency signals — act on the window','最高急迫訊號 — 把握窗口')));
-  const tp=el('div',{class:'card'});
-  const rank={critical:0,high:1,medium:2,low:3};
-  trigs.slice().sort((a,b)=>rank[a.urgency]-rank[b.urgency]).slice(0,4).forEach(t=>{
-    tp.append(el('div',{class:'trigrow'},el('span',{class:'u '+t.urgency},t.urgency),el('b',{},t.signal),
-      el('span',{class:'muted'},'→ '+(t.related_categories||[]).slice(0,3).join(', '))));
-  });
-  const more=el('div',{class:'go',style:'cursor:pointer;margin-top:8px'},T('All '+trigs.length+' triggers →','全部 '+trigs.length+' 個訊號 →'));more.onclick=()=>goTab('triggers');tp.append(more);
-  root.append(tp);
-  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},T('Or browse & filter all '+cats.length+' categories in Explore →','或到 Explore 瀏覽篩選全部 '+cats.length+' 類 →'));ex.onclick=()=>goTab('taxonomy');root.append(ex);
+  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},T('Or hunt by hardware buyer & play in Explore / Hunt →','或到 Explore / Hunt 依硬體買家與 play 狩獵 →'));ex.onclick=()=>goTab('taxonomy');root.append(ex);
 }
 
 // ================= TAXONOMY =================

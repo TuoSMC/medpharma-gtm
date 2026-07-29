@@ -62,8 +62,9 @@ REQUIRED_CATEGORY_FIELDS = [
     "data_modality", "deployment", "segments", "hardware_opportunity",
     "hardware_buyer", "primary_buyer", "supermicro_reachable",
     "hardware_opportunity_by_buyer", "hardware_profile", "infrastructure_notes",
-    "plays", "vendors", "evidence_note", "workload_envelope",
+    "plays", "vendors", "evidence_note", "workload_envelope", "home_stakeholder",
 ]
+HOME_STAKEHOLDERS = {"facility", "doctor", "nurse", "patient", "other"}
 
 # ---- taxonomy v7: per-category workload_envelope (see .claude/skills/quantify-fields) ----
 sys.path.insert(0, str(REPO / "tools"))
@@ -162,6 +163,13 @@ class TestDomainClassification(unittest.TestCase):
     def test_domains_all_used(self):
         used = {c.get("domain") for c in CATS}
         self.assertTrue(TARGET_ENUMS["domain"] <= used, f"unused domains: {TARGET_ENUMS['domain'] - used}")
+
+    def test_home_stakeholder_from_enum(self):
+        """Home page groups on home_stakeholder (facility/doctor/nurse/patient/other)."""
+        self.assertEqual(set(ENUMS.get("home_stakeholder", [])), HOME_STAKEHOLDERS)
+        for c in CATS:
+            self.assertIn(c.get("home_stakeholder"), HOME_STAKEHOLDERS,
+                          f"{c['id']}: home_stakeholder '{c.get('home_stakeholder')}' not in enum")
 
 
 class TestBuyerLayer(unittest.TestCase):
@@ -664,9 +672,13 @@ class TestAppGuidance(unittest.TestCase):
         self.assertIn("function goTab(id,opts", self.html,
                       "goTab must take an opts arg for deep-linking")
 
-    def test_play_tiles_deeplink_to_their_play(self):
-        self.assertIn("goTab('hunt',{scrollTo", self.html,
-                      "play tiles must deep-link/scroll to their own play section, not generic Hunt")
+    def test_home_groups_by_stakeholder_and_ai(self):
+        """Home organises the universe by point-of-care stakeholder (facility /
+        doctor / nurse / patient / other), each split AI-driven vs No-AI."""
+        self.assertIn("const isAI=", self.html, "Home needs the AI/no-AI derivation helper")
+        self.assertIn("c.home_stakeholder===", self.html, "Home must group on home_stakeholder")
+        for marker in ("AI-driven", "No-AI"):
+            self.assertIn(marker, self.html, f"Home missing the '{marker}' split")
 
     def test_hot_cards_prefilter_explore(self):
         self.assertIn("exploreFilter", self.html,
@@ -676,11 +688,10 @@ class TestAppGuidance(unittest.TestCase):
         for lie in ("All 14 triggers", "all 53 categories"):
             self.assertNotIn(lie, self.html, f"Home hardcodes '{lie}' — will drift; use array length")
 
-    def test_trigger_panel_label_is_honest(self):
-        """grok P1: the panel is a static urgency-sorted slice, not fired CRM signals."""
+    def test_no_false_crm_state_label(self):
+        """grok P1 (still binding): never imply fired-CRM state the app does not have."""
         self.assertNotIn("A trigger fired", self.html,
                          "misleading 'trigger fired' label implies CRM state it does not have")
-        self.assertIn("Highest-urgency signals", self.html)
 
 
 class TestWorkloadEnvelope(unittest.TestCase):
