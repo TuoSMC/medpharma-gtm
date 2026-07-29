@@ -74,6 +74,7 @@ tr:last-child td{border-bottom:0}
 .kv dt{color:var(--muted)}
 .muted{color:var(--muted)}
 .pill{font-size:11px;border:1px solid var(--line);border-radius:20px;padding:1px 9px;color:var(--muted)}
+.pill.lead{border-color:var(--accent);color:var(--accent);font-weight:600}
 .hero{padding:6px 0 16px}
 .hero h2{margin:0 0 4px;font-size:22px;letter-spacing:.2px}
 .hero p{margin:0;color:var(--muted);font-size:13px;max-width:760px}
@@ -209,15 +210,15 @@ function renderHome(){
   hero.append(el('h2',{},T('Who uses the software?','誰在用這些軟體?')));
   hero.append(el('p',{},T('The software universe by point-of-care stakeholder — each split AI-driven vs conventional (for now). Click a category to open it in Explore; hunt by hardware buyer & play there.','以照護現場的使用者切分軟體宇宙 — 每格再分 AI 驅動 vs 傳統(暫定)。點類別到 Explore 開啟;在那裡依硬體買家與 play 狩獵。')));
   root.append(hero);
-  const lbLink=el('div',{class:'go',style:'cursor:pointer;margin:2px 0 14px'},T('🏆 See the market leaderboards — who leads AI vs conventional →','🏆 看市場榜單 — AI 對傳統誰領先 →'));lbLink.onclick=()=>goTab('leaderboards');root.append(lbLink);
-  const GROUPS=[['facility',T('Facility','設施'),'🏥'],['doctor',T('Doctor','醫生'),'🩺'],
-                ['nurse',T('Nurse','護理'),'🩹'],['patient',T('Patient','病人'),'🧑'],['other',T('Others','其他'),'⚙️']];
+  const lbLink=el('div',{class:'go',style:'cursor:pointer;margin:2px 0 14px'},T('See the market leaderboards — who leads AI vs conventional →','看市場榜單 — AI 對傳統誰領先 →'));lbLink.onclick=()=>goTab('leaderboards');root.append(lbLink);
+  const GROUPS=[['facility',T('Facility','設施')],['doctor',T('Doctor','醫生')],
+                ['nurse',T('Nurse','護理')],['patient',T('Patient','病人')],['other',T('Others','其他')]];
   const openCat=c=>{goTab('taxonomy');const ft=$('#fTxt');if(ft){ft.value=c.name_en;ft.dispatchEvent(new Event('input'));}};
-  GROUPS.forEach(([key,label,icon])=>{
+  GROUPS.forEach(([key,label])=>{
     const members=cats.filter(c=>c.home_stakeholder===key);
     if(!members.length)return;
     const ai=members.filter(isAI), noai=members.filter(c=>!isAI(c));
-    root.append(el('div',{class:'section-title'},icon+' '+label+' · '+members.length+'  ('+T('AI','AI')+' '+ai.length+' · '+T('No-AI','非 AI')+' '+noai.length+')'));
+    root.append(el('div',{class:'section-title'},label+' · '+members.length+'  ('+T('AI','AI')+' '+ai.length+' · '+T('No-AI','非 AI')+' '+noai.length+')'));
     const grid=el('div',{class:'tiles'});
     [[T('AI-driven','AI 驅動'),ai,'playa'],[T('No-AI','非 AI'),noai,'playc']].forEach(([sub,list,cls])=>{
       const col=el('div',{class:'tile'});
@@ -269,10 +270,10 @@ function renderTaxonomy(){
   const jump=el('div',{class:'jump'});
   const jb=(n,txt,fn,cls)=>{const s=el('button',{class:'jbtn '+cls});s.append(el('b',{},String(n)),txt);s.onclick=fn;return s;};
   jump.append(el('span',{},T('jump to targets','跳到目標')+' ▸'),
-    jb(hotC,'🎯 '+T('customer direct','客戶直銷'),()=>window.exploreFilter('customer',3),'sc-cust'),
-    jb(hotO,'🤝 '+T('ISV co-sell','ISV 共銷'),()=>window.exploreFilter('operator',3),'sc-oper'),
-    jb(nOem,'🔩 OEM',()=>window.exploreFilter('original-equipment-manufacturer',3),'sc-oem'),
-    jb(cats.length,'📋 '+T('all','全部'),()=>{hotFilter=null;resetSel();setGroup('domain');},'sc-all'));
+    jb(hotC,T('customer direct','客戶直銷'),()=>window.exploreFilter('customer',3),'sc-cust'),
+    jb(hotO,T('ISV co-sell','ISV 共銷'),()=>window.exploreFilter('operator',3),'sc-oper'),
+    jb(nOem,'OEM',()=>window.exploreFilter('original-equipment-manufacturer',3),'sc-oem'),
+    jb(cats.length,T('all','全部'),()=>{hotFilter=null;resetSel();setGroup('domain');},'sc-all'));
   root.append(jump);
   // ---- collapsible advanced filters, each labeled ----
   const labeled=(lab,elm)=>el('label',{class:'flab'},el('span',{},lab),elm);
@@ -305,7 +306,7 @@ function renderTaxonomy(){
     cd.append(tagRow(T('deploy','部署'),c.deployment));
     if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},T('hardware','硬體')));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc',title:'deployment scale'},h+((c.hardware_profile_sizing||{})[h]?' · '+c.hardware_profile_sizing[h]:''))));cd.append(hr);}
     if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));
-      c.vendors.forEach(v=>{const bd=lbBadge(v);const p=el('span',{class:'pill',style:'cursor:pointer'},(VNAME[v]||v)+(bd?' 🏆':''));
+      c.vendors.forEach(v=>{const bd=lbBadge(v);const p=el('span',{class:'pill'+(bd?' lead':''),style:'cursor:pointer'},VNAME[v]||v);
         p.title=bd?(T('market leader: ','市場領導 ')+bd+' — '+T('view vendor','看廠商')):T('view vendor','看廠商');p.onclick=()=>goVendor(v);vr.append(p);});
       cd.append(vr);}
     if(c.hospital_view){cd.append(tagRow(T('hosp-who','醫院·誰'),c.hospital_view.stakeholder));
@@ -405,7 +406,7 @@ function renderVendors(){
     const c=el('div',{class:'card'});c.style.marginBottom='8px';
     const h=el('div',{class:'row'},el('h3',{style:'margin:0'},v.name));
     const bd=lbBadge(v.id);
-    if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},'🏆 '+bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goTab('leaderboards');h.append(lp);}
+    if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goTab('leaderboards');h.append(lp);}
     if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
     c.append(h);
     const kv=el('dl',{class:'kv'});
