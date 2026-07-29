@@ -419,7 +419,8 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     const kv=el('dl',{class:'kv'});
     const add=(k,x)=>{if(x==null||x==='')return;kv.append(el('dt',{},k),el('dd',{},String(x)));};
     add('HQ',v.headquarters); add('Founded',v.founded); add('Leadership',v.leadership);
-    add('Market position',v.market_position); add('Deployment',(v.deployment_models||[]).join(', '));
+    add('Market position',v.market_position); add('Market share',v.market_share);
+    add('Deployment',(v.deployment_models||[]).join(', '));
     c.append(kv);
     const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>seg.append(el('span',{class:'chip'},x)));c.append(seg);
     if(v.history)c.append(el('div',{class:'notes'},v.history));
@@ -432,7 +433,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   }
   function render(){
     const s=q.value.toLowerCase();
-    const shown=vs.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,(v.categories||[]).join(' ')]).toLowerCase().includes(s));
+    const shown=vs.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s));
     clear(host);shown.forEach(v=>host.append(card(v)));
     cnt.textContent=shown.length+' / '+vs.length+' shown';
   }

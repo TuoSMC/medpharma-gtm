@@ -565,7 +565,8 @@ class TestComponentSizing(unittest.TestCase):
 # §8: every enrichment claim carries a source; unverifiable -> honest null.
 # ============================================================
 _VDOC = yaml.safe_load(open(REPO / "data" / "vendors.yaml", encoding="utf-8"))
-ENRICH_FIELDS = ["headquarters", "founded", "leadership", "history", "market_position", "sources"]
+ENRICH_FIELDS = ["headquarters", "founded", "leadership", "history", "market_position",
+                 "market_share", "sources"]
 UNKNOWN = {None, "", "unknown", "not publicly disclosed", "n/a", "not disclosed"}
 
 
@@ -594,6 +595,8 @@ class TestVendorEnrichment(unittest.TestCase):
                 claims = True
             if v.get("market_position") not in UNKNOWN:
                 claims = True
+            if v.get("market_share") not in UNKNOWN:
+                claims = True
             if claims:
                 srcs = v.get("sources") or []
                 self.assertTrue(isinstance(srcs, list) and any(str(x).strip() for x in srcs),
@@ -603,6 +606,14 @@ class TestVendorEnrichment(unittest.TestCase):
         for v in _VDOC["vendors"]:
             ld = v.get("leadership")
             self.assertTrue(ld is None or isinstance(ld, str), f"{v['id']}: leadership not str/null")
+
+    def test_market_share_shape(self):
+        """market_share is a cited figure STRING (market + value) or null — never a
+        bare number (a percentage with no market/source is §8-meaningless)."""
+        for v in _VDOC["vendors"]:
+            ms = v.get("market_share")
+            self.assertTrue(ms is None or isinstance(ms, str),
+                            f"{v['id']}: market_share must be a descriptive string or null, not {type(ms).__name__}")
 
 
 
