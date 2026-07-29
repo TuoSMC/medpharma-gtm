@@ -97,6 +97,17 @@ tr:last-child td{border-bottom:0}
 .refine>summary::before{content:"\25B8 ";color:var(--accent)}
 .refine[open]>summary::before{content:"\25BE "}
 .section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:20px 0 8px}
+.statchips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0}
+.statchip{border:1px solid var(--line);background:var(--panel);color:var(--ink);font:inherit;font-size:13px;padding:7px 12px;border-radius:18px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.statchip b{font-size:15px}
+.statchip:hover{border-color:var(--accent);background:var(--accentbg)}
+.statchip.qv{padding:5px 11px;font-size:12px;border-radius:14px}
+.statchip.qv.on{border-color:var(--accent);background:var(--accentbg);color:var(--accent);font-weight:700}
+.sc-cust b{color:var(--a)}.sc-oper b{color:var(--b)}.sc-oem b{color:var(--c)}
+.flab{display:flex;flex-direction:column;gap:2px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.flab>select,.flab>input{margin:0}
+.legend{font-size:11px;color:var(--muted);margin:6px 0 2px}
+.legend .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin:0 3px 0 8px;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -236,20 +247,47 @@ function renderTaxonomy(){
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
-  const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
-  root.append(el('details',{class:'refine'},el('summary',{},T('Refine — filters & grouping','精修 — 篩選與分組')),el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup,fSpans,fTxt,cnt)));
-  // static buyer rollup summary (authoritative axis)
-  const pb={customer:0,operator:0,'original-equipment-manufacturer':0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
+  const fSpans=el('label',{class:'ckbox'},fSpansBox,T('spans on-prem↔cloud','橫跨 on-prem↔雲'));
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
         hotO=cats.filter(c=>(c.hardware_opportunity_by_buyer.operator||0)>=3).length,
         nOem=cats.filter(c=>(c.hardware_opportunity_by_buyer['original-equipment-manufacturer']||0)>=3).length;
-  const sum=el('div',{class:'rollup'});
-  sum.append('Hardware-buyer rollup (§3 gate — WHO buys the iron): primary ',
-    el('b',{},String(pb.customer)),' customer · ',el('b',{},String(pb.operator)),' operator. ',
-    el('b',{},String(hotC)),' HOT_customer (direct) · ',
-    el('b',{},String(hotO)),' HOT_operator (ISV co-sell) · ',
-    el('b',{},String(nOem)),' OEM design-wins. Badge = primary buyer (green customer / purple operator / orange OEM). Opportunity scale 1 minimal · 2 modest · 3 significant · 4 flagship.');
-  root.append(sum);
+  // ---- plain intro ----
+  root.append(el('p',{class:'muted',style:'margin:2px 0 10px;font-size:13px'},
+    T('Every category is tagged by who buys the hardware and how big the deal is. Click a shortcut below to jump straight to a ready target list, or pick a quick view to regroup all '+cats.length+' categories.',
+      '每個類別都標好「誰買硬體、機會多大」。點下面的捷徑直接跳到現成目標清單,或選一個快速視角把全部 '+cats.length+' 類重新分組。')));
+  // ---- clickable shortcut chips (hyperlink guidance to the HOT lists) ----
+  const stats=el('div',{class:'statchips'});
+  const chip=(n,txt,fn,cls)=>{const s=el('button',{class:'statchip '+(cls||'')});s.append(el('b',{},String(n)),el('span',{},txt));s.onclick=fn;return s;};
+  const resetSel=()=>{[fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';};
+  stats.append(
+    chip(hotC,'🎯 '+T('sell direct','直接銷售'),()=>window.exploreFilter('customer',3),'sc-cust'),
+    chip(hotO,'🤝 '+T('ISV co-sell','ISV 共同銷售'),()=>window.exploreFilter('operator',3),'sc-oper'),
+    chip(nOem,'🔩 '+T('OEM design-win','OEM 設計勝出'),()=>window.exploreFilter('original-equipment-manufacturer',3),'sc-oem'),
+    chip(cats.length,'📋 '+T('show all','顯示全部'),()=>{hotFilter=null;resetSel();setGroup('domain');},'sc-all')
+  );
+  root.append(stats);
+  root.append(el('div',{class:'legend'},
+    T('Shortcuts = high-opportunity target lists (opportunity ≥ 3 of 4). Card badge = who buys the hardware:','捷徑 = 高機會目標清單(機會 ≥ 3/4)。卡片徽章 = 誰買硬體:'),
+    el('span',{class:'dot',style:'background:var(--a)'}),T('customer','客戶'),
+    el('span',{class:'dot',style:'background:var(--b)'}),T('operator (ISV)','營運者 (ISV)'),
+    el('span',{class:'dot',style:'background:var(--c)'}),'OEM'));
+  // ---- quick views: one-click regroup (replaces the cryptic group-by dropdown) ----
+  const qv=el('div',{class:'statchips',style:'margin-top:8px'});
+  qv.append(el('span',{class:'tagk',style:'align-self:center'},T('Quick views','快速視角')));
+  function setGroup(g){hotFilter=null;fGroup.value=g;[...qv.querySelectorAll('.qv')].forEach(x=>x.classList.toggle('on',x.dataset.g===g));render();}
+  [['domain',T('by care area','依照護領域')],['primary_buyer',T('by who buys','依誰買硬體')],['play',T('by play','依 play')],
+   ['hardware_profile',T('by hardware','依硬體元件')],['data_modality',T('by data type','依資料型態')],['',T('flat list','平舖清單')]]
+    .forEach(([g,lab])=>{const b=el('button',{class:'statchip qv','data-g':g},lab);b.onclick=()=>setGroup(g);qv.append(b);});
+  root.append(qv);
+  // ---- collapsible advanced filters, now each labeled ----
+  const labeled=(lab,elm)=>el('label',{class:'flab'},el('span',{},lab),elm);
+  root.append(el('details',{class:'refine'},el('summary',{},T('More filters','更多篩選')),
+    el('div',{class:'filters'},
+      labeled(T('who buys','誰買'),fBuyer),labeled(T('substrate','substrate'),fBucket),
+      labeled(T('segment','客群'),fSeg),labeled(T('play','play'),fPlay),
+      labeled(T('deployment','部署'),fDep),labeled(T('min opportunity','最低機會'),fHw),
+      labeled(T('hardware component','硬體元件'),fProfile),
+      el('div',{style:'display:flex;flex-direction:column;gap:4px;justify-content:flex-end'},fSpans,fTxt),cnt)));
   const host=el('div',{});root.append(host);
   function tagRow(k,arr){const r=el('div',{class:'row'});r.append(el('span',{class:'tagk'},k));
     (arr||[]).forEach(v=>r.append(el('span',{class:'chip dim'},v)));return r;}
@@ -324,7 +362,7 @@ function renderTaxonomy(){
   }
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;render();});
   window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};fBuyer.value='';fBucket.value='';fSeg.value='';fPlay.value='';fDep.value='';fHw.value='';fProfile.value='';fSpansBox.checked=false;fTxt.value='';fGroup.value='';render();window.scrollTo(0,0);};
-  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};fGroup.value='domain';render();
+  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};setGroup('domain');
 }
 
 // ================= HUNT (per-play ranked target map) =================

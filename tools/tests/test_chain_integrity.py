@@ -704,10 +704,11 @@ class TestAppGuidance(unittest.TestCase):
         for name in ("Medical Imaging", "Genomics", "GMP Manufacturing"):
             self.assertIn(name, self.html, f"Home must surface play '{name}'")
 
-    def test_home_surfaces_hot_entry_points(self):
-        # the guided funnel must expose the HOT lists + a trigger entry
-        for marker in ("HOT_customer", "HOT_operator", "tab-triggers"):
-            self.assertIn(marker, self.html, f"Home missing guidance entry '{marker}'")
+    def test_hot_lists_reachable_via_shortcuts(self):
+        """The HOT target lists must be reachable by one click — plain-language
+        shortcut chips that prefilter Explore (not buried jargon)."""
+        for marker in ("exploreFilter", "sc-cust", "sc-oper", "sc-oem", "tab-triggers"):
+            self.assertIn(marker, self.html, f"missing HOT-list shortcut '{marker}'")
 
     def test_explore_filters_are_collapsible(self):
         """Classification cleanup: the 8 filters live in a collapsible Refine panel,
