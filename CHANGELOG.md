@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 2026-07-29 — the 6 value signals fused into one Opportunity master table + v3.0
+Tuo: "these [6 value signals] — can't they be fused into a hierarchy master-table that replaces the currently-useless one?" Yes. The passive header stat-line (*59 categories · 9 flagship · 31 customer-HOT · …*) was a dead readout — it stated the totals but you couldn't *act* on it. Replaced it with a **價值總表 / Opportunity master** — one collapsible, fully drill-through dashboard pinned at the top of Explore that fuses all six value signals into a single big→small hierarchy:
+- **KPI row** — 9 flagship · 31 customer-HOT · 155 market leaders (the totals, now the headline).
+- **Pipeline by play** (open by default) — each of the 3 plays with its flagship/HOT value + its top flagship targets as click-through chips (chip → opens that category in the detail pane; row → re-roots the tree by play).
+- **Opportunity by care area** — top 5 domains ranked by flagship opened, each row → `view by: care area`.
+- **Top vendors to work** — top 6 vendors ranked by flagship/HOT categories served, each with its leaderboard rank, each row → the vendor in the registry.
+- **Hot signals — open most flagship** — top 5 triggers ranked by flagship categories they unlock, each row → Method/Signals.
+- The header stat-line reverts to a plain scope line (*59 software categories · 309 vendors mapped to the Supermicro hardware behind them*); the value KPI now lives in the master table, surfaced *and* actionable.
+- Full category / vendor names (no `…` truncation, per Tuo); rows wrap gracefully at narrow widths.
+- **87 GREEN** (+1 lock-in test); deterministic; browser-verified both languages, desktop + narrow, zero console errors, no emoji.
+- **Tagged `v3.0`.**
+
 ## 2026-07-29 — value-surfacing rolled out across 6 components + v2.9
 Extended the flagship/HOT "value-surfacing" from the Explore lens to five more surfaces (Tuo: apply it to Vendors + Leaderboards, then find ≥4 more). One shared helper (`catsVal` → flagship = opportunity 4, HOT = customer opportunity ≥3) now drives value signals everywhere; no emoji, all text/colour badges.
 1. **Vendors** — each card shows how many flagship / customer-HOT SMCI categories the vendor serves (plus its leaderboard rank); a **sort toggle (by value / A–Z)** defaults to value, so the vendors serving the most high-opportunity categories (and market leaders) float to the top.

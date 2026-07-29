@@ -773,6 +773,21 @@ class TestAppGuidance(unittest.TestCase):
         self.assertNotIn("A trigger fired", self.html,
                          "misleading 'trigger fired' label implies CRM state it does not have")
 
+    def test_opportunity_master_table_fuses_value_signals(self):
+        """v3.0: the Explore header stat-line is replaced by one drill-through
+        master table that fuses every value signal (flagship/HOT/leaders/vendors)
+        into four click-through sections: play / care area / vendors / signals."""
+        self.assertIn("function masterTable(", self.html,
+                      "the fused Opportunity master table must exist")
+        self.assertIn("Opportunity master", self.html)
+        self.assertIn("價值總表", self.html)
+        for section in ("Pipeline by play", "Opportunity by care area",
+                        "Top vendors to work", "Hot signals"):
+            self.assertIn(section, self.html, f"master table missing section '{section}'")
+        # the passive flagship/HOT header stat line must be gone (fused into the table)
+        self.assertNotIn(" flagship · ", self.html,
+                         "the old passive header stat-line must be replaced by the master table")
+
 
 class TestWorkloadEnvelope(unittest.TestCase):
     """taxonomy v7 — per-category workload_envelope (12 keys). Provenance is FIXED
