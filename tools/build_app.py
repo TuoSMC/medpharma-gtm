@@ -346,8 +346,8 @@ const PLINE={
  'gpu-server':['compute','GPU servers','GPU 伺服器','GPU compute — AI, GPU-HPC','GPU 運算 — AI、GPU-HPC'],
  'high-performance-computing-cpu':['compute','HPC (CPU)','HPC(CPU)','CPU-only cluster','純 CPU 叢集'],
  'high-memory':['compute','High-memory','大記憶體','one box, huge RAM','單機大 RAM'],
- 'nvme-performance-storage':['storage','NVMe all-flash','NVMe 全快閃','hot data, fast','熱資料・快'],
- 'capacity-archive-storage':['storage','Capacity archive','大容量封存','cold data, cheap bulk','冷資料・便宜大量'],
+ 'nvme-performance-storage':['storage','NVMe all-flash','NVMe 全快閃','hot data, fast (SSD)','熱資料・快(SSD)'],
+ 'capacity-archive-storage':['storage','Capacity archive','大容量封存','cold bulk (HDD)','冷資料・大量(傳統硬碟)'],
  'edge-industrial':['deploy','Industrial edge','工業邊緣','on-site / plant floor','現場／廠房'],
  'high-availability-redundant':['deploy','HA pairs','高可用配對','keeps it running','維持不中斷'],
  'disaster-recovery-backup':['deploy','DR / backup','災難備援','recover after disaster','災後復原']};
