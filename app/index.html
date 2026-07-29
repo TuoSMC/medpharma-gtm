@@ -124,7 +124,6 @@ tr:last-child td{border-bottom:0}
 <nav id="nav"></nav>
 <main>
   <section class="tab on" id="tab-taxonomy"></section>
-  <section class="tab" id="tab-hunt"></section>
   <section class="tab" id="tab-plays"></section>
   <section class="tab" id="tab-triggers"></section>
   <section class="tab" id="tab-scoring"></section>
@@ -146,6 +145,7 @@ const nm=c=>LANG==='zh'?(c.name_zh||c.name_en):c.name_en;   // category display 
 const sub=c=>LANG==='zh'?c.name_en:(c.name_zh||'');         // the secondary line under it
 const T=(en,zh)=>LANG==='zh'?zh:en;                          // chrome string
 const playName=p=>({'play-a':'A · Imaging/Path','play-b':'B · Genomics/AI','play-c':'C · GMP Edge'}[p]||p);
+const PLAY_BY={};(DATA.plays.plays||[]).forEach(p=>PLAY_BY[p.id]=p);  // play id -> full play (name, hardware_anchor)
 
 // ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
 const ONPREM_SIDE=new Set(['on-premises','edge','private-cloud','original-equipment-manufacturer']);
@@ -172,7 +172,7 @@ $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.st
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
 
 // ---- tabs ----
-const TABS=[['taxonomy','Explore'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors'],['leaderboards','Leaderboards']];
+const TABS=[['taxonomy','Explore'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors'],['leaderboards','Leaderboards']];
 const nav=$('#nav');
 const NAVBTN={};
 function goTab(id,opts){opts=opts||{};
@@ -345,46 +345,21 @@ function renderTaxonomy(){
     shown.forEach(c=>groupsOf(c,gp).forEach(k=>{if(!map.has(k))map.set(k,[]);map.get(k).push(c);}));
     let keys=[...map.keys()];
     if(gp==='hardware_opportunity')keys.sort((a,b)=>b-a);
+    else if(gp==='play')keys.sort((a,b)=>((a==='(no play)')-(b==='(no play)'))||a.localeCompare(b));
     else keys.sort((a,b)=>map.get(b).length-map.get(a).length);
     keys.forEach(k=>{
       const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):k);
       host.append(el('div',{class:'grouphdr'},label,el('span',{class:'gcount'},String(map.get(k).length))));
-      const grid=el('div',{class:'grid'});map.get(k).forEach(c=>grid.append(card(c)));host.append(grid);
+      const pl=gp==='play'?PLAY_BY[k]:null;
+      if(pl&&pl.hardware_anchor&&pl.hardware_anchor.length)host.append(el('div',{class:'subhdr'},T('quote','報價')+': '+pl.hardware_anchor.join(' · ')));
+      const grid=el('div',{class:'grid'});
+      map.get(k).slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(c=>grid.append(card(c)));
+      host.append(grid);
     });
   }
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;render();});
   window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};fBuyer.value='';fBucket.value='';fSeg.value='';fPlay.value='';fDep.value='';fHw.value='';fProfile.value='';fSpansBox.checked=false;fTxt.value='';fGroup.value='';render();window.scrollTo(0,0);};
   fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};setGroup('stakeholder');
-}
-
-// ================= HUNT (per-play ranked target map) =================
-function renderHunt(){
-  const root=$('#tab-hunt'); clear(root);
-  const cats=DATA.taxonomy.categories, plays=DATA.plays.plays;
-  const VN={};(DATA.vendors.vendors||[]).forEach(v=>VN[v.id]=v.name);
-  const opp=(c,b)=>c.hardware_opportunity_by_buyer[b]||0;
-  const maxo=c=>Math.max(...Object.values(c.hardware_opportunity_by_buyer));
-  const rig=c=>(c.hardware_profile||[]).map(h=>h+'·'+((c.hardware_profile_sizing||{})[h]||'?')).join('  ')||'—';
-  root.append(el('div',{class:'rollup'},T('Per-play ranked target map — what to quote (component·scale) and who to co-sell with. Opportunity 1 minimal → 4 flagship. Full printable version: docs/hunting-guide.md','各 play 排序目標圖 — 報什麼(元件·規模)、和誰共同銷售。機會 1 微 → 4 旗艦。完整可列印版:docs/hunting-guide.md')));
-  plays.forEach(p=>{
-    const letter=p.id.split('-')[1].toUpperCase();
-    const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>maxo(b)-maxo(a)||opp(b,'customer')-opp(a,'customer'));
-    root.append(el('div',{class:'grouphdr',id:'hunt-'+p.id},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),p.name,el('span',{class:'gcount'},String(members.length))));
-    members.forEach(c=>{
-      const card=el('div',{class:'card'});card.style.marginBottom='8px';
-      const head=el('div',{class:'row'},
-        el('span',{class:'by bcust',title:'customer opportunity'},'cust·'+opp(c,'customer')),
-        el('span',{class:'by boper',title:'operator opportunity'},'oper·'+opp(c,'operator')));
-      if(opp(c,'original-equipment-manufacturer'))head.append(el('span',{class:'by boem'},'oem·'+opp(c,'original-equipment-manufacturer')));
-      card.append(head);
-      card.append(el('h3',{},nm(c)));
-      const q=el('div',{class:'row'});q.append(el('span',{class:'tagk'},T('quote','報價')));(c.hardware_profile||[]).forEach(h=>q.append(el('span',{class:'hwc'},h+'·'+((c.hardware_profile_sizing||{})[h]||'?'))));
-      if(c.hardware_profile&&c.hardware_profile.length)card.append(q);
-      const v=el('div',{class:'row'});v.append(el('span',{class:'tagk'},T('vendors','廠商')));(c.vendors||[]).forEach(x=>v.append(el('span',{class:'pill'},VN[x]||x)));
-      if(c.vendors&&c.vendors.length)card.append(v);
-      root.append(card);
-    });
-  });
 }
 
 // ================= VENDORS (enriched registry) =================
@@ -574,9 +549,9 @@ function renderLeaderboards(){
 }
 
 // ================= i18n wiring: render all tabs + language toggle =================
-const TAB_ZH={taxonomy:'探索',hunt:'獵場',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商',leaderboards:'榜單'};
+const TAB_ZH={taxonomy:'探索',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商',leaderboards:'榜單'};
 function relabelTabs(){TABS.forEach(([id,label])=>{if(NAVBTN[id])NAVBTN[id].textContent=LANG==='zh'?(TAB_ZH[id]||label):label;});}
-function renderAll(){renderTaxonomy();renderHunt();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();renderLeaderboards();}
+function renderAll(){renderTaxonomy();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();renderLeaderboards();}
 renderAll();
 $('#langtog').onclick=()=>{LANG=(LANG==='zh')?'en':'zh';$('#langtog').textContent=(LANG==='zh')?'EN':'中文';relabelTabs();renderAll();window.scrollTo(0,0);};
 </script>
