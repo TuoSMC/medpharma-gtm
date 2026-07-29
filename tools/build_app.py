@@ -180,12 +180,8 @@ tr:last-child td{border-bottom:0}
 <nav id="nav"></nav>
 <main>
   <section class="tab on" id="tab-taxonomy"></section>
-  <section class="tab" id="tab-plays"></section>
-  <section class="tab" id="tab-triggers"></section>
-  <section class="tab" id="tab-scoring"></section>
-  <section class="tab" id="tab-accounts"></section>
+  <section class="tab" id="tab-method"></section>
   <section class="tab" id="tab-vendors"></section>
-  <section class="tab" id="tab-leaderboards"></section>
 </main>
 <script>
 const DATA = /*__DATA__*/null;
@@ -228,7 +224,7 @@ $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.st
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
 
 // ---- tabs ----
-const TABS=[['taxonomy','Explore'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors'],['leaderboards','Leaderboards']];
+const TABS=[['taxonomy','Explore'],['method','Method'],['vendors','Vendors']];
 const nav=$('#nav');
 const NAVBTN={};
 function goTab(id,opts){opts=opts||{};
@@ -265,7 +261,7 @@ function renderTaxonomy(){
   const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy'); clear(root);
   root.append(el('h2',{style:'margin:2px 0 4px'},T('The medical / pharma software universe','醫療／藥廠軟體宇宙')));
   root.append(el('p',{class:'muted',style:'margin:0 0 8px;font-size:13px'},T('All '+cats.length+' categories — grouped by who uses them (default), or by any axis. Filter, jump to high-opportunity targets, or search.','全部 '+cats.length+' 類 — 預設依「誰使用」分組,也可換任何軸。可篩選、跳高機會目標、或搜尋。')));
-  const lbl=el('div',{class:'go',style:'cursor:pointer;margin:0 0 10px'},T('See the market leaderboards — who leads AI vs conventional →','看市場榜單 — AI 對傳統誰領先 →'));lbl.onclick=()=>goTab('leaderboards');root.append(lbl);
+  const lbl=el('div',{class:'go',style:'cursor:pointer;margin:0 0 10px'},T('See the market leaderboards — who leads AI vs conventional →','看市場榜單 — AI 對傳統誰領先 →'));lbl.onclick=()=>goVendorsBoard();root.append(lbl);
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
     opts.forEach(o=>s.append(el('option',{value:o},o)));return s;};
   const fBuyer=mk('fBuyer',['customer','operator','original-equipment-manufacturer','hyperscaler'],'all buyers'),
@@ -419,21 +415,21 @@ function renderTaxonomy(){
 }
 
 // ================= VENDORS (enriched registry) =================
-function renderVendors(){
-  const root=$('#tab-vendors'); clear(root);
+function renderRegistryInto(host){
+  const root=host;
   const vs=(DATA.vendors.vendors||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
   const conf=(DATA.vendors.version)||'?';
   const cnt=el('span',{class:'count'});
   const q=el('input',{type:'search',placeholder:T('search vendor / HQ / leader / category...','搜尋廠商 / 總部 / 負責人 / 類別...')});
   root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vs.length+' vendors, web-researched + adversarially verified. Every claim sourced; unverifiable fields are honest nulls / "not publicly disclosed" (§8).','廠商登錄 v'+conf+' — '+vs.length+' 家,網路研究 + 對抗式查核。每項聲明有來源;查不到的欄位為誠實 null /「未公開揭露」(§8)。')));
   root.append(el('div',{class:'filters'},q,cnt));
-  const host=el('div',{});root.append(host);
+  const vhost=el('div',{});root.append(vhost);
   function excl(v){return "exclud" in Object.assign({},v)?false:/exclud/i.test(v.note||'');}
   function card(v){
     const c=el('div',{class:'card'});c.style.marginBottom='8px';
     const h=el('div',{class:'row'},el('h3',{style:'margin:0'},v.name));
     const bd=lbBadge(v.id);
-    if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goTab('leaderboards');h.append(lp);}
+    if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goVendorsBoard();h.append(lp);}
     if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
     c.append(h);
     const kv=el('dl',{class:'kv'});
@@ -454,15 +450,15 @@ function renderVendors(){
   function render(){
     const s=q.value.toLowerCase();
     const shown=vs.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s));
-    clear(host);shown.forEach(v=>host.append(card(v)));
+    clear(vhost);shown.forEach(v=>vhost.append(card(v)));
     cnt.textContent=shown.length+' / '+vs.length+T(' shown',' 顯示');
   }
   q.oninput=render;render();
 }
 
 // ================= PLAYS =================
-function renderPlays(){
-  const root=$('#tab-plays'); clear(root);
+function renderPlaysInto(host){
+  const root=host;
   const grid=el('div',{class:'grid'});root.append(grid);
   DATA.plays.plays.forEach(p=>{
     const letter=p.id.split('-')[1].toUpperCase();
@@ -481,8 +477,8 @@ function renderPlays(){
 }
 
 // ================= TRIGGERS =================
-function renderTriggers(){
-  const root=$('#tab-triggers'); clear(root);
+function renderTriggersInto(host){
+  const root=host;
   const t=el('table');
   const TH=LANG==='zh'?['訊號','類別','急迫','窗口','來源','行動','關聯']:['Signal','Cat','Urgency','Window','Source','Action','Related'];
   t.append(el('thead',{},el('tr',{},...TH.map(h=>el('th',{},h)))));
@@ -503,8 +499,8 @@ function renderTriggers(){
 }
 
 // ================= SCORING =================
-function renderScoring(){
-  const root=$('#tab-scoring'); clear(root);
+function renderScoringInto(host){
+  const root=host;
   root.append(el('h3',{},T('Model - ','評分模型 - ')+SC.items.reduce((s,i)=>s+i.weight,0)+T(' pts - ',' 分 - ')+SC.formula));
   const mt=el('table');mt.append(el('thead',{},el('tr',{},el('th',{},T('Item','項目')),el('th',{},T('Weight','權重')))));
   const mb=el('tbody');SC.items.forEach(i=>mb.append(el('tr',{},el('td',{},i.label),el('td',{},String(i.weight)))));
@@ -536,8 +532,8 @@ function renderScoring(){
 }
 
 // ================= ACCOUNTS =================
-function renderAccounts(){
-  const root=$('#tab-accounts'); clear(root);
+function renderAccountsInto(host){
+  const root=host;
   if(!DATA.accounts.length){root.append(el('div',{class:'muted'},T('No accounts in data/accounts/ yet.','data/accounts/ 尚無帳號。')));return;}
   const scored=DATA.accounts.map(a=>({a,r:scoreAccount(a)})).sort((x,y)=>y.r.total-x.r.total);
   scored.forEach(({a,r})=>{
@@ -576,8 +572,8 @@ function renderAccounts(){
 }
 
 // ================= LEADERBOARDS (market vendor rankings) =================
-function renderLeaderboards(){
-  const root=$('#tab-leaderboards'); clear(root);
+function renderLeaderboardsInto(host){
+  const root=host;
   const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;
   if(!LB){root.append(el('div',{class:'muted'},T('No leaderboards data.','無榜單資料。')));return;}
   root.append(el('div',{class:'rollup'},T('Market vendor leaderboards — ranked by market share / installed base. Every entry §8-sourced (a real figure or a sourced market position); grouped by sub-market. A vendor that plays both sides (e.g. GE, Philips) appears on both boards.','市場廠商榜 — 按市佔／裝機量排名。每一項 §8 有來源(真數字或有來源的市場地位),依次級市場分組。雙棲廠商(如 GE、Philips)兩榜都上。')));
@@ -604,10 +600,40 @@ function renderLeaderboards(){
   root.append(wrap);
 }
 
+// ================= fused-tab section toggles (Method, Vendors) =================
+// reusable in-page sub-navigation (reuses the .seg segmented-control style)
+function subNav(root, items, defaultKey){
+  const seg=el('div',{class:'seg',style:'margin:6px 0 14px'});
+  const host=el('div',{});
+  function pick(k){const it=items.find(i=>i[0]===k)||items[0];k=it[0];
+    [...seg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.k===k));
+    clear(host);it[2](host);}
+  items.forEach(([k,lab])=>{const b=el('button',{'data-k':k},lab);b.onclick=()=>pick(k);seg.append(b);});
+  root.append(seg,host);pick(defaultKey||items[0][0]);return {pick};
+}
+let _vendorsNav=null;
+function renderMethod(){
+  const root=$('#tab-method'); clear(root);
+  root.append(el('h2',{style:'margin:2px 0 8px'},T('GTM method — how to run the motion','GTM 方法 — 怎麼打')));
+  subNav(root,[
+    ['plays',T('Plays','打法'),renderPlaysInto],
+    ['signals',T('Signals','訊號'),renderTriggersInto],
+    ['scoring',T('Scoring','評分'),renderScoringInto],
+    ['accounts',T('Accounts','帳號'),renderAccountsInto]],'plays');
+}
+function renderVendors(){
+  const root=$('#tab-vendors'); clear(root);
+  root.append(el('h2',{style:'margin:2px 0 8px'},T('Market players — vendors & leaders','市場玩家 — 廠商與領導者')));
+  _vendorsNav=subNav(root,[
+    ['registry',T('Registry','登錄')+' ('+(DATA.vendors.vendors||[]).length+')',renderRegistryInto],
+    ['leaderboards',T('Leaderboards','榜單'),renderLeaderboardsInto]],'registry');
+}
+function goVendorsBoard(){goTab('vendors');if(_vendorsNav)_vendorsNav.pick('leaderboards');}
+
 // ================= i18n wiring: render all tabs + language toggle =================
-const TAB_ZH={taxonomy:'探索',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商',leaderboards:'榜單'};
+const TAB_ZH={taxonomy:'探索',method:'方法',vendors:'廠商'};
 function relabelTabs(){TABS.forEach(([id,label])=>{if(NAVBTN[id])NAVBTN[id].textContent=LANG==='zh'?(TAB_ZH[id]||label):label;});}
-function renderAll(){renderTaxonomy();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();renderLeaderboards();}
+function renderAll(){renderTaxonomy();renderMethod();renderVendors();}
 renderAll();
 $('#langtog').onclick=()=>{LANG=(LANG==='zh')?'en':'zh';$('#langtog').textContent=(LANG==='zh')?'EN':'中文';relabelTabs();renderAll();window.scrollTo(0,0);};
 </script>

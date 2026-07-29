@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-07-29 — 7 tabs fused into 3 pillars — WHAT / HOW / WHO (via /hyakushikiflow) + v2.5
+Reviewed all tabs, then fused on natural seams into three pillars, each with an in-page section toggle (reusing Explore's `.seg` segmented control).
+- **Explore** (WHAT — the software universe): unchanged; already absorbed Home + Hunt (v2.3–v2.4).
+- **Method** (HOW — the GTM motion): fuses the old **Plays · Triggers · Scoring · Accounts** tabs into one, switched by an in-page sub-nav (Plays / Signals / Scoring / Accounts). The 3 plays, the 14-signal watchlist, the 100-pt scoring model + live calculator, and the scored demo account now live under one roof.
+- **Vendors** (WHO — the market players): fuses **Registry + Leaderboards**. Sub-nav toggles Registry (309 vendors) / Leaderboards (the AI + No-AI ranked boards). The leaderboard deep-links (Explore's link, a vendor card's rank badge) now switch to the Vendors→Leaderboards view via `goVendorsBoard()`.
+- Render functions refactored to `render*Into(host)` so a section renders into any container, driven by the reusable `subNav()` helper. Caught a real parse error in browser-verify (TUo #1): `renderRegistryInto(host)` also declared an internal `const host` — the whole script failed to parse (blank page); renamed the internal container to `vhost`.
+- Tests: `tab-triggers` marker → `tab-method`. **84 GREEN**; deterministic; browser-verified (all sub-navs, deep-links, both languages, zero console errors, no emoji). **7 tabs → 3.**
+- **Tagged `v2.5`.**
+
 ## 2026-07-29 — Home + Explore merged into one unified surface (via /hyakushikiflow) + v2.3
 Ran the request through `/hyakushikiflow`: organize each tab's hierarchy first, then integrate. Home and Explore both rendered the SAME 59 categories grouped differently — so they collapse into one surface.
 - **Level architecture, fixed first.** Home's axis = point-of-care stakeholder (WHO uses it); its 30-item "Others" dump is now **split by care domain** (R&D/Pharma 11 · Manufacturing 9 · Lab 4 · Data/Payer 5 · MedTech 1). Explore's controls organized into three tiers: GROUP (how to slice) / FILTER (narrow) / JUMP (shortcuts to HOT lists) → card → attribute levels.

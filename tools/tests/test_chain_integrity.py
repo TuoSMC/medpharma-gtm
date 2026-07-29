@@ -706,7 +706,7 @@ class TestAppGuidance(unittest.TestCase):
     def test_hot_lists_reachable_via_shortcuts(self):
         """The HOT target lists must be reachable by one click — plain-language
         shortcut chips that prefilter Explore (not buried jargon)."""
-        for marker in ("exploreFilter", "sc-cust", "sc-oper", "sc-oem", "tab-triggers"):
+        for marker in ("exploreFilter", "sc-cust", "sc-oper", "sc-oem", "tab-method"):
             self.assertIn(marker, self.html, f"missing HOT-list shortcut '{marker}'")
 
     def test_explore_filters_are_collapsible(self):
