@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-07-29 — Explore "view by" lens strengthened into a value-surfacing hunter + v2.8
+Tuo challenged the GROUP control ("does it earn its space? if useful, how — and strengthen it"). Verdict: it's genuinely useful (multi-lens re-rooting of the 59-category tree serves different sales tasks), so it was trimmed and strengthened rather than removed.
+- **Trimmed 8 → 6 lenses:** dropped `data` (a technical, not sales, cut) and `flat` (search already does that). Kept **care area · who buys · who uses it · AI/no-AI · play · hardware** — each a real sales lens. Renamed the label GROUP → **view by / 檢視**, and led with the two most sales-actionable (care area, who buys).
+- **Every group now surfaces where the money is:** each L1 header carries a **flagship** count (opportunity 4, red) and a **customer-HOT** count (opportunity ≥3, green), and groups are **sorted by value** (flagship, then HOT, then size) instead of raw count. So "who buys → customer: 9 flagship · 30 HOT" and "care area → Pharma R&D: 4 flagship · 8 HOT" jump out — the lens now answers *where do I hunt* at a glance, not just *how is it grouped*. Text badges, no emoji.
+- **86 GREEN**; deterministic; browser-verified (6 lenses, value badges + value sort on every axis, both languages, zero console errors).
+- **Tagged `v2.8`.**
+
 ## 2026-07-29 — per-category explainer detail: 6-tier hierarchy + flow diagram (via /hyakushikiflow) + v2.7
 Click a category → the right pane is now a rich, bilingual one-pager that explains the whole thing at a glance, per Tuo's six dimensions.
 - **New `data/detail.yaml`** — bilingual (EN + 繁中) explainers authored + accuracy-verified for all **59 categories** (8-domain workflow, 16 agents): `purpose`, `usage_flow` (289 ordered steps total), `tech_note`, and `smci_fit`. Kept in a separate file (not bloating taxonomy.yaml) and merged into each category at build time.

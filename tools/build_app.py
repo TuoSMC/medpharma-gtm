@@ -123,6 +123,8 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .tnode{display:flex;align-items:center;gap:7px;font-weight:700;cursor:pointer;padding:8px 0 6px;border-bottom:1px solid var(--line);margin-top:10px}
 .tnode .tcar{color:var(--accent);font-size:10px;width:10px}
 .tnode .tcount{color:var(--muted);font-weight:600;font-size:12px}
+.tnode .tflag{font-size:10px;font-weight:700;color:var(--hw4);border:1px solid var(--hw4);border-radius:10px;padding:0 6px}
+.tnode .thot{font-size:10px;font-weight:700;color:var(--a);border:1px solid var(--a);border-radius:10px;padding:0 6px}
 .tbody{padding-left:2px}
 .tsub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:8px 0 3px}
 .trow{display:flex;align-items:center;gap:8px;padding:4px 7px;border-radius:6px;cursor:pointer}
@@ -333,13 +335,12 @@ function renderTaxonomy(){
   // ---- toolbar: one segmented control to regroup all categories, + search ----
   const seg=el('div',{class:'seg'});
   function setGroup(g){hotFilter=null;fGroup.value=g;[...seg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===g));render();}
-  [['stakeholder',T('who uses it','使用者')],['domain',T('care area','照護領域')],['primary_buyer',T('who buys','誰買')],
-   ['ai',T('AI / no-AI','AI／非AI')],['play','Play'],['hardware_profile',T('hardware','硬體')],
-   ['data_modality',T('data','資料')],['',T('flat','平舖')]]
+  [['domain',T('care area','照護領域')],['primary_buyer',T('who buys','誰買硬體')],['stakeholder',T('who uses it','使用者')],
+   ['ai',T('AI / no-AI','AI／非AI')],['play',T('play','打法')],['hardware_profile',T('hardware','硬體元件')]]
     .forEach(([g,lab])=>{const b=el('button',{'data-g':g},lab);b.onclick=()=>setGroup(g);seg.append(b);});
   fTxt.placeholder=T('search…','搜尋…');
   const tb=el('div',{class:'toolbar'});
-  tb.append(el('span',{class:'tagk'},T('group','分組')),seg,el('span',{style:'flex:1 1 20px'}),fTxt,cnt);
+  tb.append(el('span',{class:'tagk'},T('view by','檢視')),seg,el('span',{style:'flex:1 1 20px'}),fTxt,cnt);
   root.append(tb);
   // ---- one thin line of high-opportunity target shortcuts (colour = who buys) ----
   const jump=el('div',{class:'jump'});
@@ -376,9 +377,15 @@ function renderTaxonomy(){
     const sub=list.filter(c=>ak==='ai'?isAI(c):!isAI(c));if(!sub.length)return;
     body.append(el('div',{class:'tsub'},alab+' · '+sub.length));
     sub.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));});}
+  const flagN=l=>l.filter(c=>c.hardware_opportunity===4).length;
+  const hotN=l=>l.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length;
   function l1node(label,list,leaf){if(!list.length)return;
     const car=el('span',{class:'tcar'},'▾');
-    const hdr=el('div',{class:'tnode'},car,el('span',{style:'flex:1'},label),el('span',{class:'tcount'},String(list.length)));
+    const fl=flagN(list), ho=hotN(list);
+    const hdr=el('div',{class:'tnode'},car,el('span',{style:'flex:1'},label));
+    if(fl)hdr.append(el('span',{class:'tflag',title:T('flagship (opportunity 4)','旗艦 (機會 4)')},fl+' '+T('flagship','旗艦')));
+    if(ho)hdr.append(el('span',{class:'thot',title:T('customer-HOT (opportunity ≥3)','客戶-HOT (機會≥3)')},ho+' HOT'));
+    hdr.append(el('span',{class:'tcount'},String(list.length)));
     const body=el('div',{class:'tbody'});
     hdr.onclick=()=>{const open=body.style.display!=='none';body.style.display=open?'none':'';car.textContent=open?'▸':'▾';};
     treePane.append(hdr,body);
@@ -497,7 +504,7 @@ function renderTaxonomy(){
       let keys=[...map.keys()];
       if(gp==='hardware_opportunity')keys.sort((a,b)=>b-a);
       else if(gp==='play')keys.sort((a,b)=>((a==='(no play)')-(b==='(no play)'))||a.localeCompare(b));
-      else keys.sort((a,b)=>map.get(b).length-map.get(a).length);
+      else keys.sort((a,b)=>flagN(map.get(b))-flagN(map.get(a))||hotN(map.get(b))-hotN(map.get(a))||map.get(b).length-map.get(a).length);
       keys.forEach(k=>{const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):gp==='domain'?domLabel(k):k);l1node(label,map.get(k));});
     }
     const keep=selected&&shown.find(c=>c.id===selected.id);
