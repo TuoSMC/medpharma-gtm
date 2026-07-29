@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-29 — Explore rebuilt as a big→small hierarchy tree + detail (via /hyakushikiflow) + v2.6
+Replaced Explore's wall of full cards with a **master–detail two-pane** so the whole 59-category universe is legible at a glance.
+- **Level architecture (big → small):** L1 = the chosen axis (default **domain** — the 8 care areas, with nice labels: Pharma R&D, Hospital · Clinical Core, Manufacturing · QC · Supply, …), L2 = **AI-driven / No-AI**, L3 = the category (a compact row: opportunity badge · full name · primary-buyer colour dot). Counts at every level; each L1 collapses.
+- **Left tree / right detail:** the left pane is the compact, scannable hierarchy (all 59 as rows under their groups); clicking a row shows that category's full card in the sticky right pane (stays put while you scroll the tree). Responsive — panes stack below 840px. The GROUP control still re-roots the tree (stakeholder / who-buys / AI / play / hardware / data / flat), and filters / jump shortcuts / search narrow it live.
+- Removed the old full-card-grid render path (`renderStake` + card grids); `render()` now builds the tree via `l1node`/`l2into`/`catRow` and drives `showDetail`.
+- **84 GREEN**; deterministic; browser-verified (tree + detail on wide and stacked on narrow, collapse, selection highlight, every axis, both languages, zero console errors, no emoji).
+- **Tagged `v2.6`.**
+
 ## 2026-07-29 — 7 tabs fused into 3 pillars — WHAT / HOW / WHO (via /hyakushikiflow) + v2.5
 Reviewed all tabs, then fused on natural seams into three pillars, each with an in-page section toggle (reusing Explore's `.seg` segmented control).
 - **Explore** (WHAT — the software universe): unchanged; already absorbed Home + Hunt (v2.3–v2.4).

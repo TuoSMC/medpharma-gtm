@@ -50,6 +50,22 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .ckbox{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
 .grouphdr{font-size:13px;font-weight:700;margin:18px 0 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
 .subhdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:10px 0 6px}
+.twopane{display:grid;grid-template-columns:minmax(300px,5fr) 7fr;gap:18px;align-items:start;margin-top:6px}
+@media(max-width:840px){.twopane{grid-template-columns:1fr}}
+.tree{font-size:13px;min-width:0}
+.detail{position:sticky;top:118px}
+@media(max-width:840px){.detail{position:static}}
+.tnode{display:flex;align-items:center;gap:7px;font-weight:700;cursor:pointer;padding:8px 0 6px;border-bottom:1px solid var(--line);margin-top:10px}
+.tnode .tcar{color:var(--accent);font-size:10px;width:10px}
+.tnode .tcount{color:var(--muted);font-weight:600;font-size:12px}
+.tbody{padding-left:2px}
+.tsub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:8px 0 3px}
+.trow{display:flex;align-items:center;gap:8px;padding:4px 7px;border-radius:6px;cursor:pointer}
+.trow:hover{background:var(--accentbg)}
+.trow.sel{background:var(--accentbg);box-shadow:inset 3px 0 0 var(--accent)}
+.trow .tname{flex:1;min-width:0;overflow-wrap:anywhere}
+.trow .tby{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.tby.bcust{background:var(--a)}.tby.boper{background:var(--b)}.tby.boem{background:var(--c)}.tby.bhyp{background:var(--muted)}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
 .play{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
 .playa{background:var(--a)}.playb{background:var(--b)}.playc{background:var(--c)}
@@ -142,6 +158,9 @@ const sub=c=>LANG==='zh'?c.name_en:(c.name_zh||'');         // the secondary lin
 const T=(en,zh)=>LANG==='zh'?zh:en;                          // chrome string
 const playName=p=>({'play-a':'A · Imaging/Path','play-b':'B · Genomics/AI','play-c':'C · GMP Edge'}[p]||p);
 const PLAY_BY={};(DATA.plays.plays||[]).forEach(p=>PLAY_BY[p.id]=p);  // play id -> full play (name, hardware_anchor)
+const DOM_ZH={'hospital-clinical-core':'醫院·臨床核心','hospital-business-administration':'醫院·行政','hospital-device-facility-operations':'醫院·設備設施','diagnostics-laboratory':'診斷實驗室','pharmaceutical-research-clinical-development':'藥廠研發','manufacturing-quality-supply-chain':'製造·品管·供應鏈','data-analytics-payer-platforms':'資料·支付方','medical-technology-device-software':'醫材裝置軟體'};
+const DOM_EN={'hospital-clinical-core':'Hospital · Clinical Core','hospital-business-administration':'Hospital · Administration','hospital-device-facility-operations':'Hospital · Device & Facility','diagnostics-laboratory':'Diagnostics Lab','pharmaceutical-research-clinical-development':'Pharma R&D','manufacturing-quality-supply-chain':'Manufacturing · QC · Supply','data-analytics-payer-platforms':'Data · Payer Platforms','medical-technology-device-software':'MedTech Device Software'};
+const domLabel=k=>(LANG==='zh'?DOM_ZH[k]:DOM_EN[k])||k;
 
 // ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
 const ONPREM_SIDE=new Set(['on-premises','edge','private-cloud','original-equipment-manufacturer']);
@@ -253,7 +272,30 @@ function renderTaxonomy(){
       labeled(T('deployment','部署'),fDep),labeled(T('min opportunity','最低機會'),fHw),
       labeled(T('hardware component','硬體元件'),fProfile),
       el('div',{style:'display:flex;align-items:flex-end'},fSpans))));
-  const host=el('div',{});root.append(host);
+  const treePane=el('div',{class:'tree'}), detailPane=el('div',{class:'detail'});
+  root.append(el('div',{class:'twopane'},treePane,detailPane));
+  let selected=null;
+  const byOpp=(a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id);
+  function showDetail(c){selected=c||null;clear(detailPane);
+    if(!c){detailPane.append(el('div',{class:'muted',style:'padding:24px 4px'},T('Select a category on the left.','在左邊選一個類別。')));return;}
+    detailPane.append(card(c));
+    [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===c.id));}
+  function catRow(c){const r=el('div',{class:'trow','data-id':c.id});
+    r.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
+    r.append(el('span',{class:'tname'},nm(c)));
+    r.append(el('span',{class:'tby '+BUYER_C[c.primary_buyer],title:c.primary_buyer}));
+    r.onclick=()=>showDetail(c);return r;}
+  function l2into(body,list){[['ai',T('AI-driven','AI 驅動')],['no',T('No-AI','非 AI')]].forEach(([ak,alab])=>{
+    const sub=list.filter(c=>ak==='ai'?isAI(c):!isAI(c));if(!sub.length)return;
+    body.append(el('div',{class:'tsub'},alab+' · '+sub.length));
+    sub.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));});}
+  function l1node(label,list,leaf){if(!list.length)return;
+    const car=el('span',{class:'tcar'},'▾');
+    const hdr=el('div',{class:'tnode'},car,el('span',{style:'flex:1'},label),el('span',{class:'tcount'},String(list.length)));
+    const body=el('div',{class:'tbody'});
+    hdr.onclick=()=>{const open=body.style.display!=='none';body.style.display=open?'none':'';car.textContent=open?'▸':'▾';};
+    treePane.append(hdr,body);
+    if(leaf)list.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));else l2into(body,list);}
   function tagRow(k,arr){const r=el('div',{class:'row'});r.append(el('span',{class:'tagk'},k));
     (arr||[]).forEach(v=>r.append(el('span',{class:'chip dim'},v)));return r;}
   function card(c){
@@ -305,20 +347,9 @@ function renderTaxonomy(){
     ['other:data-analytics-payer-platforms',T('Data / Payer','資料／支付方')],
     ['other:medical-technology-device-software',T('MedTech','醫材軟體')]];
   const stakeKey=c=>c.home_stakeholder==='other'?('other:'+c.domain):c.home_stakeholder;
-  function renderStake(shown){
-    STAKE.forEach(([k,lab])=>{
-      const mem=shown.filter(c=>stakeKey(c)===k); if(!mem.length)return;
-      host.append(el('div',{class:'grouphdr'},lab,el('span',{class:'gcount'},String(mem.length))));
-      [['ai',T('AI-driven','AI 驅動')],['no',T('No-AI','非 AI')]].forEach(([ak,alab])=>{
-        const subm=mem.filter(c=>ak==='ai'?isAI(c):!isAI(c)); if(!subm.length)return;
-        host.append(el('div',{class:'subhdr'},alab+' · '+subm.length));
-        const grid=el('div',{class:'grid'});subm.slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(c=>grid.append(card(c)));host.append(grid);
-      });
-    });
-  }
   let hotFilter=null;
   function render(){
-    const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg=fSeg.value,pl=fPlay.value,dep=fDep.value,
+    const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg2=fSeg.value,pl=fPlay.value,dep=fDep.value,
           hw=+fHw.value||0,prof=fProfile.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
     const shown=cats.filter(c=>{
       if(hotFilter&&(c.hardware_opportunity_by_buyer[hotFilter.buyer]||0)<hotFilter.min)return false;
@@ -326,36 +357,35 @@ function renderTaxonomy(){
       if(prof&&!(c.hardware_profile||[]).includes(prof))return false;
       if(bk&&bucketOf(c)!==bk)return false;
       if(sp&&!spansOf(c))return false;
-      if(seg&&!(c.segments||[]).includes(seg))return false;
+      if(seg2&&!(c.segments||[]).includes(seg2))return false;
       if(pl&&!(c.plays||[]).includes(pl))return false;
       if(dep&&!(c.deployment||[]).includes(dep))return false;
       if(hw&&c.hardware_opportunity<hw)return false;
       if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infrastructure_notes||'')).toLowerCase().includes(q)))return false;
       return true;
     });
-    clear(host);
-    cnt.textContent=shown.length+' / '+cats.length+' shown'+(hotFilter?' · HOT_'+hotFilter.buyer+' (opp≥'+hotFilter.min+')':(gp?' · grouped by '+gp:''));
-    if(!gp){const grid=el('div',{class:'grid'});shown.forEach(c=>grid.append(card(c)));host.append(grid);return;}
-    if(gp==='stakeholder'){renderStake(shown);return;}
-    const map=new Map();
-    shown.forEach(c=>groupsOf(c,gp).forEach(k=>{if(!map.has(k))map.set(k,[]);map.get(k).push(c);}));
-    let keys=[...map.keys()];
-    if(gp==='hardware_opportunity')keys.sort((a,b)=>b-a);
-    else if(gp==='play')keys.sort((a,b)=>((a==='(no play)')-(b==='(no play)'))||a.localeCompare(b));
-    else keys.sort((a,b)=>map.get(b).length-map.get(a).length);
-    keys.forEach(k=>{
-      const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):k);
-      host.append(el('div',{class:'grouphdr'},label,el('span',{class:'gcount'},String(map.get(k).length))));
-      const pl=gp==='play'?PLAY_BY[k]:null;
-      if(pl&&pl.hardware_anchor&&pl.hardware_anchor.length)host.append(el('div',{class:'subhdr'},T('quote','報價')+': '+pl.hardware_anchor.join(' · ')));
-      const grid=el('div',{class:'grid'});
-      map.get(k).slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(c=>grid.append(card(c)));
-      host.append(grid);
-    });
+    clear(treePane);
+    cnt.textContent=shown.length+' / '+cats.length+T(' shown',' 顯示')+(hotFilter?' · HOT_'+hotFilter.buyer:'');
+    if(gp==='stakeholder'){STAKE.forEach(([k,lab])=>l1node(lab,shown.filter(c=>stakeKey(c)===k)));}
+    else if(gp==='ai'){l1node(T('AI-driven','AI 驅動'),shown.filter(isAI),true);l1node(T('No-AI','非 AI'),shown.filter(c=>!isAI(c)),true);}
+    else if(!gp){l1node(T('All categories','全部類別'),shown);}
+    else{
+      const map=new Map();shown.forEach(c=>groupsOf(c,gp).forEach(k=>{if(!map.has(k))map.set(k,[]);map.get(k).push(c);}));
+      let keys=[...map.keys()];
+      if(gp==='hardware_opportunity')keys.sort((a,b)=>b-a);
+      else if(gp==='play')keys.sort((a,b)=>((a==='(no play)')-(b==='(no play)'))||a.localeCompare(b));
+      else keys.sort((a,b)=>map.get(b).length-map.get(a).length);
+      keys.forEach(k=>{const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):gp==='domain'?domLabel(k):k);l1node(label,map.get(k));});
+    }
+    const keep=selected&&shown.find(c=>c.id===selected.id);
+    showDetail(keep||shown[0]||null);
   }
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;render();});
-  window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};fBuyer.value='';fBucket.value='';fSeg.value='';fPlay.value='';fDep.value='';fHw.value='';fProfile.value='';fSpansBox.checked=false;fTxt.value='';fGroup.value='';render();window.scrollTo(0,0);};
-  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};setGroup('stakeholder');
+  window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};
+    [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';
+    fGroup.value='domain';[...seg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.g==='domain'));
+    render();window.scrollTo(0,0);};
+  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};setGroup('domain');
 }
 
 // ================= VENDORS (enriched registry) =================
