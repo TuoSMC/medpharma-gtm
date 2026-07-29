@@ -1,7 +1,7 @@
 # Vendor registry — names live HERE, never in code (CLAUDE.md §3, §8)
 # Web-researched + adversarially verified (codex + grok + opus). Every claim sourced;
 # unverifiable fields are honest nulls / 'not publicly disclosed' — never fabricated.
-version: 7
+version: 8
 
 vendors:
   - id: 10x-genomics
@@ -20,6 +20,22 @@ vendors:
       - "https://www.10xgenomics.com/platforms/xenium"
       - "https://endpoints.news/exclusive-10x-genomics-ceo-touts-incredible-traction-with-newest-launch-shipping-over-100-spatial-biology-analyzers/"
       - "https://www.prnewswire.com/news-releases/10x-genomics-launches-xenium-protein-advancing-spatial-biology-by-enabling-same-cell-rna-and-protein-analysis-302532774.html"
+  - id: 1uphealth
+    name: 1upHealth (FHIR data platform)
+    categories: [hie-interoperability-engine]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://1up.health/news/1uphealth-reports-2023-as-record-year-of-growth-company-now-offers-largest-set-of-cms-apis-in-the-industry/"
+    headquarters: "Boston, Massachusetts, USA"
+    founded: 2017
+    leadership: "Joe Gagnon, CEO"
+    history: "1upHealth, founded in 2017 by Ricky Sahu and Gajen Sunthara and headquartered in Boston, Massachusetts, is a FHIR-first health-data platform focused on payer interoperability and CMS compliance (Patient Access and Payer-to-Payer APIs). Joe Gagnon serves as CEO; co-founder Ricky Sahu remains on the board."
+    market_position: "FHIR-first data platform focused on payer CMS-compliance interoperability. Company-stated position: offers the most extensive set of CMS APIs in the industry, 80+ health organizations live, 150+ payer (Patient Access / Payer-to-Payer) endpoints. Self-reported leadership, no third-party market-share %."
+    market_share: null
+    sources:
+      - "https://1up.health/news/1uphealth-reports-2023-as-record-year-of-growth-company-now-offers-largest-set-of-cms-apis-in-the-industry/"
+      - "https://councils.forbes.com/profile/Joe-Gagnon-CEO-1upHealth-Inc/607739ab-47e8-4366-b93e-ddd583e7e845"
+      - "https://craft.co/1uphealth/executives"
   - id: abb
     name: ABB
     categories: [scada-dcs]
@@ -55,6 +71,22 @@ vendors:
       - "https://research.contrary.com/company/abridge"
       - "https://www.fiercehealthcare.com/ai-and-machine-learning/abridge-expands-clinical-decision-support-capabilities-uptodate-partnership"
       - "https://klasresearch.com/best-in-klas-ranking/ambient-speech/2026/487"
+  - id: absci
+    name: Absci (ABSI)
+    categories: [ai-drug-discovery]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://investors.absci.com/news-releases/news-release-details/absci-reports-business-updates-and-fourth-quarter-and-full-0"
+    headquarters: "Vancouver, Washington, USA"
+    founded: 2011
+    leadership: "Sean McClain, Founder & CEO"
+    history: "Absci, founded in 2011 and headquartered in Vancouver, Washington, is a generative-AI biotech that uses its Integrated Drug Creation platform to design and validate antibody therapeutics. It went public on the Nasdaq (ABSI) in 2021; its lead program ABS-201 (anti-PRLR) entered Phase 1. As a drug-creation company it does not sell externally deployable software."
+    market_position: "Public generative-AI antibody design (Integrated Drug Creation): FY2024 revenue $4.53M (FY2025 $2.80M), ~$1.4B market cap (Jul 2026); lead ABS-201 (anti-PRLR) in Phase 1 (public revenue / market-cap basis)"
+    market_share: null
+    sources:
+      - "https://investors.absci.com/news-releases/news-release-details/absci-reports-business-updates-and-fourth-quarter-and-full-0"
+      - "https://www.absci.com/about-us/team/"
+      - "https://finance.yahoo.com/quote/ABSI/profile/"
   - id: accruent
     name: Accruent
     categories: [healthcare-cmms]
@@ -155,6 +187,22 @@ vendors:
       - "https://en.wikipedia.org/wiki/Aidoc"
       - "https://www.aidoc.com/about/leadership/elad-walach/"
       - "https://www.aidoc.com/about/news/aidoc-secures-150m-for-its-healthcare-foundation-model/"
+  - id: aiforia
+    name: Aiforia Technologies
+    categories: [digital-pathology]
+    deployment_models: [software-as-a-service, on-premises]
+    confidence: B
+    source: "https://www.360dx.com/informatics/finnish-bioinformatics-firm-aiforia-seeks-automate-digital-pathology-workflows-ai"
+    headquarters: "Helsinki, Finland"
+    founded: 2013
+    leadership: "Jukka Tapaninen, CEO"
+    history: "Aiforia Technologies Plc is a Finnish company providing cloud-based deep-learning AI software for digital-pathology image analysis (Aiforia Create/Cloud, and CE-IVD-marked diagnostic models). Founded in 2013 (originally Fimmic Oy), it listed on the Nasdaq First North Growth Market Helsinki in December 2021 and is positioned as a leading European provider of CE-IVD AI pathology solutions."
+    market_position: "Publicly listed (Nasdaq First North Helsinki, IPO Dec 2021); described as the leading provider of CE-IVD-marked AI-powered digital pathology solutions in Europe; multiple CE-IVD models deployed. Sourced regional-leadership position, no global installed-base number."
+    market_share: null
+    sources:
+      - "https://www.360dx.com/informatics/finnish-bioinformatics-firm-aiforia-seeks-automate-digital-pathology-workflows-ai"
+      - "https://investors.aiforia.com/en/investors/corporate_governance/management_team"
+      - "https://www.aiforia.com/about-us/our-team"
   - id: akoya-biosciences
     name: Akoya Biosciences (a Quanterix company)
     categories: [spatial-biology-omics]
@@ -204,6 +252,22 @@ vendors:
       - "https://www.alterahealth.com/leadership/"
       - "https://www.alterahealth.com/newsroom/harris-completes-purchase-of-allscripts-hospitals-and-large-physician-practices-business-segment/"
       - "https://pitchbook.com/profiles/company/493098-13"
+  - id: ambience
+    name: Ambience Healthcare
+    categories: [cdss-clinical-ai]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://menlovc.com/perspective/2025-the-state-of-ai-in-healthcare/"
+    headquarters: "San Francisco, California, USA"
+    founded: 2020
+    leadership: "Nikhil Buduma, Co-Founder & CEO"
+    history: "Ambience Healthcare is a San Francisco ambient clinical AI (medical documentation / scribe) company founded in 2020 by Mike Ng and Nikhil Buduma. Its AI documentation platform spans 200+ specialties and is used by health systems including Cleveland Clinic and Mayo Clinic; it reached a ~$1.25B valuation in a 2025 Series C. On September 22, 2025 co-founder Nikhil Buduma was promoted from Chief Scientist to CEO, with Mike Ng becoming President and Chairman."
+    market_position: "#3 at ~13% market share of the ~$600M ambient-scribe market (Menlo Ventures, 2025 State of AI in Healthcare); third-largest ambient vendor; ~$1.25B valuation (Series C)."
+    market_share: null
+    sources:
+      - "https://menlovc.com/perspective/2025-the-state-of-ai-in-healthcare/"
+      - "https://www.ambiencehealthcare.com/blog/ambience-healthcare-announces-nikhil-buduma-as-new-chief-executive-officer"
+      - "https://news.mit.edu/2024/ambience-equips-doctors-with-ai-co-pilots-1016"
   - id: amwell
     name: Amwell (American Well)
     categories: [telehealth-platform]
@@ -220,6 +284,22 @@ vendors:
       - "https://en.wikipedia.org/wiki/Amwell_(company)"
       - "https://business.amwell.com/about-us/leadership-team"
       - "https://markets.financialcontent.com/theeveningleader/article/gnwcq-2024-6-13-amwell-co-founder-roy-schoenberg-becomes-executive-vice-chairman-of-the-board"
+  - id: annalise-ai
+    name: Annalise.ai
+    categories: [imaging-ai-deployment]
+    deployment_models: [software-as-a-service, on-premises, hybrid]
+    confidence: B
+    source: "https://www.austrade.gov.au/en/news-and-analysis/news/annalise-ai-helps-improve-patient-care-worldwide"
+    headquarters: "Sydney, New South Wales, Australia"
+    founded: 2019
+    leadership: "Aengus Tran, Co-Founder & CEO (Harrison.ai)"
+    history: "Annalise.ai is a medical-imaging AI company founded in 2019 as a joint venture between Harrison.ai and I-MED Radiology Network, Australia's largest diagnostic imaging chain. Its Annalise CXR (chest X-ray) and Annalise CTB (non-contrast head CT) products triage 100+ findings across 1,000+ sites, including as a preferred supplier under the NHS England AI Diagnostic Fund. Harrison.ai fully acquired Annalise.ai and in October 2025 unified the global brand, rebranding the radiology products as Harrison.ai Radiology; the combined company is led by co-founder Dr Aengus Tran as CEO, with co-founder Dimitry Tran (the original Annalise.ai founding CEO) as Deputy CEO."
+    market_position: "Comprehensive chest X-ray (124 findings) and non-contrast head CT (130 findings) triage; ~3,500 clinicians across 1,000+ sites on four continents; preferred supplier under NHS England AI Diagnostic Fund (supports ~1/3 of England's chest X-rays). REVISED: original cited a marketing-blog listing with 'no installed-base figure'; real deployment figures now sourced."
+    market_share: null
+    sources:
+      - "https://www.austrade.gov.au/en/news-and-analysis/news/annalise-ai-helps-improve-patient-care-worldwide"
+      - "https://harrison.ai/news/harrison-ai-and-annalise-ai-unite-as-one-company-to-accelerate-global-growth/"
+      - "https://harrison.ai/news/harrison-ai-unifies-global-brand-to-accelerate-healthcare-ai-innovation/"
   - id: antares-vision
     name: Antares Vision Group S.p.A.
     categories: [automated-visual-inspection, serialization-track-trace]
@@ -288,6 +368,22 @@ vendors:
       - "https://www.insightpartners.com/ideas/how-cofounders-yevgeny-dibrov-and-nadir-izrael-built-armis-cyber-exposure-management-and-security-giant/"
       - "https://www.timesofisrael.com/israeli-cyber-startup-armis-nears-deal-to-be-sold-to-servicenow-for-up-to-7b-report/"
       - "https://www.armis.com/about/our-leadership/"
+  - id: artera
+    name: Artera (formerly WELL Health)
+    categories: [patient-portal-engagement]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.prnewswire.com/news-releases/artera-named-1-best-in-klas-for-patient-communications-302699189.html"
+    headquarters: "Santa Barbara, California, USA"
+    founded: 2015
+    leadership: "Guillaume de Zwirek, CEO & Co-founder"
+    history: "Artera is a SaaS patient-communication platform that unifies and orchestrates messaging across healthcare touchpoints. Founded in 2015 as WELL Health by Guillaume de Zwirek in Santa Barbara, California; rebranded to Artera in September 2022. Named #1 Best in KLAS for Patient Communications, serving 1,000+ provider organizations and facilitating ~2B patient communications annually."
+    market_position: "VERIFIED: #1 Best in KLAS for Patient Communications in the 2026 Best in KLAS Awards (89.8 overall score); 1,000+ provider organizations, ~2B patient communications and ~200M patients reached annually, $100M CARR. (Note: the pre-Sept-2022 'WELL Health / wellapp.com' entity is the same company, not a separate vendor.)"
+    market_share: null
+    sources:
+      - "https://www.prnewswire.com/news-releases/artera-named-1-best-in-klas-for-patient-communications-302699189.html"
+      - "https://artera.io/leadership/guillaume-de-zwirek/"
+      - "https://artera.io/ai-powered-patient-communication/"
   - id: artisight
     name: Artisight
     categories: [or-surgical-video, smart-room-ambient-ai]
@@ -385,6 +481,54 @@ vendors:
       - "https://www.assurx.com/management-team/"
       - "https://www.cbinsights.com/company/assurx"
       - "https://tracxn.com/d/companies/assurx/__7kNcr6wAzNyqUDz4qS4G8B_enlirkdlgkKuLFtTA9sA"
+  - id: athenahealth
+    name: athenahealth (athenaPatient / athenaOne patient engagement)
+    categories: [ehr-emr-core]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+    headquarters: "Watertown, Massachusetts, USA"
+    founded: 1997
+    leadership: "Bob Segert, Chairman & CEO"
+    history: "athenahealth, founded in 1997 by Jonathan Bush and Todd Park, is a Watertown, Massachusetts-based provider of cloud-based (athenaOne) EHR, revenue-cycle, and patient-engagement software — including the athenaPatient app, portal, self-scheduling and reminders. Bob Segert became CEO via the 2019 Virence Health merger; the company was acquired by Bain Capital and Hellman & Friedman for ~$17B in 2022."
+    market_position: "#3 US ambulatory EHR: ~6.9% market share, 5,801 installations (Definitive Healthcare, Oct 2025)"
+    market_share: null
+    sources:
+      - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+      - "https://www.athenahealth.com/about/leadership/bob-segert"
+      - "https://en.wikipedia.org/wiki/Athenahealth"
+  - id: athenahealth-2
+    name: athenahealth
+    categories: [ehr-emr-core]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+    headquarters: "Boston (Watertown), Massachusetts, USA"
+    founded: 1997
+    leadership: "Bob Segert (Robert E. Segert), Chairman & CEO"
+    history: "athenahealth, founded in 1997 by Jonathan Bush and Todd Park, is a leading US ambulatory cloud-based EHR, practice-management and patient-engagement vendor. Bob Segert has been Chairman and CEO since February 2019. Previously public, it was taken private by Veritas Capital (2019) and then acquired by Bain Capital and Hellman & Friedman for $17B in a deal completed in 2022."
+    market_position: "#3 US ambulatory EHR: ~6.9% market share, 5,801 installations (Definitive Healthcare, Oct 2025)"
+    market_share: null
+    sources:
+      - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+      - "https://www.prnewswire.com/news-releases/robert-e-segert-chairman-and-chief-executive-officer-of-athenahealth-to-receive-prestigious-2026-horatio-alger-award-302670551.html"
+      - "https://en.wikipedia.org/wiki/Athenahealth"
+  - id: availity
+    name: Availity
+    categories: [rcm-billing-claims]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.availity.com/clearinghouse-and-trading-partner-network/"
+    headquarters: "Jacksonville, Florida, USA"
+    founded: 2001
+    leadership: "Russ Thomas, CEO"
+    history: "Availity operates one of the largest US real-time health information networks / EDI clearinghouses, connecting providers and health plans for eligibility, claims and clinical data exchange. Founded in 2001 (originating as a health-plan joint venture) and headquartered in Jacksonville, Florida; it processes billions of transactions annually and ranks #1 Best in KLAS for physician clearinghouse/ambulatory claims management. Russ Thomas has been CEO since March 2012."
+    market_position: "Self-described nation's largest real-time health information network; ~3.4M connected providers with ~95% payer connectivity (per Availity network page). Also #1 KLAS for ambulatory claims management/physician clearinghouse; Availity Essentials Pro ranked #2 (90.6) in 2025 KLAS Claims Management & Clearinghouse."
+    market_share: null
+    sources:
+      - "https://www.availity.com/clearinghouse-and-trading-partner-network/"
+      - "https://www.availity.com/executive-leadership/russ-thomas/"
+      - "https://craft.co/availity/executives"
   - id: avasure
     name: AvaSure
     categories: [smart-room-ambient-ai]
@@ -419,6 +563,38 @@ vendors:
       - "https://en.wikipedia.org/wiki/Aveva"
       - "https://www.aveva.com/en/about/news/press-releases/2023/aveva-announces-the-completion-of-its-acquisition-by-schneider-electric/"
       - "https://www.mergersight.com/post/schneider-electric-s-4-4bn-acquisition-of-aveva"
+  - id: baxter-international
+    name: Baxter International (medication management / IV automation, DoseEdge)
+    categories: [pharmacy-automation]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
+    headquarters: "Deerfield, Illinois, USA"
+    founded: 1931
+    leadership: "Andrew Hider, President & CEO"
+    history: "Baxter International is a Deerfield, Illinois multinational healthcare company founded in 1931 by Donald Baxter, focused on medical devices, pharmaceuticals and connected care. Its medication-management portfolio includes DoseEdge pharmacy workflow software and IV/compounding automation. Andrew Hider (former ATS Corporation CEO) was appointed President & CEO in 2025, assuming the role by September 3, 2025, succeeding interim CEO Brent Shafer."
+    market_position: "Named by Mordor Intelligence among the five suppliers (Omnicell, BD, Baxter, McKesson, Swisslog) that control ~60% of pharmacy-automation revenue; also named one of the four major players (BD, Baxter, Omnicell, KUKA) in the BCC Research 2024-2028 Pharmacy Automation report."
+    market_share: null
+    sources:
+      - "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
+      - "https://investor.baxter.com/investors/events-and-news/news/press-release-details/2025/Baxter-Appoints-Andrew-Hider-Chief-Executive-Officer/default.aspx"
+      - "https://en.wikipedia.org/wiki/Baxter_International"
+  - id: bayesian
+    name: Bayesian Health (TREWS)
+    categories: [icu-central-monitoring]
+    deployment_models: [software-as-a-service, hybrid]
+    confidence: B
+    source: "https://www.nature.com/articles/s41591-022-01894-0"
+    headquarters: "New York, New York, USA"
+    founded: 2018
+    leadership: "Suchi Saria, PhD, Founder & CEO"
+    history: "Bayesian Health, founded in 2018 by Johns Hopkins professor Suchi Saria, is a New York-based clinical-AI company whose ML early-warning system for sepsis was validated in a 2022 Nature Medicine multi-site study of 590,736 patients across 5 hospitals, associated with earlier antibiotic timing and lower sepsis mortality; it later received FDA clearance for its AI sepsis-detection tool and by 2025 had scaled across ~20 U.S. hospitals including the Cleveland Clinic system."
+    market_position: "ML sepsis early-warning deployed across multiple US health systems; Nature Medicine prospective multi-site study monitored 590,736 patients across 5 hospitals and was associated with ~18% reduction in sepsis mortality and earlier antibiotic timing."
+    market_share: null
+    sources:
+      - "https://www.nature.com/articles/s41591-022-01894-0"
+      - "https://www.cnbc.com/suchi-saria-2026-changemaker/"
+      - "https://www.medtechdive.com/news/bayesian-health-gets-fda-nod-for-ai-sepsis-detection-tool/819989/"
   - id: bd
     name: Becton, Dickinson and Company (BD)
     categories: [pharmacy-automation]
@@ -469,6 +645,40 @@ vendors:
       - "https://research.contrary.com/company/benchling"
       - "https://tracxn.com/d/companies/benchling/__ydo8O2nLPIwT3Lr_xCT-60HH5G0gXw6eFkpppgV7hYM"
       - "https://www.forbes.com/companies/benchling/"
+  - id: benevolentai
+    name: BenevolentAI
+    categories: [ai-drug-discovery]
+    deployment_models: [software-as-a-service, public-cloud, private-cloud]
+    confidence: B
+    source: "https://live.euronext.com/en/products/equities/company-news/2025-03-12-result-extraordinary-general-meeting-and-delisting"
+    headquarters: "London, United Kingdom"
+    founded: 2013
+    leadership: "Kenneth Mulvany, Executive Chairman (founder)"
+    history: "Founded in 2013 in London (originally Stratified Medical) by Kenneth Mulvany, BenevolentAI became one of Europe's most prominent AI drug-discovery companies, listing on Euronext Amsterdam via SPAC in 2022 and partnering with AstraZeneca. After a funding shortfall, CEO Dr. Joerg Moeller stepped down in October 2024 and founder Kenneth Mulvany returned as Executive Chairman; the company then delisted from Euronext Amsterdam and merged into Osaka Holdings S.a r.l. (which adopted the BenevolentAI name), completing its transition to a private company in March 2025."
+    market_position: "Former listed AI drug-discovery leader (AstraZeneca partnership); delisted from Euronext Amsterdam via merger into Osaka Holdings S.à r.l. (renamed BenevolentAI), effective Mar 13 2025 after funding gap — diminished, no longer public (sourced leadership position only, no current market figure)"
+    market_share: null
+    sources:
+      - "https://live.euronext.com/en/products/equities/company-news/2025-03-12-result-extraordinary-general-meeting-and-delisting"
+      - "https://www.businesswire.com/news/home/20241016329782/en/BenevolentAI-Appoints-Kenneth-Mulvany-as-Executive-Chairman"
+      - "https://www.benevolent.com/news-and-media/press-releases-and-in-media/benevolentai-appoints-kenneth-mulvany-executive-chairman/"
+  - id: biofourmis
+    name: Biofourmis
+    categories: [icu-central-monitoring]
+    deployment_models: [software-as-a-service, public-cloud, edge]
+    confidence: B
+    source: "https://www.forbes.com/sites/katiejennings/2022/04/26/health-ai-startup-biofourmis-hits-13-billion-valuation-with-series-d-funding/"
+    headquarters: "Boston, Massachusetts"
+    founded: 2015
+    leadership: "David Koretz, CEO"
+    history: "Founded in 2015 (originally in Singapore) by Kuldeep Singh Rajput and Maulik Majmudar, Biofourmis built an AI-driven remote patient monitoring / hospital-at-home platform, reaching a $1.3B valuation on a 2022 Series D led by General Atlantic. After 2023 layoffs and Rajput's departure, it divested its life-science business to ActiGraph (2025) and merged with CopilotIQ (announced Oct 2024) to form an end-to-end AI in-home-care company led by former CopilotIQ CEO David Koretz."
+    market_position: "Category leader in AI remote patient monitoring / hospital-at-home; reached $1.3B unicorn valuation on a $300M Series D led by General Atlantic (total funding $445M), with 100+ enterprise customers and an FDA-cleared analytics engine. Widely characterized as an RPM/digital-health market leader."
+    market_share: null
+    sources:
+      - "https://www.forbes.com/sites/katiejennings/2022/04/26/health-ai-startup-biofourmis-hits-13-billion-valuation-with-series-d-funding/"
+      - "https://biofourmis.com/news-insights/copilotiq-and-biofourmis-merge-to-create-the-first-end-to-end-platform-for-ai-driven-in-home-care"
+      - "https://www.statnews.com/2023/08/30/biofourmis-ceo-kuldeep-singh-rajput/"
+      - "https://www.prnewswire.com/news-releases/actigraph-accelerates-clinical-trial-modernization-with-transformational-acquisition-of-biofourmis-life-science-business-302344216.html"
+      - "https://www.businesswire.com/news/home/20241021889203/en/CopilotIQ-and-Biofourmis-Merge-to-Create-the-First-End-to-End-Platform-for-AI-Driven-In-Home-Care"
   - id: biognosys
     name: Biognosys
     categories: [ms-proteomics-metabolomics]
@@ -632,6 +842,23 @@ vendors:
       - "https://en.wikipedia.org/wiki/Canon_Medical_Systems_Corporation"
       - "https://global.medical.canon/News/PressRelease/Detail/18401-834"
       - "https://us.medical.canon/about/executive-team/"
+  - id: capsa
+    name: Capsa Healthcare
+    categories: [pharmacy-automation]
+    deployment_models: [on-premises, hybrid]
+    confidence: B
+    source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market/companies"
+    headquarters: "Canal Winchester, Ohio, United States"
+    founded: 1958
+    leadership: "Jeff Schlossnagle, CEO"
+    history: "Founded in 1958 and headquartered in Canal Winchester, Ohio (Columbus area), Capsa Healthcare provides medication management, pharmacy automation and point-of-care technologies, formed by combining Capsa Solutions, Kirby Lester and Rubbermaid Healthcare. Backed by Levine Leichtman Capital Partners since 2017, it is named among leading pharmacy-automation vendors serving retail, hospital and long-term-care settings. Jeff Schlossnagle (who joined Capsa in 2023 as Chief Commercial Officer) was appointed CEO on May 6, 2026, succeeding Gaurav Agarwal (CEO from November 2024)."
+    market_position: "Named by Mordor Intelligence among the top pharmacy-automation companies (listed alongside Omnicell, Parata, ScriptPro, ARxIUM) serving retail, hospital and LTC medication dispensing/management. Identified as a major player 'in no particular order' — no independent share figure, so ranked on a named-player basis."
+    market_share: null
+    sources:
+      - "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market/companies"
+      - "https://www.prnewswire.com/news-releases/capsa-healthcare-names-jeff-schlossnagle-chief-executive-officer-302763253.html"
+      - "https://www.capsahealthcare.com/resources/news/article/capsa-healthcare-names-jeff-schlossnagle-chief-executive-officer/"
+      - "https://www.globenewswire.com/news-release/2024/11/21/2985302/0/en/Gaurav-Agarwal-Joins-Capsa-Healthcare-as-Chief-Executive-Officer-to-Lead-Next-Innovative-Growth-Phase.html"
   - id: caregility
     name: Caregility
     categories: [telehealth-platform]
@@ -714,6 +941,22 @@ vendors:
       - "https://ir.certara.com/news-releases/news-release-details/certara-appoints-jon-resnick-chief-executive-officer"
       - "https://finance.yahoo.com/quote/CERT/profile/"
       - "https://www.marketsandmarkets.com/ResearchInsight/biosimulation-market.asp"
+  - id: change-enterprise-imaging
+    name: Change Healthcare / Enterprise Imaging (now Optum)
+    categories: [pacs-vna]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://intuitionlabs.ai/articles/enterprise-pacs-klas-comparison"
+    headquarters: "Eden Prairie, Minnesota, USA"
+    founded: 2017
+    leadership: null
+    history: "Change Healthcare's Enterprise Imaging business (radiology and cardiology PACS/VNA, plus the cloud-native Stratus Imaging PACS) originated in health-IT assets tracing back to McKesson and the 2017 formation of Change Healthcare. UnitedHealth Group's Optum completed its ~$13B acquisition of Change Healthcare in October 2022, and the enterprise imaging portfolio now operates as an Optum product line rather than a standalone company with its own CEO."
+    market_position: "KLAS-rated large and small PACS vendor (large ~74.8, small ~79.4 in 2024) with a large legacy installed base; KLAS Decision Insights (as 'Optum') shows declining scores and negative momentum but a substantial installed base."
+    market_share: null
+    sources:
+      - "https://intuitionlabs.ai/articles/enterprise-pacs-klas-comparison"
+      - "https://business.optum.com/en/operations-technology/enterprise-imaging/change-healthcare-radiology.html"
+      - "https://www.auntminnie.com/imaging-informatics/enterprise-imaging/pacs-vna/article/15631955/optum-completes-change-healthcare-purchase"
   - id: chemical-computing-group
     name: Chemical Computing Group ULC
     categories: [ai-drug-discovery, comp-chem-simulation]
@@ -764,6 +1007,39 @@ vendors:
       - "https://claroty.com/press-releases/claroty-establishes-global-headquarters-in-new-york"
       - "https://team8.vc/portfolio/claroty/"
       - "https://www.techtarget.com/healthtechsecurity/news/366637047/KLAS-highlights-top-healthcare-IoT-security-vendors-in-2026"
+  - id: cleerly
+    name: Cleerly
+    categories: [imaging-ai-deployment]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.medtechdive.com/news/cleerly-series-c-funding-round-insight-partners/734818/"
+    headquarters: "Denver, Colorado, USA"
+    founded: 2017
+    leadership: "James K. Min, MD, Founder & CEO"
+    history: "Cleerly, founded in 2017 by cardiologist Dr. James K. Min (formerly of Weill Cornell Medical College / NewYork-Presbyterian), develops AI-based analysis of coronary CT angiography (CCTA) to identify and quantify atherosclerotic plaque for earlier, more precise heart-disease diagnosis. It emerged from stealth in June 2021 and has raised multiple large rounds including a $106M Series C extension in December 2024 led by Insight Partners."
+    market_position: "Coronary CCTA plaque-analysis AI; raised $106M Series C extension Dec 2024 (led by Insight Partners) — funding/momentum evidence only, no disclosed installed-base or market-share figure, so ranked below vendors with numeric deployment evidence."
+    market_share: null
+    sources:
+      - "https://www.medtechdive.com/news/cleerly-series-c-funding-round-insight-partners/734818/"
+      - "https://cleerlyhealth.com/leadership/james-k-min"
+      - "https://cardiovascularbusiness.com/topics/cardiac-imaging/computed-tomography-ct/embracing-future-james-min-left-academia-push-paradigm-shift-preventive-cardiology"
+      - "https://techcrunch.com/2021/06/23/as-clinical-guidelines-shift-heart-disease-screening-startup-pulls-in-43m-series-b/"
+  - id: clew
+    name: CLEW Medical (CLEWICU)
+    categories: [icu-central-monitoring]
+    deployment_models: [software-as-a-service, private-cloud]
+    confidence: B
+    source: "https://www.healthcareitnews.com/news/fda-issues-landmark-clearance-ai-driven-icu-predictive-tool"
+    headquarters: "Netanya, Israel"
+    founded: 2014
+    leadership: "Paul Roscoe, CEO"
+    history: "CLEW Medical, founded in 2014 in Netanya, Israel, develops AI-based predictive-analytics models for high-acuity/ICU care that forecast patient deterioration. Its CLEWICU platform was the first FDA-cleared AI predictive tool for adult ICU deterioration (cleared February 2021 following a 2020 EUA), and expanded to broader inpatient settings in 2024. Co-founder Gal Salomon became Executive Chairman when Paul Roscoe was appointed CEO in November 2022."
+    market_position: "First FDA-cleared AI predictive-analytics device for adult ICU patient deterioration (hemodynamic instability up to 8 hours in advance), cleared Feb 2021 after a 2020 EUA; platform still active and expanded to all inpatient settings in 2024 (named to Newsweek World's Best Digital Health Companies 2024)."
+    market_share: null
+    sources:
+      - "https://www.healthcareitnews.com/news/fda-issues-landmark-clearance-ai-driven-icu-predictive-tool"
+      - "https://clewmed.com/team-member/paul-roscoe/"
+      - "https://www.prnewswire.com/il/news-releases/clew-announces-appointment-of-paul-roscoe-as-ceo-301666306.html"
   - id: clinisys
     name: Clinisys
     categories: [lis]
@@ -846,6 +1122,23 @@ vendors:
     sources:
       - "https://www.cbinsights.com/company/cognosos"
       - "https://cognosos.com/blog/cognosos-triples-revenue-2022-solidify-leadership-position-asset-visibility-intelligence/"
+  - id: compugroup
+    name: CompuGroup Medical (CGM LABDAQ / SCHUYLAB / AP EASY)
+    categories: [lis]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.novopath.com/resources/blog/top-lis-companies/"
+    headquarters: "Koblenz, Germany"
+    founded: 1987
+    leadership: "Daniel Gotthardt, CEO"
+    history: "Founded in 1987 and headquartered in Koblenz, Germany, CompuGroup Medical (HAM: COP) is one of the world's largest e-health companies, providing practice, hospital, pharmacy and laboratory information systems, including the CGM LABDAQ, SCHUYLAB and AP EASY LIS products for US labs. It is led by Prof. Dr. Daniel Gotthardt (son of founder Frank Gotthardt), who became CEO on September 1, 2024; the founding Gotthardt family and CVC agreed a take-private transaction in 2025."
+    market_position: "Sourced leadership position (no %): CGM's LABDAQ / AP EASY / SCHUYLAB portfolio named among leading LIS providers for reference and AP labs in NovoPath's 2026 top-LIS list."
+    market_share: null
+    sources:
+      - "https://www.novopath.com/resources/blog/top-lis-companies/"
+      - "https://www.cgm.com/corp_en/company/management/daniel-gotthardt.html"
+      - "https://en.wikipedia.org/wiki/CompuGroup_Medical"
+      - "https://www.cgm.com/corp_en/magazine/articles/press-releases/2024/compugroup-medical-appoints-prof-dr-daniel-gotthardt-as-new-ceo.html"
   - id: congenica
     name: Congenica (SeqOne Genomics)
     categories: [clinical-genomics-reporting]
@@ -881,6 +1174,23 @@ vendors:
       - "https://www.canhealth.com/2022/08/03/connexall-promotes-sandy-saggar-to-interim-ceo/"
       - "https://en.everybodywiki.com/GlobeStar_Systems"
       - "https://www.prnewswire.com/news-releases/connexall-appoints-health-technology-innovator-sandy-saggar-as-ceo-302386844.html"
+  - id: corti
+    name: Corti
+    categories: [cdss-clinical-ai]
+    deployment_models: [software-as-a-service, private-cloud, on-premises, hybrid]
+    confidence: B
+    source: "https://www.corti.ai/stories/corti-raises-60m-in-series-b-funding-to-accelerate-healthcare-ai-innovation-and-expand-work-in-public-safety"
+    headquarters: "Copenhagen, Denmark"
+    founded: 2016
+    leadership: "Andreas Cleve, Co-founder & CEO"
+    history: "Headquartered in Copenhagen and founded in the mid-2010s (commonly cited as 2016; some sources date the founding lineage to 2014) by Andreas Cleve and Lars Maaloe, Corti builds AI infrastructure for healthcare consultations, including real-time transcription, medical coding and decision support. Its technology processes large volumes of patient interactions across hospitals and emergency-medical services in Europe and the US, and it has raised roughly $94.5M in total funding."
+    market_position: "No published market-share % (adjacent ambient/clinical-conversation AI infrastructure vendor). Sourced usage position: company-reported 250,000+ patient interactions per day across hospitals in Europe and the US; $94.5M total funding."
+    market_share: null
+    sources:
+      - "https://www.corti.ai/stories/corti-raises-60m-in-series-b-funding-to-accelerate-healthcare-ai-innovation-and-expand-work-in-public-safety"
+      - "https://www.crunchbase.com/person/andreas-cleve"
+      - "https://www.crunchbase.com/organization/corti"
+      - "https://www.unite.ai/andreas-cleve-co-founder-and-ceo-of-corti-interview-series/"
   - id: cotiviti
     name: Cotiviti, Inc.
     categories: [payer-um-fraud-analytics]
@@ -931,6 +1241,23 @@ vendors:
       - "https://en.wikipedia.org/wiki/Critical_Manufacturing"
       - "https://www.criticalmanufacturing.com/company/leadership/"
       - "https://www.criticalmanufacturing.com/company/who-we-are/"
+  - id: current
+    name: Current Health (a Best Buy Health company)
+    categories: [icu-central-monitoring]
+    deployment_models: [software-as-a-service, edge]
+    confidence: B
+    source: "https://www.mobihealthnews.com/news/retail-giant-best-buy-snaps-remote-monitoring-company-current-health"
+    headquarters: "Edinburgh, United Kingdom"
+    founded: 2014
+    leadership: "Christopher (Chris) McGhee, Co-founder & CEO"
+    history: "Current Health (originally founded as snap40 in Edinburgh in 2014 by Christopher McGhee and Stewart Whiting) is a remote patient monitoring and hospital-at-home platform combining an FDA-cleared wearable biosensor with ML-based deterioration alerting, deployed at Mass General Brigham, Geisinger and UC Davis. It was acquired by Best Buy for ~$400M in 2021; Best Buy divested it back to co-founder McGhee in June 2025, and he returned as CEO of the now-independent company."
+    market_position: "Leading remote patient monitoring & hospital-at-home platform; acquired by Best Buy for ~$400M (2021); enterprise deployments at Mass General Brigham, Geisinger and UC Davis. ML-based biosensor monitoring with deterioration alerting."
+    market_share: null
+    sources:
+      - "https://www.mobihealthnews.com/news/retail-giant-best-buy-snaps-remote-monitoring-company-current-health"
+      - "https://www.mobihealthnews.com/news/former-current-health-ceo-buys-back-company-best-buy"
+      - "https://www.healthcaredive.com/news/best-buy-sells-current-health-home-care-christopher-mcghee/751645/"
+      - "https://homehealthcarenews.com/2025/06/best-buy-sells-current-health-back-to-co-founder-former-ceo/"
   - id: cynerio
     name: Cynerio (Axonius)
     categories: [medical-iot-security]
@@ -996,6 +1323,40 @@ vendors:
       - "https://en.wikipedia.org/wiki/Databricks"
       - "https://fortune.com/2025/12/17/databricks-ceo-ali-ghodsi-on-where-ai-is-most-bubbly-and-how-the-company-settled-on-its-134-billion-valuation/"
       - "https://www.gminsights.com/industry-analysis/data-lakehouse-market"
+  - id: dedalus
+    name: Dedalus
+    categories: [ehr-emr-core]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://digitalhealth.org.au/blog/dedalus-identified-as-ehr-vendor-with-most-contracted-beds-outside-the-us-for-3-consecutive-years-by-klas-research/"
+    headquarters: "Florence, Italy"
+    founded: 1982
+    leadership: "Alberto Calcagno, CEO"
+    history: "Dedalus Group, founded in 1982 in Florence, Italy by Giorgio Moretti, is one of the largest healthcare IT providers in Europe, supplying EHR, clinical, laboratory and diagnostic software across 40+ countries. Alberto Calcagno was appointed Group CEO in October 2023, with Andrea Fiumicelli as Chairman of the Board. It grew substantially through acquisitions, including the healthcare IT businesses of Agfa-Gevaert and DXC Technology."
+    market_position: "KLAS: 3rd-largest EHR vendor globally by inpatient hospitals outside the US (1,848 hospitals); most newly contracted beds outside the US for 3 consecutive years (KLAS Global Acute Care EHR Market Share)"
+    market_share: null
+    sources:
+      - "https://digitalhealth.org.au/blog/dedalus-identified-as-ehr-vendor-with-most-contracted-beds-outside-the-us-for-3-consecutive-years-by-klas-research/"
+      - "https://www.dedalus.com/global/en/about-us/top-management/"
+      - "https://www.dedalus.com/global/en/about-us/"
+      - "https://www.digitalhealthnews.eu/industry/6169-andrea-fiumicelli-appointed-as-a-ceo-of-dedalus-group"
+  - id: deep-bio
+    name: Deep Bio (DeepDx Prostate)
+    categories: [digital-pathology]
+    deployment_models: [on-premises, private-cloud, software-as-a-service]
+    confidence: B
+    source: "https://www.koreabiomed.com/news/articleView.html?idxno=12554"
+    headquarters: "Seoul, South Korea"
+    founded: 2015
+    leadership: "Sun Woo Kim, Founder & CEO"
+    history: "Founded in 2015 in Seoul, Deep Bio develops deep-learning pathology software for cancer diagnosis. Its DeepDx-Prostate received Korean MFDS Class 3 approval as (per company) the first AI IVD to classify prostate-cancer severity, is CE-marked, and is integrated into Roche navify Digital Pathology (RUO in the US); it also partners with PathAI and Indica Labs (HALO AP)."
+    market_position: "DeepDx-Prostate Pro (per company) the world's first AI IVD approved to classify prostate cancer severity (Korea MFDS Class 3); CE-marked; integrated into Roche navify Digital Pathology. Regulatory-first position; RUO in the US, no installed-base count."
+    market_share: null
+    sources:
+      - "https://www.koreabiomed.com/news/articleView.html?idxno=12554"
+      - "https://deepbio.co.kr/about/"
+      - "https://deepbio.co.kr/deep-bio-and-roche-collaborate-to-drive-ai-powered-innovations-in-digital-pathology/"
+      - "https://www.koreabiomed.com/news/articleView.html?idxno=25127"
   - id: deepc
     name: deepc
     categories: [imaging-ai-deployment]
@@ -1012,6 +1373,41 @@ vendors:
       - "https://www.deepc.ai/about"
       - "https://www.bio-m.org/en/news/news-detail/detail/News/lmu-university-hospital-munich-relies-on-deepcs-ai-platform-in-radiology.html"
       - "https://www.bayern-innovativ.de/en/kompetenzen/competencies-partner-network-health/deepc-gmbh/"
+  - id: deephealth
+    name: DeepHealth (RadNet)
+    categories: [imaging-ai-deployment]
+    deployment_models: [software-as-a-service, public-cloud, hybrid, on-premises]
+    confidence: B
+    source: "https://theimagingwire.com/2026/03/11/numbers-from-the-fda-show-radiology-is-maintaining-its-lead/"
+    headquarters: "Somerville, Massachusetts, USA (RadNet Digital Health division; RadNet Inc. HQ Los Angeles, California)"
+    founded: 2017
+    leadership: "Kees Wesdorp, President & CEO, RadNet Digital Health Division (DeepHealth)"
+    history: "DeepHealth was founded in 2017 as an AI medical-imaging (breast/mammography) startup and acquired by RadNet in 2020, becoming the company's digital-health and clinical-AI division. It scaled through acquisitions of Quantib, Aidence, iCAD (2025) and Gleamer, and now markets the cloud-native DeepHealth OS radiology-informatics and AI platform across RadNet's ~400-center US imaging network and third-party customers."
+    market_position: "28 FDA-cleared radiology AI algorithms — 7th overall by clearance count (incl. acquired Quantib and iCAD); commercialized across RadNet's ~400-center U.S. imaging network."
+    market_share: null
+    sources:
+      - "https://theimagingwire.com/2026/03/11/numbers-from-the-fda-show-radiology-is-maintaining-its-lead/"
+      - "https://deephealth.com/press-releases/radnet-inc-announces-the-appointment-of-kees-wesdorp-as-president-and-chief-executive-officer-of-radnets-digital-health-division/"
+      - "https://www.radnet.com/about-radnet/management"
+      - "https://deephealth.com/press-releases/radnet-acquires-gleamer-making-radnets-deephealth-the-largest-provider-of-radiology-clinical-ai-solutions-worldwide/"
+      - "https://deephealth.com/press-releases/deephealth-momentum-contributes-to-radnets-record-q1-2026-financial-results/"
+  - id: deepscribe
+    name: DeepScribe
+    categories: [cdss-clinical-ai]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://klasresearch.com/report/deepscribe-ambient-ai-2025-enhancing-clinician-experience-and-efficiency-through-ambient-speech-ai/3402"
+    headquarters: "San Francisco, California, USA"
+    founded: 2017
+    leadership: "Matthew Ko, CEO & Co-Founder"
+    history: "DeepScribe, founded in 2017 in San Francisco, supplies ambient AI medical-scribe software that automates clinical documentation; it was the first AI scribe to capture 1 million patient visits and earned a top KLAS ambient-AI score (98.8, 2025) plus 2025 KLAS Emerging Solutions Top 20 recognition. Co-founder Matthew Ko is listed as CEO on the company's site; co-founder and former CEO Akilesh Bapu departed in 2025 to join Hightouch."
+    market_position: "No published market-share % (long-tail / mid-market). Sourced position: KLAS overall score 98.8 (2025) and 2025 KLAS Emerging Solutions Top 20 recognition; company-reported 1,500+ organizations (company marketing, treat as company-reported not independently verified)."
+    market_share: null
+    sources:
+      - "https://klasresearch.com/report/deepscribe-ambient-ai-2025-enhancing-clinician-experience-and-efficiency-through-ambient-speech-ai/3402"
+      - "https://www.deepscribe.ai/about"
+      - "https://www.businesswire.com/news/home/20251001835418/en/Akilesh-Bapu-Joins-Hightouch-to-Lead-Generative-AI-Product-Development"
+      - "https://www.deepscribe.ai/resources/deepscribe-sets-record-first-ai-scribe-to-capture-1-million-patient-visits"
   - id: dnanexus
     name: DNAnexus, Inc.
     categories: [bioinformatics-secondary]
@@ -1063,6 +1459,55 @@ vendors:
       - "https://press.siemens.com/global/en/pressrelease/siemens-completes-acquisition-dotmatics"
       - "https://en.wikipedia.org/wiki/Dotmatics"
       - "https://blogs.sw.siemens.com/employee-spotlight/2026/04/29/dotmatics-ceo-brian-lee-on-ai-and-structured-data-the-acquisition-and-fieldwork-that-matters/"
+  - id: eclinicalworks
+    name: eClinicalWorks
+    categories: [ehr-emr-core]
+    deployment_models: [software-as-a-service, on-premises, public-cloud]
+    confidence: B
+    source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+    headquarters: "Westborough, Massachusetts, USA"
+    founded: 1999
+    leadership: "Girish Navani, CEO & Co-founder"
+    history: "eClinicalWorks is a privately held ambulatory electronic health record and practice-management software vendor. Founded in 1999 by Girish Navani and co-founders in Westborough, Massachusetts; it grew into one of the largest US ambulatory EHR vendors (a billion-dollar, privately held business) serving independent practices and health systems."
+    market_position: "#2 US ambulatory EHR: ~11.9% market share, 9,966 installations (Definitive Healthcare, Oct 2025)"
+    market_share: null
+    sources:
+      - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+      - "https://www.wbjournal.com/article/2024-power-100-girish-navani"
+      - "https://tracxn.com/d/companies/eclinicalworks/__bE58Nuc2iz0NF8cBssTkSnZu7QBiZQl3MUZZsPHBbhQ"
+  - id: ehealth-exchange
+    name: eHealth Exchange
+    categories: [hie-interoperability-engine]
+    deployment_models: [vendor-managed, software-as-a-service]
+    confidence: B
+    source: "https://www.globenewswire.com/news-release/2023/12/12/2794902/0/en/eHealth-Exchange-Among-First-To-Achieve-TEFCA-Qualified-Health-Information-Network-QHIN-Designation.html"
+    headquarters: "Vienna, Virginia"
+    founded: 2012
+    leadership: "Doug Dietzman, President & Executive Director"
+    history: "eHealth Exchange is the largest US health information network, originating from the ONC's Nationwide Health Information Network; stewardship passed to The Sequoia Project in 2012 (when it took the eHealth Exchange name) and it became an independent nonprofit in 2018. Headquartered in Vienna, Virginia, it connects ~75% of US hospitals plus 60+ regional/state HIEs and was among the first TEFCA QHINs designated (Dec 2023). Doug Dietzman became president & executive director effective July 6, 2026, succeeding Jay Nakashima."
+    market_position: "One of the nation's oldest/largest HINs: connects ~75% of U.S. hospitals, 60+ regional/state HIEs, and is the only network connecting to five federal agencies. Among the first TEFCA QHINs designated (Dec 2023) — a verifiable designation, not a claimed share."
+    market_share: null
+    sources:
+      - "https://www.globenewswire.com/news-release/2023/12/12/2794902/0/en/eHealth-Exchange-Among-First-To-Achieve-TEFCA-Qualified-Health-Information-Network-QHIN-Designation.html"
+      - "https://www.globenewswire.com/news-release/2026/07/08/3324128/0/en/eHealth-Exchange-Names-Doug-Dietzman-as-President-and-Executive-Director.html"
+      - "https://en.wikipedia.org/wiki/EHealth_Exchange"
+      - "https://www.globenewswire.com/news-release/2019/02/28/1744324/0/en/eHealth-Exchange-Modernizes-the-Nation-s-Longest-Standing-Public-Private-Health-Information-Network.html"
+  - id: eko
+    name: Eko Health (SENSORA / AI stethoscope platform)
+    categories: [icu-central-monitoring]
+    deployment_models: [software-as-a-service, edge]
+    confidence: B
+    source: "https://www.ajmc.com/view/fda-approves-first-ai-tool-for-earlier-heart-failure-detection"
+    headquarters: "Emeryville, California, USA"
+    founded: 2013
+    leadership: "Connor Landgraf, Co-Founder & CEO"
+    history: "Eko Health is an Emeryville, California digital-health company founded in 2013 by Connor Landgraf, Jason Bellet and Tyler Crouch. It makes AI-enabled digital stethoscopes (CORE, DUO) and the SENSORA cardiac disease-detection platform, holding multiple FDA clearances including the first AI tool cleared for earlier heart-failure (low ejection-fraction) detection, plus structural-murmur and AFib algorithms. It has raised roughly $195M."
+    market_position: "Market leader in AI-assisted auscultation with a large deployed base of AI-enabled digital stethoscopes across health systems; holds multiple FDA clearances including the first AI tool cleared for earlier heart-failure (low ejection-fraction) detection, plus structural-murmur and AFib algorithms. SENSORA efficacy shown in a Lancet RCT across 200+ NHS primary-care practices."
+    market_share: null
+    sources:
+      - "https://www.ajmc.com/view/fda-approves-first-ai-tool-for-earlier-heart-failure-detection"
+      - "https://www.ekohealth.com/pages/about-us"
+      - "https://en.wikipedia.org/wiki/Eko_Health_Inc."
   - id: elekta
     name: Elekta AB
     categories: [radiation-oncology-tps-ois]
@@ -1126,6 +1571,40 @@ vendors:
     sources:
       - "https://en.ennov.com/about/"
       - "https://www.businesswire.com/news/home/20260518090659/en/Ennov-Announces-Strategic-Growth-Investment-from-Bregal-Sagemount-and-Ardian"
+  - id: epic-beaker
+    name: Epic Beaker
+    categories: [lis]
+    deployment_models: [on-premises, private-cloud, vendor-managed]
+    confidence: A
+    source: "https://engage.klasresearch.com/press-release/epic-athenahealth-chartis-and-evergreen-healthcare-partners-win-2025-overall-best-in-klas-awards/"
+    headquarters: "Verona, Wisconsin"
+    founded: 1979
+    leadership: "Judy Faulkner, Founder & CEO (Epic Systems)"
+    history: "Epic Systems Corporation, founded in 1979 by Judy Faulkner and headquartered in Verona, Wisconsin, is the dominant US acute-care EHR vendor. Beaker is Epic's integrated laboratory information system (clinical pathology and anatomic pathology), introduced around 2009-2010, and is the default LIS for health systems running Epic; Epic won Overall Best in KLAS for its software suite for the 15th consecutive year in 2025."
+    market_position: "Sourced leadership position (no clean standalone LIS %): Epic is the dominant US acute-care EHR and Beaker is the default LIS for Epic health systems; Epic won Overall Best in KLAS 2025 for the 15th consecutive year, driving a large-system LIS installed base."
+    market_share: null
+    sources:
+      - "https://engage.klasresearch.com/press-release/epic-athenahealth-chartis-and-evergreen-healthcare-partners-win-2025-overall-best-in-klas-awards/"
+      - "https://www.epic.com/about/"
+      - "https://en.wikipedia.org/wiki/Epic_Systems"
+      - "https://www.epic.com/software/"
+  - id: epic-care-everywhere-epic-nexus
+    name: Epic — Care Everywhere / Epic Nexus (TEFCA QHIN)
+    categories: [hie-interoperability-engine]
+    deployment_models: [on-premises, vendor-managed, public-cloud]
+    confidence: B
+    source: "https://www.healthcareitnews.com/news/epics-care-everywhere-interoperability-platform-shows-big-jump-data-exchange ; https://www.epic.com/epic/post/epic-providers-approved-among-first-tefca-participants/"
+    headquarters: "Verona, Wisconsin, USA"
+    founded: 1979
+    leadership: "Judith R. Faulkner, Founder & CEO"
+    history: "Epic Systems Corporation is a privately held US healthcare-software company founded in 1979 by Judith Faulkner in Wisconsin; its EHR is used by a majority of large US health systems. Care Everywhere is Epic's health-information-exchange capability, and Epic Nexus was designated among the first-wave TEFCA Qualified Health Information Networks (QHINs) in December 2023; Epic customers reach the majority of US hospitals via Carequality/Care Everywhere."
+    market_position: "Largest clinical-data exchange network by volume. CORRECTED figure: Care Everywhere exchanges 20M+ patient records/day (2024) rising to ~30M/day (2025) per Healthcare IT News — the review's '16M/day' understated it. Epic Nexus was a first-wave TEFCA QHIN (Dec 2023); Epic customers reach ~70% of U.S. hospitals via Carequality."
+    market_share: null
+    sources:
+      - "https://www.healthcareitnews.com/news/epics-care-everywhere-interoperability-platform-shows-big-jump-data-exchange ; https://www.epic.com/epic/post/epic-providers-approved-among-first-tefca-participants/"
+      - "https://www.cnbc.com/2025/08/16/how-epics-82-year-old-ceo-judy-faulkner-built-her-software-factory.html"
+      - "https://en.wikipedia.org/wiki/Epic_Systems"
+      - "https://www.epic.com/epic/post/epic-providers-approved-among-first-tefca-participants/"
   - id: epic-systems
     name: Epic Systems
     categories: [ehr-emr-core, lis, patient-access-scheduling, patient-portal-engagement, rcm-billing-claims, ris-cvis-workflow]
@@ -1194,6 +1673,23 @@ vendors:
       - "https://hexagon.com/company/newsroom/press-releases/2022/hexagon-acquires-etq-adding-market-leading-saas-based-qms-software-platform-to-its-portfolio"
       - "https://www.octave.com/products/asset-performance-management/reliance"
       - "https://www.etq.com/press-releases/vick-vaishnavi-named-etq-ceo/ (appointed CEO Jan 2023; confirmed still leading ETQ in 2026 via ETQ's 2026 Pulse of Quality report coverage)"
+  - id: excel
+    name: Excel Medical (WAVE Clinical Platform / Visensia)
+    categories: [icu-central-monitoring]
+    deployment_models: [on-premises, hybrid]
+    confidence: B
+    source: "https://cardiovascularbusiness.com/topics/patient-care/excel-medicals-wave-clinical-platform-receives-fda-clearance"
+    headquarters: "Jupiter, Florida, United States"
+    founded: 1995
+    leadership: null
+    history: "Founded in 1995 in Jupiter, Florida, Excel Medical Electronics developed the WAVE Clinical Platform, the first FDA-cleared (2017) predictive patient-surveillance system, which uses the Oxford-derived Visensia Safety Index for continuous multi-vital-sign deterioration scoring with mobile and EHR alerting. Excel Medical was acquired by Hillrom in January 2020, and became part of Baxter International when Baxter acquired Hillrom for $10.5B in December 2021; it now operates as part of Baxter's connected-care portfolio rather than as an independent company."
+    market_position: "First FDA-cleared patient-deterioration predictive-algorithm platform targeted at acute-care hospitals (2017), using the Oxford-derived (ML kernel-density) Visensia Safety Index for continuous multi-vital-sign risk scoring with mobile/EHR alerting."
+    market_share: null
+    sources:
+      - "https://cardiovascularbusiness.com/topics/patient-care/excel-medicals-wave-clinical-platform-receives-fda-clearance"
+      - "https://www.medtechdive.com/news/baxter-hillrom-10B-deal-connected-care/606640/"
+      - "https://www.chiefhealthcareexecutive.com/view/predictive-patient-surveillance-system-receives-fda-clearance"
+      - "https://www.hillrom.com/en/products/excel-medical-device-integration-mdi/"
   - id: experian-health
     name: Experian Health (Experian plc)
     categories: [patient-access-scheduling]
@@ -1292,6 +1788,22 @@ vendors:
       - "https://flatiron.com/about-us"
       - "https://www.biopharmadive.com/news/roche-buys-cancer-data-company-flatiron-health-for-19b/517285/"
       - "https://www.businesswire.com/news/home/20250806534261/en/Flatiron-Health-Appoints-Nathan-Hubbard-as-Chief-Executive-Officer"
+  - id: fujifilm
+    name: Fujifilm (Synapse PACS / VNA)
+    categories: [pacs-vna]
+    deployment_models: [on-premises, private-cloud, software-as-a-service]
+    confidence: B
+    source: "https://www.signifyresearch.net/insights/opportunities-for-growth-in-the-imaging-it-market/"
+    headquarters: "Tokyo, Japan"
+    founded: 1934
+    leadership: "Teiichi Goto, President & CEO, Representative Director (FUJIFILM Holdings Corporation)"
+    history: "FUJIFILM Holdings Corporation is a Japanese multinational founded in 1934 as Fuji Photo Film Co. Its medical-informatics business produces the Synapse enterprise-imaging portfolio (Synapse PACS, VNA, Cardiovascular, 3D). Fujifilm greatly expanded its healthcare business, including acquiring Hitachi's diagnostic-imaging division in 2021 to form FUJIFILM Healthcare; ranked among the top-3 imaging-IT vendors by market share."
+    market_position: "Signify Research names Fujifilm in the top-3 imaging-IT vendors by market share (2023); KLAS 2025 large-PACS performance score 84.9, and positive new-selection momentum per KLAS Decision Insights (consolidated PACS/cardiology platform)."
+    market_share: null
+    sources:
+      - "https://www.signifyresearch.net/insights/opportunities-for-growth-in-the-imaging-it-market/"
+      - "https://holdings.fujifilm.com/en/about/executives"
+      - "https://holdings.fujifilm.com/en/about/companyprofile"
   - id: fujifilm-healthcare
     name: FUJIFILM Healthcare Americas Corporation
     categories: [pacs-vna, ris-cvis-workflow]
@@ -1358,6 +1870,40 @@ vendors:
       - "https://www.gevernova.com/news/articles/transition-energies-timeline-ge-vernovas-spin"
       - "https://en.wikipedia.org/wiki/GE_Vernova"
       - "https://www.gevernova.com/company/leadership/scott-strazik"
+  - id: genesis-therapeutics
+    name: Genesis Therapeutics
+    categories: [ai-drug-discovery]
+    deployment_models: [private-cloud, public-cloud]
+    confidence: B
+    source: "https://www.businesswire.com/news/home/20230821419353/en/Genesis-Therapeutics-Closes-Oversubscribed-$200-Million-Series-B"
+    headquarters: "Burlingame, California, USA"
+    founded: 2019
+    leadership: "Evan Feinberg, Founder & CEO"
+    history: "Genesis Therapeutics (later rebranded Genesis Molecular AI) is a Burlingame, California AI drug-discovery company founded in 2019 by Evan Feinberg (from Vijay Pande's Stanford lab), with a lab in San Diego. Its GEMS (Genesis Exploration of Molecular Space) generative/predictive AI platform drives small-molecule discovery. It closed an oversubscribed $200M Series B in August 2023 (co-led by a16z, with NVIDIA, Fidelity and BlackRock among backers), over $280M raised total, and has industry collaborations including Lilly, Gilead and Incyte."
+    market_position: "GEMS generative-AI platform: oversubscribed $200M Series B (Aug 2023, a16z co-led; NVIDIA/Fidelity/BlackRock backers), over $280M total raised; Lilly collaboration (funding-scale basis)"
+    market_share: null
+    sources:
+      - "https://www.businesswire.com/news/home/20230821419353/en/Genesis-Therapeutics-Closes-Oversubscribed-$200-Million-Series-B"
+      - "https://www.businesswire.com/news/home/20241211899517/en/Genesis-Therapeutics-Expands-Leadership-Team-with-Appointments-of-Chief-Scientific-Officer-SVP-of-Engineering-and-Board-Chairman"
+      - "https://www.linkedin.com/in/evanfeinberg"
+      - "https://www.crunchbase.com/organization/genesis-therapeutics"
+  - id: gleamer
+    name: Gleamer
+    categories: [imaging-ai-deployment]
+    deployment_models: [software-as-a-service, on-premises, hybrid]
+    confidence: B
+    source: "https://www.mobihealthnews.com/news/gleamer-scores-fda-510k-ai-enabled-fracture-detection"
+    headquarters: "Paris, France"
+    founded: 2017
+    leadership: "Christian Allouche, Co-Founder & CEO"
+    history: "Gleamer is a Paris-based radiology AI company founded in 2017 by Christian Allouche, Alexis Ducarouge and Dr Nor-Eddine Regnard. Its flagship BoneView product was among the first FDA/CE-cleared fracture-detection AI tools, its solutions are deployed in 2,000+ institutions across ~40 countries, and it distributes partly via Bayer's Calantic platform. In March 2026 Gleamer was acquired by RadNet for up to ~$269.3M (€230M) and integrated into RadNet's DeepHealth clinical-AI subsidiary."
+    market_position: "Fracture/bone-detection leader (BoneView): first FDA/CE-cleared fracture-detection AI; used by 3,500+ radiologists/emergency physicians across 300+ institutions in 30+ countries, ~7M images/year; distributed via Bayer's Calantic platform."
+    market_share: null
+    sources:
+      - "https://www.mobihealthnews.com/news/gleamer-scores-fda-510k-ai-enabled-fracture-detection"
+      - "https://www.gleamer.ai/company"
+      - "https://www.radnet.com/about-radnet/news/radnet-acquires-gleamer-making-radnet-s-deephealth-the-largest-provider-of-radiology-clinical-ai-solutions-worldwide"
+      - "https://www.crunchbase.com/organization/gleamer"
   - id: golden-helix
     name: Golden Helix
     categories: [clinical-genomics-reporting]
@@ -1375,6 +1921,22 @@ vendors:
       - "https://www.bozemandailychronicle.com/news/economy/golden-helix-brings-in-new-ceo/article_4b278d9a-b2e2-11e2-b25b-0019bb2963f4.html"
       - "https://www.linkedin.com/in/scherer/"
       - "https://www.cbinsights.com/company/golden-helix"
+  - id: google
+    name: Google (MedLM / Med-PaLM on Vertex AI)
+    categories: [healthcare-llm-serving]
+    deployment_models: [public-cloud, software-as-a-service]
+    confidence: B
+    source: "https://www.fiercehealthcare.com/ai-and-machine-learning/google-unveils-medlm-generative-ai-models-healthcare-hca-augmedix-and"
+    headquarters: "Mountain View, California, USA"
+    founded: 1998
+    leadership: "Sundar Pichai, CEO of Google and Alphabet"
+    history: "Google (a subsidiary of Alphabet Inc., founded 1998) offers MedLM, a family of healthcare-tuned foundation models built on Med-PaLM 2 and Gemini, made generally available to US Google Cloud customers via Vertex AI in December 2023. Early adopters include HCA Healthcare, Augmedix, BenchSci and Deloitte."
+    market_position: "Named key player (Google Cloud / DeepMind) in the healthcare-LLM market; MedLM foundation models (built on Med-PaLM 2 / Gemini) available to US Google Cloud customers via Vertex AI, with early adopters HCA Healthcare, Augmedix, BenchSci, Deloitte. Sourced leadership position; no published healthcare-LLM share or installed-base number."
+    market_share: null
+    sources:
+      - "https://www.fiercehealthcare.com/ai-and-machine-learning/google-unveils-medlm-generative-ai-models-healthcare-hca-augmedix-and"
+      - "https://en.wikipedia.org/wiki/Sundar_Pichai"
+      - "https://cloud.google.com/vertex-ai"
   - id: green-hills-software
     name: Green Hills Software (INTEGRITY)
     categories: [samd-embedded-oem-platform]
@@ -1391,6 +1953,23 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Green_Hills_Software"
       - "https://www.ghs.com/corporate/management_team.html"
+  - id: greenway
+    name: Greenway Health
+    categories: [ehr-emr-core]
+    deployment_models: [on-premises, software-as-a-service, private-cloud, vendor-managed]
+    confidence: B
+    source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+    headquarters: "Tampa, Florida, USA"
+    founded: 1998
+    leadership: "Pratap Sarker, CEO"
+    history: "Greenway Health is a Tampa, Florida-based ambulatory health-IT vendor providing integrated EHR, practice-management and revenue-cycle software (Intergy, Prime Suite). It was formed in 2013 through the merger of Greenway Medical Technologies (founded 1998, Carrollton, GA) with Vitera Healthcare Solutions; Pratap Sarker became CEO effective January 1, 2022, succeeding Richard Atkin, and remains CEO as of 2026."
+    market_position: "US ambulatory EHR top-10: ~2.2% market share, 1,846 installations (Definitive Healthcare, Oct 2025)"
+    market_share: null
+    sources:
+      - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+      - "https://www.greenwayhealth.com/news/greenway-health-names-pratap-sarker-chief-executive-officer"
+      - "https://en.wikipedia.org/wiki/Greenway_Health"
+      - "https://craft.co/greenway-health/executives"
   - id: hamamatsu-photonics
     name: Hamamatsu Photonics
     categories: [digital-pathology]
@@ -1457,6 +2036,23 @@ vendors:
     sources:
       - "https://www.healthstream.com/about"
       - "https://ir.healthstream.com/management/robert-frist"
+  - id: heartflow
+    name: HeartFlow
+    categories: [imaging-ai-deployment]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://xtalks.com/heartflow-closes-364m-ipo-for-ai-driven-cardiac-imaging-4376/"
+    headquarters: "Mountain View, California, USA"
+    founded: 2007
+    leadership: "John Farquhar, President & CEO"
+    history: "HeartFlow is a cardiovascular precision-medicine company whose FFRCT Analysis builds a personalized 3D coronary model from CT angiography to non-invasively assess coronary artery disease. Founded in 2007 as a Stanford University spinout (Charles Taylor and Christopher Zarins). Completed a ~$364M IPO on Nasdaq (HTFL) in August 2025; John Farquhar has been President & CEO since 2022."
+    market_position: "Leading cardiac FFR-CT AI: platform used to assess coronary artery disease in 400,000+ patients (132,000 in 2024 alone); completed ~$364.2M Nasdaq IPO (HTFL) Aug 2025."
+    market_share: null
+    sources:
+      - "https://xtalks.com/heartflow-closes-364m-ipo-for-ai-driven-cardiac-imaging-4376/"
+      - "https://ir.heartflow.com/news-releases/news-release-details/heartflow-announces-ceo-transition"
+      - "https://www.heartflow.com/about/"
+      - "https://theorg.com/org/heartflow/org-chart/john-farquhar"
   - id: hewlett-packard-enterprise
     name: Hewlett Packard Enterprise Company
     categories: [ai-hpc-orchestration]
@@ -1523,6 +2119,42 @@ vendors:
       - "https://www.hyland.com/en/solutions/products/acuo"
       - "https://en.wikipedia.org/wiki/Hyland_Software"
       - "https://www.hyland.com/en/company/about/exec-team"
+  - id: iambic-therapeutics
+    name: Iambic Therapeutics
+    categories: [ai-drug-discovery]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.iambic.ai/post/iambic-raises-over-100-million"
+    headquarters: "San Diego, California, USA"
+    founded: 2020
+    leadership: "Thomas (Tom) Miller, Co-Founder & CEO"
+    history: "Iambic Therapeutics (originally Entos), launched in 2020 and based in San Diego, was co-founded by former Caltech chemistry professor Tom Miller and longtime collaborator Fred Manby. Its GEMS generative-AI platform drives an oncology pipeline led by IAM1363 (HER2), plus KIF18A and CDK2/4 programs; it has raised over $330M across multiple rounds (investors including ARK, Regeneron, Sequoia, Illumina Ventures) and collaborates with NVIDIA."
+    market_position: "AI-discovered oncology pipeline (lead IAM1363, HER2; plus KIF18A and CDK2/4 programs): raised >$100M in an oversubscribed round Nov 10 2025 (ARK, Regeneron, Sequoia, Illumina Ventures); NVIDIA collaboration (funding-scale basis)"
+    market_share: null
+    sources:
+      - "https://www.iambic.ai/post/iambic-raises-over-100-million"
+      - "https://www.linkedin.com/in/thomas-miller-322a8521"
+      - "https://www.cnbc.com/2025/06/10/iambic-therapeutics-cnbc-disruptor-50.html"
+      - "https://www.sdbj.com/life-sciences/biotech-life-sciences/iambic-nets-100m-series-b/"
+      - "https://www.iambic.ai/post/jp-morgan-2026"
+  - id: ibex-analytics
+    name: Ibex Medical Analytics (Galen)
+    categories: [digital-pathology]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.businesswire.com/news/home/20250210014120/en/Ibex-Medical-Analytics-Receives-First-FDA-510k-Clearance"
+    headquarters: "Tel Aviv, Israel"
+    founded: 2016
+    leadership: "Yair Heller, CEO"
+    history: "Founded in 2016 in Tel Aviv by Joseph Mossel and Chaim Linhart, Ibex Medical Analytics develops the Galen AI platform for cancer diagnosis in pathology (prostate, breast, gastric biopsies), with algorithms in routine clinical use across labs in the US and Europe. Effective February 18, 2026, former COO Yair Heller was appointed CEO while co-founder Joseph Mossel moved to lead the company's expanding biopharma division."
+    market_position: "First FDA 510(k) clearance for Ibex Prostate Detect (Feb 2025, formerly Galen Second Read); Galen Prostate/Breast/Gastric in routine clinical use across US and European labs. Sourced regulatory/clinical-deployment position, no global count published."
+    market_share: null
+    sources:
+      - "https://www.businesswire.com/news/home/20250210014120/en/Ibex-Medical-Analytics-Receives-First-FDA-510k-Clearance"
+      - "https://www.businesswire.com/news/home/20260218360512/en/Ibex-Medical-Analytics-Accelerates-Global-Momentum-in-AI-Powered-Pathology-with-Strategic-Leadership-Transition-and-Expansion-in-Biopharma"
+      - "https://ibex-ai.com/pr-global-momentum-2026/"
+      - "https://ibex-ai.com/about/"
+      - "https://www.timesofisrael.com/israeli-startup-ibex-medical-aims-to-transform-cancer-diagnostics-with-ai-tech/"
   - id: ibm
     name: IBM Corporation
     categories: [ai-hpc-orchestration]
@@ -1653,6 +2285,40 @@ vendors:
       - "https://en.wikipedia.org/wiki/Innovaccer"
       - "https://innovaccer.com/about"
       - "https://www.crunchbase.com/person/abhinav-shashank"
+  - id: insilico-medicine
+    name: Insilico Medicine
+    categories: [ai-drug-discovery]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: A
+    source: "https://pharmaphorum.com/news/insilico-ends-2025-293m-hong-kong-ipo"
+    headquarters: "Hong Kong (founded in the US; Boston R&D)"
+    founded: 2014
+    leadership: "Alex Zhavoronkov, PhD, Founder & CEO"
+    history: "Founded in 2014 (originally in the US) by Alex Zhavoronkov, Insilico Medicine is a generative-AI drug-discovery company built on its Pharma.AI platform (PandaOmics target discovery, Chemistry42 generative chemistry) plus a robotics lab. It listed on the Hong Kong Stock Exchange (3696) on Dec 30, 2025 in the largest HK biotech IPO of the year (~HK$2.28B / ~US$293M raised), with a first-day open valuing it near US$2.5B; partnerships include Lilly, Sanofi and Menarini."
+    market_position: "Public generative-AI drug discovery (HKEX 3696): 2025's largest Hong Kong biotech IPO — HK$2.28B (~US$293M) Dec 30 2025, ~HK$16.7B (~US$2.1B) debut market cap; Lilly/Sanofi/Menarini partnerships (market-cap / IPO-scale basis)"
+    market_share: null
+    sources:
+      - "https://pharmaphorum.com/news/insilico-ends-2025-293m-hong-kong-ipo"
+      - "https://insilico.com/team"
+      - "https://en.wikipedia.org/wiki/Insilico_Medicine"
+      - "https://insilico.com/news/p010170up1-insilico-medicine-lists-on-hong-kong-sto"
+      - "https://www.cooley.com/news/coverage/2025/2025-12-30-insilico-medicine-announces-hk$2-28-billion-ipo"
+  - id: insitro
+    name: Insitro
+    categories: [ai-drug-discovery]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.fiercebiotech.com/medtech/insitro-raises-400m-for-machine-learning-powered-drug-discovery-efforts"
+    headquarters: "South San Francisco, California, USA"
+    founded: 2018
+    leadership: "Daphne Koller, Founder & CEO"
+    history: "Insitro is a South San Francisco machine-learning drug discovery and development company founded in 2018 by Daphne Koller (Stanford professor and Coursera co-founder). It combines ML with high-throughput biology and human genetics to discover therapeutics, has raised over $643M across Series A–C (including a $400M 2021 Series C led by CPP Investments), and holds pharma collaborations. It develops drug candidates internally rather than selling deployable software."
+    market_position: "Private ML + human-genetics drug discovery: ~$643M raised across Series A–C, including a $400M Series C (Mar 2021, led by CPP Investments); founded by Daphne Koller (funding-scale basis; valuation not disclosed)"
+    market_share: null
+    sources:
+      - "https://www.fiercebiotech.com/medtech/insitro-raises-400m-for-machine-learning-powered-drug-discovery-efforts"
+      - "https://www.insitro.com/leadership/daphne-koller/"
+      - "https://www.statnews.com/2024/01/07/jpm-2024-insitro-biotech-ai-drug-development-cancer-als-liver-disease/"
   - id: intelerad
     name: Intelerad Medical Systems (GE HealthCare)
     categories: [pacs-vna]
@@ -1719,6 +2385,21 @@ vendors:
       - "https://www.barchart.com/story/news/41527/iqvia-reports-fourth-quarter-and-full-year-2025-results-issues-full-year-2026-guidance"
       - "https://ir.iqvia.com/governance/board-of-directors/default.aspx"
       - "https://pharmaboardroom.com/articles/top-10-cros-in-2024/"
+  - id: isomorphic-labs
+    name: Isomorphic Labs
+    categories: [ai-drug-discovery]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.fiercebiotech.com/biotech/alphabets-ai-biotech-isomorphic-labs-bags-21b-series-b-fuel-next-gen-drug-design-model"
+    headquarters: "London, England, United Kingdom"
+    founded: 2021
+    leadership: "Demis Hassabis, Founder & CEO"
+    history: "Isomorphic Labs is an AI drug-discovery company incorporated in February 2021 and announced November 2021 as an Alphabet spin-out from Google DeepMind, led by founder and CEO Demis Hassabis. Building on AlphaFold, it develops AI models for drug design and has partnerships with Eli Lilly, Novartis and Johnson & Johnson. It raised a first external round of $600M (led by Thrive Capital) in March 2025, followed in 2026 by a $2.1B Series B led by Thrive Capital with Alphabet, GV, MGX, Temasek and others."
+    market_position: "Best-capitalized pure-play (no product revenue disclosed — funding/deal-value basis): $2.1B Series B closed May 12 2026 (Thrive Capital-led; Alphabet, GV, Temasek) — largest AI-drug-discovery raise on record; DeepMind spinout with Lilly, Novartis and J&J partnerships"
+    market_share: null
+    sources:
+      - "https://www.fiercebiotech.com/biotech/alphabets-ai-biotech-isomorphic-labs-bags-21b-series-b-fuel-next-gen-drug-design-model"
+      - "https://en.wikipedia.org/wiki/Isomorphic_Labs"
   - id: john-snow-labs
     name: John Snow Labs
     categories: [healthcare-llm-serving]
@@ -1798,6 +2479,23 @@ vendors:
       - "https://en.wikipedia.org/wiki/Keyence"
       - "https://pitchbook.com/profiles/company/60413-68"
       - "https://www.keyence.com/about-us/corporate/"
+  - id: klara
+    name: Klara (ModMed)
+    categories: [patient-portal-engagement]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.klara.com/"
+    headquarters: "New York, New York, USA"
+    founded: 2013
+    leadership: "Daniel Cane, Co-Founder & Co-CEO of ModMed (parent company)"
+    history: "Klara is a conversational patient-communication and collaboration platform founded in 2013 in New York City. It was acquired in February 2022 by Modernizing Medicine (ModMed), the Boca Raton, Florida specialty-EHR vendor co-founded in 2010 by Daniel Cane and Dr. Michael Sherling; since January 2025 ModMed has been led by co-CEOs Daniel Cane and Joe Harpaz. Klara now operates as a ModMed product used by healthcare teams across 40+ specialties."
+    market_position: "Conversational patient-communication platform, part of ModMed, used by healthcare teams across 40+ specialties — qualitative vendor position; no hard market-share or installed-base number available."
+    market_share: null
+    sources:
+      - "https://www.klara.com/"
+      - "https://www.modmed.com/who-we-are/leadership/"
+      - "https://www.modmed.com/press-release/modmed-acquires-maker-of-the-klara-practice-patient-collaboration-platform/"
+      - "https://refreshmiami.com/news/healthtech-pioneer-modmed-puts-co-ceos-at-the-helm/"
   - id: koerber
     name: Körber AG (Körber Pharma / Werum)
     categories: [automated-visual-inspection, mes-ebr, warehouse-cold-chain]
@@ -1914,6 +2612,22 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/LabVantage"
       - "https://www.labvantage.com/who-we-are/leadership/"
+  - id: labvantage-solutions
+    name: LabVantage Solutions
+    categories: [lis]
+    deployment_models: [on-premises, private-cloud, software-as-a-service]
+    confidence: B
+    source: "https://www.fortunebusinessinsights.com/laboratory-information-management-system-lims--114329"
+    headquarters: "Somerset, New Jersey, USA"
+    founded: 1981
+    leadership: "Mikael Hagström, CEO"
+    history: "LabVantage Solutions is a Somerset, New Jersey-based provider of laboratory information management systems (LIMS) with roots dating to 1981. It offers an integrated LIMS/ELN/LES analytics platform and is consistently ranked among the largest global LIMS suppliers (often cited as the third-largest). Mikael Hagström, a digital-transformation veteran formerly of SAS Institute, McKinsey and MetricStream, has been CEO since 2021."
+    market_position: "Sourced leadership position (no clean single %): named among the dominating global LIMS suppliers by the Fortune Business Insights LIMS report, and listed (as LabVantage Medical Suite) among leading LIS/pathology vendors in NovoPath's 2026 top-LIS list."
+    market_share: null
+    sources:
+      - "https://www.fortunebusinessinsights.com/laboratory-information-management-system-lims--114329"
+      - "https://www.businesswire.com/news/home/20210325005048/en/LabVantage-Solutions-Names-Digital-Transformation-Veteran-Mikael-Hagstroem-as-Chief-Executive-Officer"
+      - "https://en.wikipedia.org/wiki/LabVantage"
   - id: labware
     name: LabWare, Inc.
     categories: [qc-lims-cds, rd-lab-informatics]
@@ -2032,6 +2746,22 @@ vendors:
       - "https://www.crunchbase.com/organization/luma-health"
       - "https://pulse2.com/luma-health-profile-adnan-iqbal-interview/"
       - "https://www.lumahealth.io/about-us/"
+  - id: lunit
+    name: Lunit
+    categories: [imaging-ai-deployment]
+    deployment_models: [on-premises, software-as-a-service, hybrid]
+    confidence: B
+    source: "https://stockanalysis.com/quote/kosdaq/328130/"
+    headquarters: "Seoul, South Korea"
+    founded: 2013
+    leadership: "Beomseok (Brandon) Suh, CEO"
+    history: "Lunit is a South Korean medical AI company founded in 2013 (spun out of KAIST) that develops cancer-detection and precision-oncology software, notably Lunit INSIGHT for radiology and Lunit SCOPE for pathology. It listed on the KOSDAQ (328130) in 2022 and acquired New Zealand-based breast-imaging AI company Volpara Health in 2024. Prior CEO and co-founder Anthony Paek moved to Executive Chairman when Brandon Suh became CEO in October 2025."
+    market_position: "Lunit INSIGHT (chest X-ray, mammography) used in 4,800+ medical institutions across 55+ countries; KOSDAQ-listed (328130) with audited 2024 revenue of KRW 54.2B (+116% YoY, ~88% overseas) — rare public financial evidence in this segment."
+    market_share: null
+    sources:
+      - "https://stockanalysis.com/quote/kosdaq/328130/"
+      - "https://www.lunit.io/en/media-hub/announcing-brandon-suh-our-new-ceo/"
+      - "https://en.wikipedia.org/wiki/Lunit"
   - id: manhattan-associates
     name: Manhattan Associates, Inc.
     categories: [warehouse-cold-chain]
@@ -2082,6 +2812,22 @@ vendors:
       - "https://www.matrixscience.com/about.html"
       - "https://www.matrixscience.com/blog/25-years-of-matrix-science.html"
       - "https://finance.yahoo.com/news/matrix-science-introduces-mascot-r-100000794.html"
+  - id: mckesson
+    name: McKesson (EnterpriseRx, Supplylogix)
+    categories: [pharmacy-automation]
+    deployment_models: [software-as-a-service, private-cloud]
+    confidence: B
+    source: "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
+    headquarters: "Irving, Texas, USA"
+    founded: 1833
+    leadership: "Brian S. Tyler, CEO"
+    history: "McKesson Corporation is an Irving, Texas-based healthcare services and pharmaceutical distribution company founded in 1833 in New York City, and a Fortune top-10 company. Its pharmacy technology portfolio includes the EnterpriseRx pharmacy management system and Supplylogix inventory/prescription analytics for retail and central-fill pharmacies. Brian S. Tyler has been CEO since April 2019 and also became Chairman in May 2026."
+    market_position: "Named by Mordor Intelligence among the five suppliers (Omnicell, BD, Baxter, McKesson, Swisslog) that together control ~60% of pharmacy-automation market revenue; positioned in pharmacy workflow / medication management software."
+    market_share: null
+    sources:
+      - "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
+      - "https://www.mckesson.com/about-us/leadership/brian-tyler/"
+      - "https://www.mckesson.com/about-us/corporate-governance/board-of-directors/brian-tyler/"
   - id: medical-informatics-corp
     name: Medical Informatics Corp (Sickbay)
     categories: [icu-central-monitoring]
@@ -2152,6 +2898,22 @@ vendors:
       - "https://www.beckershospitalreview.com/ehrs/meet-the-c-suite-of-meditech-15-execs-to-know.html"
       - "https://www.healthcareitnews.com/news/meditech-founder-neil-pappalardo-dies-83"
       - "https://hitconsultant.net/2025/05/05/klas-epic-dominates-2024-ehr-market-share/"
+  - id: meditech-expanse-laboratory
+    name: MEDITECH — Expanse Laboratory
+    categories: [lis]
+    deployment_models: [on-premises, private-cloud, vendor-managed, hybrid]
+    confidence: B
+    source: "https://www.novopath.com/resources/blog/top-lis-companies/"
+    headquarters: "Westwood, Massachusetts, USA"
+    founded: 1969
+    leadership: "Michelle O'Connor, President & CEO"
+    history: "MEDITECH (Medical Information Technology, Inc.), founded in 1969 by Neil Pappalardo and headquartered in Westwood, Massachusetts, is one of the oldest US EHR vendors. Its current-generation web-based platform Expanse — including Expanse Laboratory — is used by hospitals and health systems in the US and internationally, and is also offered as a Google Cloud-hosted managed service (MEDITECH-as-a-Service). Michelle O'Connor was named president and CEO in 2021."
+    market_position: "Sourced leadership position (no clean LIS %): MEDITECH is a major US acute-care EHR whose Expanse lab/pathology solution is named among leading LIS options for hospitals running Expanse in NovoPath's 2026 top-LIS list."
+    market_share: null
+    sources:
+      - "https://www.novopath.com/resources/blog/top-lis-companies/"
+      - "https://ehr.meditech.com/about/executive/michelle-oconnor"
+      - "https://en.wikipedia.org/wiki/Meditech"
   - id: medtronic
     name: Medtronic
     categories: [or-surgical-video]
@@ -2300,6 +3062,39 @@ vendors:
       - "https://medinsight.com/healthcare-data-analytics-about/press-releases/milliman-medinsight-integrates-ai-and-next-generation-analytics-to-strengthen-value-based-care-decision-making/"
       - "https://www.linkedin.com/company/milliman-medinsight"
       - "https://medinsight.com/healthcare-data-analytics-about/leadership-team/"
+  - id: mindpeak
+    name: Mindpeak
+    categories: [digital-pathology]
+    deployment_models: [software-as-a-service, on-premises, hybrid]
+    confidence: B
+    source: "https://www.mindpeak.ai/for-diagnostic-labs"
+    headquarters: "Hamburg, Germany"
+    founded: 2018
+    leadership: "Felix Faber, Co-Founder & CEO"
+    history: "Mindpeak (Mindpeak GmbH), founded in 2018 in Hamburg by Felix Faber (CEO) and Dr. Tobias Lang (CTO), develops CE-IVD-marked AI software for the detection, quantification and classification of cancer in digital pathology (breast HER2/ER/PR/Ki-67, lung PD-L1). It raised a $15.3M Series A in September 2024 (led by ZEISS Ventures and InnoVentureFund) and distributes its products via partner platforms including PathAI and Pathomation."
+    market_position: "Portfolio of CE-IVD-marked AI products (breast HER2/ER/PR/Ki-67, lung PD-L1) in clinical routine diagnostics; distributed via PathAI and Pathomation platforms. Product-portfolio/clinical-use leadership; no public deployment count."
+    market_share: null
+    sources:
+      - "https://www.mindpeak.ai/for-diagnostic-labs"
+      - "https://www.mindpeak.ai/our-company"
+      - "https://www.businesswire.com/news/home/20240929105180/en/Mindpeak-secures-%2415.3M-in-series-A-funding-to-accelerate-growth-in-AI-based-digital-pathology"
+  - id: modmed
+    name: ModMed (Modernizing Medicine)
+    categories: [ehr-emr-core]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+    headquarters: "Boca Raton, Florida"
+    founded: 2010
+    leadership: "Daniel Cane, Co-founder & Co-CEO (with Joe Harpaz, Co-CEO)"
+    history: "Founded in 2010 in Boca Raton, Florida by Daniel Cane and dermatologist Dr. Michael Sherling, ModMed makes specialty-specific cloud EHR and practice-management software (dermatology, ophthalmology, orthopedics, GI, plastics, urology). It ranks among the top US ambulatory EHRs and moved to a co-CEO leadership structure (Cane and Joe Harpaz) in February 2024."
+    market_position: "#6 US ambulatory EHR: ~3.6% market share, 2,987 installations (Definitive Healthcare, Oct 2025); specialty-focused leader (derm, ophthalmology, ortho, GI)"
+    market_share: null
+    sources:
+      - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+      - "https://www.modmed.com/who-we-are/leadership/"
+      - "https://en.wikipedia.org/wiki/Modernizing_Medicine"
+      - "https://www.businesswire.com/news/home/20240213294112/en/ModMed-Appoints-Joe-Harpaz-as-Co-CEO"
   - id: moodys-analytics
     name: Moody's (Moody's Analytics — RMS, AXIS)
     categories: [payer-actuarial-hpc]
@@ -2317,6 +3112,72 @@ vendors:
       - "https://www.artemis.bm/news/rms-sold-to-moodys-2-billion/"
       - "https://www.lexpert.ca/big-deals/moodys-analytics-acquires-ggy/350440"
       - "https://www.moodys.com/web/en/us/about-us/leadership/robert-fauber.html"
+  - id: nabla
+    name: Nabla
+    categories: [cdss-clinical-ai]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.prnewswire.com/news-releases/nabla-raises-70m-series-c-to-deliver-agentic-ai-to-the-heart-of-clinical-workflows-bringing-total-funding-to-120m-302483646.html"
+    headquarters: "Paris, France"
+    founded: 2018
+    leadership: "Brian Manning, CEO"
+    history: "Nabla is a Paris-based health-tech company founded in 2018 by Alexandre Lebrun, Delphine Groll, and Martin Raison. It builds an ambient AI assistant (Nabla Copilot) that generates real-time structured clinical notes from patient encounters and integrates with EHRs. In 2025 it raised a $70M Series C, bringing total funding to $120M, with 130+ healthcare organizations and 85,000 clinicians. In July 2026 co-founder Alexandre Lebrun transitioned to Executive Chairman & Chief AI Officer and Brian Manning (formerly of Bamboo Health) was appointed CEO."
+    market_position: "No published market-share % (part of the ~24% long tail behind the top 3). Sourced installed-base position: company-reported 130+ healthcare organizations and 85,000 clinicians (Series C release, 2025). KLAS-validated ambient vendor."
+    market_share: null
+    sources:
+      - "https://www.prnewswire.com/news-releases/nabla-raises-70m-series-c-to-deliver-agentic-ai-to-the-heart-of-clinical-workflows-bringing-total-funding-to-120m-302483646.html"
+      - "https://nabla.com/press-release/nabla-appoints-brian-manning-as-chief-executive-officer-to-lead-next-phase-of-growth"
+      - "https://cathayinnovation.com/cathay-innovation-leads-24m-series-b-in-nabla-the-leading-ambient-ai-assistant-for-healthcare-practitioners/"
+      - "https://hitconsultant.net/2026/07/21/nabla-appoints-brian-manning-ceo-contextual-clinical-ai/"
+  - id: nanox-ai
+    name: Nanox.AI (Zebra Medical Vision)
+    categories: [imaging-ai-deployment]
+    deployment_models: [on-premises, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.mobihealthnews.com/news/digital-x-ray-company-nanox-scoops-ai-developer-zebra-medical-vision"
+    headquarters: "Petah Tikva, Israel"
+    founded: 2014
+    leadership: "Erez Meltzer, CEO (Nano-X Imaging, parent)"
+    history: "Founded in 2014 as Zebra Medical Vision, an Israeli imaging-AI company known for opportunistic-screening algorithms (cardiac, bone-density, fatty-liver). Acquired by Nano-X Imaging (Nasdaq: NNOX) in November 2021 for ~$100M and rebranded Nanox.AI, becoming the AI division of the group; carries multiple FDA clearances and an installed base of ~1,100 customers inherited from Zebra."
+    market_position: "Opportunistic-screening imaging AI (cardiac, bone, fatty-liver) with 8 FDA clearances; Zebra installed base of ~1,100 customers (hospitals/institutes/universities) across the U.S., Europe, Australia, LATAM and India; part of Nasdaq-listed Nanox (NNOX). REVISED: replaced marketing-blog citation with the acquisition disclosure of the ~1,100-customer installed base."
+    market_share: null
+    sources:
+      - "https://www.mobihealthnews.com/news/digital-x-ray-company-nanox-scoops-ai-developer-zebra-medical-vision"
+      - "https://investors.nanox.vision/management-team"
+      - "https://www.nanox.vision/about/"
+      - "https://en.wikipedia.org/wiki/Zebra_Medical_Vision"
+  - id: netsmart
+    name: Netsmart
+    categories: [ehr-emr-core]
+    deployment_models: [software-as-a-service, private-cloud, public-cloud, on-premises]
+    confidence: B
+    source: "https://www.ntst.com/company/news/news-release-netsmart-is-first-and-only-behavioral-health-ehr-to-attain-onc-health-it-certification"
+    headquarters: "Overland Park, Kansas, USA"
+    founded: 1968
+    leadership: "Michael (Mike) Valentine, CEO (since 2011)"
+    history: "Netsmart, with roots dating to 1968, is a leading EHR and health-IT provider for behavioral health, human services, and post-acute/home care. It was the first behavioral-health EHR to attain ONC Health IT certification, has grown via multiple acquisitions under CEO Mike Valentine (formerly Cerner COO), and is backed by private-equity owners including GI Partners and TA Associates."
+    market_position: "Leading behavioral-health and human-services EHR; first behavioral-health EHR to attain ONC Health IT certification (segment leadership position, no public share %)"
+    market_share: null
+    sources:
+      - "https://www.ntst.com/company/news/news-release-netsmart-is-first-and-only-behavioral-health-ehr-to-attain-onc-health-it-certification"
+      - "https://www.ntst.com/company/about-us/leadership/mike-valentine"
+      - "https://en.wikipedia.org/wiki/Netsmart_Technologies"
+  - id: nextech
+    name: Nextech Systems
+    categories: [ehr-emr-core]
+    deployment_models: [software-as-a-service, on-premises]
+    confidence: B
+    source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+    headquarters: "Tampa, Florida, USA"
+    founded: 1997
+    leadership: "Rusty Frantz, CEO"
+    history: "Nextech Systems is a Tampa, Florida specialty-focused EHR and practice-management software vendor founded in 1997, serving ophthalmology, dermatology, plastic surgery, orthopedics and other specialties with ONC-certified EHR, practice management, revenue management and patient engagement software. Rusty Frantz (former NextGen Healthcare CEO) was appointed CEO in June 2024. It has been recognized as a Best in KLAS ambulatory specialty EHR."
+    market_position: "#9 US ambulatory EHR: ~2.3% market share, 1,892 installations (Definitive Healthcare, Oct 2025); Best in KLAS Ambulatory Specialty EHR (derm/ophthalmology)"
+    market_share: null
+    sources:
+      - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+      - "https://www.nextech.com/press-releases/nextech-announces-new-leadership"
+      - "https://www.nextech.com/leadership"
   - id: nextgen-healthcare
     name: NextGen Healthcare (Mirth Connect)
     categories: [hie-interoperability-engine]
@@ -2351,6 +3212,38 @@ vendors:
       - "https://www.technologynetworks.com/proteomics/news/waters-acquires-nonlinear-dynamics-213840"
       - "https://www.chromatographyonline.com/view/waters-acquires-proteomics-software-development-company"
       - "https://www.waters.com/nextgen/us/en/about-waters/leadership.html (confirmed current 2026 via CNBC interview May 2026, https://www.cnbc.com/video/2026/05/05/waters-corp-ceo-udit-batra-goes-one-on-one-with-jim-cramer.html)"
+  - id: notable
+    name: Notable
+    categories: [patient-portal-engagement]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.beckershospitalreview.com/healthcare-information-technology/ai/10-ai-vendors-gaining-traction-with-health-systems/"
+    headquarters: "San Mateo, California, USA"
+    founded: 2017
+    leadership: "Pranay Kapadia, Co-Founder & CEO"
+    history: "Notable was founded in 2017 by Pranay Kapadia (previously at Blend and Intuit) and co-founders to build an AI-native healthcare-automation platform that streamlines administrative workflows such as scheduling, intake, and referrals. The company reports deployment across 12,000+ sites of care and tens of millions of patients, and is backed by investors including Greylock and ICONIQ."
+    market_position: "AI-native healthcare automation vendor (scheduling, intake, referrals); company-reported deployment across 10,000+ sites of care and 1M+ daily workflows — self-reported, NOT an independent market-share figure; cited among AI vendors gaining traction with health systems. (Beckers source could not be independently re-verified.)"
+    market_share: null
+    sources:
+      - "https://www.beckershospitalreview.com/healthcare-information-technology/ai/10-ai-vendors-gaining-traction-with-health-systems/"
+      - "https://www.notablehealth.com/about-us"
+      - "https://theorg.com/org/notablehealth/org-chart/pranay-kapadia"
+  - id: nucleai
+    name: Nucleai
+    categories: [clinical-genomics-reporting]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://nucleai.ai/mercks-corporate-venture-m-ventures-arm-backs-nucleai-to-advance-its-first-in-class-spatial-ai-biomarker-in-active-clinical-enrollment/"
+    headquarters: "Chicago, Illinois, USA (R&D in Tel Aviv, Israel)"
+    founded: 2017
+    leadership: "Avi Veidman, Co-Founder & CEO"
+    history: "Nucleai was founded in 2017 in Israel by Avi Veidman (a veteran of Israeli intelligence image-analysis units 9900/8200) and co-founder Lotan Chorev, applying spatial-biology AI that maps immune and cancer cells at single-cell resolution to discover predictive tissue biomarkers. It has raised roughly $60M across multiple rounds (including a $33M Series B) from backers such as Sanofi Ventures, M Ventures (Merck) and Section 32, and partners with 15+ biopharma companies plus Mayo Clinic."
+    market_position: "Spatial-biomarker / tissue-intelligence AI (spatial-omics adjacent, borderline to core genomics-ai); collaborations cited with 60%+ of top-20 biopharma; ~$50M total funding (Series B $33M; backers incl. Sanofi Ventures, M Ventures/Merck, Section 32). Vendor/PR-sourced leadership claim only; smallest scale of the set; no public market-share figure."
+    market_share: null
+    sources:
+      - "https://nucleai.ai/mercks-corporate-venture-m-ventures-arm-backs-nucleai-to-advance-its-first-in-class-spatial-ai-biomarker-in-active-clinical-enrollment/"
+      - "https://nucleai.ai/leadership/"
+      - "https://www.crunchbase.com/organization/nucleai"
   - id: nuvolo
     name: Nuvolo (Trane Technologies)
     categories: [healthcare-cmms]
@@ -2466,6 +3359,23 @@ vendors:
     sources:
       - "https://www.openclinica.com/resource/david-kay-named-ceo-as-openclinica-expands-leadership-team/"
       - "https://www.crunchbase.com/organization/akaza-research"
+  - id: openevidence
+    name: OpenEvidence
+    categories: [healthcare-llm-serving]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.beckershospitalreview.com/healthcare-information-technology/ai/openevidence-6-things-to-know-about-the-ai-tool-used-by-half-of-physicians/ ; https://www.cnbc.com/2026/01/21/openevidence-chatgpt-for-doctors-doubles-valuation-to-12-billion.html"
+    headquarters: "Miami, Florida, USA"
+    founded: 2022
+    leadership: "Daniel Nadler, Co-founder & CEO"
+    history: "OpenEvidence is an AI clinical decision-support / medical-information platform ('ChatGPT for doctors') that answers physician queries grounded in peer-reviewed literature, developed in collaboration with Mayo Clinic. Founded in 2022 by Daniel Nadler and Zachary Ziegler; used daily by a large share of US physicians and reached a $12B valuation in a Series D round in January 2026."
+    market_position: "Dominant installed base among US physicians: 757,000+ verified doctors registered and used daily by ~40% of US physicians across 10,000+ hospitals; billed as the fastest-growing application for physicians in history; ~$100M ARR reached by Jan 2026; valuation climbed $3.5B (Jul 2025) to $6B (Oct 2025) to $12B (Series D, Jan 2026). Genuine #1 by clinician installed base."
+    market_share: null
+    sources:
+      - "https://www.beckershospitalreview.com/healthcare-information-technology/ai/openevidence-6-things-to-know-about-the-ai-tool-used-by-half-of-physicians/ ; https://www.cnbc.com/2026/01/21/openevidence-chatgpt-for-doctors-doubles-valuation-to-12-billion.html"
+      - "https://www.forbes.com/sites/rashishrivastava/2026/01/21/openevidence-founder-doubles-his-wealth-as-medical-ai-startup-hits-12-billion-valuation/"
+      - "https://en.wikipedia.org/wiki/OpenEvidence"
+      - "https://www.cnbc.com/2026/01/21/openevidence-chatgpt-for-doctors-doubles-valuation-to-12-billion.html"
   - id: optel-group
     name: OPTEL Group
     categories: [automated-visual-inspection, serialization-track-trace]
@@ -2498,6 +3408,23 @@ vendors:
     market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Optum"
+  - id: optum-change
+    name: Optum / Change Healthcare (claims clearinghouse)
+    categories: [rcm-billing-claims]
+    deployment_models: [software-as-a-service, public-cloud, vendor-managed]
+    confidence: B
+    source: "https://www.ag.state.mn.us/Office/Communications/2022/02/24_UnitedHealthGroup.asp"
+    headquarters: "Eden Prairie, Minnesota, USA (Change Healthcare operations based in Nashville, Tennessee)"
+    founded: 2007
+    leadership: "Sandeep Dadlani, CEO of Optum Insight (the unit housing the Change Healthcare clearinghouse; appointed Sept 2025)"
+    history: "Change Healthcare (formerly Emdeon; renamed 2015, with the modern entity formed via a 2017 merger with McKesson's health-IT business) operated the largest US medical-claims clearinghouse, processing roughly half of all US medical claims. UnitedHealth's Optum acquired it in 2022 (~$13B) after antitrust litigation; the clearinghouse now sits within Optum Insight. It suffered a major ransomware attack in February 2024. Change Healthcare no longer exists as an independent company with its own CEO."
+    market_position: "Largest medical claims clearinghouse in the US; state/federal antitrust filings describe it processing roughly half of all US medical claims (~15B transactions/yr representing ~$1.5T in claims). Acquired by UnitedHealth/Optum, 2022."
+    market_share: null
+    sources:
+      - "https://www.ag.state.mn.us/Office/Communications/2022/02/24_UnitedHealthGroup.asp"
+      - "https://www.fiercehealthcare.com/health-tech/unitedhealth-taps-sandeep-dadlani-lead-optum-insight-unit"
+      - "https://www.healthcaredive.com/news/optum-insight-ceo-sandeep-dadlani/760714/"
+      - "https://en.wikipedia.org/wiki/Change_Healthcare"
   - id: oracle-health
     name: Oracle Health (Cerner)
     categories: [ehr-emr-core, hospital-erp, lis, patient-portal-engagement, rcm-billing-claims]
@@ -2598,6 +3525,22 @@ vendors:
       - "https://www.businesswire.com/news/home/20200320005137/en/Tech-Startup-Ovation.io-Launches-Effort-That-Could-Double-COVID-19-Testing-Capacity-Across-the-U.S."
       - "https://www.madrona.com/ff-ovation/"
       - "https://www.ovation.io/ovation-io-secures-5-million-series-a-funding/"
+  - id: owkin
+    name: Owkin (MSIntuit CRC)
+    categories: [digital-pathology]
+    deployment_models: [software-as-a-service, public-cloud, hybrid, on-premises]
+    confidence: B
+    source: "https://www.owkin.com/newsfeed/owkin-announces-msintuit-r-crc-v2-a-next-generation-ai-diagnostic-aimed-at-transforming-the-detection-and-treatment-of-colorectal-cancer"
+    headquarters: "New York, New York, USA (co-headquartered with Paris, France)"
+    founded: 2016
+    leadership: "Thomas Clozel, Co-Founder & CEO"
+    history: "Owkin was founded in 2016 in Paris by physician Thomas Clozel and AI researcher Gilles Wainrib, pioneering federated learning to build AI models across hospital and biopharma data without moving the data. It reached unicorn valuation, raised $300M+ from backers including Sanofi and Bristol Myers Squibb, and developed MSIntuit CRC, a CE-IVD-certified AI diagnostic detecting microsatellite instability in colorectal cancer, integrated on Roche navify Digital Pathology and Proscia Concentriq."
+    market_position: "CE-IVD-certified MSIntuit CRC MSI biomarker AI diagnostic, integrated on Roche navify Digital Pathology and Proscia Concentriq; $300M+ total funding from biopharma and VCs. Partnership/certification evidence, not a share figure."
+    market_share: null
+    sources:
+      - "https://www.owkin.com/newsfeed/owkin-announces-msintuit-r-crc-v2-a-next-generation-ai-diagnostic-aimed-at-transforming-the-detection-and-treatment-of-colorectal-cancer"
+      - "https://www.owkin.com/people"
+      - "https://en.wikipedia.org/wiki/Owkin"
   - id: paige-ai
     name: Paige (Tempus AI)
     categories: [digital-pathology]
@@ -2614,6 +3557,21 @@ vendors:
     sources:
       - "https://www.tempus.com/news/tempus-announces-the-acquisition-of-paige/"
       - "https://www.medtechdive.com/news/tempus-paige-buyout-acquisition-ai/758589/"
+  - id: parata
+    name: Parata Systems (retail/LTC pouch packaging & robotics; BD-owned since 2022)
+    categories: [pharmacy-automation]
+    deployment_models: [on-premises, edge]
+    confidence: B
+    source: "https://www.prnewswire.com/news-releases/bd-completes-acquisition-of-parata-systems-301587798.html"
+    headquarters: "Durham, North Carolina, USA"
+    founded: null
+    leadership: null
+    history: "Parata Systems, based in Durham, North Carolina, is a pharmacy-automation vendor known for pouch-packaging and robotic prescription-dispensing systems plus perpetual-inventory software for retail, hospital and long-term-care pharmacies. It was acquired by Becton, Dickinson and Company (BD) for $1.525B cash, completed July 2022, and now operates within BD's medication-management business rather than as an independent company (exact founding year not reliably sourced)."
+    market_position: "Acquired by BD for confirmed $1.525B cash (completed July 2022), giving BD entry to a ~$600M retail/hospital/LTC pharmacy-automation software+technology segment; leader in the pouch-packaging/central-fill niche. Also listed by Mordor Intelligence among top named pharmacy-automation companies. Note: now a BD subsidiary (see rank 1)."
+    market_share: null
+    sources:
+      - "https://www.prnewswire.com/news-releases/bd-completes-acquisition-of-parata-systems-301587798.html"
+      - "https://www.massdevice.com/bd-completes-parata-systems-acquisition/"
   - id: pathai
     name: PathAI
     categories: [digital-pathology]
@@ -2717,6 +3675,23 @@ vendors:
       - "https://www.plexishealth.com/about/leadership-team/"
       - "https://www.newswire.com/news/plexis-celebrates-25-years-of-empowering-healthcare-payer-businesses-21456807"
       - "https://www.pr.com/press-release/844434"
+  - id: premier
+    name: Premier, Inc. (GPO + supply chain services)
+    categories: [hospital-erp]
+    deployment_models: [software-as-a-service, vendor-managed]
+    confidence: B
+    source: "https://www.sec.gov/Archives/edgar/data/1577916/000119312525005690/d870188dex991.htm"
+    headquarters: "Charlotte, North Carolina, USA"
+    founded: 2013
+    leadership: "Emad Rizk, M.D., CEO, President & Chairman"
+    history: "Premier, Inc. is a Charlotte, North Carolina healthcare improvement company and group purchasing organization (GPO) whose alliance traces to a 1996 GPO merger; the modern corporate entity IPO'd on Nasdaq in 2013. It serves an alliance of ~4,350 U.S. hospitals/health systems and 300,000+ other providers, with Supply Chain Services its largest segment. It was taken private by an affiliate of Patient Square Capital in a $2.6B deal completed November 2025, after which Emad Rizk was appointed CEO, President and Chairman (May 2026)."
+    market_position: "GPO alliance of ~4,350 US hospitals/health systems and 300,000+ other providers; FY2025 total net revenue ~$1.01B (SEC 8-K), with Supply Chain Services as its largest segment."
+    market_share: null
+    sources:
+      - "https://www.sec.gov/Archives/edgar/data/1577916/000119312525005690/d870188dex991.htm"
+      - "https://premierinc.com/newsroom/press-releases/premier-inc-appoints-emad-rizk-md-as-chief-executive-officer-president-and-chairman-of-the-board-to-advance-its-leadership-as-the-preeminent-healthcare-performance-improvement-partner"
+      - "https://www.businesswire.com/news/home/20251124340996/en/Patient-Square-Capital-Completes-Acquisition-of-Premier-Inc."
+      - "https://en.wikipedia.org/wiki/Premier,_Inc."
   - id: proscia
     name: Proscia
     categories: [digital-pathology]
@@ -2767,6 +3742,40 @@ vendors:
       - "https://en.wikipedia.org/wiki/Qiagen"
       - "https://corporate.qiagen.com/newsroom/press-releases/press-release-details/2020/QIAGEN-names-Thierry-Bernard-as-Chief-Executive-Officer/default.aspx"
       - "https://digitalinsights.qiagen.com/"
+  - id: quadax
+    name: Quadax (Xpeditor)
+    categories: [rcm-billing-claims]
+    deployment_models: [software-as-a-service]
+    confidence: B
+    source: "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+    headquarters: "Middleburg Heights (Cleveland), Ohio, USA"
+    founded: 1973
+    leadership: "John Leskiw, President & CEO"
+    history: "Quadax is a healthcare revenue-cycle-management and claims-clearinghouse company founded in 1973, based in the Cleveland, Ohio area. Its Xpeditor claims-management platform delivers high first-pass clean-claim rates; the company celebrated its 50th anniversary in 2023 and ranked among top-tier vendors in the 2025 KLAS Claims Management rankings."
+    market_position: "Claims management / clearinghouse; Xpeditor scored 89.4 (3rd) in the 2025 KLAS Claims Management ranking, ahead of Experian ClaimSource — a sourced top-tier leadership position. No public share/volume figure."
+    market_share: null
+    sources:
+      - "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+      - "https://www.crunchbase.com/person/john-leskiw"
+      - "https://www.quadax.com/about/"
+  - id: qure-ai
+    name: Qure.ai
+    categories: [imaging-ai-deployment]
+    deployment_models: [software-as-a-service, public-cloud, on-premises, hybrid, edge]
+    confidence: B
+    source: "https://time.com/collections/time100-companies-2025/7289652/qure-ai/"
+    headquarters: "Mumbai, India"
+    founded: 2016
+    leadership: "Prashant Warier, Co-Founder & CEO"
+    history: "Qure.ai is a medical-imaging AI company founded in 2016 by Prashant Warier and Pooja Rao, headquartered in Mumbai, India with offices in New York, London and Dubai. Its deep-learning tools (qXR chest X-ray, qCT, qER) are deployed at 4,800+ sites across 100+ countries and hold 18+ FDA clearances; it raised a $65M Series D and was named to the 2025 TIME100 Most Influential Companies."
+    market_position: "Named to TIME100 Most Influential Companies 2025; deployed at 4,800+ sites across 100+ countries (chest X-ray/CT, TB, lung, stroke) — one of the largest global installed footprints in radiology AI; 18 FDA clearances (most for lung-cancer AI). NOTE: original '105+ countries' was an error (105 = number of TIME100 companies; actual footprint is 100+ countries)."
+    market_share: null
+    sources:
+      - "https://time.com/collections/time100-companies-2025/7289652/qure-ai/"
+      - "https://www.qure.ai/us/about-us"
+      - "https://pulse2.com/qure-ai-profile-prashant-warier-interview/"
+      - "https://www.crunchbase.com/organization/qure-ai"
+      - "https://www.qure.ai/us/news-press-coverages/qure-ai-gets-series-d-funding-to-expand-healthcare-ai"
   - id: qventus
     name: Qventus
     categories: [capacity-command-center]
@@ -2783,6 +3792,40 @@ vendors:
     sources:
       - "https://qventus.com/company/story-team/"
       - "https://qventus.com/company/our-team/"
+  - id: r1-rcm
+    name: R1 RCM
+    categories: [rcm-billing-claims]
+    deployment_models: [software-as-a-service, vendor-managed]
+    confidence: B
+    source: "https://www.newswire.com/news/r1-rcm-named-top-performing-revenue-cycle-management-outsourcing-22387006"
+    headquarters: "Murray, Utah, USA"
+    founded: 2003
+    leadership: "Joe Flanagan (Joseph Flanagan), CEO"
+    history: "R1 RCM is the largest US end-to-end revenue-cycle-management outsourcing provider, founded in 2003 as Accretive Health and renamed R1 RCM in 2017. In November 2024 it was taken private in an $8.9B deal by TowerBrook Capital Partners and Clayton, Dubilier & Rice; at closing Joe Flanagan reassumed the CEO role (which he had held 2016 until stepping down in January 2023), replacing Lee Rivas. It works with roughly 95 of the top 100 US health systems."
+    market_position: "Largest end-to-end RCM outsourcing provider; works with 95 of the top 100 US health systems and manages $55B+ in net patient revenue; named top-performing RCM outsourcing provider in the 2024 Black Book Health Systems Client Survey. (~$2.5B+ annual revenue; taken private 2024.)"
+    market_share: null
+    sources:
+      - "https://www.newswire.com/news/r1-rcm-named-top-performing-revenue-cycle-management-outsourcing-22387006"
+      - "https://www.towerbrook.com/r1-rcm-becomes-privately-held-company-joe-flanagan-reappointed-as-ceo/"
+      - "https://www.beckershospitalreview.com/finance/6-things-to-know-about-r1-rcms-returning-ceo/"
+  - id: rapidai
+    name: RapidAI
+    categories: [imaging-ai-deployment]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.rapidai.com/press-release/rapidai-celebrates-international-adoption-of-ai-powered-stroke-care"
+    headquarters: "San Mateo, California, United States"
+    founded: 2012
+    leadership: "Karim Karti, CEO"
+    history: "Founded in 2012 as iSchemaView by Stanford researchers Roland Bammer and Greg Albers, RapidAI develops the Rapid platform for AI-enhanced stroke and neurovascular imaging (CT/MR perfusion, large-vessel-occlusion and hemorrhage detection). Its software is deployed in roughly 2,000+ hospitals across 100+ countries, and it has expanded from stroke triage into broader vascular and pulmonary-embolism workflows. Karim Karti, formerly president/CEO of GE Healthcare Imaging, was named CEO in early 2022 (announced January 31, 2022) and remains CEO."
+    market_position: "Stroke/neurovascular AI deployed in 2,000+ hospitals (company reports up to ~2,250) across 100+ countries, ~14,000 scans/day; category leader in stroke imaging triage."
+    market_share: null
+    sources:
+      - "https://www.rapidai.com/press-release/rapidai-celebrates-international-adoption-of-ai-powered-stroke-care"
+      - "https://www.rapidai.com/press-release/rapidai-announces-new-ceo"
+      - "https://www.rapidai.com/leadership"
+      - "https://www.businesswire.com/news/home/20220131005179/en/RapidAI-Announces-Karim-Karti-as-New-CEO"
+      - "https://www.cbinsights.com/company/rapidai"
   - id: raysearch-laboratories
     name: RaySearch Laboratories AB
     categories: [radiation-oncology-tps-ois]
@@ -2800,6 +3843,55 @@ vendors:
       - "https://en.wikipedia.org/wiki/RaySearch_Laboratories"
       - "https://www.raysearchlabs.com/organization/"
       - "https://www.raysearchlabs.com/media/press-releases/2024/raystation-in-more-than-1000-radiotherapy-centers-worldwide/"
+  - id: recursion-pharmaceuticals
+    name: Recursion Pharmaceuticals (RXRX)
+    categories: [ai-drug-discovery]
+    deployment_models: [on-premises, public-cloud]
+    confidence: A
+    source: "https://ir.recursion.com/news-releases/news-release-details/recursion-reports-fourth-quarter-and-full-year-2025-financial"
+    headquarters: "Salt Lake City, Utah, USA"
+    founded: 2013
+    leadership: "Najat Khan, Ph.D., CEO & President"
+    history: "Recursion is a clinical-stage TechBio company that industrializes drug discovery by combining machine learning with automated wet-lab biology (its Recursion OS platform and BioHive supercomputers). Founded in 2013 in Salt Lake City by Chris Gibson and colleagues; IPO on Nasdaq (RXRX) in 2021; merged with Exscientia in November 2024; collaborations with Roche/Genentech and Sanofi. Co-founder Chris Gibson stepped down as CEO effective January 1, 2026 (moving to Chairman), succeeded by Najat Khan."
+    market_position: "Largest public AI-native drug-discovery company by real revenue: FY2025 revenue $74.7M (+27% YoY, includes Exscientia which merged in Nov 2024), ~$2.5B market cap; Roche/Genentech and Sanofi collaborations"
+    market_share: null
+    sources:
+      - "https://ir.recursion.com/news-releases/news-release-details/recursion-reports-fourth-quarter-and-full-year-2025-financial"
+      - "https://www.statnews.com/2025/11/05/recursion-ceo-chris-gibson-out-najat-khan-new-head/"
+      - "https://ir.recursion.com/news-releases/news-release-details/recursion-announces-ceo-transition-plan-to-drive-next-phase-of-growth"
+  - id: redox
+    name: Redox (integration-as-a-service / EHR API)
+    categories: [hie-interoperability-engine]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://redoxengine.com/use-cases/connect-with-provider-ehrs/"
+    headquarters: "Madison, Wisconsin, USA"
+    founded: 2014
+    leadership: "Luke Bonney, Co-Founder & CEO"
+    history: "Redox is a Madison, Wisconsin healthcare interoperability company founded in 2014 by three former Epic engineers, including Luke Bonney. It provides an integration-as-a-service platform that connects digital-health applications to EHRs across 100+ EHR vendors, and has raised roughly $95M+ (including a 2021 Series D led by Adams Street Partners)."
+    market_position: "Leading modern integration-as-a-service layer for digital-health apps. Company-stated (not third-party) scale: ~10,000 healthcare organizations, 12,000+ active integrations across 100+ EHR vendors, 20M+ transactions/day (2025). Positional leadership, no independent market-share figure."
+    market_share: null
+    sources:
+      - "https://redoxengine.com/use-cases/connect-with-provider-ehrs/"
+      - "https://www.crunchbase.com/person/luke-bonney"
+      - "https://www.beckershospitalreview.com/healthcare-information-technology/this-interoperability-focused-startup-was-founded-by-3-former-epic-engineers/"
+  - id: relatient
+    name: Relatient (Dash)
+    categories: [patient-portal-engagement]
+    deployment_models: [software-as-a-service, public-cloud, private-cloud]
+    confidence: B
+    source: "https://www.relatient.com/about/"
+    headquarters: "Franklin, Tennessee, United States"
+    founded: 2012
+    leadership: "Jeff Gartland, CEO"
+    history: "Founded in 2012 and headquartered in Franklin, Tennessee (with additional offices including Atlanta, Georgia), Relatient is a patient-engagement and scheduling software company whose Dash platform (launched at HIMSS22) provides self-scheduling, appointment reminders and patient communications. It merged with Radix Health in 2021 alongside a $100M+ growth investment and reports engaging tens of millions of patients annually. Jeff Gartland, a former Anthem and Ciox Health executive, has served as CEO since September 2021."
+    market_position: "Company-reported ~50,000 providers; ~50M+ unique patients engaged and ~150M appointments facilitated in 2025 — one of the largest self-scheduling/patient-access installed bases (self-reported vendor figure)."
+    market_share: null
+    sources:
+      - "https://www.relatient.com/about/"
+      - "https://www.relatient.com/resources/press-release/relatient-appoints-jeff-gartland-as-chief-executive-officer-to-lead-health-it-company-through-next-generation-growth-phase-2/"
+      - "https://www.crunchbase.com/person/jeff-gartland"
+      - "https://www.relatient.com/relatient-merges-with-radix-health-to-extend-its-lead-in-patient-engagement-announces-100m-growth-investment/"
   - id: rhapsody
     name: Rhapsody (Rhapsody Health, incl. Corepoint)
     categories: [hie-interoperability-engine]
@@ -2817,6 +3909,23 @@ vendors:
       - "https://rhapsody.health/about-us/"
       - "https://www.businesswire.com/news/home/20230913789477/en/Rhapsody-Names-Sagnik-Bhattacharya-Chief-Executive-Officer"
       - "https://rhapsody.health/blog/rhapsody-and-corepoint-merge-to-advance-interoperability-in-healthcare/"
+  - id: riverain
+    name: Riverain Technologies
+    categories: [imaging-ai-deployment]
+    deployment_models: [on-premises, hybrid]
+    confidence: B
+    source: "https://www.einpresswire.com/article/690884912/riverain-technologies-brings-clearread-ai-powered-lung-cancer-detection-to-hospitals-and-va-medical-centers"
+    headquarters: "Miamisburg, Ohio, USA"
+    founded: 2004
+    leadership: "Steve Worrell, CEO"
+    history: "Riverain Technologies is a Miamisburg, Ohio-based medical imaging AI company that develops the ClearRead suite of FDA-cleared software for chest/lung imaging, including bone-suppression and automated nodule detection on X-ray and CT. Steve Worrell has served as CEO since 2013. Its ClearRead solutions are deployed across the U.S. Department of Veterans Affairs and other hospital/IDN and DoD sites, processing several million exams annually."
+    market_position: "Chest/lung imaging AI (ClearRead CT/Xray, bone-suppression/nodule-detection): >4M exams processed annually, deployed VA-wide across every VISN plus AMCs/IDNs/DoD. REVISED: replaced marketing-blog citation with sourced deployment/throughput figures; no clean total-site count disclosed."
+    market_share: null
+    sources:
+      - "https://www.einpresswire.com/article/690884912/riverain-technologies-brings-clearread-ai-powered-lung-cancer-detection-to-hospitals-and-va-medical-centers"
+      - "https://www.riveraintech.com/about/"
+      - "https://www.dicardiology.com/content/riverain-technologies-launches-new-fda-cleared-technology-expands-globally"
+      - "https://theorg.com/org/riverain-technologies/org-chart/steve-worrell"
   - id: roche
     name: Roche Diagnostics
     categories: [digital-pathology, lab-middleware-automation]
@@ -2917,6 +4026,22 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/SAS_Institute"
       - "https://blogs.sas.com/content/subconsciousmusings/2021/09/30/sas-leads-market-28-years-in-a-row/"
+  - id: scc-soft-computer
+    name: SCC Soft Computer
+    categories: [lis]
+    deployment_models: [on-premises, vendor-managed]
+    confidence: B
+    source: "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+    headquarters: "Clearwater, Florida, USA"
+    founded: 1979
+    leadership: "Gilbert Hakim, Founder & CEO"
+    history: "SCC Soft Computer, founded in 1979 by Gilbert Hakim and headquartered in Clearwater, Florida, develops laboratory, genetics and blood-services information systems (SoftLab, SoftPath, SoftGene, SoftBank) for large reference and hospital laboratories; it is one of the largest independent LIS/laboratory-and-genetics information-system vendors, still led by its founder as of 2026."
+    market_position: "Sourced leadership position (no %): named among the laboratory information system vendors (alongside McKesson) in the Verified Market Research LIS vendor review; a long-standing LIS supplier for large reference/hospital labs. (Prior NovoPath citation dropped — NovoPath's list does not name SCC.)"
+    market_share: null
+    sources:
+      - "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+      - "https://www.softcomputer.com/about-us/company-profile/"
+      - "https://www.linkedin.com/in/gilbert-hakim-11a88317"
   - id: schneider-electric
     name: Schneider Electric
     categories: [hospital-bms]
@@ -2933,6 +4058,21 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Schneider_Electric"
       - "https://sustainabilitymag.com/articles/olivier-blum-named-new-ceo-of-schneider-electric"
+  - id: schr-dinger
+    name: Schrödinger (SDGR)
+    categories: [ai-drug-discovery]
+    deployment_models: [software-as-a-service, public-cloud, private-cloud, on-premises, hybrid]
+    confidence: A
+    source: "https://ir.schrodinger.com/press-releases/news-details/2026/Schrdinger-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx"
+    headquarters: "New York, New York, USA"
+    founded: 1990
+    leadership: "Ramy Farid, Ph.D., President & CEO (CEO since 2017)"
+    history: "Founded in 1990, Schrödinger develops a physics-based (molecular-simulation) plus machine-learning computational platform used for drug discovery and materials science, licensing software to biopharma while advancing its own therapeutic pipeline. It went public on Nasdaq (SDGR) in February 2020 and reported FY2025 total revenue of $255.9M, including $199.5M of software revenue."
+    market_position: "Segment software-revenue leader — the only pure-play selling drug-discovery SOFTWARE at scale: FY2025 total revenue $256M (+23% YoY), software revenue $200M (+11%), software ACV $198M; NasdaqGS-listed physics-based + ML computational platform"
+    market_share: null
+    sources:
+      - "https://ir.schrodinger.com/press-releases/news-details/2026/Schrdinger-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results/default.aspx"
+      - "https://en.wikipedia.org/wiki/Schr%C3%B6dinger,_Inc."
   - id: schrodinger
     name: Schrodinger, Inc.
     categories: [ai-drug-discovery, comp-chem-simulation]
@@ -3095,6 +4235,22 @@ vendors:
       - "https://en.wikipedia.org/wiki/Siemens_Healthineers"
       - "https://www.siemens-healthineers.com/company/management/bernd-montag"
       - "https://www.siemens-healthineers.com/press/releases/pr-20181005033shs.html"
+  - id: simple-interact
+    name: Simple Interact
+    categories: [patient-portal-engagement]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://klasresearch.com/best-in-klas-ranking/patient-intake-management/2026/341"
+    headquarters: "Dallas, Texas"
+    founded: 2013
+    leadership: "Ravi Kalidindi, Founder & CEO"
+    history: "Founded in 2013 in Dallas, Texas by Ravi Kalidindi, Simple Interact provides healthcare front-office / 'digital front door' automation covering patient intake forms, engagement, reminders, two-way SMS, scheduling, feedback and referral management. It was named 2026 Best in KLAS for Patient Intake Management (overall score 98.4, second consecutive year)."
+    market_position: "VERIFIED: 2026 Best in KLAS winner for Patient Intake Management, overall performance score 98.4 (klasresearch.com), second consecutive year — sourced category-leadership (satisfaction) position; smaller market share than the numerically-evidenced leaders above."
+    market_share: null
+    sources:
+      - "https://klasresearch.com/best-in-klas-ranking/patient-intake-management/2026/341"
+      - "https://www.prnewswire.com/news-releases/simple-interact-earns-2026-best-in-klas-award-for-patient-intake-management-for-second-consecutive-year-302722987.html"
+      - "https://tracxn.com/d/companies/simple-interact/__jzdm9VSkw-cigaf5xf3ReWsFuVsP7c-LSAS-1jtcCV8"
   - id: simulations-plus
     name: Simulations Plus
     categories: [pharmacometrics-modeling-simulation]
@@ -3129,6 +4285,23 @@ vendors:
     sources:
       - "https://en.wikipedia.org/wiki/Snowflake_Inc."
       - "https://www.snowflake.com/en/news/press-releases/sridhar-ramaswamy-named-chief-executive-officer-of-snowflake/"
+  - id: solutionreach
+    name: Solutionreach
+    categories: [patient-portal-engagement]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.solutionreach.com/"
+    headquarters: "Lehi, Utah, USA"
+    founded: 2000
+    leadership: "Ken Ernsting, CEO (since Aug 2023)"
+    history: "Solutionreach was founded in 2000 by Jim Higgins as a patient relationship management and engagement platform providing appointment reminders, two-way messaging, self-scheduling and marketing for medical, dental and vision practices. The company marked its 25th year in 2025 and is now led by CEO Ken Ernsting (appointed August 2023); founder Jim Higgins no longer serves as CEO."
+    market_position: "Company-reported 50,000+ customer installations with 400+ PM/EHR integrations and ~2M SMS/day; large independent- and group-practice base (self-reported vendor figure)."
+    market_share: null
+    sources:
+      - "https://www.solutionreach.com/"
+      - "https://www.prnewswire.com/news-releases/solutionreach-appoints-ken-ernsting-as-chief-executive-officer-301897271.html"
+      - "https://www.crunchbase.com/person/jim-higgins"
+      - "https://www.solutionreach.com/news/solutionreach-appoints-ken-ernsting-as-chief-executive-officer"
   - id: solventum
     name: Solventum Corporation (formerly 3M Health Information Systems)
     categories: [him-coding]
@@ -3195,6 +4368,24 @@ vendors:
     sources:
       - "https://thessigroup.com/the-ssi-group-names-new-president-and-ceo/"
       - "https://businessalabama.com/new-leadership-for-ssi-group/"
+  - id: ssi-group-2
+    name: The SSI Group
+    categories: [rcm-billing-claims]
+    deployment_models: [software-as-a-service, vendor-managed]
+    confidence: B
+    source: "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+    headquarters: "Mobile, Alabama"
+    founded: 1988
+    leadership: "Diana Allen, PhD, President & CEO"
+    history: "Founded in 1988 in Mobile, Alabama, The SSI Group is a national healthcare claims clearinghouse and revenue-cycle-management software provider, processing 600M+ transactions and $800B+ in billed electronic claims annually. Diana Allen became president & CEO in February 2020, succeeding longtime CEO Jimmy Lyons, and remains in the role (speaking at the 2026 HFMA Annual Conference)."
+    market_position: "Established national healthcare claims clearinghouse (founded 1988); SSI Claims Management scored 83.4 (6th) in the 2025 KLAS Claims Management & Clearinghouse ranking — a sourced top-tier position. No public share/volume figure."
+    market_share: null
+    sources:
+      - "https://www.techtarget.com/revcyclemanagement/news/366618883/KLAS-names-top-revenue-cycle-management-vendors"
+      - "https://thessigroup.com/leadership-team/"
+      - "https://businessalabama.com/new-leadership-for-ssi-group/"
+      - "https://www.businesswire.com/news/home/20200224005247/en/The-SSI-Group-Names-New-President-and-CEO"
+      - "https://thessigroup.com/ssi-group-ceo-diana-allen-hfma-annual-conference-2026/"
   - id: starlims
     name: STARLIMS Corporation
     categories: [qc-lims-cds]
@@ -3242,6 +4433,23 @@ vendors:
       - "https://en.wikipedia.org/wiki/Stryker_Corporation"
       - "https://aflcio.org/paywatch/SYK"
       - "https://www.companieshistory.com/stryker/"
+  - id: suki
+    name: Suki
+    categories: [cdss-clinical-ai]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.businesswire.com/news/home/20241010687252/en/Suki-Secures-$70M-Series-D-Funding-as-Demand-Surges-Expands-Strategic-Partnership-with-MedStar-Health"
+    headquarters: "Redwood City, California, USA"
+    founded: 2017
+    leadership: "Punit Soni, Founder & CEO"
+    history: "Suki, founded in 2017 in Redwood City, California by Punit Soni, builds an AI voice/ambient clinical assistant (Suki Assistant) that generates clinical documentation from patient-clinician conversations. It raised a $70M Series D in October 2024, and in January 2026 was named athenahealth's preferred solution partner for ambient intelligence, powering athenahealth Ambient Notes."
+    market_position: "No published market-share % (mid-market). Sourced leadership position: athenahealth's preferred ambient-AI partner, powering athenahealth Ambient Notes; $70M Series D (Oct 2024). KLAS-validated ambient vendor."
+    market_share: null
+    sources:
+      - "https://www.businesswire.com/news/home/20241010687252/en/Suki-Secures-$70M-Series-D-Funding-as-Demand-Surges-Expands-Strategic-Partnership-with-MedStar-Health"
+      - "https://www.crunchbase.com/person/punit-soni"
+      - "https://www.finsmes.com/2024/10/suki-raises-70m-in-series-d-funding.html"
+      - "https://www.suki.ai/press-releases/suki-selected-by-athenahealth-as-preferred-solution-partner-for-ambient-intelligence/"
   - id: swisslog-healthcare
     name: Swisslog Healthcare (KUKA AG)
     categories: [pharmacy-automation]
@@ -3310,6 +4518,22 @@ vendors:
       - "https://en.wikipedia.org/wiki/Systech_Corporation"
       - "https://www.inkworldmagazine.com/breaking-news/markem-imaje-dover-completes-systech-international-acquisition/"
       - "https://tracxn.com/d/companies/systech/__C2xInc6vA9tPUaxb7GBJojfXcXOmEy2BZbc6HpiYlCY"
+  - id: tecsys
+    name: Tecsys (Elite Healthcare supply chain execution / WMS)
+    categories: [hospital-erp]
+    deployment_models: [software-as-a-service, public-cloud, on-premises]
+    confidence: B
+    source: "https://www.prnewswire.com/news-releases/tecsys-named-a-challenger-in-2026-gartner-magic-quadrant-for-warehouse-management-systems-302761448.html"
+    headquarters: "Montreal, Quebec, Canada"
+    founded: 1983
+    leadership: "Peter Brereton, President & CEO"
+    history: "Tecsys, founded in 1983 in Montreal by brothers David and Peter Brereton, develops supply-chain management, warehouse-management and distribution software, with a strong healthcare supply-chain execution business. It is publicly listed on the TSX (TCS); co-founder Peter Brereton became president in 1995 and CEO in 1998 and remained President & CEO as of the Q3-2026 earnings call (March 2026)."
+    market_position: "Named a Challenger in the 2026 Gartner Magic Quadrant for Warehouse Management Systems (15th appearance in the report); recognized healthcare supply chain execution / WMS vendor. Position reflects vision/execution, not a published market-share figure."
+    market_share: null
+    sources:
+      - "https://www.prnewswire.com/news-releases/tecsys-named-a-challenger-in-2026-gartner-magic-quadrant-for-warehouse-management-systems-302761448.html"
+      - "https://www.tecsys.com/about-us/management-team/"
+      - "https://www.tecsys.com/hubfs/Tecsys-Press-Kit-Supply-Chain-and-Distribution.pdf"
   - id: teladoc-health
     name: Teladoc Health
     categories: [telehealth-platform]
@@ -3390,6 +4614,22 @@ vendors:
       - "https://en.wikipedia.org/wiki/Thermo_Fisher_Scientific"
       - "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html"
       - "https://www.verifiedmarketresearch.com/blog/top-7-mass-spectrometry-companies-revolutionizing-research-to-regulation/"
+  - id: thermo-fisher-scientific-samplemanager-lims
+    name: Thermo Fisher Scientific — SampleManager LIMS
+    categories: [lis]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+    headquarters: "Waltham, Massachusetts, USA"
+    founded: 2006
+    leadership: "Marc N. Casper, Chairman & CEO"
+    history: "Thermo Fisher Scientific, headquartered in Waltham, Massachusetts, was formed by the 2006 merger of Thermo Electron and Fisher Scientific. Its SampleManager LIMS is one of the most widely deployed laboratory information management systems globally, serving QA/QC, manufacturing and R&D labs. Marc N. Casper has been CEO since October 2009 and Chairman since February 2020; he also held the President title until March 2026."
+    market_position: "~11.5% LIS/LIMS share per a single Verified Market Research blog comparison table (confirmed present at cited URL, single-source); Thermo Fisher is consistently named among the leading global LIMS suppliers in market reports."
+    market_share: null
+    sources:
+      - "https://www.verifiedmarketresearch.com/blog/top-laboratory-information-systems/"
+      - "https://ir.thermofisher.com/investors/corporate-governance/board-of-directors/person-details/default.aspx?ItemId=abfe2952-3bff-4a3f-9b43-038b28177aa5"
+      - "https://en.wikipedia.org/wiki/Thermo_Fisher_Scientific"
   - id: tigerconnect
     name: TigerConnect
     categories: [clinical-communication-collaboration]
@@ -3572,6 +4812,22 @@ vendors:
       - "https://www.genomeweb.com/business-news/pierian-seven-bridges-ugentec-acquired-merged-become-velsera"
       - "https://velsera.com/velsera-appoints-jamie-coffin-phd-as-chief-executive-officer/"
       - "https://velsera.com/products/seven-bridges-platform/"
+  - id: veradigm
+    name: Veradigm (Allscripts)
+    categories: [ehr-emr-core]
+    deployment_models: [on-premises, private-cloud, hybrid, software-as-a-service]
+    confidence: B
+    source: "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+    headquarters: "Chicago, Illinois, USA"
+    founded: 1986
+    leadership: "Don Trigg, CEO"
+    history: "Veradigm (formerly Allscripts) is a Chicago healthcare-technology company founded in 1986, providing EHR, practice-management, and health-data/analytics solutions to providers, life-sciences firms and payers. It rebranded from Allscripts to Veradigm in January 2023. Don Trigg (former Cerner/Oracle Health president and ex-apree health CEO) was appointed CEO effective September 2, 2025, succeeding Thomas Langan."
+    market_position: "US ambulatory EHR: Veradigm Inc ~3.1% (2,580 installs) plus Practice Fusion ~3.1% (2,563 installs) (Definitive Healthcare, Oct 2025)"
+    market_share: null
+    sources:
+      - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
+      - "https://investor.veradigm.com/news-releases/news-release-details/veradigm-appoints-don-trigg-chief-executive-officer"
+      - "https://en.wikipedia.org/wiki/Veradigm"
   - id: virtusense
     name: VirtuSense Technologies
     categories: [smart-room-ambient-ai]
@@ -3604,6 +4860,22 @@ vendors:
     sources:
       - "https://visageimaging.com/company/"
       - "https://visageimaging.com/company/team/"
+  - id: visiopharm
+    name: Visiopharm
+    categories: [digital-pathology]
+    deployment_models: [on-premises, software-as-a-service]
+    confidence: B
+    source: "https://visiopharm.com/about-us/"
+    headquarters: "Hoersholm, Denmark"
+    founded: 2001
+    leadership: "Michael Grunkin, Co-Founder & CEO"
+    history: "Visiopharm, founded in 2001 near Copenhagen, Denmark, develops AI-based quantitative digital-pathology image-analysis software used in cancer tissue diagnostics and research, with several algorithms cleared under IVDR. In May 2026 it was acquired by Finnish microscope-scanner maker Grundium to form an integrated precision-pathology platform; co-founder Michael Grunkin remained CEO of Visiopharm."
+    market_position: "Over 750 customer accounts across 40+ countries; nine diagnostic algorithms cleared under IVDR (acquired by Grundium 2026). Only other vendor besides Indica/Proscia with a published installed-base count."
+    market_share: null
+    sources:
+      - "https://visiopharm.com/about-us/"
+      - "https://www.grundium.com/news/grundium-and-visiopharm-unite-to-advance-precision-pathology/"
+      - "https://visiopharm.com/press-releases/grundium-acquires-visiopharm-to-create-integrated-precision-pathology-platform/"
   - id: viz-ai
     name: Viz.ai
     categories: [imaging-ai-deployment]
@@ -3692,6 +4964,23 @@ vendors:
       - "https://www.waystar.com/about-us/leadership/matthew-hawkins/"
       - "https://tracxn.com/d/companies/waystar/__76y4Rxj0twYIJsagSAn37BepJDIkfOToE671BqLfGVQ"
       - "https://www.sec.gov/Archives/edgar/data/1990354/000199035425000031/way-20250930.htm"
+  - id: wellsky
+    name: WellSky
+    categories: [ehr-emr-core]
+    deployment_models: [software-as-a-service, private-cloud, on-premises, hybrid]
+    confidence: B
+    source: "https://wellsky.com/bringing-healthcare-home/"
+    headquarters: "Overland Park, Kansas, United States"
+    founded: null
+    leadership: "Bill Miller, CEO"
+    history: "WellSky is a health and community-care technology company headquartered in Overland Park, Kansas, created when Mediware Information Systems (a health-IT firm whose lineage dates to the 1970s) rebranded as WellSky in 2018 under private-equity ownership (TPG, later Leonard Green and others). It is a leading post-acute EHR vendor for home health, hospice and palliative care, serving 20,000+ client sites, and is led by CEO Bill Miller (formerly CEO of OptumInsight), who joined in July 2017. (Founding year left null: sources conflict on whether to date the company from the Mediware lineage or the 2018 rebrand.)"
+    market_position: "Leading post-acute EHR for home health, hospice and palliative care; 20,000+ client sites (vendor-stated leadership position, no public share %)"
+    market_share: null
+    sources:
+      - "https://wellsky.com/bringing-healthcare-home/"
+      - "https://wellsky.com/about-us/leadership/"
+      - "https://homehealthcarenews.com/2018/09/tpg-backed-mediware-rebrands-as-wellsky-hits-260m-in-revenue/"
+      - "https://www.tpg.com/news-and-insights/partnership-perspectives-from-bill-miller-ceo-of-wellsky"
   - id: wind-river
     name: Wind River (Aptiv)
     categories: [samd-embedded-oem-platform]

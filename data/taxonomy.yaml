@@ -119,7 +119,7 @@ categories:
     hardware_profile: [nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {nvme-performance-storage: rack, capacity-archive-storage: cluster}
     plays: [play-a]
-    vendors: [agfa-healthcare, fujifilm-healthcare, ge-healthcare, hyland-acuo-vna, infinitt-healthcare, intelerad, merative, philips, sectra, visage-imaging]
+    vendors: [agfa-healthcare, change-enterprise-imaging, fujifilm, fujifilm-healthcare, ge-healthcare, hyland-acuo-vna, infinitt-healthcare, intelerad, merative, philips, sectra, visage-imaging]
     evidence_note: null
     workload_envelope:
       scaling_driver: "imaging studies archived per day and average study size across modalities"
@@ -234,7 +234,7 @@ categories:
     hardware_profile_sizing: {nvme-performance-storage: rack, high-availability-redundant: cluster, disaster-recovery-backup: rack}
     plays: []
     play_exemption: "General datacenter refresh / disaster-recovery deal (high-availability database + virtual desktops); not an imaging, genomics, or manufacturing-edge motion — pursue as a standalone infrastructure deal"
-    vendors: [altera-digital-health, epic-systems, meditech, oracle-health]
+    vendors: [altera-digital-health, athenahealth, athenahealth-2, dedalus, eclinicalworks, epic-systems, greenway, meditech, modmed, netsmart, nextech, oracle-health, veradigm, wellsky]
     evidence_note: null
     workload_envelope:
       scaling_driver: "concurrent clinicians and staffed bed count"
@@ -274,7 +274,7 @@ categories:
     hardware_profile_sizing: {gpu-server: node}
     plays: []
     play_exemption: "Clinical inference graphics-processing-unit capacity attaches to the electronic-health-record estate or the vendor's inference fleet; not a play-A/B/C motion"
-    vendors: [abridge, aidoc, microsoft-nuance, wolters-kluwer-health]
+    vendors: [abridge, aidoc, ambience, corti, deepscribe, microsoft-nuance, nabla, suki, wolters-kluwer-health]
     evidence_note: null
     workload_envelope:
       scaling_driver: "concurrent inference requests and number of deployed clinical models"
@@ -392,7 +392,7 @@ categories:
     hardware_profile_sizing: {nvme-performance-storage: node, edge-industrial: node, high-availability-redundant: node}
     plays: []
     play_exemption: "Device-maker (original-equipment-manufacturer) channel deal for regulator-cleared central stations; outside the three solution plays"
-    vendors: [etiometry, ge-healthcare, medical-informatics-corp, philips]
+    vendors: [bayesian, biofourmis, clew, current, eko, etiometry, excel, ge-healthcare, medical-informatics-corp, philips]
     evidence_note: null
     workload_envelope:
       scaling_driver: "monitored bed count and continuous waveform sampling rate"
@@ -549,7 +549,7 @@ categories:
     hardware_profile: []
     hardware_profile_sizing: {}
     plays: []
-    vendors: [epic-systems, intelichart, luma-health, meditech, oracle-health]
+    vendors: [artera, epic-systems, intelichart, klara, luma-health, meditech, notable, oracle-health, relatient, simple-interact, solutionreach]
     evidence_note: null
     workload_envelope:
       scaling_driver: "registered patient count and peak concurrent portal login burst"
@@ -627,7 +627,7 @@ categories:
     hardware_profile: [gpu-server, nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {gpu-server: node, nvme-performance-storage: node, high-availability-redundant: node, disaster-recovery-backup: node}
     plays: []
-    vendors: [epic-systems, finthrive, oracle-health, ssi-group, trubridge, waystar]
+    vendors: [availity, epic-systems, finthrive, optum-change, oracle-health, quadax, r1-rcm, ssi-group, ssi-group-2, trubridge, waystar]
     evidence_note: null
     workload_envelope:
       scaling_driver: "annual claim and charge-transaction volume plus concurrent batch scrubbing jobs"
@@ -707,7 +707,7 @@ categories:
     hardware_profile_sizing: {nvme-performance-storage: rack, high-availability-redundant: rack, disaster-recovery-backup: node}
     plays: []
     play_exemption: "Back-office transactional high-availability cluster; standalone infrastructure refresh deal"
-    vendors: [infor, microsoft, oracle-health, sap, workday]
+    vendors: [infor, microsoft, oracle-health, premier, sap, tecsys, workday]
     evidence_note: null
     workload_envelope:
       scaling_driver: "transaction volume, concurrent users, and bed count"
@@ -904,7 +904,7 @@ categories:
     hardware_profile: [edge-industrial]
     hardware_profile_sizing: {edge-industrial: node}
     plays: []
-    vendors: [arxium, bd, omnicell, scriptpro, swisslog-healthcare]
+    vendors: [arxium, baxter-international, bd, capsa, mckesson, omnicell, parata, scriptpro, swisslog-healthcare]
     evidence_note: null
     workload_envelope:
       scaling_driver: "dispensing-cabinet and robot fleet size and medication transaction volume"
@@ -1102,7 +1102,7 @@ categories:
     hardware_profile_sizing: {nvme-performance-storage: node, high-availability-redundant: rack, disaster-recovery-backup: node}
     plays: []
     play_exemption: "Clinical laboratory transactional high-availability / disaster-recovery footprint; standalone infrastructure deal"
-    vendors: [clinisys, epic-systems, ligolab, oracle-health, orchard-software]
+    vendors: [clinisys, compugroup, epic-beaker, epic-systems, labvantage-solutions, ligolab, meditech-expanse-laboratory, oracle-health, orchard-software, scc-soft-computer, thermo-fisher-scientific-samplemanager-lims]
     evidence_note: null
     workload_envelope:
       scaling_driver: "tests resulted per day and instrument-interface feed count"
@@ -1180,7 +1180,7 @@ categories:
     hardware_profile: [gpu-server, nvme-performance-storage, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: cluster, nvme-performance-storage: rack, capacity-archive-storage: cluster}
     plays: [play-a]
-    vendors: [hamamatsu-photonics, indica-labs, leica-biosystems, paige-ai, pathai, philips, proscia, roche, sectra]
+    vendors: [aiforia, deep-bio, hamamatsu-photonics, ibex-analytics, indica-labs, leica-biosystems, mindpeak, owkin, paige-ai, pathai, philips, proscia, roche, sectra, visiopharm]
     evidence_note: null
     workload_envelope:
       scaling_driver: "whole-slide images scanned per day and per-slide image size"
@@ -1254,7 +1254,7 @@ categories:
     hardware_profile: []
     hardware_profile_sizing: {}
     plays: []
-    vendors: [congenica, fabric-genomics, golden-helix, qiagen, sophia-genetics, tempus]
+    vendors: [congenica, fabric-genomics, golden-helix, nucleai, qiagen, sophia-genetics, tempus]
     evidence_note: null
 
   # ======== pharma R&D + clinical development ========
@@ -1366,7 +1366,7 @@ categories:
     hardware_profile: [gpu-server, nvme-performance-storage]
     hardware_profile_sizing: {gpu-server: cluster, nvme-performance-storage: rack}
     plays: [play-b]
-    vendors: [cadence-design-systems, chemical-computing-group, cresset, nvidia, schrodinger]
+    vendors: [absci, benevolentai, cadence-design-systems, chemical-computing-group, cresset, genesis-therapeutics, iambic-therapeutics, insilico-medicine, insitro, isomorphic-labs, nvidia, recursion-pharmaceuticals, schr-dinger, schrodinger]
     evidence_note: null
     workload_envelope:
       scaling_driver: "model parameter scale and curated training-set throughput"
@@ -1929,7 +1929,7 @@ categories:
     hardware_profile: [high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {high-availability-redundant: node, disaster-recovery-backup: node}
     plays: []
-    vendors: [intersystems, nextgen-healthcare, orion-health, rhapsody]
+    vendors: [1uphealth, ehealth-exchange, epic-care-everywhere-epic-nexus, intersystems, nextgen-healthcare, orion-health, redox, rhapsody]
     evidence_note: null
     workload_envelope:
       scaling_driver: "interface count and inbound clinical message volume"
@@ -1968,7 +1968,7 @@ categories:
     hardware_profile: [gpu-server, edge-industrial, high-availability-redundant]
     hardware_profile_sizing: {gpu-server: cluster, edge-industrial: node, high-availability-redundant: rack}
     plays: [play-a]
-    vendors: [aidoc, blackford-analysis, carpl-ai, deepc, ge-healthcare, philips, sectra, siemens-healthineers, viz-ai]
+    vendors: [aidoc, annalise-ai, blackford-analysis, carpl-ai, cleerly, deepc, deephealth, ge-healthcare, gleamer, heartflow, lunit, nanox-ai, philips, qure-ai, rapidai, riverain, sectra, siemens-healthineers, viz-ai]
     evidence_note: null
     workload_envelope:
       scaling_driver: "imaging studies per day and number of concurrently served AI models"
@@ -2268,7 +2268,7 @@ categories:
     hardware_profile_sizing: {gpu-server: cluster, high-memory: rack}
     infrastructure_notes: "Large-video-memory multi-GPU tensor-parallel serving of 70-billion-parameter and larger foundation models sited on-prem for protected-health-information residency and latency (ambient documentation, chart summarization, coding assist, agentic clinical workflows). The serving/infrastructure layer beneath the decision-support apps (cdss-clinical-ai) — the same app-versus-infrastructure split as ai-drug-discovery versus ai-hpc-orchestration. Sized by concurrent token throughput and number of models hosted."
     plays: [play-b]
-    vendors: [aidoc, hippocratic-ai, john-snow-labs, microsoft-nuance-dax, nvidia-nim-bionemo]
+    vendors: [aidoc, google, hippocratic-ai, john-snow-labs, microsoft-nuance-dax, nvidia-nim-bionemo, openevidence]
     evidence_note: "Added via completeness audit (opus-verified gap); the text/multimodal analogue of imaging-ai-deployment."
     workload_envelope:
       scaling_driver: "concurrent token throughput and number of foundation models hosted"
