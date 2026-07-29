@@ -1,7 +1,7 @@
 # Vendor registry — names live HERE, never in code (CLAUDE.md §3, §8)
 # Web-researched + adversarially verified (codex + grok + opus). Every claim sourced;
 # unverifiable fields are honest nulls / 'not publicly disclosed' — never fabricated.
-version: 6
+version: 7
 
 vendors:
   - id: 10x-genomics
@@ -15,6 +15,7 @@ vendors:
     leadership: "Serge Saxonov — Co-founder & CEO"
     history: "Founded 2012 in Pleasanton by Serge Saxonov, Ben Hindson and Kevin Ness; pioneered single-cell and spatial platforms including Chromium, Visium and the Xenium in-situ analyzer."
     market_position: "Market leader in single-cell and spatial biology; publicly traded (Nasdaq: TXG). Its Xenium in-situ platform surpassed 100+ analyzer shipments per 2025 reporting; instruments and analysis run on customer-owned on-prem compute."
+    market_share: null
     sources:
       - "https://www.10xgenomics.com/platforms/xenium"
       - "https://endpoints.news/exclusive-10x-genomics-ceo-touts-incredible-traction-with-newest-launch-shipping-over-100-spatial-biology-analyzers/"
@@ -30,10 +31,12 @@ vendors:
     leadership: "Morten Wierod — CEO"
     history: "Formed 1988 by merger of Sweden's ASEA (1883) and Switzerland's Brown, Boveri & Cie (1891). Its System 800xA is a flagship distributed control system (DCS) for process automation. Morten Wierod has been CEO since August 2024."
     market_position: "Global top-tier DCS/process-automation vendor (System 800xA); one of the largest industrial automation companies worldwide."
+    market_share: "#1 in global Distributed Control Systems (DCS) market, ~19% share, leader for 22nd consecutive year (ARC Advisory Group)"
     sources:
       - "https://new.abb.com/control-systems/system-800xa/800xa-dcs"
       - "https://en.wikipedia.org/wiki/ABB"
       - "https://new.abb.com/news/detail/112917/abb-appoints-morten-wierod-to-succeed-bjorn-rosengren-as-ceo"
+      - "https://new.abb.com/news/detail/85787/abb-global-market-leadership-in-distributed-control-systems-confirmed-for-22nd-consecutive-year"
   - id: abridge
     name: Abridge
     categories: [cdss-clinical-ai]
@@ -46,10 +49,12 @@ vendors:
     leadership: "Shiv Rao — Co-founder & CEO"
     history: "Founded 2018 in Pittsburgh by Shiv Rao and co-founders (incl. Zachary Lipton, Sandeep Konam); venture-backed generative-AI ambient clinical documentation company."
     market_position: "2025/2026 Best in KLAS for ambient AI/speech; reported deployed across 300+ health systems (secondary/press sourcing)."
+    market_share: "#1 Best in KLAS, Ambient Speech/Ambient AI (2025; repeated 2026)"
     sources:
       - "https://www.massgeneralbrigham.org/en/about/newsroom/articles/how-shiv-raos-abridge-is-freeing-clinicians-from-administrative-burdens"
       - "https://research.contrary.com/company/abridge"
       - "https://www.fiercehealthcare.com/ai-and-machine-learning/abridge-expands-clinical-decision-support-capabilities-uptodate-partnership"
+      - "https://klasresearch.com/best-in-klas-ranking/ambient-speech/2026/487"
   - id: accruent
     name: Accruent
     categories: [healthcare-cmms]
@@ -59,13 +64,15 @@ vendors:
     note: "TMS/Connectiv healthcare CMMS; mostly SaaS with residual on-prem installs at legacy sites."
     headquarters: "Austin, Texas, USA"
     founded: 1995
-    leadership: null
+    leadership: "Arul Elumalai, Interim President"
     history: "Founded 1995; facilities/asset-management and healthcare CMMS software. Previously owned by Genstar Capital, then acquired by Fortive Corporation in 2018 for $2.0B."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.gencap.com/genstar-capital-announces-agreement-to-sell-accruent-to-fortive-corporation-for-2-0-billion-in-cash/"
       - "https://en.wikipedia.org/wiki/Fortive"
       - "https://www.fmlink.com/articles/fortive-accruent-facilities-management-software/"
+      - "https://www.accruent.com/about-us/our-leadership"
   - id: advarra
     name: Advarra
     categories: [clinical-trial-suite]
@@ -77,6 +84,7 @@ vendors:
     leadership: "Gadi Saarony — Chief Executive Officer"
     history: "Formed 2017 by merging Chesapeake IRB and Schulman IRB; leading IRB, research-compliance and clinical-trial technology provider (OnCore CTMS); private-equity backed."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.cbinsights.com/company/advarra/people"
       - "https://tracxn.com/d/companies/advarra/__LZ_R-wATIon9TaZX2A9YRnPAV2Y62i0cNzFWzo4u_DA"
@@ -93,6 +101,7 @@ vendors:
     leadership: "Jeremy Rassen — Chief Executive Officer"
     history: "Founded 2013 by Harvard Medical School epidemiologists; regulatory-grade real-world-evidence analytics. Acquired by Datavant July 2025, now part of Datavant's life-sciences data-linkage platform."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.prnewswire.com/news-releases/aetion-appoints-ceo-and-new-executive-chair-of-the-board-302346457.html"
       - "https://www.crunchbase.com/organization/aetion-2"
@@ -108,6 +117,7 @@ vendors:
     leadership: "Pascal Juéry — CEO, Agfa-Gevaert"
     history: "Belgian imaging pioneer Agfa (1867) merged with Gevaert (1964) as Agfa-Gevaert. Agfa HealthCare, its enterprise-imaging/PACS IT division, was separated internally as 'ITCo' in 2019."
     market_position: "Publicly listed (Euronext Brussels: AGFB); HealthCare-division market share not publicly disclosed."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Agfa-Gevaert"
       - "https://en.wikipedia.org/wiki/Agfa"
@@ -123,6 +133,7 @@ vendors:
     leadership: "Padraig McDonnell — President & CEO"
     history: "Spun off from Hewlett-Packard in 1999; publicly traded (NYSE: A). Analytical-instrument and lab-informatics maker behind OpenLab CDS and SLIMS; HQ Santa Clara, California."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Agilent_Technologies"
       - "https://people.equilar.com/bio/org/agilent-technologies-inc/340"
@@ -139,6 +150,7 @@ vendors:
     leadership: "Elad Walach — Co-Founder & CEO"
     history: "Founded 2016 in Tel Aviv by Elad Walach, Michael Braginsky and Guy Reiner; independent clinical-AI vendor; built aiOS orchestration platform and CARE foundation model; raised $150M Series E (2025)."
     market_position: "Private; company/press report deployment at ~2,000 hospitals processing ~60M cases/year, backed by a $150M Series E (2025) with NVIDIA and AWS partners."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Aidoc"
       - "https://www.aidoc.com/about/leadership/elad-walach/"
@@ -154,6 +166,7 @@ vendors:
     leadership: "Masoud Toloue — CEO, Quanterix (Akoya's parent)"
     history: "Founded 2015 in Marlborough on Stanford's CODEX technology; commercialized PhenoCycler and PhenoImager spatial platforms; acquired by Quanterix in an all-stock deal completed July 2025."
     market_position: "Spatial-proteomics specialist (PhenoCycler/CODEX, PhenoImager); now part of Quanterix, combining tissue spatial biology with ultrasensitive Simoa blood-biomarker detection. Instruments run on customer on-prem compute."
+    market_share: null
     sources:
       - "https://ir.quanterix.com/news-releases/news-release-details/quanterix-acquire-akoya-biosciences-creating-first-integrated"
       - "https://finance.yahoo.com/news/quanterix-completes-acquisition-akoya-biosciences-130700411.html"
@@ -170,6 +183,7 @@ vendors:
     leadership: "James Scapa — Founder and CEO"
     history: "Founded 1985 in Troy, Michigan by James Scapa; grew through simulation/HPC acquisitions (PBS Works); acquired by Siemens for ~$10B enterprise value, completed 2025."
     market_position: "Acquired by Siemens for approximately $10 billion enterprise value (completed 2025); leading industrial simulation/HPC software vendor."
+    market_share: null
     sources:
       - "https://dallasinnovates.com/siemens-acquires-industrial-simulation-software-co-altair-engineering-in-10-billion-deal/"
       - "https://press.siemens.com/global/en/pressrelease/siemens-strengthens-leadership-industrial-software-and-ai-acquisition-altair"
@@ -185,6 +199,7 @@ vendors:
     leadership: "Marcus Perez — President"
     history: "Formed May 2022 when N. Harris Computer Corp (Constellation Software) acquired Allscripts' Hospitals & Large Physician Practices unit; Sunrise and Paragon EHR lines."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.alterahealth.com/leadership/"
       - "https://www.alterahealth.com/newsroom/harris-completes-purchase-of-allscripts-hospitals-and-large-physician-practices-business-segment/"
@@ -200,6 +215,7 @@ vendors:
     leadership: "Ido Schoenberg — Chairman & CEO"
     history: "Founded 2006 by brothers Ido and Roy Schoenberg as American Well; telehealth platform; IPO on NYSE (AMWL) 2020; Roy became Executive Vice Chairman June 2024."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Amwell_(company)"
       - "https://business.amwell.com/about-us/leadership-team"
@@ -216,6 +232,7 @@ vendors:
     leadership: "Fabio Forestelli — Chief Executive Officer"
     history: "Founded 2007 by Emidio Zorzella and Massimo Bonardi; listed on Euronext Milan; grew via acquisitions into inspection, serialization and track-&-trace group."
     market_position: "Publicly listed on Euronext Milan; positions itself as a global leader in inspection and track-&-trace."
+    market_share: null
     sources:
       - "https://www.tradingview.com/news/reuters.com,2025:newsml_FWN3VU2AT:0-antares-vision-appoints-fabio-forestelli-as-new-ceo/"
       - "https://antaresvisiongroup.com/about-us/"
@@ -232,6 +249,7 @@ vendors:
     leadership: "Michael Meucci — President & CEO"
     history: "Founded 2002 as Arcadia Solutions; healthcare data-and-analytics platform for value-based care, aggregating EHR, claims and SDoH data. Privately held."
     market_position: "IDC MarketScape named Arcadia a Leader in its U.S. Population Health Analytics 2020 Vendor Assessment."
+    market_share: null
     sources:
       - "https://www.prnewswire.com/news-releases/idc-marketscape-names-arcadia-a-leader-in-us-population-health-analytics-2020-vendor-assessment-301186936.html"
       - "https://arcadia.io/about-arcadia"
@@ -247,6 +265,7 @@ vendors:
     leadership: "Aman Wasan — Chief Executive Officer"
     history: "Founded 1987 by Deepak Abbhi; provides the LifeSphere platform for pharmacovigilance, regulatory affairs and clinical development; serves 500+ life-sciences clients, CROs and health authorities."
     market_position: "Serves 500+ life-sciences clients (company-stated); market-share figure not publicly disclosed."
+    market_share: null
     sources:
       - "https://www.arisglobal.com/leadership/"
       - "https://www.arisglobal.com/"
@@ -263,6 +282,7 @@ vendors:
     leadership: "Yevgeny Dibrov — CEO & Co-founder"
     history: "Founded 2015 in Tel Aviv by Yevgeny Dibrov and Nadir Izrael; connected-device/IoT security vendor reportedly in 2025 talks to be acquired by ServiceNow (~$7B). HQ now San Francisco."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://insights.persana.ai/Armis"
       - "https://www.insightpartners.com/ideas/how-cofounders-yevgeny-dibrov-and-nadir-izrael-built-armis-cyber-exposure-management-and-security-giant/"
@@ -280,6 +300,7 @@ vendors:
     leadership: "Andrew Gostine — Co-Founder & CEO"
     history: "Clinician-led smart-hospital platform (formerly Whiteboard Coordinator) co-founded by Andrew Gostine, Garrett Larance and Tim Koby; independent; NVIDIA-aligned edge-AI for virtual nursing and ambient monitoring."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://artisight.com/about/"
       - "https://www.crunchbase.com/person/andrew-gostine"
@@ -294,6 +315,7 @@ vendors:
     leadership: "Nhat H. Ngo — CEO"
     history: "Formed 2015 when Intelligent Hospital Systems (founded 2006) acquired AmerisourceBergen Technology Group; pharmacy-automation vendor; HQ Winnipeg with US operations in Buffalo Grove, Illinois."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.pharmacytimes.com/view/intelligent-hospital-systems-acquires-amerisourcebergen-technology-group-creating-new-company-named-arxium"
       - "https://www.arxium.com/our-company"
@@ -310,6 +332,7 @@ vendors:
     leadership: "David Hale — CEO"
     history: "Swiss communications/healthcare-tech group established 1987; SIX Swiss Exchange-listed; Ascom Healthcare Platform for clinical alerting and workflow."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.ascom.com/news/ad-hoc-announcements/2025/en/ascom-appoints-david-hale-as-new-ceo/"
       - "https://en.wikipedia.org/wiki/Ascom_(company)"
@@ -325,6 +348,7 @@ vendors:
     leadership: "Shankar Somasundaram — CEO"
     history: "Founded 2017 by Shankar Somasundaram and Hithesh Nama; venture-backed (Series C) IoMT/IoT device security and risk-management vendor; independent."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://asimily.com/about-us/"
       - "https://www.crunchbase.com/organization/asimily"
@@ -340,6 +364,7 @@ vendors:
     leadership: "Vince Servello — President, AspenTech (Emerson business unit)"
     history: "Founded 1981 (MIT roots); process-optimization software (aspenONE, InfoPlus.21); Emerson took majority stake 2022 and fully acquired March 2025, making it an Emerson business unit. Antonio Pietri retired as CEO on completion; Vincent M. Servello leads the unit."
     market_position: "Wholly owned Emerson subsidiary since March 2025; industrial/process-optimization software provider (formerly Nasdaq: AZPN)."
+    market_share: null
     sources:
       - "https://www.prnewswire.com/news-releases/emerson-completes-acquisition-of-remaining-outstanding-shares-of-aspentech-302399867.html"
       - "https://en.wikipedia.org/wiki/Aspen_Technology"
@@ -355,6 +380,7 @@ vendors:
     leadership: "Tamar June — President & CEO"
     history: "Founded 1993 (incorporated in California 2000, formerly Intuitive Data Solutions); privately held enterprise quality-management and regulatory-compliance software vendor."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.assurx.com/management-team/"
       - "https://www.cbinsights.com/company/assurx"
@@ -371,6 +397,7 @@ vendors:
     leadership: "Adam McMullin — CEO"
     history: "Founded 2008 in Belmont, Michigan; pioneered the AvaSys TeleSitter virtual patient-monitoring solution (2009). Received growth investment from Goldman Sachs and Heritage Group (2021)."
     market_position: "Private; positions itself as a leader in acute-care virtual sitting/nursing; specific market share not publicly disclosed."
+    market_share: null
     sources:
       - "https://avasure.com/about/"
       - "https://avasure.com/news/avasure-ceo-adam-mcmullin-named-top-leader-in-digital-health/"
@@ -387,6 +414,7 @@ vendors:
     leadership: "Caspar Herzberg — CEO"
     history: "British industrial-software firm founded 1967 in Cambridge; grew the Wonderware and PI System (OSIsoft) lines. Fully acquired by Schneider Electric in early 2023 (~$11B); now a subsidiary."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Aveva"
       - "https://www.aveva.com/en/about/news/press-releases/2023/aveva-announces-the-completion-of-its-acquisition-by-schneider-electric/"
@@ -403,6 +431,7 @@ vendors:
     leadership: "Tom Polen — Chairman, CEO & President"
     history: "Founded 1897 by Maxwell Becton and Fairleigh Dickinson; global medical-technology firm (NYSE: BDX); Pyxis automated dispensing line; acquired Parata Systems (retail/LTC pharmacy automation)."
     market_position: "Public (NYSE: BDX); named a leading pharmacy-automation vendor (Pyxis dispensing cabinets) in industry market analyses."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/BD_(company)"
       - "https://www.mordorintelligence.com/industry-reports/pharmacy-automation-market"
@@ -418,6 +447,7 @@ vendors:
     leadership: "Kevin O'Reilly — President, Beckman Coulter Diagnostics"
     history: "Founded 1935 in Pasadena by Arnold O. Beckman; combined with Coulter Electronics (1997); acquired by Danaher 2011; now Danaher's clinical diagnostics operating company."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Beckman_Coulter"
       - "https://www.beckman.com/about-us/company-history"
@@ -434,6 +464,7 @@ vendors:
     leadership: "Sajith Wickramasekara — Co-founder & CEO"
     history: "Founded 2012 by Sajith Wickramasekara and Ashu Singhal; venture-backed cloud R&D life-sciences platform (ELN/LIMS/registry); private."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://research.contrary.com/company/benchling"
       - "https://tracxn.com/d/companies/benchling/__ydo8O2nLPIwT3Lr_xCT-60HH5G0gXw6eFkpppgV7hYM"
@@ -449,6 +480,7 @@ vendors:
     leadership: "Oliver Rinner — CEO"
     history: "Founded 2008 as an ETH Zurich spin-off from Ruedi Aebersold's lab. Develops Spectronaut for data-independent-acquisition (DIA) proteomics; Bruker acquired a majority stake in January 2023, with Rinner continuing as CEO."
     market_position: "Proteomics technology company; Spectronaut is a widely used software for DIA mass-spectrometry proteomics data analysis."
+    market_share: null
     sources:
       - "https://biognosys.com/news/biognosys-announces-release-of-spectronaut/"
       - "https://en.wikipedia.org/wiki/Biognosys"
@@ -462,12 +494,15 @@ vendors:
     note: "Safety-certified RTOS (IEC 62304) widely designed into regulated medical devices; embedded OEM BOM play, long-lifecycle design wins. Confidence C: only a third-party blog cited, no QNX/BlackBerry primary medical page."
     headquarters: "Ottawa, Ontario, Canada"
     founded: 1980
-    leadership: null
+    leadership: "John Wall, President of QNX division"
     history: "Founded 1980 as Quantum Software Systems (renamed QNX 1984); safety-certified embedded RTOS; acquired by BlackBerry in 2010; now BlackBerry's QNX division."
     market_position: "QNX software deployed in 255M+ vehicles worldwide (company figure; automotive-led, also used in medical devices)"
+    market_share: "~37% of the global automotive operating-system market (2025, Global Market Insights est.); QNX embedded in 275M+ vehicles"
     sources:
       - "https://blackberry.qnx.com/en"
       - "https://www.mathworks.com/products/connections/product_detail/qnx-neutrino-rtos.html"
+      - "https://www.morningstar.com/news/accesswire/1103385msn/blackberry-appoints-john-wall-as-president-of-qnx-division (BlackBerry press release, Nov 17 2025)"
+      - "https://www.gminsights.com/industry-analysis/automotive-operating-systems-market"
   - id: blackford-analysis
     name: Blackford Analysis (Bayer — imaging-AI platform business winding down)
     categories: [imaging-ai-deployment]
@@ -479,6 +514,7 @@ vendors:
     leadership: "Ben Panter — Founder & Chief Executive Officer"
     history: "Founded 2010 as a University of Edinburgh spin-out; imaging-AI orchestration/marketplace platform; acquired by Bayer February 2023, which later deprioritized the business (2025)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://edinburgh-innovations.ed.ac.uk/news/blackford-analysis-acquired-by-bayer-following-sustained-growth"
       - "https://theimagingwire.com/2025/09/07/investment-in-ai-platform-company-blackford/"
@@ -494,6 +530,7 @@ vendors:
     leadership: "Duncan Angove — Chief Executive Officer"
     history: "Founded 1985 as JDA Software; renamed Blue Yonder 2020 after acquiring the German AI firm of that name; acquired by Panasonic 2021, operates as an independent subsidiary."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Blue_Yonder"
       - "https://blueyonder.com/about/leadership/duncan-angove"
@@ -508,6 +545,7 @@ vendors:
     leadership: "Rainer Birkenbach — CEO"
     history: "Founded 1989 in Munich by Stefan Vilsmeier; medical-technology firm in surgical navigation, radiosurgery and digital OR. Converted to an SE; Vilsmeier now chairs the administrative board."
     market_position: "Private; systems used in roughly 4,000 hospitals across ~120 countries (company-stated)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Brainlab"
       - "https://www.brainlab.com/about-brainlab/company/"
@@ -524,6 +562,7 @@ vendors:
     leadership: "Frank Laukien — Chairman, President & CEO"
     history: "Scientific-instruments maker founded 1960 in Karlsruhe, Germany by Günther Laukien; NYSE: BRKR. Acquired Optimal Industrial Technologies (synTQ PAT software) in 2022; HQ Billerica, Massachusetts."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Bruker"
       - "https://en.wikipedia.org/wiki/Frank_Laukien"
@@ -539,6 +578,7 @@ vendors:
     leadership: "Frank Laukien — President & CEO, Bruker Corporation"
     history: "NanoString, founded 2003 in Seattle, developed nCounter and CosMx spatial imagers; Bruker acquired its assets in May 2024, forming the Bruker Spatial Biology division."
     market_position: "Major spatial-multiomics platform vendor; the CosMx Spatial Molecular Imager competes with 10x Xenium and Vizgen MERSCOPE. Imaging and analysis run on on-prem instruments and local compute."
+    market_share: null
     sources:
       - "https://www.bruker.com/en/news-and-events/news/2024/bruker-announces-formation-of-spatial-biology-division.html"
       - "https://ir.bruker.com/press-releases/press-release-details/2024/Bruker-Completes-Asset-Acquisition-of-NanoString-Business/default.aspx"
@@ -556,6 +596,7 @@ vendors:
     leadership: "Anirudh Devgan — President & CEO"
     history: "Founded 1983 (as SDA, renamed Cadence 1988) in San Jose; a 'big-three' EDA vendor (Nasdaq: CDNS); acquired OpenEye Scientific in 2022 for molecular-design/drug-discovery software."
     market_position: "Public (Nasdaq: CDNS); one of the three dominant electronic-design-automation vendors, with molecular-sciences software via its OpenEye unit."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Cadence_Design_Systems"
       - "https://www.cadence.com/en_US/home/company/leadership-team.html"
@@ -571,6 +612,7 @@ vendors:
     leadership: "Gary Stern — President"
     history: "Founded 1985, headquartered in Martinsburg, Pennsylvania; privately held industrial data-historian software vendor."
     market_position: "not publicly disclosed (private; vendor reports 30,000+ installations across 70+ countries, no market-share figure published)"
+    market_share: null
     sources:
       - "https://www.canarylabs.com/about"
       - "https://www.zoominfo.com/p/Gary-Stern/41124290"
@@ -585,6 +627,7 @@ vendors:
     leadership: "Toshio Takiguchi — President & CEO"
     history: "Established 1948; formerly Toshiba Medical Systems; acquired by Canon (Dec 2016) and renamed Canon Medical Systems (Jan 2018); includes Vital Images advanced visualization."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Canon_Medical_Systems_Corporation"
       - "https://global.medical.canon/News/PressRelease/Detail/18401-834"
@@ -601,6 +644,7 @@ vendors:
     leadership: "Ron Gaboury — CEO"
     history: "Founded 2019, spun out of Yorktel by Bin Guan and Ron Gaboury; enterprise virtual-care/telehealth platform; venture-backed and independent."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://caregility.com/about/"
       - "https://www.crunchbase.com/organization/caregility"
@@ -615,6 +659,7 @@ vendors:
     leadership: "Matt Krueger — Chief Executive Officer"
     history: "Founded 2013 in Berlin by Dennis Kogan and Bjoern von Siemens; surgical-intelligence/video-analytics platform; founders remain on board after Krueger became CEO in 2025."
     market_position: "Company reports its surgical-intelligence software is used in 4,200+ operating rooms supporting 3M+ procedures per year."
+    market_share: null
     sources:
       - "https://www.caresyntax.com/news/caresyntax-elevates-matt-krueger-to-chief-executive-officer"
       - "https://caresyntax.com/podcast/lse-focal-point-welcomes-bjoern-von-siemens/"
@@ -629,6 +674,7 @@ vendors:
     leadership: "Vidur Mahajan — Founder & CEO"
     history: "Founded 2018 (Delaware-incorporated, India roots via Mahajan Imaging); radiology-AI marketplace and orchestration platform (275+ AI apps). Raised $6M seed 2024; venture-backed. HQ location reported inconsistently."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.forbes.com/sites/davidprosser/2024/02/01/carpl-picks-up-6-million-for-its-one-stop-shop-for-healthcare-ai/"
       - "https://techcrunch.com/2024/02/01/carpl/"
@@ -645,6 +691,7 @@ vendors:
     leadership: "Andrew Robinson — President & CEO"
     history: "Founded 2007 in Newtown, Pennsylvania; healthcare real-time location (RTLS) provider. Acquired by UK's Halma plc (2016); acquired managed-services firm Infinite Leap (2021)."
     market_position: "Used by 2,000+ healthcare organizations (company-stated); subsidiary of Halma plc."
+    market_share: null
     sources:
       - "https://centrak.com/news/andrew-robinson-appointed-ceo"
       - "https://www.halma.com/news/press-releases/2016/05-02-2016"
@@ -660,11 +707,13 @@ vendors:
     leadership: "Jon Resnick — CEO (effective Jan 1, 2026)"
     history: "Formed in 2008 from Pharsight and Tripos assets; grew via acquisitions into a biosimulation leader. Phoenix WinNonlin/NLME are its core pharmacometrics tools."
     market_position: "Global leader in model-informed drug development (MIDD) and biosimulation; Phoenix WinNonlin/NLME is the de facto standard for non-compartmental and population PK/PD analysis."
+    market_share: "Leading player (~12%+ share, 2025) in the global biosimulation market (MarketsandMarkets)"
     sources:
       - "https://www.certara.com/software/phoenix-nlme/"
       - "https://www.certara.com/software/phoenix-winnonlin/"
       - "https://ir.certara.com/news-releases/news-release-details/certara-appoints-jon-resnick-chief-executive-officer"
       - "https://finance.yahoo.com/quote/CERT/profile/"
+      - "https://www.marketsandmarkets.com/ResearchInsight/biosimulation-market.asp"
   - id: chemical-computing-group
     name: Chemical Computing Group ULC
     categories: [ai-drug-discovery, comp-chem-simulation]
@@ -677,6 +726,7 @@ vendors:
     leadership: "Paul Labute — President & CEO"
     history: "Privately held cheminformatics firm founded 1994 in Montreal; develops the MOE (Molecular Operating Environment) drug-discovery and molecular-modeling platform. Independent, founder-led."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Chemical_Computing_Group"
       - "https://www.cbinsights.com/company/chemical-computing-group"
@@ -692,6 +742,7 @@ vendors:
     leadership: "Erkan Akyuz — CEO"
     history: "Co-founded 2008 in Calgary by Greg Ogrodnick and cardiologist Matthias Friedrich; flagship cvi42 cardiac-imaging analysis platform; owned by private-equity firm Thoma Bravo."
     market_position: "Private (Thoma Bravo-owned); company states cvi42 interprets millions of exams yearly across 1,700+ hospitals in 90+ countries."
+    market_share: null
     sources:
       - "https://www.theglobeandmail.com/business/article-calgary-software-star-circle-cardiovascular-promises-the-answer-to/"
       - "https://www.thomabravo.com/press-releases/circle-cardiovascular-imaging-announces-leadership-transition"
@@ -708,6 +759,7 @@ vendors:
     leadership: "Yaniv Vardi — CEO"
     history: "Founded 2015 by Galina Antova, Amir Zilberstein and Benny Porat (Team8-incubated); OT/IoT/IoMT cyber-physical-systems security; acquired Medigate; HQ New York."
     market_position: "KLAS 2026 healthcare IoT security score 92.1 (xDome/Medigate)."
+    market_share: null
     sources:
       - "https://claroty.com/press-releases/claroty-establishes-global-headquarters-in-new-york"
       - "https://team8.vc/portfolio/claroty/"
@@ -723,6 +775,7 @@ vendors:
     leadership: "Michael Simpson — CEO"
     history: "Laboratory-informatics group formed by combining Sunquest (founded 1979), CliniSys, HORIZON Lab Systems and ApolloLIMS under one Clinisys brand (2022)."
     market_position: "Reported 3,000+ laboratory customers across 34 countries (company press release)."
+    market_share: null
     sources:
       - "https://www.clinisys.com/us/en/news/clinisys-completes-combination-of-sunquest-horizon-and-apollolims-businesses/"
       - "https://www.clinisys.com/us/en/history/"
@@ -739,6 +792,7 @@ vendors:
     leadership: "Musheer Ahmed — CEO & Founder"
     history: "Founded 2016 by Musheer Ahmed and Mustaque Ahamad (Atlanta); AI payment-integrity/FWA software; backed by CVS Health Ventures. (Some sources cite 2017.)"
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.codoxo.com/leadership/"
       - "https://www.crunchbase.com/person/musheer-ahmed"
@@ -755,6 +809,7 @@ vendors:
     leadership: "Matt Moschner — President & Chief Executive Officer"
     history: "Founded 1981 by Robert Shillman, William Silver and Marilyn Matz; publicly traded (Nasdaq: CGNX) machine-vision (deep-learning inspection) leader based in Natick, Massachusetts; Matt Moschner serves as President & CEO after Robert Willett's tenure."
     market_position: "Publicly traded (Nasdaq: CGNX); FY2024 revenue ~$915M; described as world-leading machine-vision provider."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Cognex_Corporation"
       - "https://www.forbes.com/companies/cognex/"
@@ -770,6 +825,7 @@ vendors:
     leadership: "Ravi Kumar S — CEO, Cognizant"
     history: "TriZetto (Facets/QNXT payer cores) acquired by Cognizant for $2.7B in 2014 from Apax Partners. Cognizant itself founded 1994, headquartered Teaneck NJ."
     market_position: "TriZetto Facets and QNXT are leading U.S. payer claims-administration cores; at the 2014 acquisition the combined Cognizant/TriZetto healthcare unit served ~350 payers and 245,000 providers (Everest Group / Cognizant)."
+    market_share: null
     sources:
       - "https://news.cognizant.com/2014-09-15-Cognizant-to-Acquire-TriZetto-Creating-a-Fully-Integrated-Healthcare-Technology-and-Operations-Leader"
       - "https://www.everestgrp.com/2014-09-cognizant-acquires-trizetto-the-new-big-blue-of-healthcare-it-sherpas-in-blue-shirts-15544.html"
@@ -786,6 +842,7 @@ vendors:
     leadership: "Braxton Jarratt — CEO"
     history: "Founded circa 2014 in Atlanta; venture-backed RTLS/asset-intelligence provider using low-power radio and cloud analytics for healthcare, automotive and logistics."
     market_position: "Private; revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://www.cbinsights.com/company/cognosos"
       - "https://cognosos.com/blog/cognosos-triples-revenue-2022-solidify-leadership-position-asset-visibility-intelligence/"
@@ -801,6 +858,7 @@ vendors:
     leadership: "Martin Dubuc — CEO (of parent SeqOne Genomics, post-acquisition)"
     history: "Spun out of the Wellcome Sanger Institute in 2013 (Cambridge, UK); clinical-genomics interpretation platform Sapientia. Acquired by France's SeqOne Genomics in 2025 to form a combined genomics software leader."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.crunchbase.com/organization/congenica"
       - "https://www.seqone.com/news-insights/seqone-acquires-congenica-to-create-a-global-leader-in-ai-powered-genomic-medicine"
@@ -815,12 +873,14 @@ vendors:
     note: "Alarm/event middleware; became available in Epic Toolbox as Alert Manager Integration (July 2025); classic on-prem integration-engine deployment."
     headquarters: "Toronto, Ontario, Canada"
     founded: 1992
-    leadership: null
+    leadership: "Sandy Saggar, CEO"
     history: "Connexall alarm/event-integration middleware is the flagship product of GlobeStar Systems, founded 1992 in Toronto by David Tavares (d. 2021); privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.canhealth.com/2022/08/03/connexall-promotes-sandy-saggar-to-interim-ceo/"
       - "https://en.everybodywiki.com/GlobeStar_Systems"
+      - "https://www.prnewswire.com/news-releases/connexall-appoints-health-technology-innovator-sandy-saggar-as-ceo-302386844.html"
   - id: cotiviti
     name: Cotiviti, Inc.
     categories: [payer-um-fraud-analytics]
@@ -830,12 +890,14 @@ vendors:
     note: "Market leader in payment integrity and FWA analytics (~$15B suspect claims identified in 2023); analytics run on Cotiviti-operated infrastructure — operator-iron pull."
     headquarters: "South Jordan, USA"
     founded: 1979
-    leadership: null
+    leadership: "Ric Sinclair, CEO"
     history: "Roots in Connolly (founded 1979); formed as Cotiviti via 2018 Verscend–Cotiviti merger; KKR-backed; HQ South Jordan, Utah; payment-integrity analytics leader."
     market_position: "Everest Group highest-designated Leader for Payment Integrity Solutions PEAK Matrix (2025 and 2026)."
+    market_share: "Highest-designated Leader for market impact, Everest Group 2026 Pre-payment Integrity Solutions PEAK Matrix"
     sources:
       - "https://www.cotiviti.com/press-release/cotiviti-named-highest-designated-leader-by-everest-group-in-payment-integrity-solutions-peak-matrix-assessment-2025"
       - "https://www.cotiviti.com/press-release/cotiviti-recognized-by-everest-group-as-the-highest-designated-leader-for-market-impact-in-the-2026-pre-payment-integrity-solutions-peak-matrix-assessment"
+      - "https://hitconsultant.net/2026/03/09/cotiviti-appoints-ric-sinclair-ceo-emad-rizk-advisor/"
   - id: cresset
     name: Cresset Group
     categories: [ai-drug-discovery, comp-chem-simulation]
@@ -848,6 +910,7 @@ vendors:
     leadership: "Tim Cheeseright — CEO"
     history: "Founded 2002 (Dr Andy Vinter and colleagues); UK computational-chemistry/drug-discovery software (Flare, Torx) plus contract research; Robert Scoffin CEO 2010–2024, now President."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://cresset-group.com/about/people/"
       - "https://cresset-group.com/about/news/ceo-end-of-year-message-2024/"
@@ -863,6 +926,7 @@ vendors:
     leadership: "Francisco Almada Lobo — CEO"
     history: "Founded 2009 in Maia, Portugal; Industry 4.0 MES for semiconductor, electronics and medical devices. Became a subsidiary of ASMPT in 2018. Francisco Almada Lobo has been CEO since founding (2010)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Critical_Manufacturing"
       - "https://www.criticalmanufacturing.com/company/leadership/"
@@ -879,6 +943,7 @@ vendors:
     leadership: "Leon Lerman — SVP at Axonius (Cynerio co-founder & former CEO)"
     history: "Founded 2018 by Leon Lerman and Daniel Brodie; healthcare IoMT security; acquired by Axonius July 2025 for $100M+, now part of Axonius."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.axonius.com/newsroom/press-release/axonius-acquires-medical-device-security-specialist-cynerio"
       - "https://hitconsultant.net/2025/07/30/axonius-acquires-cynerio-for-over-100m-strengthening-medical-device-security/"
@@ -894,6 +959,7 @@ vendors:
     leadership: "Pascal Daloz — Chairman & Chief Executive Officer"
     history: "Founded 1981 as a Dassault Aviation spin-off; publicly traded 3D/PLM software leader; BIOVIA (ex-Accelrys) unit supplies molecular-modeling and simulation. Daloz succeeded Bernard Charlès as CEO January 2024 and became Chairman in February 2026."
     market_position: "Publicly traded (Euronext Paris); FY2024 revenue €6.21B."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Dassault_Syst%C3%A8mes"
   - id: data-innovations
@@ -908,6 +974,7 @@ vendors:
     leadership: "Michael Epplen — Chief Executive Officer"
     history: "Founded 1989, Colchester Vermont; maker of the Instrument Manager lab middleware. Owned by Battery Ventures, then acquired by Roper Technologies in 2015."
     market_position: "Instrument Manager is described as the dominant vendor-neutral lab middleware, deployed in 6,000+ laboratories with 1,200+ instrument drivers (Data Innovations)."
+    market_share: null
     sources:
       - "https://www.datainnovations.com/product/instrument-manager/"
       - "https://www.globenewswire.com/news-release/2015/02/05/1052256/0/en/Battery-Ventures-Owned-Data-Innovations-Acquired-by-Unit-of-Roper-Industries.html"
@@ -924,9 +991,11 @@ vendors:
     leadership: "Ali Ghodsi — Co-founder & CEO"
     history: "Founded 2013 by the UC Berkeley creators of Apache Spark, led by Ali Ghodsi; data-and-AI 'lakehouse' platform; still privately held."
     market_position: "Private; valued ~$134B (Dec 2025) with a reported annual revenue run-rate exceeding $4.8B."
+    market_share: "~11% of the global data-lakehouse market (2024, Global Market Insights est.)"
     sources:
       - "https://en.wikipedia.org/wiki/Databricks"
       - "https://fortune.com/2025/12/17/databricks-ceo-ali-ghodsi-on-where-ai-is-most-bubbly-and-how-the-company-settled-on-its-134-billion-valuation/"
+      - "https://www.gminsights.com/industry-analysis/data-lakehouse-market"
   - id: deepc
     name: deepc
     categories: [imaging-ai-deployment]
@@ -938,6 +1007,7 @@ vendors:
     leadership: "Franz Pfister — CEO & Co-Founder"
     history: "Munich-based radiology-AI startup; deepcOS is a vendor-neutral orchestration/marketplace platform for imaging AI. Co-founded by CEO Franz Pfister and CTO Julia Moosbauer; venture-backed and independent. Founding year not verified."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.deepc.ai/about"
       - "https://www.bio-m.org/en/news/news-detail/detail/News/lmu-university-hospital-munich-relies-on-deepcs-ai-platform-in-radiology.html"
@@ -954,6 +1024,7 @@ vendors:
     leadership: "Richard Daly — CEO"
     history: "Founded 2009 as a Stanford spin-out (Sidow, Batzoglou, Sundquist); cloud-based genomics/bioinformatics platform; independent, privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://tracxn.com/d/companies/dnanexus/__kdzA5d0nphW7dNIMWmRrEf770ucn6c_yCysmavCioEw"
       - "https://www.crunchbase.com/person/richard-daly"
@@ -969,10 +1040,12 @@ vendors:
     leadership: "John Dolbey — Senior Vice President & General Manager"
     history: "Founded 1914 in Cincinnati by John Dolbey (partnering with Thomas Edison on early dictation); family-owned; provides computer-assisted coding, transcription and speech-recognition software."
     market_position: "Best in KLAS for Computer-Assisted Coding (Fusion CAC), 2017-2025."
+    market_share: "#1 Best in KLAS, Computer-Assisted Coding (score 89.6, 9th consecutive year, 2025)"
     sources:
       - "https://www.dolbey.com/company/"
       - "https://www.dolbey.com/solutions/coding/fusion-cac/"
       - "https://www.linkedin.com/in/john-dolbey-57538425/"
+      - "https://klasresearch.com/best-in-klas-ranking/computer-assisted-coding-cac/2025/229"
   - id: dotmatics
     name: Dotmatics (Siemens)
     categories: [rd-lab-informatics]
@@ -985,6 +1058,7 @@ vendors:
     leadership: "Brian Lee — CEO"
     history: "Founded 2005; scientific R&D informatics suite (ELN, registration, inventory) built by acquisition; acquired by Siemens July 2025 for ~$5.1B; Brian Lee became CEO Dec 2025."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://press.siemens.com/global/en/pressrelease/siemens-completes-acquisition-dotmatics"
       - "https://en.wikipedia.org/wiki/Dotmatics"
@@ -1001,6 +1075,7 @@ vendors:
     leadership: "Jakob Just-Bomholt — President & CEO"
     history: "Founded 1972 by Lars and Laurent Leksell to commercialize the Gamma Knife; radiation-oncology TPS/OIS (Monaco, MOSAIQ); listed on Nasdaq Stockholm."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Elekta"
       - "https://www.elekta.com/company/about-us/story/the-early-years/"
@@ -1016,6 +1091,7 @@ vendors:
     leadership: "Gergely Sved — Chief Executive Officer"
     history: "Founded 1949 in Denmark; thermal-validation and environmental-monitoring specialist (wireless data loggers, thermocouple systems); owned by the Lundbeck Foundation."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.ellab.com/about-ellab/our-history/"
       - "https://lundbeckfonden.com/business-activities/strategic-ownerships/ellab-a/s"
@@ -1031,6 +1107,7 @@ vendors:
     leadership: "Lal Karsanbhai — President & CEO"
     history: "Founded 1890 in St. Louis; Fortune 500 industrial automation and software company. Holds a majority stake in Aspen Technology and acquired Open Systems International."
     market_position: "Publicly traded (NYSE: EMR); Fortune 500 industrial automation and software company."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Emerson_Electric"
   - id: ennov
@@ -1045,6 +1122,7 @@ vendors:
     leadership: "Olivier Pâris — Founder & CEO"
     history: "Founded 1999 in Paris by Olivier Pâris; provides end-to-end regulatory, quality and clinical software for life sciences. Took growth investment from Bregal Sagemount and Ardian (2026)."
     market_position: "Serves ~650 customers across 30 countries (company-stated); privately held."
+    market_share: null
     sources:
       - "https://en.ennov.com/about/"
       - "https://www.businesswire.com/news/home/20260518090659/en/Ennov-Announces-Strategic-Growth-Investment-from-Bregal-Sagemount-and-Ardian"
@@ -1060,10 +1138,12 @@ vendors:
     leadership: "Judy Faulkner — Founder & CEO"
     history: "Founded 1979 in Wisconsin by Judy Faulkner; privately held and employee-owned. Largest US EHR vendor; grows organically rather than through major acquisitions. HQ Verona, Wisconsin."
     market_position: "Largest US EHR vendor by market share; company reports 325M+ patients with a current Epic record and ~$6.7B FY2025 revenue (Forbes/CNBC)."
+    market_share: "#1 US acute-care hospital EHR: 42.3% of hospitals and 54.9% of beds (KLAS, year-end 2024)"
     sources:
       - "https://en.wikipedia.org/wiki/Epic_Systems"
       - "https://www.forbes.com/profile/judy-faulkner/"
       - "https://www.cnbc.com/2025/08/16/how-epics-82-year-old-ceo-judy-faulkner-built-her-software-factory.html"
+      - "https://engage.klasresearch.com/blog/us-acute-care-ehr-market-share-in-2024/805/"
   - id: eq2
     name: EQ2
     categories: [healthcare-cmms]
@@ -1076,6 +1156,7 @@ vendors:
     leadership: null
     history: "EQ2 commercialized the University of Vermont-developed HEMS biomedical CMMS in 1993; acquired by TMA Systems (announced March 2025)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.eq2llc.com/about-us"
       - "https://www.healthcarefacilitiestoday.com/posts/EQ2-LLC-moves-headquarters-from-Vermont-to-North-Carolina--12896"
@@ -1090,6 +1171,7 @@ vendors:
     leadership: "Shane Cooke — President & CEO"
     history: "Founded 2010 in Boston by Dimitar Baronov, Evan Butler and Jesse Lock; ICU clinical-intelligence and predictive-analytics platform; Shane Cooke joined as President & CEO in 2019."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Etiometry"
       - "https://www.etiometry.com/resources/etiometry-expands-leadership-with-new-ceo/"
@@ -1103,13 +1185,15 @@ vendors:
     note: "ETQ Reliance no-code eQMS for CAPA, audits, risk management"
     headquarters: "Burlington, Massachusetts, United States"
     founded: 1992
-    leadership: null
+    leadership: "Vick Vaishnavi, CEO"
     history: "Founded 1992; ETQ Reliance no-code eQMS; acquired by Hexagon AB (2022); product rebranded 'Octave Reliance' under Hexagon's Octave spin-off."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.etq.com/press-releases/hexagon-acquires-etq/"
       - "https://hexagon.com/company/newsroom/press-releases/2022/hexagon-acquires-etq-adding-market-leading-saas-based-qms-software-platform-to-its-portfolio"
       - "https://www.octave.com/products/asset-performance-management/reliance"
+      - "https://www.etq.com/press-releases/vick-vaishnavi-named-etq-ceo/ (appointed CEO Jan 2023; confirmed still leading ETQ in 2026 via ETQ's 2026 Pulse of Quality report coverage)"
   - id: experian-health
     name: Experian Health (Experian plc)
     categories: [patient-access-scheduling]
@@ -1122,6 +1206,7 @@ vendors:
     leadership: "Tom Cox — President, Experian Health"
     history: "Division of Experian plc; US revenue-cycle, patient-access and identity software; built via acquisitions incl. MyHealthDirect (2019) and Wave HDC (2022)."
     market_position: "Ranked #1 largest revenue-cycle management firm by Modern Healthcare (2015 listing)"
+    market_share: null
     sources:
       - "https://histalk2.com/2021/11/15/histalk-interviews-tom-cox-president-experian-health/"
       - "https://www.prnewswire.com/news-releases/modern-healthcare-ranks-experian-health-1-largest-revenue-management-firm-300141019.html"
@@ -1138,6 +1223,7 @@ vendors:
     leadership: "Martin Schmid — Chief Executive Officer"
     history: "Founded 1996 in Germany by Martin Schmid; regulatory-information-management (EXTEDOpulse RIM/eCTD publishing) vendor; part of Bertelsmann Group (Digital Health division) since February 2024."
     market_position: "Vendor states EXTEDOpulse is used by 850+ organizations and ~80% of eCTD-accepting regulatory agencies."
+    market_share: null
     sources:
       - "https://www.cbinsights.com/company/extedo/people"
       - "https://www.extedo.com/company/about"
@@ -1154,6 +1240,7 @@ vendors:
     leadership: "Martin Reese — Co-Founder, President & CEO"
     history: "Founded as Omicia, later renamed Fabric Genomics; AI-driven clinical genomics interpretation (GEM/ACE). Acquired by GeneDx in 2025, operates as an independent subsidiary."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://fabricgenomics.com/about-fabric/"
       - "https://www.crunchbase.com/organization/omicia"
@@ -1169,6 +1256,7 @@ vendors:
     leadership: "Hemant Goel — CEO"
     history: "Rebranded from nThrive in 2022; healthcare revenue-cycle-management technology vendor headquartered in Plano, Texas, serving hospitals and health systems."
     market_position: "Privately held; revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://finthrive.com/about-us/elt"
       - "https://www.cbinsights.com/company/finthrive"
@@ -1183,6 +1271,7 @@ vendors:
     leadership: "Stephanie Ferris — CEO"
     history: "Fidelity National Information Services (FIS) acquired SunGard in 2015, gaining the Prophet actuarial-modeling platform now central to its Insurance Risk Suite for valuation, pricing and IFRS 17."
     market_position: "Prophet is a widely deployed enterprise actuarial-modeling engine for life and P&C insurers; runs on compute-intensive on-prem HPC grids or FIS-managed cloud/SaaS, a strong actuarial-HPC target."
+    market_share: null
     sources:
       - "https://www.fisglobal.com/products/fis-insurance-risk-suite"
       - "https://en.wikipedia.org/wiki/FIS_(company)"
@@ -1198,6 +1287,7 @@ vendors:
     leadership: "Nathan Hubbard — CEO"
     history: "Founded 2012 by Nat Turner and Zach Weinberg (ex-Google); oncology EHR (OncoEMR) and real-world evidence. Acquired by Roche for $1.9B in 2018, operates as independent affiliate. Nathan Hubbard appointed CEO August 2025, succeeding Carolyn Starrett."
     market_position: "Market leader in oncology-specific EHR and real-world oncology data; acquired by Roche for $1.9 billion (2018)."
+    market_share: null
     sources:
       - "https://flatiron.com/about-us"
       - "https://www.biopharmadive.com/news/roche-buys-cancer-data-company-flatiron-health-for-19b/517285/"
@@ -1213,6 +1303,7 @@ vendors:
     leadership: "Henry Izawa — President & CEO, FUJIFILM Healthcare Americas"
     history: "Healthcare arm of Japan's FUJIFILM Holdings; the Americas unit (Lexington, MA) was formed in 2021 when Fujifilm acquired Hitachi's diagnostic-imaging business (~$1.56B) and merged it with Fujifilm Medical Systems."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://healthcaresolutions-us.fujifilm.com/resources/press-release/fujifilm-to-acquire-hitachis-diagnostic-imaging-related-business-to-accelerate-growth-of-its-healthcare-business/"
       - "https://www.globenewswire.com/news-release/2021/10/01/2307092/0/en/Fujifilm-Integrates-Two-Medical-Technology-Businesses-to-Drive-Growth-Collaboration-and-Innovation.html"
@@ -1229,6 +1320,7 @@ vendors:
     leadership: null
     history: "Founded 1964; electron-microscopy instrumentation/software maker (DigitalMicrograph); acquired by AMETEK from Roper Technologies in 2019 for $925M; now part of AMETEK's Electron Microscopy Technologies group."
     market_position: "Part of AMETEK (NYSE: AME); described by AMETEK as the world's leading manufacturer of instrumentation and software for electron microscopes."
+    market_share: null
     sources:
       - "https://www.gatan.com/company/about-gatan"
       - "https://www.gatan.com/company/news/ametek-acquire-gatan-roper-technologies"
@@ -1244,6 +1336,7 @@ vendors:
     leadership: "Peter Arduini — President & CEO"
     history: "General Electric's healthcare business (rooted in the 1890s); spun off as independent, Nasdaq-listed GE HealthCare Technologies in January 2023; HQ Chicago."
     market_position: "Revenue of $18.3 billion for 2022 (final year before the standalone spin-off)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/GE_HealthCare"
       - "https://investor.gehealthcare.com/news-releases/news-release-details/peter-arduini-named-ceo-ge-healthcare/"
@@ -1260,6 +1353,7 @@ vendors:
     leadership: "Scott Strazik — CEO"
     history: "Formed April 2, 2024 as the energy spin-off from General Electric (NYSE: GEV); Proficy historian/MES software carries the former GE Digital industrial-software lineage."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.gevernova.com/news/articles/transition-energies-timeline-ge-vernovas-spin"
       - "https://en.wikipedia.org/wiki/GE_Vernova"
@@ -1276,6 +1370,7 @@ vendors:
     leadership: "Andreas Scherer — President & CEO"
     history: "Founded 1998 (Bozeman, Montana); bioinformatics/NGS variant-interpretation software (VarSeq, VSWarehouse); privately held; Andreas Scherer succeeded founder Christophe Lambert as CEO."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.bozemandailychronicle.com/news/economy/golden-helix-brings-in-new-ceo/article_4b278d9a-b2e2-11e2-b25b-0019bb2963f4.html"
       - "https://www.linkedin.com/in/scherer/"
@@ -1292,6 +1387,7 @@ vendors:
     leadership: "Dan O'Dowd — President & Chief Executive Officer"
     history: "Founded 1982 by Dan O'Dowd and Carl Rosenberg; private, Santa Barbara-based vendor of safety-certified embedded RTOS (INTEGRITY) and compiler/development tools."
     market_position: "not publicly disclosed (privately held)"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Green_Hills_Software"
       - "https://www.ghs.com/corporate/management_team.html"
@@ -1306,6 +1402,7 @@ vendors:
     leadership: "Tadashi Maruno — President & CEO"
     history: "Founded 1953; publicly traded photonics maker (TSE: 6965); NanoZoomer whole-slide scanner family is its digital-pathology / WSI acquisition instrument line."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://nanozoomer.hamamatsu.com/"
       - "https://www.hamamatsu.com/us/en/our-company/history.html"
@@ -1322,6 +1419,7 @@ vendors:
     leadership: "Ben Albert — Chief Executive Officer"
     history: "Founded 2008 in Utah by Tom Burton and Steven Barlow; healthcare data-and-analytics platform (IPO 2019, Nasdaq: HCAT). Acquired Upfront Healthcare 2025; Ben Albert became CEO Feb 2026, succeeding Dan Burton."
     market_position: "Publicly traded (Nasdaq: HCAT); healthcare data-and-analytics technology and services provider."
+    market_share: null
     sources:
       - "https://www.healthcatalyst.com/news/health-catalyst-appoints-ben-albert-as-chief-executive-officer"
       - "https://www.sahmcapital.com/news/content/health-catalyst-appoints-ben-albert-as-ceo-succeeding-dan-burton-2026-02-18"
@@ -1338,6 +1436,7 @@ vendors:
     leadership: "Steve Krupa — CEO"
     history: "Founded 2005 in Burlington, Massachusetts; payer core-administration software (HealthRules Payor). Majority-acquired by Blackstone (2020), then acquired by Bain Capital (2025)."
     market_position: "Private (Bain Capital-owned); revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://healthedge.com/about-us/"
       - "https://www.baincapital.com/news/healthedge-secures-strategic-investment-bain-capital"
@@ -1354,6 +1453,7 @@ vendors:
     leadership: "Robert A. Frist Jr. — Chairman & CEO"
     history: "Founded 1990 in Nashville by Robert A. Frist Jr., who still leads it; publicly traded (NASDAQ: HSTM). Healthcare workforce development, learning and credentialing SaaS; grown partly via acquisitions."
     market_position: "Company reports its workforce solutions are used by over half of US hospitals (HealthStream investor relations)."
+    market_share: null
     sources:
       - "https://www.healthstream.com/about"
       - "https://ir.healthstream.com/management/robert-frist"
@@ -1369,9 +1469,11 @@ vendors:
     leadership: "Antonio Neri — President & CEO"
     history: "Formed November 2015 from the split of Hewlett-Packard Co. into HPE (enterprise) and HP Inc.; HQ relocated to Texas; HPC/AI portfolio includes former Cray and Determined AI assets."
     market_position: "Public (NYSE: HPE); among the largest enterprise infrastructure and HPC-server vendors globally."
+    market_share: "#2 supercomputer vendor by TOP500 system share (~115 of 500 systems, June 2024, behind Lenovo)"
     sources:
       - "https://en.wikipedia.org/wiki/Hewlett_Packard_Enterprise"
       - "https://www.hpe.com/us/en/leadership-bios/antonio-neri.html"
+      - "https://www.top500.org/lists/top500/2024/06/highs/"
   - id: hippocratic-ai
     name: Hippocratic AI
     categories: [healthcare-llm-serving]
@@ -1383,6 +1485,7 @@ vendors:
     leadership: "Munjal Shah — Co-founder & CEO"
     history: "Founded 2023 in Palo Alto by Munjal Shah; builds a safety-focused healthcare LLM powering generative-AI clinical agents for non-diagnostic patient calls; raised $141M Series B at $1.64B valuation."
     market_position: "High-profile healthcare-LLM startup; delivers vendor-managed AI patient-care agents rather than on-premises software (operator model). Backed by NVIDIA NVentures, a16z, General Catalyst and Kleiner Perkins."
+    market_share: null
     sources:
       - "https://www.businesswire.com/news/home/20250109643850/en/Hippocratic-AI-Completes-$141MM-Series-B-Financing-Round-Led-by-Kleiner-Perkins-Valuing-the-Company-at-$1.64B"
       - "https://www.businesswire.com/news/home/20240919304919/en/Hippocratic-AI-Receives-Investment-From-NVentures-to-Build-Generative-AI-Healthcare-Agents"
@@ -1399,6 +1502,7 @@ vendors:
     leadership: "Vimal Kapur — Chairman & CEO"
     history: "Founded 1906 (Wabash, Indiana); diversified industrial/technology conglomerate; moved HQ to Charlotte, North Carolina (2019); announced 2025 plan to split into three companies."
     market_position: "Fortune 100 industrial conglomerate; 2025 announcement to split into three separate publicly traded businesses."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Honeywell"
       - "https://businessnc.com/honeywell-picks-its-new-charlotte-headquarters-home/"
@@ -1414,6 +1518,7 @@ vendors:
     leadership: "Jitesh Ghai — President & CEO"
     history: "Acuo VNA is Hyland Healthcare's vendor-neutral archive; Hyland (founded 1991, maker of OnBase) acquired Acuo via the Perceptive/Lexmark business in 2017; Hyland is Thoma Bravo-owned."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.hyland.com/en/solutions/products/acuo"
       - "https://en.wikipedia.org/wiki/Hyland_Software"
@@ -1430,6 +1535,7 @@ vendors:
     leadership: "Arvind Krishna — Chairman & CEO"
     history: "Founded 1911 as Computing-Tabulating-Recording Co., renamed IBM 1924; Spectrum LSF is its long-standing on-prem HPC workload manager."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/IBM"
       - "https://www.ibm.com/history/arvind-krishna"
@@ -1444,6 +1550,7 @@ vendors:
     leadership: "Barry Balfe — CEO (effective Oct 1, 2025)"
     history: "CRO founded 1990 in Dublin. Through its acquisition of GloboMax/ICON Development Solutions it maintains and distributes NONMEM, the standard nonlinear mixed-effects modeling package for population PK/PD."
     market_position: "Owner and distributor of NONMEM, used by the majority of population-pharmacokinetics groups; NONMEM runs on workstations and HPC clusters for pharmacometric analysis."
+    market_share: null
     sources:
       - "https://www.iconplc.com/solutions/technologies/nonmem"
       - "https://en.wikipedia.org/wiki/NONMEM"
@@ -1461,6 +1568,7 @@ vendors:
     leadership: "Ben Dorks — CEO"
     history: "Founded 1993 (Nottingham, UK); quality/compliance (eQMS) software grown via acquisitions; acquired by Hg Capital July 2022 at ~£1.09B, delisted from AIM."
     market_position: "not publicly disclosed (private; ~£1.09B enterprise value at 2022 Hg acquisition)"
+    market_share: null
     sources:
       - "https://www.ideagen.com/company/news/acquisition-of-ideagen"
       - "https://hgcapital.com/portfolio/ideagen"
@@ -1476,9 +1584,11 @@ vendors:
     leadership: "Jacob Thaysen — Chief Executive Officer"
     history: "Founded 1998 in San Diego; dominant next-generation-sequencing systems/consumables provider; publicly traded (Nasdaq: ILMN); Clarity LIMS came via the GenoLogics acquisition."
     market_position: "Publicly traded (Nasdaq: ILMN); leading global NGS provider with an active installed base of ~21,000 instruments worldwide."
+    market_share: "Dominant global NGS provider; >90% share of clinical genomics sequencing (DeciBio estimate, cited by GEN, 2023)"
     sources:
       - "https://www.prnewswire.com/news-releases/illuminas-board-appoints-jacob-thaysen-phd-as-its-new-chief-executive-officer-301917362.html"
       - "https://www.illumina.com/content/dam/illumina-marketing/documents/company/illumina-at-a-glance.pdf"
+      - "https://www.genengnews.com/topics/omics/illumina-and-the-state-of-the-genomics-market/"
   - id: indica-labs
     name: Indica Labs
     categories: [digital-pathology, spatial-biology-omics]
@@ -1490,6 +1600,7 @@ vendors:
     leadership: "Steven Hashagen — Founder & CEO"
     history: "Founded 2011; maker of the HALO and HALO AI quantitative image-analysis platform plus HALO AP enterprise digital-pathology software for primary diagnosis."
     market_position: "Self-described global leader in computational pathology; surpassed 3,000 HALO deployments worldwide since 2013"
+    market_share: null
     sources:
       - "https://indicalab.com/"
       - "https://indicalab.com/company-indica-labs/"
@@ -1502,11 +1613,13 @@ vendors:
     source: "https://cardiovascularbusiness.com/topics/health-it/cvis/2026-best-klas-rankings-examine-cardiovascular-information-systems-hemodynamic-solutions (INFINITT Cardiology Suite Best in KLAS CVIS 2026, score 89; INFINITT also a PACS vendor per market listings)"
     headquarters: "Seoul, South Korea"
     founded: 1997
-    leadership: null
+    leadership: "Won Yong Lee, CEO"
     history: "Founded 1997, Seoul; KRX-listed PACS/VNA and cardiovascular imaging vendor with global subsidiaries including INFINITT North America."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/INFINITT_Healthcare"
+      - "https://en.wikipedia.org/wiki/INFINITT_Healthcare (corroborated current by https://dieurope.com/it-ai/leadership-shake-up-at-infinitt-europe-as-kevin-lim-takes-charge.html, Oct 2025, naming Weon-Yong Lee as CEO)"
   - id: infor
     name: Infor (Koch Industries)
     categories: [hospital-erp]
@@ -1519,6 +1632,7 @@ vendors:
     leadership: "Kevin Samuelson — CEO"
     history: "Founded 2002; industry-specific cloud-ERP vendor headquartered in New York. Grew through acquisitions (Lawson, GT Nexus); wholly acquired by Koch Industries (2020)."
     market_position: "Among the largest cloud-ERP vendors (Koch-owned); revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Infor"
       - "https://www.infor.com/news/koch-industries-completes-infor-acquisition"
@@ -1534,6 +1648,7 @@ vendors:
     leadership: "Abhinav Shashank — Co-founder & CEO"
     history: "Founded 2014 in San Francisco by Abhinav Shashank, Kanav Hasija and Sandeep Gupta; venture-backed healthcare data-and-AI platform (population health, RCM, patient engagement). Independent."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Innovaccer"
       - "https://innovaccer.com/about"
@@ -1546,11 +1661,13 @@ vendors:
     source: "https://intuitionlabs.ai/articles/enterprise-pacs-klas-comparison (Intelerad rated in KLAS enterprise PACS comparison — challenger with on-prem and hosted deployments; single secondary-aggregator source)"
     headquarters: "Montreal, Quebec, Canada"
     founded: 1999
-    leadership: null
+    leadership: "Jordan Bazinsky, CEO"
     history: "Founded 1999 in Montreal by McGill-affiliated grads (Rick Rubin, Christopher Henri); enterprise-imaging/PACS vendor; privately held."
     market_position: "Private; company reports ~2,500 healthcare-organization customers supporting 230M+ exams and 8B images annually."
+    market_share: null
     sources:
       - "https://tracxn.com/d/companies/intelerad/__iGmkwGwpVA9Gf-GGhJtOvbLjG1ijMl4OAoCHFDEU_bQ"
+      - "https://www.intelerad.com/en/leadership/jordan-bazinsky/"
   - id: intelichart
     name: InteliChart LLC
     categories: [patient-portal-engagement]
@@ -1563,6 +1680,7 @@ vendors:
     leadership: "Gary Hamilton — CEO"
     history: "Founded 2010 by Gary Hamilton (out of Integrated Healthcare Solutions, 2001); EHR-agnostic patient-engagement platform (Healthy Outcomes); HQ Charlotte, North Carolina."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.intelichart.com/who-we-are"
       - "https://www.prnewswire.com/news-releases/intelichart-expands-leadership-team-with-new-chief-operating-officer-301658382.html"
@@ -1579,6 +1697,7 @@ vendors:
     leadership: "Phillip T. (Terry) Ragon — Founder & CEO"
     history: "Founded 1978 by Terry Ragon; privately held; IRIS data platform and HealthShare HIE, descended from the Caché database."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/InterSystems"
       - "https://www.intersystems.com/contact/phillip-t-terry-ragon/"
@@ -1594,10 +1713,12 @@ vendors:
     leadership: "Ari Bousbib — Chairman & CEO"
     history: "Formed October 2016 from merger of Quintiles and IMS Health; global RWD/RWE, CRO and life-sciences analytics; NYSE-listed (IQV)."
     market_position: "FY2025 revenue US$16.3 billion"
+    market_share: "World's largest CRO by revenue (~US$15.4B FY2024); #1 in the global contract-research-organization market"
     sources:
       - "https://en.wikipedia.org/wiki/IQVIA"
       - "https://www.barchart.com/story/news/41527/iqvia-reports-fourth-quarter-and-full-year-2025-results-issues-full-year-2026-guidance"
       - "https://ir.iqvia.com/governance/board-of-directors/default.aspx"
+      - "https://pharmaboardroom.com/articles/top-10-cros-in-2024/"
   - id: john-snow-labs
     name: John Snow Labs
     categories: [healthcare-llm-serving]
@@ -1609,6 +1730,7 @@ vendors:
     leadership: "David Talby — CEO"
     history: "Founded 2015; develops Spark NLP and domain-specific Medical LLMs for healthcare and life sciences, deployable on-premises or air-gapped."
     market_position: "Industry leader in medical language models and healthcare NLP; emphasizes on-premises / private deployment of Medical LLMs, differentiating from cloud-only clinical AI vendors — a strong on-prem serving co-sell target."
+    market_share: null
     sources:
       - "https://www.johnsnowlabs.com/healthcare-llm/"
       - "https://www.johnsnowlabs.com/"
@@ -1625,6 +1747,7 @@ vendors:
     leadership: "Joakim Weidemanis — Chief Executive Officer"
     history: "Founded 1885 by Warren Johnson (Milwaukee); publicly traded building-technologies leader (Metasys BMS); now legally domiciled in Cork, Ireland. Weidemanis became CEO March 2025."
     market_position: "Publicly traded (NYSE: JCI); market leader in hospital/commercial building automation (Metasys)."
+    market_share: null
     sources:
       - "https://www.johnsoncontrols.com/media-center/news/press-releases/2025/02/05/johnson-controls-announces-joakim-weidemanis-as-next-ceo"
       - "https://www.hfmmagazine.com/articles/4401-building-automation-expands-for-hospitals"
@@ -1639,6 +1762,7 @@ vendors:
     leadership: "Karl-Christian Storz — President & CEO"
     history: "Founded 1945 in Tuttlingen by Dr. Karl Storz; family-owned endoscopy and medical-technology manufacturer, now led by the third generation (Karl-Christian Storz)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.karlstorz.com/us/en/about-us.htm"
       - "https://en.wikipedia.org/wiki/Karl_Storz_Endoskope"
@@ -1653,6 +1777,7 @@ vendors:
     leadership: "Lyle Berkowitz — Founder & CEO"
     history: "Founded by Dr. Lyle Berkowitz; virtual-care company built natively on the Epic platform, supplying on-demand virtualist physician teams to Epic-using health systems."
     market_position: "Private, venture-backed; revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://councils.forbes.com/profile/Lyle-Berkowitz-MD-CEO-Founder-KeyCare-Inc/cf350a9e-3d7e-42b8-b614-110cacbeb5ba"
       - "https://www.chiefhealthcareexecutive.com/view/keycare-ceo-talks-about-hospital-partnerships-virtual-care-and-opening-digital-front-door"
@@ -1668,6 +1793,7 @@ vendors:
     leadership: "Yu Nakata — President (Takemitsu Takizaki — Founder & Honorary Chairman)"
     history: "Founded 1974 in Osaka by Takemitsu Takizaki (as Lead Electric; renamed Keyence 1986); direct-sales maker of factory-automation sensors, measuring instruments and machine-vision systems. Publicly traded (TSE: 6861)."
     market_position: "Publicly traded (TSE: 6861); reported revenue of ~US$7.09B for FY2025 (Wikipedia/PitchBook)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Keyence"
       - "https://pitchbook.com/profiles/company/60413-68"
@@ -1681,12 +1807,15 @@ vendors:
     note: "Werum PAS-X is the de facto MES/EBR standard; K.Motion WMS for pharma warehousing; Seidenader for automated visual inspection — multi-category on-prem/edge anchor"
     headquarters: "Hamburg, Germany"
     founded: 1946
-    leadership: null
+    leadership: "Stephan Seifert, Chairman of the Group Executive Board (CEO)"
     history: "Körber AG founded 1946 in Hamburg by Kurt A. Körber; Körber Pharma business includes Werum (founded 1969, PAS-X MES) and Seidenader visual-inspection; PAS-X is a leading pharma MES."
     market_position: "Körber describes Werum PAS-X as the world's leading manufacturing-execution system (MES) for pharma and biotech."
+    market_share: "Market-leading pharma/biotech MES (Werum PAS-X); used by >50% of the world's top-30 pharma & biotech companies, 1,000+ installations (company-stated; Gartner MQ Leader)"
     sources:
       - "https://en.wikipedia.org/wiki/K%C3%B6rber"
       - "https://www.koerber.com/en/about-us/news-and-press/planned-werum-it-solutions-acquisition"
+      - "https://www.koerber.com/en/about-us/leadership"
+      - "https://www.koerber-pharma.com/en/solutions/software/pasx-extended"
   - id: komodo-health
     name: Komodo Health, Inc.
     categories: [rwd-rwe-analytics]
@@ -1699,6 +1828,7 @@ vendors:
     leadership: "Arif Nathoo — CEO & Co-founder"
     history: "Founded 2014 in San Francisco by Arif Nathoo and Web Sun; real-world-data 'Healthcare Map' analytics platform for life sciences; venture-backed."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.komodohealth.com/company/"
       - "https://www.prnewswire.com/news-releases/samacare-welcomes-komodo-health-ceo-arif-nathoo-to-board-of-directors-301790095.html"
@@ -1715,6 +1845,7 @@ vendors:
     leadership: "Philipp von Gilsa — CEO"
     history: "Founded 2013 in Kraków, Poland (with US offices in New York and North Charleston, SC); BLE/AI RTLS 'Kio Cloud' for healthcare asset/staff tracking; private."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.highperformr.ai/company/kontakt-io"
       - "https://tracxn.com/d/companies/kontakt/__3T01v49V8gWjUGPDXQBva8UXWOnk-T6Pwd-_I9NraFc"
@@ -1731,6 +1862,7 @@ vendors:
     leadership: "Graham Gardner — CEO & Co-Founder"
     history: "Founded 2010 by Graham Gardner and Julie Yoo; provider-search/patient-access platform; acquired HealthSparq 2021."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://tracxn.com/d/companies/kyruus-health/__uZdicDiwioyVx_8ttGO6ywfH1KxT1A17__l_Mpd2190"
       - "https://kyruushealth.com/kyruus-completes-acquisition-of-healthsparq-paving-way-for-seamless-cross-channel-care-navigation/"
@@ -1746,6 +1878,7 @@ vendors:
     leadership: "Vasu Rangadass — Chief Executive Officer"
     history: "Founded 2013 as Lab7 Systems, renamed L7 Informatics in 2018 under CEO Vasu Rangadass; Austin-based lab-informatics vendor (L7|ESP unified LIMS/ELN/workflow-orchestration)."
     market_position: "not publicly disclosed (privately held)"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/L7_Informatics"
       - "https://l7informatics.com/news/lab7-systems-appoints-new-ceo-and-changes-name-to-l7-informatics/"
@@ -1761,6 +1894,7 @@ vendors:
     leadership: "Pierre Rodrigues — Founder & CEO"
     history: "AgileBio founded 2002 by Pierre Rodrigues (Paris and San Diego); develops LabCollector, a web-based LIMS/ELN/inventory platform. Privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://labcollector.com/about/company/"
       - "https://leadiq.com/c/agilebio/5a1d9050540000590075e192"
@@ -1776,6 +1910,7 @@ vendors:
     leadership: "Mikael Hagström — CEO"
     history: "Founded 1981 as Laboratory MicroSystems in Troy, New York; laboratory information management system (LIMS) and lab-informatics vendor headquartered in Somerset, New Jersey."
     market_position: "Private; positioned among leading LIMS vendors; market-share figure not publicly disclosed."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/LabVantage"
       - "https://www.labvantage.com/who-we-are/leadership/"
@@ -1791,6 +1926,7 @@ vendors:
     leadership: "Vance Kershner — President & CEO"
     history: "Founded 1987 in Wilmington, Delaware by Vance Kershner, who still leads it; privately held LIMS, ELN and lab-analytics vendor serving regulated labs across 125+ countries."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/LabWare"
       - "https://www.labware.com/about"
@@ -1807,6 +1943,7 @@ vendors:
     leadership: "Mohan Giridharadas — Founder & CEO"
     history: "Founded 2010 by ex-McKinsey partner Mohan Giridharadas; iQueue SaaS optimizes OR, infusion and inpatient capacity; privately held (Bain Capital-backed)."
     market_position: "Private; company reports its iQueue platform is used by 180+ health systems."
+    market_share: null
     sources:
       - "https://leantaas.com/company/leadership/"
       - "https://www.crunchbase.com/person/mohan-giridharadas"
@@ -1819,13 +1956,15 @@ vendors:
     note: "Aperio scanners (GT450/CS5/GT180 DX) + eSlide Manager image management with broad validated-AI partner ecosystem; mature on-prem clinical WSI platform."
     headquarters: "Nussloch, Germany"
     founded: 1872
-    leadership: null
+    leadership: "J. Gustavo Perez, President"
     history: "Lineage to 1872 (Leica optics); histopathology and digital-pathology unit (acquired Aperio); Danaher acquired 2005 and made it a standalone operating company in 2011; HQ Nussloch, Germany."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Leica_Biosystems"
       - "https://www.leicabiosystems.com/news/celebrating-leica-biosystems-150th-anniversary/"
       - "https://www.danaher.com/our-businesses/diagnostics/leica-biosystems"
+      - "https://www.linkedin.com/in/j-gustavo-perez-632a413/"
   - id: lightbeam-health
     name: Lightbeam Health Solutions
     categories: [population-health-analytics]
@@ -1838,10 +1977,12 @@ vendors:
     leadership: "Ben Stilwill — President"
     history: "Founded 2013 by Pat Cline (NextGen co-founder); population-health/value-based-care analytics platform; Pat Cline now Founder & Executive Chairman."
     market_position: "Vendor states its platform served roughly 10% of MSSP beneficiaries in PY2023."
+    market_share: "~10% of all MSSP ACO beneficiaries served in PY2023 (company-stated)"
     sources:
       - "https://lightbeamhealth.com/about/"
       - "https://lightbeamhealth.com/accountable-care/"
       - "https://www.highperformr.ai/company/lightbeamhealth"
+      - "https://www.businesswire.com/news/home/20241210682108/en/ACOs-Using-Lightbeam-Solutions-Report-Record-MSSP-Savings-in-PY23-Driving-Cumulative-Savings-Beyond-3-Billion-Milestone"
   - id: ligolab
     name: LigoLab Information Systems
     categories: [lis]
@@ -1854,6 +1995,7 @@ vendors:
     leadership: "Suren Avunjian — Co-Founder & CEO"
     history: "Founded 2006 by Suren Avunjian, Edward Kharatian and Anthony Oganesian; privately held LIS + revenue-cycle platform for clinical/pathology labs."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://theorg.com/org/ligolab/org-chart/suren-avunjian"
       - "https://www.ligolab.com/our-story"
@@ -1869,6 +2011,7 @@ vendors:
     leadership: "Narinder Singh — Co-founder & Chief Executive Officer"
     history: "Founded 2019 in Oakland by Narinder Singh and Tom Hata; computer-vision/AI inpatient-monitoring startup (virtual nursing, fall prevention) with in-room edge cameras."
     market_position: "not publicly disclosed (early-stage private)"
+    market_share: null
     sources:
       - "https://councils.forbes.com/profile/Narinder-Singh-CEO-LookDeep-Health/0e55f47c-e345-49c8-8bda-67055554a21a"
       - "https://lookdeep.health/about-us/"
@@ -1884,6 +2027,7 @@ vendors:
     leadership: "Adnan Iqbal — Co-Founder & CEO"
     history: "Founded 2015 in San Francisco (Iqbal, Bansod, Ekram); patient-engagement 'Patient Success' SaaS platform (scheduling, reminders, intake). Venture-backed, privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.crunchbase.com/organization/luma-health"
       - "https://pulse2.com/luma-health-profile-adnan-iqbal-interview/"
@@ -1900,9 +2044,11 @@ vendors:
     leadership: "Eric Clark — President & CEO"
     history: "Founded 1990 in Atlanta; publicly traded (NASDAQ: MANH) supply-chain commerce software vendor spanning warehouse management, cold-chain and omnichannel. Eric Clark succeeded Eddie Capel as CEO in February 2025."
     market_position: "Publicly traded (NASDAQ: MANH); specific market-share figure not publicly disclosed."
+    market_share: "Leader in the Gartner Magic Quadrant for Warehouse Management Systems (2024, 16th consecutive year; a Leader in every WMS MQ since 2006)"
     sources:
       - "https://www.manh.com/about-us/newsroom/press-releases/manhattan-associates-announces-ceo-succession"
       - "https://www.businesswire.com/news/home/20250210935455/en/Manhattan-Associates-Announces-CEO-Succession"
+      - "https://ir.manh.com/news-releases/news-release-details/manhattan-associates-named-leader-gartnerr-magic-quadranttm-2"
   - id: mastercontrol
     name: MasterControl Solutions, Inc.
     categories: [eqms-calibration, mes-ebr]
@@ -1915,6 +2061,7 @@ vendors:
     leadership: "David Edwards — CEO (appointed April 2026; founder Jon Beckstrand now Board Chair)"
     history: "Founded in the early 1990s in Salt Lake City; cloud QMS/MES for regulated life sciences. Privately held; acquired asset-management firm Qualer. Long-time CEO Jon Beckstrand became Board Chair in 2026, succeeded by David Edwards."
     market_position: "Reported $200M+ annual recurring revenue and ~$1.3B valuation; named a Leader in multiple QMS analyst reports (KSL/hjnews)."
+    market_share: null
     sources:
       - "https://www.prnewswire.com/news-releases/mastercontrol-appoints-david-edwards-as-ceo-to-drive-next-phase-of-growth-302737707.html"
       - "https://www.ksl.com/article/50582388/utah-company-mastercontrol-has-quietly-become-a-software-leader-worth-13b"
@@ -1930,6 +2077,7 @@ vendors:
     leadership: null
     history: "Founded 1998 by John Cottrell and David Creasy. Develops Mascot, a search engine matching mass-spectrometry data against sequence databases for protein identification, plus Mascot Distiller and Insight."
     market_position: "Long-standing market-leading vendor of the Mascot protein-identification search engine, one of the most widely used tools in MS-based proteomics."
+    market_share: null
     sources:
       - "https://www.matrixscience.com/about.html"
       - "https://www.matrixscience.com/blog/25-years-of-matrix-science.html"
@@ -1946,6 +2094,7 @@ vendors:
     leadership: "Emma Fauss — Co-Founder & CEO"
     history: "Houston-based; co-founded by Emma Fauss; developed the FDA-cleared Sickbay vendor-neutral platform for real-time waveform ingest and virtual patient monitoring; privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.linkedin.com/in/emmafauss/"
       - "https://www.biospace.com/medical-informatics-corp-accelerates-growth-with-opening-of-new-office-in-heart-of-texas-medical-center"
@@ -1958,13 +2107,15 @@ vendors:
     note: "co-sell excluded per playbook §5.4. Rave EDC/CTMS/RTSM is one of the two dominant enterprise eClinical platforms; AWS-committed multi-tenant SaaS, no customer or independent-operator hardware pull. Confidence downgraded B→C: single secondary source, no primary Medidata documentation cited."
     headquarters: "New York, USA"
     founded: 1999
-    leadership: null
+    leadership: "Anthony Costello, CEO"
     history: "Founded 1999 in New York by Tarek Sherif, Glen de Vries and Edward Ikeguchi; leading clinical-trial EDC/CTMS platform (Rave); acquired by Dassault Systèmes for $5.8B, 2019."
     market_position: "One of the two dominant enterprise eClinical/EDC platforms; acquired by Dassault Systèmes for $5.8 billion (2019)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Medidata_Solutions"
       - "https://www.3ds.com/newsroom/press-releases/dassault-systemes-completes-acquisition-medidata-opening-new-world-virtual-twin-experiences-healthcare"
       - "https://www.clinicalresearchnewsonline.com/news/2019/06/12/dassault-syst%C3%A8mes-acquires-medidata-solutions-for-$5-8-billion"
+      - "https://www.medidata.com/en/company/ (confirmed current via https://insights.citeline.com/in-vivo/leadership/c-suite-speaks/i-want-everything-to-go-faster-medidatas-ceo-on-pushing-the-strategic-accelerator-DKEM4VVWPVEOXO6SQ7QEFF7QZU/)"
   - id: medimizer
     name: MediMizer
     categories: [healthcare-cmms]
@@ -1974,13 +2125,15 @@ vendors:
     note: "Biomedical CMMS challenger; member of AAMI-sponsored CMMS Collaborative on failure-code standardization."
     headquarters: "Encinitas, California, United States"
     founded: 1983
-    leadership: null
+    leadership: "Gus Sakis, President"
     history: "Founded 1983 out of a biomedical service company; independent biomedical/HTM and facilities CMMS software (MediMizer) for hospitals and third-party service organizations; private."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://tracxn.com/d/companies/medimizer/__KGosSbn-GwX7BPgf51YxqN5fb_0Y7a4BaYcxSw5ioYM"
       - "https://medimizer.com/"
       - "https://24x7mag.com/medical-equipment/software/cmms/cmms-competitors-standardize-medical-device-failure-codes/"
+      - "https://www.linkedin.com/in/gus-sakis-4833554/"
   - id: meditech
     name: Medical Information Technology, Inc. (MEDITECH)
     categories: [ehr-emr-core, patient-access-scheduling, patient-portal-engagement]
@@ -1993,10 +2146,12 @@ vendors:
     leadership: "Michelle O'Connor — President & CEO"
     history: "Founded 1969 by A. Neil Pappalardo (died January 2026); privately held EHR pioneer (Expanse); MUMPS heritage; Westwood, Massachusetts."
     market_position: "not publicly disclosed"
+    market_share: "~14.8% US acute-care hospital EHR market share by number of hospitals (2024, KLAS)"
     sources:
       - "https://en.wikipedia.org/wiki/Meditech"
       - "https://www.beckershospitalreview.com/ehrs/meet-the-c-suite-of-meditech-15-execs-to-know.html"
       - "https://www.healthcareitnews.com/news/meditech-founder-neil-pappalardo-dies-83"
+      - "https://hitconsultant.net/2025/05/05/klas-epic-dominates-2024-ehr-market-share/"
   - id: medtronic
     name: Medtronic
     categories: [or-surgical-video]
@@ -2008,10 +2163,12 @@ vendors:
     leadership: "Geoff Martha — Chairman & CEO"
     history: "Founded 1949 in Minneapolis (operational HQ), incorporated in Dublin. Touch Surgery surgical-video ecosystem came via the 2020 acquisition of London-based Digital Surgery. Geoff Martha has been Chairman & CEO since 2020."
     market_position: "One of the world's largest medical-device companies; Touch Surgery Enterprise is a leading AI surgical-video platform."
+    market_share: "World's largest medical device company by revenue (MDO Medtech Big 100, 2024)"
     sources:
       - "https://www.medtronic.com/en-us/healthcare-professionals/specialties/touch-surgery.html"
       - "https://www.fiercebiotech.com/medtech/medtronic-to-bolster-its-ai-and-surgical-robotics-work-digital-surgery-acquisition"
       - "https://en.wikipedia.org/wiki/Touch_Surgery"
+      - "https://www.medicaldesignandoutsourcing.com/2024-Medical-Design-and-Outsourcing-BIG-100/medtronic/"
   - id: merative
     name: Merative (Merge Healthcare)
     categories: [pacs-vna, ris-cvis-workflow]
@@ -2023,6 +2180,7 @@ vendors:
     leadership: "Gerry McCarthy — Chief Executive Officer"
     history: "Founded 2022 when Francisco Partners acquired IBM's Watson Health assets (~$1B) and rebranded them as standalone Merative; portfolio includes Merge imaging (PACS/CVIS)."
     market_position: "not publicly disclosed (private, Francisco Partners portfolio; formed from ~$1B IBM Watson Health carve-out)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Merative"
       - "https://healthexec.com/topics/healthcare-management/mergers-and-acquisitions/francisco-partners-completes-1b-buyout-ibm"
@@ -2034,13 +2192,15 @@ vendors:
     source: "https://www.metrumrg.com/"
     headquarters: "Tariffville, Connecticut, USA"
     founded: 2004
-    leadership: null
+    leadership: "Michelle Johnson, CEO"
     history: "Founded 2004; pharmacometrics and QSP consultancy that develops open-source R tools (e.g., mrgsolve) and the Metworx cloud computation platform for model-informed drug development."
     market_position: "Specialist pharmacometrics/QSP consultancy and developer of widely used open-source modeling tools plus the Metworx cloud modeling-and-simulation platform."
+    market_share: null
     sources:
       - "https://www.metrumrg.com/"
       - "https://github.com/metrumresearchgroup"
       - "https://intuitionlabs.ai/companies/cro/metrum-research-group"
+      - "https://www.metrumrg.com/team_member/michelle-johnson/"
   - id: microsoft
     name: Microsoft Corporation
     categories: [hospital-erp]
@@ -2053,6 +2213,7 @@ vendors:
     leadership: "Satya Nadella — Chairman & CEO"
     history: "Founded 1975 by Gates and Allen; deepened healthcare presence via the $19.7B Nuance acquisition (completed 2022) and Azure/Dynamics 365. Publicly traded (Nasdaq: MSFT)."
     market_position: "Via Nuance (acquired 2022), Microsoft's clinical speech tools are reported used by 55%+ of U.S. physicians and 75% of radiologists (Microsoft)."
+    market_share: null
     sources:
       - "https://news.microsoft.com/source/2022/03/04/microsoft-completes-acquisition-of-nuance-ushering-in-new-era-of-outcomes-based-ai/"
       - "https://blogs.microsoft.com/blog/2022/03/04/microsoft-nuance-better-together-to-transform-business-and-healthcare-outcomes-with-ai/"
@@ -2068,9 +2229,11 @@ vendors:
     leadership: "Satya Nadella — Chairman & CEO, Microsoft"
     history: "Nuance Communications (AI speech and clinical documentation; originally Burlington, Massachusetts) was acquired by Microsoft in 2022 for ~$19B. DAX Copilot is its ambient clinical-documentation product."
     market_position: "DAX Copilot used by 550+ health systems and 200,000+ clinicians (company-stated); Microsoft acquired Nuance for ~$19B (2022)."
+    market_share: "Dominant US medical speech-recognition / clinical-documentation vendor: Nuance solutions reported used by 55%+ of US physicians, 75% of radiologists and 77% of US hospitals (Microsoft, 2021)"
     sources:
       - "https://www.healthcaredive.com/news/nuance-dax-copilot-epic-available-artificial-intelligence-clinical-documentation/705026/"
       - "https://hmacademy.com/insights/AI-Catalyst/health-technology/microsoft-nuance-ai-powered-clinical-documentation-vendor-snapshot"
+      - "https://news.microsoft.com/source/2021/04/12/microsoft-accelerates-industry-cloud-strategy-for-healthcare-with-the-acquisition-of-nuance/"
   - id: microsoft-nuance-dax
     name: Microsoft (Nuance Dragon / DAX Copilot)
     categories: [healthcare-llm-serving]
@@ -2082,6 +2245,7 @@ vendors:
     leadership: "Satya Nadella — Chairman & CEO"
     history: "Microsoft acquired Nuance Communications in 2022; its Dragon Ambient eXperience (DAX) Copilot delivers GPT-4-powered ambient clinical documentation via Microsoft Azure to 500+ health systems."
     market_position: "Dominant ambient-clinical-documentation vendor via Nuance DAX/Dragon Copilot, but CLOUD-LOCKED to Microsoft Azure with no on-premises serving option — effectively out of scope for direct on-prem hardware co-sell."
+    market_share: null
     sources:
       - "https://www.healthcaredive.com/news/dax-copilot-nuance-automated-doctor-tool-artificial-intelligence-healthcare/694818/"
       - "https://marketplace.microsoft.com/en-us/product/web-apps/nuance_gskaff.dax_copilot_usa?tab=overview"
@@ -2097,6 +2261,7 @@ vendors:
     leadership: "Jon Wells — President & CEO"
     history: "Founded 1915 in Ohio as the Cummings Machine Company (concrete mixers); renamed Midmark in 1969. Family-owned maker of medical, dental and veterinary equipment and related software; HQ Versailles, Ohio."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Midmark"
       - "https://www.midmark.com/about-us/our-history-and-culture"
@@ -2112,6 +2277,7 @@ vendors:
     leadership: "Dermot Corry — President & CEO"
     history: "Founded 1947 in Seattle; global actuarial and consulting firm; its Integrate cloud actuarial-modeling platform and MG-ALFA serve insurers; divested the Arius reserving software to Akur8 in September 2024."
     market_position: "Leading independent actuarial firm; Integrate provides compute-intensive cloud/grid actuarial modeling. Note: the Arius reserving product was divested to Akur8 (2024) and is no longer a Milliman offering."
+    market_share: null
     sources:
       - "https://integrate.milliman.com/en/About-us"
       - "https://www.milliman.com/en/consultants/corry-dermot"
@@ -2126,12 +2292,14 @@ vendors:
     note: "Value-based care, risk adjustment and payer analytics on the MedInsight Health Cloud (Microsoft-certified AI partner); SaaS delivery, Azure-aligned."
     headquarters: "Seattle, Washington, United States"
     founded: null
-    leadership: null
+    leadership: "Kent Sacia, CEO"
     history: "Healthcare data-and-analytics business of actuarial firm Milliman; MedInsight platform serves value-based-care, risk-adjustment and payer analytics; Microsoft-certified AI partner, Azure-aligned."
     market_position: "Company states MedInsight is trusted by 300+ payers, providers/ACOs, employers and government agencies worldwide."
+    market_share: null
     sources:
       - "https://medinsight.com/healthcare-data-analytics-about/press-releases/milliman-medinsight-integrates-ai-and-next-generation-analytics-to-strengthen-value-based-care-decision-making/"
       - "https://www.linkedin.com/company/milliman-medinsight"
+      - "https://medinsight.com/healthcare-data-analytics-about/leadership-team/"
   - id: moodys-analytics
     name: Moody's (Moody's Analytics — RMS, AXIS)
     categories: [payer-actuarial-hpc]
@@ -2143,6 +2311,7 @@ vendors:
     leadership: "Robert Fauber — President & CEO"
     history: "Moody's Analytics acquired actuarial-software firm GGY (AXIS) in 2016 and catastrophe-risk modeler RMS for $2B in 2021, building an insurance risk-and-actuarial analytics platform."
     market_position: "Major insurance risk-analytics vendor; RMS catastrophe models (Intelligent Risk Platform, cloud/SaaS) and the AXIS actuarial system (grid/HPC) serve P&C and life insurers and reinsurers."
+    market_share: null
     sources:
       - "https://ir.moodys.com/press-releases/news-details/2021/Moodys-to-Acquire-RMS-Leader-in-Climate--Natural-Disaster-Risk/default.aspx"
       - "https://www.artemis.bm/news/rms-sold-to-moodys-2-billion/"
@@ -2160,6 +2329,7 @@ vendors:
     leadership: "Srinivas (Sri) Velamoor — President & CEO"
     history: "Founded 1974 as Quality Systems, Inc.; ambulatory EHR/practice-management vendor; taken private by Thoma Bravo for $1.8B (2023); CEO transition to Sri Velamoor completed October 2025."
     market_position: "Acquired (taken private) by Thoma Bravo for $1.8 billion (2023)."
+    market_share: null
     sources:
       - "https://www.nextgen.com/company/newsroom/press-release/nextgen-healthcare-completes-ceo-transition-ahead-of-annual-user-group-meeting"
       - "https://www.thomabravo.com/press-releases/thoma-bravo-completes-acquisition-of-nextgen-healthcare"
@@ -2172,13 +2342,15 @@ vendors:
     source: "https://www.nonlinear.com/progenesis/"
     headquarters: "Newcastle upon Tyne, United Kingdom"
     founded: 1989
-    leadership: null
+    leadership: "Udit Batra, President & CEO (parent Waters Corporation; no separately named CEO for the Nonlinear Dynamics subsidiary)"
     history: "Founded 1989 by Will Dracup; developed the Progenesis LC-MS software for proteomics and metabolomics/lipidomics. Acquired by Waters Corporation (2013) and operated as a Waters company."
     market_position: "Developer of Progenesis QI, a widely used LC-MS software for label-free proteomics and metabolomics analysis; a Waters subsidiary (Waters CEO Udit Batra)."
+    market_share: null
     sources:
       - "https://www.nonlinear.com/progenesis/"
       - "https://www.technologynetworks.com/proteomics/news/waters-acquires-nonlinear-dynamics-213840"
       - "https://www.chromatographyonline.com/view/waters-acquires-proteomics-software-development-company"
+      - "https://www.waters.com/nextgen/us/en/about-waters/leadership.html (confirmed current 2026 via CNBC interview May 2026, https://www.cnbc.com/video/2026/05/05/waters-corp-ceo-udit-batra-goes-one-on-one-with-jim-cramer.html)"
   - id: nuvolo
     name: Nuvolo (Trane Technologies)
     categories: [healthcare-cmms]
@@ -2191,6 +2363,7 @@ vendors:
     leadership: "Tom Stanford — Founder & CEO"
     history: "Founded c.2013 by Tom Stanford; Connected Workplace EAM/CMMS built natively on ServiceNow; acquired by Trane Technologies (completed Nov 2023)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://investors.tranetechnologies.com/news-and-events/news-releases/news-release-details/2023/Trane-Technologies-Completes-Acquisition-of-Connected-Workplace-and-Enterprise-Asset-Management-Leader-Nuvolo/default.aspx"
       - "https://www.nuvolo.com/news/trane-technologies-to-acquire-connected-workplace-and-enterprise-asset-management-leader-nuvolo/"
@@ -2206,9 +2379,11 @@ vendors:
     leadership: "Jensen Huang — Founder, President & CEO"
     history: "Founded 1993 by Jensen Huang, Chris Malachowsky and Curtis Priem; GPU/accelerated-computing leader; publicly traded (Nasdaq: NVDA); Santa Clara, California."
     market_position: "not publicly disclosed"
+    market_share: "~90-94% of the discrete add-in-board GPU market (2025, Jon Peddie Research)"
     sources:
       - "https://en.wikipedia.org/wiki/Nvidia"
       - "https://nvidianews.nvidia.com/bios/jensen-huang"
+      - "https://wccftech.com/nvidia-gpu-market-share-swells-to-94-percent-amd-drops-to-6-in-q2-2025/"
   - id: nvidia-nim-bionemo
     name: NVIDIA (NIM / BioNeMo)
     categories: [healthcare-llm-serving]
@@ -2220,10 +2395,12 @@ vendors:
     leadership: "Jensen Huang — Founder, President & CEO"
     history: "Founded 1993 in Santa Clara; NVIDIA's NIM inference microservices and BioNeMo platform package optimized LLM/biomodel serving in containers deployable on-premises, at edge, or in cloud."
     market_position: "Dominant AI-compute supplier; NIM/BioNeMo provide the on-premises and hybrid inference-serving stack for healthcare and drug-discovery LLMs and biomodels, self-hostable via Docker/Kubernetes on GPU servers."
+    market_share: "NVIDIA holds an estimated ~85-90% of the data-center AI GPU / accelerator market (2025-2026 analyst estimates)"
     sources:
       - "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/"
       - "https://www.nvidia.com/en-us/clara/bionemo/"
       - "https://developer.nvidia.com/blog/nvidia-nim-offers-optimized-inference-microservices-for-deploying-ai-models-at-scale/"
+      - "https://axis-intelligence.com/nvidia-gpu-market-share/"
   - id: olympus
     name: Olympus Corporation
     categories: [or-surgical-video]
@@ -2235,10 +2412,12 @@ vendors:
     leadership: "Bob White — Representative Executive Officer, President and CEO (effective June 1, 2025)"
     history: "Established 1919 in Tokyo; global endoscopy leader. Surgical imaging / OR integration (endoscopy systems, EASYSUITE OR integration) building beyond hardware toward integrated care. Bob White (ex-Medtronic) appointed President & CEO effective June 1, 2025, following the October 2024 resignation of Stefan Kaufmann and an interim period under chairman Yasuo Takeuchi."
     market_position: "Global market leader in flexible endoscopy with a large installed base of endoscopy systems."
+    market_share: "More than 70% share of the global gastrointestinal endoscope market (Olympus IR; figure consistently cited through 2025)"
     sources:
       - "https://www.olympus-global.com/news/2025/nr02932.html"
       - "https://medical.olympusamerica.com/articles/olympus-appoints-new-ceo"
       - "https://medical.olympusamerica.com/articles/olympus-unveils-corporate-strategy"
+      - "https://www.olympus-global.com/ir/data/integratedreport/pdf/ar2016e_11.pdf"
   - id: omnicell
     name: Omnicell, Inc.
     categories: [pharmacy-automation]
@@ -2251,9 +2430,11 @@ vendors:
     leadership: "Randall Lipps — Chairman, President & Chief Executive Officer"
     history: "Founded 1992 by Randall Lipps; publicly traded (Nasdaq: OMCL) medication-management and pharmacy-automation leader; relocated headquarters to Fort Worth, Texas."
     market_position: "Publicly traded (Nasdaq: OMCL); FY2024 revenue $1.11B; comprehensive medication-management/pharmacy-automation portfolio."
+    market_share: "#1 by share in the U.S. pharmacy-automation-devices market (2022, analyst est.)"
     sources:
       - "https://en.wikipedia.org/wiki/Omnicell"
       - "https://www.omnicell.com/leadership/randall-lipps/"
+      - "https://www.fortunebusinessinsights.com/u-s-pharmacy-automation-devices-market-108969"
   - id: open-systems-pharmacology
     name: Open Systems Pharmacology (PK-Sim/MoBi, originated at Bayer)
     categories: [pharmacometrics-modeling-simulation]
@@ -2265,6 +2446,7 @@ vendors:
     leadership: null
     history: "PK-Sim and MoBi were developed over 25+ years at Bayer Technology Services, then released as free open-source PBPK/QSP software under the Open Systems Pharmacology community in 2017."
     market_position: "Leading open-source, whole-body PBPK and quantitative-systems-pharmacology platform used across academia, regulators, and industry."
+    market_share: null
     sources:
       - "https://github.com/open-systems-pharmacology/pk-sim"
       - "https://www.open-systems-pharmacology.org/"
@@ -2280,6 +2462,7 @@ vendors:
     leadership: "David Kay — Chief Executive Officer"
     history: "Founded 2006 (from Akaza Research) by Cal Collins and Ben Baumann; commercial open-source clinical-trial EDC/CDM software. Privately held; David Kay now CEO."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.openclinica.com/resource/david-kay-named-ceo-as-openclinica-expands-leadership-team/"
       - "https://www.crunchbase.com/organization/akaza-research"
@@ -2295,6 +2478,7 @@ vendors:
     leadership: "Louis Roy — Founder & CEO"
     history: "Founded 1989 in Quebec City by Louis Roy (still CEO); provides pharma serialization, track-and-trace and automated visual-inspection systems for regulatory compliance."
     market_position: "Private; revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://www.optelgroup.com/en/about-optel/"
       - "https://leadiq.com/c/optel-group/5a1d966a2300005400850ce3"
@@ -2311,6 +2495,7 @@ vendors:
     leadership: "Heather Cianfrocco — CEO"
     history: "Health-services and technology arm of UnitedHealth Group, formed 2011; HQ Eden Prairie, Minnesota. Grew via major acquisitions including Catamaran, Change Healthcare (~$13B, 2022) and Amedisys."
     market_position: "Reported FY2025 revenue of US$270.6B as UnitedHealth Group's Optum segment (Wikipedia/UnitedHealth Group)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Optum"
   - id: oracle-health
@@ -2325,9 +2510,11 @@ vendors:
     leadership: "Seema Verma — EVP & GM, Oracle Health and Life Sciences"
     history: "Cerner founded 1979 in North Kansas City by Neal Patterson, Paul Gorup and Cliff Illig; acquired by Oracle in 2022 for $28.3B and rebranded Oracle Health."
     market_position: "Acquired by Oracle for $28.3B (2022); a leading US hospital EHR vendor (Millennium/PowerChart), historically second to Epic in acute care."
+    market_share: "22.9% of the US acute-care hospital EHR market (2024, KLAS Research)"
     sources:
       - "https://en.wikipedia.org/wiki/Oracle_Health"
       - "https://www.healthcareitnews.com/news/oracle-acquires-cerner-283b"
+      - "https://engage.klasresearch.com/blog/us-acute-care-ehr-market-share-in-2024/805/"
   - id: oracle-life-sciences
     name: Oracle (Oracle Life Sciences / Oracle Health Sciences)
     categories: [clinical-trial-suite, pv-regulatory-information]
@@ -2340,6 +2527,7 @@ vendors:
     leadership: "Seema Verma — EVP & General Manager, Oracle Health and Life Sciences"
     history: "Oracle (founded 1977) life-sciences/health unit; greatly expanded via the $28B Cerner acquisition (2022), pairing EHR with clinical-trial and pharmacovigilance applications."
     market_position: "Post-Cerner ($28B acquisition, 2022) Oracle positions itself as uniquely combining cloud infrastructure with both EHR and life-sciences applications."
+    market_share: null
     sources:
       - "https://www.oracle.com/corporate/executives/seema-verma/"
       - "https://www.oracle.com/life-sciences/"
@@ -2356,6 +2544,7 @@ vendors:
     leadership: "Billie Whitehurst — CEO"
     history: "Founded 1993; laboratory information systems (Harvest LIS) for community/outreach and anatomic-pathology labs; acquired by Francisco Partners (2022)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.dnb.com/business-directory/company-profiles.orchard_software_corporation.75bfab05f8e72c9e48b7011d75c1545c.html"
       - "https://www.brentwoodcap.com/orchard-software-acquired-by-francisco-partners-2/"
@@ -2369,11 +2558,13 @@ vendors:
     note: "KLAS 2026 score 89.4; AI-driven device discovery and automated policy generation; traffic-mirroring sensor appliances at each campus."
     headquarters: "Santa Clara, California, USA"
     founded: 2015
-    leadership: null
+    leadership: "Jim Hyman, CEO"
     history: "Founded 2015 by Gnanaprakasam Pandian; AI-powered asset-risk/IoT-IoMT security; venture-backed (Series C)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://tracxn.com/d/companies/ordr/__YFf67T6_LnRqhCH7RJ7mUTqWZKdXFnkCPE9arVMXANM"
+      - "https://ordr.net/news/cybersecurity-leader-and-expert-hyman-ceo"
   - id: orion-health
     name: Orion Health
     categories: [hie-interoperability-engine]
@@ -2386,6 +2577,7 @@ vendors:
     leadership: "Brad Porter — Chief Executive Officer"
     history: "Founded 1993 in Auckland by Ian McCrae; health-integration and population-health software vendor; majority acquired by Canada's HEALWELL AI (completed April 2025), with Brad Porter as CEO succeeding founder McCrae."
     market_position: "not publicly disclosed (acquired by HEALWELL AI, completed 2025)."
+    market_share: null
     sources:
       - "https://orionhealth.com/nz/media-releases/healwell-ai-completes-acquisition-of-orion-health-mccrae-tech-launched/"
       - "https://en.wikipedia.org/wiki/Orion_Health"
@@ -2401,6 +2593,7 @@ vendors:
     leadership: "Barry Wark — Co-Founder & CEO"
     history: "Founded 2009 in Cambridge Massachusetts by Barry Wark and Winston Brasor; cloud-native LIMS for molecular/NGS diagnostic laboratories. Venture-backed (Series A)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.businesswire.com/news/home/20200320005137/en/Tech-Startup-Ovation.io-Launches-Effort-That-Could-Double-COVID-19-Testing-Capacity-Across-the-U.S."
       - "https://www.madrona.com/ff-ovation/"
@@ -2417,6 +2610,7 @@ vendors:
     leadership: "Eric Lefkofsky — Founder & CEO, Tempus AI (parent)"
     history: "Founded 2017; digital-pathology AI company that produced the first FDA-cleared AI application in pathology. Acquired by Tempus AI in 2025 for ~$81M."
     market_position: "Delivered the first FDA-cleared AI application in pathology; acquired by Tempus AI for ~$81M (2025)."
+    market_share: null
     sources:
       - "https://www.tempus.com/news/tempus-announces-the-acquisition-of-paige/"
       - "https://www.medtechdive.com/news/tempus-paige-buyout-acquisition-ai/758589/"
@@ -2431,6 +2625,7 @@ vendors:
     leadership: "Andy Beck — Co-founder & CEO"
     history: "Founded 2016 in Boston (Fenway) by co-founder/CEO Andy Beck; venture-backed AI digital- and computational-pathology company serving pharma, labs and health systems. Independent."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.pathai.com/about-us"
       - "https://www.pathai.com/careers/"
@@ -2446,6 +2641,7 @@ vendors:
     leadership: "Roy Jakobs — President & CEO"
     history: "Founded 1891 in Eindhoven by the Philips family; Dutch health-technology multinational (Euronext/NYSE: PHG); repositioned from consumer electronics to diagnostic imaging, monitoring and informatics."
     market_position: "Public (Euronext/NYSE: PHG); global health-technology leader across diagnostic imaging, image-guided therapy and patient monitoring."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Philips"
       - "https://www.philips.com/a-w/about/executive-committee/roy-jakobs.html"
@@ -2461,6 +2657,7 @@ vendors:
     leadership: "Ben Mannisto — President & CEO"
     history: "Founded 1981 in the Detroit area (Southfield, Michigan); developer of the AIMS healthcare CMMS, first delivered to Michigan hospitals in 1984; privately held."
     market_position: "not publicly disclosed (vendor reports AIMS used in ~3,000 hospitals across 20 countries)"
+    market_share: null
     sources:
       - "https://www.goaims.com/phoenix-data-systems-about-us/"
       - "https://www.zoominfo.com/p/Ben-Mannisto/1179934999"
@@ -2477,6 +2674,7 @@ vendors:
     leadership: "Chaim Indig — Co-founder & CEO"
     history: "Founded January 2005 by Chaim Indig and Evan Roberts; patient intake, registration, scheduling and payments SaaS; IPO 2019 (NYSE: PHR)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Phreesia"
       - "https://www.phreesia.com/company/about-us/"
@@ -2493,6 +2691,7 @@ vendors:
     leadership: "Jorge Yant — CEO & Founder"
     history: "Founded 1996 by Jorge Yant (Ashland, Oregon); payer core-administration and claims-adjudication software; privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.plexishealth.com/about/leadership-team/"
       - "https://www.newswire.com/news/plexis-celebrates-25-years-of-empowering-healthcare-payer-businesses-21456807"
@@ -2509,6 +2708,7 @@ vendors:
     leadership: "David West — Co-founder & Chief Executive Officer"
     history: "Founded 2014 in Philadelphia by David West, Nathan Buchbinder and Coleman Stavish; digital-/computational-pathology software vendor (Concentriq platform); venture-backed."
     market_position: "not publicly disclosed (privately held; Insight Partners-backed)."
+    market_share: null
     sources:
       - "https://digitalpathologyassociation.org/david-west-proscia"
       - "https://www.insightpartners.com/ideas/proscia-leadership-story/"
@@ -2524,6 +2724,7 @@ vendors:
     leadership: "Greg Benoit — Founder & CEO"
     history: "Founded 2006, Atlanta, by Greg Benoit; healthcare workforce-management and scheduling SaaS. Owned by Francisco Partners, sold to Hearst in 2024; acquired Shift Admin 2021."
     market_position: "Awarded Best in KLAS for Physician, Nurse and Staff Scheduling (2022)."
+    market_share: null
     sources:
       - "https://www.businesswire.com/news/home/20220208005831/en/QGenda-Awarded-Best-in-KLAS-for-Physician-Nurse-and-Staff-Scheduling-for-2022"
       - "https://www.franciscopartners.com/media/francisco-partners-announces-sale-of-qgenda-to-hearst"
@@ -2540,6 +2741,7 @@ vendors:
     leadership: "Thierry Bernard — CEO"
     history: "Founded 1984 at Heinrich Heine University, Düsseldorf; molecular-diagnostics and sample-technology firm, HQ Venlo. QIAGEN Digital Insights (est. 2014) is its bioinformatics arm (Ingenuity, CLC bio, BIOBASE)."
     market_position: "Publicly listed (NYSE/Frankfurt: QGEN); market-share figure not publicly disclosed."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Qiagen"
       - "https://corporate.qiagen.com/newsroom/press-releases/press-release-details/2020/QIAGEN-names-Thierry-Bernard-as-Chief-Executive-Officer/default.aspx"
@@ -2556,6 +2758,7 @@ vendors:
     leadership: "Mudit Garg — Co-founder & CEO"
     history: "Founded 2012 by two McKinsey/Stanford veterans (CEO Mudit Garg and Ian Christopher); venture-backed AI platform automating hospital operations (patient flow, perioperative, inpatient). Founder-led, independent."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://qventus.com/company/story-team/"
       - "https://qventus.com/company/our-team/"
@@ -2571,9 +2774,11 @@ vendors:
     leadership: "Johan Löf — Founder, President & CEO"
     history: "Founded 2000 by Johan Löf as a Karolinska Institutet spin-off; listed on Nasdaq Stockholm since 2003; develops RayStation TPS and RayCare OIS."
     market_position: "Public (Nasdaq Stockholm); RayStation treatment-planning system used at clinics worldwide, distributed via OEM licensing to leading medtech firms."
+    market_share: "Self-described market leader in ion-therapy treatment planning (~110 ion centers); RayStation in 1,000+ radiotherapy centers across 43 countries (2024, company press release)"
     sources:
       - "https://en.wikipedia.org/wiki/RaySearch_Laboratories"
       - "https://www.raysearchlabs.com/organization/"
+      - "https://www.raysearchlabs.com/media/press-releases/2024/raystation-in-more-than-1000-radiotherapy-centers-worldwide/"
   - id: rhapsody
     name: Rhapsody (Rhapsody Health, incl. Corepoint)
     categories: [hie-interoperability-engine]
@@ -2586,6 +2791,7 @@ vendors:
     leadership: "Sagnik Bhattacharya — CEO"
     history: "Independent Rhapsody formed by the July 2019 merger of the Rhapsody integration engine (Orion Health) and Corepoint Health (ex-NeoTool, founded 2000); healthcare interoperability vendor; HQ Boston."
     market_position: "Positioned at formation as the largest independent healthcare interoperability company (2019 Rhapsody–Corepoint merger)."
+    market_share: null
     sources:
       - "https://rhapsody.health/about-us/"
       - "https://www.businesswire.com/news/home/20230913789477/en/Rhapsody-Names-Sagnik-Bhattacharya-Chief-Executive-Officer"
@@ -2602,9 +2808,11 @@ vendors:
     leadership: "Matt Sause — CEO, Roche Diagnostics Division"
     history: "Roche founded 1896 in Basel by Fritz Hoffmann-La Roche; SIX/OTC-listed; Diagnostics division spans cobas lab systems and VENTANA/uPath digital pathology."
     market_position: "not publicly disclosed"
+    market_share: "#1 globally in in-vitro diagnostics by revenue (~US$16.8B, 2023)"
     sources:
       - "https://www.biospace.com/press-releases/roche-appoints-dan-malarek-as-president-and-ceo-of-roche-diagnostics-north-america"
       - "https://diagnostics.roche.com/us/en/products/product-category/lab-type/pathology-lab/digital-pathology.html"
+      - "https://www.statista.com/statistics/331718/top-global-companies-by-in-vitro-diagnostics-revenue/"
   - id: rockwell-automation
     name: Rockwell Automation, Inc.
     categories: [mes-ebr, scada-dcs]
@@ -2617,6 +2825,7 @@ vendors:
     leadership: "Blake Moret — Chairman & CEO"
     history: "Founded 1903 (Allen-Bradley heritage); industrial automation/MES/SCADA leader; Rockwell Automation name adopted 2001; NYSE-listed (ROK), Milwaukee."
     market_position: "FY2025 revenue US$8.34 billion"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Rockwell_Automation"
       - "https://www.rockwellautomation.com/en-us/company/investor-relations/governance/executive-leadership.html"
@@ -2632,10 +2841,12 @@ vendors:
     leadership: "Christian Klein — Chief Executive Officer"
     history: "Founded 1972 in Germany by five former IBM engineers; world's largest enterprise-software (ERP) vendor; publicly traded. Klein became sole CEO in 2020."
     market_position: "Publicly traded (XETRA: SAP / NYSE: SAP); 2025 revenue ambition >€37.5B; became Europe's most valuable company in 2025."
+    market_share: "~6.6% of the global ERP applications market ($8.6B ERP revenue, 2024, Apps Run The World est.)"
     sources:
       - "https://www.sap.com/about/company/leadership/christian-klein.html"
       - "https://www.semafor.com/article/06/19/2025/how-christian-kleins-ai-bet-turned-sap-into-europes-most-valuable-company"
       - "https://finance.yahoo.com/news/sap-sees-higher-operating-profit-052114974.html"
+      - "https://www.appsruntheworld.com/top-10-erp-software-vendors-and-market-forecast/"
   - id: sapio-sciences
     name: Sapio Sciences, LLC
     categories: [rd-lab-informatics]
@@ -2648,6 +2859,7 @@ vendors:
     leadership: "Kevin Cramer — Founder & CEO"
     history: "Founded 2004 by Kevin Cramer, Baltimore; unified low-code/no-code LIMS/ELN/SDMS platform for life-sciences labs. Received growth investment from GHO Capital."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.sapiosciences.com/our-leadership/"
       - "https://en.wikipedia.org/wiki/Sapio_Sciences"
@@ -2664,6 +2876,7 @@ vendors:
     leadership: "Michael Grosse — Group CEO"
     history: "Founded 1870 in Göttingen; publicly listed (Frankfurt) bioprocess and lab-equipment group. Michael Grosse became Group CEO on July 1, 2025, succeeding long-serving Joachim Kreuzburg."
     market_position: "Publicly listed (Frankfurt: SRT/SRT3, DAX member); market-share figure not publicly disclosed."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Sartorius_AG"
       - "https://www.sartorius.com/en/company/newsroom/corporate-news/1657934-1657934"
@@ -2679,8 +2892,10 @@ vendors:
     leadership: "James Goodnight — CEO"
     history: "Founded 1976 in Cary, North Carolina, spun out of NC State University; privately held analytics-software company still led by co-founder James Goodnight."
     market_position: "Privately held; reported revenue of US$3B+ in 2024 (Wikipedia/SAS)."
+    market_share: "#1 in worldwide advanced & predictive analytics software market share for 20+ consecutive years per IDC (~27.7% share, 2018)"
     sources:
       - "https://en.wikipedia.org/wiki/SAS_Institute"
+      - "https://blogs.sas.com/content/subconsciousmusings/2021/09/30/sas-leads-market-28-years-in-a-row/"
   - id: schneider-electric
     name: Schneider Electric
     categories: [hospital-bms]
@@ -2693,6 +2908,7 @@ vendors:
     leadership: "Olivier Blum — CEO"
     history: "Founded 1836 by the Schneider brothers; French energy-management and automation multinational (Euronext: SU); EcoStruxure Building Operation serves hospital campuses; Olivier Blum became CEO November 2024."
     market_position: "Public (Euronext: SU); global leader in energy management and industrial automation."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Schneider_Electric"
       - "https://sustainabilitymag.com/articles/olivier-blum-named-new-ceo-of-schneider-electric"
@@ -2708,6 +2924,7 @@ vendors:
     leadership: "Ramy Farid — President & CEO"
     history: "Founded 1990 (New York) by Richard Friesner and William Goddard; physics-based computational drug-discovery and materials-science software; Ramy Farid CEO since 2017; public on Nasdaq (SDGR) since 2020."
     market_position: "Publicly traded (Nasdaq: SDGR); leading physics-based computational drug-discovery platform."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Schr%C3%B6dinger,_Inc."
       - "https://www.crunchbase.com/organization/schrodinger"
@@ -2720,13 +2937,15 @@ vendors:
     source: "https://sciex.com/products/software/sciex-os-software"
     headquarters: "Framingham, Massachusetts, USA"
     founded: null
-    leadership: null
+    leadership: "Chris Hagen, President"
     history: "Mass-spectrometry business operating within Danaher's life-sciences segment. SCIEX OS controls its instruments and processes proteomics/metabolomics data, integrating tools such as PEAKS, DIA-NN, and MS-DIAL."
     market_position: "Leading mass-spectrometry vendor (ZenoTOF, QTRAP); SCIEX OS is a unified acquisition and processing platform for proteomics, metabolomics, and lipidomics. Operating company of Danaher (CEO Rainer M. Blair)."
+    market_share: null
     sources:
       - "https://sciex.com/products/software/sciex-os-software"
       - "https://lifesciences.danaher.com/us/en/products/mass-spectrometers/mass-spectrometry-software.html"
       - "https://lifesciences.danaher.com/us/en/news/sciex-bsi-peaks-software-collaboration.html"
+      - "https://www.businesswire.com/news/home/20250414890101/en/SCIEX-Appoints-Chris-Hagen-as-President (also https://sciex.com/about-us/executive-management)"
   - id: scimage
     name: ScImage
     categories: [ris-cvis-workflow]
@@ -2738,6 +2957,7 @@ vendors:
     leadership: "Sai Raya — Founder & CEO"
     history: "Founded 1993 by Sai Raya, Ph.D.; PICOM365 enterprise/cardiology imaging (PACS, CVIS, VNA, enterprise viewer); privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://scimage.com/wp-content/uploads/2025/10/ScImage_PR_2023-04-11_SOC-2.pdf"
       - "https://tracxn.com/d/companies/scimage/__lYBj4fof1CrMqiW_h5WiBEcxGLsqX2gW1yV9q70WhZo"
@@ -2753,6 +2973,7 @@ vendors:
     leadership: "Mike Coughlin — President & CEO (Founder)"
     history: "Founded 1994 by Mike Coughlin (Mission, Kansas); pharmacy-automation robotics and software deployed in 7,000+ pharmacies; privately held."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://scriptpro.com/our-story/"
       - "https://scriptpro.com/mike-coughlin/"
@@ -2768,9 +2989,11 @@ vendors:
     leadership: "Torbjörn Kronander — President & Chief Executive Officer"
     history: "Founded 1978 in Linköping (Linköping University roots); publicly traded medical-imaging IT (PACS/enterprise imaging) and secure-communications vendor."
     market_position: "Sectra PACS ranked #1 in US customer satisfaction for 12 consecutive years (Best in KLAS); FY2024/25 sales SEK 3,240M."
+    market_share: "#1 Best in KLAS enterprise PACS in the US, 13 consecutive years customer-satisfaction leader (KLAS Research)"
     sources:
       - "https://www.prnewswire.com/news-releases/sectra-keeps-1-position-in-customer-satisfactionearns-8-best-in-klas-awards-within-radiology-and-digital-pathology-302368822.html"
       - "https://investor.sectra.com/this-is-sectra/sectras-history/"
+      - "https://medical.sectra.com/about-sectra/sectra-pacs-best-in-klas/"
   - id: securitas-healthcare
     name: Securitas Healthcare
     categories: [rtls-asset-tracking]
@@ -2783,6 +3006,7 @@ vendors:
     leadership: "Bill McCarthy — President, Securitas Healthcare"
     history: "Formerly STANLEY Healthcare (heritage includes AeroScout RTLS); acquired by Securitas in 2022 and rebranded Securitas Healthcare. Provides RTLS/asset-tracking for hospitals; acquired ZulaFly."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.securitashealthcare.com/news/stanley-healthcare-now-securitas-healthcare"
       - "https://www.securitysystemsnews.com/article/securitas-celebrates-second-anniversary-of-stanley-acquisition"
@@ -2798,6 +3022,7 @@ vendors:
     leadership: "Jun Ye — CEO"
     history: "Founded 2014; genomics secondary-analysis software (DNAseq/DNAscope, TNseq) known for speed and accuracy; headquartered in San Jose, California."
     market_position: "Private; revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://www.genomeweb.com/informatics/sentieon-seeks-build-business-around-faster-more-accurate-genomic-analysis-software"
       - "https://www.zoominfo.com/c/sentieon-inc/368359769"
@@ -2813,6 +3038,7 @@ vendors:
     leadership: "Evan Floden — Co-founder & CEO"
     history: "Founded 2018 in Barcelona by Evan Floden and Paolo Di Tommaso, creators of the open-source Nextflow workflow engine (2013); venture-backed bioinformatics-pipeline platform (Seqera Platform / Tower)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://seqera.io/about/"
   - id: siemens
@@ -2827,6 +3053,7 @@ vendors:
     leadership: "Roland Busch — President & CEO"
     history: "Founded 1847 in Berlin by Werner von Siemens and Johann Georg Halske; German industrial-technology conglomerate (FWB: SIE); Desigo CC building management widely deployed in hospitals."
     market_position: "Public (FWB: SIE); the largest industrial manufacturing company in Europe."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Siemens"
       - "https://www.siemens.com/en-us/corporate-information/"
@@ -2842,6 +3069,7 @@ vendors:
     leadership: "Bernd Montag — CEO"
     history: "Siemens' medical business (lineage to 1847); carved out and incorporated 2017, IPO'd March 2018; HQ Erlangen, Germany; acquired Varian 2021."
     market_position: "Revenue of €21.7 billion in fiscal 2022."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Siemens_Healthineers"
       - "https://www.siemens-healthineers.com/company/management/bernd-montag"
@@ -2857,6 +3085,7 @@ vendors:
     leadership: "Shawn O'Connor — CEO"
     history: "Founded 1996 by Walter Woltosz. Acquired Lixoft (MonolixSuite) and Cognigen; develops GastroPlus PBPK and Monolix population-modeling software. Agreed to be acquired by Altaris (~$375M, $18.50/share) in June 2026."
     market_position: "Leading vendor of PBPK (GastroPlus) and nonlinear mixed-effects (MonolixSuite) modeling and simulation software for drug discovery and development."
+    market_share: null
     sources:
       - "https://www.simulations-plus.com/software/monolix/"
       - "https://www.simulations-plus.com/software/gastroplus/"
@@ -2875,6 +3104,7 @@ vendors:
     leadership: "Sridhar Ramaswamy — CEO"
     history: "Founded 2012 in San Mateo, CA; cloud data platform / AI Data Cloud; IPO 2020 (NYSE: SNOW); Sridhar Ramaswamy CEO since Feb 2024."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Snowflake_Inc."
       - "https://www.snowflake.com/en/news/press-releases/sridhar-ramaswamy-named-chief-executive-officer-of-snowflake/"
@@ -2890,6 +3120,7 @@ vendors:
     leadership: "Bryan Hanson — Chairman & CEO"
     history: "Spun off from 3M on April 1, 2024; includes former 3M Health Information Systems; four units (MedSurg, Dental, HIS, Purification & Filtration); NYSE-listed (SOLV)."
     market_position: "2024 revenue US$8.3 billion (total company, not HIS segment alone)"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Solventum"
       - "https://www.massdevice.com/3m-completes-solventum-healthcare-business-spinoff/"
@@ -2906,6 +3137,7 @@ vendors:
     leadership: "Jurgi Camblong — Co-founder & Chief Executive Officer"
     history: "Founded 2011 in Switzerland by Jurgi Camblong, Pierre Hutter and Lars Steinmetz; genomic/multimodal data-analytics (SOPHiA DDM); US base in Boston; NASDAQ IPO 2021."
     market_position: "Publicly traded (Nasdaq: SOPH); genomic data-analytics platform (SOPHiA DDM)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Sophia_Genetics"
       - "https://www.sophiagenetics.com/leadership-team/"
@@ -2921,6 +3153,7 @@ vendors:
     leadership: "Vincent Kelly — President & CEO"
     history: "Spok Holdings formed 2004 (merger of Metrocall and Arch Wireless, as USA Mobility); pivoted to clinical communications after acquiring Amcom Software in 2011. Nasdaq: SPOK."
     market_position: "Publicly traded (Nasdaq: SPOK); clinical communications and alarm-management provider."
+    market_share: null
     sources:
       - "https://www.spok.com/about-spok/"
       - "https://www.spok.com/about-spok/leadership/"
@@ -2937,6 +3170,7 @@ vendors:
     leadership: "Diana Allen — President & CEO"
     history: "Founded 1988 in Mobile, Alabama; healthcare revenue-cycle, claims-management and analytics vendor. Diana Allen was appointed president/CEO, succeeding longtime chief Jimmy Lyons."
     market_position: "Privately held; revenue not publicly disclosed."
+    market_share: null
     sources:
       - "https://thessigroup.com/the-ssi-group-names-new-president-and-ceo/"
       - "https://businessalabama.com/new-leadership-for-ssi-group/"
@@ -2952,6 +3186,7 @@ vendors:
     leadership: "Max Schultz — CEO"
     history: "Laboratory-informatics vendor founded 1986; HQ Hollywood, Florida. STARLIMS LIMS/ELN platform for regulated labs and manufacturing; nearly 40 years in laboratory informatics."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.starlims.com/en/about/"
   - id: structura-biotechnology
@@ -2966,6 +3201,7 @@ vendors:
     leadership: "Ali Punjani — Co-Founder & CEO"
     history: "Founded 2016 as a University of Toronto computer-science spin-out by Ali Punjani and Marcus Brubaker; makes CryoSPARC cryo-EM single-particle-analysis software; collaborates with Thermo Fisher."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://ca.linkedin.com/in/ali-punjani-a7b42b82"
       - "https://www.utoronto.ca/news/run-brother-sister-team-u-t-startup-leading-big-pharma-out-dark"
@@ -2980,6 +3216,7 @@ vendors:
     leadership: "Kevin A. Lobo — Chairman & CEO"
     history: "Founded 1941 in Kalamazoo, Michigan by orthopedic surgeon Dr. Homer Stryker; global medical-technology company; HQ Portage, Michigan; Kevin Lobo CEO since 2012."
     market_position: "Reported revenue of $22.59 billion in 2024."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Stryker_Corporation"
       - "https://aflcio.org/paywatch/SYK"
@@ -2993,13 +3230,15 @@ vendors:
     note: "Omnia robotic pharmacy automation plus pneumatic-tube transport; heavily on-prem/edge deployments in hospital pharmacies."
     headquarters: "Buchs, Switzerland"
     founded: null
-    leadership: null
+    leadership: "Cory Kwarta, CEO"
     history: "Business of Swisslog (founded 1900, Buchs, Switzerland; acquired by KUKA in 2015, KUKA owned by China's Midea); Swisslog Healthcare a distinct brand since 2019; pharmacy automation and pneumatic transport."
     market_position: "Vendor states installations at more than 3,000 healthcare institutions worldwide."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Swisslog"
       - "https://www.swisslog-healthcare.com/en-us/company"
       - "https://www.businesswire.com/news/home/20220301006006/en/Swisslog-Healthcare-Announces-Updated-Global-Management-Structure"
+      - "https://www.businesswire.com/news/home/20250707562872/en/Swisslog-Healthcare-Welcomes-New-Global-Head-of-People-Organization"
   - id: symplr
     name: symplr Software LLC
     categories: [workforce-management]
@@ -3012,6 +3251,7 @@ vendors:
     leadership: "BJ Schaknowski — CEO"
     history: "Founded 2006 as Vendor Credentialing Service (VCS); healthcare governance/risk/compliance and operations SaaS grown via acquisitions; Clearlake Capital-backed; Houston."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.symplr.com/press-releases/clearlake-capital-backed-symplr-names-software-industry-veteran-bj-schaknowski-as-ceo"
       - "https://www.symplr.com/press-releases/vcs-changes-name-symplr"
@@ -3027,6 +3267,7 @@ vendors:
     leadership: "Torsten Türling — Chief Executive Officer"
     history: "Established 1969 as Robert Bosch Apparatebau; formerly Bosch Packaging Technology, sold by Bosch to CVC Capital Partners in 2020 and rebranded Syntegon; pharma/food processing & packaging equipment maker."
     market_position: "not publicly disclosed (private; owned by CVC Capital Partners)."
+    market_share: null
     sources:
       - "https://www.linkedin.com/company/syntegon"
       - "https://www.syntegon.com/about-us/history/"
@@ -3043,6 +3284,7 @@ vendors:
     leadership: null
     history: "Founded 1985, Princeton NJ; pharma serialization/track-and-trace and brand-protection software. Acquired by Dover in 2020, now part of the Markem-Imaje business unit."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Systech_Corporation"
       - "https://www.inkworldmagazine.com/breaking-news/markem-imaje-dover-completes-systech-international-acquisition/"
@@ -3059,9 +3301,11 @@ vendors:
     leadership: "Chuck Divita — CEO"
     history: "Founded 2002 in Dallas; publicly traded (NYSE: TDOC) telehealth pioneer, now HQ New York City. Acquired Livongo (2020). Chuck Divita became CEO in 2024."
     market_position: "Publicly traded (NYSE: TDOC); a leading US telehealth provider; specific market share not publicly disclosed."
+    market_share: "#1 in US telehealth, ~25%+ market share (2024, Market.us)"
     sources:
       - "https://en.wikipedia.org/wiki/Teladoc_Health"
       - "https://www.teladochealth.com/newsroom/press/teladoc-health-names-chuck-divita-as-ceo"
+      - "https://market.us/report/us-telehealth-market/"
   - id: teletracking
     name: TeleTracking Technologies, Inc.
     categories: [capacity-command-center]
@@ -3074,6 +3318,7 @@ vendors:
     leadership: "Christopher Johnson — Co-CEO (with Michael Zamagias — Chairman & Co-CEO)"
     history: "Founded 1991 in Pittsburgh; patient-flow, capacity-management and RTLS software for hospitals. Privately held; led by co-CEOs Michael Zamagias (chairman) and Christopher Johnson."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.teletracking.com/about"
   - id: tempus
@@ -3087,6 +3332,7 @@ vendors:
     leadership: "Eric Lefkofsky — Founder & CEO"
     history: "Founded 2015 in Chicago by Eric Lefkofsky (formerly Tempus Labs); multi-modal precision-medicine, genomics and real-world-data platform; IPO on Nasdaq (TEM) in June 2024."
     market_position: "Public (Nasdaq: TEM) since June 2024; ~2,300 employees (2024)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Tempus_AI"
       - "https://www.tempus.com/about-us/our-history/"
@@ -3101,6 +3347,7 @@ vendors:
     leadership: null
     history: "Founded 1997 by Japanese radiologists; advanced-visualization pioneer (iNtuition); acquired by SymphonyAI Group (2020) and integrated with sister company ConcertAI."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.terarecon.com/about"
       - "https://www.terarecon.com/news/symphonyai-group-acquires-healthcare-imaging-ai-technology-leader-terarecon"
@@ -3117,9 +3364,11 @@ vendors:
     leadership: "Marc N. Casper — Chairman, President & CEO"
     history: "Formed 2006 by merger of Thermo Electron (founded 1956) and Fisher Scientific; NYSE: TMO; lab informatics incl. SampleManager LIMS and Chromeleon CDS."
     market_position: "not publicly disclosed"
+    market_share: "~24.5% of the global mass-spectrometry market; cited as the #1 mass-spec vendor (analyst est.)"
     sources:
       - "https://en.wikipedia.org/wiki/Thermo_Fisher_Scientific"
       - "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html"
+      - "https://www.verifiedmarketresearch.com/blog/top-7-mass-spectrometry-companies-revolutionizing-research-to-regulation/"
   - id: tracelink
     name: TraceLink Inc.
     categories: [serialization-track-trace]
@@ -3132,6 +3381,7 @@ vendors:
     leadership: "Shabbir Dahod — President & CEO"
     history: "Founded 2009 by Shabbir Dahod; cloud serialization/track-and-trace network for pharma supply chains (41B+ serialized IDs); privately held; North Reading, MA."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.tracelink.com/about-us/leadership/management/shabbir-dahod"
       - "https://www.tracelink.com/about/news-room/tracelink-hosts-openscs-working-group-at-its-us-headquarters"
@@ -3147,6 +3397,7 @@ vendors:
     leadership: "August Calhoun — Chief Executive Officer"
     history: "Cambridge, Massachusetts-based operator of a global federated real-world-data/clinical-research network linking healthcare organizations with life-sciences and academic researchers."
     market_position: "Company reports a federated network of 309M+ patient lives across 14,200+ clinical sites in 20+ countries."
+    market_share: null
     sources:
       - "https://trinetx.com/about/leadership/"
       - "https://trinetx.com/contact-us/"
@@ -3163,6 +3414,7 @@ vendors:
     leadership: "Chris Fowler — President & CEO"
     history: "Founded 1979 as Computer Programs and Systems (CPSI), Mobile Alabama; rural/community-hospital EHR and RCM. Rebranded TruBridge 2024; acquired TruCode 2021. Nasdaq: TBRG."
     market_position: "Publicly traded (Nasdaq: TBRG); RCM and EHR provider serving 1,500+ rural and community hospitals."
+    market_share: null
     sources:
       - "https://trubridge.com/about-us/"
       - "https://trubridge.com/resources/cpsi-to-rebrand-as-trubridge-inc/"
@@ -3179,6 +3431,7 @@ vendors:
     leadership: "Terry Myerson — Co-founder & CEO"
     history: "Founded 2020 in Bellevue, Washington by a consortium of US health systems and former Windows chief Terry Myerson; real-world de-identified patient-data and analytics platform."
     market_position: "Private, health-system-led; platform holds de-identified records for 120M+ US patients (company-stated)."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Truveta"
       - "https://www.truveta.com/leadership/"
@@ -3193,6 +3446,7 @@ vendors:
     leadership: "Natan Linder — Co-founder & CEO"
     history: "Founded 2014 by Natan Linder and Rony Kubat, spun out of MIT Media Lab (Pattie Maes). No-code frontline operations / composable MES platform with edge connectivity."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://tulip.co/platform/"
       - "https://tulip.co/frontline-operations/"
@@ -3209,6 +3463,7 @@ vendors:
     leadership: "Jennifer Morgan — CEO"
     history: "Formed April 2020 by the merger of Ultimate Software and Kronos; HCM, payroll and workforce-management vendor. Private-equity owned; dual HQ Lowell, MA and Weston, FL. Jennifer Morgan became CEO in 2024."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/UKG"
   - id: vaisala
@@ -3223,6 +3478,7 @@ vendors:
     leadership: "Kai Öistämö — President & CEO"
     history: "Founded 1936 in Finland by Vilho Väisälä; environmental and industrial measurement firm (Nasdaq Helsinki: VAIAS); viewLinc continuous monitoring for GxP warehouse/cold-chain."
     market_position: "Public (Nasdaq Helsinki: VAIAS); global leader in environmental and industrial measurement."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Vaisala"
       - "https://www.highperformr.ai/company/vaisala"
@@ -3234,13 +3490,16 @@ vendors:
     source: "https://www.itnonline.com/article/introduction-current-radiation-therapy-treatment-planning-systems (Eclipse TPS with fast calculation engines and integrated plan QA; ARIA OIS ecosystem — market leader)"
     headquarters: "Palo Alto, USA"
     founded: 1948
-    leadership: null
+    leadership: "Arthur Kaindl, Head of Varian"
     history: "Founded 1948 as Varian Associates, Palo Alto; radiation-oncology systems and treatment-planning software leader; acquired by Siemens Healthineers for $16.4B (2021), now its oncology business."
     market_position: "Acquired by Siemens Healthineers for $16.4 billion (completed 2021)."
+    market_share: ">60% of the radiotherapy market (2025; up ~10 percentage points since 2021, per Siemens Healthineers)"
     sources:
       - "https://padailypost.com/2020/08/03/palo-altos-varian-medical-to-be-taken-over-by-siemens-spinoff/"
       - "https://radiologybusiness.com/topics/healthcare-management/healthcare-economics/siemens-healthineers-acquisition-varian-medical"
       - "https://www.siemens-healthineers.com/press/releases/varian-closing"
+      - "https://cancercare.siemens-healthineers.com/about-us/about/executive-management (Head of Varian; confirmed current 2026, page lists Arthur Kaindl as Head of Varian)"
+      - "https://www.siemens-healthineers.com/press/releases/asm2026"
   - id: veeva-systems
     name: Veeva Systems Inc.
     categories: [clinical-trial-suite, eqms-calibration, pv-regulatory-information]
@@ -3253,9 +3512,11 @@ vendors:
     leadership: "Peter Gassner — Co-founder & CEO"
     history: "Founded 2007 by Peter Gassner and Matt Wallach; cloud software for life sciences (Vault suite); IPO 2013 (NYSE: VEEV); public-benefit corporation."
     market_position: "not publicly disclosed"
+    market_share: "~80% of the global life-sciences (pharma) CRM market (2024-25, analyst est.)"
     sources:
       - "https://en.wikipedia.org/wiki/Veeva_Systems"
       - "https://www.marketsandmarkets.com/ResearchInsight/pharmaceutical-quality-management-software-market.asp"
+      - "https://askme.it/en/insights/pharma-crm-in-2026-the-duopoly-has-broken/"
   - id: velsera
     name: Velsera
     categories: [bioinformatics-secondary]
@@ -3267,6 +3528,7 @@ vendors:
     leadership: "Jamie Coffin — Chief Executive Officer"
     history: "Formed January 2023 by Summa Equity merging Seven Bridges (bioinformatics, founded 2009), PierianDx (clinical genomics) and UgenTec (lab AI). Runs the Seven Bridges multi-cloud genomics platform. Jamie Coffin appointed CEO effective February 1, 2026."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.genomeweb.com/business-news/pierian-seven-bridges-ugentec-acquired-merged-become-velsera"
       - "https://velsera.com/velsera-appoints-jamie-coffin-phd-as-chief-executive-officer/"
@@ -3283,6 +3545,7 @@ vendors:
     leadership: "David Park — CEO"
     history: "Founded 2013 by Deepak Gaddipati (Peoria, Illinois); AI vision-based fall-prevention/patient-safety monitoring (VSTAlert); privately held; Deepak Gaddipati is founder/CTO."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.virtusense.ai/about/story"
       - "https://www.virtusense.ai/about/team"
@@ -3295,11 +3558,13 @@ vendors:
     source: "https://intuitionlabs.ai/articles/enterprise-pacs-klas-comparison and https://www.diagnosticimaging.com/view/advanced-visualization-aims-expand-enterprise (Visage 7 enterprise imaging gaining KLAS ground; named among five stand-out advanced-visualization vendors; server-side GPU streaming architecture)"
     headquarters: "San Diego, California, USA (parent Pro Medicus, Melbourne, Australia)"
     founded: null
-    leadership: null
+    leadership: "Sam Hupert, Co-Founder and CEO"
     history: "Berlin/San Diego enterprise-imaging vendor (Visage 7 platform) with 30+ years of medical-imaging heritage; wholly owned subsidiary of Australia's Pro Medicus (ASX: PME)."
     market_position: "Wholly owned subsidiary of publicly listed Pro Medicus (ASX: PME)."
+    market_share: null
     sources:
       - "https://visageimaging.com/company/"
+      - "https://visageimaging.com/company/team/"
   - id: viz-ai
     name: Viz.ai
     categories: [imaging-ai-deployment]
@@ -3311,6 +3576,7 @@ vendors:
     leadership: "Chris Mansi — Co-founder & CEO"
     history: "Founded 2016 by neurosurgeon Chris Mansi; FDA De Novo clearance 2018 for Viz LVO stroke-detection; independent, venture-backed."
     market_position: "Category leader in AI care coordination; deployed in 1,800+ hospitals; reached >$1.2B valuation at 2022 Series D"
+    market_share: null
     sources:
       - "https://www.viz.ai/"
       - "https://www.mobihealthnews.com/news/stroke-care-coordination-company-vizai-lands-100m"
@@ -3326,6 +3592,7 @@ vendors:
     leadership: "Rob Carson — CEO & President"
     history: "Founded 2019 near Boston commercializing Harvard's MERFISH as the MERSCOPE spatial-transcriptomics platform; merged with proteomics firm Ultivue in October 2024 to pursue spatial multiomics."
     market_position: "Privately held spatial-transcriptomics vendor; MERSCOPE/MERFISH competes with 10x Xenium and Bruker CosMx. Closed a $48M financing in January 2026 (led by ARCH Venture Partners) post-Ultivue merger; imaging runs on on-prem workstations."
+    market_share: null
     sources:
       - "https://vizgen.com/about-us/"
       - "https://vizgen.com/vizgen-and-ultivue-merge-to-enable-deeper-insights-into-disease-mechanisms-and-drive-innovation-in-spatial-multiomics/"
@@ -3343,6 +3610,7 @@ vendors:
     leadership: "Udit Batra — President & CEO"
     history: "Founded 1958 by James Waters; analytical instruments and lab informatics (Empower CDS, NuGenesis). NYSE: WAT; merged with BD's Biosciences & Diagnostic Solutions unit in 2026."
     market_position: "Publicly traded (NYSE: WAT); its Empower is a market-leading chromatography data system."
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Waters_Corporation"
       - "https://finance.yahoo.com/quote/WAT/profile/"
@@ -3358,10 +3626,12 @@ vendors:
     leadership: "Matt Hawkins — CEO"
     history: "Founded 2017 from the merger of Navicure and ZirMed; healthcare revenue-cycle and payments platform, co-headquartered in Lehi, Utah and Louisville, Kentucky. IPO'd on Nasdaq (WAY) June 2024."
     market_position: "Publicly traded (Nasdaq: WAY); reported ~$270M quarterly revenue in 2025, up ~15% year-over-year."
+    market_share: "Processes claims spanning ~60% of US patients and ~1-in-3 hospital discharges; ~$2.4T gross claims volume in FY2025 (company filings)"
     sources:
       - "https://investors.waystar.com/shareholder-services/investor-faqs"
       - "https://www.waystar.com/about-us/leadership/matthew-hawkins/"
       - "https://tracxn.com/d/companies/waystar/__76y4Rxj0twYIJsagSAn37BepJDIkfOToE671BqLfGVQ"
+      - "https://www.sec.gov/Archives/edgar/data/1990354/000199035425000031/way-20250930.htm"
   - id: wind-river
     name: Wind River (Aptiv)
     categories: [samd-embedded-oem-platform]
@@ -3374,6 +3644,7 @@ vendors:
     leadership: "Jay Bellissimo — President"
     history: "Founded 1981 in Alameda, California; makes the VxWorks RTOS and embedded/edge software for safety-critical systems. Owned successively by Intel (2009-18), TPG Capital (2018-22) and Aptiv (2022, ~$4.3B)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Wind_River_Systems"
       - "https://www.windriver.com/company/bios"
@@ -3388,6 +3659,7 @@ vendors:
     leadership: "Stacey Caywood — CEO, Wolters Kluwer"
     history: "Health division of information-services group Wolters Kluwer; flagship UpToDate clinical decision support and Lippincott/Ovid; Stacey Caywood led the Health division before becoming group CEO, succeeding Nancy McKinstry."
     market_position: "Division of publicly traded Wolters Kluwer; UpToDate is a widely used physician-authored clinical decision support resource."
+    market_share: null
     sources:
       - "https://www.wolterskluwer.com/en/news/stacey-caywood-has-officially-assumed-the-role-of-ceo-at-wolters-kluwer"
       - "https://www.wolterskluwer.com/en/news/wolters-kluwer-appoints-leaders-for-health-legal-regulatory-divisions"
@@ -3403,10 +3675,12 @@ vendors:
     leadership: "Aneel Bhusri — CEO"
     history: "Founded 2005 in Pleasanton, California by Dave Duffield and Aneel Bhusri; cloud HCM and financials SaaS; co-founder Aneel Bhusri returned as sole CEO in February 2026, succeeding Carl Eschenbach."
     market_position: "Reported revenue of $8.45 billion in fiscal 2025."
+    market_share: "#1 in worldwide HCM & payroll applications, ~12.6% share ($5.2B) (IDC, 2024)"
     sources:
       - "https://en.wikipedia.org/wiki/Workday,_Inc."
       - "https://www.danvillesanramon.com/business/2026/02/09/workday-ceo-out-as-co-founder-returns-to-lead-pleasanton-company/"
       - "https://www.companieshistory.com/workday-inc/"
+      - "https://my.idc.com/getdoc.jsp?containerId=US53468226"
   - id: wtw
     name: WTW (RiskAgility / ResQ)
     categories: [payer-actuarial-hpc]
@@ -3418,6 +3692,7 @@ vendors:
     leadership: "Carl Hess — CEO"
     history: "Willis Towers Watson (WTW), formed by the 2016 Willis–Towers Watson merger, offers RiskAgility Financial Modeler for actuarial modeling and ResQ for P&C loss reserving."
     market_position: "Leading actuarial-software vendor; RiskAgility FM (valuation, pricing, capital, VM-22) and ResQ reserving run compute-intensive workloads on-prem or private cloud, orchestrated via WTW Unify — an actuarial-HPC target."
+    market_share: null
     sources:
       - "https://www.wtwco.com/en-us/solutions/products/riskagility-financial-modeler"
       - "https://www.wtwco.com/en-th/solutions/products/resq"
@@ -3431,12 +3706,14 @@ vendors:
     note: "CENTUM VP DCS; challenger in pharma (less common than DeltaV/PCS 7, stronger in oil & gas/chemicals)"
     headquarters: "Musashino, Tokyo, Japan"
     founded: 1915
-    leadership: null
+    leadership: "Kunimasa Shigeno, President & CEO (Representative Executive Officer)"
     history: "Founded 1915 in Tokyo; industrial automation and measurement (CENTUM VP DCS); Tokyo Stock Exchange-listed. Current president/CEO not verified from a live source this round."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Yokogawa_Electric"
       - "https://automationforum.co/here-are-top-10-dcs-manufacturing-companies-with-their-dcs-model-name-software-name-and-its-controllers/"
+      - "https://www.yokogawa.com/about/ir/governance/board/board_detail/"
   - id: zebra-technologies
     name: Zebra Technologies
     categories: [rtls-asset-tracking]
@@ -3449,6 +3726,7 @@ vendors:
     leadership: "William (Bill) Burns — CEO"
     history: "Founded 1969; barcode, RFID and RTLS/asset-tracking leader; acquired Motorola Solutions' enterprise business 2014; NYSE-listed (ZBRA), Lincolnshire, Illinois."
     market_position: "2025 revenue US$5.40 billion"
+    market_share: null
     sources:
       - "https://en.wikipedia.org/wiki/Zebra_Technologies"
       - "https://www.zebra.com/us/en/about-zebra/company-information/company-leadership.html"
@@ -3461,11 +3739,13 @@ vendors:
     note: "Jiva care/utilization management platform, Best in KLAS payer care management 2022-2025 (Harvard Pilgrim, Sentara, HPSJ); UM/CM side of the category, SaaS-dominant."
     headquarters: "Plano, Texas, USA"
     founded: null
-    leadership: null
+    leadership: "Sam Rangaswamy, Founder & CEO"
     history: "Plano, Texas-based population-health-management software vendor; flagship Jiva platform serves payers and risk-bearing providers (care management, utilization management)."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://www.zeomega.com/"
+      - "https://www.zeomega.com/our-team/sam-rangaswamy"
   - id: ziosoft
     name: Ziosoft
     categories: [advanced-visualization-3d]
@@ -3474,10 +3754,12 @@ vendors:
     source: "https://www.diagnosticimaging.com/view/3d-rivals-battle-rsna-2008 and https://www.diagnosticimaging.com/view/advanced-visualization-aims-expand-enterprise (thin-client architecture with server-side processing — named among stand-out AV vendors)"
     headquarters: "Tokyo, Japan"
     founded: 1998
-    leadership: null
+    leadership: "Kengo Araki, President"
     history: "Founded 1998, Tokyo; advanced 3D visualization software (Ziostation, REVORAS) using thin-client server architecture. Offices in Japan and the USA; partnered with Olympus on AI surgical planning."
     market_position: "not publicly disclosed"
+    market_share: null
     sources:
       - "https://ziosoftinc.com/about-us/"
       - "https://www.prweb.com/releases/ziosoft-features-next-generation-ziostation-platform-at-annual-radiology-society-of-north-america-301996844.html"
       - "https://www.cbinsights.com/company/ziosoft-inc"
+      - "https://www.zio.co.jp/en/outline/"
