@@ -343,17 +343,15 @@ const smciFam=h=>(LANG==='zh'?(SMCI_FAMILY[h]||[h,h])[1]:(SMCI_FAMILY[h]||[h,h])
 // as three clear buckets (compute / storage / deploy) not eight unexplained acronyms.
 // [group, short_en, short_zh, gloss_en, gloss_zh]
 const PLINE={
- 'gpu-server':['compute','GPU servers','GPU 伺服器','AI training & inference','AI 訓練與推論'],
- 'high-performance-computing-cpu':['compute','HPC nodes (CPU)','HPC 節點 (CPU)','CPU-dense parallel compute — simulation, genomics pipelines','CPU 密集平行運算 — 模擬、基因體流程'],
- 'high-memory':['compute','High-memory servers','大記憶體伺服器','multi-TB in-memory datasets','多 TB 記憶體內資料集'],
- 'nvme-performance-storage':['storage','NVMe all-flash','NVMe 全快閃','hot, fast working storage (high IOPS)','熱資料、高速工作儲存(高 IOPS)'],
- 'capacity-archive-storage':['storage','Capacity archive','大容量封存','cold bulk PB storage — low cost','冷資料、PB 級大量封存 — 低成本'],
- 'edge-industrial':['deploy','Industrial edge','工業邊緣','on-site / plant-floor servers','現場／廠房伺服器'],
- 'high-availability-redundant':['deploy','HA pairs','高可用配對','no-downtime redundancy — keeps it up','不中斷冗餘 — 維持運行'],
- 'disaster-recovery-backup':['deploy','DR / backup','災難備援／備份','disaster recovery & backup','災難備援與備份']};
-const PGRP=[['compute','Compute — runs the workload','運算 — 跑工作負載'],
-            ['storage','Storage — where the data lives','儲存 — 資料放哪'],
-            ['deploy','Deploy & resilience — how it runs and stays up','部署・韌性 — 怎麼跑、怎麼不中斷']];
+ 'gpu-server':['compute','GPU servers','GPU 伺服器','AI train & inference','AI 訓練・推論'],
+ 'high-performance-computing-cpu':['compute','HPC nodes','HPC 節點','CPU-parallel, no GPU','CPU 平行(非 GPU)'],
+ 'high-memory':['compute','High-memory','大記憶體','one box, huge RAM','單機大 RAM'],
+ 'nvme-performance-storage':['storage','NVMe all-flash','NVMe 全快閃','hot data, fast','熱資料・快'],
+ 'capacity-archive-storage':['storage','Capacity archive','大容量封存','cold data, cheap bulk','冷資料・便宜大量'],
+ 'edge-industrial':['deploy','Industrial edge','工業邊緣','on-site / plant floor','現場／廠房'],
+ 'high-availability-redundant':['deploy','HA pairs','高可用配對','keeps it running','維持不中斷'],
+ 'disaster-recovery-backup':['deploy','DR / backup','災難備援','recover after disaster','災後復原']};
+const PGRP=[['compute','Compute','運算'],['storage','Storage','儲存'],['deploy','Deploy & resilience','部署・韌性']];
 const plineGloss=h=>PLINE[h]?(LANG==='zh'?PLINE[h][4]:PLINE[h][3]):'';
 
 // ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
@@ -629,7 +627,7 @@ function renderTaxonomy(){
       const tp=document.getElementById('twopane');if(tp)tp.scrollIntoView({behavior:'smooth',block:'start'});};
     const URANK={critical:0,high:1,medium:2,low:3};
     // door: SMCI product line (facet 1) — grouped by role + plain gloss, not acronym soup
-    box.append(el('div',{class:'dhdr'},T('Product line — the SMCI box, grouped by what it does','產品線 — SMCI 機箱,依用途分組')));
+    box.append(el('div',{class:'dhdr'},T('Product line (SMCI box)','產品線(SMCI 機箱)')));
     const plist=el('div',{class:'plist'});
     PGRP.forEach(([gk,gen,gzh])=>{
       const rows=Object.keys(PLINE).filter(h=>PLINE[h][0]===gk)
@@ -642,7 +640,7 @@ function renderTaxonomy(){
         plist.append(it);});
     });
     box.append(plist);
-    box.append(el('div',{class:'muted',style:'font-size:11px;margin:1px 0 4px'},T('A category can pull several boxes, so these counts overlap — e.g. an AI pipeline pulls GPU + NVMe.','一個類別可拉動多種機箱,故這些數字會重疊 — 例:AI 流程同時拉 GPU + NVMe。')));
+    box.append(el('div',{class:'muted',style:'font-size:11px;margin:1px 0 4px'},T('Counts overlap — a category often pulls several boxes.','數字會重疊 — 一個類別常拉多台機箱。')));
     // door: trigger (facet 3) — signal -> affected markets -> the action
     const trow=el('div',{class:'drow'});trow.append(el('span',{class:'dlab'},T('Trigger','觸發訊號')));
     (DATA.triggers.triggers||[]).slice().sort((a,b)=>URANK[a.urgency]-URANK[b.urgency]).forEach(t=>{
