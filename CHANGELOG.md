@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-29 — product-line door de-jargoned: grouped + plain-glossed + v3.2.1
+Tuo on the product-line door: "GPU 22 · HPC 11 · NVMe 17 · 封存 19 · 邊緣 17 · HA 17 · DR 9 — 這裏很奇怪…HPC 可以搭配 GPU,NVMe 就是 storage,封存又是什麼?HA 呢?DR 呢?你會讓人搞不清楚啊." Right — eight raw hardware_profile acronyms in a flat row read as soup, overlap (GPU/HPC both compute; NVMe/archive both storage), and never say what HA / DR / archive are. Rebuilt the door as a **labeled menu grouped by role**, each line with a plain one-line gloss:
+- **Compute — runs the workload:** GPU servers (AI training & inference) · HPC nodes CPU (CPU-dense parallel compute — simulation, genomics) · High-memory (multi-TB in-memory).
+- **Storage — where the data lives:** NVMe all-flash (hot, fast working storage, high IOPS) · Capacity archive (cold bulk PB storage — low cost).
+- **Deploy & resilience — how it runs and stays up:** Industrial edge (on-site / plant-floor) · HA pairs (no-downtime redundancy) · DR / backup (disaster recovery & backup).
+- Added a note that a category pulls several boxes, so the counts overlap by design (an AI pipeline pulls GPU + NVMe). The battle-card reference-arch chips also carry the plain gloss as a tooltip.
+- **89 GREEN**; deterministic; browser-verified both languages, zero console errors, no emoji. **Tagged `v3.2.1`.**
+
 ## 2026-07-29 — killed the passive summary; Explore is now an active hunt launcher + battle cards + v3.2
 Tuo, after v3.1: "改了有個屁用, 想別的方式優化" — polishing the summary table was useless; find a different shape. Diagnosis: the master table was a **passive poster** — it aggregated 59 categories into numbers you couldn't *act* on. An account manager opens the tool *with a context* (a product line to push, a meeting, a trigger) that a summary doesn't answer. So the whole top-of-Explore was rebuilt from a poster into a **tool**. Tuo wanted all four proposed directions — so they were unified: **three doors + one destination.**
 - **Battle card (the destination).** The category detail pane now leads with an actionable sell layer, pulled from data: **Your motion** (direct / co-sell / OEM, derived from hardware_buyer), **Reference architecture** (the exact SMCI server families to pitch, from hardware_profile → SMCI family + sizing), and **Trigger → move** (the triggers that touch this category, reverse-looked-up, each with its urgency and the prescribed outreach action). Explainer → weapon.
