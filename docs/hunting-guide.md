@@ -1,6 +1,6 @@
 # SMCI Medical / Pharma Hunting Guide
 
-> Generated from `/data` (taxonomy v7, 58 categories, 228 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
+> Generated from `/data` (taxonomy v7, 59 categories, 231 vendors). Deterministic — do not edit by hand; regenerate with `python3 tools/hunting_guide.py`.
 >
 > **Gate question first (CLAUDE.md §3): who controls the infrastructure behind the software?** No answer → not in pipeline.
 
@@ -71,6 +71,7 @@
 | **RWD/RWE Analytics Platform** <br><small>rwd-rwe-analytics</small> | 2 | 3 | · | gpu-server (rack), capacity-archive-storage (cluster) | Operator-side real-world-data / claims analytics platform (warehouse + software-as-a-service); a data-platform co-sell, not the sequencing / research-AI motion of Play B |
 | **SaMD & Embedded Device Software Platform (OEM)** <br><small>samd-embedded-oem-platform</small> | 3 | · | 3 | gpu-server (rack), high-performance-computing-cpu (rack), edge-industrial (node) | OEM embedded design-win — medtech / in-vitro-diagnostics device software; a per-unit board/edge bill-of-materials channel deal, not a hospital imaging/genomics/manufacturing play |
 | **Smart-Room Ambient Sensing & Clinical Video AI** <br><small>smart-room-ambient-ai</small> | 3 | 3 | 2 | gpu-server (rack), capacity-archive-storage (rack), edge-industrial (node) | Clinical video artificial intelligence adjacent to Play A but outside the fixed three-play scope; pursue as a standalone ward-video edge deal alongside the imaging estate |
+| **Clinical Communication & Collaboration** <br><small>clinical-communication-collaboration</small> | 2 | 2 | · | edge-industrial (node), high-availability-redundant (node) | Hospital nurse-call and clinical-alerting high-availability middleware; a standalone clinical-communication infrastructure deal, not one of the three imaging/genomics/manufacturing plays |
 
 ## 3 · Master HOT lists
 
@@ -155,7 +156,7 @@
 - **nvme-performance-storage** — 17 categories, 15 customer-HOT: `ai-drug-discovery`, `bioinformatics-secondary`, `comp-chem-simulation`, `cryo-em-structural-bio`, `digital-pathology`, `ehr-emr-core`, `pacs-vna`, `clinical-data-lakehouse` …
 - **capacity-archive-storage** — 19 categories, 12 customer-HOT: `bioinformatics-secondary`, `cryo-em-structural-bio`, `digital-pathology`, `pacs-vna`, `clinical-data-lakehouse`, `ms-proteomics-metabolomics`, `or-surgical-video`, `plant-historian` …
 - **high-memory** — 6 categories, 6 customer-HOT: `comp-chem-simulation`, `cryo-em-structural-bio`, `healthcare-llm-serving`, `ms-proteomics-metabolomics`, `payer-actuarial-hpc`, `pharmacometrics-modeling-simulation`
-- **edge-industrial** — 16 categories, 9 customer-HOT: `imaging-ai-deployment`, `automated-visual-inspection`, `medical-device-integration`, `mes-ebr`, `or-surgical-video`, `pat-process-twin`, `samd-embedded-oem-platform`, `scada-dcs` …
-- **high-availability-redundant** — 16 categories, 9 customer-HOT: `ehr-emr-core`, `imaging-ai-deployment`, `hospital-erp`, `lis`, `medical-device-integration`, `mes-ebr`, `payer-core-admin`, `radiation-oncology-tps-ois` …
+- **edge-industrial** — 17 categories, 9 customer-HOT: `imaging-ai-deployment`, `automated-visual-inspection`, `medical-device-integration`, `mes-ebr`, `or-surgical-video`, `pat-process-twin`, `samd-embedded-oem-platform`, `scada-dcs` …
+- **high-availability-redundant** — 17 categories, 9 customer-HOT: `ehr-emr-core`, `imaging-ai-deployment`, `hospital-erp`, `lis`, `medical-device-integration`, `mes-ebr`, `payer-core-admin`, `radiation-oncology-tps-ois` …
 - **disaster-recovery-backup** — 9 categories, 5 customer-HOT: `ehr-emr-core`, `hospital-erp`, `lis`, `mes-ebr`, `payer-core-admin`, `hie-interoperability-engine`, `qc-lims-cds`, `rcm-billing-claims` …
 

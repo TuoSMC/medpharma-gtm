@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-07-28 — category #59 clinical-communication + full EN⇄中文 app toggle + v1.6
+Two asks: close the on-shift-clinician-communication gap in the map, and make the whole universe map viewable in Chinese.
+- **+1 category → 59: `clinical-communication-collaboration`** (nurse call, secure messaging, on-call scheduling, shift handoff) under `hospital-device-facility-operations`. Full six layers + workload_envelope (derived from tags via the helper: gpu none, capacity none, availability high-availability, latency real-time; judgment low/random-transactional/high). Deliberately modest (opportunity 2) — pure comms is SaaS-light under the §3 hardware gate — but real for a complete software-universe map. **7 vendors**: added the category to ascom/connexall/spok/qgenda + researched 3 new (Vocera/Stryker, TigerConnect, PerfectServe) §8-verified — Vocera leadership honest-null (now a Stryker unit, no independent current exec), TigerConnect → Sean O'Neal CEO, PerfectServe → Guillaume Castel CEO. Registry → 231.
+- **EN ⇄ 中文 toggle across the whole app.** A header button flips a global `LANG`; all 8 tab renders refactored from run-once IIFEs into named functions + a `renderAll()` so a toggle re-renders live. Category display names switch to `name_zh` (with the English as the sub-line); nav labels, tab chrome, section titles, field labels (HQ→總部, Leadership→負責人, Market share→市佔, …), and the key hero/rollup strings switch via a `T(en, zh)` helper. Vendor company names stay English (proper nouns). Browser-verified both directions, category #59 renders in both languages, zero console errors.
+- **78 tests GREEN** (59 categories, 231 vendors); app + hunting guide rebuilt (deterministic).
+- **Tagged `v1.6`.**
+
 ## 2026-07-28 — vendor leadership backfill + market_share layer (registry v7) + v1.5
 Closed the two vendor-page gaps: the 28 vendors missing a named leader, and a new **market_share** field across all 228. Filled by the `vendor-enrich2` workflow (10 chunks × research + adversarial verify, 20 agents) under the §8 no-fabrication rule.
 - **leadership +22** (of 28 missing) — each a current, sourced named exec with tenure verified (e.g. Intelerad → Jordan Bazinsky CEO; ETQ → Vick Vaishnavi; Varian → Arthur Kaindl; Nonlinear Dynamics → Udit Batra via parent Waters). **6 stay honest null** (eq2, gatan, matrix-science, open-systems-pharmacology, systech, terarecon — no public exec found). Leadership coverage 200 → 222 / 228.

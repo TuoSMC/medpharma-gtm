@@ -2262,3 +2262,42 @@ categories:
       per_unit_data_size: null
       sources: []
       notes: "Central-processing-unit-dense grid for Monte-Carlo reserving on tight overnight batch windows; scratch data is transient, not accumulating."
+
+  - id: clinical-communication-collaboration
+    name_en: Clinical Communication & Collaboration
+    name_zh: 臨床通訊與協作平台
+    name_full: Clinical Communication and Collaboration (nurse call, secure messaging, on-call scheduling, shift handoff)
+    domain: hospital-device-facility-operations
+    lifecycle: [clinical]
+    role: [workflow, integration]
+    data_modality: [transactional, time-series]
+    deployment: [on-premises, edge, hybrid, software-as-a-service]
+    segments: [hospital-health-system, academic-medical-center]
+    hospital_view:
+      stakeholder: [clinician]
+      dimension: [clinical, ops]
+    hardware_opportunity: 2
+    hardware_buyer: [customer, operator, hyperscaler]
+    primary_buyer: customer
+    supermicro_reachable: true
+    hardware_opportunity_by_buyer: {customer: 2, operator: 2}
+    infrastructure_notes: "On-premises nurse-call and clinical-alerting middleware in high-availability pairs, plus unit and in-room edge stations routing alarms, secure messages, and on-call schedules to clinician devices on shift; the secure-messaging and scheduling tiers are increasingly vendor-hosted software-as-a-service. Sizing driven by bed and clinician-endpoint count and alarm-delivery uptime service levels, not data volume."
+    hardware_profile: [edge-industrial, high-availability-redundant]
+    hardware_profile_sizing: {edge-industrial: node, high-availability-redundant: node}
+    plays: []
+    play_exemption: "Hospital nurse-call and clinical-alerting high-availability middleware; a standalone clinical-communication infrastructure deal, not one of the three imaging/genomics/manufacturing plays"
+    vendors: [ascom, connexall, perfectserve, qgenda, spok, tigerconnect, vocera-stryker]
+    evidence_note: "Added to close the software-universe map gap for on-shift clinician communication (nurse call, secure messaging, on-call scheduling) — deliberately thin under the hardware gate but real for the map."
+    workload_envelope:
+      scaling_driver: "clinician endpoint count and alarm-and-message delivery volume per shift"
+      gpu_role: none
+      capacity_band: none
+      availability_class: high-availability
+      latency_class: real-time
+      data_growth: low
+      io_pattern: random-transactional
+      concurrency: high
+      retention_horizon: null
+      per_unit_data_size: null
+      sources: []
+      notes: "Alerting and messaging middleware; redundant HA pair plus in-room edge, sized by endpoint count and delivery uptime, not accumulating data."

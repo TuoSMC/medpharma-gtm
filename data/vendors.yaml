@@ -322,7 +322,7 @@ vendors:
       - "https://www.highperformr.ai/company/arxium"
   - id: ascom
     name: Ascom Holding AG
-    categories: [medical-device-integration]
+    categories: [clinical-communication-collaboration, medical-device-integration]
     deployment_models: [on-premises, edge, hybrid]
     confidence: C
     source: "https://www.fortunebusinessinsights.com/clinical-alarm-management-market-111697"
@@ -866,7 +866,7 @@ vendors:
       - "https://tech.eu/2025/09/02/seqone-acquires-congenica-to-create-a-global-leader-in-ai-powered-genomic-medicine/"
   - id: connexall
     name: Connexall
-    categories: [medical-device-integration]
+    categories: [clinical-communication-collaboration, medical-device-integration]
     deployment_models: [on-premises, hybrid]
     confidence: B
     source: "https://www.fortunebusinessinsights.com/clinical-alarm-management-market-111697"
@@ -2629,6 +2629,27 @@ vendors:
     sources:
       - "https://www.pathai.com/about-us"
       - "https://www.pathai.com/careers/"
+  - id: perfectserve
+    name: PerfectServe
+    categories: [clinical-communication-collaboration]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://www.perfectserve.com/company/ (cloud-based clinical communication & collaboration, provider scheduling, and medical answering platform; multiple Best in KLAS 2026 awards for physician scheduling and ambulatory/post-acute clinical communications)"
+    headquarters: "Knoxville, Tennessee, USA"
+    founded: 1997
+    leadership: "Guillaume Castel — Chief Executive Officer (CEO since July 2019; confirmed current per official team page). Founder Terry Edwards serves as Chairman of the Board."
+    history: "Founded in August 1997 by Terry Edwards in Knoxville, Tennessee, originally as a physician-directed clinical communication and medical answering service (Edwards drew on his interactive-voice-messaging background). Grew into a unified cloud platform for clinical communication & collaboration (CC&C), provider/on-call scheduling, and patient engagement. Following a growth investment from K1 Investment Management, it expanded via acquisitions: Telmediq (secure communications, announced January 2019), and on February 5, 2019 it acquired Lightning Bolt Solutions (AI-optimized physician shift scheduling, which manages more than 3 million physician hours per month) and CareWire. Guillaume Castel became CEO in July 2019, with Terry Edwards transitioning to Chairman of the Board. The company remains backed by K1 Investment Management."
+    market_position: "Leading clinical communication and collaboration (CC&C) and provider-scheduling vendor. In the 2026 Best in KLAS report, PerfectServe's Lightning Bolt Scheduling ranked #1 in Physician Scheduling (third consecutive year) and its platform ranked #1 in Clinical Communications for Ambulatory/Post-Acute Care (second consecutive year), following dual 2025 Best in KLAS recognition. Reported as a trusted partner to more than 500 hospitals and 30,000 medical practices; the Lightning Bolt scheduling product manages 3M+ physician hours per month."
+    market_share: null
+    sources:
+      - "https://www.perfectserve.com/company/"
+      - "https://www.perfectserve.com/team/guillaume-castel/"
+      - "https://www.perfectserve.com/press-releases/perfectserve-names-healthcare-and-technology-veteran-guillaume-castel-as-new-ceo-appoints-terry-edwards-as-chairman-of-the-board/"
+      - "https://www.perfectserve.com/news/perfectserve-acquires-lightning-bolt-and-carewire-reinforces-vision-of-care-team-collaboration-platform/"
+      - "https://www.perfectserve.com/news/perfectserve-acquires-telmediq/"
+      - "https://www.globenewswire.com/news-release/2026/02/04/3232150/0/en/perfectserve-is-again-best-in-klas-for-physician-scheduling-and-ambulatory-clinical-communications.html"
+      - "https://www.prnewswire.com/news-releases/perfectserve-earns-dual-2025-best-in-klas-recognition-for-physician-scheduling-and-clinical-communications-302368359.html"
+      - "https://www.pehub.com/k1-backed-perfectserve-buys-telmediq/"
   - id: philips
     name: Philips (Koninklijke Philips N.V.)
     categories: [advanced-visualization-3d, digital-pathology, icu-central-monitoring, imaging-ai-deployment, medical-device-integration, pacs-vna, ris-cvis-workflow, telehealth-platform]
@@ -2714,7 +2735,7 @@ vendors:
       - "https://www.insightpartners.com/ideas/proscia-leadership-story/"
   - id: qgenda
     name: QGenda, LLC (Hearst Health)
-    categories: [workforce-management]
+    categories: [clinical-communication-collaboration, workforce-management]
     deployment_models: [software-as-a-service]
     confidence: C
     source: "https://www.varshealth.com/post/top-healthcare-staff-scheduling-software"
@@ -3143,7 +3164,7 @@ vendors:
       - "https://www.sophiagenetics.com/leadership-team/"
   - id: spok
     name: Spok Inc.
-    categories: [medical-device-integration]
+    categories: [clinical-communication-collaboration, medical-device-integration]
     deployment_models: [on-premises, hybrid, software-as-a-service]
     confidence: B
     source: "https://www.businesswire.com/news/home/20220120005944/en/Insights-on-the-Clinical-Alarm-Management-Global-Market-to-2026---Featuring-Baxter-International-Ascom-Holding-and-Spok-Among-Others---ResearchAndMarkets.com"
@@ -3369,6 +3390,24 @@ vendors:
       - "https://en.wikipedia.org/wiki/Thermo_Fisher_Scientific"
       - "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html"
       - "https://www.verifiedmarketresearch.com/blog/top-7-mass-spectrometry-companies-revolutionizing-research-to-regulation/"
+  - id: tigerconnect
+    name: TigerConnect
+    categories: [clinical-communication-collaboration]
+    deployment_models: [software-as-a-service, public-cloud]
+    confidence: B
+    source: "https://tigerconnect.com/about/leadership-team/"
+    headquarters: "El Segundo, California, USA"
+    founded: 2010
+    leadership: "Sean O'Neal — Chief Executive Officer (appointed May 1, 2025; previously Chief Product Officer at Sinch). VERIFIED CURRENT against the company's live leadership-team page as of July 2026 — O'Neal is listed as sitting CEO, not former/resigned. Co-founder Brad Brooks is listed as Co-Founder & Executive Chairman (moved from CEO in the same transition); co-founder Andrew Brooks, MD is Co-Founder & Chief Medical Officer. Other executives on the current leadership page, titles verbatim: Tim Goodwin (Chief Technology Officer), Saurin Shah (Chief Product Officer), Sheeza Hussain (Chief Growth Officer), John Montealegre (Chief Financial Officer), Peter Stetson, MD (Chief Medical Informatics Officer), Brian Kaminski (Chief Customer Officer), Allie Vu (Chief People Officer), Michelle White (Chief Marketing Officer)."
+    history: "Founded in 2010 as TigerText by Brad Brooks, Andrew Brooks, MD, and Jeffrey Evans, originally to provide HIPAA-compliant secure text messaging for healthcare. The company rebranded to TigerConnect on March 6, 2018, expanding from secure messaging into a broader clinical communication and collaboration (CC&C) platform. Currently headquartered at 841 Apollo Street, Suite 200, El Segundo, California (per the company's official contact page and SAM.gov registration as of July 2026); the company was previously headquartered in Santa Monica (2110 Broadway), an address that still appears in older third-party directories. In May 2025 the company appointed Sean O'Neal (previously Chief Product Officer at Sinch) as CEO, with co-founder Brad Brooks transitioning to Executive Chairman."
+    market_position: "Positioned as a leading pure-play clinical communication and collaboration / secure-messaging SaaS vendor in the U.S. healthcare market, competing with Vocera (Stryker), Spok, PerfectServe, and Symplr/Halo Health. The company self-reports adoption by more than 7,000 healthcare organizations and processing over 10 million messages per day with claimed 99.99% uptime (vendor-reported figures, confidence C — not independently verified). No independently cited market-share percentage for a defined market was located."
+    market_share: null
+    sources:
+      - "https://tigerconnect.com/about/leadership-team/"
+      - "https://tigerconnect.com/resources/newsroom/tigerconnect-appoints-sean-oneal-as-ceo"
+      - "https://tigerconnect.com/about/contact-us/"
+      - "https://opengovus.com/sam-entity/N6VBMNJA1W37"
+      - "https://en.wikipedia.org/wiki/TigerConnect"
   - id: tracelink
     name: TraceLink Inc.
     categories: [serialization-track-trace]
@@ -3598,6 +3637,27 @@ vendors:
       - "https://vizgen.com/vizgen-and-ultivue-merge-to-enable-deeper-insights-into-disease-mechanisms-and-drive-innovation-in-spatial-multiomics/"
       - "https://vizgen.com/vizgen-announces-48-million-financing/"
       - "https://endpoints.news/vizgen-raises-48m-for-push-in-spatial-biology-and-multiomics-tools/"
+  - id: vocera-stryker
+    name: Vocera Communications (part of Stryker)
+    categories: [clinical-communication-collaboration]
+    deployment_models: [on-premises, private-cloud]
+    confidence: B
+    source: "https://investors.stryker.com/press-releases/news-details/2022/Stryker-completes-acquisition-of-Vocera-Communications/default.aspx"
+    headquarters: "San Jose, California, USA"
+    founded: 2000
+    leadership: null
+    history: "Vocera Communications was founded in Silicon Valley in 2000, headquartered in San Jose, California. In 2002 it shipped the first hands-free, voice-controlled Vocera Badge, becoming a leader in clinical communication and workflow — wearable communication badges/Smartbadges, nurse-call and clinical alerting integration, and secure messaging via the Vocera Platform, which integrates with 150+ clinical and operational systems (EHRs, nurse call, physiologic monitors, lab, radiology, bed management). Vocera went public in 2012. Stryker announced a definitive agreement to acquire Vocera on Jan 6, 2022 at $79.25/share (~$2.97B equity value, ~$3.09B enterprise value including convertible notes) and completed the acquisition on Feb 23, 2022 (tender offer expired Feb 22, 2022 with ~85% of shares tendered). Vocera now operates as part of Stryker's Medical division under its Advanced Digital Healthcare offerings. Leadership is recorded as null: pre-acquisition CEO Brent Lang led the independent public company but is a former, not current, leader; post-acquisition Vocera is a Stryker business unit with no independently verifiable standalone current Vocera leader, so no current-tenure claim is made."
+    market_position: "Established leader in clinical/hands-free healthcare communication (wearable Badge/Smartbadge plus clinical alerting and secure messaging); now part of Stryker's Medical division, extending Stryker's Advanced Digital Healthcare portfolio. Category: clinical-communication-collaboration. Deployed primarily on hospital-side infrastructure (Vocera Platform on Windows Server / Microsoft Hyper-V, Windows Server 2016 or later), with wearable endpoint devices at the point of care."
+    market_share: null
+    sources:
+      - "https://investors.stryker.com/press-releases/news-details/2022/Stryker-completes-acquisition-of-Vocera-Communications/default.aspx"
+      - "https://www.globenewswire.com/news-release/2022/01/06/2362418/0/en/Stryker-announces-definitive-agreement-to-acquire-Vocera-Communications.html"
+      - "https://www.businesswire.com/news/home/20200218005363/en/Vocera-Celebrates-20-Years-of-Innovation"
+      - "https://www.sec.gov/Archives/edgar/data/1129260/000112926017000007/vcra-12312016x10k.htm"
+      - "https://www.healthcareitnews.com/news/stryker-acquire-vocera-communications-3b"
+      - "https://www.vocera.com/resource/videos/integration-over-150-clinical-systems-improving-clinical-staff-response-times-and"
+      - "https://pubs.vocera.com/rnotes/ReleaseNotes_vp_6.3.3_sr0.html"
+      - "https://vocera.stryker.com/s/product-hub/vocera-smartbadge"
   - id: waters
     name: Waters Corporation
     categories: [qc-lims-cds]

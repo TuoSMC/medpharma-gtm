@@ -155,6 +155,7 @@ tr:last-child td{border-bottom:0}
 </head>
 <body>
 <header>
+  <button id="langtog" style="position:absolute;top:14px;right:16px;padding:5px 12px;border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--fg);font-size:13px;font-weight:700;cursor:pointer">中文</button>
   <h1>SMCI Medical / Pharma GTM Playbook <span class="pill" id="ver"></span></h1>
   <div class="sub" id="built"></div>
 </header>
@@ -177,6 +178,11 @@ const el=(t,a={},...kids)=>{const n=document.createElement(t);
   for(const c of kids)n.append(c&&c.nodeType?c:document.createTextNode(c));return n;};
 const clear=n=>n.replaceChildren();
 const playClass=p=>({'play-a':'playa','play-b':'playb','play-c':'playc'}[p]||'');
+// ---- i18n: EN <-> 中文 toggle (category names come from data name_zh; chrome from T()) ----
+let LANG='en';
+const nm=c=>LANG==='zh'?(c.name_zh||c.name_en):c.name_en;   // category display name
+const sub=c=>LANG==='zh'?c.name_en:(c.name_zh||'');         // the secondary line under it
+const T=(en,zh)=>LANG==='zh'?zh:en;                          // chrome string
 const playName=p=>({'play-a':'A · Imaging/Path','play-b':'B · Genomics/AI','play-c':'C · GMP Edge'}[p]||p);
 
 // ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
@@ -224,14 +230,15 @@ function scoreAccount(acc){
 function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-led':'var(--u-med)','Monitor':'var(--u-low)','Drop':'var(--u-crit)'}[name]||'var(--muted)';}
 
 // ================= HOME (guided funnel) =================
-(function(){
-  const root=$('#tab-home'), cats=DATA.taxonomy.categories, plays=DATA.plays.plays, trigs=DATA.triggers.triggers;
+function renderHome(){
+  const root=$('#tab-home'); clear(root);
+  const cats=DATA.taxonomy.categories, plays=DATA.plays.plays, trigs=DATA.triggers.triggers;
   const cust=c=>c.hardware_opportunity_by_buyer.customer||0, oper=c=>c.hardware_opportunity_by_buyer.operator||0;
   const oem=c=>c.hardware_opportunity_by_buyer['original-equipment-manufacturer']||0;
   const mx=c=>Math.max(...Object.values(c.hardware_opportunity_by_buyer));
   const hero=el('div',{class:'hero'});
-  hero.append(el('h2',{},'Where do you want to hunt?'));
-  hero.append(el('p',{},'Gate question first (§3): who controls the infrastructure behind the software? Pick a play to see its ranked hardware targets — what to quote and who to co-sell with — or act on a fired trigger.'));
+  hero.append(el('h2',{},T('Where do you want to hunt?','要在哪裡狩獵?')));
+  hero.append(el('p',{},T('Gate question first (§3): who controls the infrastructure behind the software? Pick a play to see its ranked hardware targets — what to quote and who to co-sell with — or act on a fired trigger.','先問關卡問題(§3):軟體背後的基礎設施由誰掌控?挑一個 play 看它的排序硬體目標——報什麼、和誰共同銷售——或對已觸發的訊號行動。')));
   root.append(hero);
   const hc=cats.filter(c=>cust(c)>=3).length, ho=cats.filter(c=>oper(c)>=3).length, ho2=cats.filter(c=>oem(c)>=3).length;
   const bar=el('div',{class:'statbar'});
@@ -240,7 +247,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     st.onclick=()=>{goTab('taxonomy');if(window.exploreFilter)window.exploreFilter(bk,3);}; bar.append(st);
   });
   root.append(bar);
-  root.append(el('div',{class:'section-title'},'The three plays — pick your motion'));
+  root.append(el('div',{class:'section-title'},T('The three plays — pick your motion','三個 play — 挑你的打法')));
   const tiles=el('div',{class:'tiles'});
   plays.forEach(p=>{
     const letter=p.id.split('-')[1].toUpperCase();
@@ -250,27 +257,28 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     t.append(el('h3',{},p.name));
     t.append(el('div',{class:'anchor'},(p.hardware_anchor||[]).join(' · ')));
     members.forEach(c=>{const m=['cust·'+cust(c)];if(oper(c)>=3)m.push('oper·'+oper(c));if(oem(c)>=3)m.push('oem·'+oem(c));
-      t.append(el('div',{class:'cat'},el('span',{},c.name_en.length>42?c.name_en.slice(0,42)+'…':c.name_en),el('b',{},m.join('  '))));});
-    t.append(el('div',{class:'go'},'Open ranked targets →'));
+      const nn=nm(c);
+      t.append(el('div',{class:'cat'},el('span',{},nn.length>42?nn.slice(0,42)+'…':nn),el('b',{},m.join('  '))));});
+    t.append(el('div',{class:'go'},T('Open ranked targets →','看排序目標 →')));
     t.onclick=()=>goTab('hunt',{scrollTo:'hunt-'+p.id});
     tiles.append(t);
   });
   root.append(tiles);
-  root.append(el('div',{class:'section-title'},'Highest-urgency signals — act on the window'));
+  root.append(el('div',{class:'section-title'},T('Highest-urgency signals — act on the window','最高急迫訊號 — 把握窗口')));
   const tp=el('div',{class:'card'});
   const rank={critical:0,high:1,medium:2,low:3};
   trigs.slice().sort((a,b)=>rank[a.urgency]-rank[b.urgency]).slice(0,4).forEach(t=>{
     tp.append(el('div',{class:'trigrow'},el('span',{class:'u '+t.urgency},t.urgency),el('b',{},t.signal),
       el('span',{class:'muted'},'→ '+(t.related_categories||[]).slice(0,3).join(', '))));
   });
-  const more=el('div',{class:'go',style:'cursor:pointer;margin-top:8px'},'All '+trigs.length+' triggers →');more.onclick=()=>goTab('triggers');tp.append(more);
+  const more=el('div',{class:'go',style:'cursor:pointer;margin-top:8px'},T('All '+trigs.length+' triggers →','全部 '+trigs.length+' 個訊號 →'));more.onclick=()=>goTab('triggers');tp.append(more);
   root.append(tp);
-  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},'Or browse & filter all '+cats.length+' categories in Explore →');ex.onclick=()=>goTab('taxonomy');root.append(ex);
-})();
+  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},T('Or browse & filter all '+cats.length+' categories in Explore →','或到 Explore 瀏覽篩選全部 '+cats.length+' 類 →'));ex.onclick=()=>goTab('taxonomy');root.append(ex);
+}
 
 // ================= TAXONOMY =================
-(function(){
-  const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy');
+function renderTaxonomy(){
+  const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy'); clear(root);
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
     opts.forEach(o=>s.append(el('option',{value:o},o)));return s;};
   const fBuyer=mk('fBuyer',['customer','operator','original-equipment-manufacturer','hyperscaler'],'all buyers'),
@@ -285,7 +293,7 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
   const fSpans=el('label',{class:'ckbox'},fSpansBox,'spans boundary');
-  root.append(el('details',{class:'refine'},el('summary',{},'Refine — filters & grouping'),el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup,fSpans,fTxt,cnt)));
+  root.append(el('details',{class:'refine'},el('summary',{},T('Refine — filters & grouping','精修 — 篩選與分組')),el('div',{class:'filters'},fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup,fSpans,fTxt,cnt)));
   // static buyer rollup summary (authoritative axis)
   const pb={customer:0,operator:0,'original-equipment-manufacturer':0,hyperscaler:0};cats.forEach(c=>pb[c.primary_buyer]++);
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
@@ -310,20 +318,20 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     if(spansOf(c))head.append(el('span',{class:'byo',title:'deployment spans customer↔vendor'},'⇄'));
     (c.plays||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
     cd.append(head);
-    cd.append(el('h3',{},c.name_en));
-    cd.append(el('div',{class:'zh'},c.name_zh));
+    cd.append(el('h3',{},nm(c)));
+    cd.append(el('div',{class:'zh'},sub(c)));
     const segr=el('div',{class:'row'});(c.segments||[]).forEach(s=>segr.append(el('span',{class:'chip'},s)));
     cd.append(segr);
-    cd.append(tagRow('lifecycle',c.lifecycle));
-    cd.append(tagRow('role',c.role));
-    cd.append(tagRow('data',c.data_modality));
-    cd.append(tagRow('deploy',c.deployment));
-    if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},'hardware'));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc',title:'deployment scale'},h+((c.hardware_profile_sizing||{})[h]?' · '+c.hardware_profile_sizing[h]:''))));cd.append(hr);}
-    if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},'vendors'));c.vendors.forEach(v=>vr.append(el('span',{class:'pill'},VNAME[v]||v)));cd.append(vr);}
-    if(c.hospital_view){cd.append(tagRow('hosp-who',c.hospital_view.stakeholder));
-      cd.append(tagRow('hosp-dim',c.hospital_view.dimension));}
+    cd.append(tagRow(T('lifecycle','生命週期'),c.lifecycle));
+    cd.append(tagRow(T('role','角色'),c.role));
+    cd.append(tagRow(T('data','資料型態'),c.data_modality));
+    cd.append(tagRow(T('deploy','部署'),c.deployment));
+    if(c.hardware_profile&&c.hardware_profile.length){const hr=el('div',{class:'row'});hr.append(el('span',{class:'tagk'},T('hardware','硬體')));c.hardware_profile.forEach(h=>hr.append(el('span',{class:'hwc',title:'deployment scale'},h+((c.hardware_profile_sizing||{})[h]?' · '+c.hardware_profile_sizing[h]:''))));cd.append(hr);}
+    if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));c.vendors.forEach(v=>vr.append(el('span',{class:'pill'},VNAME[v]||v)));cd.append(vr);}
+    if(c.hospital_view){cd.append(tagRow(T('hosp-who','醫院·誰'),c.hospital_view.stakeholder));
+      cd.append(tagRow(T('hosp-dim','醫院·面向'),c.hospital_view.dimension));}
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
-    if(c.play_exemption)cd.append(el('div',{class:'notes'},'Outside play scope: '+c.play_exemption));
+    if(c.play_exemption)cd.append(el('div',{class:'notes'},T('Outside play scope: ','play 範圍外:')+c.play_exemption));
     return cd;
   }
   function groupsOf(c,axis){
@@ -370,16 +378,17 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;render();});
   window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};fBuyer.value='';fBucket.value='';fSeg.value='';fPlay.value='';fDep.value='';fHw.value='';fProfile.value='';fSpansBox.checked=false;fTxt.value='';fGroup.value='';render();window.scrollTo(0,0);};
   fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};fGroup.value='domain';render();
-})();
+}
 
 // ================= HUNT (per-play ranked target map) =================
-(function(){
-  const root=$('#tab-hunt'), cats=DATA.taxonomy.categories, plays=DATA.plays.plays;
+function renderHunt(){
+  const root=$('#tab-hunt'); clear(root);
+  const cats=DATA.taxonomy.categories, plays=DATA.plays.plays;
   const VN={};(DATA.vendors.vendors||[]).forEach(v=>VN[v.id]=v.name);
   const opp=(c,b)=>c.hardware_opportunity_by_buyer[b]||0;
   const maxo=c=>Math.max(...Object.values(c.hardware_opportunity_by_buyer));
   const rig=c=>(c.hardware_profile||[]).map(h=>h+'·'+((c.hardware_profile_sizing||{})[h]||'?')).join('  ')||'—';
-  root.append(el('div',{class:'rollup'},'Per-play ranked target map — what to quote (component·scale) and who to co-sell with. Opportunity 1 minimal → 4 flagship. Full printable version: docs/hunting-guide.md'));
+  root.append(el('div',{class:'rollup'},T('Per-play ranked target map — what to quote (component·scale) and who to co-sell with. Opportunity 1 minimal → 4 flagship. Full printable version: docs/hunting-guide.md','各 play 排序目標圖 — 報什麼(元件·規模)、和誰共同銷售。機會 1 微 → 4 旗艦。完整可列印版:docs/hunting-guide.md')));
   plays.forEach(p=>{
     const letter=p.id.split('-')[1].toUpperCase();
     const members=cats.filter(c=>(c.plays||[]).includes(p.id)).sort((a,b)=>maxo(b)-maxo(a)||opp(b,'customer')-opp(a,'customer'));
@@ -391,23 +400,24 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
         el('span',{class:'by boper',title:'operator opportunity'},'oper·'+opp(c,'operator')));
       if(opp(c,'original-equipment-manufacturer'))head.append(el('span',{class:'by boem'},'oem·'+opp(c,'original-equipment-manufacturer')));
       card.append(head);
-      card.append(el('h3',{},c.name_en));
-      const q=el('div',{class:'row'});q.append(el('span',{class:'tagk'},'quote'));(c.hardware_profile||[]).forEach(h=>q.append(el('span',{class:'hwc'},h+'·'+((c.hardware_profile_sizing||{})[h]||'?'))));
+      card.append(el('h3',{},nm(c)));
+      const q=el('div',{class:'row'});q.append(el('span',{class:'tagk'},T('quote','報價')));(c.hardware_profile||[]).forEach(h=>q.append(el('span',{class:'hwc'},h+'·'+((c.hardware_profile_sizing||{})[h]||'?'))));
       if(c.hardware_profile&&c.hardware_profile.length)card.append(q);
-      const v=el('div',{class:'row'});v.append(el('span',{class:'tagk'},'vendors'));(c.vendors||[]).forEach(x=>v.append(el('span',{class:'pill'},VN[x]||x)));
+      const v=el('div',{class:'row'});v.append(el('span',{class:'tagk'},T('vendors','廠商')));(c.vendors||[]).forEach(x=>v.append(el('span',{class:'pill'},VN[x]||x)));
       if(c.vendors&&c.vendors.length)card.append(v);
       root.append(card);
     });
   });
-})();
+}
 
 // ================= VENDORS (enriched registry) =================
-(function(){
-  const root=$('#tab-vendors'), vs=(DATA.vendors.vendors||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
+function renderVendors(){
+  const root=$('#tab-vendors'); clear(root);
+  const vs=(DATA.vendors.vendors||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
   const conf=(DATA.vendors.version)||'?';
   const cnt=el('span',{class:'count'});
-  const q=el('input',{type:'search',placeholder:'search vendor / HQ / leader / category...'});
-  root.append(el('div',{class:'rollup'},'Vendor registry v'+conf+' — '+vs.length+' vendors, web-researched + adversarially verified. Every claim sourced; unverifiable fields are honest nulls / "not publicly disclosed" (§8).'));
+  const q=el('input',{type:'search',placeholder:T('search vendor / HQ / leader / category...','搜尋廠商 / 總部 / 負責人 / 類別...')});
+  root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vs.length+' vendors, web-researched + adversarially verified. Every claim sourced; unverifiable fields are honest nulls / "not publicly disclosed" (§8).','廠商登錄 v'+conf+' — '+vs.length+' 家,網路研究 + 對抗式查核。每項聲明有來源;查不到的欄位為誠實 null /「未公開揭露」(§8)。')));
   root.append(el('div',{class:'filters'},q,cnt));
   const host=el('div',{});root.append(host);
   function excl(v){return "exclud" in Object.assign({},v)?false:/exclud/i.test(v.note||'');}
@@ -418,14 +428,14 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     c.append(h);
     const kv=el('dl',{class:'kv'});
     const add=(k,x)=>{if(x==null||x==='')return;kv.append(el('dt',{},k),el('dd',{},String(x)));};
-    add('HQ',v.headquarters); add('Founded',v.founded); add('Leadership',v.leadership);
-    add('Market position',v.market_position); add('Market share',v.market_share);
-    add('Deployment',(v.deployment_models||[]).join(', '));
+    add(T('HQ','總部'),v.headquarters); add(T('Founded','成立'),v.founded); add(T('Leadership','負責人'),v.leadership);
+    add(T('Market position','市場地位'),v.market_position); add(T('Market share','市佔'),v.market_share);
+    add(T('Deployment','部署'),(v.deployment_models||[]).join(', '));
     c.append(kv);
     const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>seg.append(el('span',{class:'chip'},x)));c.append(seg);
     if(v.history)c.append(el('div',{class:'notes'},v.history));
     const srcs=(v.sources&&v.sources.length)?v.sources:(v.source?[v.source]:[]);
-    if(srcs.length){const sr=el('div',{class:'row'});sr.append(el('span',{class:'tagk'},'sources'));
+    if(srcs.length){const sr=el('div',{class:'row'});sr.append(el('span',{class:'tagk'},T('sources','來源')));
       srcs.forEach(u=>{const isurl=/^https?:\/\//.test(u);
         sr.append(isurl?el('a',{href:u,target:'_blank',class:'pill'},u.replace(/^https?:\/\//,'').split('/')[0]):el('span',{class:'pill'},u.slice(0,40)));});
       c.append(sr);}
@@ -435,14 +445,15 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     const s=q.value.toLowerCase();
     const shown=vs.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s));
     clear(host);shown.forEach(v=>host.append(card(v)));
-    cnt.textContent=shown.length+' / '+vs.length+' shown';
+    cnt.textContent=shown.length+' / '+vs.length+T(' shown',' 顯示');
   }
   q.oninput=render;render();
-})();
+}
 
 // ================= PLAYS =================
-(function(){
-  const root=$('#tab-plays'),grid=el('div',{class:'grid'});root.append(grid);
+function renderPlays(){
+  const root=$('#tab-plays'); clear(root);
+  const grid=el('div',{class:'grid'});root.append(grid);
   DATA.plays.plays.forEach(p=>{
     const letter=p.id.split('-')[1].toUpperCase();
     const card=el('div',{class:'card'});
@@ -451,19 +462,20 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     const sec=(t,arr)=>{card.append(el('div',{class:'tagk'},t));
       const ul=el('ul',{class:'muted'});(arr||[]).forEach(x=>ul.append(el('li',{},x)));
       ul.style.margin='4px 0 8px';ul.style.paddingLeft='18px';ul.style.fontSize='12px';card.append(ul);};
-    sec('workloads',p.workloads);
-    sec('target segments',p.target_segments);
-    sec('hardware anchor',p.hardware_anchor);
-    if(p.regulatory_notes)card.append(el('div',{class:'notes'},'reg: '+p.regulatory_notes));
+    sec(T('workloads','工作負載'),p.workloads);
+    sec(T('target segments','目標客群'),p.target_segments);
+    sec(T('hardware anchor','硬體錨點'),p.hardware_anchor);
+    if(p.regulatory_notes)card.append(el('div',{class:'notes'},T('reg: ','法規:')+p.regulatory_notes));
     grid.append(card);
   });
-})();
+}
 
 // ================= TRIGGERS =================
-(function(){
-  const root=$('#tab-triggers');
+function renderTriggers(){
+  const root=$('#tab-triggers'); clear(root);
   const t=el('table');
-  t.append(el('thead',{},el('tr',{},...['Signal','Cat','Urgency','Window','Source','Action','Related'].map(h=>el('th',{},h)))));
+  const TH=LANG==='zh'?['訊號','類別','急迫','窗口','來源','行動','關聯']:['Signal','Cat','Urgency','Window','Source','Action','Related'];
+  t.append(el('thead',{},el('tr',{},...TH.map(h=>el('th',{},h)))));
   const tb=el('tbody');
   DATA.triggers.triggers.forEach(x=>{
     tb.append(el('tr',{},
@@ -478,19 +490,19 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
         ...(x.related_categories||[]).map(c=>el('span',{class:'pill'},c))))));
   });
   t.append(tb);root.append(el('div',{class:'wrap'},t));
-})();
+}
 
 // ================= SCORING =================
-(function(){
-  const root=$('#tab-scoring');
-  root.append(el('h3',{},'Model - '+SC.items.reduce((s,i)=>s+i.weight,0)+' pts - '+SC.formula));
-  const mt=el('table');mt.append(el('thead',{},el('tr',{},el('th',{},'Item'),el('th',{},'Weight'))));
+function renderScoring(){
+  const root=$('#tab-scoring'); clear(root);
+  root.append(el('h3',{},T('Model - ','評分模型 - ')+SC.items.reduce((s,i)=>s+i.weight,0)+T(' pts - ',' 分 - ')+SC.formula));
+  const mt=el('table');mt.append(el('thead',{},el('tr',{},el('th',{},T('Item','項目')),el('th',{},T('Weight','權重')))));
   const mb=el('tbody');SC.items.forEach(i=>mb.append(el('tr',{},el('td',{},i.label),el('td',{},String(i.weight)))));
   mt.append(mb);root.append(el('div',{class:'wrap'},mt));
   const tr=el('div',{class:'row'});tr.style.margin='14px 0';
   TIERS.slice().reverse().forEach(t=>tr.append(el('span',{class:'tierbadge',style:'background:'+tierColor(t.name)},t.name+' >='+t.min)));
-  root.append(el('div',{},el('div',{class:'tagk'},'tiers'),tr));
-  root.append(el('h3',{},'Try it'));
+  root.append(el('div',{},el('div',{class:'tagk'},T('tiers','分級')),tr));
+  root.append(el('h3',{},T('Try it','試算')));
   const wrap=el('div',{class:'card'});wrap.style.maxWidth='680px';
   const sg=el('div',{class:'scorer'});
   const out=el('div',{});
@@ -511,12 +523,12 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
   }
   wrap.append(sg,el('hr',{style:'border:0;border-top:1px solid var(--line);margin:14px 0'}),out);
   root.append(wrap);calc();
-})();
+}
 
 // ================= ACCOUNTS =================
-(function(){
-  const root=$('#tab-accounts');
-  if(!DATA.accounts.length){root.append(el('div',{class:'muted'},'No accounts in data/accounts/ yet.'));return;}
+function renderAccounts(){
+  const root=$('#tab-accounts'); clear(root);
+  if(!DATA.accounts.length){root.append(el('div',{class:'muted'},T('No accounts in data/accounts/ yet.','data/accounts/ 尚無帳號。')));return;}
   const scored=DATA.accounts.map(a=>({a,r:scoreAccount(a)})).sort((x,y)=>y.r.total-x.r.total);
   scored.forEach(({a,r})=>{
     const card=el('div',{class:'card'});card.style.marginBottom='12px';
@@ -528,12 +540,12 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     card.append(el('h3',{},(a.company||'?')+' - '+(a.facility||'?')));
     const kv=el('dl',{class:'kv'});
     const add=(k,v)=>{if(v==null||v==='')return;kv.append(el('dt',{},k),el('dd',{},typeof v==='object'?JSON.stringify(v):String(v)));};
-    add('Segment',a.segment);
-    add('Software',a.software&&(a.software.domain||''));
-    add('Deployment',a.deployment);add('Operator',a.operator);
-    add('Trigger',a.trigger&&(a.trigger.detail||a.trigger.id));
-    add('Infra control',a.infrastructure_control);
-    add('Next step',a.next_step);
+    add(T('Segment','客群'),a.segment);
+    add(T('Software','軟體'),a.software&&(a.software.domain||''));
+    add(T('Deployment','部署'),a.deployment);add(T('Operator','營運者'),a.operator);
+    add(T('Trigger','觸發訊號'),a.trigger&&(a.trigger.detail||a.trigger.id));
+    add(T('Infra control','基建掌控'),a.infrastructure_control);
+    add(T('Next step','下一步'),a.next_step);
     card.append(kv);
     const bd=el('div',{});bd.style.marginTop='10px';
     r.rows.forEach(row=>{
@@ -547,11 +559,18 @@ function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-
     card.append(bd);
     const ev=(a.evidence||[]);if(ev.length){
       const confs=ev.map(e=>e.confidence).filter(Boolean);
-      card.append(el('div',{class:'notes'},'Evidence: '+ev.length+' claim(s), confidence '+[...new Set(confs)].join('/')+(confs.length&&confs.every(c=>c==='D')?' - all inference, verify before pursuit':'')));
+      card.append(el('div',{class:'notes'},T('Evidence: ','證據:')+ev.length+T(' claim(s), confidence ',' 項聲明,信心 ')+[...new Set(confs)].join('/')+(confs.length&&confs.every(c=>c==='D')?T(' - all inference, verify before pursuit',' - 全為推論,追蹤前先查證'):'')));
     }
     root.append(card);
   });
-})();
+}
+
+// ================= i18n wiring: render all tabs + language toggle =================
+const TAB_ZH={home:'首頁',taxonomy:'探索',hunt:'獵場',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商'};
+function relabelTabs(){TABS.forEach(([id,label])=>{if(NAVBTN[id])NAVBTN[id].textContent=LANG==='zh'?(TAB_ZH[id]||label):label;});}
+function renderAll(){renderHome();renderTaxonomy();renderHunt();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();}
+renderAll();
+$('#langtog').onclick=()=>{LANG=(LANG==='zh')?'en':'zh';$('#langtog').textContent=(LANG==='zh')?'EN':'中文';relabelTabs();renderAll();window.scrollTo(0,0);};
 </script>
 </body>
 </html>"""

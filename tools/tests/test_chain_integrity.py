@@ -250,6 +250,7 @@ APPROVED_IDS = {
     "samd-embedded-oem-platform", "ai-hpc-orchestration",
     "pharmacometrics-modeling-simulation", "ms-proteomics-metabolomics",
     "spatial-biology-omics", "healthcare-llm-serving", "payer-actuarial-hpc",
+    "clinical-communication-collaboration",
 }
 
 APPROVED_DOMAIN = {
@@ -285,6 +286,7 @@ APPROVED_DOMAIN = {
     "spatial-biology-omics": "pharmaceutical-research-clinical-development",
     "healthcare-llm-serving": "data-analytics-payer-platforms",
     "payer-actuarial-hpc": "data-analytics-payer-platforms",
+    "clinical-communication-collaboration": "hospital-device-facility-operations",
 }
 
 REQUIRED_GLOSSARY_KEYS = {
@@ -307,7 +309,7 @@ CLOUD_SUBSTRATE = {"public-cloud", "software-as-a-service", "hybrid", "vendor-ma
 class TestInventoryLocked(unittest.TestCase):
     def test_exactly_53_categories_with_approved_ids(self):
         ids = {c["id"] for c in CATS}
-        self.assertEqual(len(CATS), 58)
+        self.assertEqual(len(CATS), 59)
         self.assertEqual(ids, APPROVED_IDS)
 
     def test_domain_fixture_locked(self):
