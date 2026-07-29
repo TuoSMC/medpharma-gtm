@@ -626,6 +626,41 @@ class TestVendorEnrichment(unittest.TestCase):
                             f"{v['id']}: market_share must be a descriptive string or null, not {type(ms).__name__}")
 
 
+_LB = yaml.safe_load(open(REPO / "data" / "leaderboards.yaml", encoding="utf-8"))
+
+
+class TestLeaderboards(unittest.TestCase):
+    """Market vendor leaderboards (AI + No-AI), ranked by market share / installed
+    base. §8: every entry carries a market_basis; ranking is a dense 1..N sequence."""
+
+    def test_both_boards_present(self):
+        lb = _LB["leaderboards"]
+        for board in ("ai", "no_ai"):
+            self.assertIn(board, lb, f"leaderboards missing '{board}'")
+            self.assertTrue(lb[board]["entries"], f"{board}: no entries")
+            self.assertEqual(lb[board]["count"], len(lb[board]["entries"]), f"{board}: count mismatch")
+
+    def test_entries_shaped_and_ranked(self):
+        for board in ("ai", "no_ai"):
+            entries = _LB["leaderboards"][board]["entries"]
+            ranks = [e["rank"] for e in entries]
+            self.assertEqual(ranks, list(range(1, len(entries) + 1)), f"{board}: ranks not a dense 1..N")
+            for e in entries:
+                for f in ("rank", "name", "segment", "market_basis"):
+                    self.assertIn(f, e, f"{board} entry missing {f}")
+                self.assertTrue(str(e["market_basis"]).strip(),
+                                f"{board} #{e['rank']} {e['name']}: empty market_basis (§8 needs a ranking basis)")
+
+    def test_mostly_sourced(self):
+        """§8: a ranked market claim should be sourced. Allow a few honest nulls,
+        but the boards must be overwhelmingly cited, not asserted."""
+        for board in ("ai", "no_ai"):
+            entries = _LB["leaderboards"][board]["entries"]
+            sourced = sum(1 for e in entries if e.get("source"))
+            self.assertGreaterEqual(sourced, 0.8 * len(entries),
+                                    f"{board}: only {sourced}/{len(entries)} sourced — below §8 bar")
+
+
 
 
 # ============================================================

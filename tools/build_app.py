@@ -41,6 +41,7 @@ def main():
         "triggers": load(DATA / "triggers.yaml"),
         "scoring": load(DATA / "scoring.yaml"),
         "vendors": load(DATA / "vendors.yaml"),
+        "leaderboards": load(DATA / "leaderboards.yaml"),
         "accounts": accounts,
         "built": f"taxonomy v{load(DATA / 'taxonomy.yaml').get('version', '?')} · vendors v{load(DATA / 'vendors.yaml').get('version', '?')}",
     }
@@ -170,6 +171,7 @@ tr:last-child td{border-bottom:0}
   <section class="tab" id="tab-scoring"></section>
   <section class="tab" id="tab-accounts"></section>
   <section class="tab" id="tab-vendors"></section>
+  <section class="tab" id="tab-leaderboards"></section>
 </main>
 <script>
 const DATA = /*__DATA__*/null;
@@ -201,7 +203,7 @@ $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.st
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
 
 // ---- tabs ----
-const TABS=[['home','Home'],['taxonomy','Explore'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors']];
+const TABS=[['home','Home'],['taxonomy','Explore'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors'],['leaderboards','Leaderboards']];
 const nav=$('#nav');
 const NAVBTN={};
 function goTab(id,opts){opts=opts||{};
@@ -552,10 +554,37 @@ function renderAccounts(){
   });
 }
 
+// ================= LEADERBOARDS (market vendor rankings) =================
+function renderLeaderboards(){
+  const root=$('#tab-leaderboards'); clear(root);
+  const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;
+  if(!LB){root.append(el('div',{class:'muted'},T('No leaderboards data.','無榜單資料。')));return;}
+  root.append(el('div',{class:'rollup'},T('Market vendor leaderboards — ranked by market share / installed base. Every entry §8-sourced (a real figure or a sourced market position); grouped by sub-market. A vendor that plays both sides (e.g. GE, Philips) appears on both boards.','市場廠商榜 — 按市佔／裝機量排名。每一項 §8 有來源(真數字或有來源的市場地位),依次級市場分組。雙棲廠商(如 GE、Philips)兩榜都上。')));
+  const wrap=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fill,minmax(430px,1fr))'});
+  [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([key,board])=>{
+    if(!board)return;
+    const col=el('div',{class:'card'});
+    col.append(el('h3',{style:'margin-bottom:6px'},(LANG==='zh'?board.label_zh:board.label_en)+' · '+board.count));
+    let curSeg=null;
+    (board.entries||[]).forEach(e=>{
+      if(e.segment!==curSeg){curSeg=e.segment;
+        col.append(el('div',{class:'tagk',style:'display:block;margin:12px 0 2px'},(LANG==='zh'?e.segment_zh:e.segment)));}
+      const row=el('div',{style:'padding:6px 0;border-top:1px solid var(--line)'});
+      row.append(el('div',{class:'row'},el('b',{style:'color:var(--accent);min-width:34px'},'#'+e.rank),el('span',{style:'font-weight:600'},e.name)));
+      row.append(el('div',{class:'muted',style:'font-size:11px;margin:3px 0'},e.market_basis));
+      if(e.source){const isurl=/^https?:\/\//.test(e.source);
+        row.append(isurl?el('a',{href:e.source,target:'_blank',class:'pill'},T('source','來源')+' ↗'):el('span',{class:'pill'},String(e.source).slice(0,60)));}
+      col.append(row);
+    });
+    wrap.append(col);
+  });
+  root.append(wrap);
+}
+
 // ================= i18n wiring: render all tabs + language toggle =================
-const TAB_ZH={home:'首頁',taxonomy:'探索',hunt:'獵場',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商'};
+const TAB_ZH={home:'首頁',taxonomy:'探索',hunt:'獵場',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商',leaderboards:'榜單'};
 function relabelTabs(){TABS.forEach(([id,label])=>{if(NAVBTN[id])NAVBTN[id].textContent=LANG==='zh'?(TAB_ZH[id]||label):label;});}
-function renderAll(){renderHome();renderTaxonomy();renderHunt();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();}
+function renderAll(){renderHome();renderTaxonomy();renderHunt();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();renderLeaderboards();}
 renderAll();
 $('#langtog').onclick=()=>{LANG=(LANG==='zh')?'en':'zh';$('#langtog').textContent=(LANG==='zh')?'EN':'中文';relabelTabs();renderAll();window.scrollTo(0,0);};
 </script>

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-28 — market vendor leaderboards (AI + No-AI, ranked, sourced) + v1.8
+Two market-wide leaderboards of the leading medical/pharma software vendors, ranked by market share / installed base, per Tuo (asked for ~100 each; "fewer is fine — don't pad").
+- **`data/leaderboards.yaml`**: **AI board 66 · No-AI board 89** (155 total), every entry §8-sourced — a real cited figure or a sourced market position, no fabrication. Built by the `market-leaderboards` workflow (16 sub-segment researchers + 16 adversarial verifiers = 32 agents); the verify pass caught and fixed real errors (e.g. Qure.ai's "105 countries" was a TIME100 artifact → corrected to 100+). Grouped by sub-market and ranked by installed base / share within each: AI led by Aidoc (31 FDA clearances, ~2,000 hospitals), Qure.ai (4,800+ sites), Lunit (KOSDAQ-audited revenue); No-AI led by Epic, Oracle Health, MEDITECH (KLAS acute-care EHR share). Dual-play vendors (GE, Philips) appear on both boards.
+- **New "Leaderboards / 榜單" app tab** (9th): two ranked columns, grouped by sub-segment, each row rank · vendor · market_basis · clickable source (155 source links). Fully bilingual.
+- Ranking basis is market share / installed base first, sourced market-leader position where no number is public (§8) — never a bare number. `market-leaderboards.yaml` version 1.
+- Tests: `TestLeaderboards` (both boards present, dense 1..N ranks, every entry has a market_basis, ≥80% sourced). **82 tests GREEN**; app deterministic; browser clean both languages.
+- **Tagged `v1.8`.**
+
 ## 2026-07-28 — Home re-organised by point-of-care stakeholder × AI/No-AI + v1.7
 Replaced the Home page's hunting-funnel (plays / HOT stats / trigger panel — those live on in Explore·Hunt·Triggers) with a stakeholder-first map of the whole 59-category universe, per Tuo's scheme.
 - **New data axis `home_stakeholder`** (facility / doctor / nurse / patient / other) on every category + an enum. The taxonomy's `clinician` tag doesn't split doctor vs nurse, so this is an explicit editable-in-data judgment: 8 doctor (PACS, CDSS, RIS/CVIS, radiation-oncology, surgical video, 3D viz, digital pathology, EHR), 4 nurse (ICU monitoring, pharmacy automation, smart-room ambient, clinical-communication), 3 patient (portal, access/scheduling, telehealth), 14 facility (ERP, RCM, HIM, workforce, device-integration, RTLS, CMMS, IoT-sec, BMS, capacity-command, imaging-AI, data-lakehouse, HIE, LLM-serving), 30 other (all non-hospital-point-of-care: pharma, manufacturing, lab back-end, payer, medtech).
