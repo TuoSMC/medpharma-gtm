@@ -82,8 +82,9 @@ tr:last-child td{border-bottom:0}
 .tile:hover{border-color:var(--accent);transform:translateY(-2px)}
 .tile h3{margin:0 0 2px;font-size:15px}
 .tile .anchor{color:var(--muted);font-size:11px;margin-bottom:10px}
-.tile .cat{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:4px 0;border-top:1px dashed var(--line)}
-.tile .cat b{color:var(--ink)}
+.tile .cat{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:12px;padding:4px 0;border-top:1px dashed var(--line)}
+.tile .cat span{min-width:0;overflow-wrap:anywhere}
+.tile .cat b{color:var(--ink);flex:0 0 auto;white-space:nowrap}
 .tile .go{margin-top:10px;color:var(--accent);font-weight:600;font-size:12px}
 .statbar{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
 .stat{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
@@ -196,8 +197,7 @@ function renderHome(){
       const col=el('div',{class:'tile'});
       col.append(el('div',{class:'row'},el('span',{class:'play '+cls},sub),el('b',{},String(list.length))));
       list.slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(c=>{
-        const nn=nm(c);
-        const row=el('div',{class:'cat',style:'cursor:pointer'},el('span',{},nn.length>40?nn.slice(0,40)+'…':nn),el('b',{title:'hardware opportunity'},'hw·'+c.hardware_opportunity));
+        const row=el('div',{class:'cat',style:'cursor:pointer'},el('span',{},nm(c)),el('b',{title:'hardware opportunity'},'hw·'+c.hardware_opportunity));
         row.onclick=()=>openCat(c); col.append(row);
       });
       if(!list.length)col.append(el('div',{class:'muted',style:'font-size:12px;padding:4px 0'},'—'));
