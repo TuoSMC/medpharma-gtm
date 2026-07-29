@@ -75,7 +75,7 @@ TEMPLATE = r"""<!doctype html>
   --accent:#0b6bcb; --accentbg:#e7f0fb;
   --hw1:#9aa4b2; --hw2:#5b8def; --hw3:#f0993e; --hw4:#e0464b;
   --u-crit:#e0464b; --u-high:#f0993e; --u-med:#d9a91f; --u-low:#7a8794;
-  --a:#1f9d57; --b:#7a5cd0; --c:#c2560c;
+  --a:#1f9d57; --b:#7a5cd0; --c:#c2560c; --d:#0e8a94;
 }
 @media (prefers-color-scheme:dark){
   :root{--bg:#14171b;--panel:#1c2026;--ink:#e6e9ee;--muted:#98a2b0;--line:#2b313a;
@@ -240,7 +240,7 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .dstep b{color:var(--accent);flex:0 0 auto}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
 .play{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
-.playa{background:var(--a)}.playb{background:var(--b)}.playc{background:var(--c)}
+.playa{background:var(--a)}.playb{background:var(--b)}.playc{background:var(--c)}.playd{background:var(--d)}
 .notes{color:var(--muted);font-size:12px;margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
 .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 .filters select,.filters input{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
@@ -322,13 +322,13 @@ const el=(t,a={},...kids)=>{const n=document.createElement(t);
   for(const k in a){if(k==='class')n.className=a[k];else n.setAttribute(k,a[k]);}
   for(const c of kids)n.append(c&&c.nodeType?c:document.createTextNode(c));return n;};
 const clear=n=>n.replaceChildren();
-const playClass=p=>({'play-a':'playa','play-b':'playb','play-c':'playc'}[p]||'');
+const playClass=p=>({'play-a':'playa','play-b':'playb','play-c':'playc','play-d':'playd'}[p]||'');
 // ---- i18n: EN <-> 中文 toggle (category names come from data name_zh; chrome from T()) ----
 let LANG='en';
 const nm=c=>LANG==='zh'?(c.name_zh||c.name_en):c.name_en;   // category display name
 const sub=c=>LANG==='zh'?c.name_en:(c.name_zh||'');         // the secondary line under it
 const T=(en,zh)=>LANG==='zh'?zh:en;                          // chrome string
-const playName=p=>({'play-a':'A · Imaging/Path','play-b':'B · Genomics/AI','play-c':'C · GMP Edge'}[p]||p);
+const playName=p=>({'play-a':'A · Imaging/Path','play-b':'B · Genomics/AI','play-c':'C · GMP Edge','play-d':'D · Clinical Core'}[p]||p);
 const PLAY_BY={};(DATA.plays.plays||[]).forEach(p=>PLAY_BY[p.id]=p);  // play id -> full play (name, hardware_anchor)
 const DOM_ZH={'hospital-clinical-core':'醫院·臨床核心','hospital-business-administration':'醫院·行政','hospital-device-facility-operations':'醫院·設備設施','diagnostics-laboratory':'診斷實驗室','pharmaceutical-research-clinical-development':'藥廠研發','manufacturing-quality-supply-chain':'製造·品管·供應鏈','data-analytics-payer-platforms':'資料·支付方','medical-technology-device-software':'醫材裝置軟體'};
 const DOM_EN={'hospital-clinical-core':'Hospital · Clinical Core','hospital-business-administration':'Hospital · Administration','hospital-device-facility-operations':'Hospital · Device & Facility','diagnostics-laboratory':'Diagnostics Lab','pharmaceutical-research-clinical-development':'Pharma R&D','manufacturing-quality-supply-chain':'Manufacturing · QC · Supply','data-analytics-payer-platforms':'Data · Payer Platforms','medical-technology-device-software':'MedTech Device Software'};
@@ -488,7 +488,7 @@ function renderTaxonomy(){
     cd.append(el('div',{class:'row',style:'align-items:center'},
       el('span',{class:'u '+t.urgency,style:'font-weight:800;text-transform:uppercase;font-size:12px'},t.urgency),
       el('span',{class:'tagk'},T('trigger','觸發訊號')),
-      ...(t.related_plays||[]).map(pid=>el('span',{class:'play play'+pid.split('-')[1].toLowerCase()},'Play '+pid.split('-')[1].toUpperCase()))));
+      ...(t.related_plays||[]).map(pid=>{const ch=el('span',{class:'play play'+pid.split('-')[1].toLowerCase(),style:'cursor:pointer'},'Play '+pid.split('-')[1].toUpperCase());ch.onclick=()=>goPlay(pid);return ch;})));
     cd.append(el('h3',{style:'margin:6px 0 4px'},t.signal));
     const bc=el('div',{class:'battle'});
     const brow=(lab,val)=>{const r=el('div',{class:'brow'});r.append(el('div',{class:'blab'},lab));r.append(el('div',{class:'bval'},val||'—'));bc.append(r);};
@@ -508,6 +508,43 @@ function renderTaxonomy(){
     ms.append(mw);cd.append(ms);
     return cd;
   }
+  // play brief: the play's bet, organized — hardware anchor · segments · the triggers that open it · target categories
+  function playBrief(pid){
+    const p=PLAY_BY[pid]; if(!p)return el('div',{});const L=pid.split('-')[1].toUpperCase();
+    const cd=el('div',{class:'card'});
+    cd.append(el('div',{class:'row',style:'align-items:center'},el('span',{class:'play play'+L.toLowerCase()},'Play '+L),el('span',{class:'tagk'},T('play','打法'))));
+    cd.append(el('h3',{style:'margin:6px 0 4px'},p.name));
+    const bc=el('div',{class:'battle'});
+    const brow=(lab,val)=>{const r=el('div',{class:'brow'});r.append(el('div',{class:'blab'},lab));r.append(el('div',{class:'bval'},val||'—'));bc.append(r);};
+    brow(T('Hardware anchor','硬體錨'),(p.hardware_anchor||[]).join(' · '));
+    brow(T('Segments','客群'),(p.target_segments||[]).join(' · '));
+    if(p.regulatory_notes)brow(T('Notes','備註'),p.regulatory_notes);
+    cd.append(bc);
+    const feed=(DATA.triggers.triggers||[]).filter(t=>(t.related_plays||[]).includes(pid))
+      .sort((a,b)=>({critical:0,high:1,medium:2,low:3}[a.urgency]-{critical:0,high:1,medium:2,low:3}[b.urgency]));
+    if(feed.length){const ts=el('div',{class:'dsec'});ts.append(el('div',{class:'dsh'},T('Triggers that open this play — click for the signal brief','開啟此打法的訊號 — 點看訊號簡報')));
+      const tw=el('div',{style:'display:flex;flex-wrap:wrap;gap:5px'});
+      feed.forEach(t=>{const ch=el('span',{class:'pill',style:'cursor:pointer'},el('span',{class:'u '+t.urgency,style:'font-weight:700'},'● '),t.signal);ch.onclick=()=>goTrigger(t);tw.append(ch);});
+      ts.append(tw);cd.append(ts);}
+    const mem=cats.filter(c=>(c.plays||[]).includes(pid)).sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity);
+    const ms=el('div',{class:'dsec'});ms.append(el('div',{class:'dsh'},T('Target categories — click for the battle card','目標類別 — 點看戰卡')+' · '+mem.length));
+    const mw=el('div',{class:'mklist'});
+    mem.forEach(c=>{const it=el('div',{class:'mkitem'},el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px'},String(c.hardware_opportunity)),el('span',{class:'mknm'},nm(c)));
+      if(isFlag(c))it.append(el('span',{class:'cb f'},T('flagship','旗艦')));
+      if(isHot(c))it.append(el('span',{class:'cb h'},T('direct','直銷')));
+      it.onclick=()=>showDetail(c);mw.append(it);});
+    ms.append(mw);cd.append(ms);
+    return cd;
+  }
+  // shared navigation: filter the tree + land on the matching brief (used by doors AND by every play/trigger chip)
+  function setNote(node){const nb=document.querySelector('.hnote');if(nb){clear(nb);if(node)nb.append(node);}}
+  function scrollToPanes(){const tp=document.getElementById('twopane');if(tp)tp.scrollIntoView({behavior:'smooth',block:'start'});}
+  function goTrigger(t){catFilter=(t.related_categories||[]);hotFilter=null;fTxt.value='';render();
+    clear(detailPane);detailPane.append(triggerBrief(t));
+    setNote(el('span',{},el('span',{class:'u '+t.urgency,style:'font-weight:700;text-transform:uppercase'},t.urgency+' · '),el('b',{},t.signal),T(' — brief on the right','— 右側簡報')));scrollToPanes();}
+  function goPlay(pid){const p=PLAY_BY[pid];catFilter=cats.filter(c=>(c.plays||[]).includes(pid)).map(c=>c.id);hotFilter=null;fTxt.value='';render();
+    clear(detailPane);detailPane.append(playBrief(pid));
+    setNote(el('span',{},el('span',{class:'play play'+pid.split('-')[1].toLowerCase()},'Play '+pid.split('-')[1].toUpperCase()),' ',el('b',{},p?p.name:''),' — '+catFilter.length+T(' categories · brief on the right',' 個類別 · 右側簡報')));scrollToPanes();}
   function catRow(c){const r=el('div',{class:'trow','data-id':c.id});
     r.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
     r.append(el('span',{class:'tname'},nm(c)));
@@ -539,7 +576,7 @@ function renderTaxonomy(){
       el('span',{class:'by '+BUYER_C[c.primary_buyer],title:'primary buyer '+c.primary_buyer+(pbP?' · '+OPP[pbP]+' opportunity':'')},c.primary_buyer+(pbP?'·'+pbP:'')));
     (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo',title:x+' buys iron'+(c.hardware_opportunity_by_buyer[x]?' · '+OPP[c.hardware_opportunity_by_buyer[x]]+' opportunity':'')},x+(c.hardware_opportunity_by_buyer[x]?'·'+c.hardware_opportunity_by_buyer[x]:''))));
     if(spansOf(c))head.append(el('span',{class:'byo',title:'deployment spans customer↔vendor'},'⇄'));
-    (c.plays||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
+    (c.plays||[]).forEach(p=>{const ch=el('span',{class:'play '+playClass(p),style:'cursor:pointer',title:playName(p)},playName(p).split(' ')[0]);ch.onclick=()=>goPlay(p);head.append(ch);});
     cd.append(head);
     cd.append(el('h3',{},nm(c)));
     cd.append(el('div',{class:'zh'},sub(c)));
@@ -566,7 +603,7 @@ function renderTaxonomy(){
     const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hardware_opportunity,title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)),
       el('span',{class:'by '+BUYER_C[c.primary_buyer]},c.primary_buyer+(pbP?'·'+pbP:'')));
     (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo'},x+(c.hardware_opportunity_by_buyer[x]?'·'+c.hardware_opportunity_by_buyer[x]:''))));
-    (c.plays||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
+    (c.plays||[]).forEach(p=>{const ch=el('span',{class:'play '+playClass(p),style:'cursor:pointer',title:playName(p)},playName(p).split(' ')[0]);ch.onclick=()=>goPlay(p);head.append(ch);});
     cd.append(head);
     cd.append(el('h3',{style:'margin:6px 0 0'},nm(c)));
     cd.append(el('div',{class:'zh'},sub(c)));
@@ -684,7 +721,7 @@ function renderTaxonomy(){
         (t.related_plays||[]).forEach(pid=>{const L=pid.split('-')[1].toUpperCase();pg.append(el('span',{class:'play play'+L.toLowerCase()},'Play '+L));});
         const it=el('div',{class:'pitem'},el('span',{class:'u '+t.urgency,style:'font-weight:700'},'●'),el('span',{class:'pnm'},t.signal),pg,
           el('span',{class:'pct'},ids.length+T(' mkts ▸',' 市場 ▸')));
-        it.onclick=()=>openDoor(el('span',{},el('span',{class:'u '+t.urgency,style:'font-weight:700;text-transform:uppercase'},t.urgency+' · '),el('b',{},t.signal),T(' — brief on the right','— 右側簡報')),ids,triggerBrief(t));
+        it.onclick=()=>goTrigger(t);
         tlist.append(it);});
     });
     box.append(tlist);
@@ -692,7 +729,7 @@ function renderTaxonomy(){
     const prow=el('div',{class:'drow'});prow.append(el('span',{class:'dlab'},T('Play','打法')));
     DATA.plays.plays.forEach(p=>{const letter=p.id.split('-')[1].toUpperCase();const ids=cats.filter(c=>(c.plays||[]).includes(p.id)).map(c=>c.id);
       const chip=el('button',{class:'dchip'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),' '+p.name+' ',el('span',{class:'dn'},String(ids.length)));
-      chip.onclick=()=>openDoor(el('span',{},el('b',{},'Play '+letter+' · '+p.name),' — '+ids.length+T(' categories','個類別')),ids);prow.append(chip);});
+      chip.onclick=()=>goPlay(p.id);prow.append(chip);});
     box.append(prow);
     // folded signal key — definitions preserved, no longer the dominant surface
     const key=el('details',{class:'hkey'});key.append(el('summary',{},T('What do flagship / customer-HOT / market-leader mean?','旗艦／客戶-HOT／市場領導者是什麼意思?')));

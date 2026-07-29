@@ -55,10 +55,11 @@ Each item scored 0–5, weighted score = (item ÷ 5) × weight.
 | Competitive differentiation | 5 |
 Tiers: **≥70 Active pursuit** · 50–69 Nurture/partner-led · 30–49 Monitor · <30 Drop.
 ## 5. Hard scope constraints
-1. **3 solution plays only** (default trio — confirm or swap with me in the first session):
+1. **4 solution plays** (started as a 3-play trio; **Play D added 2026-07-29** after an adversarial data review — see plays.yaml header. A proposed **Play E (payer/RWD) was rejected** as a segment bucket, not a hardware anchor; "payer" stays a segment tag):
    - **Play A — Medical Imaging + Digital Pathology**: GPU inference, NVMe ingest, PB-scale archive. Targets: hospitals, imaging centers, pathology labs, PACS/pathology ISVs.
    - **Play B — Genomics / Bioinformatics / Research AI** (incl. cloud-repatriation targets): HPC + GPU clusters, NVMe scratch, object storage. Targets: AMCs, biotech, pharma R&D, AI-native drug-discovery companies.
    - **Play C — GMP Manufacturing Edge**: MES / SCADA / Historian / EBR — redundant plant servers, industrial edge, DR. Targets: pharma plants, biologics facilities, CDMOs, MES ISVs + automation SIs.
+   - **Play D — Clinical Core Resilience & Ransomware DR**: NVMe-OLTP DB nodes + HA-redundant failover + immutable DR/backup (explicitly zero-GPU). Routes the only play-less flagship (EHR/EMR) plus LIS, Hospital ERP, device integration, HIE, payer core admin. Targets: hospital/health-system core-IT & payer claims-IT (direct). Ties to the cyber/ransomware, EHR go-live, hospital M&A, new-campus triggers.
 2. **30 target accounts max**, researched at **facility level** (a pharma's genomics center ≠ its sterile plant — different stack, budget, buyer).
 3. **Lite card first; full card only at score ≥70.**
 4. ISV co-sell **excludes** AWS-committed clinical SaaS (Veeva, Medidata — near-zero co-sell room). Focus on ISVs still deploying on-prem: PACS/pathology, LIMS, MES vendors.

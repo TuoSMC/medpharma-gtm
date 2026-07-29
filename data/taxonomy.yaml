@@ -232,8 +232,7 @@ categories:
     infrastructure_notes: "Large HA database clusters, virtualization/VDI farms for clinician access, and full DR sites; sized by bed count, concurrent users, and uptime SLAs. Refresh cycles and DR site builds are the main deal triggers."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {nvme-performance-storage: rack, high-availability-redundant: cluster, disaster-recovery-backup: rack}
-    plays: []
-    play_exemption: "General datacenter refresh / disaster-recovery deal (high-availability database + virtual desktops); not an imaging, genomics, or manufacturing-edge motion — pursue as a standalone infrastructure deal"
+    plays: [play-d]
     vendors: [altera-digital-health, athenahealth, athenahealth-2, dedalus, eclinicalworks, epic-systems, greenway, meditech, modmed, netsmart, nextech, oracle-health, veradigm, wellsky]
     evidence_note: null
     workload_envelope:
@@ -272,8 +271,7 @@ categories:
     infrastructure_notes: "Mostly rides on EHR or cloud infrastructure; emerging pull is on-prem GPU inference nodes where PHI rules force local hosting of clinical LLM/ambient-AI workloads. Sized by inference concurrency, not data volume."
     hardware_profile: [gpu-server]
     hardware_profile_sizing: {gpu-server: node}
-    plays: []
-    play_exemption: "Clinical inference graphics-processing-unit capacity attaches to the electronic-health-record estate or the vendor's inference fleet; not a play-A/B/C motion"
+    plays: [play-a]
     vendors: [abridge, aidoc, ambience, corti, deepscribe, microsoft-nuance, nabla, suki, wolters-kluwer-health]
     evidence_note: null
     workload_envelope:
@@ -587,7 +585,7 @@ categories:
     infrastructure_notes: "Runs as HA VMs alongside the HIS/EHR; check-in kiosks, queue displays and ticketing terminals are edge endpoints. Sizing driven by daily outpatient visit volume and the morning registration peak — downtime is front-door visible, so HA is non-negotiable."
     hardware_profile: [high-availability-redundant]
     hardware_profile_sizing: {high-availability-redundant: node}
-    plays: []
+    plays: [play-d]
     vendors: [epic-systems, experian-health, kyruus-health, luma-health, meditech, phreesia]
     evidence_note: null
     workload_envelope:
@@ -665,8 +663,7 @@ categories:
     infrastructure_notes: "Scanned-chart/document-imaging repositories with 7-15yr retention drive the storage footprint; legacy on-prem archives are refresh candidates. NLP computer-assisted/autonomous coding inference is mostly ISV-hosted GPU rather than customer-side."
     hardware_profile: [gpu-server, capacity-archive-storage]
     hardware_profile_sizing: {gpu-server: rack, capacity-archive-storage: rack}
-    plays: []
-    play_exemption: "Operator-side coding natural-language-processing plus the customer-side scanned-chart archive refresh (7-15 year retention); attaches to the revenue-cycle / electronic-health-record estate rather than a play motion"
+    plays: [play-a]
     vendors: [dolbey, optum, solventum, trubridge]
     evidence_note: null
     workload_envelope:
@@ -705,8 +702,7 @@ categories:
     infrastructure_notes: "Where on-prem (still common in APAC hospitals), a classic DB+app HA cluster with a DR pair and nightly close/batch windows; sized by transaction volume, bed count and concurrent users. Cloud-ERP migration is steadily eroding this footprint, so refresh cycles are the entry point."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {nvme-performance-storage: rack, high-availability-redundant: rack, disaster-recovery-backup: node}
-    plays: []
-    play_exemption: "Back-office transactional high-availability cluster; standalone infrastructure refresh deal"
+    plays: [play-d]
     vendors: [infor, microsoft, oracle-health, premier, sap, tecsys, workday]
     evidence_note: null
     workload_envelope:
@@ -785,8 +781,7 @@ categories:
     infrastructure_notes: "Bedside/unit edge gateways plus central integration engines in HA pairs feeding the EMR; vitals and waveform streams demand low-latency compute and growing time-series retention storage. Sizing driven by monitored-bed count, waveform capture depth, and alarm-routing uptime SLAs."
     hardware_profile: [nvme-performance-storage, edge-industrial, high-availability-redundant]
     hardware_profile_sizing: {nvme-performance-storage: rack, edge-industrial: node, high-availability-redundant: node}
-    plays: []
-    play_exemption: "Hospital integration-engine high-availability pairs; standalone clinical-information-technology infrastructure deal"
+    plays: [play-d]
     vendors: [ascom, connexall, ge-healthcare, philips, spok, stryker]
     evidence_note: null
     workload_envelope:
@@ -1059,8 +1054,7 @@ categories:
     infrastructure_notes: "Patient-room cameras and ambient sensors feed GPU inference servers at unit or campus edge (fall detection, virtual sitting, ambient clinical documentation), with substantial video retention storage. Sizing driven by camera/room count, streams per GPU, and video retention policy. OR-specific capture/routing lives in or-surgical-video (no double-count)."
     hardware_profile: [gpu-server, capacity-archive-storage, edge-industrial]
     hardware_profile_sizing: {gpu-server: rack, capacity-archive-storage: rack, edge-industrial: node}
-    plays: []
-    play_exemption: "Clinical video artificial intelligence adjacent to Play A but outside the fixed three-play scope; pursue as a standalone ward-video edge deal alongside the imaging estate"
+    plays: [play-a]
     vendors: [artisight, avasure, lookdeep-health, stryker, virtusense]
     evidence_note: null
 
@@ -1100,8 +1094,7 @@ categories:
     infrastructure_notes: "On-prem transactional DB plus application servers with HA clustering and a DR site; sizing driven by test/order/result throughput, interface count, and long retention and uptime SLAs. No GPU."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {nvme-performance-storage: node, high-availability-redundant: rack, disaster-recovery-backup: node}
-    plays: []
-    play_exemption: "Clinical laboratory transactional high-availability / disaster-recovery footprint; standalone infrastructure deal"
+    plays: [play-d]
     vendors: [clinisys, compugroup, epic-beaker, epic-systems, labvantage-solutions, ligolab, meditech-expanse-laboratory, oracle-health, orchard-software, scc-soft-computer, thermo-fisher-scientific-samplemanager-lims]
     evidence_note: null
     workload_envelope:
@@ -1140,7 +1133,7 @@ categories:
     infrastructure_notes: "On-prem/edge integration and real-time track-control servers sitting beside analyzers, HA for core-lab uptime; sizing driven by instrument count, result/transaction rate, and autoverification/QC rule load. No GPU."
     hardware_profile: [edge-industrial, high-availability-redundant]
     hardware_profile_sizing: {edge-industrial: node, high-availability-redundant: node}
-    plays: []
+    plays: [play-d]
     vendors: [beckman-coulter, data-innovations, roche, siemens-healthineers]
     evidence_note: null
     workload_envelope:
@@ -1928,7 +1921,7 @@ categories:
     infrastructure_notes: "Modest general-purpose compute but strict HA/DR — message brokers cannot drop clinical feeds, so clustered pairs and dual-site failover are standard. Sizing by interface count and HL7/FHIR message volume; no meaningful GPU."
     hardware_profile: [high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {high-availability-redundant: node, disaster-recovery-backup: node}
-    plays: []
+    plays: [play-d]
     vendors: [1uphealth, ehealth-exchange, epic-care-everywhere-epic-nexus, intersystems, nextgen-healthcare, orion-health, redox, rhapsody]
     evidence_note: null
     workload_envelope:
@@ -2004,8 +1997,7 @@ categories:
     infrastructure_notes: "High-availability transactional compute and database storage; nightly batch adjudication windows drive CPU sizing, and regulatory DR mandates push dual-site deployments. Legacy platform modernization (mainframe to x86) creates refresh events."
     hardware_profile: [nvme-performance-storage, high-availability-redundant, disaster-recovery-backup]
     hardware_profile_sizing: {nvme-performance-storage: rack, high-availability-redundant: rack, disaster-recovery-backup: rack}
-    plays: []
-    play_exemption: "Payer claims core; payer segment sits outside the three provider/pharma plays"
+    plays: [play-d]
     vendors: [cognizant-trizetto, healthedge, plexis-healthcare-systems]
     evidence_note: null
     workload_envelope:
@@ -2344,8 +2336,7 @@ categories:
     infrastructure_notes: "On-premises nurse-call and clinical-alerting middleware in high-availability pairs, plus unit and in-room edge stations routing alarms, secure messages, and on-call schedules to clinician devices on shift; the secure-messaging and scheduling tiers are increasingly vendor-hosted software-as-a-service. Sizing driven by bed and clinician-endpoint count and alarm-delivery uptime service levels, not data volume."
     hardware_profile: [edge-industrial, high-availability-redundant]
     hardware_profile_sizing: {edge-industrial: node, high-availability-redundant: node}
-    plays: []
-    play_exemption: "Hospital nurse-call and clinical-alerting high-availability middleware; a standalone clinical-communication infrastructure deal, not one of the three imaging/genomics/manufacturing plays"
+    plays: [play-d]
     vendors: [ascom, connexall, perfectserve, qgenda, spok, tigerconnect, vocera-stryker]
     evidence_note: "Added to close the software-universe map gap for on-shift clinician communication (nurse call, secure messaging, on-call scheduling) — deliberately thin under the hardware gate but real for the map."
     workload_envelope:

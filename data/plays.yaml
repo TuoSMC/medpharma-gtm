@@ -1,6 +1,11 @@
-# 3 solution plays — hard scope constraint (CLAUDE.md §5.1)
-# Default trio. Confirm or swap with Tuo in first session.
-version: 1
+# 4 solution plays — scope constraint (CLAUDE.md §5.1). Started as a 3-play trio (A/B/C);
+# Play D added 2026-07-29 after an adversarial data review found the taxonomy's ONLY play-less
+# flagship (EHR/EMR, opp4/cust4) plus 8 customer-HOT clinical/payer-core systems sharing one
+# distinct zero-GPU anchor (NVMe-OLTP + HA + DR), and 5 triggers dead-ending with no play to
+# route to. A proposed Play E (payer/RWD) was REJECTED as a segment bucket, not a hardware
+# anchor — its pieces fold into B (CPU-HPC risk-modeling), A/B (GPU+archive data), and D (payer
+# core = same NVMe/HA/DR anchor); "payer" stays a segment tag, not a play.
+version: 2
 
 plays:
   - id: play-a
@@ -54,3 +59,19 @@ plays:
       - Redundant tower/rack pairs
       - DR storage
     regulatory_notes: "GxP + Part 11 core. Documentation IS the product: controlled BOM, firmware/driver matrix, change notification, lifecycle statement, hardening guide"
+
+  - id: play-d
+    name: Clinical Core Resilience & Ransomware DR
+    workloads:
+      - NVMe-OLTP database nodes (EHR / LIS / ERP / claims transactional systems)
+      - HA-redundant failover pairs (zero-downtime clinical uptime)
+      - Immutable / air-gapped DR + backup (ransomware recovery)
+      - Integration & interoperability engines (device integration, HIE)
+    target_segments:
+      - Hospital / Health System (core-IT / enterprise-systems Infrastructure Owner)
+      - Payer (claims-adjudication core-IT)
+    hardware_anchor:
+      - NVMe performance storage servers (transactional DB)
+      - High-availability redundant pairs
+      - Disaster-recovery / immutable backup nodes
+    regulatory_notes: "PHI always; mission-critical availability + immutable backup is the pitch (NOT GPU/AI). Cyber/ransomware, EHR go-live, hospital M&A and new-campus triggers land here. Same accounts as Play A (shared CIO) — land-and-expand, not new territory."

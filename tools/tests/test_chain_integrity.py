@@ -459,6 +459,26 @@ class TestPlayScopeHonesty(unittest.TestCase):
             if c.get("play_exemption"):
                 self.assertFalse(c["plays"], f"{c['id']}: has both plays and play_exemption")
 
+    def test_play_d_added_and_routes_the_flagship_orphan(self):
+        """v3.4: Play D (Clinical Core Resilience) added after adversarial review. The
+        taxonomy's only play-less flagship (EHR/EMR) — and the NVMe/HA/DR clinical/payer
+        siblings — now route to it; the stripped GPU categories route to Play A."""
+        play_ids = {p["id"] for p in PLAYS["plays"]}
+        self.assertIn("play-d", play_ids, "Play D must exist in plays.yaml")
+        self.assertNotIn("play-e", play_ids, "Play E was rejected (segment bucket, not a hardware anchor)")
+        byid = {c["id"]: c for c in CATS}
+        self.assertEqual(byid["ehr-emr-core"]["plays"], ["play-d"], "flagship EHR must route to Play D")
+        for cid in ("lis", "hospital-erp", "medical-device-integration", "payer-core-admin"):
+            self.assertIn("play-d", byid[cid]["plays"], f"{cid} (NVMe/HA/DR anchor) must be in Play D")
+        for cid in ("cdss-clinical-ai", "smart-room-ambient-ai", "him-coding"):
+            self.assertIn("play-a", byid[cid]["plays"], f"{cid} (GPU) must route to Play A, not the resilience play")
+        # no flagship or customer-HOT category is left play-less any more (every high-value deal is routable)
+        for c in CATS:
+            hot = max(c["hardware_opportunity_by_buyer"].values()) >= 3
+            if c["supermicro_reachable"] and hot:
+                self.assertTrue(c["plays"] or c.get("play_exemption"),
+                                f"{c['id']}: HOT deal with no play and no exemption")
+
 
 class TestTriggerForeignKeys(unittest.TestCase):
     def test_triggers_bind_to_taxonomy_and_plays(self):
@@ -816,6 +836,20 @@ class TestAppGuidance(unittest.TestCase):
         for sig in ("New sequencer purchase", "Cyber incident", "FDA IND filing",
                     "Serialization", "Cloud repatriation", "Plant modernization"):
             self.assertIn(sig, self.html, f"trigger '{sig}' must be present")
+
+    def test_plays_are_navigable_and_open_a_play_brief(self):
+        """v3.4: a play is a navigable filter, not a decoration. Play chips everywhere
+        (door, trigger brief, battle card) call goPlay -> a play brief (anchor · segments ·
+        the triggers that open it · target categories), closing trigger<->play<->category."""
+        self.assertIn("function playBrief(", self.html, "clicking a play must open a play brief")
+        self.assertIn("function goPlay(", self.html, "play chips must be navigable")
+        self.assertIn("function goTrigger(", self.html, "trigger chips must be navigable")
+        for row in ("Hardware anchor", "Triggers that open this play", "Target categories"):
+            self.assertIn(row, self.html, f"play brief missing '{row}'")
+        # Play D must have a distinct chip colour (colour/weight, no emoji)
+        self.assertIn(".playd{background:var(--d)}", self.html, "Play D needs its own chip colour")
+        # the play chips are wired to goPlay (not inert labels)
+        self.assertIn("ch.onclick=()=>goPlay(p)", self.html, "battle-card play chip must call goPlay")
 
     def test_detail_does_not_conflate_leaderboard_with_cosell_motion(self):
         """codex-lens finding: leaderboard rank is a VENDOR standing signal, not the

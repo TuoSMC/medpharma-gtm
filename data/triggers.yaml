@@ -16,7 +16,7 @@ triggers:
     source: "KLAS reports, hospital press releases, Epic/Oracle Health announcements"
     action: "Map infra operator; approach Infrastructure Owner re: compute/storage/VDI refresh"
     related_categories: [ehr-emr-core, medical-device-integration]
-    related_plays: []
+    related_plays: [play-d]
   - id: fda-ind
     signal: FDA IND filing
     category: pharmaceutical-research-development
@@ -52,7 +52,7 @@ triggers:
     source: "Earnings calls ('reducing cloud spend'), CIO interviews, job postings for on-prem roles"
     action: "TCO conversation with Infrastructure Owner + Economic Buyer"
     related_categories: [ai-hpc-orchestration, bioinformatics-secondary, clinical-data-lakehouse, ehr-emr-core, pacs-vna]
-    related_plays: [play-a, play-b]
+    related_plays: [play-a, play-b, play-d]
   - id: hospital-ma
     signal: Hospital M&A / consolidation
     category: hospital-corporate-activity
@@ -61,7 +61,7 @@ triggers:
     source: "Healthcare M&A trackers, local business press"
     action: "Consolidated datacenter/imaging archive opportunity; find surviving IT org"
     related_categories: [pacs-vna, ehr-emr-core, clinical-data-lakehouse]
-    related_plays: [play-a]
+    related_plays: [play-a, play-d]
   - id: pharma-ai-strategy
     signal: Pharma AI-strategy announcement
     category: pharmaceutical-research-development
@@ -79,7 +79,7 @@ triggers:
     source: "Certificate-of-need filings, construction news, hospital PR"
     action: "New datacenter/edge closets get spec'd early — reach facility IT planning"
     related_categories: [ehr-emr-core, pacs-vna, medical-device-integration]
-    related_plays: [play-a]
+    related_plays: [play-a, play-d]
   - id: hpc-job-postings
     signal: HPC / bioinformatics job postings
     category: talent-signal
@@ -97,7 +97,7 @@ triggers:
     source: "KLAS reports, HIMSS analytics (EMRAM stage changes)"
     action: "EMRAM stage jump = infra investment underway; qualify operator"
     related_categories: [ehr-emr-core]
-    related_plays: []
+    related_plays: [play-d]
   # ---- added from framework doc ----
   - id: cyber-incident
     signal: Cyber incident / ransomware
@@ -107,7 +107,7 @@ triggers:
     source: "HHS breach portal, news, sector ISACs"
     action: "DR/backup/rebuild conversation — air-gapped backup, immutable storage angle"
     related_categories: [ehr-emr-core, pacs-vna, hospital-erp, scada-dcs, mes-ebr, plant-historian, lis]
-    related_plays: []
+    related_plays: [play-d, play-a, play-c]
   - id: plant-modernization
     signal: Plant modernization or new plant
     category: pharmaceutical-manufacturing
@@ -134,4 +134,4 @@ triggers:
     source: "Earnings calls, CFO commentary, layoff/efficiency announcements"
     action: "Soft repatriation signal — total-cost-of-ownership conversation with Infrastructure Owner + Economic Buyer; nurture"
     related_categories: [ai-hpc-orchestration, clinical-data-lakehouse, ehr-emr-core]
-    related_plays: [play-b]
+    related_plays: [play-b, play-d]
