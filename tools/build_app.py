@@ -125,6 +125,8 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .tnode .tcount{color:var(--muted);font-weight:600;font-size:12px}
 .tnode .tflag{font-size:10px;font-weight:700;color:var(--hw4);border:1px solid var(--hw4);border-radius:10px;padding:0 6px}
 .tnode .thot{font-size:10px;font-weight:700;color:var(--a);border:1px solid var(--a);border-radius:10px;padding:0 6px}
+.vflag{font-size:10px;font-weight:700;color:var(--hw4);border:1px solid var(--hw4);border-radius:10px;padding:0 6px}
+.vhot{font-size:10px;font-weight:700;color:var(--a);border:1px solid var(--a);border-radius:10px;padding:0 6px}
 .tbody{padding-left:2px}
 .tsub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:8px 0 3px}
 .trow{display:flex;align-items:center;gap:8px;padding:4px 7px;border-radius:6px;cursor:pointer}
@@ -268,12 +270,22 @@ const LB_BY_VID={};
   [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([bk,b])=>{if(!b)return;(b.entries||[]).forEach(e=>{
     if(e.vendor_id){(LB_BY_VID[e.vendor_id]=LB_BY_VID[e.vendor_id]||[]).push({board:bk,rank:e.rank});}});});})();
 const lbBadge=vid=>{const r=LB_BY_VID[vid];return r?r.map(x=>(x.board==='ai'?'AI':'No-AI')+' #'+x.rank).join(' · '):null;};
+// ---- value signals (flagship=opp4, HOT=customer opp>=3) reused everywhere ----
+const isFlag=c=>c.hardware_opportunity===4, isHot=c=>(c.hardware_opportunity_by_buyer.customer||0)>=3;
+function catsVal(ids){let flag=0,hot=0;(ids||[]).forEach(id=>{const c=CATBYID[id];if(!c)return;if(isFlag(c))flag++;if(isHot(c))hot++;});return {flag,hot,n:(ids||[]).length};}
+const vendorVal=v=>catsVal(v.categories);
+// value badges (text, no icons): red flagship + green HOT
+function valBadges(v,into){if(v.flag)into.append(el('span',{class:'vflag',title:'flagship categories (opportunity 4)'},v.flag+' '+T('flagship','旗艦')));if(v.hot)into.append(el('span',{class:'vhot',title:'customer-HOT categories (opportunity ≥3)'},v.hot+' HOT'));return into;}
 function goVendor(id){goTab('vendors');const q=$('#tab-vendors input[type=search]');const v=VBYID[id];if(q&&v){q.value=v.name;q.dispatchEvent(new Event('input'));}}
 function goCategory(id){goTab('taxonomy');const ft=$('#fTxt');const c=CATBYID[id];if(ft&&c){ft.value=c.name_en;ft.dispatchEvent(new Event('input'));}}
 
 // ---- header ----
 $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.status;
-$('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
+function setBuilt(){const cats=DATA.taxonomy.categories;const fl=cats.filter(isFlag).length,ho=cats.filter(isHot).length;
+  const nv=(DATA.vendors.vendors||[]).length;const lb=DATA.leaderboards&&DATA.leaderboards.leaderboards;
+  const nl=lb?(lb.ai.entries.length+lb.no_ai.entries.length):0;
+  $('#built').textContent=cats.length+T(' categories · ',' 類 · ')+fl+T(' flagship · ',' 旗艦 · ')+ho+T(' customer-HOT · ',' 客戶-HOT · ')+nv+T(' vendors · ',' 廠商 · ')+nl+T(' market leaders',' 市場領導者');}
+setBuilt();
 
 // ---- tabs ----
 const TABS=[['taxonomy','Explore'],['method','Method'],['vendors','Vendors']];
@@ -453,6 +465,9 @@ function renderTaxonomy(){
     sec(T('How it works','技術講解'),(LANG==='zh'?det.tech_zh:det.tech_en));
     sec(T('Supermicro workload fit','SMCI 可協助的 workload'),(LANG==='zh'?det.smci_zh:det.smci_en));
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
+    const leaders=(c.vendors||[]).filter(v=>lbBadge(v));
+    if(leaders.length){const lr=el('div',{class:'dsec'});lr.append(el('div',{class:'dsh'},T('Market leaders serving this — co-sell','服務本類的市場領導者 — 共銷')));
+      const w=el('div',{class:'row'});leaders.forEach(v=>{const p=el('span',{class:'pill lead',style:'cursor:pointer'},(VNAME[v]||v)+' · '+lbBadge(v));p.onclick=()=>goVendor(v);w.append(p);});lr.append(w);cd.append(lr);}
     if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row',style:'margin-top:8px'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));c.vendors.forEach(v=>{const bd=lbBadge(v);const p=el('span',{class:'pill'+(bd?' lead':''),style:'cursor:pointer'},VNAME[v]||v);p.onclick=()=>goVendor(v);vr.append(p);});cd.append(vr);}
     return cd;
   }
@@ -521,12 +536,16 @@ function renderTaxonomy(){
 // ================= VENDORS (enriched registry) =================
 function renderRegistryInto(host){
   const root=host;
-  const vs=(DATA.vendors.vendors||[]).slice().sort((a,b)=>a.name.localeCompare(b.name));
+  const vsAll=(DATA.vendors.vendors||[]);
   const conf=(DATA.vendors.version)||'?';
   const cnt=el('span',{class:'count'});
   const q=el('input',{type:'search',placeholder:T('search vendor / HQ / leader / category...','搜尋廠商 / 總部 / 負責人 / 類別...')});
-  root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vs.length+' vendors, web-researched + adversarially verified. Every claim sourced; unverifiable fields are honest nulls / "not publicly disclosed" (§8).','廠商登錄 v'+conf+' — '+vs.length+' 家,網路研究 + 對抗式查核。每項聲明有來源;查不到的欄位為誠實 null /「未公開揭露」(§8)。')));
-  root.append(el('div',{class:'filters'},q,cnt));
+  root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vsAll.length+' vendors, web-researched + adversarially verified. Sort by value = the vendors serving the most flagship / customer-HOT SMCI categories, market leaders first.','廠商登錄 v'+conf+' — '+vsAll.length+' 家,網路研究 + 對抗式查核。依價值排序 = 服務最多旗艦／客戶-HOT SMCI 類的廠商,市場領導者在前。')));
+  let sortMode='value';
+  function byValue(a,b){const A=vendorVal(a),B=vendorVal(b);return B.flag-A.flag||B.hot-A.hot||((LB_BY_VID[b.id]?1:0)-(LB_BY_VID[a.id]?1:0))||a.name.localeCompare(b.name);}
+  const sseg=el('div',{class:'seg',style:'margin:0'});
+  [['value',T('by value','依價值')],['az','A–Z']].forEach(([k,lab])=>{const b=el('button',{'data-k':k,class:k==='value'?'on':''},lab);b.onclick=()=>{sortMode=k;[...sseg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.k===k));render();};sseg.append(b);});
+  root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
   const vhost=el('div',{});root.append(vhost);
   function excl(v){return "exclud" in Object.assign({},v)?false:/exclud/i.test(v.note||'');}
   function card(v){
@@ -534,6 +553,7 @@ function renderRegistryInto(host){
     const h=el('div',{class:'row'},el('h3',{style:'margin:0'},v.name));
     const bd=lbBadge(v.id);
     if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goVendorsBoard();h.append(lp);}
+    valBadges(vendorVal(v),h);
     if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
     c.append(h);
     const kv=el('dl',{class:'kv'});
@@ -553,9 +573,10 @@ function renderRegistryInto(host){
   }
   function render(){
     const s=q.value.toLowerCase();
-    const shown=vs.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s));
+    const shown=vsAll.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s))
+      .slice().sort(sortMode==='az'?(a,b)=>a.name.localeCompare(b.name):byValue);
     clear(vhost);shown.forEach(v=>vhost.append(card(v)));
-    cnt.textContent=shown.length+' / '+vs.length+T(' shown',' 顯示');
+    cnt.textContent=shown.length+' / '+vsAll.length+T(' shown',' 顯示');
   }
   q.oninput=render;render();
 }
@@ -569,6 +590,13 @@ function renderPlaysInto(host){
     const card=el('div',{class:'card'});
     card.append(el('div',{class:'row'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter)));
     card.append(el('h3',{},p.name));
+    const members=DATA.taxonomy.categories.filter(c=>(c.plays||[]).includes(p.id));
+    const vv=catsVal(members.map(c=>c.id));
+    const vrow=el('div',{class:'row',style:'margin:2px 0 8px'});
+    vrow.append(el('span',{class:'tagk'},T('pipeline','管線')),el('span',{class:'muted',style:'font-size:12px'},members.length+T(' targets','個目標')));
+    valBadges(vv,vrow);card.append(vrow);
+    const top=members.filter(isFlag).slice().sort((a,b)=>a.id.localeCompare(b.id)).slice(0,4);
+    if(top.length){const tr=el('div',{class:'row',style:'margin-bottom:8px'});tr.append(el('span',{class:'tagk'},T('top targets','頂級目標')));top.forEach(c=>{const pp=el('span',{class:'pill lead',style:'cursor:pointer'},nm(c));pp.onclick=()=>goCategory(c.id);tr.append(pp);});card.append(tr);}
     const sec=(t,arr)=>{card.append(el('div',{class:'tagk'},t));
       const ul=el('ul',{class:'muted'});(arr||[]).forEach(x=>ul.append(el('li',{},x)));
       ul.style.margin='4px 0 8px';ul.style.paddingLeft='18px';ul.style.fontSize='12px';card.append(ul);};
@@ -587,7 +615,15 @@ function renderTriggersInto(host){
   const TH=LANG==='zh'?['訊號','類別','急迫','窗口','來源','行動','關聯']:['Signal','Cat','Urgency','Window','Source','Action','Related'];
   t.append(el('thead',{},el('tr',{},...TH.map(h=>el('th',{},h)))));
   const tb=el('tbody');
-  DATA.triggers.triggers.forEach(x=>{
+  const rank={critical:0,high:1,medium:2,low:3};
+  DATA.triggers.triggers.slice().sort((a,b)=>rank[a.urgency]-rank[b.urgency]
+    ||catsVal(b.related_categories).flag-catsVal(a.related_categories).flag
+    ||catsVal(b.related_categories).hot-catsVal(a.related_categories).hot).forEach(x=>{
+    const vv=catsVal(x.related_categories);
+    const rrow=el('div',{class:'row'});
+    (x.related_plays||[]).forEach(p=>rrow.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
+    valBadges(vv,rrow);
+    (x.related_categories||[]).forEach(cid=>{const c=CATBYID[cid];const p=el('span',{class:'pill'+((c&&isFlag(c))?' lead':''),style:'cursor:pointer'},c?nm(c):cid);p.onclick=()=>goCategory(cid);rrow.append(p);});
     tb.append(el('tr',{},
       el('td',{},el('strong',{},x.signal)),
       el('td',{},el('span',{class:'pill'},x.category)),
@@ -595,9 +631,7 @@ function renderTriggersInto(host){
       el('td',{class:'muted'},x.window),
       el('td',{class:'muted'},x.source),
       el('td',{},x.action),
-      el('td',{},el('div',{class:'row'},
-        ...(x.related_plays||[]).map(p=>el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])),
-        ...(x.related_categories||[]).map(c=>el('span',{class:'pill'},c))))));
+      el('td',{},rrow)));
   });
   t.append(tb);root.append(el('div',{class:'wrap'},t));
 }
@@ -693,7 +727,9 @@ function renderLeaderboardsInto(host){
       const row=el('div',{style:'padding:6px 0;border-top:1px solid var(--line)'});
       const nmEl=el('span',{style:'font-weight:600'+(e.vendor_id?';cursor:pointer;text-decoration:underline dotted var(--accent)':'')},e.name+(e.vendor_id?' ↩':''));
       if(e.vendor_id){nmEl.title=T('in the registry — view vendor card','在登錄中 — 看廠商卡');nmEl.onclick=()=>goVendor(e.vendor_id);}
-      row.append(el('div',{class:'row'},el('b',{style:'color:var(--accent);min-width:34px'},'#'+e.rank),nmEl));
+      const rowline=el('div',{class:'row'},el('b',{style:'color:var(--accent);min-width:34px'},'#'+e.rank),nmEl);
+      if(e.vendor_id&&VBYID[e.vendor_id])valBadges(vendorVal(VBYID[e.vendor_id]),rowline);
+      row.append(rowline);
       row.append(el('div',{class:'muted',style:'font-size:11px;margin:3px 0'},e.market_basis));
       if(e.source){const isurl=/^https?:\/\//.test(e.source);
         row.append(isurl?el('a',{href:e.source,target:'_blank',class:'pill'},T('source','來源')+' ↗'):el('span',{class:'pill'},String(e.source).slice(0,60)));}
@@ -737,7 +773,7 @@ function goVendorsBoard(){goTab('vendors');if(_vendorsNav)_vendorsNav.pick('lead
 // ================= i18n wiring: render all tabs + language toggle =================
 const TAB_ZH={taxonomy:'探索',method:'方法',vendors:'廠商'};
 function relabelTabs(){TABS.forEach(([id,label])=>{if(NAVBTN[id])NAVBTN[id].textContent=LANG==='zh'?(TAB_ZH[id]||label):label;});}
-function renderAll(){renderTaxonomy();renderMethod();renderVendors();}
+function renderAll(){setBuilt();renderTaxonomy();renderMethod();renderVendors();}
 renderAll();
 $('#langtog').onclick=()=>{LANG=(LANG==='zh')?'en':'zh';$('#langtog').textContent=(LANG==='zh')?'EN':'中文';relabelTabs();renderAll();window.scrollTo(0,0);};
 </script>

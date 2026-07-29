@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-07-29 — value-surfacing rolled out across 6 components + v2.9
+Extended the flagship/HOT "value-surfacing" from the Explore lens to five more surfaces (Tuo: apply it to Vendors + Leaderboards, then find ≥4 more). One shared helper (`catsVal` → flagship = opportunity 4, HOT = customer opportunity ≥3) now drives value signals everywhere; no emoji, all text/colour badges.
+1. **Vendors** — each card shows how many flagship / customer-HOT SMCI categories the vendor serves (plus its leaderboard rank); a **sort toggle (by value / A–Z)** defaults to value, so the vendors serving the most high-opportunity categories (and market leaders) float to the top.
+2. **Leaderboards** — each ranked entry now carries a flagship / HOT badge = how many high-opportunity SMCI categories that market leader touches, i.e. which leaders are actually a hardware opportunity, not just a big brand.
+3. **Plays** — each play card shows its pipeline value (targets · flagship · HOT) and its **top flagship targets** as click-through chips → the play is now a pipeline view, not just a definition.
+4. **Signals (Triggers)** — each trigger shows the flagship / HOT categories it *opens*, its related categories are click-through and flagship-highlighted, and the table is **sorted by urgency then opportunity opened** — act on the signal that unlocks the most flagship deals.
+5. **Header** — the build stamp became a **portfolio value summary**: *59 categories · 9 flagship · 31 customer-HOT · 309 vendors · 155 market leaders* (updates with the language toggle).
+6. **Explore detail pane** — a new **"Market leaders serving this — co-sell"** section lists the category's vendors that are on a leaderboard, with rank, as click-through co-sell targets.
+- **86 GREEN**; deterministic; browser-verified all six, both languages, zero console errors, no emoji.
+- **Tagged `v2.9`.**
+
 ## 2026-07-29 — Explore "view by" lens strengthened into a value-surfacing hunter + v2.8
 Tuo challenged the GROUP control ("does it earn its space? if useful, how — and strengthen it"). Verdict: it's genuinely useful (multi-lens re-rooting of the 59-category tree serves different sales tasks), so it was trimmed and strengthened rather than removed.
 - **Trimmed 8 → 6 lenses:** dropped `data` (a technical, not sales, cut) and `flat` (search already does that). Kept **care area · who buys · who uses it · AI/no-AI · play · hardware** — each a real sales lens. Renamed the label GROUP → **view by / 檢視**, and led with the two most sales-actionable (care area, who buys).
