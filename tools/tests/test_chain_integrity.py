@@ -774,19 +774,42 @@ class TestAppGuidance(unittest.TestCase):
                          "misleading 'trigger fired' label implies CRM state it does not have")
 
     def test_opportunity_master_table_fuses_value_signals(self):
-        """v3.0: the Explore header stat-line is replaced by one drill-through
-        master table that fuses every value signal (flagship/HOT/leaders/vendors)
-        into four click-through sections: play / care area / vendors / signals."""
-        self.assertIn("function masterTable(", self.html,
-                      "the fused Opportunity master table must exist")
+        """v3.1: the master table DEFINES + LINKS the 3 value signals in a legend,
+        then a per-play opportunity matrix pairs real market products (pulled live
+        from the vendor registry) with the market-leader rank. Secondary rollups
+        stay collapsible."""
+        self.assertIn("function masterTable(", self.html, "the master table must exist")
         self.assertIn("Opportunity master", self.html)
         self.assertIn("價值總表", self.html)
-        for section in ("Pipeline by play", "Opportunity by care area",
-                        "Top vendors to work", "Hot signals"):
-            self.assertIn(section, self.html, f"master table missing section '{section}'")
-        # the passive flagship/HOT header stat line must be gone (fused into the table)
-        self.assertNotIn(" flagship · ", self.html,
-                         "the old passive header stat-line must be replaced by the master table")
+        # legend: each of the 3 signals is DEFINED with the sales question it answers
+        for q in ("How big is the biggest deal?", "Is it a direct sale?",
+                  "Which software vendor do I go through?"):
+            self.assertIn(q, self.html, f"legend missing signal definition/question '{q}'")
+        # the level split is exposed (2 category signals, 1 vendor signal) — this is the linkage
+        self.assertIn("Read it as a chain", self.html, "the 3 signals must be linked by a read-path")
+        # real market products are pulled from data, never hardcoded in code
+        self.assertIn("function pipeVendors(", self.html, "example products must be data-driven")
+        for h in ("Leading products in this market", "Market-leader rank"):
+            self.assertIn(h, self.html, f"opportunity matrix missing column '{h}'")
+        # secondary rollups survive
+        for section in ("Opportunity by care area", "Top vendors to work", "Hot signals"):
+            self.assertIn(section, self.html, f"master table missing rollup '{section}'")
+
+    def test_master_table_does_not_conflate_leaderboard_with_cosell_motion(self):
+        """codex-lens finding: leaderboard rank is a VENDOR standing signal, not the
+        co-sell MOTION (which is set by hardware_buyer). The old 'co-sell' label on
+        every ranked-vendor list wrongly implied the motion; it must be motion-neutral."""
+        self.assertNotIn("服務本類的市場領導者 — 共銷", self.html,
+                         "detail-pane must not label ranked vendors 'co-sell' (motion-conflation)")
+        self.assertNotIn("Co-sell rank", self.html,
+                         "the matrix rank column must be motion-neutral, not 'Co-sell rank'")
+
+    def test_flagship_not_direct_nesting_is_derived_not_hardcoded(self):
+        """mutual-distinctness lens: flagship is (currently) a strict subset of
+        customer-direct. The read-path states this from a live count, so it can never
+        silently go stale if the data changes (TUo Brain #4)."""
+        self.assertIn("isFlag(c)&&!isHot(c)", self.html,
+                      "the flagship-vs-direct nesting claim must be computed from data, not hardcoded")
 
 
 class TestWorkloadEnvelope(unittest.TestCase):
