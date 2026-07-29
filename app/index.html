@@ -50,6 +50,8 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .ckbox{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
 .grouphdr{font-size:13px;font-weight:700;margin:18px 0 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
 .subhdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:10px 0 6px}
+.backbtn{position:sticky;top:64px;z-index:6;align-items:center;gap:4px;font-family:inherit;font-size:12px;font-weight:600;color:var(--accent);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 11px;cursor:pointer;margin:2px 0 6px}
+.backbtn:hover{border-color:var(--accent);background:var(--accentbg)}
 .twopane{display:grid;grid-template-columns:minmax(300px,5fr) 7fr;gap:18px;align-items:start;margin-top:6px}
 @media(max-width:840px){.twopane{grid-template-columns:1fr}}
 .tree{font-size:13px;min-width:0}
@@ -428,13 +430,26 @@ function renderTaxonomy(){
       labeled(T('hardware component','硬體元件'),fProfile),
       el('div',{style:'display:flex;align-items:flex-end'},fSpans))));
   const treePane=el('div',{class:'tree'}), detailPane=el('div',{class:'detail'});
-  root.append(el('div',{class:'twopane',id:'twopane'},treePane,detailPane));
   let selected=null;
+  let navStack=[], dv={kind:'none',id:null};
+  const backBtn=el('button',{class:'backbtn',style:'display:none'},'← '+T('Back','返回'));
+  root.append(backBtn);
+  root.append(el('div',{class:'twopane',id:'twopane'},treePane,detailPane));
   const byOpp=(a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id);
   function showDetail(c){selected=c||null;clear(detailPane);
     if(!c){detailPane.append(el('div',{class:'muted',style:'padding:24px 4px'},T('Select a category on the left.','在左邊選一個類別。')));return;}
-    detailPane.append(detailCard(c));
+    detailPane.append(detailCard(c));dv={kind:'cat',id:c.id};
     [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===c.id));}
+  // ---- back navigation: a stack of {catFilter, detail-view} snapshots ----
+  const TRIG_BY={};(DATA.triggers.triggers||[]).forEach(t=>TRIG_BY[t.id]=t);
+  function updateBack(){backBtn.style.display=navStack.length?'inline-flex':'none';}
+  function pushNav(){navStack.push({cf:catFilter?catFilter.slice():null,dv:{kind:dv.kind,id:dv.id}});updateBack();}
+  function applyDv(){if(dv.kind==='cat'&&CATBYID[dv.id])showDetail(CATBYID[dv.id]);
+    else if(dv.kind==='trigger'&&TRIG_BY[dv.id]){clear(detailPane);detailPane.append(triggerBrief(TRIG_BY[dv.id]));}
+    else if(dv.kind==='play'){clear(detailPane);detailPane.append(playBrief(dv.id));}}
+  function goBack(){if(!navStack.length)return;const s=navStack.pop();catFilter=s.cf;hotFilter=null;fTxt.value='';render();dv=s.dv;applyDv();updateBack();scrollToPanes();}
+  function viewCat(c){pushNav();showDetail(c);}
+  backBtn.onclick=goBack;
   // trigger brief: a signal, organized — window · where to catch · the move · the markets it opens
   function triggerBrief(t){
     const cd=el('div',{class:'card'});
@@ -456,7 +471,7 @@ function renderTaxonomy(){
       const it=el('div',{class:'mkitem'},el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px'},String(c.hardware_opportunity)),el('span',{class:'mknm'},nm(c)));
       if(isFlag(c))it.append(el('span',{class:'cb f'},T('flagship','旗艦')));
       if(isHot(c))it.append(el('span',{class:'cb h'},T('direct','直銷')));
-      it.onclick=()=>showDetail(c);mw.append(it);});
+      it.onclick=()=>viewCat(c);mw.append(it);});
     if(!(t.related_categories||[]).length)mw.append(el('div',{class:'muted'},'—'));
     ms.append(mw);cd.append(ms);
     return cd;
@@ -485,24 +500,24 @@ function renderTaxonomy(){
     mem.forEach(c=>{const it=el('div',{class:'mkitem'},el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px'},String(c.hardware_opportunity)),el('span',{class:'mknm'},nm(c)));
       if(isFlag(c))it.append(el('span',{class:'cb f'},T('flagship','旗艦')));
       if(isHot(c))it.append(el('span',{class:'cb h'},T('direct','直銷')));
-      it.onclick=()=>showDetail(c);mw.append(it);});
+      it.onclick=()=>viewCat(c);mw.append(it);});
     ms.append(mw);cd.append(ms);
     return cd;
   }
   // shared navigation: filter the tree + land on the matching brief (used by doors AND by every play/trigger chip)
   function setNote(node){const nb=document.querySelector('.hnote');if(nb){clear(nb);if(node)nb.append(node);}}
   function scrollToPanes(){const tp=document.getElementById('twopane');if(tp)tp.scrollIntoView({behavior:'smooth',block:'start'});}
-  function goTrigger(t){catFilter=(t.related_categories||[]);hotFilter=null;fTxt.value='';render();
-    clear(detailPane);detailPane.append(triggerBrief(t));
+  function goTrigger(t){pushNav();catFilter=(t.related_categories||[]);hotFilter=null;fTxt.value='';render();
+    clear(detailPane);detailPane.append(triggerBrief(t));dv={kind:'trigger',id:t.id};
     setNote(el('span',{},el('span',{class:'u '+t.urgency,style:'font-weight:700;text-transform:uppercase'},t.urgency+' · '),el('b',{},t.signal),T(' — brief on the right','— 右側簡報')));scrollToPanes();}
-  function goPlay(pid){const p=PLAY_BY[pid];catFilter=cats.filter(c=>(c.plays||[]).includes(pid)).map(c=>c.id);hotFilter=null;fTxt.value='';render();
-    clear(detailPane);detailPane.append(playBrief(pid));
+  function goPlay(pid){pushNav();const p=PLAY_BY[pid];catFilter=cats.filter(c=>(c.plays||[]).includes(pid)).map(c=>c.id);hotFilter=null;fTxt.value='';render();
+    clear(detailPane);detailPane.append(playBrief(pid));dv={kind:'play',id:pid};
     setNote(el('span',{},el('span',{class:'play play'+pid.split('-')[1].toLowerCase()},'Play '+pid.split('-')[1].toUpperCase()),' ',el('b',{},p?p.name:''),' — '+catFilter.length+T(' categories · brief on the right',' 個類別 · 右側簡報')));scrollToPanes();}
   function catRow(c){const r=el('div',{class:'trow','data-id':c.id});
     r.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
     r.append(el('span',{class:'tname'},nm(c)));
     r.append(el('span',{class:'tby '+BUYER_C[c.primary_buyer],title:c.primary_buyer}));
-    r.onclick=()=>showDetail(c);return r;}
+    r.onclick=()=>viewCat(c);return r;}
   function l2into(body,list){[['ai',T('AI-driven','AI 驅動')],['no',T('No-AI','非 AI')]].forEach(([ak,alab])=>{
     const sub=list.filter(c=>ak==='ai'?isAI(c):!isAI(c));if(!sub.length)return;
     body.append(el('div',{class:'tsub'},alab+' · '+sub.length));
@@ -658,7 +673,7 @@ function renderTaxonomy(){
     sb.oninput=()=>{fTxt.value=sb.value;catFilter=null;hotFilter=null;render();};
     box.append(sb);
     const note=el('div',{class:'hnote'});box.append(note);
-    const openDoor=(labelNode,ids,brief)=>{catFilter=ids;hotFilter=null;fTxt.value='';render();
+    const openDoor=(labelNode,ids,brief)=>{pushNav();catFilter=ids;hotFilter=null;fTxt.value='';render();
       clear(note);if(labelNode)note.append(labelNode);
       if(brief){selected=null;clear(detailPane);detailPane.append(brief);}
       const tp=document.getElementById('twopane');if(tp)tp.scrollIntoView({behavior:'smooth',block:'start'});};

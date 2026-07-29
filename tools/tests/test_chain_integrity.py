@@ -855,6 +855,16 @@ class TestAppGuidance(unittest.TestCase):
                     "Serialization", "Cloud repatriation", "Plant modernization"):
             self.assertIn(sig, self.html, f"trigger '{sig}' must be present")
 
+    def test_back_navigation_exists(self):
+        """v3.6: every drill-down (door -> brief -> battle card, chip -> chip) is
+        reversible — a Back button pops a nav stack of {catFilter, detail-view} and
+        restores the prior view."""
+        for marker in ("navStack", "function goBack(", "function pushNav(",
+                       "function viewCat(", "class:'backbtn'"):
+            self.assertIn(marker, self.html, f"back-navigation missing '{marker}'")
+        # the pushing navigations are wired
+        self.assertIn("function applyDv(", self.html, "back must restore the detail view by kind")
+
     def test_vendor_market_share_drawer_with_proportional_bars(self):
         """v3.5: the category vendor list is a collapsible drawer; each vendor gets a
         proportional market-share bar from a cited number (market_share_pct) or 'n/a'.
