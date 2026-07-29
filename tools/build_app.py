@@ -192,6 +192,38 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .farrow{color:var(--muted);font-weight:700}
 .dsec{margin:14px 0}
 .dsec .dsh{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:4px}
+/* battle card: the actionable sell layer at the top of a category */
+.battle{border:1px solid var(--line);border-radius:9px;background:var(--accentbg);padding:8px 11px;margin:8px 0 4px}
+.brow{display:grid;grid-template-columns:108px 1fr;gap:10px;align-items:baseline;padding:4px 0}
+.brow+.brow{border-top:1px solid var(--line)}
+.blab{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--muted)}
+.bval{font-size:12.5px;line-height:1.45}
+.rarch{display:flex;flex-wrap:wrap;gap:5px}
+.raxx{font-size:11px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:1px 7px}
+.twrow{display:flex;flex-wrap:wrap;gap:4px 7px;align-items:baseline;padding:2px 0}
+.twrow .tsig{font-weight:600}
+.twrow .tact{color:var(--muted);font-size:11.5px}
+/* hunt launcher: the 4 doors into the battle card */
+.launch{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:4px 0 16px;background:var(--panel)}
+.launch h3{font-size:15px}
+.hsearch{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font-size:13px;margin:2px 0 8px;font-family:inherit}
+.hsearch:focus{outline:none;border-color:var(--accent)}
+.hnote{font-size:12px;color:var(--muted);margin:0 0 8px;background:var(--accentbg);border-radius:8px;padding:7px 10px;line-height:1.45}
+.hnote:empty{display:none}
+.hnote b{color:var(--ink)}
+.drow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:7px 0}
+.dlab{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);width:92px;flex:0 0 auto}
+.dchip{display:inline-flex;align-items:center;gap:5px;font-size:12px;border:1px solid var(--line);border-radius:20px;padding:4px 10px;background:var(--bg);color:var(--ink);cursor:pointer;font-family:inherit}
+.dchip:hover{border-color:var(--accent);background:var(--accentbg)}
+.dchip .dn{font-size:10px;color:var(--muted);font-weight:700}
+.hkey{margin-top:8px;border-top:1px solid var(--line);padding-top:6px}
+.hkey>summary{font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;list-style:none}
+.hkey>summary::-webkit-details-marker{display:none}
+.hkey>summary::before{content:"\25b8 ";color:var(--accent)}
+.hkey[open]>summary::before{content:"\25be "}
+.krow{font-size:12px;margin:5px 0;display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
+.kdot{width:9px;height:9px;border-radius:3px;flex:0 0 auto;position:relative;top:1px}
+.kdot.g-flag{background:var(--hw4)}.kdot.g-hot{background:var(--a)}.kdot.g-lead{background:var(--accent)}
 .dstep{display:flex;gap:8px;margin:3px 0;font-size:13px}
 .dstep b{color:var(--accent);flex:0 0 auto}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
@@ -390,7 +422,7 @@ function renderTaxonomy(){
   const resetSel=()=>{[fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';};
   // ---- toolbar: one segmented control to regroup all categories, + search ----
   const seg=el('div',{class:'seg'});
-  function setGroup(g){hotFilter=null;fGroup.value=g;[...seg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===g));render();}
+  function setGroup(g){hotFilter=null;catFilter=null;fGroup.value=g;[...seg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===g));render();}
   [['domain',T('care area','照護領域')],['primary_buyer',T('who buys','誰買硬體')],['stakeholder',T('who uses it','使用者')],
    ['ai',T('AI / no-AI','AI／非AI')],['play',T('play','打法')],['hardware_profile',T('hardware','硬體元件')]]
     .forEach(([g,lab])=>{const b=el('button',{'data-g':g},lab);b.onclick=()=>setGroup(g);seg.append(b);});
@@ -417,7 +449,7 @@ function renderTaxonomy(){
       labeled(T('hardware component','硬體元件'),fProfile),
       el('div',{style:'display:flex;align-items:flex-end'},fSpans))));
   const treePane=el('div',{class:'tree'}), detailPane=el('div',{class:'detail'});
-  root.append(el('div',{class:'twopane'},treePane,detailPane));
+  root.append(el('div',{class:'twopane',id:'twopane'},treePane,detailPane));
   let selected=null;
   const byOpp=(a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id);
   function showDetail(c){selected=c||null;clear(detailPane);
@@ -487,6 +519,25 @@ function renderTaxonomy(){
     cd.append(el('h3',{style:'margin:6px 0 0'},nm(c)));
     cd.append(el('div',{class:'zh'},sub(c)));
     if(c.name_full)cd.append(el('div',{class:'muted',style:'font-size:12px;margin-bottom:6px'},c.name_full));
+    // ---- battle card: the actionable sell layer (motion · reference arch · trigger→move) ----
+    const bc=el('div',{class:'battle'});
+    const brow=(lab,node)=>{const r=el('div',{class:'brow'});r.append(el('div',{class:'blab'},lab));const v=el('div',{class:'bval'});v.append(node);r.append(v);bc.append(r);};
+    const hb=c.hardware_buyer||[];
+    const motion=(hb.includes('customer')&&isHot(c))?T('Direct sale — the end org buys and runs its own iron.','直銷 — 終端機構自己採購並運行硬體。')
+      :hb.includes('operator')?T('Co-sell — an ISV / service operator runs the iron; sell through them.','共銷 — ISV／服務營運商運行硬體;透過他們賣。')
+      :hb.includes('oem')?T('OEM design-win — hardware embedded in a device; per-unit BOM.','OEM 設計導入 — 硬體嵌入裝置;按台計 BOM。')
+      :hb.includes('customer')?T('Direct sale (modest scale).','直銷(規模較小)。'):T('—','—');
+    brow(T('Your motion','你的打法'),el('span',{},motion+'  ('+c.primary_buyer+(pbP?'·'+pbP:'')+')'));
+    const ra=el('div',{class:'rarch'});
+    if((c.hardware_profile||[]).length)c.hardware_profile.forEach(h=>ra.append(el('span',{class:'raxx'},smciFam(h)+((c.hardware_profile_sizing||{})[h]?' · '+c.hardware_profile_sizing[h]:''))));
+    else ra.append(el('span',{class:'muted'},T('SaaS-light — little on-prem iron to sell.','SaaS 輕量 — 幾乎無地端硬體可賣。')));
+    brow(T('Reference arch','建議配置'),ra);
+    const trigs=(DATA.triggers.triggers||[]).filter(t=>(t.related_categories||[]).includes(c.id));
+    if(trigs.length){const tw=el('div',{});trigs.forEach(t=>{const row=el('div',{class:'twrow'});
+      row.append(el('span',{class:'u '+t.urgency,style:'font-size:10px;font-weight:700;text-transform:uppercase'},t.urgency));
+      row.append(el('span',{class:'tsig'},t.signal));row.append(el('span',{class:'tact'},'→ '+t.action));tw.append(row);});
+      brow(T('Trigger → move','盯訊號 → 動作'),tw);}
+    cd.append(bc);
     // ---- 6-tier hierarchy diagram (階級圖) ----
     const tiers=el('div',{class:'tiers6'});
     const tier=(lab,cont)=>{tiers.append(el('div',{class:'tier6'},el('div',{class:'tlab'},lab),el('div',{class:'tcont'},cont)));};
@@ -536,104 +587,56 @@ function renderTaxonomy(){
     ['other:data-analytics-payer-platforms',T('Data / Payer','資料／支付方')],
     ['other:medical-technology-device-software',T('MedTech','醫材軟體')]];
   const stakeKey=c=>c.home_stakeholder==='other'?('other:'+c.domain):c.home_stakeholder;
-  // ---- value master table: defines + links the 3 value signals, then a real
-  //      per-play opportunity matrix with market-product examples pulled from data ----
-  // pick a category's leading vendors: leaderboard-ranked first (AI board, then rank),
-  // drop names flagged as winding-down; also compute the rank-range badge.
-  function pipeVendors(c){
-    const ids=(c.vendors||[]).filter(id=>!/winding down/i.test(VNAME[id]||''));
-    const ranked=ids.filter(id=>LB_BY_VID[id]).map(id=>{const r=LB_BY_VID[id][0];return {id,ai:r.board==='ai',rank:r.rank};});
-    // surface the board that MATCHES this category first (AI and No-AI are peer sub-markets,
-    // not a quality order), then by rank; never assert AI>No-AI globally.
-    const wantAI=isAI(c);
-    ranked.sort((a,b)=>((a.ai===wantAI?0:1)-(b.ai===wantAI?0:1))||a.rank-b.rank);
-    const plain=ids.filter(id=>!LB_BY_VID[id]);
-    const order=[...ranked.map(r=>r.id),...plain];
-    let badge=null;
-    if(ranked.length){const ai=ranked.filter(r=>r.ai).map(r=>r.rank),no=ranked.filter(r=>!r.ai).map(r=>r.rank);const parts=[];
-      if(ai.length)parts.push('AI #'+Math.min(...ai)+(ai.length>1?'–'+Math.max(...ai):''));
-      if(no.length)parts.push('No-AI #'+Math.min(...no)+(no.length>1?'–'+Math.max(...no):''));badge=parts.join(' · ');}
-    return {ids:order.slice(0,4),badge};
-  }
+  // ---- hunt launcher: four doors (search · product line · trigger · play),
+  //      every door filters the tree and lands on the category's battle card ----
   function masterTable(){
-    const box=el('div',{class:'master'});
-    const fl=cats.filter(isFlag).length,ho=cats.filter(isHot).length,nv=(DATA.vendors.vendors||[]).length;
-    const lbd=DATA.leaderboards&&DATA.leaderboards.leaderboards;const nl=lbd?(lbd.ai.entries.length+lbd.no_ai.entries.length):0;
-    box.append(el('div',{class:'row',style:'justify-content:space-between;align-items:baseline'},
-      el('h3',{style:'margin:0'},T('Opportunity master — where the money is, and who to sell it with','價值總表 — 錢在哪、跟誰一起賣')),
-      el('span',{class:'muted',style:'font-size:12px'},cats.length+T(' categories · ',' 類 · ')+nv+T(' vendors',' 廠商'))));
-    // ---- legend: define each signal, its level, and the sales question it answers ----
-    const SIG=[
-      {cls:'g-flag',n:fl,label:T('flagship','旗艦'),lv:T('software category · size','軟體類別 · 大小'),
-       def:T('The biggest SMCI deal this category can pull — hardware opportunity 4/4 (the top score across all buyers). The servers vary by category; it sizes the deal but does not say who buys.','該類別能拉動的最大 SMCI 單 — 硬體機會 4/4(跨所有買方的最高分)。用哪種伺服器視類別而定;它衡量單子大小,但不代表誰買。'),
-       q:T('How big is the biggest deal?','最大的單多大?')},
-      {cls:'g-hot',n:ho,label:T('customer-HOT','客戶-HOT'),lv:T('software category · buyer','軟體類別 · 買方'),
-       def:T('The §3 gate answered “customer” — the end org runs its own iron, a direct SMCI sale — at significant size (customer score ≥3). One of three gate answers (customer / operator / OEM).','§3 閘門答案為「客戶」— 終端機構自建機房、SMCI 直銷 — 且規模顯著(客戶分 ≥3)。三種閘門答案之一(客戶／營運商／OEM)。'),
-       q:T('Is it a direct sale?','是直銷嗎?')},
-      {cls:'g-lead',n:nl,label:T('market leader','市場領導者'),lv:T('vendor · standing','廠商 · 地位'),
-       def:T('The vendor serving this category holds a ranked slot on a market leaderboard (AI or No-AI) — it already owns the account. The motion (co-sell / OEM / direct) still depends on the category’s buyer.','服務該類別的廠商在市場榜單(AI 或 No-AI)有名次 — 已握有客戶。實際打法(共銷／OEM／直銷)仍取決於類別的買方。'),
-       q:T('Which software vendor do I go through?','透過哪家軟體廠商?')},
-    ];
-    const leg=el('div',{class:'mlegend'});
-    SIG.forEach(s=>{const cc=el('div',{class:'mleg '+s.cls});
-      cc.append(el('div',{class:'lh'},el('span',{class:'ln'},String(s.n)),el('span',{class:'llab'},s.label),el('span',{class:'lv'},s.lv)));
-      cc.append(el('div',{class:'ld'},s.def));cc.append(el('div',{class:'lq'},s.q));leg.append(cc);});
-    box.append(leg);
-    // nesting is derived, never hardcoded: in the data flagship is the top slice of customer-HOT.
-    const fnh=cats.filter(c=>isFlag(c)&&!isHot(c)).length;
-    const nest=fnh===0
-      ? T('Flagship is the top tier of customer-HOT: every flagship category here is also a direct sale — flagship just marks the biggest of them.','旗艦是客戶-HOT 的最高層:此處每個旗艦類別同時也是直銷 — 旗艦只是標示其中最大的。')
-      : T('Flagship sizes the deal; customer-HOT confirms it is direct — '+fnh+' flagship not direct.','旗艦衡量單子大小;客戶-HOT 確認是否直銷 — 有 '+fnh+' 個旗艦非直銷。');
-    box.append(el('div',{class:'mpath'},
-      T('Read it as a chain: pick a ','當一條鏈讀:選一個 '),el('b',{},'Play'),
-      T(' (a hardware bet) → its ','(硬體賭注)→ 其 '),el('b',{},T('flagship','旗艦')),
-      T(' categories show where the biggest boxes are, the ','類別顯示最大的機箱在哪,'),el('b',{},T('customer-HOT','客戶-HOT')),
-      T(' ones which are direct sales → ','類別顯示哪些是直銷 → '),el('b',{},T('market-leader','市場領導者')),
-      T(' vendors show who already owns each account. ','廠商顯示誰已握有客戶。'),nest));
-    // ---- per-play opportunity matrix: real categories -> real market products ----
-    DATA.plays.plays.forEach(p=>{
-      const letter=p.id.split('-')[1].toUpperCase();
-      const mem=cats.filter(c=>(c.plays||[]).includes(p.id));
-      const flags=mem.filter(isFlag);
-      const rowsCats=(flags.length?flags:mem.filter(isHot).sort((a,b)=>(b.hardware_opportunity_by_buyer.customer||0)-(a.hardware_opportunity_by_buyer.customer||0)).slice(0,3));
-      const nf=flags.length,nh=mem.filter(isHot).length;
-      const hh=el('div',{class:'play-h'});
-      hh.append(el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),el('span',{class:'pl'},p.name),
-        el('span',{class:'ps'},(nf?nf+T(' flagship · ',' 旗艦 · '):'')+nh+T(' customer-direct','個直銷')));
-      box.append(hh);
-      const tbl=el('div',{class:'ptbl'});
-      tbl.append(el('div',{class:'ph'},T('Software category','軟體類別')),
-        el('div',{class:'ph'},T('Leading products in this market','此市場的領導產品')),
-        el('div',{class:'ph',style:'text-align:right'},T('Market-leader rank','領導者名次')));
-      rowsCats.forEach((c,i)=>{const last=i===rowsCats.length-1?' last':'';
-        const c1=el('div',{class:'pc'+last});const nmS=el('span',{class:'pcat'},nm(c));nmS.onclick=()=>showDetail(c);c1.append(nmS);
-        if(isFlag(c))c1.append(el('span',{class:'cb f'},T('flagship','旗艦')));
-        if(isHot(c))c1.append(el('span',{class:'cb h'},T('direct','直銷')));
-        const pv=pipeVendors(c);const c2=el('div',{class:'pc pven'+last});
-        pv.ids.forEach((id,j)=>{if(j)c2.append(document.createTextNode(' · '));const v=el('b',{style:'cursor:pointer'},VNAME[id]||id);v.onclick=()=>goVendor(id);c2.append(v);});
-        if(!pv.ids.length)c2.append(document.createTextNode('—'));
-        const c3=el('div',{class:'pc prank'+last});
-        if(pv.badge)c3.append(el('span',{class:'rb'},pv.badge));else c3.append(el('span',{class:'rn'},'—'));
-        tbl.append(c1,c2,c3);});
-      box.append(tbl);
-    });
-    box.append(el('div',{class:'mpath',style:'background:none;padding:6px 2px;margin-top:4px'},
-      T('“—” = this market is not covered by the AI / No-AI leaderboards, so leadership is not ranked here — the products shown are still their market’s leaders. Click a category for the full stack, a product to open its vendor.','“—” = 此市場不在 AI／No-AI 榜單涵蓋範圍,故此處未排名 — 所列產品仍是該市場的領導者。點類別看完整堆疊,點產品開廠商。')));
-    // ---- secondary rollups (collapsible) ----
-    const mrow=(label,vv,onclick,extra)=>{const r=el('div',{class:'mrow'});if(onclick){r.style.cursor='pointer';r.onclick=onclick;}
-      r.append(el('span',{class:'mlabel'},label));const b=el('span',{class:'mbadges'});valBadges(vv,b);r.append(b);if(extra)r.append(extra);return r;};
-    const msec=(title,rows,open)=>{const d=el('details',{class:'msec'});if(open)d.setAttribute('open','');d.append(el('summary',{},title));rows.forEach(r=>d.append(r));box.append(d);};
-    const dm={};cats.forEach(c=>{(dm[c.domain]=dm[c.domain]||[]).push(c);});
-    msec(T('Opportunity by care area','機會(依領域)'),Object.keys(dm).map(k=>[k,catsVal(dm[k].map(c=>c.id))]).sort((a,b)=>b[1].flag-a[1].flag||b[1].hot-a[1].hot).slice(0,5).map(([k,vv])=>mrow(domLabel(k),vv,()=>setGroup('domain'))));
-    msec(T('Top vendors to work','值得經營的廠商'),(DATA.vendors.vendors||[]).map(v=>[v,vendorVal(v)]).sort((a,b)=>b[1].flag-a[1].flag||b[1].hot-a[1].hot).slice(0,6).map(([v,vv])=>{const lbb=lbBadge(v.id);return mrow(v.name,vv,()=>goVendor(v.id),lbb?el('span',{class:'pill lead'},lbb):null);}));
-    msec(T('Hot signals — open most flagship','急迫訊號 — 開最多旗艦'),DATA.triggers.triggers.map(x=>[x,catsVal(x.related_categories)]).sort((a,b)=>b[1].flag-a[1].flag||b[1].hot-a[1].hot).slice(0,5).map(([x,vv])=>mrow(x.signal,vv,()=>goTab('method'))));
+    const box=el('div',{class:'launch'});
+    box.append(el('div',{class:'row',style:'justify-content:space-between;align-items:baseline;margin-bottom:2px'},
+      el('h3',{style:'margin:0'},T('Start the hunt — pick a door','開始獵單 — 選一道門')),
+      el('span',{class:'muted',style:'font-size:12px'},cats.length+T(' categories · ',' 類 · ')+(DATA.vendors.vendors||[]).length+T(' vendors',' 廠商'))));
+    box.append(el('div',{class:'muted',style:'font-size:12px;margin:0 0 8px'},T('Search, or start from a Supermicro product line, a trigger, or a play. Every door opens the category’s battle card — your motion, the reference architecture to pitch, and the trigger to act on.','搜尋,或從 Supermicro 產品線、觸發訊號、或打法開始。每道門都打開該類別的戰卡 — 你的打法、要提的建議配置、該盯的訊號。')));
+    // door: search (proxies the toolbar search)
+    const sb=el('input',{class:'hsearch',type:'search',placeholder:T('Search a category, vendor, or SMCI box — “digital pathology” · “Sectra” · “GPU”…','搜尋類別、廠商、或 SMCI 硬體 —「數位病理」·「Sectra」·「GPU」…')});
+    sb.oninput=()=>{fTxt.value=sb.value;catFilter=null;hotFilter=null;render();};
+    box.append(sb);
+    const note=el('div',{class:'hnote'});box.append(note);
+    const openDoor=(labelNode,ids)=>{catFilter=ids;hotFilter=null;fTxt.value='';render();
+      clear(note);if(labelNode)note.append(labelNode);
+      const tp=document.getElementById('twopane');if(tp)tp.scrollIntoView({behavior:'smooth',block:'start'});};
+    const URANK={critical:0,high:1,medium:2,low:3};
+    // door: SMCI product line (facet 1)
+    const hrow=el('div',{class:'drow'});hrow.append(el('span',{class:'dlab'},T('Product line','產品線')));
+    Object.keys(SMCI_FAMILY).forEach(h=>{const ids=cats.filter(c=>(c.hardware_profile||[]).includes(h)).map(c=>c.id);if(!ids.length)return;
+      const chip=el('button',{class:'dchip'},smciFam(h)+' ',el('span',{class:'dn'},String(ids.length)));
+      chip.onclick=()=>openDoor(el('span',{},el('b',{},smciFam(h)),T(' — '+ids.length+' categories pull this box. Open one for the reference architecture.',' — '+ids.length+' 個類別拉動此機箱。點一個看建議配置。')),ids);hrow.append(chip);});
+    box.append(hrow);
+    // door: trigger (facet 3) — signal -> affected markets -> the action
+    const trow=el('div',{class:'drow'});trow.append(el('span',{class:'dlab'},T('Trigger','觸發訊號')));
+    (DATA.triggers.triggers||[]).slice().sort((a,b)=>URANK[a.urgency]-URANK[b.urgency]).forEach(t=>{
+      const ids=(t.related_categories||[]);const chip=el('button',{class:'dchip'},el('span',{class:'u '+t.urgency,style:'font-weight:700'},'●'),' '+t.signal);
+      chip.onclick=()=>openDoor(el('span',{},el('span',{class:'u '+t.urgency,style:'font-weight:700;text-transform:uppercase'},t.urgency+' · '),el('b',{},t.signal),'  → '+t.action),ids);trow.append(chip);});
+    box.append(trow);
+    // door: play
+    const prow=el('div',{class:'drow'});prow.append(el('span',{class:'dlab'},T('Play','打法')));
+    DATA.plays.plays.forEach(p=>{const letter=p.id.split('-')[1].toUpperCase();const ids=cats.filter(c=>(c.plays||[]).includes(p.id)).map(c=>c.id);
+      const chip=el('button',{class:'dchip'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),' '+p.name+' ',el('span',{class:'dn'},String(ids.length)));
+      chip.onclick=()=>openDoor(el('span',{},el('b',{},'Play '+letter+' · '+p.name),' — '+ids.length+T(' categories','個類別')),ids);prow.append(chip);});
+    box.append(prow);
+    // folded signal key — definitions preserved, no longer the dominant surface
+    const key=el('details',{class:'hkey'});key.append(el('summary',{},T('What do flagship / customer-HOT / market-leader mean?','旗艦／客戶-HOT／市場領導者是什麼意思?')));
+    [['g-flag',T('flagship','旗艦'),T('the biggest SMCI box the category pulls (opportunity 4/4) — how big the deal is.','該類別拉動的最大 SMCI 機箱(機會 4/4)— 單子多大。')],
+     ['g-hot',T('customer-HOT','客戶-HOT'),T('the end org buys and runs its own iron — a direct sale (§3 gate = customer, ≥3).','終端機構自己買鐵、自建機房 — 直銷(§3 閘門=客戶,≥3)。')],
+     ['g-lead',T('market leader','市場領導者'),T('the vendor is ranked on the AI / No-AI leaderboard — it already owns the account.','廠商在 AI／No-AI 榜有名次 — 已握有客戶。')]
+    ].forEach(([cls,lab,def])=>key.append(el('div',{class:'krow'},el('span',{class:'kdot '+cls}),el('b',{},lab),el('span',{class:'muted'},' — '+def))));
+    box.append(key);
     root.append(box);
   }
-  let hotFilter=null;
+  let hotFilter=null, catFilter=null;
   function render(){
     const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg2=fSeg.value,pl=fPlay.value,dep=fDep.value,
           hw=+fHw.value||0,prof=fProfile.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
     const shown=cats.filter(c=>{
+      if(catFilter&&!catFilter.includes(c.id))return false;
       if(hotFilter&&(c.hardware_opportunity_by_buyer[hotFilter.buyer]||0)<hotFilter.min)return false;
       if(by&&!c.hardware_buyer.includes(by))return false;
       if(prof&&!(c.hardware_profile||[]).includes(prof))return false;
@@ -662,12 +665,12 @@ function renderTaxonomy(){
     const keep=selected&&shown.find(c=>c.id===selected.id);
     showDetail(keep||shown[0]||null);
   }
-  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;render();});
-  window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};
+  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;catFilter=null;render();});
+  window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};catFilter=null;
     [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';
     fGroup.value='domain';[...seg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.g==='domain'));
     render();window.scrollTo(0,0);};
-  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};setGroup('domain');
+  fSpansBox.onchange=()=>{hotFilter=null;catFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;catFilter=null;render();};setGroup('domain');
 }
 
 // ================= VENDORS (enriched registry) =================

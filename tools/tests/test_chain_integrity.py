@@ -773,43 +773,42 @@ class TestAppGuidance(unittest.TestCase):
         self.assertNotIn("A trigger fired", self.html,
                          "misleading 'trigger fired' label implies CRM state it does not have")
 
-    def test_opportunity_master_table_fuses_value_signals(self):
-        """v3.1: the master table DEFINES + LINKS the 3 value signals in a legend,
-        then a per-play opportunity matrix pairs real market products (pulled live
-        from the vendor registry) with the market-leader rank. Secondary rollups
-        stay collapsible."""
-        self.assertIn("function masterTable(", self.html, "the master table must exist")
-        self.assertIn("Opportunity master", self.html)
-        self.assertIn("價值總表", self.html)
-        # legend: each of the 3 signals is DEFINED with the sales question it answers
-        for q in ("How big is the biggest deal?", "Is it a direct sale?",
-                  "Which software vendor do I go through?"):
-            self.assertIn(q, self.html, f"legend missing signal definition/question '{q}'")
-        # the level split is exposed (2 category signals, 1 vendor signal) — this is the linkage
-        self.assertIn("Read it as a chain", self.html, "the 3 signals must be linked by a read-path")
-        # real market products are pulled from data, never hardcoded in code
-        self.assertIn("function pipeVendors(", self.html, "example products must be data-driven")
-        for h in ("Leading products in this market", "Market-leader rank"):
-            self.assertIn(h, self.html, f"opportunity matrix missing column '{h}'")
-        # secondary rollups survive
-        for section in ("Opportunity by care area", "Top vendors to work", "Hot signals"):
-            self.assertIn(section, self.html, f"master table missing rollup '{section}'")
+    def test_explore_top_is_an_active_hunt_launcher_not_a_passive_summary(self):
+        """v3.2: the passive summary dashboard is replaced by an ACTIVE launcher with
+        four doors (search · SMCI product line · trigger · play). Each door filters the
+        category tree (catFilter) and lands on the battle card — no read-only poster."""
+        self.assertIn("Start the hunt", self.html, "the launcher must front the four hunt doors")
+        self.assertIn("class:'hsearch'", self.html, "door 4: a search box")
+        for door in ("Product line", "Trigger", "Play"):
+            self.assertIn(door, self.html, f"missing hunt door '{door}'")
+        # doors drive a real filter that the tree respects, then scroll to the battle card
+        self.assertIn("catFilter", self.html, "doors must drive a category filter")
+        self.assertIn("getElementById('twopane')", self.html, "a door must land on the tree + battle card")
+        # the signal definitions survive (folded key), not lost in the reshape
+        for label in ("What do flagship / customer-HOT / market-leader mean?",):
+            self.assertIn(label, self.html, "the 3-signal definitions must remain available")
 
-    def test_master_table_does_not_conflate_leaderboard_with_cosell_motion(self):
+    def test_battle_card_is_an_actionable_sell_layer(self):
+        """v3.2: the category detail pane leads with a battle card — the seller's motion,
+        the SMCI reference architecture to pitch, and the trigger→action to act on —
+        pulled from data (hardware_profile → SMCI family; triggers reverse-looked-up)."""
+        self.assertIn("class:'battle'", self.html, "detail pane must carry the battle-card sell layer")
+        for row in ("Your motion", "Reference arch", "Trigger → move"):
+            self.assertIn(row, self.html, f"battle card missing row '{row}'")
+        # reference architecture is the SMCI family map, not free text
+        self.assertIn("smciFam(h)", self.html, "reference architecture must render the SMCI server family")
+        # triggers are reverse-looked-up by category, not hardcoded
+        self.assertIn("related_categories||[]).includes(c.id)", self.html,
+                      "trigger-to-watch must be derived from the category's triggers")
+
+    def test_detail_does_not_conflate_leaderboard_with_cosell_motion(self):
         """codex-lens finding: leaderboard rank is a VENDOR standing signal, not the
         co-sell MOTION (which is set by hardware_buyer). The old 'co-sell' label on
         every ranked-vendor list wrongly implied the motion; it must be motion-neutral."""
         self.assertNotIn("服務本類的市場領導者 — 共銷", self.html,
                          "detail-pane must not label ranked vendors 'co-sell' (motion-conflation)")
         self.assertNotIn("Co-sell rank", self.html,
-                         "the matrix rank column must be motion-neutral, not 'Co-sell rank'")
-
-    def test_flagship_not_direct_nesting_is_derived_not_hardcoded(self):
-        """mutual-distinctness lens: flagship is (currently) a strict subset of
-        customer-direct. The read-path states this from a live count, so it can never
-        silently go stale if the data changes (TUo Brain #4)."""
-        self.assertIn("isFlag(c)&&!isHot(c)", self.html,
-                      "the flagship-vs-direct nesting claim must be computed from data, not hardcoded")
+                         "no rank column may be labelled 'Co-sell rank' (motion-conflation)")
 
 
 class TestWorkloadEnvelope(unittest.TestCase):
