@@ -689,16 +689,15 @@ class TestAppGuidance(unittest.TestCase):
                        capture_output=True, text=True, timeout=60)
         cls.html = (REPO / "app" / "index.html").read_text(encoding="utf-8")
 
-    def test_default_tab_is_home(self):
-        """The guided Home funnel is the landing tab, not the 8-filter grid."""
-        self.assertIn('class="tab on" id="tab-home"', self.html,
-                      "Home must be the default-active tab (id=tab-home, class 'tab on')")
-        # the old filter grid must NOT be the default-on tab
-        self.assertNotIn('class="tab on" id="tab-taxonomy"', self.html,
-                         "Taxonomy/Explore filter grid must not be the landing tab")
+    def test_default_tab_is_unified_explore(self):
+        """Home folded into Explore: the unified universe (id=tab-taxonomy) is the
+        landing tab; there is no separate Home tab."""
+        self.assertIn('class="tab on" id="tab-taxonomy"', self.html,
+                      "the unified Explore must be the default-active landing tab")
+        self.assertNotIn('id="tab-home"', self.html, "the separate Home tab must be gone")
 
-    def test_home_registered_first_in_nav(self):
-        self.assertIn("const TABS=[['home',", self.html, "Home must be first in TABS")
+    def test_unified_explore_registered_first_in_nav(self):
+        self.assertIn("const TABS=[['taxonomy',", self.html, "the unified Explore must be first in TABS")
 
     def test_home_surfaces_the_three_plays(self):
         for name in ("Medical Imaging", "Genomics", "GMP Manufacturing"):

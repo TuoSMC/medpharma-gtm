@@ -105,6 +105,7 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .rollup b{color:var(--ink)}
 .ckbox{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 9px}
 .grouphdr{font-size:13px;font-weight:700;margin:18px 0 8px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.subhdr{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:10px 0 6px}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
 .play{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
 .playa{background:var(--a)}.playb{background:var(--b)}.playc{background:var(--c)}
@@ -178,8 +179,7 @@ tr:last-child td{border-bottom:0}
 </header>
 <nav id="nav"></nav>
 <main>
-  <section class="tab on" id="tab-home"></section>
-  <section class="tab" id="tab-taxonomy"></section>
+  <section class="tab on" id="tab-taxonomy"></section>
   <section class="tab" id="tab-hunt"></section>
   <section class="tab" id="tab-plays"></section>
   <section class="tab" id="tab-triggers"></section>
@@ -228,7 +228,7 @@ $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.st
 $('#built').textContent='Rendered from /data — '+DATA.built+' · '+DATA.taxonomy.categories.length+' categories · '+DATA.plays.plays.length+' plays · '+DATA.triggers.triggers.length+' triggers · '+DATA.accounts.length+' accounts';
 
 // ---- tabs ----
-const TABS=[['home','Home'],['taxonomy','Explore'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors'],['leaderboards','Leaderboards']];
+const TABS=[['taxonomy','Explore'],['hunt','Hunt'],['plays','Plays'],['triggers','Triggers'],['scoring','Scoring'],['accounts','Accounts'],['vendors','Vendors'],['leaderboards','Leaderboards']];
 const nav=$('#nav');
 const NAVBTN={};
 function goTab(id,opts){opts=opts||{};
@@ -257,43 +257,15 @@ function scoreAccount(acc){
 }
 function tierColor(name){return {'Active pursuit':'var(--a)','Nurture / partner-led':'var(--u-med)','Monitor':'var(--u-low)','Drop':'var(--u-crit)'}[name]||'var(--muted)';}
 
-// ================= HOME (software universe by point-of-care stakeholder x AI) =================
+// isAI: derived AI/no-AI flag (role/modality/gpu) — used by the stakeholder view.
 const isAI=c=>(c.role||[]).includes('analytics-artificial-intelligence')||(c.data_modality||[]).includes('artificial-intelligence-models')||(c.hardware_profile||[]).includes('gpu-server');
-function renderHome(){
-  const root=$('#tab-home'); clear(root);
-  const cats=DATA.taxonomy.categories;
-  const hero=el('div',{class:'hero'});
-  hero.append(el('h2',{},T('Who uses the software?','誰在用這些軟體?')));
-  hero.append(el('p',{},T('The software universe by point-of-care stakeholder — each split AI-driven vs conventional (for now). Click a category to open it in Explore; hunt by hardware buyer & play there.','以照護現場的使用者切分軟體宇宙 — 每格再分 AI 驅動 vs 傳統(暫定)。點類別到 Explore 開啟;在那裡依硬體買家與 play 狩獵。')));
-  root.append(hero);
-  const lbLink=el('div',{class:'go',style:'cursor:pointer;margin:2px 0 14px'},T('See the market leaderboards — who leads AI vs conventional →','看市場榜單 — AI 對傳統誰領先 →'));lbLink.onclick=()=>goTab('leaderboards');root.append(lbLink);
-  const GROUPS=[['facility',T('Facility','設施')],['doctor',T('Doctor','醫生')],
-                ['nurse',T('Nurse','護理')],['patient',T('Patient','病人')],['other',T('Others','其他')]];
-  const openCat=c=>{goTab('taxonomy');const ft=$('#fTxt');if(ft){ft.value=c.name_en;ft.dispatchEvent(new Event('input'));}};
-  GROUPS.forEach(([key,label])=>{
-    const members=cats.filter(c=>c.home_stakeholder===key);
-    if(!members.length)return;
-    const ai=members.filter(isAI), noai=members.filter(c=>!isAI(c));
-    root.append(el('div',{class:'section-title'},label+' · '+members.length+'  ('+T('AI','AI')+' '+ai.length+' · '+T('No-AI','非 AI')+' '+noai.length+')'));
-    const grid=el('div',{class:'tiles'});
-    [[T('AI-driven','AI 驅動'),ai,'playa'],[T('No-AI','非 AI'),noai,'playc']].forEach(([sub,list,cls])=>{
-      const col=el('div',{class:'tile'});
-      col.append(el('div',{class:'row'},el('span',{class:'play '+cls},sub),el('b',{},String(list.length))));
-      list.slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(c=>{
-        const row=el('div',{class:'cat',style:'cursor:pointer'},el('span',{},nm(c)),el('b',{title:'hardware opportunity'},'hw·'+c.hardware_opportunity));
-        row.onclick=()=>openCat(c); col.append(row);
-      });
-      if(!list.length)col.append(el('div',{class:'muted',style:'font-size:12px;padding:4px 0'},'—'));
-      grid.append(col);
-    });
-    root.append(grid);
-  });
-  const ex=el('div',{class:'go',style:'cursor:pointer;margin-top:18px'},T('Or hunt by hardware buyer & play in Explore / Hunt →','或到 Explore / Hunt 依硬體買家與 play 狩獵 →'));ex.onclick=()=>goTab('taxonomy');root.append(ex);
-}
 
-// ================= TAXONOMY =================
+// ================= EXPLORE (unified universe: Home's stakeholder view folded in) =================
 function renderTaxonomy(){
   const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy'); clear(root);
+  root.append(el('h2',{style:'margin:2px 0 4px'},T('The medical / pharma software universe','醫療／藥廠軟體宇宙')));
+  root.append(el('p',{class:'muted',style:'margin:0 0 8px;font-size:13px'},T('All '+cats.length+' categories — grouped by who uses them (default), or by any axis. Filter, jump to high-opportunity targets, or search.','全部 '+cats.length+' 類 — 預設依「誰使用」分組,也可換任何軸。可篩選、跳高機會目標、或搜尋。')));
+  const lbl=el('div',{class:'go',style:'cursor:pointer;margin:0 0 10px'},T('See the market leaderboards — who leads AI vs conventional →','看市場榜單 — AI 對傳統誰領先 →'));lbl.onclick=()=>goTab('leaderboards');root.append(lbl);
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
     opts.forEach(o=>s.append(el('option',{value:o},o)));return s;};
   const fBuyer=mk('fBuyer',['customer','operator','original-equipment-manufacturer','hyperscaler'],'all buyers'),
@@ -303,7 +275,7 @@ function renderTaxonomy(){
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'opportunity ≥'),
         fProfile=mk('fProfile',['gpu-server','high-performance-computing-cpu','nvme-performance-storage','capacity-archive-storage','high-memory','edge-industrial','high-availability-redundant','disaster-recovery-backup'],'all hardware'),
-        fGroup=mk('fGroup',['domain','primary_buyer','hardware_buyer','hardware_opportunity','hardware_profile','play','segment','data_modality','role','bucket'],'no grouping'),
+        fGroup={value:''},
         fSpansBox=el('input',{type:'checkbox'}),
         fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
@@ -315,8 +287,9 @@ function renderTaxonomy(){
   // ---- toolbar: one segmented control to regroup all categories, + search ----
   const seg=el('div',{class:'seg'});
   function setGroup(g){hotFilter=null;fGroup.value=g;[...seg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===g));render();}
-  [['domain',T('care area','照護領域')],['primary_buyer',T('who buys','誰買')],['play','Play'],
-   ['hardware_profile',T('hardware','硬體')],['data_modality',T('data','資料')],['',T('flat','平舖')]]
+  [['stakeholder',T('who uses it','使用者')],['domain',T('care area','照護領域')],['primary_buyer',T('who buys','誰買')],
+   ['ai',T('AI / no-AI','AI／非AI')],['play','Play'],['hardware_profile',T('hardware','硬體')],
+   ['data_modality',T('data','資料')],['',T('flat','平舖')]]
     .forEach(([g,lab])=>{const b=el('button',{'data-g':g},lab);b.onclick=()=>setGroup(g);seg.append(b);});
   fTxt.placeholder=T('search…','搜尋…');
   const tb=el('div',{class:'toolbar'});
@@ -379,7 +352,29 @@ function renderTaxonomy(){
     if(axis==='play')return (c.plays&&c.plays.length)?c.plays.slice():['(no play)'];
     if(axis==='hardware_profile')return (c.hardware_profile&&c.hardware_profile.length)?c.hardware_profile.slice():['(no hardware)'];
     if(axis==='domain')return [c.domain];
+    if(axis==='ai')return [isAI(c)?T('AI-driven','AI 驅動'):T('No-AI','非 AI')];
     return (c[axis]||[]).slice();
+  }
+  // ---- stakeholder view: WHO uses the software (Home's axis, folded in) ----
+  // L1 = point-of-care stakeholder; the non-hospital "other" bucket is split by
+  // care domain so it is not a 30-item dump. L2 = AI-driven / No-AI.
+  const STAKE=[['facility',T('Facility','設施')],['doctor',T('Doctor','醫生')],['nurse',T('Nurse','護理')],['patient',T('Patient','病人')],
+    ['other:pharmaceutical-research-clinical-development',T('R&D / Pharma','研發／藥廠')],
+    ['other:manufacturing-quality-supply-chain',T('Manufacturing','製造')],
+    ['other:diagnostics-laboratory',T('Lab','實驗室')],
+    ['other:data-analytics-payer-platforms',T('Data / Payer','資料／支付方')],
+    ['other:medical-technology-device-software',T('MedTech','醫材軟體')]];
+  const stakeKey=c=>c.home_stakeholder==='other'?('other:'+c.domain):c.home_stakeholder;
+  function renderStake(shown){
+    STAKE.forEach(([k,lab])=>{
+      const mem=shown.filter(c=>stakeKey(c)===k); if(!mem.length)return;
+      host.append(el('div',{class:'grouphdr'},lab,el('span',{class:'gcount'},String(mem.length))));
+      [['ai',T('AI-driven','AI 驅動')],['no',T('No-AI','非 AI')]].forEach(([ak,alab])=>{
+        const subm=mem.filter(c=>ak==='ai'?isAI(c):!isAI(c)); if(!subm.length)return;
+        host.append(el('div',{class:'subhdr'},alab+' · '+subm.length));
+        const grid=el('div',{class:'grid'});subm.slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(c=>grid.append(card(c)));host.append(grid);
+      });
+    });
   }
   let hotFilter=null;
   function render(){
@@ -401,6 +396,7 @@ function renderTaxonomy(){
     clear(host);
     cnt.textContent=shown.length+' / '+cats.length+' shown'+(hotFilter?' · HOT_'+hotFilter.buyer+' (opp≥'+hotFilter.min+')':(gp?' · grouped by '+gp:''));
     if(!gp){const grid=el('div',{class:'grid'});shown.forEach(c=>grid.append(card(c)));host.append(grid);return;}
+    if(gp==='stakeholder'){renderStake(shown);return;}
     const map=new Map();
     shown.forEach(c=>groupsOf(c,gp).forEach(k=>{if(!map.has(k))map.set(k,[]);map.get(k).push(c);}));
     let keys=[...map.keys()];
@@ -414,7 +410,7 @@ function renderTaxonomy(){
   }
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;render();});
   window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};fBuyer.value='';fBucket.value='';fSeg.value='';fPlay.value='';fDep.value='';fHw.value='';fProfile.value='';fSpansBox.checked=false;fTxt.value='';fGroup.value='';render();window.scrollTo(0,0);};
-  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};setGroup('domain');
+  fSpansBox.onchange=()=>{hotFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;render();};setGroup('stakeholder');
 }
 
 // ================= HUNT (per-play ranked target map) =================
@@ -634,9 +630,9 @@ function renderLeaderboards(){
 }
 
 // ================= i18n wiring: render all tabs + language toggle =================
-const TAB_ZH={home:'首頁',taxonomy:'探索',hunt:'獵場',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商',leaderboards:'榜單'};
+const TAB_ZH={taxonomy:'探索',hunt:'獵場',plays:'打法',triggers:'訊號',scoring:'評分',accounts:'帳號',vendors:'廠商',leaderboards:'榜單'};
 function relabelTabs(){TABS.forEach(([id,label])=>{if(NAVBTN[id])NAVBTN[id].textContent=LANG==='zh'?(TAB_ZH[id]||label):label;});}
-function renderAll(){renderHome();renderTaxonomy();renderHunt();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();renderLeaderboards();}
+function renderAll(){renderTaxonomy();renderHunt();renderPlays();renderTriggers();renderScoring();renderAccounts();renderVendors();renderLeaderboards();}
 renderAll();
 $('#langtog').onclick=()=>{LANG=(LANG==='zh')?'en':'zh';$('#langtog').textContent=(LANG==='zh')?'EN':'中文';relabelTabs();renderAll();window.scrollTo(0,0);};
 </script>
