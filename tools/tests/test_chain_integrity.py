@@ -606,6 +606,24 @@ class TestVendorEnrichment(unittest.TestCase):
             missing = [f for f in ENRICH_FIELDS if f not in v]
             self.assertFalse(missing, f"vendor {v['id']}: missing enrichment {missing}")
 
+    def test_market_share_pct_is_numeric_and_sourced(self):
+        """v3.5: the market-share bar reads market_share_pct. It must be a plausible
+        number AND traceable — only present where the vendor carries market_share prose
+        (its cited source). Never a bare, unsourced percentage."""
+        n = 0
+        for v in _VDOC["vendors"]:
+            if "market_share_pct" in v and v["market_share_pct"] is not None:
+                n += 1
+                p = v["market_share_pct"]
+                self.assertTrue(isinstance(p, (int, float)) and 0 < p <= 100,
+                                f"{v['id']}: market_share_pct {p!r} not a 0-100 number")
+                self.assertTrue(v.get("market_share"),
+                                f"{v['id']}: has market_share_pct but no market_share prose to source it")
+        self.assertGreaterEqual(n, 15, "expected the structured share numbers to be populated")
+        byid = {v["id"]: v for v in _VDOC["vendors"]}
+        self.assertEqual(byid["epic-systems"]["market_share_pct"], 42.3)
+        self.assertEqual(byid["oracle-health"]["market_share_pct"], 22.9)
+
     def test_founded_is_year_or_null(self):
         for v in _VDOC["vendors"]:
             f = v.get("founded")
@@ -836,6 +854,19 @@ class TestAppGuidance(unittest.TestCase):
         for sig in ("New sequencer purchase", "Cyber incident", "FDA IND filing",
                     "Serialization", "Cloud repatriation", "Plant modernization"):
             self.assertIn(sig, self.html, f"trigger '{sig}' must be present")
+
+    def test_vendor_market_share_drawer_with_proportional_bars(self):
+        """v3.5: the category vendor list is a collapsible drawer; each vendor gets a
+        proportional market-share bar from a cited number (market_share_pct) or 'n/a'.
+        Tracks are a fixed width so bars are comparable; never fabricated."""
+        self.assertIn("class:'vdrawer'", self.html, "vendor list must be a collapsible drawer")
+        self.assertIn("market_share_pct", self.html, "bars must read the structured share field")
+        self.assertIn("class:'msfill'", self.html, "each share must render a proportional bar")
+        # a fixed-width track column so bars are comparable across rows
+        self.assertIn("grid-template-columns:minmax(120px,1fr) clamp(", self.html,
+                      "the track column must be a fixed width so bars share one scale")
+        # missing data shows n/a, not a fabricated bar
+        self.assertIn("'n/a','未公開'", self.html, "vendors without a cited share must show n/a, not a made-up bar")
 
     def test_plays_are_navigable_and_open_a_play_brief(self):
         """v3.4: a play is a navigable filter, not a decoration. Play chips everywhere

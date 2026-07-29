@@ -236,6 +236,24 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .mkitem{display:flex;align-items:center;gap:7px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:12.5px}
 .mkitem:hover{background:var(--accentbg);border-color:var(--accent)}
 .mkitem .mknm{flex:1;font-weight:600;overflow-wrap:anywhere}
+/* vendors-in-market drawer with cited market-share bars */
+.vdrawer{margin-top:12px;border-top:1px solid var(--line);padding-top:6px}
+.vdrawer>summary{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);cursor:pointer;list-style:none;padding:3px 0}
+.vdrawer>summary::-webkit-details-marker{display:none}
+.vdrawer>summary::before{content:"\25b8  ";color:var(--accent)}
+.vdrawer[open]>summary::before{content:"\25be  "}
+.vsbody{margin-top:6px}
+/* fixed track column so every bar shares one scale (comparable market share) */
+.msrow{display:grid;grid-template-columns:minmax(120px,1fr) clamp(90px,18vw,150px) 46px;gap:10px;align-items:center;padding:3px 2px;font-size:12.5px}
+.msn{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px;min-width:0}
+.msn .vn{font-weight:600;cursor:pointer;overflow-wrap:anywhere}
+.msn .vn:hover{color:var(--accent)}
+.msrk{font-size:9px;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:9px;padding:0 5px;white-space:nowrap}
+.mstrack{height:9px;width:100%;background:var(--line);border-radius:5px;overflow:hidden}
+.mstrack.empty{background:transparent}
+.msfill{height:100%;background:var(--accent);border-radius:5px}
+.msp{text-align:right;font-weight:700;font-size:11px}
+.msund{text-align:right;font-size:10px;color:var(--muted)}
 .dstep{display:flex;gap:8px;margin:3px 0;font-size:13px}
 .dstep b{color:var(--accent);flex:0 0 auto}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
@@ -649,10 +667,26 @@ function renderTaxonomy(){
     sec(T('How it works','技術講解'),(LANG==='zh'?det.tech_zh:det.tech_en));
     sec(T('Supermicro workload fit','SMCI 可協助的 workload'),(LANG==='zh'?det.smci_zh:det.smci_en));
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
-    const leaders=(c.vendors||[]).filter(v=>lbBadge(v));
-    if(leaders.length){const lr=el('div',{class:'dsec'});lr.append(el('div',{class:'dsh'},T('Market incumbents in this category — ranked','本類既有龍頭 — 已上榜')));
-      const w=el('div',{class:'row'});leaders.forEach(v=>{const p=el('span',{class:'pill lead',style:'cursor:pointer'},(VNAME[v]||v)+' · '+lbBadge(v));p.onclick=()=>goVendor(v);w.append(p);});lr.append(w);cd.append(lr);}
-    if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row',style:'margin-top:8px'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));c.vendors.forEach(v=>{const bd=lbBadge(v);const p=el('span',{class:'pill'+(bd?' lead':''),style:'cursor:pointer'},VNAME[v]||v);p.onclick=()=>goVendor(v);vr.append(p);});cd.append(vr);}
+    // ---- vendors in this market — collapsible drawer with cited market-share bars ----
+    if(c.vendors&&c.vendors.length){
+      const rows=c.vendors.map(vid=>{const v=VBYID[vid]||{};return {vid:vid,name:VNAME[vid]||vid,rank:lbBadge(vid),
+        pct:(typeof v.market_share_pct==='number'?v.market_share_pct:null),src:v.market_share||''};});
+      rows.sort((a,b)=>(b.pct==null?-1:b.pct)-(a.pct==null?-1:a.pct)||((a.rank?0:1)-(b.rank?0:1))||a.name.localeCompare(b.name));
+      const nShare=rows.filter(r=>r.pct!=null).length;
+      const d=el('details',{class:'vdrawer'});
+      d.append(el('summary',{},T('Vendors in this market','此市場的廠商')+' · '+rows.length+(nShare?' · '+nShare+T(' with cited share',' 家有引用市佔'):'')));
+      const body=el('div',{class:'vsbody'});
+      rows.forEach(r=>{const row=el('div',{class:'msrow'});
+        const nmc=el('span',{class:'msn'});const vn=el('span',{class:'vn'},r.name);vn.onclick=()=>goVendor(r.vid);nmc.append(vn);
+        if(r.rank)nmc.append(el('span',{class:'msrk'},r.rank));
+        row.append(nmc);
+        if(r.pct!=null){const tr=el('div',{class:'mstrack',title:r.src});tr.append(el('div',{class:'msfill',style:'width:'+Math.min(100,r.pct)+'%'}));row.append(tr);row.append(el('span',{class:'msp'},r.pct+'%'));}
+        else{row.append(el('div',{class:'mstrack empty'}));row.append(el('span',{class:'msund',title:r.src||''},T('n/a','未公開')));}
+        body.append(row);});
+      d.append(body);
+      d.append(el('div',{class:'muted',style:'font-size:10px;margin-top:5px;line-height:1.4'},T('Bars = cited market share (hover a bar for the source); “n/a” = no public share figure. Each share is of that vendor’s own market.','長條=有引用來源的市佔率(游標移到長條看來源);「未公開」=無公開市佔數字。每個市佔為該廠商所屬市場之比例。')));
+      cd.append(d);
+    }
     return cd;
   }
   function groupsOf(c,axis){

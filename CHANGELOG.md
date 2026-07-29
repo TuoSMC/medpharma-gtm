@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-29 — battle-card vendors → a collapsible drawer with cited market-share bars + v3.5
+Tuo, pointing at the battle card's vendor lists: make it a drawer too, and inside show a proportional bar of each vendor's market share. Done — honestly.
+- The two old vendor blocks (ranked incumbents + full vendor pills) are fused into one collapsible **`<details>` drawer** — "Vendors in this market · N · M with cited share" — rows sorted by share, each: vendor name (→ registry) · leaderboard rank · a **proportional market-share bar** · the %.
+- **Real data only (§8, no fabrication):** market share lived as *cited prose* on 33/309 vendors. Classified it — **20 carry a clean, sourced market-*share* %** (share of a defined market: Epic 42.3, Oracle 22.9, NVIDIA 92, Illumina 90, Veeva 80, SAP 6.6, …); the other 13 were rank/award/revenue/adoption/coverage metrics, NOT share, so they were **excluded**, not guessed. Extracted the 20 into a structured `market_share_pct` field; the prose stays as the bar's hover **source**. Vendors with no cited share show **"n/a / 未公開"** — never a made-up bar.
+- Bug caught in verification: the bars weren't comparable because each row was its own grid and a long rank badge (Oracle's `#2·#28·#75`) shrank its track. Fixed to a **fixed-width track column** so every bar shares one scale — Epic's 42.3% bar now renders ~2× Oracle's 22.9%, ~3× MEDITECH's 14.8% (pixel-verified 63/34/22 px on a 150px track).
+- **94 GREEN** (+2: app drawer/bars + data integrity — market_share_pct must be a 0-100 number AND have market_share prose to source it); deterministic; browser-verified (DOM + pixel), zero console errors, no emoji.
+- **Tagged `v3.5`.**
+
 ## 2026-07-29 — Play D added (data-driven), Play E rejected; plays made navigable + v3.4
 Tuo asked whether the 3-play scope should grow to D/E, why, and how to wire it in Explore. Ran a 5-agent adversarial evaluation (3 lenses + a keep-3 skeptic + synthesis) grounded in the orphaned-category data. Unanimous verdict: **add Play D, reject Play E.**
 - **Why D:** 35 of 59 categories had no play — including the taxonomy's ONLY play-less flagship, **EHR/EMR (opp4/cust4)**, plus 8 customer-HOT clinical/payer-core systems that verifiably share ONE distinct zero-GPU anchor: **NVMe-OLTP + HA-redundant + immutable DR/backup**. Five triggers (cyber/ransomware, EHR go-live, hospital M&A, new campus, KLAS) dead-ended with no play to route to. **Play D — "Clinical Core Resilience & Ransomware DR"** is genuinely distinct from A/B (GPU/HPC compute) and C (industrial edge): the bet is transactional-DB resilience, pitched as uptime + ransomware recovery, not AI.

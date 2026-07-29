@@ -48,6 +48,7 @@ vendors:
     history: "Formed 1988 by merger of Sweden's ASEA (1883) and Switzerland's Brown, Boveri & Cie (1891). Its System 800xA is a flagship distributed control system (DCS) for process automation. Morten Wierod has been CEO since August 2024."
     market_position: "Global top-tier DCS/process-automation vendor (System 800xA); one of the largest industrial automation companies worldwide."
     market_share: "#1 in global Distributed Control Systems (DCS) market, ~19% share, leader for 22nd consecutive year (ARC Advisory Group)"
+    market_share_pct: 19
     sources:
       - "https://new.abb.com/control-systems/system-800xa/800xa-dcs"
       - "https://en.wikipedia.org/wiki/ABB"
@@ -708,6 +709,7 @@ vendors:
     history: "Founded 1980 as Quantum Software Systems (renamed QNX 1984); safety-certified embedded RTOS; acquired by BlackBerry in 2010; now BlackBerry's QNX division."
     market_position: "QNX software deployed in 255M+ vehicles worldwide (company figure; automotive-led, also used in medical devices)"
     market_share: "~37% of the global automotive operating-system market (2025, Global Market Insights est.); QNX embedded in 275M+ vehicles"
+    market_share_pct: 37
     sources:
       - "https://blackberry.qnx.com/en"
       - "https://www.mathworks.com/products/connections/product_detail/qnx-neutrino-rtos.html"
@@ -935,6 +937,7 @@ vendors:
     history: "Formed in 2008 from Pharsight and Tripos assets; grew via acquisitions into a biosimulation leader. Phoenix WinNonlin/NLME are its core pharmacometrics tools."
     market_position: "Global leader in model-informed drug development (MIDD) and biosimulation; Phoenix WinNonlin/NLME is the de facto standard for non-compartmental and population PK/PD analysis."
     market_share: "Leading player (~12%+ share, 2025) in the global biosimulation market (MarketsandMarkets)"
+    market_share_pct: 12
     sources:
       - "https://www.certara.com/software/phoenix-nlme/"
       - "https://www.certara.com/software/phoenix-winnonlin/"
@@ -1319,6 +1322,7 @@ vendors:
     history: "Founded 2013 by the UC Berkeley creators of Apache Spark, led by Ali Ghodsi; data-and-AI 'lakehouse' platform; still privately held."
     market_position: "Private; valued ~$134B (Dec 2025) with a reported annual revenue run-rate exceeding $4.8B."
     market_share: "~11% of the global data-lakehouse market (2024, Global Market Insights est.)"
+    market_share_pct: 11
     sources:
       - "https://en.wikipedia.org/wiki/Databricks"
       - "https://fortune.com/2025/12/17/databricks-ceo-ali-ghodsi-on-where-ai-is-most-bubbly-and-how-the-company-settled-on-its-134-billion-valuation/"
@@ -1618,6 +1622,7 @@ vendors:
     history: "Founded 1979 in Wisconsin by Judy Faulkner; privately held and employee-owned. Largest US EHR vendor; grows organically rather than through major acquisitions. HQ Verona, Wisconsin."
     market_position: "Largest US EHR vendor by market share; company reports 325M+ patients with a current Epic record and ~$6.7B FY2025 revenue (Forbes/CNBC)."
     market_share: "#1 US acute-care hospital EHR: 42.3% of hospitals and 54.9% of beds (KLAS, year-end 2024)"
+    market_share_pct: 42.3
     sources:
       - "https://en.wikipedia.org/wiki/Epic_Systems"
       - "https://www.forbes.com/profile/judy-faulkner/"
@@ -2066,6 +2071,7 @@ vendors:
     history: "Formed November 2015 from the split of Hewlett-Packard Co. into HPE (enterprise) and HP Inc.; HQ relocated to Texas; HPC/AI portfolio includes former Cray and Determined AI assets."
     market_position: "Public (NYSE: HPE); among the largest enterprise infrastructure and HPC-server vendors globally."
     market_share: "#2 supercomputer vendor by TOP500 system share (~115 of 500 systems, June 2024, behind Lenovo)"
+    market_share_pct: 23
     sources:
       - "https://en.wikipedia.org/wiki/Hewlett_Packard_Enterprise"
       - "https://www.hpe.com/us/en/leadership-bios/antonio-neri.html"
@@ -2217,6 +2223,7 @@ vendors:
     history: "Founded 1998 in San Diego; dominant next-generation-sequencing systems/consumables provider; publicly traded (Nasdaq: ILMN); Clarity LIMS came via the GenoLogics acquisition."
     market_position: "Publicly traded (Nasdaq: ILMN); leading global NGS provider with an active installed base of ~21,000 instruments worldwide."
     market_share: "Dominant global NGS provider; >90% share of clinical genomics sequencing (DeciBio estimate, cited by GEN, 2023)"
+    market_share_pct: 90
     sources:
       - "https://www.prnewswire.com/news-releases/illuminas-board-appoints-jacob-thaysen-phd-as-its-new-chief-executive-officer-301917362.html"
       - "https://www.illumina.com/content/dam/illumina-marketing/documents/company/illumina-at-a-glance.pdf"
@@ -2692,6 +2699,7 @@ vendors:
     history: "Founded 2013 by Pat Cline (NextGen co-founder); population-health/value-based-care analytics platform; Pat Cline now Founder & Executive Chairman."
     market_position: "Vendor states its platform served roughly 10% of MSSP beneficiaries in PY2023."
     market_share: "~10% of all MSSP ACO beneficiaries served in PY2023 (company-stated)"
+    market_share_pct: 10
     sources:
       - "https://lightbeamhealth.com/about/"
       - "https://lightbeamhealth.com/accountable-care/"
@@ -2893,6 +2901,7 @@ vendors:
     history: "Founded 1969 by A. Neil Pappalardo (died January 2026); privately held EHR pioneer (Expanse); MUMPS heritage; Westwood, Massachusetts."
     market_position: "not publicly disclosed"
     market_share: "~14.8% US acute-care hospital EHR market share by number of hospitals (2024, KLAS)"
+    market_share_pct: 14.8
     sources:
       - "https://en.wikipedia.org/wiki/Meditech"
       - "https://www.beckershospitalreview.com/ehrs/meet-the-c-suite-of-meditech-15-execs-to-know.html"
@@ -3273,6 +3282,7 @@ vendors:
     history: "Founded 1993 by Jensen Huang, Chris Malachowsky and Curtis Priem; GPU/accelerated-computing leader; publicly traded (Nasdaq: NVDA); Santa Clara, California."
     market_position: "not publicly disclosed"
     market_share: "~90-94% of the discrete add-in-board GPU market (2025, Jon Peddie Research)"
+    market_share_pct: 92
     sources:
       - "https://en.wikipedia.org/wiki/Nvidia"
       - "https://nvidianews.nvidia.com/bios/jensen-huang"
@@ -3289,6 +3299,7 @@ vendors:
     history: "Founded 1993 in Santa Clara; NVIDIA's NIM inference microservices and BioNeMo platform package optimized LLM/biomodel serving in containers deployable on-premises, at edge, or in cloud."
     market_position: "Dominant AI-compute supplier; NIM/BioNeMo provide the on-premises and hybrid inference-serving stack for healthcare and drug-discovery LLMs and biomodels, self-hostable via Docker/Kubernetes on GPU servers."
     market_share: "NVIDIA holds an estimated ~85-90% of the data-center AI GPU / accelerator market (2025-2026 analyst estimates)"
+    market_share_pct: 87
     sources:
       - "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/"
       - "https://www.nvidia.com/en-us/clara/bionemo/"
@@ -3306,6 +3317,7 @@ vendors:
     history: "Established 1919 in Tokyo; global endoscopy leader. Surgical imaging / OR integration (endoscopy systems, EASYSUITE OR integration) building beyond hardware toward integrated care. Bob White (ex-Medtronic) appointed President & CEO effective June 1, 2025, following the October 2024 resignation of Stefan Kaufmann and an interim period under chairman Yasuo Takeuchi."
     market_position: "Global market leader in flexible endoscopy with a large installed base of endoscopy systems."
     market_share: "More than 70% share of the global gastrointestinal endoscope market (Olympus IR; figure consistently cited through 2025)"
+    market_share_pct: 70
     sources:
       - "https://www.olympus-global.com/news/2025/nr02932.html"
       - "https://medical.olympusamerica.com/articles/olympus-appoints-new-ceo"
@@ -3438,6 +3450,7 @@ vendors:
     history: "Cerner founded 1979 in North Kansas City by Neal Patterson, Paul Gorup and Cliff Illig; acquired by Oracle in 2022 for $28.3B and rebranded Oracle Health."
     market_position: "Acquired by Oracle for $28.3B (2022); a leading US hospital EHR vendor (Millennium/PowerChart), historically second to Epic in acute care."
     market_share: "22.9% of the US acute-care hospital EHR market (2024, KLAS Research)"
+    market_share_pct: 22.9
     sources:
       - "https://en.wikipedia.org/wiki/Oracle_Health"
       - "https://www.healthcareitnews.com/news/oracle-acquires-cerner-283b"
@@ -3972,6 +3985,7 @@ vendors:
     history: "Founded 1972 in Germany by five former IBM engineers; world's largest enterprise-software (ERP) vendor; publicly traded. Klein became sole CEO in 2020."
     market_position: "Publicly traded (XETRA: SAP / NYSE: SAP); 2025 revenue ambition >€37.5B; became Europe's most valuable company in 2025."
     market_share: "~6.6% of the global ERP applications market ($8.6B ERP revenue, 2024, Apps Run The World est.)"
+    market_share_pct: 6.6
     sources:
       - "https://www.sap.com/about/company/leadership/christian-klein.html"
       - "https://www.semafor.com/article/06/19/2025/how-christian-kleins-ai-bet-turned-sap-into-europes-most-valuable-company"
@@ -4023,6 +4037,7 @@ vendors:
     history: "Founded 1976 in Cary, North Carolina, spun out of NC State University; privately held analytics-software company still led by co-founder James Goodnight."
     market_position: "Privately held; reported revenue of US$3B+ in 2024 (Wikipedia/SAS)."
     market_share: "#1 in worldwide advanced & predictive analytics software market share for 20+ consecutive years per IDC (~27.7% share, 2018)"
+    market_share_pct: 27.7
     sources:
       - "https://en.wikipedia.org/wiki/SAS_Institute"
       - "https://blogs.sas.com/content/subconsciousmusings/2021/09/30/sas-leads-market-28-years-in-a-row/"
@@ -4547,6 +4562,7 @@ vendors:
     history: "Founded 2002 in Dallas; publicly traded (NYSE: TDOC) telehealth pioneer, now HQ New York City. Acquired Livongo (2020). Chuck Divita became CEO in 2024."
     market_position: "Publicly traded (NYSE: TDOC); a leading US telehealth provider; specific market share not publicly disclosed."
     market_share: "#1 in US telehealth, ~25%+ market share (2024, Market.us)"
+    market_share_pct: 25
     sources:
       - "https://en.wikipedia.org/wiki/Teladoc_Health"
       - "https://www.teladochealth.com/newsroom/press/teladoc-health-names-chuck-divita-as-ceo"
@@ -4610,6 +4626,7 @@ vendors:
     history: "Formed 2006 by merger of Thermo Electron (founded 1956) and Fisher Scientific; NYSE: TMO; lab informatics incl. SampleManager LIMS and Chromeleon CDS."
     market_position: "not publicly disclosed"
     market_share: "~24.5% of the global mass-spectrometry market; cited as the #1 mass-spec vendor (analyst est.)"
+    market_share_pct: 24.5
     sources:
       - "https://en.wikipedia.org/wiki/Thermo_Fisher_Scientific"
       - "https://www.thermofisher.com/us/en/home/digital-solutions/lab-informatics/lims-pharma-biopharma-rd.html"
@@ -4773,6 +4790,7 @@ vendors:
     history: "Founded 1948 as Varian Associates, Palo Alto; radiation-oncology systems and treatment-planning software leader; acquired by Siemens Healthineers for $16.4B (2021), now its oncology business."
     market_position: "Acquired by Siemens Healthineers for $16.4 billion (completed 2021)."
     market_share: ">60% of the radiotherapy market (2025; up ~10 percentage points since 2021, per Siemens Healthineers)"
+    market_share_pct: 60
     sources:
       - "https://padailypost.com/2020/08/03/palo-altos-varian-medical-to-be-taken-over-by-siemens-spinoff/"
       - "https://radiologybusiness.com/topics/healthcare-management/healthcare-economics/siemens-healthineers-acquisition-varian-medical"
@@ -4792,6 +4810,7 @@ vendors:
     history: "Founded 2007 by Peter Gassner and Matt Wallach; cloud software for life sciences (Vault suite); IPO 2013 (NYSE: VEEV); public-benefit corporation."
     market_position: "not publicly disclosed"
     market_share: "~80% of the global life-sciences (pharma) CRM market (2024-25, analyst est.)"
+    market_share_pct: 80
     sources:
       - "https://en.wikipedia.org/wiki/Veeva_Systems"
       - "https://www.marketsandmarkets.com/ResearchInsight/pharmaceutical-quality-management-software-market.asp"
@@ -5025,6 +5044,7 @@ vendors:
     history: "Founded 2005 in Pleasanton, California by Dave Duffield and Aneel Bhusri; cloud HCM and financials SaaS; co-founder Aneel Bhusri returned as sole CEO in February 2026, succeeding Carl Eschenbach."
     market_position: "Reported revenue of $8.45 billion in fiscal 2025."
     market_share: "#1 in worldwide HCM & payroll applications, ~12.6% share ($5.2B) (IDC, 2024)"
+    market_share_pct: 12.6
     sources:
       - "https://en.wikipedia.org/wiki/Workday,_Inc."
       - "https://www.danvillesanramon.com/business/2026/02/09/workday-ceo-out-as-co-founder-returns-to-lead-pleasanton-company/"
