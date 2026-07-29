@@ -677,6 +677,31 @@ class TestLeaderboards(unittest.TestCase):
 
 
 
+_DETAIL = yaml.safe_load(open(REPO / "data" / "detail.yaml", encoding="utf-8"))
+
+
+class TestCategoryDetail(unittest.TestCase):
+    """data/detail.yaml — bilingual per-category explainers (purpose / usage flow /
+    tech / Supermicro fit) powering the Explore detail pane's hierarchy diagram."""
+
+    def test_every_category_has_bilingual_detail(self):
+        det = _DETAIL["details"]
+        for c in CATS:
+            self.assertIn(c["id"], det, f"{c['id']}: no detail explainer")
+            d = det[c["id"]]
+            for f in ("purpose_en", "purpose_zh", "tech_en", "tech_zh", "smci_en", "smci_zh"):
+                self.assertTrue(str(d.get(f, "")).strip(), f"{c['id']}: empty {f}")
+            self.assertTrue(d.get("usage_flow"), f"{c['id']}: no usage_flow steps")
+            for s in d["usage_flow"]:
+                self.assertTrue(str(s.get("en", "")).strip() and str(s.get("zh", "")).strip(),
+                                f"{c['id']}: usage_flow step missing en/zh")
+
+    def test_detail_pane_renders_hierarchy(self):
+        html = (REPO / "app" / "index.html").read_text(encoding="utf-8")
+        for marker in ("function detailCard(", "tiers6", "SMCI_FAMILY", "flowstrip"):
+            self.assertIn(marker, html, f"detail render missing '{marker}'")
+
+
 # ============================================================
 # Round-6 invariants: app guided-home wayfinding (Q1 locked = funnel front door)
 # ============================================================

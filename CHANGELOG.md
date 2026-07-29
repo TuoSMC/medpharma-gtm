@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-07-29 — per-category explainer detail: 6-tier hierarchy + flow diagram (via /hyakushikiflow) + v2.7
+Click a category → the right pane is now a rich, bilingual one-pager that explains the whole thing at a glance, per Tuo's six dimensions.
+- **New `data/detail.yaml`** — bilingual (EN + 繁中) explainers authored + accuracy-verified for all **59 categories** (8-domain workflow, 16 agents): `purpose`, `usage_flow` (289 ordered steps total), `tech_note`, and `smci_fit`. Kept in a separate file (not bloating taxonomy.yaml) and merged into each category at build time.
+- **6-tier hierarchy diagram (階級圖)** in the detail pane, top→down: **Who uses → Purpose → Usage flow → Tech → Hardware → SMCI workload**, connected by a rail with a node per tier. The Usage-flow tier embeds a **horizontal flow diagram** (step boxes + arrows, e.g. *Modalities acquire → Ingest to NVMe → Migrate to archive → Serve → Retain 10yr+*). Below it, full prose sections (Purpose / Usage flow numbered / How it works / Supermicro workload fit).
+- **Supermicro workload mapping** — each `hardware_profile` component resolves to a server family (GPU servers · NVMe all-flash · high-capacity archive JBOD · HPC nodes · high-memory · industrial edge · HA-redundant · DR/backup) so the "what SMCI can help with" is concrete, plus the authored per-category `smci_fit` note. Server FAMILIES only — no invented SKUs (§8).
+- Tests: `TestCategoryDetail` (every category has a complete bilingual detail with usage-flow steps; the pane renders the hierarchy + flow). **86 GREEN**; deterministic; browser-verified in both languages, zero console errors, no emoji.
+- **Tagged `v2.7`.**
+
 ## 2026-07-29 — Explore rebuilt as a big→small hierarchy tree + detail (via /hyakushikiflow) + v2.6
 Replaced Explore's wall of full cards with a **master–detail two-pane** so the whole 59-category universe is legible at a glance.
 - **Level architecture (big → small):** L1 = the chosen axis (default **domain** — the 8 care areas, with nice labels: Pharma R&D, Hospital · Clinical Core, Manufacturing · QC · Supply, …), L2 = **AI-driven / No-AI**, L3 = the category (a compact row: opportunity badge · full name · primary-buyer colour dot). Counts at every level; each L1 collapses.

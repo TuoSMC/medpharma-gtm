@@ -35,8 +35,17 @@ def main():
         a["_file"] = Path(p).name
         accounts.append(a)
 
+    taxonomy = load(DATA / "taxonomy.yaml")
+    # merge authored per-category explainers (data/detail.yaml) into each category
+    detail_path = DATA / "detail.yaml"
+    if detail_path.exists():
+        details = (load(detail_path) or {}).get("details", {})
+        for c in taxonomy["categories"]:
+            if c["id"] in details:
+                c["detail"] = details[c["id"]]
+
     data = {
-        "taxonomy": load(DATA / "taxonomy.yaml"),
+        "taxonomy": taxonomy,
         "plays": load(DATA / "plays.yaml"),
         "triggers": load(DATA / "triggers.yaml"),
         "scoring": load(DATA / "scoring.yaml"),
@@ -122,6 +131,18 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .trow .tname{flex:1;min-width:0;overflow-wrap:anywhere}
 .trow .tby{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
 .tby.bcust{background:var(--a)}.tby.boper{background:var(--b)}.tby.boem{background:var(--c)}.tby.bhyp{background:var(--muted)}
+.tiers6{margin:12px 0}
+.tier6{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:8px 0 8px 14px;position:relative;border-left:2px solid var(--line)}
+.tier6:before{content:"";position:absolute;left:-5px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.tier6 .tlab{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;padding-top:2px}
+.tier6 .tcont{font-size:13px;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.flowstrip{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.fbox{border:1px solid var(--accent);color:var(--accent);border-radius:6px;padding:2px 8px;font-size:12px;background:var(--accentbg)}
+.farrow{color:var(--muted);font-weight:700}
+.dsec{margin:14px 0}
+.dsec .dsh{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:4px}
+.dstep{display:flex;gap:8px;margin:3px 0;font-size:13px}
+.dstep b{color:var(--accent);flex:0 0 auto}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
 .play{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;color:#fff}
 .playa{background:var(--a)}.playb{background:var(--b)}.playc{background:var(--c)}
@@ -217,6 +238,16 @@ const PLAY_BY={};(DATA.plays.plays||[]).forEach(p=>PLAY_BY[p.id]=p);  // play id
 const DOM_ZH={'hospital-clinical-core':'醫院·臨床核心','hospital-business-administration':'醫院·行政','hospital-device-facility-operations':'醫院·設備設施','diagnostics-laboratory':'診斷實驗室','pharmaceutical-research-clinical-development':'藥廠研發','manufacturing-quality-supply-chain':'製造·品管·供應鏈','data-analytics-payer-platforms':'資料·支付方','medical-technology-device-software':'醫材裝置軟體'};
 const DOM_EN={'hospital-clinical-core':'Hospital · Clinical Core','hospital-business-administration':'Hospital · Administration','hospital-device-facility-operations':'Hospital · Device & Facility','diagnostics-laboratory':'Diagnostics Lab','pharmaceutical-research-clinical-development':'Pharma R&D','manufacturing-quality-supply-chain':'Manufacturing · QC · Supply','data-analytics-payer-platforms':'Data · Payer Platforms','medical-technology-device-software':'MedTech Device Software'};
 const domLabel=k=>(LANG==='zh'?DOM_ZH[k]:DOM_EN[k])||k;
+// SMCI server family per hardware_profile component (the "workload SMCI can help with")
+const SMCI_FAMILY={'gpu-server':['GPU servers (NVIDIA HGX / MGX)','GPU 伺服器 (NVIDIA HGX/MGX)'],
+ 'high-performance-computing-cpu':['HPC compute nodes (dense multi-node)','HPC 運算節點 (高密度多節點)'],
+ 'nvme-performance-storage':['NVMe all-flash performance storage','NVMe 全快閃效能儲存'],
+ 'capacity-archive-storage':['High-capacity archive (top-load JBOD)','大容量封存儲存 (頂載 JBOD)'],
+ 'high-memory':['High-memory servers (multi-TB DRAM)','大記憶體伺服器 (多-TB DRAM)'],
+ 'edge-industrial':['Industrial / short-depth edge servers','工業／短機身邊緣伺服器'],
+ 'high-availability-redundant':['High-availability redundant pairs','高可用冗餘配對'],
+ 'disaster-recovery-backup':['Disaster-recovery / backup nodes','災難備援節點']};
+const smciFam=h=>(LANG==='zh'?(SMCI_FAMILY[h]||[h,h])[1]:(SMCI_FAMILY[h]||[h,h])[0]);
 
 // ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
 const ONPREM_SIDE=new Set(['on-premises','edge','private-cloud','original-equipment-manufacturer']);
@@ -334,7 +365,7 @@ function renderTaxonomy(){
   const byOpp=(a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id);
   function showDetail(c){selected=c||null;clear(detailPane);
     if(!c){detailPane.append(el('div',{class:'muted',style:'padding:24px 4px'},T('Select a category on the left.','在左邊選一個類別。')));return;}
-    detailPane.append(card(c));
+    detailPane.append(detailCard(c));
     [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===c.id));}
   function catRow(c){const r=el('div',{class:'trow','data-id':c.id});
     r.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:10px;padding:0 5px',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
@@ -380,6 +411,42 @@ function renderTaxonomy(){
       cd.append(tagRow(T('hosp-dim','醫院·面向'),c.hospital_view.dimension));}
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
     if(c.play_exemption)cd.append(el('div',{class:'notes'},T('Outside play scope: ','play 範圍外:')+c.play_exemption));
+    return cd;
+  }
+  function detailCard(c){
+    const det=c.detail||{}, cd=el('div',{class:'card'});
+    const pbP=c.hardware_opportunity_by_buyer[c.primary_buyer];
+    const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hardware_opportunity,title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)),
+      el('span',{class:'by '+BUYER_C[c.primary_buyer]},c.primary_buyer+(pbP?'·'+pbP:'')));
+    (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo'},x+(c.hardware_opportunity_by_buyer[x]?'·'+c.hardware_opportunity_by_buyer[x]:''))));
+    (c.plays||[]).forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
+    cd.append(head);
+    cd.append(el('h3',{style:'margin:6px 0 0'},nm(c)));
+    cd.append(el('div',{class:'zh'},sub(c)));
+    if(c.name_full)cd.append(el('div',{class:'muted',style:'font-size:12px;margin-bottom:6px'},c.name_full));
+    // ---- 6-tier hierarchy diagram (階級圖) ----
+    const tiers=el('div',{class:'tiers6'});
+    const tier=(lab,cont)=>{tiers.append(el('div',{class:'tier6'},el('div',{class:'tlab'},lab),el('div',{class:'tcont'},cont)));};
+    const who=el('span',{style:'display:flex;flex-wrap:wrap;gap:5px'});(c.segments||[]).forEach(s=>who.append(el('span',{class:'chip'},s)));(((c.hospital_view||{}).stakeholder)||[]).forEach(s=>who.append(el('span',{class:'chip dim'},s)));
+    tier(T('Who uses','使用方'),who);
+    tier(T('Purpose','目的'),el('span',{},(LANG==='zh'?det.purpose_zh:det.purpose_en)||'—'));
+    const flow=el('div',{class:'flowstrip'});(det.usage_flow||[]).forEach((s,i)=>{if(i)flow.append(el('span',{class:'farrow'},'→'));flow.append(el('span',{class:'fbox'},LANG==='zh'?s.zh:s.en));});
+    tier(T('Usage flow','使用流程'),(det.usage_flow&&det.usage_flow.length)?flow:el('span',{},'—'));
+    const tech=el('span',{style:'display:flex;flex-wrap:wrap;gap:5px;align-items:center'});(c.role||[]).forEach(r=>tech.append(el('span',{class:'chip dim'},r)));(c.data_modality||[]).forEach(m=>tech.append(el('span',{class:'chip dim'},m)));
+    tier(T('Tech','技術'),tech);
+    const hw=el('span',{style:'display:flex;flex-wrap:wrap;gap:5px'});(c.hardware_profile||[]).forEach(h=>hw.append(el('span',{class:'hwc'},h+((c.hardware_profile_sizing||{})[h]?'·'+c.hardware_profile_sizing[h]:''))));if(!(c.hardware_profile||[]).length)hw.append(el('span',{class:'muted'},T('SaaS-light','SaaS 輕量')));
+    tier(T('Hardware','硬體'),hw);
+    const sm=el('span',{style:'display:flex;flex-wrap:wrap;gap:5px'});(c.hardware_profile||[]).forEach(h=>sm.append(el('span',{class:'pill lead'},smciFam(h))));if(!(c.hardware_profile||[]).length)sm.append(el('span',{class:'muted'},'—'));
+    tier(T('SMCI workload','SMCI'),sm);
+    cd.append(tiers);
+    // ---- prose sections (authored, bilingual) ----
+    const sec=(lab,txt)=>{if(!txt)return;cd.append(el('div',{class:'dsec'},el('div',{class:'dsh'},lab),el('div',{},txt)));};
+    sec(T('Purpose','目的'),(LANG==='zh'?det.purpose_zh:det.purpose_en));
+    if(det.usage_flow&&det.usage_flow.length){const fs=el('div',{class:'dsec'});fs.append(el('div',{class:'dsh'},T('Usage flow','使用流程')));det.usage_flow.forEach((s,i)=>fs.append(el('div',{class:'dstep'},el('b',{},(i+1)+'.'),el('span',{},LANG==='zh'?s.zh:s.en))));cd.append(fs);}
+    sec(T('How it works','技術講解'),(LANG==='zh'?det.tech_zh:det.tech_en));
+    sec(T('Supermicro workload fit','SMCI 可協助的 workload'),(LANG==='zh'?det.smci_zh:det.smci_en));
+    if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
+    if(c.vendors&&c.vendors.length){const vr=el('div',{class:'row',style:'margin-top:8px'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));c.vendors.forEach(v=>{const bd=lbBadge(v);const p=el('span',{class:'pill'+(bd?' lead':''),style:'cursor:pointer'},VNAME[v]||v);p.onclick=()=>goVendor(v);vr.append(p);});cd.append(vr);}
     return cd;
   }
   function groupsOf(c,axis){

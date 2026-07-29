@@ -1,0 +1,1490 @@
+# Per-category explainers (purpose / usage flow / tech / Supermicro workload fit), bilingual.
+# Authored + accuracy-verified; merged into the app detail pane at build time.
+# Generated — regenerate via the author-category-detail workflow, don't hand-edit.
+details:
+  advanced-visualization-3d:
+    purpose_en: Server-side advanced post-processing of CT/MR/vascular/cardiac studies — volume rendering,
+      3D reconstruction and structural-heart planning — delivered to radiologists and clinicians as thin-client
+      sessions.
+    purpose_zh: 伺服器端的 CT/MR/血管／心臟影像進階後處理——體積渲染、3D 重建與結構性心臟手術規劃——以瘦客戶端方式提供給放射科與臨床醫師。
+    smci_en: GPU servers building the central rendering farm that serves the concurrent thin-client sessions;
+      rack scale.
+    smci_zh: 以 GPU 伺服器建置中央渲染農場，服務多個同時的瘦客戶端連線；機櫃級規模。
+    tech_en: A centralized GPU volume-rendering farm serves interactive thin-client sessions, distinct
+      from the PACS archive tier and from AI inference orchestration. Sizing is driven by concurrent render
+      sessions and per-study volume size.
+    tech_zh: 集中式 GPU 體積渲染農場服務互動式瘦客戶端連線，與 PACS 典藏層及 AI 推論協調機制各自獨立；規模依同時渲染連線數與單檢查體積大小決定。
+    usage_flow:
+    - en: Pull study from PACS
+      zh: 自 PACS 取檢查
+    - en: Server-side GPU volume rendering
+      zh: 伺服器端 GPU 體積渲染
+    - en: Interactive 3D thin-client session
+      zh: 互動式 3D 瘦客戶端連線
+    - en: Save results/measurements
+      zh: 儲存結果與量測
+    - en: Return to record
+      zh: 回寫紀錄
+  ai-drug-discovery:
+    purpose_en: Uses machine learning over multimodal biological data — omics, images, and chemical structures
+      — to predict targets, generate molecules, and prioritize candidates. It exists to accelerate discovery
+      by learning patterns across large curated datasets.
+    purpose_zh: 運用機器學習於多模態生物資料——體學、影像與化學結構——以預測標靶、生成分子並排序候選藥物。存在目的是透過學習大型精選資料集中的模式來加速藥物發現。
+    smci_en: Multi-GPU training servers with high-speed interconnect drive large-model training, while
+      NVMe all-flash feeds the data pipeline — cluster scale, often hybrid with cloud burst.
+    smci_zh: 以具高速互連的多GPU訓練伺服器進行大型模型訓練，並以NVMe全快閃供給資料管線——叢集規模，常與雲端爆發混合。
+    tech_en: Large multi-GPU training clusters pair with high-throughput inference nodes, and sizing is
+      driven by model scale, curated multimodal datasets, and data-pipeline throughput. Deployments are
+      frequently hybrid with cloud burst, with NVMe feeding the training pipeline.
+    tech_zh: 大型多GPU訓練叢集搭配高吞吐推論節點，規模由模型大小、精選多模態資料集與資料管線吞吐量決定。常採混合雲端爆發，並以NVMe供給訓練管線。
+    usage_flow:
+    - en: Curate multimodal data
+      zh: 整理多模態資料
+    - en: Train / fine-tune models
+      zh: 訓練／微調模型
+    - en: Generate & score candidates
+      zh: 生成並評分候選分子
+    - en: Run inference at scale
+      zh: 大規模推論
+    - en: Feed back experimental results
+      zh: 回饋實驗結果
+  ai-hpc-orchestration:
+    purpose_en: The scheduling and MLOps layer that sits on top of a GPU/HPC cluster — batch queuing,
+      container orchestration, GPU partitioning, and job/experiment tracking. It exists to keep expensive
+      GPU/HPC hardware fully utilized across many users and jobs.
+    purpose_zh: 位於GPU／HPC叢集之上的排程與MLOps層——批次排隊、容器編排、GPU分割以及作業／實驗追蹤。存在目的是讓昂貴的GPU／HPC硬體在眾多使用者與作業間維持滿載。
+    smci_en: This layer directly anchors GPU server and HPC CPU clusters, making it the most natural ISV
+      co-sell for a server vendor. It is sized to aggregate cluster job concurrency at cluster scale.
+    smci_zh: 此層直接錨定GPU伺服器與HPC CPU叢集，是伺服器廠商最自然的ISV共同銷售切入點。依叢集整體作業並行度以叢集規模部署。
+    tech_en: A GPU/HPC scheduler plus MLOps layer — batch queue, container orchestration, and GPU partitioning
+      — anchors and sizes the on-prem GPU/HPC cluster beneath it. It scales to aggregate job concurrency
+      across the cluster.
+    tech_zh: GPU／HPC排程器加MLOps層（批次佇列、容器編排與GPU分割）錨定並決定其下地端GPU／HPC叢集的規模。依叢集整體作業並行度調整規模。
+    usage_flow:
+    - en: Submit jobs
+      zh: 提交作業
+    - en: Schedule & queue
+      zh: 排程與排隊
+    - en: Partition & allocate GPUs
+      zh: 分割並配置 GPU
+    - en: Run & track
+      zh: 執行與追蹤
+    - en: Release & reclaim
+      zh: 釋放並回收資源
+  automated-visual-inspection:
+    purpose_en: Automated visual inspection uses deep-learning machine vision to detect defects in vials,
+      syringes and finished devices on the fill-finish and packaging lines, replacing or augmenting manual
+      inspection. It exists to raise detection reliability and throughput on high-speed lines under GxP
+      validation.
+    purpose_zh: 自動化視覺檢測運用深度學習機器視覺，在充填封裝與包裝線上偵測小瓶、注射器與成品裝置的瑕疵，取代或輔助人工檢查。其存在目的是在 GxP 驗證下提升高速產線的偵測可靠度與產能。
+    smci_en: Fits an industrial-edge GPU inference node per line (compact edge or short-depth GPU server),
+      scaling node count with the number of fill-finish/packaging lines. Sized by lines and images inspected
+      per line; controlled BOM and validated-change docs travel with the hardware.
+    smci_zh: 適配每條產線一台工業邊緣 GPU 推論節點（精巧邊緣型或短機身 GPU 伺服器），節點數量隨充填封裝／包裝線數而增。規模依產線數與每條線檢測影像量而定；受控 BOM 與驗證變更文件須隨硬體交付。
+    tech_en: As a data-acquisition and analytics/AI layer, cameras feed high-resolution images to a GPU
+      inference node at the line edge, where deep-learning models classify defects in real time and drive
+      reject actuation. One GPU inference node typically sits per fill-finish/packaging line under GxP,
+      with validated-change documentation part of the deployment.
+    tech_zh: 作為資料擷取與分析／AI 層，攝影機將高解析度影像送至產線邊緣的 GPU 推論節點，由深度學習模型即時判別瑕疵並驅動剔退動作。在 GxP 下通常每條充填封裝／包裝線配置一台 GPU
+      推論節點，並將驗證變更文件納入部署。
+    usage_flow:
+    - en: Capture line images
+      zh: 擷取產線影像
+    - en: Run GPU defect inference
+      zh: 執行 GPU 瑕疵推論
+    - en: Classify pass/fail
+      zh: 判定合格／不合格
+    - en: Reject & log results
+      zh: 剔退並紀錄結果
+  bioinformatics-secondary:
+    purpose_en: Turns raw sequencer output into biological meaning — aligning reads to a reference genome
+      and calling variants (secondary analysis), then annotating and interpreting them at cohort scale
+      (tertiary). It exists because sequencers emit terabytes of raw reads that are useless until computationally
+      processed into variant calls and insight.
+    purpose_zh: 將定序儀輸出的原始序列讀段轉化為生物學意義——比對到參考基因組並進行變異點判讀（二級分析），再於世代層級進行註釋與詮釋（三級分析）。定序儀產生數TB原始讀段，必須經運算處理成變異結果與洞見才有價值，此為其存在原因。
+    smci_en: HPC CPU-dense compute nodes handle alignment and variant calling, paired with GPU servers
+      for accelerated callers and ML, NVMe all-flash for pipeline scratch, and high-capacity archive JBOD
+      for cohort storage — sized as a cluster.
+    smci_zh: 以HPC高密度CPU運算節點負責比對與變異判讀，搭配GPU伺服器加速判讀與機器學習，NVMe全快閃作為流程暫存，並以大容量歸檔JBOD存放世代資料——以叢集規模部署。
+    tech_en: CPU-heavy alignment and variant-calling pipelines (BWA/GATK-style) run alongside GPU-accelerated
+      callers; large NVMe scratch absorbs the burst I/O of pipeline runs while object and capacity storage
+      hold reference genomes and cohort archives. It mixes CPU-HPC and GPU nodes and becomes a cloud-repatriation
+      candidate once load is sustained.
+    tech_zh: 以CPU為主的比對與變異判讀流程（BWA/GATK類）搭配GPU加速判讀器；流程執行時以大容量NVMe暫存承接爆發式I/O，物件與容量儲存存放參考基因組與世代資料庫。混合CPU-HPC與GPU節點，負載持續時為雲端回遷候選。
+    usage_flow:
+    - en: Ingest raw reads (BCL/FASTQ)
+      zh: 匯入原始讀段 (BCL/FASTQ)
+    - en: Align to reference genome
+      zh: 比對參考基因組
+    - en: Call variants (secondary)
+      zh: 變異點判讀（二級）
+    - en: Annotate & filter (tertiary)
+      zh: 註釋與過濾（三級）
+    - en: Store & hand off curated calls
+      zh: 儲存並交付判讀結果
+  capacity-command-center:
+    purpose_en: A real-time 'air traffic control' for the hospital — it ingests bed, ADT, and device feeds
+      to predict and orchestrate patient flow, bed assignment, and system-wide capacity, often on a physical
+      command-center video wall.
+    purpose_zh: 醫院的即時「航管中心」——匯入床位、ADT 與設備資料流，預測並統籌病患流動、床位分配與全系統量能，常呈現於實體指揮中心影像牆。
+    smci_en: Mostly SaaS with minimal customer-side hardware; flagship on-site command centers use a small
+      compute cluster of general-purpose integration and real-time inference servers driving the display
+      wall, sized by feed volume, bed count, and model refresh rate.
+    smci_zh: 多為 SaaS、客戶端硬體極少；旗艦現場指揮中心採由通用整合與即時推論伺服器組成的小型運算叢集驅動影像牆，依資料流量、床位數與模型刷新率調配。
+    tech_en: The platform streams admit-discharge-transfer and device/bed feeds into a real-time model
+      of hospital state, and predictive analytics forecast bottlenecks and drive placement workflows.
+      It is broadly SaaS, but flagship academic deployments keep on-site integration and real-time inference
+      servers plus display-wall infrastructure.
+    tech_zh: 系統將入出轉（ADT）與設備／床位資料流匯入醫院即時狀態模型，預測分析預判瓶頸並驅動安置工作流程。整體以 SaaS 為主，但旗艦學術部署會保留現場整合與即時推論伺服器及影像牆基礎設施。
+    usage_flow:
+    - en: Ingest ADT/device feeds
+      zh: 匯入 ADT／設備資料流
+    - en: Aggregate real-time state
+      zh: 彙整即時狀態
+    - en: Predict flow & bottlenecks
+      zh: 預測流動與瓶頸
+    - en: Orchestrate placement
+      zh: 統籌床位安置
+    - en: Display on wall
+      zh: 呈現於影像牆
+  cdss-clinical-ai:
+    purpose_en: Delivers alerts, guideline recommendations and AI predictions (risk scores, ambient clinical
+      documentation, clinical LLMs) into the clinician's workflow at the point of care to support clinical
+      decisions.
+    purpose_zh: 在照護現場把警示、指引建議與 AI 預測（風險評分、環境式病歷記錄、臨床大型語言模型）帶入臨床工作流程，協助臨床決策。
+    smci_en: Single- or multi-GPU inference server nodes to host clinical models and LLMs locally where
+      PHI forbids the cloud; starts at node scale and grows to a small cluster as the number of deployed
+      models rises.
+    smci_zh: 在 PHI 禁止上雲時，以單／多 GPU 推論伺服器節點在本地承載臨床模型與 LLM；由節點級起步，隨部署模型數增加擴展為小型叢集。
+    tech_en: Combines rules engines with ML models and LLMs. It mostly rides on EHR or cloud infrastructure,
+      but PHI rules increasingly force on-prem GPU inference nodes to host clinical LLM and ambient-AI
+      workloads locally. Sizing is driven by inference concurrency and the number of deployed models,
+      not by data volume.
+    tech_zh: 結合規則引擎與機器學習模型及大型語言模型；多半依附於 EHR 或雲端，但 PHI（受保護健康資訊）規範日益要求以本地端 GPU 推論節點承載臨床 LLM 與環境式 AI；規模取決於推論並行量與部署模型數，而非資料量。
+    usage_flow:
+    - en: Pull EHR context
+      zh: 擷取病歷情境
+    - en: Run model inference
+      zh: 執行模型推論
+    - en: Generate alert/recommendation
+      zh: 產生警示或建議
+    - en: Surface in EHR workflow
+      zh: 於病歷流程呈現
+    - en: Clinician acts + feeds back
+      zh: 醫師採取行動與回饋
+  clinical-communication-collaboration:
+    purpose_en: Connects care teams — nurse call, secure messaging, alarm/alert routing, on-call scheduling,
+      and shift handoff — so the right clinician is reached fast with the right context, cutting alarm
+      fatigue and communication delays.
+    purpose_zh: 串連照護團隊——護理呼叫、安全訊息、警報／告警路由、值班排班與交班——使正確的臨床人員迅速接收含情境的訊息，降低警報疲勞與溝通延遲。
+    smci_en: High-availability redundant server pairs for the on-prem nurse-call/alerting middleware plus
+      industrial-edge nodes at the unit and in-room level; node-scale, sized by bed and clinician-endpoint
+      count and alarm-delivery uptime SLAs.
+    smci_zh: on-prem 護理呼叫／告警中介軟體採高可用備援伺服器對，加上病區與床邊層的工業邊緣節點；節點級，依床位與臨床人員端點數量及警報送達的正常運行 SLA 調配。
+    tech_en: On-prem nurse-call and clinical-alerting middleware in HA pairs integrates alarms, secure
+      messages, and on-call schedules and routes them to clinician devices via unit and in-room edge stations;
+      the secure-messaging and scheduling tiers increasingly run as vendor-hosted SaaS. Transactional
+      and time-series data; no GPU.
+    tech_zh: on-prem 護理呼叫與臨床告警中介軟體以高可用對整合警報、安全訊息與值班排班，並經病區與床邊邊緣站台路由至臨床人員裝置；安全訊息與排班層日益以廠商託管 SaaS 運行。交易與時序型資料，無
+      GPU。
+    usage_flow:
+    - en: Capture call/alarm
+      zh: 擷取呼叫／警報
+    - en: Match on-call clinician
+      zh: 匹配值班臨床人員
+    - en: Route secure message
+      zh: 路由安全訊息
+    - en: Confirm or escalate
+      zh: 確認或升級
+    - en: Hand off shift
+      zh: 交接班
+  clinical-data-lakehouse:
+    purpose_en: A unified analytics repository that consolidates data from EHR, imaging, lab, waveform
+      and omics systems into one governed platform, so a health system can run population reporting, quality
+      measures, research and AI on a single source of truth instead of siloed source systems.
+    purpose_zh: 統一的分析資料儲存庫，將電子病歷、影像、檢驗、波形與體學等來源系統的資料整合進一個受治理的平台，讓醫療體系能在單一可信資料源上執行族群報表、品質指標、研究與 AI，而非分散於各孤島系統。
+    smci_en: Fits SMCI high-capacity storage servers and JBOD for the object/archive tier, NVMe all-flash
+      nodes for the hot analytics tier, HPC CPU nodes for ETL and query, and a small GPU-server tier for
+      clinical-notes NLP/LLM inference — typically a rack-scale build sized by bed count, retention years
+      and modality breadth.
+    smci_zh: 適用美超微高容量儲存伺服器與 JBOD 作為物件/歸檔層、NVMe 全快閃節點作為熱分析層、HPC CPU 節點負責 ETL 與查詢，再加一小組 GPU 伺服器供臨床病歷 NLP/LLM
+      推論——通常為機架級部署，依床位數、保存年限與資料模態廣度定規模。
+    tech_en: It lands transactional records, clinical documents, time-series waveforms and omics into
+      a tiered store — an object/capacity layer for the raw and historical data plus a fast NVMe analytics
+      tier for query — with heavy ETL/ELT compute for normalization to a common data model. GPU inference
+      is increasingly attached to run NLP and LLM extraction over unstructured clinical notes.
+    tech_zh: 系統將交易紀錄、臨床文件、時序波形與體學資料落地至分層儲存——以物件/容量層存放原始與歷史資料，並以高速 NVMe 分析層供查詢——並以大量 ETL/ELT 運算正規化至共同資料模型。近年愈來愈多附掛
+      GPU 推論，用以對非結構化臨床病歷執行 NLP 與 LLM 抽取。
+    usage_flow:
+    - en: Ingest from source systems
+      zh: 自來源系統擷取資料
+    - en: Normalize & map to common model
+      zh: 正規化並對應共同資料模型
+    - en: Store tiered (fast + object)
+      zh: 分層儲存（高速層+物件層）
+    - en: Query, model & run NLP/LLM
+      zh: 查詢、建模並執行 NLP/LLM
+    - en: Serve dashboards & cohorts
+      zh: 供應儀表板與世代查詢
+  clinical-genomics-reporting:
+    purpose_en: 'The interpretation-and-reporting (tertiary-analysis) layer of clinical genomics: it takes
+      the variant calls produced by secondary analysis, annotates and classifies variants against curated
+      knowledge bases, and generates the signed clinical report. It exists to turn a variant list into
+      a clinically actionable, regulated diagnostic report.'
+    purpose_zh: 臨床基因體學的判讀與報告層（三級分析），接收由次級分析產出的變異呼叫結果，依據策展的知識庫進行變異註解與分級，並產出經簽署的臨床報告。其存在是為了將變異清單轉化為具臨床可行性、受監管的診斷報告。
+    smci_en: Carries no customer-side server pull — it is SaaS-dominant and any footprint is cloud infrastructure
+      at the software operator. Hardware co-sell, if any, is with the ISV/operator hosting the platform,
+      not the diagnostic lab.
+    smci_zh: 不帶客戶端伺服器需求——以 SaaS 為主，任何佔用皆為軟體營運方的雲端基礎架構。若有硬體協同銷售，對象是託管該平台的 ISV/營運方，而非診斷實驗室。
+    tech_en: A predominantly SaaS analytics/workflow layer that consumes variant calls handed off from
+      the compute-heavy secondary-analysis bioinformatics pipeline, then applies variant annotation, classification
+      against curated knowledge bases, and report generation. The regulated SaMD logic and any real compute
+      footprint sit at the cloud operator, not on customer premises. No on-prem GPU pull at the customer.
+    tech_zh: 以 SaaS 為主的分析/工作流程層，接收由運算密集的次級分析生物資訊流程交付的變異呼叫結果，再套用變異註解、對策展知識庫的分級，以及報告產生。受監管的 SaMD 邏輯與任何實質運算佔用皆位於雲端營運方，而非客戶端；客戶端無本地
+      GPU 需求。
+    usage_flow:
+    - en: Ingest variant calls
+      zh: 匯入變異呼叫
+    - en: Annotate & classify
+      zh: 註解與分級
+    - en: Match knowledge base
+      zh: 對照知識庫
+    - en: Generate signed report
+      zh: 產出簽署報告
+  clinical-trial-suite:
+    purpose_en: The software backbone for running a clinical trial — capturing patient data (EDC), managing
+      operations (CTMS), storing regulated documents (eTMF), and randomizing and supplying (RTSM). It
+      exists to run compliant trials at scale across many sites.
+    purpose_zh: 執行臨床試驗的軟體骨幹——擷取受試者資料（EDC）、管理營運（CTMS）、存放受規範文件（eTMF）、隨機分配與試驗物資管理（RTSM）。存在目的是跨眾多試驗中心大規模執行合規試驗。
+    smci_en: Customer-side hardware is negligible because this is vendor-hosted SaaS; any server footprint
+      belongs to the software operator's multi-tenant cloud rather than to a direct on-prem opportunity.
+    smci_zh: 因屬廠商託管SaaS，客戶端硬體微乎其微；任何伺服器足跡屬於軟體營運商的多租戶雲端，而非直接的地端機會。
+    tech_en: This is vendor-hosted multi-tenant SaaS over transactional and document data, so sponsor-
+      and site-side hardware is negligible. Any real compute or storage footprint sits with the software
+      operator, not the customer.
+    tech_zh: 此為廠商託管的多租戶SaaS，資料為交易型與文件型，因此委託方與試驗中心端硬體微乎其微。實際運算與儲存足跡皆位於軟體營運商而非客戶端。
+    usage_flow:
+    - en: Design study & forms
+      zh: 設計試驗與表單
+    - en: Capture patient data (EDC)
+      zh: 擷取受試者資料 (EDC)
+    - en: Manage operations (CTMS/eTMF)
+      zh: 管理營運 (CTMS／eTMF)
+    - en: Randomize & supply (RTSM)
+      zh: 隨機分配與供應 (RTSM)
+    - en: Lock & submit data
+      zh: 鎖定並提交資料
+  comp-chem-simulation:
+    purpose_en: Simulates molecules and their interactions computationally — molecular dynamics, docking,
+      and quantum-mechanical calculations — to predict binding, stability, and properties before any wet-lab
+      work. It exists to shrink the drug-design search space in silico.
+    purpose_zh: 以運算方式模擬分子及其交互作用——分子動力學、對接與量子力學計算——在任何濕實驗前預測結合力、穩定性與性質。存在目的是以電腦模擬縮小藥物設計的搜尋空間。
+    smci_en: GPU servers accelerate molecular dynamics alongside HPC CPU nodes for QM and docking, with
+      NVMe parallel scratch and high-memory nodes for large systems — a low-latency interconnected cluster.
+    smci_zh: 以GPU伺服器加速分子動力學，搭配HPC CPU節點執行量子力學／對接，NVMe平行暫存，以及供大型系統使用的高記憶體節點——採低延遲互連的叢集。
+    tech_en: GPU-dense nodes run molecular dynamics while CPU-HPC handles docking and quantum-mechanical
+      calculations; low-latency interconnect and fast parallel scratch storage set the cluster size, and
+      large campaigns burst to cloud. The data is simulation output plus AI/ML surrogate models.
+    tech_zh: 以GPU高密度節點執行分子動力學，CPU-HPC執行對接與量子力學計算；低延遲互連與高速平行暫存儲存決定叢集規模，大型計算專案可爆發至雲端。資料為模擬結果加AI／機器學習替代模型。
+    usage_flow:
+    - en: Build molecular system
+      zh: 建構分子系統
+    - en: Configure simulation
+      zh: 設定模擬參數
+    - en: Run MD/docking/QM on cluster
+      zh: 於叢集執行 MD／對接／QM
+    - en: Analyze trajectories
+      zh: 分析軌跡
+    - en: Rank candidates
+      zh: 排序候選分子
+  cryo-em-structural-bio:
+    purpose_en: Processes cryo-electron-microscopy movie data into 3D molecular structures — motion correction,
+      CTF estimation, particle picking, and 2D/3D classification and reconstruction. It exists to resolve
+      protein and complex structures at near-atomic resolution for drug design.
+    purpose_zh: 將低溫電子顯微鏡的影格資料處理成三維分子結構——動態校正、CTF估計、粒子挑選以及2D／3D分類與重建。存在目的是解析蛋白質與複合體結構至近原子解析度以支援藥物設計。
+    smci_en: GPU servers run motion-correction and classification, NVMe all-flash serves as the high-bandwidth
+      ingest/working tier, high-memory nodes handle reconstruction, and high-capacity archive retains
+      the movie data — rack-to-cluster.
+    smci_zh: 以GPU伺服器執行動態校正與分類，NVMe全快閃作為高頻寬匯入／工作層，高記憶體節點供重建，並以大容量歸檔保存影格——機櫃至叢集規模。
+    tech_en: Instruments emit terabytes of movie data per session, driving a large fast NVMe tier and
+      archive plus high-bandwidth ingest, while GPU nodes handle motion correction, CTF estimation, and
+      2D/3D classification. High-memory nodes support large reconstructions.
+    tech_zh: 儀器每次工作產生數TB影格資料，驅動大型高速NVMe層與歸檔以及高頻寬匯入，GPU節點則處理動態校正、CTF估計與2D／3D分類。大型重建使用高記憶體節點。
+    usage_flow:
+    - en: Ingest microscope movies
+      zh: 匯入顯微鏡影格
+    - en: Motion-correct & CTF estimate
+      zh: 動態校正與CTF估計
+    - en: Pick & classify particles
+      zh: 挑選並分類粒子
+    - en: 3D reconstruct
+      zh: 三維重建
+    - en: Refine & archive
+      zh: 精修與歸檔
+  digital-pathology:
+    purpose_en: Digitizes glass pathology slides into whole-slide images (WSI) for on-screen diagnosis,
+      and runs AI to assist detection, quantification, and grading. It exists to replace the microscope
+      with a scalable digital workflow and to add regulated AI-assisted diagnostic tools.
+    purpose_zh: 將玻璃病理切片數位化為全切片影像（WSI）以供螢幕判讀，並運行 AI 協助偵測、量化與分級。其存在是為了以可擴充的數位工作流程取代顯微鏡，並加入受監管的 AI 輔助診斷工具。
+    smci_en: Fits a GPU-server cluster for AI inference/training, an NVMe all-flash rack as the scan-ingest
+      and viewing tier, and a high-capacity archive cluster (JBOD/object) for the PB-scale image store
+      — the flagship compute-plus-storage pull of the lab. A scanner-embedded ingest/inference workstation
+      is the OEM path.
+    smci_zh: 適合以 GPU 伺服器叢集承載 AI 推論/訓練、以 NVMe 全快閃機櫃作為掃描匯入與瀏覽層，並以高容量歸檔叢集（JBOD/物件儲存）承載 PB 級影像庫，是實驗室中運算加儲存的旗艦級需求。掃描儀內嵌的匯入/推論工作站則是
+      OEM 路徑。
+    tech_en: High-throughput scanners produce multi-gigabyte pyramidal WSI files that land on an NVMe
+      ingest tier, are served for pan/zoom viewing, and feed GPU servers for AI inference and model training.
+      Petabyte-scale tiered storage holds the growing image archive, and the AI diagnostic components
+      are regulated SaMD. GPU is used for both inference and training.
+    tech_zh: 高通量掃描儀產出數 GB 的金字塔式 WSI 檔案，先落在 NVMe 匯入層，供縮放瀏覽並送入 GPU 伺服器進行 AI 推論與模型訓練。PB 級分層儲存保存持續成長的影像庫；AI
+      診斷元件屬受監管的 SaMD。GPU 同時用於推論與訓練。
+    usage_flow:
+    - en: Scan slides (WSI)
+      zh: 掃描切片（WSI）
+    - en: Ingest to fast storage
+      zh: 匯入高速儲存
+    - en: GPU AI inference
+      zh: GPU AI 推論
+    - en: Pathologist reads
+      zh: 病理醫師判讀
+    - en: Archive images
+      zh: 影像歸檔
+  ehr-emr-core:
+    purpose_en: The central patient record and clinical workflow system for the health system — orders,
+      results, notes, medication and documentation — and the transactional system of record for patient
+      data across the enterprise.
+    purpose_zh: 全院核心病歷與臨床作業系統，統整醫囑、檢驗結果、病歷紀錄、給藥與臨床文件，是全院病人資料的交易型記錄系統。
+    smci_en: HA-redundant database cluster nodes backed by NVMe all-flash for the transactional DB, virtualization
+      hosts for the VDI farm, and a DR-site server pair; scaling from rack to cluster. Refresh cycles
+      and DR-site builds are the main deal triggers.
+    smci_zh: 交易資料庫採用搭配 NVMe 全快閃的高可用備援叢集節點，另配虛擬化／VDI 主機與異地備援站點的伺服器對，規模由機櫃到叢集；汰換週期與異地備援站建置是主要商機切入點。
+    tech_en: A large transactional relational database runs on high-availability clusters, fronted by
+      virtualization/VDI farms for clinician access and integration engines for data exchange. DR replication
+      and strict uptime SLAs are mandatory; capacity is sized by concurrent users, staffed bed count and
+      refresh cycles.
+    tech_zh: 以大型交易型關聯資料庫執行於高可用叢集，前端搭配虛擬化／VDI 農場供臨床端存取，並以整合引擎進行資料交換；具異地備援複寫與嚴格的可用性 SLA，容量依同時上線人數、床數與汰換週期決定。
+    usage_flow:
+    - en: Clinician logs in
+      zh: 醫師登入
+    - en: Order/document at point of care
+      zh: 於照護端下醫囑或紀錄
+    - en: Transactional DB commit
+      zh: 交易資料庫寫入
+    - en: Exchange via HL7/FHIR
+      zh: 以 HL7/FHIR 整合交換
+    - en: Replicate to DR site
+      zh: 複寫至異地備援
+  eqms-calibration:
+    purpose_en: An electronic QMS with calibration and maintenance management runs the GxP quality processes
+      — deviations, CAPAs, change control, training, controlled documents — and tracks the calibration
+      and maintenance schedules of regulated equipment. It exists to keep the quality system compliant
+      and audit-ready.
+    purpose_zh: 電子品質管理系統（eQMS）搭配校正與維護管理，執行 GxP 品質流程（偏差、CAPA、變更控制、訓練、受控文件），並追蹤受管制設備的校正與維護排程。其存在目的是維持品質系統的合規性與稽核準備狀態。
+    smci_en: 'Minimal on-prem hardware: at most a high-capacity archive node for controlled-document retention
+      plus small application/database servers where a site self-hosts. Calibration/CMMS modules add asset
+      and schedule records, not compute — node-scale at most.'
+    smci_zh: 地端硬體需求極低：至多一台高容量封存節點供受控文件保存，以及在自行代管情況下的少量應用／資料庫伺服器。校正／CMMS 模組僅新增資產與排程紀錄，並無運算需求，至多為節點層級。
+    tech_en: As a system-of-record and workflow engine, it manages controlled documents and transactional
+      quality records with electronic signatures and audit trails, largely a document-and-form-centric
+      workload. It is predominantly delivered as validated SaaS or hosted; on-prem footprint is limited
+      to integration and long-term document retention rather than heavy compute.
+    tech_zh: 作為紀錄系統與工作流程引擎，它以電子簽章與稽核軌跡管理受控文件與交易型品質紀錄，主要屬以文件與表單為核心的工作負載。它多以已驗證的 SaaS 或代管方式交付；地端佔用僅限於整合與長期文件保存，而非高運算需求。
+    usage_flow:
+    - en: Log quality event / record
+      zh: 登錄品質事件／紀錄
+    - en: Route review & approval
+      zh: 傳送審查與核准
+    - en: Track calibration & maintenance
+      zh: 追蹤校正與維護
+    - en: Retain controlled records
+      zh: 保存受控紀錄
+  healthcare-cmms:
+    purpose_en: A maintenance system of record for biomedical and facility equipment — it tracks assets,
+      schedules preventive maintenance, logs work orders, and documents compliance for accreditation.
+    purpose_zh: 生醫與設施設備的維護系統紀錄——追蹤資產、排定預防性維護、記錄工單，並為評鑑留存合規文件。
+    smci_en: Minimal direct hardware opportunity; where a residual on-prem or air-gapped install exists
+      it is a single small application/database server, not scale-out infrastructure.
+    smci_zh: 直接硬體機會極小；殘存的 on-prem 或氣隙安裝僅為單台小型應用／資料庫伺服器，非橫向擴展基礎架構。
+    tech_en: A transactional database of assets and work orders with attached documents (manuals, service
+      records, compliance evidence), delivered overwhelmingly as SaaS. Only small legacy application/database
+      servers remain on-prem at air-gapped sites; no GPU and no scale-out footprint.
+    tech_zh: 以交易型資料庫管理資產與工單並附掛文件（手冊、維修紀錄、合規佐證），絕大多數以 SaaS 交付。僅在氣隙隔離的舊站點保留小型應用／資料庫伺服器，無 GPU、無橫向擴展需求。
+    usage_flow:
+    - en: Register asset
+      zh: 登錄資產
+    - en: Schedule maintenance
+      zh: 排定維護
+    - en: Dispatch work order
+      zh: 派發工單
+    - en: Log service
+      zh: 記錄維修
+    - en: Report compliance
+      zh: 產出合規報表
+  healthcare-llm-serving:
+    purpose_en: A private, on-prem inference platform that hosts large foundation models behind the hospital
+      firewall, so generative-AI workloads — ambient documentation, chart summarization, coding assist,
+      agentic clinical workflows — run on protected health data without sending it to a public cloud.
+    purpose_zh: 在醫院防火牆內託管大型基礎模型的私有地端推論平台，讓生成式 AI 工作負載——環境語音記錄、病歷摘要、編碼輔助、代理式臨床流程——能在受保護的健康資料上運行，而無須將資料送往公有雲。
+    smci_en: Fits SMCI multi-GPU servers (large-VRAM, NVLink-class interconnect) paired with high-memory
+      hosts — a GPU-cluster-scale build. This is a flagship on-prem AI-inference deal driven by PHI residency
+      and token throughput and by how many foundation models are served concurrently.
+    smci_zh: 適用美超微多 GPU 伺服器（大顯存、NVLink 等級互連）搭配高記憶體主機——為 GPU 叢集級部署。此為受保護健康資料在地化與 token 吞吐量、以及並發託管基礎模型數量驅動的旗艦級地端
+      AI 推論商機。
+    tech_en: It runs tensor-parallel serving of 70-billion-parameter and larger models across multiple
+      large-VRAM GPUs, requiring high-memory hosts and fast interconnect. It is the infrastructure serving
+      layer beneath decision-support apps (CDSS), sited on-prem for PHI residency and low latency; sizing
+      is driven by concurrent token throughput and the number of models hosted, not stored-data volume.
+    tech_zh: 系統以張量平行方式跨多顆大顯存 GPU 供應 700 億參數以上的模型，需要高記憶體主機與高速互連。它是決策支援應用（CDSS）底層的基礎設施供應層，因受保護健康資料在地化與低延遲需求而部署於地端；規模由並發
+      token 吞吐量與託管模型數量決定，而非儲存資料量。
+    usage_flow:
+    - en: Load foundation models
+      zh: 載入基礎模型
+    - en: Serve on GPU cluster
+      zh: 於 GPU 叢集供應服務
+    - en: Route app requests via gateway
+      zh: 經閘道路由應用請求
+    - en: Run inference on PHI locally
+      zh: 本地對受保護健康資料推論
+    - en: Return to clinical apps
+      zh: 回傳臨床應用
+  hie-interoperability-engine:
+    purpose_en: The messaging backbone that routes and translates clinical data between systems and organizations,
+      so an order, result or patient record created in one system reliably reaches every other system
+      that needs it — the plumbing that makes health-data exchange work.
+    purpose_zh: 在系統與機構間路由並轉譯臨床資料的訊息骨幹，讓某系統產生的醫囑、檢驗結果或病患紀錄可靠地送達所有需要的其他系統——是讓健康資料交換得以運作的管路。
+    smci_en: Fits SMCI HA-redundant server pairs and a DR/backup node at a second site — general-purpose
+      compute where reliability, not raw performance, is the spec. A node-scale build sized by interface
+      count and message volume; the sell is uptime and dual-site resilience.
+    smci_zh: 適用美超微 HA 冗餘伺服器配對，並於第二站點配置 DR/備援節點——以可靠度而非原始效能為規格重點的通用型運算。為節點級部署，依介面數與訊息量定規模；銷售訴求在於不中斷運行與雙站點韌性。
+    tech_en: It runs message brokers and transformation engines that parse and map HL7 v2 and FHIR feeds
+      between interfaces, with guaranteed delivery, queuing and retry. Compute is modest and general-purpose,
+      but availability requirements are strict — feeds cannot be dropped — so clustered HA pairs and dual-site
+      DR failover are standard. No meaningful GPU.
+    tech_zh: 系統以訊息代理與轉換引擎解析並對應各介面間的 HL7 v2 與 FHIR 饋送，具保證傳遞、佇列與重送機制。運算需求適中且為通用型，但可用性要求嚴格——饋送不得遺失——故叢集式
+      HA 配對與雙站點 DR 容錯為標準配置。無顯著 GPU 需求。
+    usage_flow:
+    - en: Receive inbound feeds
+      zh: 接收上游資料饋送
+    - en: Parse HL7 / FHIR messages
+      zh: 解析 HL7/FHIR 訊息
+    - en: Transform & map
+      zh: 轉換與對應
+    - en: Route to destinations
+      zh: 路由至目的系統
+    - en: Queue, retry & audit
+      zh: 佇列、重送與稽核
+  him-coding:
+    purpose_en: Health information management and coding software governs the legal medical record and
+      turns documentation into standardized diagnosis and procedure codes (ICD, CPT) for billing, reporting
+      and compliance. It exists to keep the chart complete, retained and accurately coded.
+    purpose_zh: 健康資訊管理與醫療編碼軟體掌管法定病歷，並把臨床文件轉換為標準化的診斷與處置代碼（ICD、CPT），供計費、統計與合規使用。它的存在是為了讓病歷完整、依規保存並準確編碼。
+    smci_en: At the customer, rack-scale high-capacity archive/JBOD storage for long-retention document
+      repositories is the main pull; a modest GPU server (node/rack) applies only where a hospital chooses
+      to host coding NLP on-prem, otherwise that GPU sits with the ISV.
+    smci_zh: 在客戶端，主要需求是機架級的高容量歸檔/JBOD 儲存，用於長期保存的文件庫；只有當醫院選擇在院內自建編碼 NLP 時，才會用到一台規模有限的 GPU 伺服器（節點/機架級），否則該
+      GPU 落在 ISV 端。
+    tech_en: The dominant footprint is scanned-chart and document-imaging repositories held under long,
+      multi-year retention (often 7-15 years or more depending on jurisdiction), so storage, not compute,
+      drives sizing; legacy on-prem archives are prime refresh candidates. NLP-based computer-assisted
+      and autonomous coding adds GPU inference, but that inference is mostly ISV-hosted rather than run
+      on customer hardware.
+    tech_zh: 其主要規模來自掃描病歷與文件影像的儲存庫，須依規長年保存（視法規常達 7 至 15 年甚至更久），因此決定規模的是儲存而非運算；老舊的院內歸檔正是汰換更新的首選標的。以 NLP
+      進行的電腦輔助與自動化編碼會帶來 GPU 推論，但該推論多由 ISV 託管，較少在客戶端硬體上執行。
+    usage_flow:
+    - en: Capture / scan chart documents
+      zh: 擷取或掃描病歷文件
+    - en: NLP suggests codes (CAC)
+      zh: NLP 建議代碼（電腦輔助編碼）
+    - en: Coder reviews & finalizes
+      zh: 編碼師覆核並定稿
+    - en: Codes flow to billing/reporting
+      zh: 代碼送往計費/統計
+    - en: Archive record long-term
+      zh: 長期歸檔病歷
+  hospital-bms:
+    purpose_en: Monitors and controls building systems — HVAC, power, medical gas — and provides compliance-grade
+      environmental monitoring (temperature, humidity, pressure) for sensitive areas such as ORs, pharmacies,
+      and cold storage.
+    purpose_zh: 監控並控制建物系統——空調、電力、醫療氣體——並為手術室、藥局、冷藏等敏感區域提供合規級環境監測（溫度、濕度、壓差）。
+    smci_en: A compact industrial-edge node hosts the supervisory/historian server; node-scale, sized
+      by monitored building-automation point count, campus size, and historian retention requirements.
+    smci_zh: 以精簡工業邊緣節點承載監控／歷史資料伺服器；節點級，依建物自動化監測點數量、院區規模與歷史資料保存需求調配。
+    tech_en: Proprietary edge controllers sense and actuate building points, while modest on-prem supervisory/historian
+      servers store time-series readings, drive alarms on environmental excursions, and support compliance
+      reporting, with small analytics for energy optimization. No GPU.
+    tech_zh: 專有邊緣控制器感測並致動建物監測點，規模適中的 on-prem 監控／歷史資料伺服器儲存時序讀值、對環境逾限告警並支援合規報表，另有小型分析用於能源優化。無 GPU。
+    usage_flow:
+    - en: Sense building points
+      zh: 感測建物監測點
+    - en: Control equipment
+      zh: 控制設備
+    - en: Historize readings
+      zh: 歷史化讀值
+    - en: Alarm excursions
+      zh: 逾限告警
+    - en: Report & optimize
+      zh: 報表與節能優化
+  hospital-erp:
+    purpose_en: Hospital ERP runs the enterprise back office — finance and general ledger, supply-chain
+      and materials management, and human resources/payroll — for a health system. It exists to control
+      cost, procurement and workforce administration as the business backbone behind clinical operations.
+    purpose_zh: 醫院 ERP 負責醫療體系的企業後勤——財務與總帳、供應鏈與物料管理，以及人力資源/薪資——的運作。它的存在是為了掌控成本、採購與人力行政，是臨床營運背後的營運骨幹。
+    smci_en: 'Fits rack-scale general-purpose servers: an NVMe-backed HA database/application cluster
+      plus a DR/backup node, sized by transaction volume and concurrent users; positioned around the customer''s
+      refresh cycle since new on-prem footprint is shrinking.'
+    smci_zh: 適合機架級通用型伺服器：以 NVMe 承載的高可用資料庫/應用叢集，再加一個異地備援/備份節點，規模由交易量與併發使用者決定；由於新增院內部署正在萎縮，應圍繞客戶的汰換週期切入。
+    tech_en: Where deployed on-prem (still common in APAC hospitals), it is a classic transactional database
+      plus application tier in an HA cluster with a DR pair and nightly close/batch windows; sizing follows
+      transaction volume, bed count and concurrent users. Cloud-ERP migration is steadily eroding the
+      on-prem footprint, so hardware refresh cycles are the main entry point.
+    tech_zh: 在採院內部署時（於亞太地區醫院仍常見），它是典型的交易型資料庫加應用層，以高可用叢集運行，並配一組異地備援對與夜間結帳/批次時窗；規模取決於交易量、床位數與併發使用者數。雲端 ERP
+      遷移正持續侵蝕院內部署，因此硬體汰換週期是主要切入點。
+    usage_flow:
+    - en: Record transactions (finance/supply/HR)
+      zh: 記錄交易（財務/供應/人資）
+    - en: Process procurement & inventory
+      zh: 處理採購與庫存
+    - en: Run payroll & HR workflows
+      zh: 執行薪資與人資流程
+    - en: Nightly close / batch posting
+      zh: 夜間結帳/批次過帳
+    - en: Report & analyze results
+      zh: 產出報表與分析
+  icu-central-monitoring:
+    purpose_en: A central-station monitoring and clinical surveillance system that continuously ingests
+      bedside physiological waveforms and vitals across ICU and monitored beds, driving alarms and early-warning
+      analytics.
+    purpose_zh: 中央監視站與臨床監測系統，持續擷取加護病房與監測床位的床邊生理波形與生命徵象，驅動警報與早期預警分析。
+    smci_en: HA-redundant server pairs with an NVMe fast tier for waveform ingest, plus industrial edge
+      gateways at the bedside/unit; node/pair scale. The larger motion is an OEM design-win through the
+      monitoring device maker; hospital-owned surveillance analytics is the smaller direct pull.
+    smci_zh: 以高可用備援伺服器對搭配 NVMe 高速層承載波形匯入，並在床邊／單位配置工業級邊緣閘道；節點／伺服器對規模。最大宗機會是透過監測儀器廠商的 OEM 設計導入，醫院自有的監測分析則屬較小的直接商機。
+    tech_en: Redundant on-prem server pairs and bedside/edge gateways ingest continuous high-rate waveforms;
+      HA is mandatory because downtime is a patient-safety event. Sized by monitored-bed count and waveform
+      retention. Central-station servers are usually OEM-supplied by the monitoring vendor as part of
+      the FDA-cleared system.
+    tech_zh: 以冗餘的本地伺服器對與床邊／邊緣閘道匯入高取樣率的連續波形；因停機即屬病安事件，高可用為必要；規模依監測床數與波形保存決定；中央站伺服器通常由監測儀器廠商作為 FDA 核准系統的一部分供應。
+    usage_flow:
+    - en: Bedside devices stream waveforms
+      zh: 床邊裝置串流波形
+    - en: Edge gateway ingest
+      zh: 邊緣閘道匯入
+    - en: Central HA server store
+      zh: 中央高可用伺服器儲存
+    - en: Surveillance analytics + alarms
+      zh: 監測分析與警報
+    - en: Notify clinician
+      zh: 通知臨床端
+  imaging-ai-deployment:
+    purpose_en: An orchestration/marketplace platform that deploys and serves many imaging AI models (triage,
+      detection, quantification) against incoming studies and routes the results back to PACS and reporting.
+    purpose_zh: 影像 AI 部署／市集平台，把多個影像 AI 模型（分流、偵測、量化）部署並服務於進入的檢查，並把結果回送 PACS 與報告系統。
+    smci_en: GPU inference servers (data-center or edge form factor) placed near PACS for PHI/latency,
+      in HA configuration; scaling from an edge node to a cluster. This is the prime hospital GPU hook.
+    smci_zh: 以 GPU 推論伺服器（資料中心或邊緣型態）部署於 PACS 附近以兼顧 PHI／延遲，並採高可用架構；由邊緣節點到叢集規模；是醫院端最主要的 GPU 切入點。
+    tech_en: Inference nodes in data-center or edge form factor are sited near PACS and modalities for
+      PHI and latency, orchestrating many concurrent AI models, while marketplace operators run large
+      GPU fleets. Sizing is driven by studies per day, concurrent model count and clinical HA requirements.
+    tech_zh: 推論節點以資料中心或邊緣型態部署於 PACS 與儀器附近以顧及 PHI 與延遲，協調多個並行 AI 模型；市集營運方則有大型 GPU 機群；規模依每日檢查量、並行模型數與臨床高可用需求決定。
+    usage_flow:
+    - en: Study arrives from PACS/modality
+      zh: 檢查自 PACS／儀器抵達
+    - en: Route to model(s)
+      zh: 路由至模型
+    - en: GPU inference
+      zh: GPU 推論
+    - en: Return results/overlays to PACS
+      zh: 回傳結果與疊加至 PACS
+    - en: Monitor/manage models
+      zh: 監控與管理模型
+  lab-middleware-automation:
+    purpose_en: 'Middleware that sits between analyzers/track automation and the LIS: it drives instrument
+      automation lines, applies autoverification and QC rules to incoming results, and routes samples
+      and data in real time. It exists to keep a high-volume core lab running hands-free while releasing
+      only rule-passing results.'
+    purpose_zh: 位於分析儀/軌道自動化與 LIS 之間的中介軟體，負責驅動儀器自動化生產線、對進來的結果套用自動審核與品管規則，並即時調度檢體與資料。其存在是為了讓高產量的核心實驗室近乎無人化運行，同時只放行通過規則的結果。
+    smci_en: Fits compact industrial/edge server nodes on the lab floor next to the automation line, deployed
+      as HA-redundant pairs so a single failure does not halt the track — node-scale, one or two per lab,
+      no GPU.
+    smci_zh: 適合部署在實驗室現場、緊鄰自動化生產線的精簡工業級/邊緣伺服器節點，並以高可用配對部署，使單點故障不會中斷軌道；規模為節點級，每間實驗室一至兩台，無需 GPU。
+    tech_en: Real-time integration and track-control servers ingest instrument messages — transactional
+      data plus time-series status/sensor streams — evaluate autoverification and QC rules with low latency,
+      and forward passing results to the LIS. Because core-lab automation cannot stop, it runs on HA edge/industrial
+      server pairs beside the analyzers. No GPU.
+    tech_zh: 即時整合與軌道控制伺服器擷取儀器訊息（交易資料加上時序的狀態/感測串流），以低延遲評估自動審核與品管規則，再將通過的結果轉送至 LIS。由於核心實驗室自動化不能中斷，因此以高可用的工業級邊緣伺服器對部署在分析儀旁；無需
+      GPU。
+    usage_flow:
+    - en: Connect analyzers
+      zh: 連接分析儀
+    - en: Control automation track
+      zh: 控制自動化軌道
+    - en: Apply QC / autoverify
+      zh: 套用品管/自動審核
+    - en: Route results to LIS
+      zh: 結果送交 LIS
+  lis:
+    purpose_en: 'The system of record for a clinical laboratory: it receives test orders, tracks specimens
+      through the analyzers, captures and validates results, and returns reports to the ordering clinician
+      and EHR. It exists to run a hospital or reference lab''s daily order-to-result workflow reliably
+      and with a full audit trail.'
+    purpose_zh: 臨床實驗室的核心紀錄系統，負責接收檢驗醫囑、追蹤檢體在分析儀之間的流轉、擷取與審核結果，並將報告回傳給開單醫師與電子病歷。其存在是為了穩定且可稽核地運行醫院或參考實驗室每日的「醫囑到結果」流程。
+    smci_en: Fits HA-redundant dual-node server pairs for the database and application tier, NVMe all-flash
+      for the hot transaction store, and a DR/backup node at a second site — a rack-scale HA cluster plus
+      a modest DR footprint, no GPU.
+    smci_zh: 適合以高可用雙節點伺服器對承載資料庫與應用層、以 NVMe 全快閃承載熱交易資料，並於第二站點部署異地備援/備份節點；規模為機櫃級高可用叢集加上小型異地備援，無需 GPU。
+    tech_en: A transactional relational database plus application servers hold orders, specimen states,
+      and results, connected to instruments and the EHR over HL7/ASTM interfaces. The workload is high-concurrency
+      small-transaction reads and writes with long data retention and strict uptime, so it runs on HA
+      database clusters with fast NVMe storage and a DR replica. No GPU is involved.
+    tech_zh: 以交易型關聯式資料庫搭配應用伺服器，保存醫囑、檢體狀態與結果，並透過 HL7/ASTM 介面連接儀器與電子病歷。工作負載屬高併發、小交易的讀寫，資料保留期長且要求高可用，因此運行於高可用資料庫叢集、搭配高速
+      NVMe 儲存與異地備援複本；不需 GPU。
+    usage_flow:
+    - en: Receive order
+      zh: 接收醫囑
+    - en: Accession specimen
+      zh: 檢體登錄
+    - en: Interface analyzers
+      zh: 串接分析儀
+    - en: Validate results
+      zh: 審核結果
+    - en: Report to EHR
+      zh: 回傳病歷
+  medical-device-integration:
+    purpose_en: Connects bedside medical devices (patient monitors, ventilators, infusion pumps) to the
+      EMR, normalizing their data streams and routing clinical alarms so vitals flow into the chart automatically
+      and alerts reach the right clinician.
+    purpose_zh: 將床邊醫療設備（生理監視器、呼吸器、輸液幫浦）連接至電子病歷，統一其資料串流並路由臨床警報，使生命徵象自動寫入病歷、警示送達正確的臨床人員。
+    smci_en: High-availability redundant server pairs for the central integration engine, compact industrial-edge
+      nodes at the bedside and unit level, and an NVMe all-flash performance tier for waveform retention;
+      scales from node to rack per facility.
+    smci_zh: 中央整合引擎採高可用備援伺服器對，床邊與病區層部署精簡工業邊緣節點，並配置 NVMe 全快閃效能層保存波形；每院區從節點級擴展至機櫃級。
+    tech_en: Edge gateways at the bedside capture continuous vitals and waveform time-series over device
+      protocols (HL7 and proprietary), and a high-availability central integration engine normalizes and
+      maps them into EMR feeds while alarm rules route notifications at low latency. Growing waveform
+      retention drives NVMe performance and time-series storage; no GPU.
+    tech_zh: 床邊邊緣閘道透過設備協定（HL7 與專有協定）擷取連續生命徵象與波形時序，高可用中央整合引擎進行正規化並對應至病歷資料流，警報規則以低延遲路由通知。持續增長的波形保存需求驅動 NVMe
+      效能層與時序儲存，無 GPU。
+    usage_flow:
+    - en: Acquire device data
+      zh: 擷取設備資料
+    - en: Normalize & map
+      zh: 正規化與對應
+    - en: Route alarms
+      zh: 路由警報
+    - en: Post to EMR
+      zh: 寫入電子病歷
+    - en: Retain time-series
+      zh: 保存時序資料
+  medical-iot-security:
+    purpose_en: Discovers, inventories, and monitors connected medical and IoT/OT devices for cyber risk,
+      passively watching network traffic to detect vulnerabilities, anomalies, and threats without disrupting
+      clinical devices.
+    purpose_zh: 探索、盤點並監控連網醫療與 IoT／OT 設備的資安風險，以被動方式監看網路流量偵測漏洞、異常與威脅，且不干擾臨床設備。
+    smci_en: Industrial-edge collector nodes at each campus ingest and inspect mirrored (SPAN/TAP) traffic
+      at line rate; node-scale, sized by connected-device count, number of network segments, and traffic-mirroring
+      throughput.
+    smci_zh: 各院區部署工業邊緣採集節點，以線速擷取並檢測鏡像（SPAN／TAP）流量；節點級，依連網設備數量、網段數與流量鏡像吞吐量調配。
+    tech_en: Passive collector/sensor appliances ingest mirrored (SPAN/TAP) network traffic at each campus,
+      fingerprint devices and baseline their behavior as time-series, and flag anomalies. Analytics and
+      asset inventory mostly run in the cloud, with fully on-prem builds only for high-security sites;
+      no GPU.
+    tech_zh: 被動式採集／感測器設備於各院區擷取鏡像（SPAN／TAP）網路流量，指紋辨識設備並以時序建立行為基線、標記異常。分析與資產盤點多在雲端，僅高安全站點採全 on-prem，無 GPU。
+    usage_flow:
+    - en: Mirror network traffic
+      zh: 鏡像網路流量
+    - en: Identify devices
+      zh: 辨識設備
+    - en: Baseline behavior
+      zh: 建立行為基線
+    - en: Detect anomaly
+      zh: 偵測異常
+    - en: Alert & segment
+      zh: 告警與隔離
+  mes-ebr:
+    purpose_en: A Manufacturing Execution System with Electronic Batch Record digitizes and enforces the
+      recipe on the shop floor, guiding operators step by step through each production batch and capturing
+      a complete, review-by-exception electronic record. It exists to replace paper batch records, enforce
+      GxP compliance, and prove every batch was made right.
+    purpose_zh: 製造執行系統（MES）搭配電子批次紀錄（EBR），將配方數位化並在生產現場強制執行，逐步引導操作員完成每一批次生產，同時擷取完整、可「例外審查」的電子紀錄。其存在目的是取代紙本批次紀錄、落實
+      GxP 法規遵循，並證明每一批次都依規範製造。
+    smci_en: Fits redundant HA server pairs per plant plus rugged industrial-edge nodes at each line,
+      backed by a DR/backup node at a second site; typically sized at the node/pair level rather than
+      large clusters. Because it is GxP/Part 11, a controlled BOM and validated-change documentation ship
+      with the hardware.
+    smci_zh: 適配每廠一組高可用（HA）冗餘伺服器對，加上每條產線的強固型工業邊緣節點，並於異地配置一台 DR/備份節點；規模多為節點／伺服器對層級，而非大型叢集。因屬 GxP/Part 11
+      環境，硬體須隨附受控 BOM 與驗證變更文件。
+    tech_en: As a system-of-record and workflow engine, MES/EBR runs a transactional database of recipes,
+      orders and material genealogy, ingests time-series parameters from equipment and process control,
+      and stores review documents and e-signatures under 21 CFR Part 11. It integrates downward to SCADA/PLC/historian
+      and upward to ERP, and must run continuously with deterministic response so a line never stalls.
+    tech_zh: 作為紀錄系統與工作流程引擎，MES/EBR 維護配方、工單與物料譜系的交易型資料庫，從設備與製程控制擷取時序參數，並依 21 CFR Part 11 儲存審查文件與電子簽章。它向下整合
+      SCADA/PLC/歷史資料庫、向上整合 ERP，且須以確定性反應持續運行，避免產線停擺。
+    usage_flow:
+    - en: Author & release recipe
+      zh: 編寫並發放配方
+    - en: Execute batch steps on line
+      zh: 產線逐步執行批次
+    - en: Capture data & e-signatures
+      zh: 擷取數據與電子簽章
+    - en: Review by exception
+      zh: 例外審查
+    - en: Release & archive batch record
+      zh: 放行並歸檔批次紀錄
+  ms-proteomics-metabolomics:
+    purpose_en: Turns mass-spectrometry raw data into identified and quantified proteins and metabolites
+      via spectral-library and database search and data-independent-acquisition deconvolution. It exists
+      to read the protein and metabolite content of biological samples at scale.
+    purpose_zh: 透過光譜庫與資料庫搜尋以及資料獨立擷取（DIA）解卷積，將質譜原始資料轉化為已鑑定並定量的蛋白質與代謝物。存在目的是大規模讀取生物樣本的蛋白質與代謝物組成。
+    smci_en: HPC CPU nodes carry the search and deconvolution workload, high-memory nodes handle large
+      searches, NVMe provides scratch, and high-capacity archive stores accumulating raw files — rack
+      scale, and largely CPU-bound today.
+    smci_zh: 以HPC CPU節點承載搜尋與解卷積工作，高記憶體節點供大型搜尋，NVMe提供暫存，並以大容量歸檔存放累積的原始檔——機櫃規模，目前多以CPU為主。
+    tech_en: Parallel spectral-library and database search plus DIA deconvolution (MaxQuant/DIA-NN/Spectronaut/FragPipe)
+      are CPU-bound and need large-memory nodes and NVMe scratch, while accumulating raw instrument files
+      drive archive growth. Deep-learning spectral and retention-time prediction is an emerging GPU workload,
+      and sizing follows sample throughput.
+    tech_zh: 平行光譜庫與資料庫搜尋加DIA解卷積（MaxQuant／DIA-NN／Spectronaut／FragPipe）以CPU為主，需高記憶體節點與NVMe暫存，累積的原始儀器檔案則驅動歸檔成長。深度學習光譜與滯留時間預測為新興GPU需求，規模依樣本吞吐量而定。
+    usage_flow:
+    - en: Acquire MS raw files
+      zh: 取得質譜原始檔
+    - en: Search spectra / deconvolute
+      zh: 搜尋光譜／解卷積
+    - en: Identify & quantify
+      zh: 鑑定與定量
+    - en: Statistical analysis
+      zh: 統計分析
+    - en: Archive raw + results
+      zh: 歸檔原始檔與結果
+  ngs-lab-lims:
+    purpose_en: 'A LIMS specialized for the sequencing wet lab: it tracks samples, libraries, reagents,
+      and sequencing runs through the bench workflow and records the chain of custody. It exists to manage
+      the operational lab process around the sequencers, not to process the sequence data itself.'
+    purpose_zh: 專為定序濕實驗室設計的 LIMS，追蹤檢體、文庫、試劑與定序批次在實驗流程中的流轉，並記錄監管鏈。其存在是為了管理環繞定序儀的實驗室操作流程，而非處理定序資料本身。
+    smci_en: 'Carries no significant server pull of its own — a light application/database VM alongside
+      the LIS or lab infrastructure suffices. The real hardware opportunity is adjacent: the sequencer
+      storage tier and the bioinformatics secondary-analysis cluster, not this software.'
+    smci_zh: 本身不帶明顯的伺服器需求——在 LIS 或實驗室基礎架構旁配置一台輕量的應用/資料庫 VM 即可。真正的硬體機會在其鄰近環節：定序儀的儲存層與生物資訊次級分析叢集，而非此軟體。
+    tech_en: A modest transactional application-and-database tier records samples, libraries, and run
+      metadata, deployable on-prem or as SaaS. It sits beside sequencers that stage terabyte-scale BCL/FASTQ
+      output locally, but that storage and compute belong to the instruments and downstream secondary
+      analysis, not to the LIMS. No GPU.
+    tech_zh: 以精簡的交易型應用與資料庫層記錄檢體、文庫與批次中繼資料，可部署於本地或以 SaaS 提供。它座落在定序儀旁，而定序儀會在本地暫存 TB 級的 BCL/FASTQ 產出，但該儲存與運算屬於儀器與下游次級分析，而非
+      LIMS 軟體本身。無需 GPU。
+    usage_flow:
+    - en: Register samples
+      zh: 登錄檢體
+    - en: Track library prep
+      zh: 追蹤文庫製備
+    - en: Schedule sequencing run
+      zh: 排定定序批次
+    - en: Record run metadata
+      zh: 記錄批次中繼資料
+  or-surgical-video:
+    purpose_en: Manages operating-room scheduling and workflow while capturing, routing and archiving
+      surgical video (endoscopic, room cameras, 4K) for documentation, teaching and increasingly intra-operative
+      AI.
+    purpose_zh: 管理開刀房排程與作業，並擷取、路由與典藏手術影片（內視鏡、手術室攝影機、4K），用於病歷文件、教學，以及日益增加的術中 AI。
+    smci_en: Per-OR industrial edge capture nodes, GPU inference server nodes for intra-op video AI, and
+      capacity-archive storage for 4K video retention; node-per-OR plus rack-scale central archive. Strong
+      OEM appliance opportunity.
+    smci_zh: 每間開刀房的工業級邊緣擷取節點、供術中影像 AI 的 GPU 推論伺服器節點，以及 4K 影片保存的容量典藏儲存；每房節點加機櫃級中央典藏；OEM 設備整合機會強。
+    tech_en: Per-OR edge capture and routing appliances feed a central store of 4K surgical video; GPU
+      enters with intra-operative video AI. Sized by OR count, per-case video resolution and retention
+      policy, with a strong OEM appliance angle via OR-integration ISVs.
+    tech_zh: 每間開刀房的邊緣擷取與路由設備把 4K 手術影片送入集中儲存；術中影像 AI 則引入 GPU；規模依開刀房數、單刀影片解析度與保存政策決定，並有透過開刀房整合 ISV 的 OEM
+      設備切入機會。
+    usage_flow:
+    - en: Schedule case
+      zh: 排程刀次
+    - en: Capture/route video at OR edge
+      zh: 於開刀房邊緣擷取並路由影片
+    - en: Optional intra-op AI inference
+      zh: 選配術中 AI 推論
+    - en: Central video archive
+      zh: 集中影片典藏
+    - en: Review/teach/link to EHR
+      zh: 檢閱、教學與病歷連結
+  pacs-vna:
+    purpose_en: Stores, manages and distributes all of a hospital's medical images (CT, MR, X-ray, ultrasound)
+      as the long-term system of record, so any prior study can be retrieved and viewed on demand. The
+      VNA layer consolidates images across departments and multiple PACS into one vendor-neutral archive.
+    purpose_zh: 儲存、管理並分發醫院所有醫學影像（CT、MR、X光、超音波），作為長期影像的記錄系統，讓臨床醫師能隨時調閱任何歷史檢查；VNA（廠商中立典藏）再加上整合層，把跨科別、跨 PACS
+      的影像集中管理。
+    smci_en: NVMe all-flash storage servers for the hot ingest/cache tier and high-capacity archive JBOD/storage
+      servers for the PB-scale retention tier; sized from rack (flash) to cluster (archive).
+    smci_zh: 熱資料匯入／快取層採用 NVMe 全快閃儲存伺服器，PB 級保存層採用高容量典藏 JBOD／儲存伺服器，規模由機櫃（快閃）到叢集（典藏）。
+    tech_en: Receives DICOM studies from imaging modalities over standard protocols (DICOM/HL7/FHIR),
+      lands them on an NVMe ingest and cache tier, then migrates to petabyte-scale tiered object/capacity
+      storage for 10+ year retention. Images are served back to diagnostic viewers on demand; the archive
+      itself needs no GPU (the AI overlay is a separate category).
+    tech_zh: 透過 DICOM/HL7/FHIR 標準協定接收各影像儀器的檢查，先落在 NVMe 高速匯入與快取層，再遷移到 PB 級的分層物件／容量儲存以做 10 年以上保存，並隨選提供影像給診斷檢視器；典藏層本身不需
+      GPU（AI 疊加另計）。
+    usage_flow:
+    - en: Modalities acquire images
+      zh: 儀器擷取影像
+    - en: Ingest to NVMe fast tier
+      zh: 匯入 NVMe 高速層
+    - en: Migrate to tiered archive
+      zh: 遷移至分層典藏
+    - en: Serve on demand to viewers
+      zh: 隨選分發至檢視器
+    - en: Retain 10yr+
+      zh: 長期保存 10 年以上
+  pat-process-twin:
+    purpose_en: PAT and process digital twin apply real-time analytical models on the production line
+      and simulate the bioprocess so quality can be understood and controlled during manufacture rather
+      than only tested afterward. They exist to enable real-time release thinking, deeper process understanding,
+      and faster process development.
+    purpose_zh: 製程分析技術（PAT）與製程數位孿生在生產線上套用即時分析模型並模擬生物製程，使品質能在製造過程中被理解與控制，而非僅於事後檢驗。其存在目的是實現即時放行的思維、更深入的製程理解，以及更快的製程開發。
+    smci_en: Fits GPU servers and HPC CPU compute at rack scale for simulation and digital-twin runs,
+      plus industrial-edge GPU nodes on the line for real-time spectral inference. Mixed inference/compute;
+      sized by process-model complexity and monitored unit operations.
+    smci_zh: 適配機櫃層級的 GPU 伺服器與 HPC CPU 運算供模擬與數位孿生，並在產線上配置工業邊緣 GPU 節點供即時光譜推論。屬推論與運算混合型，規模依製程模型複雜度與受監控單元操作數而定。
+    tech_en: As an analytics/AI, data-acquisition and integration layer, it runs GPU/edge inference on
+      in-line spectral models to predict critical quality attributes, and uses GPU/HPC compute for bioprocess
+      simulation and digital-twin runs over time-series, simulation and AI-model data. Sizing scales with
+      model complexity and the number of monitored unit operations.
+    tech_zh: 作為分析／AI、資料擷取與整合層，它以 GPU／邊緣推論運行線上光譜模型以預測關鍵品質屬性，並運用 GPU/HPC 運算對時序、模擬與 AI 模型資料執行生物製程模擬與數位孿生。規模隨模型複雜度與受監控單元操作數而增。
+    usage_flow:
+    - en: Acquire in-line spectra/sensors
+      zh: 擷取線上光譜／感測
+    - en: Run real-time model inference
+      zh: 執行即時模型推論
+    - en: Predict quality attributes
+      zh: 預測品質屬性
+    - en: Simulate process / digital twin
+      zh: 模擬製程／數位孿生
+    - en: Feed control & release decisions
+      zh: 回饋控制與放行決策
+  patient-access-scheduling:
+    purpose_en: 'Patient access and scheduling software manages the front-of-house flow: appointment booking,
+      registration, check-in, insurance eligibility, and queue management across outpatient and diagnostic
+      settings. It exists to keep the patient''s entry point running smoothly and to feed clean encounter
+      data into downstream clinical and billing systems.'
+    purpose_zh: 病患准入與排程軟體負責「前台」流程：預約掛號、報到、身分/保險資格核驗與候診叫號管理，涵蓋門診與檢查各場景。它的存在是為了讓病患的入口環節順暢運作，並把乾淨的就診資料送往後端臨床與計費系統。
+    smci_en: Fits a small high-availability redundant server pair (general-purpose or virtualization rack
+      nodes) co-located with the HIS/EHR — node-scale — because a front-door outage is immediately visible,
+      so HA rather than raw capacity is the sizing constraint.
+    smci_zh: 適合一組小型高可用冗餘伺服器對（通用型或虛擬化機架節點），與 HIS/EHR 並置部署，屬節點級規模；因為前台停機會立即被病患察覺，故決定規格的是高可用而非原始容量。
+    tech_en: This is a transactional workflow application, typically deployed as HA virtual machines alongside
+      the HIS/EHR, with check-in kiosks, queue displays and ticketing terminals acting as thin edge endpoints.
+      It integrates tightly to the record system for demographics and orders; sizing is driven by daily
+      outpatient visit volume and the morning registration peak, where concurrency spikes hardest.
+    tech_zh: 這是一套交易型工作流應用，通常以高可用虛擬機的形式與 HIS/EHR 並置部署，報到自助機、叫號顯示與取票終端則作為輕量邊緣端點。它與病歷系統緊密整合以取得基本資料與醫囑；規模由每日門診量與早晨報到尖峰決定，該時段併發量最為劇烈。
+    usage_flow:
+    - en: Book appointment / register
+      zh: 預約掛號、建檔
+    - en: Verify identity & eligibility
+      zh: 核驗身分與保險資格
+    - en: Patient checks in (kiosk/desk)
+      zh: 病患報到（自助機/櫃檯）
+    - en: Queue & route to service
+      zh: 排隊叫號、分流至服務
+    - en: Encounter data to EHR/billing
+      zh: 就診資料送往病歷/計費
+  patient-portal-engagement:
+    purpose_en: A patient portal and engagement platform gives patients online self-service access to
+      their records, test results, appointment requests, secure messaging, and bill payment, extending
+      the health system's front door beyond the clinic. It exists to raise patient satisfaction, deflect
+      call-center load, and meet patient-access requirements.
+    purpose_zh: 病患入口網站與互動平台讓病患透過線上自助方式查閱病歷、檢驗結果、預約掛號、安全訊息往來與帳單繳費，把醫療體系的「大門」延伸到院外。它的存在是為了提升病患滿意度、減輕客服中心負荷，並滿足病患資料存取的法規要求。
+    smci_en: Hardware pull at the customer is minimal and SaaS-diluted; where a hospital self-hosts the
+      DMZ web/app tier, a small pair of general-purpose rack or multi-node servers with HA is sufficient,
+      node-scale rather than rack- or cluster-scale.
+    smci_zh: 此類在客戶端的硬體需求極小且因 SaaS 化而稀釋；若醫院自建 DMZ Web/應用層，僅需一組小型通用型機架或多節點伺服器搭配高可用配置即可，屬節點級規模，而非機架或叢集級。
+    tech_en: The platform is a web/mobile application tier holding mostly transactional records and documents,
+      integrating to the EHR/HIS over HL7/FHIR APIs so it renders data rather than owning it. It is overwhelmingly
+      delivered as multi-tenant SaaS on public cloud; where a hospital self-hosts, only a small web/app
+      (DMZ) front-end tier tethers to the on-prem HIS, sized by registered-patient count and peak login
+      bursts.
+    tech_zh: 此平台是一層 Web/行動應用，主要承載交易紀錄與文件，透過 HL7/FHIR 介面與電子病歷/HIS 整合，因此是「呈現」資料而非「持有」資料。它絕大多數以多租戶 SaaS 形式部署於公有雲；少數醫院自建時，也僅是一層對外（DMZ）Web/應用前端銜接院內
+      HIS，規模取決於註冊病患數與登入尖峰併發量。
+    usage_flow:
+    - en: Patient registers / logs in
+      zh: 病患註冊或登入
+    - en: Portal pulls data from EHR/HIS
+      zh: 入口從電子病歷/HIS 拉取資料
+    - en: Patient views results & messages
+      zh: 病患查閱結果與訊息
+    - en: Books appointments / pays bills
+      zh: 預約掛號、線上繳費
+    - en: Actions sync back to source systems
+      zh: 操作同步回源系統
+  payer-actuarial-hpc:
+    purpose_en: A compute grid that runs the insurer's actuarial and underwriting risk models — large
+      stochastic simulations that project reserves, price policies and test solvency across thousands
+      of scenarios, meeting regulatory reserving and reporting deadlines.
+    purpose_zh: 運行保險方精算與核保風險模型的運算網格——執行大規模隨機模擬，跨數千情境推估準備金、定價保單並測試清償能力，以符合法規準備金與申報期限。
+    smci_en: Fits SMCI HPC CPU-dense compute nodes with high-memory configurations — a rack-scale grid
+      sized by stochastic scenario count and policy volume. The sell is core density and memory per node
+      to close the overnight reserving batch window; no GPU required.
+    smci_zh: 適用美超微 HPC CPU 密集型運算節點搭配高記憶體配置——為機架級網格，依隨機情境數與保單量定規模。銷售訴求在於核心密度與每節點記憶體，以在隔夜時段內完成準備金批次；無須 GPU。
+    tech_en: It is a CPU-dense batch grid executing Monte-Carlo actuarial runs — thousands of scenarios
+      over millions of policies within tight overnight windows — with per-node high memory for large in-memory
+      model states. No GPU; performance is bounded by CPU core count and memory bandwidth, and regulatory
+      reserving deadlines drive grid refresh and expansion.
+    tech_zh: 系統為 CPU 密集型批次網格，執行蒙地卡羅精算運算——於緊迫的隔夜時段內對數百萬保單跑數千情境——並以每節點高記憶體承載大型記憶體內模型狀態。無 GPU；效能受限於 CPU 核心數與記憶體頻寬，法規準備金期限則驅動網格更新與擴充。
+    usage_flow:
+    - en: Load policy & assumption data
+      zh: 載入保單與假設資料
+    - en: Generate stochastic scenarios
+      zh: 產生隨機情境
+    - en: Run Monte-Carlo grid
+      zh: 執行蒙地卡羅網格運算
+    - en: Aggregate reserves & risk
+      zh: 彙整準備金與風險
+    - en: Report for reserving
+      zh: 產出準備金申報
+  payer-core-admin:
+    purpose_en: The insurer's system of record for enrollment, benefits and claims adjudication — it receives
+      each claim, applies benefit and contract rules, and decides what to pay, forming the transactional
+      core that runs a health plan's day-to-day operations.
+    purpose_zh: 保險方在投保、給付與理賠核付上的紀錄系統——接收每筆理賠、套用給付與合約規則並裁定支付金額，構成營運健保計畫日常作業的交易核心。
+    smci_en: Fits SMCI HA-redundant server pairs with NVMe all-flash for the transactional database and
+      a full DR site — a rack-scale build sized by claims volume and member count. The mainframe-to-x86
+      modernization wave is the primary refresh event to target.
+    smci_zh: 適用美超微 HA 冗餘伺服器配對，搭配 NVMe 全快閃承載交易資料庫並建置完整 DR 站點——為機架級部署，依理賠量與會員數定規模。由大型主機遷移至 x86 的現代化浪潮為主要更新切入點。
+    tech_en: 'It is a high-volume transactional database and rules engine: real-time and nightly batch
+      adjudication runs drive heavy CPU demand, while regulatory requirements mandate high availability
+      and dual-site DR. Storage is transactional (fast NVMe) rather than analytical; legacy mainframe-to-x86
+      modernization is a recurring refresh trigger.'
+    tech_zh: 系統為高流量交易資料庫與規則引擎：即時與夜間批次核付作業帶來沉重 CPU 需求，法規則要求高可用性與雙站點 DR。儲存屬交易型（高速 NVMe）而非分析型；由大型主機遷移至 x86
+      的現代化為反覆出現的更新契機。
+    usage_flow:
+    - en: Enroll members & benefits
+      zh: 登錄會員與給付方案
+    - en: Receive claims
+      zh: 接收理賠件
+    - en: Adjudicate against rules
+      zh: 依規則核付
+    - en: Batch process & pay
+      zh: 批次處理與支付
+    - en: Store & report
+      zh: 儲存與報表
+  payer-um-fraud-analytics:
+    purpose_en: Software that manages utilization and care review while flagging fraud, waste and abuse
+      in claims — steering appropriate care and protecting the plan's spend by scoring claims and provider
+      behavior against learned patterns.
+    purpose_zh: 管理使用率與照護審查、同時標記理賠中詐欺、浪費與濫用的軟體——透過對理賠及提供者行為依習得模式評分，引導適當照護並保護計畫支出。
+    smci_en: Fits SMCI HPC CPU-dense servers for claims-history model training and scoring at large or
+      government payers — a rack-scale compute footprint. GPU is not the driver here; the sell is CPU
+      throughput over full claims history and retraining cadence.
+    smci_zh: 適用美超微 HPC CPU 密集型伺服器，供大型或政府保險機構進行理賠歷史模型訓練與評分——為機架級運算足跡。此處 GPU 非關鍵；銷售訴求在於針對完整理賠歷史的 CPU 吞吐量與重訓頻率。
+    tech_en: Utilization and care-management workflows are SaaS-dominant, but the fraud/waste/abuse machine-learning
+      layer trains and scores over the full transactional claims history, which is where the on-prem hardware
+      angle lives at large or single-payer/government insurers. It is CPU-heavy analytics; sizing follows
+      claims volume and model-retraining cadence rather than GPU.
+    tech_zh: 使用率與照護管理流程以 SaaS 為主，但詐欺/浪費/濫用的機器學習層需針對完整交易理賠歷史進行訓練與評分，此即大型或單一支付方/政府保險機構的地端硬體切入點。屬 CPU 密集型分析；規模依理賠量與模型重訓頻率而定，非
+      GPU。
+    usage_flow:
+    - en: Ingest claims & history
+      zh: 擷取理賠與歷史資料
+    - en: Train fraud/UM models
+      zh: 訓練詐欺/使用管理模型
+    - en: Score claims & providers
+      zh: 評分理賠與提供者
+    - en: Flag & route for review
+      zh: 標記並轉交審查
+    - en: Retrain on feedback
+      zh: 依回饋重新訓練
+  pharmacometrics-modeling-simulation:
+    purpose_en: Models how drugs move through and act on the body (PK/PD, PBPK, QSP) and simulates clinical
+      trials to inform dosing and trial design. It exists to quantify drug behavior and de-risk clinical
+      decisions through modeling.
+    purpose_zh: 模擬藥物在體內的動態與作用（PK／PD、PBPK、QSP）並模擬臨床試驗，以指導給藥與試驗設計。存在目的是以模型量化藥物行為並降低臨床決策風險。
+    smci_en: HPC CPU-dense compute nodes run the parallel estimation and bootstrap grid, with high-memory
+      nodes carrying the QSP/PBPK models — a rack-scale validated grid that needs no GPU.
+    smci_zh: 以HPC高密度CPU運算節點執行平行估計與自助抽樣格網，並以高記憶體節點承載QSP／PBPK模型——機櫃規模的驗證格網，無需GPU。
+    tech_en: Embarrassingly-parallel population PK/PD estimation (NONMEM/NLME), covariate searches, and
+      bootstrap replicates fan out across CPU cores, while QSP and PBPK models add large-memory nodes.
+      Validated on-prem or private grids satisfy licensing and regulatory compliance; there is no GPU
+      workload, and sizing follows concurrent estimation jobs.
+    tech_zh: 高度平行的族群PK／PD估計（NONMEM／NLME）、共變數搜尋與自助抽樣分散於多CPU核心，QSP與PBPK模型則需高記憶體節點。為授權與法規合規採經驗證的地端或私有運算格網；無GPU工作負載，規模依並行估計作業數而定。
+    usage_flow:
+    - en: Assemble PK/PD data
+      zh: 彙整 PK／PD 資料
+    - en: Build & estimate model
+      zh: 建立並估計模型
+    - en: Run covariate/bootstrap search
+      zh: 執行共變數／自助抽樣搜尋
+    - en: Simulate virtual populations/trials
+      zh: 模擬虛擬族群／試驗
+    - en: Report for submission
+      zh: 產出送件報告
+  pharmacy-automation:
+    purpose_en: Automates medication dispensing, packaging, and compounding and manages the medication-use
+      workflow — controlling access to drugs, tracking inventory, and detecting diversion.
+    purpose_zh: 自動化藥品調劑、包裝與配製並管理用藥流程——控管藥品取用權限、追蹤庫存並偵測藥品流失。
+    smci_en: Industrial-edge nodes for the on-prem central and controller servers behind the cabinet and
+      robot fleet; node-scale, sized by cabinet/robot fleet size and medication transaction volume.
+    smci_zh: 以工業邊緣節點承載藥櫃與機器人群後端的 on-prem 中央與控制伺服器；節點級，依藥櫃／機器人機群規模與用藥交易量調配。
+    tech_en: Dispensing cabinets and packaging/compounding robots run on embedded/edge controllers, while
+      an on-prem central server holds formulary, inventory, and transaction records and runs diversion
+      analytics, with management tiers shifting hybrid/cloud. Transactional data only; no GPU.
+    tech_zh: 調劑藥櫃與包裝／配製機器人運行於嵌入式／邊緣控制器；on-prem 中央伺服器保存處方集、庫存與交易紀錄並執行流失分析，管理層漸轉混合／雲端。僅交易型資料，無 GPU。
+    usage_flow:
+    - en: Order & verify med
+      zh: 開立與核對醫囑
+    - en: Dispense at cabinet/robot
+      zh: 於藥櫃或機器人調劑
+    - en: Record transaction
+      zh: 記錄交易
+    - en: Reconcile inventory
+      zh: 盤點庫存
+    - en: Flag diversion
+      zh: 標記流失異常
+  plant-historian:
+    purpose_en: A plant historian is the time-series system-of-record that continuously captures and permanently
+      stores every process tag from the plant floor at high frequency. It exists to give quality, engineering
+      and operations a trustworthy long-term archive for trending, investigations, batch review and regulatory
+      retention.
+    purpose_zh: 工廠歷史資料庫（Historian）是時序型紀錄系統，以高頻率持續擷取並永久儲存廠區每一個製程標籤。其存在目的是為品保、工程與營運提供可信賴的長期封存，供趨勢分析、事件調查、批次審查與法規保存之用。
+    smci_en: Fits an NVMe all-flash node for the hot ingest/query tier paired with a high-capacity archive
+      rack (JBOD/dense storage) for long retention — a storage-led profile with modest compute. Sizing
+      tracks historized tag count and sampling frequency per site.
+    smci_zh: 適配一台 NVMe 全快閃節點負責熱資料擷取／查詢層，搭配一機櫃高容量封存（JBOD／高密度儲存）供長期保存，屬儲存主導、運算需求不高的型態。規模依各廠歷史化標籤數與取樣頻率而定。
+    tech_en: As a system-of-record and data-acquisition store, it ingests very high volumes of time-series
+      data, applies compression, and serves fast trend queries. Hot recent data lives on fast NVMe while
+      multi-year retention rolls onto a high-capacity tier; storage grows continuously as tags, lines
+      and sensors are added.
+    tech_zh: 作為紀錄系統與資料擷取儲存庫，它擷取極大量的時序資料、施以壓縮，並提供快速的趨勢查詢。近期熱資料存放於高速 NVMe，多年期保存則轉入高容量儲存層；隨著標籤、產線與感測器增加，儲存量持續成長。
+    usage_flow:
+    - en: Collect tags from control layer
+      zh: 自控制層收集標籤
+    - en: Compress & write hot data
+      zh: 壓縮並寫入熱資料
+    - en: Tier to capacity archive
+      zh: 分層至容量封存
+    - en: Query, trend & report
+      zh: 查詢、趨勢與報表
+  population-health-analytics:
+    purpose_en: Analytics that aggregate claims and encounter data across a covered population to stratify
+      risk, close care gaps and support value-based-care contracts, helping health systems and payers
+      manage cost and quality for whole panels of patients rather than one visit at a time.
+    purpose_zh: 彙整涵蓋族群的理賠與就診資料以進行風險分層、彌補照護缺口並支援價值導向照護合約的分析工具，協助醫療體系與保險方以整組病患為單位管理成本與品質，而非逐次就診處理。
+    smci_en: Minimal direct customer hardware; the co-sell is with the SaaS operator, where SMCI HPC CPU
+      nodes handle claims/EHR aggregation and risk scoring and capacity storage holds the aggregated history
+      — a node-to-small-cluster footprint scaled by covered lives and claims depth.
+    smci_zh: 客戶端直接硬體極少；商機在於與 SaaS 營運商協同銷售，由美超微 HPC CPU 節點處理理賠/病歷彙整與風險評分、容量儲存存放彙整歷史——為節點至小型叢集規模，依涵蓋人數與理賠深度擴充。
+    tech_en: It joins transactional claims with real-world encounter data in a warehouse, then applies
+      risk-stratification and predictive models across the covered lives. It is overwhelmingly delivered
+      as SaaS on public cloud, so any hardware footprint — warehouse compute and aggregation/scoring storage
+      — sits with the operator, not at the customer site.
+    tech_zh: 系統於資料倉儲中將交易理賠與真實世界就診資料連結，再對涵蓋人口套用風險分層與預測模型。此類產品絕大多數以公有雲上的 SaaS 形式交付，因此任何硬體足跡——倉儲運算與彙整/評分儲存——皆位於營運商端，而非客戶現場。
+    usage_flow:
+    - en: Aggregate claims & encounters
+      zh: 彙整理賠與就診資料
+    - en: Attribute & stratify risk
+      zh: 歸屬並分層風險
+    - en: Score risk models
+      zh: 計算風險模型評分
+    - en: Surface care gaps
+      zh: 呈現照護缺口
+    - en: Report to care teams
+      zh: 回報照護團隊
+  pv-regulatory-information:
+    purpose_en: Manages drug-safety and regulatory processes — collecting, assessing, and reporting adverse
+      events (pharmacovigilance) and tracking product registrations, submissions, and correspondence (RIM).
+      It exists to meet mandatory safety-reporting and regulatory obligations.
+    purpose_zh: 管理藥物安全與法規流程——收集、評估並通報不良事件（藥物安全監測），以及追蹤產品註冊、送件與往來文件（法規資訊管理）。存在目的是符合強制性的安全通報與法規義務。
+    smci_en: Mostly vendor-hosted; the modest hardware angle is an archive node plus, where AI-assisted
+      case intake is run, a single GPU inference node — node scale, and largely at the operator rather
+      than the customer.
+    smci_zh: 多由廠商託管；小幅硬體切入點為一個歸檔節點，及在採用AI輔助收案時的單一GPU推論節點——節點規模，且多位於營運商而非客戶端。
+    tech_en: It runs predominantly as SaaS or hosted case-processing and submission repositories over
+      transactional and document data, with minimal customer on-prem beyond integration and archive nodes.
+      AI-assisted case intake can add modest GPU inference, mostly at the operator.
+    tech_zh: 主要以SaaS或託管的案件處理與送件庫運作，資料為交易型與文件型，客戶地端除整合與歸檔節點外極少。AI輔助案件收錄可增加少量GPU推論，且多位於營運商端。
+    usage_flow:
+    - en: Intake adverse-event case
+      zh: 接收不良事件案件
+    - en: Triage & assess
+      zh: 分級與評估
+    - en: Code & write narrative
+      zh: 編碼與撰寫敘述
+    - en: Report to authorities
+      zh: 通報主管機關
+    - en: Archive & track submissions
+      zh: 歸檔與追蹤送件
+  qc-lims-cds:
+    purpose_en: QC lab informatics — a QC LIMS plus a Chromatography Data System — manages quality-control
+      testing of raw materials and finished product and acquires and processes the analytical instrument
+      data (chromatography, spectra) behind each result. It exists to run the release-testing workflow
+      and hold the compliant record that a batch meets specification.
+    purpose_zh: 品管實驗室資訊系統（QC LIMS 加上層析數據系統 CDS）管理原物料與成品的品質管制檢測，並擷取與處理每項結果背後的分析儀器數據（層析、光譜）。其存在目的是執行放行檢驗流程，並保存證明批次符合規格的合規紀錄。
+    smci_en: 'A storage-led profile: fits a high-capacity archive node for accumulating validated raw
+      files plus a DR/backup node, alongside modest on-prem lab application servers. Sized by QC samples
+      tested per day and per-instrument raw-file volume, at node scale rather than clusters.'
+    smci_zh: 屬儲存主導型態：適配一台高容量封存節點存放持續累積的已驗證原始檔，加上一台 DR／備份節點，並搭配少量地端實驗室應用伺服器。規模依每日品管檢測樣品數與各儀器原始檔量而定，屬節點層級而非叢集。
+    tech_en: As a system-of-record, workflow and data-acquisition layer, it runs a transactional QC database
+      and CDS acquisition workstations attached to chromatographs and spectrometers, generating documents
+      and time-series raw files. Compute is modest but chromatography and spectral raw files accumulate
+      steadily, pulling validated long-retention storage and backup under GxP.
+    tech_zh: 作為紀錄系統、工作流程與資料擷取層，它運行交易型品管資料庫，並以連接層析儀與光譜儀的 CDS 擷取工作站產生文件與時序原始檔。運算需求不高，但層析與光譜原始檔持續累積，在 GxP
+      下帶動已驗證的長保存儲存與備份需求。
+    usage_flow:
+    - en: Register sample & test plan
+      zh: 登錄樣品與檢測計畫
+    - en: Acquire instrument raw data
+      zh: 擷取儀器原始數據
+    - en: Process & review results
+      zh: 處理並審查結果
+    - en: Approve & release result
+      zh: 核准並放行結果
+    - en: Archive raw files & records
+      zh: 封存原始檔與紀錄
+  radiation-oncology-tps-ois:
+    purpose_en: The treatment planning system (TPS) computes radiation dose distributions for cancer treatment,
+      while the oncology information system (OIS) is the record-and-verify system of record that manages
+      the entire treatment course.
+    purpose_zh: 治療計畫系統（TPS）為癌症治療計算放射劑量分布；腫瘤資訊系統（OIS）則是管理整個療程的紀錄與核對（record-and-verify）記錄系統。
+    smci_en: GPU servers for the dose-calculation farm, capacity storage for DICOM-RT images, and an HA
+      server pair for the OIS record-and-verify database; rack-scale GPU per cancer center.
+    smci_zh: 以 GPU 伺服器組成劑量計算農場，以容量儲存承載 DICOM-RT 影像，並以高可用伺服器對承載 OIS 資料庫；每個癌症中心為機櫃級 GPU 規模。
+    tech_en: GPU-accelerated dose engines (Monte Carlo / collapsed-cone) run on HA compute, alongside
+      the OIS record-and-verify database and DICOM-RT image storage. Calc-farm sizing is driven by plan
+      throughput and dose-calculation grid complexity, making each cancer center a discrete GPU/server
+      project.
+    tech_zh: 以 GPU 加速的劑量引擎（蒙地卡羅／collapsed-cone）執行於高可用運算，搭配 OIS 的 record-and-verify 資料庫與 DICOM-RT 影像儲存；計算農場規模依計畫吞吐量與劑量網格複雜度決定，使每個癌症中心成為獨立的
+      GPU／伺服器專案。
+    usage_flow:
+    - en: Import planning CT/images
+      zh: 匯入計畫用 CT／影像
+    - en: Contour + plan
+      zh: 器官描繪與計畫
+    - en: Dose calc (Monte Carlo/GPU)
+      zh: 劑量計算（蒙地卡羅／GPU）
+    - en: Plan QA + approval
+      zh: 計畫品保與核准
+    - en: Record-and-verify delivery
+      zh: 紀錄核對後執行治療
+  rcm-billing-claims:
+    purpose_en: 'Revenue cycle management software runs the money side of care: charge capture, coding,
+      claim generation and scrubbing, payer submission, denials management, and patient billing. It exists
+      to convert clinical activity into paid claims and to protect the provider''s cash flow.'
+    purpose_zh: 營收週期管理（RCM）軟體負責醫療的「金流」端：費用擷取、編碼、產生與審核申報單、送保險方、拒付管理與病患帳單。它的存在是把臨床活動轉化為可獲付的申報，並保障醫療機構的現金流。
+    smci_en: At the customer, node-scale general-purpose servers with NVMe for the transactional/batch
+      database, an HA-redundant pair, and a DR/backup target fit best; the GPU inference footprint is
+      small and typically belongs to the ISV/BPO co-sell rather than the hospital.
+    smci_zh: 在客戶端，最適合的是節點級通用型伺服器：以 NVMe 承載交易/批次資料庫、一組高可用冗餘對，再加一個異地備援/備份標的；GPU 推論規模很小，通常屬於 ISV/BPO 協同銷售範疇而非醫院自有。
+    tech_en: At its core is a high-volume transactional database with heavy scheduled batch runs for claim
+      generation and scrubbing, usually co-located with EHR patient accounting on-prem or hosted-private;
+      HA plus DR is mandatory because a billing stoppage halts cash flow. AI-based claims-scrubbing and
+      denials-prediction inference exists but sits mostly at the ISV or BPO operator rather than on hospital
+      iron.
+    tech_zh: 其核心是一套高交易量的資料庫，並帶有大量排程批次作業以產生與審核申報單，通常與電子病歷的病患帳務系統並置於院內或私有託管；高可用加上異地備援是必備的，因為計費一旦中斷即等同現金流停擺。以
+      AI 進行申報審核與拒付預測的推論雖然存在，但多半落在 ISV 或 BPO 營運方，而非醫院自有硬體。
+    usage_flow:
+    - en: Capture charges from encounters
+      zh: 自就診擷取費用
+    - en: Generate & scrub claims (batch)
+      zh: 批次產生並審核申報單
+    - en: Submit to payers
+      zh: 送交保險支付方
+    - en: Manage denials & post payments
+      zh: 處理拒付、入帳
+    - en: Bill patient balance
+      zh: 向病患開立餘額帳單
+  rd-lab-informatics:
+    purpose_en: The system of record for research experiments and samples — electronic lab notebooks capture
+      experiments, research LIMS tracks samples and workflows, and biobank systems manage specimen inventory.
+      It exists to make R&D data traceable, searchable, and GxP-compliant.
+    purpose_zh: 研究實驗與樣本的記錄系統——電子實驗記錄本（ELN）記錄實驗、研究型LIMS追蹤樣本與流程、生物樣本庫系統管理檢體庫存。存在目的是使研發資料可追溯、可查詢並符合GxP規範。
+    smci_en: High-availability redundant server pairs carry the app and database tier, high-capacity archive
+      storage holds instrument files and long-retention data, and DR/backup nodes satisfy GxP compliance
+      — node-to-rack scale.
+    smci_zh: 以高可用冗餘伺服器對承載應用與資料庫層，大容量歸檔儲存存放儀器檔案與長期保存資料，並以DR備份節點滿足GxP合規——節點至機櫃規模。
+    tech_en: A transactional database and application servers hold structured records and documents, while
+      storage grows with attached instrument files and specimen-linked datasets. GxP-grade high availability,
+      backup, and long-retention archive drive most of the sizing; there is no GPU workload.
+    tech_zh: 交易型資料庫加應用伺服器存放結構化記錄與文件；儲存量隨附加的儀器檔案與檢體關聯資料集成長。GxP等級的高可用、備份與長期保存歸檔主導規模；無GPU工作負載。
+    usage_flow:
+    - en: Record experiment (ELN)
+      zh: 記錄實驗 (ELN)
+    - en: Register & track samples
+      zh: 登錄並追蹤樣本
+    - en: Attach instrument files
+      zh: 附加儀器檔案
+    - en: Manage biobank inventory
+      zh: 管理樣本庫存
+    - en: Archive & retain (GxP)
+      zh: 歸檔與長期保存 (GxP)
+  ris-cvis-workflow:
+    purpose_en: The departmental workflow and reporting engine for radiology (RIS) and cardiology (CVIS)
+      — scheduling, worklists and reporting — and the manager of cath/echo video and ECG waveforms generated
+      in those departments.
+    purpose_zh: 放射（RIS）與心臟（CVIS）科的部門作業與報告引擎，負責排程、工作清單與報告，並管理科內產生的心導管／心臟超音波影片與心電圖波形。
+    smci_en: Capacity/archive storage servers for the growing cath/echo video and waveform retention,
+      alongside departmental application servers; rack scale, frequently folded into an imaging-archive
+      refresh project.
+    smci_zh: 以容量／典藏儲存伺服器承載持續成長的心導管／心臟超音波影片與波形保存，搭配部門應用伺服器；機櫃級，常併入影像典藏汰換專案。
+    tech_en: A transactional database handles orders and reports, while fast-growing storage holds cardiology
+      video and ECG waveform time-series; it integrates with the EHR and PACS. Sizing follows procedure
+      volume, per-study video/waveform size and retention rules.
+    tech_zh: 以交易型資料庫處理醫囑與報告，並以快速成長的儲存承載心臟科影片與心電圖波形時序資料，並與 EHR、PACS 整合；容量依檢查量、單檢查影片／波形大小與保存規則決定。
+    usage_flow:
+    - en: Schedule/order procedure
+      zh: 排程與醫囑
+    - en: Acquire images/video/waveforms
+      zh: 擷取影像、影片與波形
+    - en: Worklist + reporting
+      zh: 工作清單與報告
+    - en: Store departmental record
+      zh: 儲存部門紀錄
+    - en: Feed EHR/PACS
+      zh: 回饋 EHR 與 PACS
+  rtls-asset-tracking:
+    purpose_en: Tracks the real-time location of equipment, staff, and patients across the campus using
+      tags and sensors, powering asset-utilization, patient-flow, and staff safety/duress workflows.
+    purpose_zh: 透過標籤與感測器即時追蹤院區內設備、人員與病患位置，支援資產使用率、病患流動與人員安全／求救工作流程。
+    smci_en: Compact industrial-edge nodes host the on-prem location engine and receiver aggregation;
+      node-scale per campus, sized by tag/sensor count, location-update frequency, and campus square footage.
+    smci_zh: 以精簡工業邊緣節點承載 on-prem 定位引擎與接收器彙整；每院區為節點級，依標籤／感測器數量、位置更新頻率與院區面積調配。
+    tech_en: RFID/BLE/UWB/IR tags stream location events to edge receivers, and an on-prem or hybrid location
+      engine fuses the signals into positions as time-series and transactional records that feed flow
+      and utilization workflows. Analytics tiers increasingly run in the cloud; no GPU.
+    tech_zh: RFID／BLE／UWB／紅外線標籤將位置事件串流至邊緣接收器，on-prem 或混合式定位引擎將訊號融合為位置（時序與交易紀錄），驅動流動與使用率工作流程。分析層日益上雲，無
+      GPU。
+    usage_flow:
+    - en: Tag assets & people
+      zh: 標記資產與人員
+    - en: Sense location
+      zh: 感測位置
+    - en: Compute position
+      zh: 計算定位
+    - en: Trigger workflow
+      zh: 觸發工作流程
+    - en: Analyze utilization
+      zh: 分析使用率
+  rwd-rwe-analytics:
+    purpose_en: A platform that turns real-world data — claims, EHR, and unstructured clinical documents,
+      often linked to genomics — into real-world evidence for pharma and CROs, supporting regulatory submissions,
+      comparative-effectiveness studies and post-market research beyond the randomized trial.
+    purpose_zh: 將真實世界資料——理賠、電子病歷與非結構化臨床文件，常連結至基因體資料——轉化為真實世界證據的平台，供藥廠與 CRO 用於法規申報、比較療效研究及上市後研究，補足隨機試驗之外的證據。
+    smci_en: 'Best fit is the data-operator co-sell (and pharma private enclaves): SMCI GPU servers for
+      NLP/LLM chart abstraction paired with high-capacity archive JBOD for the petabyte data lake — a
+      rack of GPU plus cluster-scale storage sized by covered lives and unstructured-document volume.'
+    smci_zh: 最佳切入為資料營運商協同銷售（及藥廠私有封閉環境）：以美超微 GPU 伺服器執行 NLP/LLM 病歷抽取，搭配高容量歸檔 JBOD 承載 PB 級資料湖——一機架 GPU 加叢集級儲存，依涵蓋人數與非結構化文件量定規模。
+    tech_en: It stores petabyte-class multi-source data lakes (real-world data, documents, omics), applies
+      GPU-accelerated NLP/LLM for chart abstraction, and performs clinico-genomic record linkage across
+      covered lives. Delivery is SaaS/cloud-led, so most hardware sits with the data operator, though
+      some pharma run private on-prem analytics enclaves for sensitive datasets.
+    tech_zh: 系統儲存 PB 級的多來源資料湖（真實世界資料、文件、體學），以 GPU 加速的 NLP/LLM 執行病歷抽取，並跨涵蓋人口進行臨床-基因體紀錄連結。交付以 SaaS/雲端為主，故多數硬體位於資料營運商端，惟部分藥廠會為敏感資料集自建私有地端分析封閉環境。
+    usage_flow:
+    - en: Acquire & link RWD sources
+      zh: 取得並連結真實世界資料源
+    - en: Abstract charts via NLP/LLM
+      zh: 以 NLP/LLM 抽取病歷
+    - en: Curate cohorts & datasets
+      zh: 策展世代與資料集
+    - en: Run studies & models
+      zh: 執行研究與建模
+    - en: Generate evidence & reports
+      zh: 產出證據與報告
+  samd-embedded-oem-platform:
+    purpose_en: The software that a medical-device or IVD maker builds into its products (Software as
+      a Medical Device plus the embedded firmware/AI running on the instrument) so the device can sense,
+      analyze, and act under regulatory clearance. It exists because modern diagnostic and therapeutic
+      devices increasingly deliver their clinical value through on-device software and AI, not just mechanics.
+    purpose_zh: 醫療器材或體外診斷（IVD）製造商內建於產品中的軟體，包含「軟體即醫療器材」（SaMD）以及運行於儀器上的嵌入式韌體與 AI，使裝置能在法規許可下進行感測、分析與執行。它之所以存在，是因為現代診斷與治療裝置的臨床價值越來越倚賴機上軟體與
+      AI，而非僅靠機械結構。
+    smci_en: 'Two-sided fit: rack-scale GPU servers plus HPC compute nodes at the OEM for AI model training,
+      verification/validation, and simulation, and industrial edge nodes as the embedded compute designed
+      into each device as a long-lifecycle, locked BOM. Sizing scales with annual units shipped and the
+      AI inference content per device.'
+    smci_zh: 雙邊契合：OEM 端採用機櫃級 GPU 伺服器搭配 HPC 運算節點，用於 AI 模型訓練、驗證確效與模擬；並以工業級邊緣節點作為設計進每台裝置、長生命週期且鎖定 BOM 的嵌入式運算。規模隨年出貨台數與每台裝置的
+      AI 推論含量而擴展。
+    tech_en: 'Two workload tiers: on the device, edge-industrial compute runs real-time inference over
+      time-series, image, and sensor streams under a frozen, regulatory-locked bill of materials with
+      a long service life; at the OEM, GPU and HPC-CPU clusters handle model training, verification &
+      validation, and physics/simulation runs. Deployment is edge (embedded per unit) plus SaaS for fleet
+      telemetry, model management, and update distribution, with strict change-control and traceability
+      because the software is a regulated medical device.'
+    tech_zh: 分為兩層工作負載：裝置端以工業級邊緣運算，在鎖定且法規凍結、服役週期長的物料清單（BOM）上，對時間序列、影像與感測串流執行即時推論；OEM 端則以 GPU 與 HPC-CPU
+      叢集進行模型訓練、驗證與確效（V&V）以及物理／模擬運算。部署方式為邊緣（每台裝置嵌入）加上用於裝置機隊遙測、模型管理與更新派送的 SaaS，並因軟體屬受監管醫療器材而需嚴格的變更控管與可追溯性。
+    usage_flow:
+    - en: Design & train device AI (OEM)
+      zh: 設計並訓練裝置 AI（OEM 端）
+    - en: V&V + simulation, regulatory lock
+      zh: 驗證確效與模擬、法規鎖定
+    - en: Embed into device BOM
+      zh: 嵌入裝置物料清單（BOM）
+    - en: Edge inference on the instrument
+      zh: 儀器端邊緣推論
+    - en: Field telemetry back to OEM
+      zh: 現場遙測回傳 OEM
+    - en: Retrain & release update
+      zh: 再訓練並發布更新
+  scada-dcs:
+    purpose_en: SCADA and DCS are the real-time process-control layer that monitors and commands plant
+      equipment — valves, pumps, bioreactors, utilities — keeping the process running safely within its
+      defined operating envelope. They exist so operators can supervise and control production continuously
+      and deterministically.
+    purpose_zh: SCADA 與 DCS 是即時製程控制層，負責監視並操控廠內設備（閥件、泵浦、生物反應器、公用設施），使製程安全地維持在既定操作範圍內運行。其存在目的是讓操作員能持續且具確定性地監督與控制生產。
+    smci_en: Fits redundant HA server pairs per process area plus industrial-edge compute for I/O and
+      supervisory functions, sized at the node/pair level on a deterministic network. HA/failover and
+      validated-change control drive both the sizing and the refresh cycle.
+    smci_zh: 適配每個製程區一組高可用冗餘伺服器對，加上負責 I/O 與監控功能的工業邊緣運算，於確定性網路上以節點／伺服器對層級配置。高可用／故障切換與驗證變更控制同時決定其規模與汰換週期。
+    tech_en: As a data-acquisition and workflow layer, it continuously scans I/O points and control tags,
+      runs deterministic control loops, and streams high-frequency time-series plus transactional alarm/event
+      data. It runs on a low-latency, often segmented industrial network and depends on redundant controllers
+      and failover to avoid loss of control.
+    tech_zh: 作為資料擷取與工作流程層，它持續掃描 I/O 點與控制標籤，執行確定性控制迴路，並串流高頻時序資料及交易型告警／事件資料。它運行於低延遲、通常經網段隔離的工業網路，並仰賴冗餘控制器與故障切換以避免失控。
+    usage_flow:
+    - en: Sense field I/O
+      zh: 感測現場 I/O
+    - en: Execute control logic
+      zh: 執行控制邏輯
+    - en: Actuate equipment
+      zh: 驅動設備動作
+    - en: Visualize & alarm on HMI
+      zh: HMI 可視化與告警
+    - en: Feed data to historian/MES
+      zh: 數據送往歷史庫/MES
+  serialization-track-trace:
+    purpose_en: Serialization / track-and-trace assigns and manages unique identifiers on pharmaceutical
+      packaging — from the packaging line and site systems up to the enterprise and regulatory (L5) network
+      — so every saleable unit can be authenticated and traced through the supply chain. It exists to
+      meet anti-counterfeiting mandates like DSCSA and the EU FMD.
+    purpose_zh: 序列化／追溯系統（Track-and-Trace）為藥品包裝指派並管理唯一識別碼，自包裝線與廠區系統向上串接至企業與法規（L5）網路，使每一可銷售單位皆可被驗證並在供應鏈中追溯。其存在目的是滿足如美國
+      DSCSA 與歐盟 FMD 等反偽藥法規要求。
+    smci_en: Fits an HA-redundant server node/pair at each packaging site to protect line uptime, integrating
+      up to enterprise/regulatory (L5) hubs that live elsewhere. Node-scale, sized by packaging-line count
+      and serialization event volume per line.
+    smci_zh: 適配各包裝廠區一組高可用冗餘伺服器節點／對以保障產線運轉，並向上整合位於他處的企業／法規（L5）中樞。屬節點層級，規模依包裝線數量與每條線的序列化事件量而定。
+    tech_en: As a system-of-record, integration and workflow layer, it manages transactional serial-number
+      pools and commissioning/aggregation events in real time on the packaging line, then exchanges data
+      with enterprise and regulatory (L5) hubs that are often managed or cloud. On-site serialization
+      uptime is critical because a repository outage stops the line.
+    tech_zh: 作為紀錄系統、整合與工作流程層，它在包裝線上即時管理交易型序號池與賦碼／聚合事件，再與通常屬代管或雲端的企業及法規（L5）中樞交換資料。廠區端序列化系統的可用性至關重要，因為儲存庫中斷會使產線停擺。
+    usage_flow:
+    - en: Generate serial numbers
+      zh: 產生序號
+    - en: Commission on packaging line
+      zh: 於包裝線上賦碼
+    - en: Aggregate to cases/pallets
+      zh: 聚合至箱／棧板
+    - en: Report events to L5 hub
+      zh: 回報事件至 L5 中樞
+  smart-room-ambient-ai:
+    purpose_en: Turns patient rooms into sensing environments — cameras and ambient sensors feed AI for
+      fall detection, virtual sitting/patient monitoring, and ambient clinical documentation, reducing
+      manual observation and freeing staff.
+    purpose_zh: 將病房轉為感測環境——攝影機與環境感測器供給 AI 進行跌倒偵測、虛擬陪護／病患監看與環境臨床文書，減少人工觀察並釋放人力。
+    smci_en: GPU inference servers at rack scale at the unit/campus edge, plus a high-capacity archive
+      tier for video retention and compact industrial-edge nodes at room level; sized by camera/room count,
+      streams per GPU, and video retention policy.
+    smci_zh: 於病區／院區邊緣配置機櫃級 GPU 推論伺服器，加上影像保存的高容量歸檔層，並在病房層部署精簡工業邊緣節點；依攝影機／病房數、每 GPU 串流數與影像保存政策調配。
+    tech_en: Patient-room cameras and ambient sensors stream video and time-series to GPU inference servers
+      at the unit or campus edge running vision models (fall detection, virtual sitting, ambient documentation),
+      with substantial video-retention storage backing review and model improvement. GPU is used for inference.
+    tech_zh: 病房攝影機與環境感測器將影像與時序串流至病區或院區邊緣的 GPU 推論伺服器，運行視覺模型（跌倒偵測、虛擬陪護、環境文書），並以大量影像保存儲存支撐回溯與模型精進。GPU 用於推論。
+    usage_flow:
+    - en: Capture room video/sensors
+      zh: 擷取病房影像／感測
+    - en: Run edge GPU inference
+      zh: 執行邊緣 GPU 推論
+    - en: Detect events
+      zh: 偵測事件
+    - en: Alert staff
+      zh: 告警臨床人員
+    - en: Retain video
+      zh: 保存影像
+  spatial-biology-omics:
+    purpose_en: Analyzes where molecules sit within tissue — spatial transcriptomics and multiplex tissue
+      proteomics — combining imaging with omics to map cells and gene/protein expression in situ. It exists
+      to preserve the spatial context lost in bulk and single-cell assays.
+    purpose_zh: 分析分子在組織中的空間位置——空間轉錄體學與多重組織蛋白質體學——結合影像與體學，於原位描繪細胞與基因／蛋白質表現。存在目的是保留批量與單細胞分析中喪失的空間脈絡。
+    smci_en: GPU servers run segmentation and spatial modeling, an NVMe all-flash working tier feeds them,
+      and petabyte-class capacity archive stores the multiplex image and transcript stacks — rack-to-cluster,
+      mirroring the cryo-EM footprint.
+    smci_zh: 以GPU伺服器執行分割與空間建模，NVMe全快閃工作層供給，並以PB級大容量歸檔存放多重影像與轉錄本堆疊——機櫃至叢集規模，輪廓與低溫電顯相近。
+    tech_en: Deep-learning cell segmentation, image registration and stitching, and spatial modeling run
+      on GPU (Xenium/Visium/CosMx/PhenoCycler/MERFISH), with an NVMe working tier feeding them. Multiplex
+      whole-slide image and transcript stacks (hundreds of GB to multiple TB per run) drive petabyte archive,
+      mirroring the cryo-EM profile.
+    tech_zh: 以GPU執行深度學習細胞分割、影像對位與拼接以及空間建模（Xenium／Visium／CosMx／PhenoCycler／MERFISH），並以NVMe工作層供給。多重全玻片影像與轉錄本堆疊（每次執行數百GB至數TB）驅動PB級歸檔，輪廓與低溫電顯相近。
+    usage_flow:
+    - en: Ingest run (images + transcripts)
+      zh: 匯入資料（影像＋轉錄本）
+    - en: Segment cells & register images
+      zh: 細胞分割與影像對位
+    - en: Assign transcripts
+      zh: 指派轉錄本
+    - en: Spatial modeling
+      zh: 空間建模
+    - en: Visualize & archive
+      zh: 視覺化與歸檔
+  telehealth-platform:
+    purpose_en: A virtual-care platform for video visits, remote consults and virtual-care coordination
+      between patients and clinicians.
+    purpose_zh: 虛擬照護平台，提供視訊門診、遠距會診與病人—臨床端之間的虛擬照護協調。
+    smci_en: Minimal customer-side footprint — this is not a hardware-bearing workload at the customer.
+      Only opportunistic node-scale fit exists, in tele-ICU command-center ingest/display servers.
+    smci_zh: 客戶端硬體需求極小——在客戶端並非承載硬體的工作負載；僅有機會性的節點級適配，見於遠距加護指揮中心的匯入／顯示伺服器。
+    tech_en: Predominantly SaaS and public-cloud; customer-side hardware is largely endpoints and telemedicine
+      carts. The niche exception is on-prem tele-ICU command centers with video walls and ingest servers.
+    tech_zh: 以 SaaS 與公有雲為主；客戶端硬體多為終端裝置與遠距醫療推車。少數例外是本地端的遠距加護指揮中心，配置影像牆與匯入伺服器。
+    usage_flow:
+    - en: Patient books visit
+      zh: 病人預約
+    - en: Join virtual visit
+      zh: 加入虛擬門診
+    - en: Clinician consults over video
+      zh: 臨床視訊會診
+    - en: Document to EHR
+      zh: 記錄至 EHR
+    - en: Follow-up
+      zh: 後續追蹤
+  warehouse-cold-chain:
+    purpose_en: A WMS with cold-chain environmental monitoring controls warehouse operations — receiving,
+      put-away, picking, shipping — while continuously monitoring temperature and humidity across storage
+      and distribution sites. It exists to keep GxP-regulated and cold-chain product within its required
+      conditions and to prove it, end to end.
+    purpose_zh: 倉儲管理系統（WMS）搭配冷鏈環境監控，管理倉庫作業（收貨、上架、揀貨、出貨），同時在各儲存與配銷據點持續監測溫度與濕度。其存在目的是使受 GxP 管制及冷鏈產品維持於所需條件，並提供全程佐證。
+    smci_en: Fits ruggedized industrial-edge nodes at each site to aggregate WMS and environmental-monitoring
+      streams, plus small on-prem app/DB servers. Node-scale and site-count-driven, not heavy compute
+      — sized by number of sites and sensor density.
+    smci_zh: 適配各據點的強固型工業邊緣節點以彙整 WMS 與環境監控串流，並搭配少量地端應用／資料庫伺服器。屬節點層級、由據點數量驅動，非高運算需求，規模依據點數與感測器密度而定。
+    tech_en: As a system-of-record, data-acquisition and workflow layer, it runs a transactional inventory
+      database while environmental-monitoring gateways ingest time-series sensor streams from cold rooms
+      and cleanrooms. Compute is light; ruggedized edge nodes at each plant and distribution site aggregate
+      sensor and cold-chain data with local resilience.
+    tech_zh: 作為紀錄系統、資料擷取與工作流程層，它運行交易型庫存資料庫，同時由環境監控閘道器擷取來自冷藏室與潔淨室的時序感測串流。運算需求輕，各廠區與配銷據點以強固型邊緣節點在本地具韌性地彙整感測與冷鏈資料。
+    usage_flow:
+    - en: Receive & put away goods
+      zh: 收貨與上架
+    - en: Sense environmental conditions
+      zh: 感測環境條件
+    - en: Alert on excursions
+      zh: 異常偏離告警
+    - en: Pick, pack & ship
+      zh: 揀貨、包裝與出貨
+    - en: Log inventory & audit trail
+      zh: 紀錄庫存與稽核軌跡
+  workforce-management:
+    purpose_en: Healthcare workforce management software handles nurse and staff scheduling, shift rostering,
+      predictive staffing, float/agency pools, and time-and-attendance. It exists to match staffing to
+      patient demand while controlling labor cost and burnout in a chronically short-staffed sector.
+    purpose_zh: 醫療人力管理軟體負責護理與員工排班、班表編排、預測性人力配置、機動/派遣人力池與出勤打卡。它的存在是為了在長期人力短缺的產業中，讓人力配置貼合病患需求，同時控管人事成本與過勞。
+    smci_en: No meaningful Supermicro server opportunity at the customer — the workload is SaaS-hosted
+      with only thin attendance endpoints on-prem; any residual footprint is legacy time-and-attendance
+      servers awaiting decommission, not a scale-out target.
+    smci_zh: 在客戶端幾乎沒有實質的 Supermicro 伺服器機會——此工作負載以 SaaS 託管，院內僅有輕量出勤端點；任何殘留部署都是等待除役的老舊出勤打卡伺服器，並非橫向擴充的目標。
+    tech_en: This is a transactional and time-series workflow application, delivered overwhelmingly as
+      SaaS (rostering, predictive staffing, float/agency marketplaces), with time-clock and biometric
+      attendance devices acting as thin edge endpoints. Predictive-staffing analytics is light and cloud-side;
+      there is essentially no scale-out compute or storage on customer hardware.
+    tech_zh: 這是一套交易型與時間序列的工作流應用，絕大多數以 SaaS 交付（排班、預測性人力配置、機動/派遣媒合），打卡機與生物辨識出勤裝置僅作為輕量邊緣端點。預測性人力分析負載很輕且落在雲端；客戶端硬體基本上沒有需橫向擴充的運算或儲存。
+    usage_flow:
+    - en: Forecast staffing demand
+      zh: 預測人力需求
+    - en: Build & publish rosters
+      zh: 編排並發布班表
+    - en: Staff clock in/out
+      zh: 員工打卡上下班
+    - en: Fill gaps via float/agency
+      zh: 以機動/派遣補缺
+    - en: Analyze labor cost & compliance
+      zh: 分析人事成本與合規
+version: 1
