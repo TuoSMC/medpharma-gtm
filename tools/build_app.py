@@ -76,19 +76,34 @@ TEMPLATE = r"""<!doctype html>
 <title>SMCI MedPharma GTM Playbook</title>
 <style>
 :root{
-  --bg:#f6f7f9; --panel:#fff; --ink:#1a1d21; --muted:#5b6470; --line:#e3e6ea;
-  --accent:#0b6bcb; --accentbg:#e7f0fb;
-  --hw1:#9aa4b2; --hw2:#5b8def; --hw3:#f0993e; --hw4:#e0464b;
-  --u-crit:#e0464b; --u-high:#f0993e; --u-med:#d9a91f; --u-low:#7a8794;
-  --a:#1f9d57; --b:#7a5cd0; --c:#c2560c; --d:#0e8a94;
+  /* neutrals — whisper-cool (hue 255), instrument feel */
+  --bg:oklch(0.984 0.004 255); --panel:oklch(1 0 0); --ink:oklch(0.27 0.013 255); --muted:oklch(0.47 0.014 255); --line:oklch(0.905 0.006 255);
+  --accent:oklch(0.55 0.16 255); --accentbg:oklch(0.955 0.028 255);
+  /* semantic shelf — equal weight, hue-only variation, so meanings read as one system */
+  --hw1:oklch(0.62 0.02 255); --hw2:oklch(0.60 0.14 255); --hw3:oklch(0.66 0.15 60); --hw4:oklch(0.575 0.18 25);
+  --u-crit:oklch(0.575 0.18 25); --u-high:oklch(0.66 0.15 60); --u-med:oklch(0.72 0.13 90); --u-low:oklch(0.60 0.02 255);
+  --a:oklch(0.56 0.15 150); --b:oklch(0.55 0.16 290); --c:oklch(0.62 0.16 50); --d:oklch(0.57 0.10 200);
+  /* 4pt spacing scale */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
 }
 @media (prefers-color-scheme:dark){
-  :root{--bg:#14171b;--panel:#1c2026;--ink:#e6e9ee;--muted:#98a2b0;--line:#2b313a;
-        --accent:#5aa2f0;--accentbg:#182636;}
+  :root{
+    --bg:oklch(0.20 0.012 255); --panel:oklch(0.245 0.014 255); --ink:oklch(0.94 0.008 255); --muted:oklch(0.705 0.016 255); --line:oklch(0.325 0.014 255);
+    --accent:oklch(0.72 0.13 255); --accentbg:oklch(0.315 0.05 255);
+    --hw1:oklch(0.63 0.02 255); --hw2:oklch(0.68 0.13 255); --hw3:oklch(0.73 0.14 60); --hw4:oklch(0.665 0.17 25);
+    --u-crit:oklch(0.665 0.17 25); --u-high:oklch(0.73 0.14 60); --u-med:oklch(0.79 0.12 90); --u-low:oklch(0.66 0.02 255);
+    --a:oklch(0.68 0.15 150); --b:oklch(0.665 0.15 290); --c:oklch(0.70 0.15 50); --d:oklch(0.66 0.10 200);
+  }
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);
-  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang TC","Microsoft JhengHei",sans-serif}
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"PingFang TC","Microsoft JhengHei",sans-serif;
+  font-variant-numeric:tabular-nums lining-nums;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* functional micro-motion only (no decoration); honor reduced-motion */
+button,summary,a,.trow,.pitem,.mkitem,.prow,.lplay,.ldoor,.dchip,.sfstage,.vn,.pcat,.msn,.tnode{
+  transition:background-color .14s cubic-bezier(.22,1,.36,1),border-color .14s cubic-bezier(.22,1,.36,1),color .14s cubic-bezier(.22,1,.36,1)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:5px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 header{padding:18px 22px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:5}
 h1{margin:0;font-size:17px;letter-spacing:.2px}
 .sub{color:var(--muted);font-size:12px;margin-top:3px}
@@ -154,8 +169,9 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 /* legend: defines + links the 3 signals (count lives here too) */
 .mlegend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 8px}
 @media(max-width:760px){.mlegend{grid-template-columns:1fr}}
-.mleg{border:1px solid var(--line);border-left-width:3px;border-radius:9px;padding:9px 11px;background:var(--bg)}
-.mleg.g-flag{border-left-color:var(--hw4)}.mleg.g-hot{border-left-color:var(--a)}.mleg.g-lead{border-left-color:var(--accent)}
+.mleg{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:var(--bg)}
+.mleg.g-flag{border-color:color-mix(in oklch,var(--hw4) 45%,var(--line))}.mleg.g-hot{border-color:color-mix(in oklch,var(--a) 45%,var(--line))}.mleg.g-lead{border-color:color-mix(in oklch,var(--accent) 45%,var(--line))}
+.mleg.g-flag .llab{color:var(--hw4)}.mleg.g-hot .llab{color:var(--a)}.mleg.g-lead .llab{color:var(--accent)}
 .mleg .lh{display:flex;align-items:baseline;gap:8px}
 .mleg .ln{font-size:23px;font-weight:800;line-height:1}
 .mleg.g-flag .ln{color:var(--hw4)}.mleg.g-hot .ln{color:var(--a)}.mleg.g-lead .ln{color:var(--accent)}
@@ -184,14 +200,15 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .prank .rn{font-size:10px;color:var(--muted);white-space:nowrap}
 .tbody{padding-left:2px}
 .tsub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin:8px 0 3px}
-.trow{display:flex;align-items:center;gap:8px;padding:4px 7px;border-radius:6px;cursor:pointer}
+.trow{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:6px;cursor:pointer}
+.trow:hover{background:var(--accentbg)}
 .trow:hover{background:var(--accentbg)}
 .trow.sel{background:var(--accentbg);box-shadow:inset 3px 0 0 var(--accent)}
 .trow .tname{flex:1;min-width:0;overflow-wrap:anywhere}
 .trow .tby{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
 .tby.bcust{background:var(--a)}.tby.boper{background:var(--b)}.tby.boem{background:var(--c)}.tby.bhyp{background:var(--muted)}
 .tiers6{margin:12px 0}
-.tier6{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:8px 0 8px 14px;position:relative;border-left:2px solid var(--line)}
+.tier6{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:8px 0 8px 14px;position:relative;border-left:1px solid var(--line)}
 .tier6:before{content:"";position:absolute;left:-5px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .tier6 .tlab{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;padding-top:2px}
 .tier6 .tcont{font-size:13px;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
@@ -201,8 +218,8 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .dsec{margin:14px 0}
 .dsec .dsh{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:4px}
 /* battle card: the actionable sell layer at the top of a category */
-.battle{border:1px solid var(--line);border-radius:9px;background:var(--accentbg);padding:8px 11px;margin:8px 0 4px}
-.brow{display:grid;grid-template-columns:108px 1fr;gap:10px;align-items:baseline;padding:4px 0}
+.battle{border-radius:10px;background:var(--accentbg);padding:11px 13px;margin:10px 0 6px}
+.brow{display:grid;grid-template-columns:104px 1fr;gap:12px;align-items:baseline;padding:5px 0}
 .brow+.brow{border-top:1px solid var(--line)}
 .blab{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--muted)}
 .bval{font-size:12.5px;line-height:1.45}
@@ -232,10 +249,43 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .krow{font-size:12px;margin:5px 0;display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}
 .kdot{width:9px;height:9px;border-radius:3px;flex:0 0 auto;position:relative;top:1px}
 .kdot.g-flag{background:var(--hw4)}.kdot.g-hot{background:var(--a)}.kdot.g-lead{background:var(--accent)}
-.dhdr{font-size:11px;font-weight:700;color:var(--muted);margin:9px 0 1px}
+/* Method = "how to use this map" learn page */
+.lsec{font-size:13px;font-weight:700;color:var(--ink);margin:18px 0 8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.ldoors{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:2px 0 8px}
+@media(max-width:720px){.ldoors{grid-template-columns:1fr}}
+.ldoor{border:1px solid var(--line);border-radius:9px;padding:8px 11px;display:flex;flex-direction:column;gap:3px}
+.ldoor b{font-size:13px}
+.ldoor .muted{font-size:12px;line-height:1.4}
+.lbtn{font-family:inherit;font-size:12.5px;font-weight:700;color:#fff;background:var(--accent);border:none;border-radius:9px;padding:8px 14px;cursor:pointer;margin:2px 0 4px}
+.lbtn:hover{filter:brightness(1.08)}
+.lsteps{margin:4px 0 8px;padding-left:22px;max-width:820px}
+.lsteps li{margin:6px 0;font-size:13px;line-height:1.5}
+.lplays{display:flex;flex-direction:column;gap:6px;margin:2px 0}
+.lplay{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;padding:8px 11px;cursor:pointer;font-size:13px;flex-wrap:wrap}
+.lplay:hover{border-color:var(--accent);background:var(--accentbg)}
+.lpct{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap}
+.lsecsub{font-size:11px;font-weight:600;color:var(--muted);text-transform:none;letter-spacing:0}
+/* system flow diagram — static, click-through */
+.sysflow{display:flex;align-items:stretch;flex-wrap:wrap;gap:0;margin:4px 0 6px}
+.sfstage{flex:1 1 150px;min-width:138px;border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:var(--panel)}
+.sfstage[style*="cursor"]:hover{border-color:var(--accent)}
+.sftag{font-size:10px;font-weight:800;letter-spacing:.3px;color:var(--accent)}
+.sftitle{font-weight:700;font-size:13px;margin:2px 0 6px}
+.sfbody{display:flex;flex-direction:column;gap:3px}
+.sfrow{font-size:11.5px;color:var(--muted)}
+.sfdots{display:flex;flex-wrap:wrap;gap:4px 8px;margin:1px 0}
+.sfdot{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:var(--muted)}
+.sfarrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px;font-weight:800;padding:0 3px;flex:0 0 auto}
+@media(max-width:760px){.sysflow{flex-direction:column}.sfstage{flex-basis:auto}.sfarrow{transform:rotate(90deg);padding:2px 0}}
+.dhdr{font-size:11px;font-weight:700;color:var(--muted);margin:9px 0 5px}
+.ldrawer{margin:8px 0 2px}
+.ldrawer>summary{font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;list-style:none;padding:3px 0}
+.ldrawer>summary::-webkit-details-marker{display:none}
+.ldrawer>summary::before{content:"\25b8  ";color:var(--accent)}
+.ldrawer[open]>summary::before{content:"\25be  "}
 .plist{display:flex;flex-direction:column;gap:1px;margin:1px 0 2px}
 .pgrp{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--accent);margin:7px 0 1px}
-.pitem{display:flex;align-items:baseline;gap:8px;padding:4px 8px;border-radius:7px;cursor:pointer}
+.pitem{display:flex;align-items:baseline;gap:8px;padding:5px 8px;border-radius:7px;cursor:pointer}
 .pitem:hover{background:var(--accentbg)}
 .pitem .pnm{font-weight:600;font-size:12.5px;flex:0 0 auto}
 .pitem .pgl{color:var(--muted);font-size:11.5px;flex:1;min-width:0}
@@ -460,6 +510,8 @@ const isAI=c=>(c.role||[]).includes('analytics-artificial-intelligence')||(c.dat
 // ================= EXPLORE (unified universe: Home's stakeholder view folded in) =================
 function renderTaxonomy(){
   const cats=DATA.taxonomy.categories, E=DATA.taxonomy.enums, root=$('#tab-taxonomy'); clear(root);
+  // single search input, rendered prominently in the launcher (below) and read by render()
+  const fTxt=el('input',{id:'fTxt',class:'hsearch',type:'search',placeholder:T('Search a category, vendor, or SMCI box — “digital pathology” · “Sectra” · “GPU”…','搜尋類別、廠商、或 SMCI 硬體 —「數位病理」·「Sectra」·「GPU」…')});
   root.append(el('h2',{style:'margin:2px 0 6px'},T('The medical / pharma software universe','醫療／藥廠軟體宇宙')));
   masterTable();
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
@@ -473,7 +525,6 @@ function renderTaxonomy(){
         fProfile=mk('fProfile',['gpu-server','high-performance-computing-cpu','nvme-performance-storage','capacity-archive-storage','high-memory','edge-industrial','high-availability-redundant','disaster-recovery-backup'],'all hardware'),
         fGroup={value:''},
         fSpansBox=el('input',{type:'checkbox'}),
-        fTxt=el('input',{id:'fTxt',type:'search',placeholder:'search name / notes...'}),
         cnt=el('span',{class:'count'});
   const fSpans=el('label',{class:'ckbox'},fSpansBox,T('spans on-prem↔cloud','橫跨 on-prem↔雲'));
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
@@ -486,9 +537,8 @@ function renderTaxonomy(){
   [['domain',T('care area','照護領域')],['primary_buyer',T('who buys','誰買硬體')],['stakeholder',T('who uses it','使用者')],
    ['ai',T('AI / no-AI','AI／非AI')],['play',T('play','打法')],['hardware_profile',T('hardware','硬體元件')]]
     .forEach(([g,lab])=>{const b=el('button',{'data-g':g},lab);b.onclick=()=>setGroup(g);seg.append(b);});
-  fTxt.placeholder=T('search…','搜尋…');
   const tb=el('div',{class:'toolbar'});
-  tb.append(el('span',{class:'tagk'},T('view by','檢視')),seg,el('span',{style:'flex:1 1 20px'}),fTxt,cnt);
+  tb.append(el('span',{class:'tagk'},T('view by','檢視')),seg,el('span',{style:'flex:1 1 20px'}),cnt);
   root.append(tb);
   // ---- one thin line of high-opportunity target shortcuts (colour = who buys) ----
   const jump=el('div',{class:'jump'});
@@ -529,6 +579,8 @@ function renderTaxonomy(){
   function goBack(){if(!navStack.length)return;const s=navStack.pop();catFilter=s.cf;hotFilter=null;fTxt.value='';render();dv=s.dv;applyDv();updateBack();scrollToPanes();}
   function viewCat(c){pushNav();showDetail(c);}
   backBtn.onclick=goBack;
+  // expose Explore navigation so the Method "how to use" walkthrough can deep-link in
+  window._exp={goTrigger:goTrigger,goPlay:goPlay,goCat:function(id){const c=CATBYID[id];if(c)viewCat(c);}};
   // trigger brief: a signal, organized — window · where to catch · the move · the markets it opens
   function triggerBrief(t){
     const cd=el('div',{class:'card'});
@@ -603,15 +655,17 @@ function renderTaxonomy(){
     sub.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));});}
   const flagN=l=>l.filter(c=>c.hardware_opportunity===4).length;
   const hotN=l=>l.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length;
-  function l1node(label,list,leaf){if(!list.length)return;
-    const car=el('span',{class:'tcar'},'▾');
+  function l1node(label,list,leaf,open){if(!list.length)return;
+    if(open===undefined)open=true;
+    const car=el('span',{class:'tcar'},open?'▾':'▸');
     const fl=flagN(list), ho=hotN(list);
     const hdr=el('div',{class:'tnode'},car,el('span',{style:'flex:1'},label));
     if(fl)hdr.append(el('span',{class:'tflag',title:T('flagship (opportunity 4)','旗艦 (機會 4)')},fl+' '+T('flagship','旗艦')));
     if(ho)hdr.append(el('span',{class:'thot',title:T('customer-HOT (opportunity ≥3)','客戶-HOT (機會≥3)')},ho+' HOT'));
     hdr.append(el('span',{class:'tcount'},String(list.length)));
     const body=el('div',{class:'tbody'});
-    hdr.onclick=()=>{const open=body.style.display!=='none';body.style.display=open?'none':'';car.textContent=open?'▸':'▾';};
+    if(!open)body.style.display='none';
+    hdr.onclick=()=>{const o=body.style.display!=='none';body.style.display=o?'none':'';car.textContent=o?'▸':'▾';};
     treePane.append(hdr,body);
     if(leaf)list.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));else l2into(body,list);}
   function tagRow(k,arr){const r=el('div',{class:'row'});r.append(el('span',{class:'tagk'},k));
@@ -689,12 +743,15 @@ function renderTaxonomy(){
     const sm=el('span',{style:'display:flex;flex-wrap:wrap;gap:5px'});(c.hardware_profile||[]).forEach(h=>sm.append(el('span',{class:'pill lead'},smciFam(h))));if(!(c.hardware_profile||[]).length)sm.append(el('span',{class:'muted'},'—'));
     tier(T('SMCI workload','SMCI'),sm);
     cd.append(tiers);
-    // ---- prose sections (authored, bilingual) ----
-    const sec=(lab,txt)=>{if(!txt)return;cd.append(el('div',{class:'dsec'},el('div',{class:'dsh'},lab),el('div',{},txt)));};
+    // ---- full explainer (authored prose) — folded; the 6-tier diagram above is its summary ----
+    const expl=el('details',{class:'ldrawer',style:'margin-top:10px'});
+    const eb=el('div',{});
+    const sec=(lab,txt)=>{if(!txt)return;eb.append(el('div',{class:'dsec'},el('div',{class:'dsh'},lab),el('div',{},txt)));};
     sec(T('Purpose','目的'),(LANG==='zh'?det.purpose_zh:det.purpose_en));
-    if(det.usage_flow&&det.usage_flow.length){const fs=el('div',{class:'dsec'});fs.append(el('div',{class:'dsh'},T('Usage flow','使用流程')));det.usage_flow.forEach((s,i)=>fs.append(el('div',{class:'dstep'},el('b',{},(i+1)+'.'),el('span',{},LANG==='zh'?s.zh:s.en))));cd.append(fs);}
+    if(det.usage_flow&&det.usage_flow.length){const fs=el('div',{class:'dsec'});fs.append(el('div',{class:'dsh'},T('Usage flow','使用流程')));det.usage_flow.forEach((s,i)=>fs.append(el('div',{class:'dstep'},el('b',{},(i+1)+'.'),el('span',{},LANG==='zh'?s.zh:s.en))));eb.append(fs);}
     sec(T('How it works','技術講解'),(LANG==='zh'?det.tech_zh:det.tech_en));
     sec(T('Supermicro workload fit','SMCI 可協助的 workload'),(LANG==='zh'?det.smci_zh:det.smci_en));
+    if(eb.children.length){expl.append(el('summary',{},T('Full explainer','完整說明')));expl.append(eb);cd.append(expl);}
     if(c.infrastructure_notes)cd.append(el('div',{class:'notes'},c.infrastructure_notes));
     // ---- vendors in this market — collapsible drawer with cited market-share bars ----
     if(c.vendors&&c.vendors.length){
@@ -767,18 +824,17 @@ function renderTaxonomy(){
       el('h3',{style:'margin:0'},T('Start the hunt — pick a door','開始獵單 — 選一道門')),
       el('span',{class:'muted',style:'font-size:12px'},cats.length+T(' categories · ',' 類 · ')+(DATA.vendors.vendors||[]).length+T(' vendors',' 廠商'))));
     box.append(el('div',{class:'muted',style:'font-size:12px;margin:0 0 8px'},T('Search, or start from a Supermicro product line, a trigger, or a play. Every door opens the category’s battle card — your motion, the reference architecture to pitch, and the trigger to act on.','搜尋,或從 Supermicro 產品線、觸發訊號、或打法開始。每道門都打開該類別的戰卡 — 你的打法、要提的建議配置、該盯的訊號。')));
-    // door: search (proxies the toolbar search)
-    const sb=el('input',{class:'hsearch',type:'search',placeholder:T('Search a category, vendor, or SMCI box — “digital pathology” · “Sectra” · “GPU”…','搜尋類別、廠商、或 SMCI 硬體 —「數位病理」·「Sectra」·「GPU」…')});
-    sb.oninput=()=>{fTxt.value=sb.value;catFilter=null;hotFilter=null;render();};
-    box.append(sb);
+    // door: search — the single search input (also read by render); no duplicate in the toolbar
+    box.append(fTxt);
     const note=el('div',{class:'hnote'});box.append(note);
     const openDoor=(labelNode,ids,brief)=>{pushNav();catFilter=ids;hotFilter=null;fTxt.value='';render();
       clear(note);if(labelNode)note.append(labelNode);
       if(brief){selected=null;clear(detailPane);detailPane.append(brief);}
       const tp=document.getElementById('twopane');if(tp)tp.scrollIntoView({behavior:'smooth',block:'start'});};
     const URANK={critical:0,high:1,medium:2,low:3};
-    // door: SMCI product line (facet 1) — grouped by role + plain gloss, not acronym soup
-    box.append(el('div',{class:'dhdr'},T('Product line (SMCI box)','產品線(SMCI 機箱)')));
+    // door: SMCI product line (facet 1) — folded drawer so the workspace stays above the fold
+    const pdrawer=el('details',{class:'ldrawer'});
+    pdrawer.append(el('summary',{},T('Product line (SMCI box)','產品線(SMCI 機箱)')));
     const plist=el('div',{class:'plist'});
     PGRP.forEach(([gk,gen,gzh])=>{
       const rows=Object.keys(PLINE).filter(h=>PLINE[h][0]===gk)
@@ -790,10 +846,12 @@ function renderTaxonomy(){
         it.onclick=()=>openDoor(el('span',{},el('b',{},nm2),' — '+gl+'. '+ids.length+T(' categories pull this box.',' 個類別拉動此機箱。')),ids);
         plist.append(it);});
     });
-    box.append(plist);
-    box.append(el('div',{class:'muted',style:'font-size:11px;margin:1px 0 4px'},T('Counts overlap — a category often pulls several boxes.','數字會重疊 — 一個類別常拉多台機箱。')));
-    // door: trigger (facet 3) — grouped by urgency; each row -> an organized brief
-    box.append(el('div',{class:'dhdr'},T('Trigger — a signal that starts a deal (click for the brief)','觸發訊號 — 啟動一單的訊號(點看簡報)')));
+    pdrawer.append(plist);
+    pdrawer.append(el('div',{class:'muted',style:'font-size:11px;margin:1px 0 4px'},T('Counts overlap — a category often pulls several boxes.','數字會重疊 — 一個類別常拉多台機箱。')));
+    box.append(pdrawer);
+    // door: trigger (facet 3) — folded drawer; grouped by urgency; each row -> an organized brief
+    const tdrawer=el('details',{class:'ldrawer'});
+    tdrawer.append(el('summary',{},T('Trigger — a signal that starts a deal','觸發訊號 — 啟動一單的訊號')+' · '+(DATA.triggers.triggers||[]).length));
     const URG=[['critical',T('Critical','危急')],['high',T('High','高')],['medium',T('Medium','中')],['low',T('Low','低')]];
     const tlist=el('div',{class:'plist'});
     URG.forEach(([uk,ulab])=>{
@@ -807,7 +865,8 @@ function renderTaxonomy(){
         it.onclick=()=>goTrigger(t);
         tlist.append(it);});
     });
-    box.append(tlist);
+    tdrawer.append(tlist);
+    box.append(tdrawer);
     // door: play
     const prow=el('div',{class:'drow'});prow.append(el('span',{class:'dlab'},T('Play','打法')));
     DATA.plays.plays.forEach(p=>{const letter=p.id.split('-')[1].toUpperCase();const ids=cats.filter(c=>(c.plays||[]).includes(p.id)).map(c=>c.id);
@@ -843,7 +902,10 @@ function renderTaxonomy(){
     });
     clear(treePane);
     cnt.textContent=shown.length+' / '+cats.length+T(' shown',' 顯示')+(hotFilter?' · HOT_'+hotFilter.buyer:'');
-    if(gp==='stakeholder'){STAKE.forEach(([k,lab])=>l1node(lab,shown.filter(c=>stakeKey(c)===k)));}
+    // auto-collapse groups when browsing many; keep open when narrowed, and always open the group holding the selected category
+    const sel=(selected&&shown.find(c=>c.id===selected.id))||shown[0]||null;
+    const openIf=list=>shown.length<=12||(sel&&list.indexOf(sel)>=0);
+    if(gp==='stakeholder'){STAKE.forEach(([k,lab])=>{const li=shown.filter(c=>stakeKey(c)===k);l1node(lab,li,false,openIf(li));});}
     else if(gp==='ai'){l1node(T('AI-driven','AI 驅動'),shown.filter(isAI),true);l1node(T('No-AI','非 AI'),shown.filter(c=>!isAI(c)),true);}
     else if(!gp){l1node(T('All categories','全部類別'),shown);}
     else{
@@ -852,10 +914,9 @@ function renderTaxonomy(){
       if(gp==='hardware_opportunity')keys.sort((a,b)=>b-a);
       else if(gp==='play')keys.sort((a,b)=>((a==='(no play)')-(b==='(no play)'))||a.localeCompare(b));
       else keys.sort((a,b)=>flagN(map.get(b))-flagN(map.get(a))||hotN(map.get(b))-hotN(map.get(a))||map.get(b).length-map.get(a).length);
-      keys.forEach(k=>{const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):gp==='domain'?domLabel(k):k);l1node(label,map.get(k));});
+      keys.forEach(k=>{const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):gp==='domain'?domLabel(k):k);l1node(label,map.get(k),false,openIf(map.get(k)));});
     }
-    const keep=selected&&shown.find(c=>c.id===selected.id);
-    showDetail(keep||shown[0]||null);
+    showDetail(sel);
   }
   [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;catFilter=null;render();});
   window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};catFilter=null;
@@ -914,61 +975,6 @@ function renderRegistryInto(host){
 }
 
 // ================= PLAYS =================
-function renderPlaysInto(host){
-  const root=host;
-  const grid=el('div',{class:'grid'});root.append(grid);
-  DATA.plays.plays.forEach(p=>{
-    const letter=p.id.split('-')[1].toUpperCase();
-    const card=el('div',{class:'card'});
-    card.append(el('div',{class:'row'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter)));
-    card.append(el('h3',{},p.name));
-    const members=DATA.taxonomy.categories.filter(c=>(c.plays||[]).includes(p.id));
-    const vv=catsVal(members.map(c=>c.id));
-    const vrow=el('div',{class:'row',style:'margin:2px 0 8px'});
-    vrow.append(el('span',{class:'tagk'},T('pipeline','管線')),el('span',{class:'muted',style:'font-size:12px'},members.length+T(' targets','個目標')));
-    valBadges(vv,vrow);card.append(vrow);
-    const top=members.filter(isFlag).slice().sort((a,b)=>a.id.localeCompare(b.id)).slice(0,4);
-    if(top.length){const tr=el('div',{class:'row',style:'margin-bottom:8px'});tr.append(el('span',{class:'tagk'},T('top targets','頂級目標')));top.forEach(c=>{const pp=el('span',{class:'pill lead',style:'cursor:pointer'},nm(c));pp.onclick=()=>goCategory(c.id);tr.append(pp);});card.append(tr);}
-    const sec=(t,arr)=>{card.append(el('div',{class:'tagk'},t));
-      const ul=el('ul',{class:'muted'});(arr||[]).forEach(x=>ul.append(el('li',{},x)));
-      ul.style.margin='4px 0 8px';ul.style.paddingLeft='18px';ul.style.fontSize='12px';card.append(ul);};
-    sec(T('workloads','工作負載'),p.workloads);
-    sec(T('target segments','目標客群'),p.target_segments);
-    sec(T('hardware anchor','硬體錨點'),p.hardware_anchor);
-    if(p.regulatory_notes)card.append(el('div',{class:'notes'},T('reg: ','法規:')+p.regulatory_notes));
-    grid.append(card);
-  });
-}
-
-// ================= TRIGGERS =================
-function renderTriggersInto(host){
-  const root=host;
-  const t=el('table');
-  const TH=LANG==='zh'?['訊號','類別','急迫','窗口','來源','行動','關聯']:['Signal','Cat','Urgency','Window','Source','Action','Related'];
-  t.append(el('thead',{},el('tr',{},...TH.map(h=>el('th',{},h)))));
-  const tb=el('tbody');
-  const rank={critical:0,high:1,medium:2,low:3};
-  DATA.triggers.triggers.slice().sort((a,b)=>rank[a.urgency]-rank[b.urgency]
-    ||catsVal(b.related_categories).flag-catsVal(a.related_categories).flag
-    ||catsVal(b.related_categories).hot-catsVal(a.related_categories).hot).forEach(x=>{
-    const vv=catsVal(x.related_categories);
-    const rrow=el('div',{class:'row'});
-    (x.related_plays||[]).forEach(p=>rrow.append(el('span',{class:'play '+playClass(p)},playName(p).split(' ')[0])));
-    valBadges(vv,rrow);
-    (x.related_categories||[]).forEach(cid=>{const c=CATBYID[cid];const p=el('span',{class:'pill'+((c&&isFlag(c))?' lead':''),style:'cursor:pointer'},c?nm(c):cid);p.onclick=()=>goCategory(cid);rrow.append(p);});
-    tb.append(el('tr',{},
-      el('td',{},el('strong',{},x.signal)),
-      el('td',{},el('span',{class:'pill'},x.category)),
-      el('td',{},el('span',{class:'u '+x.urgency},x.urgency)),
-      el('td',{class:'muted'},x.window),
-      el('td',{class:'muted'},x.source),
-      el('td',{},x.action),
-      el('td',{},rrow)));
-  });
-  t.append(tb);root.append(el('div',{class:'wrap'},t));
-}
-
-// ================= SCORING =================
 function renderScoringInto(host){
   const root=host;
   root.append(el('h3',{},T('Model - ','評分模型 - ')+SC.items.reduce((s,i)=>s+i.weight,0)+T(' pts - ',' 分 - ')+SC.formula));
@@ -1002,78 +1008,6 @@ function renderScoringInto(host){
 }
 
 // ================= ACCOUNTS =================
-function renderAccountsInto(host){
-  const root=host;
-  if(!DATA.accounts.length){root.append(el('div',{class:'muted'},T('No accounts in data/accounts/ yet.','data/accounts/ 尚無帳號。')));return;}
-  const scored=DATA.accounts.map(a=>({a,r:scoreAccount(a)})).sort((x,y)=>y.r.total-x.r.total);
-  scored.forEach(({a,r})=>{
-    const card=el('div',{class:'card'});card.style.marginBottom='12px';
-    const head=el('div',{class:'row'},
-      el('span',{class:'tierbadge',style:'background:'+tierColor(r.tier.name)},r.total+' - '+r.tier.name));
-    (a.plays?[a.plays]:(a.play?[a.play]:[])).flat().forEach(p=>head.append(el('span',{class:'play '+playClass(p)},playName(p))));
-    if(a.fictional)head.append(el('span',{class:'pill'},'fictional / demo'));
-    card.append(head);
-    card.append(el('h3',{},(a.company||'?')+' - '+(a.facility||'?')));
-    const kv=el('dl',{class:'kv'});
-    const add=(k,v)=>{if(v==null||v==='')return;kv.append(el('dt',{},k),el('dd',{},typeof v==='object'?JSON.stringify(v):String(v)));};
-    add(T('Segment','客群'),a.segment);
-    add(T('Software','軟體'),a.software&&(a.software.domain||''));
-    add(T('Deployment','部署'),a.deployment);add(T('Operator','營運者'),a.operator);
-    add(T('Trigger','觸發訊號'),a.trigger&&(a.trigger.detail||a.trigger.id));
-    add(T('Infra control','基建掌控'),a.infrastructure_control);
-    add(T('Next step','下一步'),a.next_step);
-    card.append(kv);
-    const bd=el('div',{});bd.style.marginTop='10px';
-    r.rows.forEach(row=>{
-      const pct=(row.score/SMAX)*100;
-      const line=el('div',{});line.style.margin='6px 0';
-      line.append(el('div',{class:'muted',style:'font-size:11px;display:flex;justify-content:space-between'},
-        el('span',{},row.label+' ('+row.score+'/'+SMAX+' x'+row.weight+')'),el('span',{},String(row.weighted))));
-      const bar=el('div',{class:'mini'});const fill=el('i',{style:'width:'+pct+'%;background:'+(row.score<=2?'var(--u-crit)':row.score>=4?'var(--a)':'var(--u-med)')});
-      bar.append(fill);line.append(bar);bd.append(line);
-    });
-    card.append(bd);
-    const ev=(a.evidence||[]);if(ev.length){
-      const confs=ev.map(e=>e.confidence).filter(Boolean);
-      card.append(el('div',{class:'notes'},T('Evidence: ','證據:')+ev.length+T(' claim(s), confidence ',' 項聲明,信心 ')+[...new Set(confs)].join('/')+(confs.length&&confs.every(c=>c==='D')?T(' - all inference, verify before pursuit',' - 全為推論,追蹤前先查證'):'')));
-    }
-    root.append(card);
-  });
-}
-
-// ================= LEADERBOARDS (market vendor rankings) =================
-function renderLeaderboardsInto(host){
-  const root=host;
-  const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;
-  if(!LB){root.append(el('div',{class:'muted'},T('No leaderboards data.','無榜單資料。')));return;}
-  root.append(el('div',{class:'rollup'},T('Market vendor leaderboards — ranked by market share / installed base. Every entry §8-sourced (a real figure or a sourced market position); grouped by sub-market. A vendor that plays both sides (e.g. GE, Philips) appears on both boards.','市場廠商榜 — 按市佔／裝機量排名。每一項 §8 有來源(真數字或有來源的市場地位),依次級市場分組。雙棲廠商(如 GE、Philips)兩榜都上。')));
-  const wrap=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fill,minmax(430px,1fr))'});
-  [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([key,board])=>{
-    if(!board)return;
-    const col=el('div',{class:'card'});
-    col.append(el('h3',{style:'margin-bottom:6px'},(LANG==='zh'?board.label_zh:board.label_en)+' · '+board.count));
-    let curSeg=null;
-    (board.entries||[]).forEach(e=>{
-      if(e.segment!==curSeg){curSeg=e.segment;
-        col.append(el('div',{class:'tagk',style:'display:block;margin:12px 0 2px'},(LANG==='zh'?e.segment_zh:e.segment)));}
-      const row=el('div',{style:'padding:6px 0;border-top:1px solid var(--line)'});
-      const nmEl=el('span',{style:'font-weight:600'+(e.vendor_id?';cursor:pointer;text-decoration:underline dotted var(--accent)':'')},e.name+(e.vendor_id?' ↩':''));
-      if(e.vendor_id){nmEl.title=T('in the registry — view vendor card','在登錄中 — 看廠商卡');nmEl.onclick=()=>goVendor(e.vendor_id);}
-      const rowline=el('div',{class:'row'},el('b',{style:'color:var(--accent);min-width:34px'},'#'+e.rank),nmEl);
-      if(e.vendor_id&&VBYID[e.vendor_id])valBadges(vendorVal(VBYID[e.vendor_id]),rowline);
-      row.append(rowline);
-      row.append(el('div',{class:'muted',style:'font-size:11px;margin:3px 0'},e.market_basis));
-      if(e.source){const isurl=/^https?:\/\//.test(e.source);
-        row.append(isurl?el('a',{href:e.source,target:'_blank',class:'pill'},T('source','來源')+' ↗'):el('span',{class:'pill'},String(e.source).slice(0,60)));}
-      col.append(row);
-    });
-    wrap.append(col);
-  });
-  root.append(wrap);
-}
-
-// ================= fused-tab section toggles (Method, Vendors) =================
-// reusable in-page sub-navigation (reuses the .seg segmented-control style)
 function subNav(root, items, defaultKey){
   const seg=el('div',{class:'seg',style:'margin:6px 0 14px'});
   const host=el('div',{});
@@ -1086,12 +1020,89 @@ function subNav(root, items, defaultKey){
 let _vendorsNav=null;
 function renderMethod(){
   const root=$('#tab-method'); clear(root);
-  root.append(el('h2',{style:'margin:2px 0 8px'},T('GTM method — how to run the motion','GTM 方法 — 怎麼打')));
-  subNav(root,[
-    ['plays',T('Plays','打法'),renderPlaysInto],
-    ['signals',T('Signals','訊號'),renderTriggersInto],
-    ['scoring',T('Scoring','評分'),renderScoringInto],
-    ['accounts',T('Accounts','帳號'),renderAccountsInto]],'plays');
+  root.append(el('h2',{style:'margin:2px 0 4px'},T('How to use this map','怎麼用這張地圖')));
+  root.append(el('p',{class:'muted',style:'margin:0 0 8px;font-size:13px;max-width:820px;line-height:1.55'},
+    T('We sell the hardware — but the buying decision starts one layer up, at the software. This map turns that into a repeatable flow: from the software universe, through a door, to a battle card, to the deal.',
+      '我們賣硬體 —— 但採購決策在上一層,在軟體。這張地圖把它變成一條可複製的流程:從軟體宇宙,經一道門,到戰卡,到成交。')));
+  const goExplore=(fn)=>{goTab('taxonomy');if(window._exp&&fn)fn(window._exp);};
+  const sech=(t,sub)=>{const h=el('div',{class:'lsec'},t);if(sub)h.append(el('span',{class:'lsecsub'},'  '+sub));root.append(h);};
+  const lbtn=(label,onclick)=>{const b=el('button',{class:'lbtn'},label);b.onclick=onclick;return b;};
+
+  // ===== the system, one animated picture =====
+  sech(T('The system','整套系統'),T('a hunt flows left → right','一次獵單由左 → 右'));
+  const flow=el('div',{class:'sysflow'});
+  const sdots=()=>{const d=el('div',{class:'sfdots'});
+    [['g-flag',T('flagship','旗艦')],['g-hot',T('customer-HOT','客戶-HOT')],['g-lead',T('market leader','市場領導者')]]
+      .forEach(([c,l])=>d.append(el('span',{class:'sfdot'},el('i',{class:'kdot '+c}),l)));return d;};
+  const stage=(i,tag,title,rows,onclick)=>{const s=el('div',{class:'sfstage',style:'--i:'+i});
+    if(onclick){s.style.cursor='pointer';s.onclick=onclick;}
+    s.append(el('div',{class:'sftag'},tag),el('div',{class:'sftitle'},title));
+    const b=el('div',{class:'sfbody'});rows.forEach(r=>b.append(typeof r==='string'?el('div',{class:'sfrow'},r):r));s.append(b);return s;};
+  const arrow=(i)=>el('div',{class:'sfarrow',style:'--i:'+i},'→');
+  flow.append(
+    stage(0,T('① Universe','① 宇宙'),T('The software map','軟體地圖'),
+      [DATA.taxonomy.categories.length+T(' software categories','個軟體類別'),sdots(),T('each → its SMCI box','每類 → 其 SMCI 機箱')],()=>goTab('taxonomy')),
+    arrow(0),
+    stage(1,T('② Door','② 門'),T('How you enter','怎麼進'),
+      [T('search','搜尋'),T('product line','產品線'),T('trigger','觸發訊號'),T('play','打法')],()=>goTab('taxonomy')),
+    arrow(1),
+    stage(2,T('③ Battle card','③ 戰卡'),T('What to do','怎麼打'),
+      [T('your motion','你的打法'),T('reference architecture','建議配置'),T('trigger to watch','盯的訊號'),T('market share','市佔率'),T('who to co-sell with','跟誰共銷')],()=>goExplore(e=>e.goCat('ehr-emr-core'))),
+    arrow(2),
+    stage(3,T('④ Deal','④ 成交'),T('The attach','拿下'),
+      [T('SMCI hardware','SMCI 硬體'),T('+ co-sell partner','+ 共銷夥伴')]));
+  root.append(flow);
+  root.append(el('div',{class:'muted',style:'font-size:11px;margin:2px 0'},T('Click any stage to jump into it. The rest of this page unpacks each one.','點任一階段直接跳進去。下面逐一拆解。')));
+
+  // ===== ① signals =====
+  sech(T('① The three signals — on every category','① 三個訊號 —— 每個類別都有'));
+  const leg=el('div',{class:'mlegend'});
+  [['g-flag',T('flagship','旗艦'),T('The biggest SMCI box this category pulls (opportunity 4/4).  →  the biggest deals.','該類別拉動的最大 SMCI 機箱(機會 4/4)。 → 最大的單。')],
+   ['g-hot',T('customer-HOT','客戶-HOT'),T('The end org buys and runs its own iron — a direct SMCI sale.  →  who you can sell to directly.','終端機構自己買鐵、自建機房 —— SMCI 直銷。 → 可以直接賣的對象。')],
+   ['g-lead',T('market leader','市場領導者'),T('The vendor is ranked on the market leaderboard — it already owns the account.  →  who to co-sell through.','廠商在市場榜單有名次 —— 已握有客戶。 → 透過誰共銷。')]
+  ].forEach(([cls,lab,def])=>{const c=el('div',{class:'mleg '+cls});c.append(el('div',{class:'lh'},el('span',{class:'llab'},lab)));c.append(el('div',{class:'ld'},def));leg.append(c);});
+  root.append(leg);
+
+  // ===== ② doors =====
+  sech(T('② The four doors — when to use each','② 四道門 —— 何時用哪個'));
+  const dg=el('div',{class:'ldoors'});
+  [[T('Search','搜尋'),T('You have a name in mind — a category, a vendor, or an SMCI box.','心裡有個名字 —— 類別、廠商、或 SMCI 硬體。')],
+   [T('Product line','產品線'),T('You sell a specific box (GPU, NVMe, archive, edge) and want its whole pipeline.','你賣某一款機箱(GPU、NVMe、封存、邊緣),想看它整條管線。')],
+   [T('Trigger','觸發訊號'),T('Something happened — an FDA filing, a ransomware hit, an EHR go-live.','發生了某件事 —— FDA 申報、勒索軟體、EHR 上線。')],
+   [T('Play','打法'),T('You are running one of the four hardware bets.','你正在跑四個硬體賭注之一。')]
+  ].forEach(([n,w])=>dg.append(el('div',{class:'ldoor'},el('b',{},n),el('span',{class:'muted'},w))));
+  root.append(dg);
+  root.append(lbtn(T('Open Explore →','開啟 Explore →'),()=>goTab('taxonomy')));
+
+  // ===== ③ walkthrough =====
+  sech(T('③ Watch one flow through','③ 看一次完整流程'));
+  const ol=el('ol',{class:'lsteps'});
+  [T('A hospital just disclosed a ransomware incident.','某醫院剛揭露勒索軟體事件。'),
+   T('Open the “Cyber incident / ransomware” trigger — the brief shows the 7 markets it opens and the move: immutable / air-gapped backup.','開「Cyber incident／ransomware」觸發 —— 簡報顯示它開的 7 個市場,以及動作:不可變／氣隙備份。'),
+   T('Click the EHR / EMR market → its battle card.','點 EHR／EMR 市場 → 它的戰卡。'),
+   T('The card gives you: your motion (direct sale), the reference architecture (NVMe + HA + DR, zero GPU), and who already runs there.','戰卡給你:打法(直銷)、建議配置(NVMe + HA + DR,零 GPU)、以及誰已跑在那。'),
+   T('That is the deal — the resilience iron under the EHR, funded by the breach budget.','這就是那張單 —— EHR 底下的韌性硬體,用資安預算買。')
+  ].forEach(s=>ol.append(el('li',{},s)));
+  root.append(ol);
+  root.append(lbtn(T('Try it live →','實際走一遍 →'),()=>goExplore(e=>e.goTrigger(DATA.triggers.triggers.find(t=>t.id==='cyber-incident')))));
+
+  // ===== ④ the four bets =====
+  sech(T('④ The four bets — click to open','④ 四個賭注 —— 點開'));
+  const pg=el('div',{class:'lplays'});
+  DATA.plays.plays.forEach(p=>{const L=p.id.split('-')[1].toUpperCase();const n=DATA.taxonomy.categories.filter(c=>(c.plays||[]).includes(p.id)).length;
+    const row=el('div',{class:'lplay'},el('span',{class:'play play'+L.toLowerCase()},'Play '+L),el('b',{},p.name),el('span',{class:'muted',style:'flex:1'},' — '+(p.hardware_anchor||[]).slice(0,2).join(' · ')),el('span',{class:'lpct'},n+T(' categories','類')));
+    row.onclick=()=>goExplore(e=>e.goPlay(p.id));pg.append(row);});
+  root.append(pg);
+
+  // ===== folded: prioritize (scoring) =====
+  const d=el('details',{class:'hkey',style:'margin-top:18px'});
+  d.append(el('summary',{},T('Advanced — how an account gets prioritized (scoring)','進階 —— 帳號怎麼排優先序(評分)')));
+  const sc=el('div',{style:'padding-top:8px'});
+  sc.append(el('p',{class:'muted',style:'font-size:12.5px;max-width:740px;line-height:1.5'},
+    T('When you do work a specific account, rank it on two things: how BIG the hardware deal is, and how WINNABLE it is (does the customer control the iron, is there a refresh trigger, is it repeatable across sites…). 100 points; ≥70 = pursue now. Try the sliders:',
+      '當你真的去攻一個帳號,用兩件事排序:硬體單有多大、以及多好贏(客戶是否掌控硬體、有沒有換機觸發、能不能跨點複製…)。滿分 100;≥70 = 現在追。拉拉看:')));
+  renderScoringInto(sc);
+  d.append(sc);root.append(d);
 }
 function renderVendors(){
   const root=$('#tab-vendors'); clear(root);

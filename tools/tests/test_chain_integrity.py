@@ -882,6 +882,33 @@ class TestAppGuidance(unittest.TestCase):
         self.assertIn("pk-hw", self.html)
         self.assertIn(".partnerships||[]", self.html)
 
+    def test_method_is_a_how_to_use_learn_page(self):
+        """v3.9: Method is one teaching page ('how to use this map') with a static
+        system-flow diagram, not the old plays/signals/scoring/accounts sub-nav."""
+        self.assertIn("How to use this map", self.html)
+        self.assertIn("class:'sysflow'", self.html, "Method needs the system-flow diagram")
+        self.assertNotIn("renderAccountsInto", self.html, "the fictional Accounts sub-tab must be gone")
+
+    def test_single_search_input(self):
+        """v3.9: exactly one search field (the prominent launcher input, also read by
+        render); the duplicate toolbar search was removed."""
+        self.assertEqual(self.html.count("id:'fTxt'"), 1, "there must be exactly one fTxt search input")
+
+    def test_no_ai_slop_side_stripes_and_oklch_palette(self):
+        """v3.9 premium pass: no side-stripe accent borders (impeccable ban), and the
+        palette is OKLCH-based (harmonized shelf), not ad-hoc hex."""
+        import re as _re
+        stripes = _re.findall(r"border-(?:left|right):[2-9]\d*px", self.html)
+        self.assertEqual(stripes, [], f"side-stripe accents are banned: {stripes[:3]}")
+        self.assertIn("oklch(", self.html, "palette must be OKLCH")
+        self.assertIn("tabular-nums", self.html, "numbers must use tabular figures")
+
+    def test_tree_auto_collapses_when_browsing_many(self):
+        """v3.9: category-tree groups collapse by default when browsing many, and the
+        group holding the selected category auto-opens."""
+        self.assertIn("openIf=list=>shown.length", self.html,
+                      "the tree must auto-collapse groups (open the selected one)")
+
     def test_back_navigation_exists(self):
         """v3.6: every drill-down (door -> brief -> battle card, chip -> chip) is
         reversible — a Back button pops a nav stack of {catFilter, detail-view} and
