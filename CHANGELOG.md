@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-07-29 — researched vendor market share + partnerships; Back nav + a partner-landscape drawer + v3.6/v3.7
+Three asks from Tuo: fill the "未公開" market-share gaps (with sources), add a back button, and surface each vendor's peer ranking + who they partner with.
+- **Back navigation (v3.6):** every drill-down (door → brief → battle card; play chip ⇄ trigger chip ⇄ category) now pushes a `{catFilter, detail-view}` snapshot onto a nav stack; a sticky "← Back" button pops it and restores the prior view. Verified: PlayD → trigger → market, Back → trigger brief, Back → play brief.
+- **Researched the data (v3.7):** a 12-agent web-research workflow covered all 133 leaderboard vendors lacking a share figure → 25 market-share candidates + **110 vendors with partnerships**, every claim carrying a source.
+- **Verified, didn't trust (TUo Brain #1/#3):** reality-checking the 25 share figures exposed that agents conflated **adoption/reach with market share** (OpenEvidence "65% of physicians use it", FinThrive, Phreesia, Optum-Change reach) and leaned on **unreliable tech-trackers** (Enlyft/6sense: epic-beaker 35.29%, greenway 0.19%, orchard, solutionreach), plus a **wrong-product mislabel** (meditech-expanse-laboratory got MEDITECH's *EHR* share) and **market-mismatch cloud share** (Microsoft/Google). **Kept 13** genuine market-share figures (eClinicalWorks 13.9, athenahealth 7.5, McKesson 33, Optum 23, CompuGroup 19.5 [DE], Arxium 19.1, Philips 15, Clinisys 9.2, Sectra 25, Abridge 30, Oracle Life Sciences 60, Veradigm 3.1, Altera 2.9), **rejected 12** — kept as "未公開" rather than show a misleading bar.
+- **Partner-landscape drawer:** a second battle-card drawer, "Who these vendors partner with", lists each vendor's partners with **hardware / cloud partners highlighted** (NVIDIA, AWS, Azure, GCP, Dell, HPE) — each is a concrete SMCI co-sell / displacement angle (the vendor already runs on someone's iron). E.g. Imaging-AI: Aidoc → NVIDIA + AWS; DeepHealth → GE + AWS + Google Cloud. Sorted hardware/cloud-first; hover a partner for the note + source.
+- Structured `partnerships: [{partner, kind, note, source}]` and the 13 `market_share_pct` merged into vendors.yaml (line-oriented, prose kept as the bar's source).
+- **97 GREEN** (+4: back-nav, partner drawer, partnerships sourced, share-rejection); deterministic; browser-verified (DOM), zero console errors, no emoji.
+- **Tagged `v3.7`.** Note: partnerships/share are point-in-time research (2025-26 sources); refresh periodically.
+
 ## 2026-07-29 — battle-card vendors → a collapsible drawer with cited market-share bars + v3.5
 Tuo, pointing at the battle card's vendor lists: make it a drawer too, and inside show a proportional bar of each vendor's market share. Done — honestly.
 - The two old vendor blocks (ranked incumbents + full vendor pills) are fused into one collapsible **`<details>` drawer** — "Vendors in this market · N · M with cited share" — rows sorted by share, each: vendor name (→ registry) · leaderboard rank · a **proportional market-share bar** · the %.

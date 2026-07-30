@@ -623,6 +623,25 @@ class TestVendorEnrichment(unittest.TestCase):
         byid = {v["id"]: v for v in _VDOC["vendors"]}
         self.assertEqual(byid["epic-systems"]["market_share_pct"], 42.3)
         self.assertEqual(byid["oracle-health"]["market_share_pct"], 22.9)
+        self.assertEqual(byid["athenahealth"]["market_share_pct"], 7.5)  # researched + kept
+        # adoption/reach and tech-tracker figures were REJECTED, not stamped as market share
+        self.assertIsNone(byid.get("openevidence", {}).get("market_share_pct"))  # 65% = physician adoption
+        self.assertIsNone(byid.get("greenway", {}).get("market_share_pct"))       # 6sense tech-tracker
+        self.assertIsNone(byid.get("phreesia", {}).get("market_share_pct"))       # visits-enabled reach
+
+    def test_partnerships_are_structured_and_sourced(self):
+        """v3.7: researched partnerships give the co-sell / displacement map. Every
+        partnership must be fully structured and carry a source (never unsourced)."""
+        n = 0
+        for v in _VDOC["vendors"]:
+            for p in (v.get("partnerships") or []):
+                n += 1
+                for f in ("partner", "kind", "note", "source"):
+                    self.assertIn(f, p, f"{v['id']}: partnership missing '{f}'")
+                self.assertIn(p["kind"], ("hardware", "cloud", "clinical", "channel", "other"),
+                              f"{v['id']}: bad partnership kind {p['kind']!r}")
+                self.assertTrue(p["source"], f"{v['id']}: partnership '{p['partner']}' has no source")
+        self.assertGreaterEqual(n, 100, "expected partnerships to be populated from research")
 
     def test_founded_is_year_or_null(self):
         for v in _VDOC["vendors"]:
@@ -854,6 +873,14 @@ class TestAppGuidance(unittest.TestCase):
         for sig in ("New sequencer purchase", "Cyber incident", "FDA IND filing",
                     "Serialization", "Cloud repatriation", "Plant modernization"):
             self.assertIn(sig, self.html, f"trigger '{sig}' must be present")
+
+    def test_partner_landscape_drawer(self):
+        """v3.7: a second drawer shows who each vendor partners with, hardware/cloud
+        partners highlighted as SMCI co-sell / displacement angles, read from data."""
+        self.assertIn("Who these vendors partner with", self.html)
+        self.assertIn("class:'pchip'", self.html)
+        self.assertIn("pk-hw", self.html)
+        self.assertIn(".partnerships||[]", self.html)
 
     def test_back_navigation_exists(self):
         """v3.6: every drill-down (door -> brief -> battle card, chip -> chip) is

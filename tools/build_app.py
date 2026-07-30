@@ -256,6 +256,12 @@ main{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
 .msfill{height:100%;background:var(--accent);border-radius:5px}
 .msp{text-align:right;font-weight:700;font-size:11px}
 .msund{text-align:right;font-size:10px;color:var(--muted)}
+.prow{display:flex;gap:8px;align-items:baseline;padding:5px 2px;font-size:12.5px;flex-wrap:wrap}
+.pvn{font-weight:600;cursor:pointer;flex:0 0 auto;min-width:120px;max-width:200px;overflow-wrap:anywhere}
+.pvn:hover{color:var(--accent)}
+.pchips{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.pchip{font-size:10px;border-radius:10px;padding:1px 7px;border:1px solid var(--line);color:var(--muted);cursor:default;white-space:nowrap}
+.pchip.pk-hw{color:var(--hw3);border-color:var(--hw3);font-weight:700}
 .dstep{display:flex;gap:8px;margin:3px 0;font-size:13px}
 .dstep b{color:var(--accent);flex:0 0 auto}
 .gcount{font-size:11px;font-weight:600;color:var(--muted);background:var(--accentbg);border-radius:20px;padding:1px 8px}
@@ -701,6 +707,26 @@ function renderTaxonomy(){
       d.append(body);
       d.append(el('div',{class:'muted',style:'font-size:10px;margin-top:5px;line-height:1.4'},T('Bars = cited market share (hover a bar for the source); “n/a” = no public share figure. Each share is of that vendor’s own market.','長條=有引用來源的市佔率(游標移到長條看來源);「未公開」=無公開市佔數字。每個市佔為該廠商所屬市場之比例。')));
       cd.append(d);
+    }
+    // ---- partner landscape drawer: who this market's vendors run with (SMCI co-sell / displacement) ----
+    if(c.vendors&&c.vendors.length){
+      const pv=c.vendors.map(vid=>({vid:vid,name:VNAME[vid]||vid,ps:((VBYID[vid]||{}).partnerships||[])})).filter(x=>x.ps.length);
+      const hwc=x=>x.ps.some(p=>p.kind==='hardware'||p.kind==='cloud');
+      pv.sort((a,b)=>((hwc(b)?1:0)-(hwc(a)?1:0))||a.name.localeCompare(b.name));
+      if(pv.length){
+        const d=el('details',{class:'vdrawer'});
+        d.append(el('summary',{},T('Who these vendors partner with','這些廠商跟誰合作')+' · '+pv.length));
+        const body=el('div',{class:'vsbody'});
+        pv.forEach(x=>{const row=el('div',{class:'prow'});
+          const vn=el('span',{class:'pvn'},x.name);vn.onclick=()=>goVendor(x.vid);row.append(vn);
+          const chips=el('span',{class:'pchips'});
+          x.ps.forEach(p=>{const hl=(p.kind==='hardware'||p.kind==='cloud');
+            chips.append(el('span',{class:'pchip'+(hl?' pk-hw':''),title:p.partner+' ('+p.kind+') — '+(p.note||'')+(p.source?'  ['+p.source+']':'')},p.partner));});
+          row.append(chips);body.append(row);});
+        d.append(body);
+        d.append(el('div',{class:'muted',style:'font-size:10px;margin-top:5px;line-height:1.4'},T('Hardware / cloud partners are highlighted — each is an SMCI co-sell or displacement angle (the vendor already runs on someone’s iron). Hover a partner for the note + source.','硬體／雲夥伴標亮 — 每個都是 SMCI 共銷或替換切入點(該廠商已跑在別人的鐵上)。游標移到夥伴看說明與來源。')));
+        cd.append(d);
+      }
     }
     return cd;
   }
