@@ -1034,6 +1034,35 @@ function renderMethod(){
   renderScoringInto(sc);
   d.append(sc);root.append(d);
 }
+function renderLeaderboardsInto(host){
+  const root=host;
+  const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;
+  if(!LB){root.append(el('div',{class:'muted'},T('No leaderboards data.','無榜單資料。')));return;}
+  root.append(el('div',{class:'rollup'},T('Market vendor leaderboards — ranked by market share / installed base. Every entry §8-sourced (a real figure or a sourced market position); grouped by sub-market. A vendor that plays both sides (e.g. GE, Philips) appears on both boards.','市場廠商榜 — 按市佔／裝機量排名。每一項 §8 有來源(真數字或有來源的市場地位),依次級市場分組。雙棲廠商(如 GE、Philips)兩榜都上。')));
+  const wrap=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fill,minmax(430px,1fr))'});
+  [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([key,board])=>{
+    if(!board)return;
+    const col=el('div',{class:'card'});
+    col.append(el('h3',{style:'margin-bottom:6px'},(LANG==='zh'?board.label_zh:board.label_en)+' · '+board.count));
+    let curSeg=null;
+    (board.entries||[]).forEach(e=>{
+      if(e.segment!==curSeg){curSeg=e.segment;
+        col.append(el('div',{class:'tagk',style:'display:block;margin:12px 0 2px'},(LANG==='zh'?e.segment_zh:e.segment)));}
+      const row=el('div',{style:'padding:6px 0;border-top:1px solid var(--line)'});
+      const nmEl=el('span',{style:'font-weight:600'+(e.vendor_id?';cursor:pointer;text-decoration:underline dotted var(--accent)':'')},e.name+(e.vendor_id?' ↩':''));
+      if(e.vendor_id){nmEl.title=T('in the registry — view vendor card','在登錄中 — 看廠商卡');nmEl.onclick=()=>goVendor(e.vendor_id);}
+      const rowline=el('div',{class:'row'},el('b',{style:'color:var(--accent);min-width:34px'},'#'+e.rank),nmEl);
+      if(e.vendor_id&&VBYID[e.vendor_id])valBadges(vendorVal(VBYID[e.vendor_id]),rowline);
+      row.append(rowline);
+      row.append(el('div',{class:'muted',style:'font-size:11px;margin:3px 0'},e.market_basis));
+      if(e.source){const isurl=/^https?:\/\//.test(e.source);
+        row.append(isurl?el('a',{href:e.source,target:'_blank',class:'pill'},T('source','來源')+' ↗'):el('span',{class:'pill'},String(e.source).slice(0,60)));}
+      col.append(row);
+    });
+    wrap.append(col);
+  });
+  root.append(wrap);
+}
 function renderVendors(){
   const root=$('#tab-vendors'); clear(root);
   root.append(el('h2',{style:'margin:2px 0 8px'},T('Market players — vendors & leaders','市場玩家 — 廠商與領導者')));

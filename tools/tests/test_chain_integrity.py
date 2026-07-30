@@ -1198,5 +1198,43 @@ class TestWorkloadEnvelope(unittest.TestCase):
                                     f"compute/GPU/HA tier (not archive-only)")
 
 
+# ============================================================
+# Load-time integrity: the app's inline JS must not reference a function it
+# never defines. Regression guard for the v3.9 dead-code sweep, which deleted
+# renderLeaderboardsInto while renderVendors still called it -> renderAll() threw
+# at load, leaving Vendors empty and the language toggle unbound (line after
+# renderAll() never ran). Static string tests could not catch it; this can.
+# ============================================================
+
+class TestNoUndefinedRenderRefs(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import subprocess
+        subprocess.run([sys.executable, "tools/build_app.py"], cwd=str(REPO),
+                       capture_output=True, text=True, timeout=60)
+        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+
+    def test_every_render_into_called_is_defined(self):
+        """Any render*Into wired into a subNav/renderAll must have a definition —
+        otherwise renderAll() throws at load and cascades (Vendors blank, toggle dead)."""
+        called = set(re.findall(r"\brender\w+Into\b", self.src))
+        defined = set(re.findall(r"function\s+(render\w+Into)\s*\(", self.src))
+        missing = sorted(called - defined)
+        self.assertEqual(missing, [], f"render*Into called but never defined: {missing}")
+
+    def test_renderall_tab_renderers_defined(self):
+        """The three tab renderers renderAll() calls must all exist."""
+        for fn in ("renderTaxonomy", "renderMethod", "renderVendors"):
+            self.assertRegex(self.src, r"function\s+%s\s*\(" % fn,
+                             f"renderAll() calls {fn}() but it is not defined")
+
+    def test_langtog_bind_after_initial_render(self):
+        """langtog.onclick is bound on the line AFTER renderAll(); if the initial
+        renderAll() can throw, the toggle never binds. Keep them adjacent so the
+        guard above (no undefined refs) actually protects the binding."""
+        m = re.search(r"renderAll\(\);\s*\n\s*\$\('#langtog'\)\.onclick", self.src)
+        self.assertIsNotNone(m, "langtog.onclick must be bound immediately after renderAll()")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
