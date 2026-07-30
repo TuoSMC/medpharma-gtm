@@ -21,6 +21,7 @@ import yaml
 REPO = Path(__file__).resolve().parent.parent
 DATA = REPO / "data"
 OUT = REPO / "app" / "index.html"
+DOCS = REPO / "docs" / "index.html"  # GitHub Pages copy (byte-identical; single source = this build)
 
 
 def load(p):
@@ -57,7 +58,11 @@ def main():
 
     html = TEMPLATE.replace("/*__DATA__*/null", json.dumps(data, ensure_ascii=False))
     OUT.write_text(html, encoding="utf-8")
+    DOCS.parent.mkdir(exist_ok=True)
+    DOCS.write_text(html, encoding="utf-8")            # GitHub Pages serves /docs
+    (DOCS.parent / ".nojekyll").write_text("", encoding="utf-8")  # serve the file as-is
     print(f"OK: wrote {OUT}")
+    print(f"OK: wrote {DOCS}")
     print(f"    {len(data['taxonomy']['categories'])} categories, "
           f"{len(data['plays']['plays'])} plays, {len(data['triggers']['triggers'])} triggers, "
           f"{len(accounts)} accounts")
