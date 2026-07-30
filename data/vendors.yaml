@@ -16,6 +16,9 @@ vendors:
     history: "Founded 2012 in Pleasanton by Serge Saxonov, Ben Hindson and Kevin Ness; pioneered single-cell and spatial platforms including Chromium, Visium and the Xenium in-situ analyzer."
     market_position: "Market leader in single-cell and spatial biology; publicly traded (Nasdaq: TXG). Its Xenium in-situ platform surpassed 100+ analyzer shipments per 2025 reporting; instruments and analysis run on customer-owned on-prem compute."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "GPU-accelerated analysis of 10x single-cell/spatial data via RAPIDS-singlecell & Clara Parabricks; NVIDIA DGX B200 processed 1M cells in 26s (>120x vs 32-core CPU). Ecosystem acceleration rather than a formal joint venture.", source: "https://developer.nvidia.com/blog/gpu-accelerated-single-cell-rna-analysis-with-rapids-singlecell/"}
+      - {partner: "BioTuring", kind: "other", note: "Strategic collaboration to streamline single-cell/spatial data analysis on BioTuring's GPU-accelerated architecture.", source: "https://bioturing.com/blog/bioturing-and-10x-genomics-announce-strategic-collaboration-to-streamline-single-cell-and-spatial-data-analysis/"}
     sources:
       - "https://www.10xgenomics.com/platforms/xenium"
       - "https://endpoints.news/exclusive-10x-genomics-ceo-touts-incredible-traction-with-newest-launch-shipping-over-100-spatial-biology-analyzers/"
@@ -50,6 +53,8 @@ vendors:
     history: "Formed 1988 by merger of Sweden's ASEA (1883) and Switzerland's Brown, Boveri & Cie (1891). Its System 800xA is a flagship distributed control system (DCS) for process automation. Morten Wierod has been CEO since August 2024."
     market_position: "Global top-tier DCS/process-automation vendor (System 800xA); one of the largest industrial automation companies worldwide."
     market_share: "#1 in global Distributed Control Systems (DCS) market, ~19% share, leader for 22nd consecutive year (ARC Advisory Group)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Partnership (announced 2026) integrating NVIDIA Omniverse into ABB RobotStudio ('RobotStudio HyperReality') and NVIDIA Jetson edge compute into ABB's OmniCore controller for real-time edge AI inference.", source: "https://new.abb.com/news/detail/134030/prsrl-abb-robotics-partners-with-nvidia-to-deliver-industrial-grade-physical-ai-at-scale"}
     market_share_pct: 19
     sources:
       - "https://new.abb.com/control-systems/system-800xa/800xa-dcs"
@@ -111,6 +116,9 @@ vendors:
     history: "Founded 1995; facilities/asset-management and healthcare CMMS software. Previously owned by Genstar Capital, then acquired by Fortive Corporation in 2018 for $2.0B."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "ServiceChannel", kind: "channel", note: "Sister Fortive company; solutions combined into an integrated IWMS for multi-site operators.", source: "https://servicechannel.com/press/servicechannel-partners-with-accruent-to-deliver-integrated-real-estate-and-facilities-management-solution-for-multi-site-business-operators/"}
+      - {partner: "Fortive", kind: "other", note: "Owned by Fortive Corporation; acquired 2018 for ~$2.0B (facilities/asset-management software).", source: "https://investors.fortive.com/news-events/press-releases/detail/170/fortive-to-acquire-accruent-for-approximately-2-0-billion-in-cash"}
     sources:
       - "https://www.gencap.com/genstar-capital-announces-agreement-to-sell-accruent-to-fortive-corporation-for-2-0-billion-in-cash/"
       - "https://en.wikipedia.org/wiki/Fortive"
@@ -128,6 +136,9 @@ vendors:
     history: "Formed 2017 by merging Chesapeake IRB and Schulman IRB; leading IRB, research-compliance and clinical-trial technology provider (OnCore CTMS); private-equity backed."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Veeva Systems / Fortrea", kind: "clinical", note: "Three-way industry partnership (2024) for a unified, single-sign-on patient/site clinical-trial experience across Fortrea-run studies.", source: "https://ir.fortrea.com/news-releases/news-release-details/fortrea-establishes-industry-partnership-veeva-and-advarra"}
+      - {partner: "eClinical partner network (Suvoda, YPrime, Datacubed, Endpoint, Scout)", kind: "channel", note: "Study Collaboration solution: vendor-agnostic single-sign-on network connecting leading eClinical technologies to research sites (2025).", source: "https://www.prnewswire.com/news-releases/advarra-expands-study-collaboration-solution-connecting-leading-clinical-trial-technology-partners-to-simplify-site-access-302637357.html"}
     sources:
       - "https://www.cbinsights.com/company/advarra/people"
       - "https://tracxn.com/d/companies/advarra/__LZ_R-wATIon9TaZX2A9YRnPAV2Y62i0cNzFWzo4u_DA"
@@ -183,6 +194,9 @@ vendors:
     history: "Spun off from Hewlett-Packard in 1999; publicly traded (NYSE: A). Analytical-instrument and lab-informatics maker behind OpenLab CDS and SLIMS; HQ Santa Clara, California."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA + AWS", kind: "cloud", note: "Agilent Alissa Reporter runs on AWS EC2 G5g (Graviton2 + NVIDIA T4G GPUs) with NVIDIA Clara Parabricks to accelerate NGS variant-calling / genomics pipelines (2022). Direct hardware+cloud co-sell signal.", source: "https://www.agilent.com/about/newsroom/presrel/2022/07jun-ca22019.html"}
+      - {partner: "Akoya Biosciences", kind: "clinical", note: "Partnership (2023) integrating Agilent's Dako Omnis autostainer with Akoya's PhenoImager for multiplex-IHC tissue-assay development for biopharma.", source: "https://www.agilent.com/about/newsroom/presrel/2023/06jan-ca23001.html"}
     sources:
       - "https://en.wikipedia.org/wiki/Agilent_Technologies"
       - "https://people.equilar.com/bio/org/agilent-technologies-inc/340"
@@ -238,6 +252,10 @@ vendors:
     history: "Founded 2015 in Marlborough on Stanford's CODEX technology; commercialized PhenoCycler and PhenoImager spatial platforms; acquired by Quanterix in an all-stock deal completed July 2025."
     market_position: "Spatial-proteomics specialist (PhenoCycler/CODEX, PhenoImager); now part of Quanterix, combining tissue spatial biology with ultrasensitive Simoa blood-biomarker detection. Instruments run on customer on-prem compute."
     market_share: null
+    partnerships:
+      - {partner: "Agilent Technologies", kind: "clinical", note: "Multiplex-IHC assay partnership (Dako Omnis + PhenoImager HT) for biopharma tissue analysis (2023).", source: "https://www.agilent.com/about/newsroom/presrel/2023/06jan-ca23001.html"}
+      - {partner: "Quanterix", kind: "other", note: "Akoya acquired by Quanterix (all-stock; merger agreement Jan 2025, closed 2025), combining Simoa blood-biomarker detection with Akoya PhenoImager spatial biology; ~2,300 combined instrument install base.", source: "https://ir.quanterix.com/news-releases/news-release-details/quanterix-acquire-akoya-biosciences-creating-first-integrated"}
+      - {partner: "PathAI", kind: "other", note: "Collaboration using Akoya's spatial platform with PathAI's AI tools to identify predictive markers for biopharma customers.", source: "https://www.genomeweb.com/proteomics-protein-research/akoya-keeping-eye-clinic-amidst-new-product-launches-and-collaborations"}
     sources:
       - "https://ir.quanterix.com/news-releases/news-release-details/quanterix-acquire-akoya-biosciences-creating-first-integrated"
       - "https://finance.yahoo.com/news/quanterix-completes-acquisition-akoya-biosciences-130700411.html"
@@ -255,6 +273,11 @@ vendors:
     history: "Founded 1985 in Troy, Michigan by James Scapa; grew through simulation/HPC acquisitions (PBS Works); acquired by Siemens for ~$10B enterprise value, completed 2025."
     market_position: "Acquired by Siemens for approximately $10 billion enterprise value (completed 2025); leading industrial simulation/HPC software vendor."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Altair CFD solvers (UltraFluidx / nanoFluidx) are GPU-accelerated on NVIDIA GPUs, cited ~4x faster vs CPU; HPC/AI workloads run on NVIDIA-accelerated infrastructure.", source: "https://altair.com/hpc-cloud-applications/"}
+      - {partner: "Oracle Cloud Infrastructure (OCI)", kind: "cloud", note: "Altair HyperWorks Unlimited Virtual Appliance and PBS Works offered as managed HPC on Oracle Cloud.", source: "https://investor.altair.com/news-releases/news-release-details/altair-offer-hpc-cloud-solutions-oracle-cloud-platform"}
+      - {partner: "AWS / Microsoft Azure / Google Cloud / OCI (multi-cloud)", kind: "cloud", note: "Altair HPCWorks integrates with all four major cloud providers for hybrid/cloud HPC bursting.", source: "https://altair.com/cloud-computing"}
+      - {partner: "Siemens", kind: "other", note: "Altair acquired by Siemens (Siemens Digital Industries; deal announced Oct 2024, closed 2025) — now part of Siemens' simulation/PLM portfolio. Not verified with a direct source URL in this session; flagged for confirmation.", source: "Siemens press release / Siemens Digital Industries Software (Altair acquisition, 2024-2025) — URL not captured"}
     sources:
       - "https://dallasinnovates.com/siemens-acquires-industrial-simulation-software-co-altair-engineering-in-10-billion-deal/"
       - "https://press.siemens.com/global/en/pressrelease/siemens-strengthens-leadership-industrial-software-and-ai-acquisition-altair"
@@ -308,7 +331,10 @@ vendors:
     leadership: "Ido Schoenberg — Chairman & CEO"
     history: "Founded 2006 by brothers Ido and Roy Schoenberg as American Well; telehealth platform; IPO on NYSE (AMWL) 2020; Roy became Executive Vice Chairman June 2024."
     market_position: "not publicly disclosed"
-    market_share: null
+    market_share: "13.7% of the US telehealth market, ranked #2 behind Zoom (36.4%) — Definitive Healthcare, 2024."
+    market_share_pct: 13.7
+    partnerships:
+      - {partner: "Google Cloud", kind: "cloud", note: "Multi-year strategic partnership (2020): Amwell is Google's preferred global telehealth platform, Google Cloud is Amwell's preferred cloud; Google invested $100M; Amwell migrated video capabilities from AWS to Google Cloud.", source: "https://www.prnewswire.com/news-releases/google-cloud-and-amwell-partner-to-transform-and-expand-access-to-virtual-care-301117360.html"}
     sources:
       - "https://en.wikipedia.org/wiki/Amwell_(company)"
       - "https://business.amwell.com/about-us/leadership-team"
@@ -345,6 +371,8 @@ vendors:
     history: "Founded 2007 by Emidio Zorzella and Massimo Bonardi; listed on Euronext Milan; grew via acquisitions into inspection, serialization and track-&-trace group."
     market_position: "Publicly listed on Euronext Milan; positions itself as a global leader in inspection and track-&-trace."
     market_share: null
+    partnerships:
+      - {partner: "Spherity", kind: "other", note: "Expanded partnership (via rfxcel unit) on digital identity / verifiable credentials for pharma supply-chain traceability.", source: "https://rfxcel.com/antares-vision-group-expands-partnership-with-spherity/"}
     sources:
       - "https://www.tradingview.com/news/reuters.com,2025:newsml_FWN3VU2AT:0-antares-vision-appoints-fabio-forestelli-as-new-ceo/"
       - "https://antaresvisiongroup.com/about-us/"
@@ -362,6 +390,8 @@ vendors:
     history: "Founded 2002 as Arcadia Solutions; healthcare data-and-analytics platform for value-based care, aggregating EHR, claims and SDoH data. Privately held."
     market_position: "IDC MarketScape named Arcadia a Leader in its U.S. Population Health Analytics 2020 Vendor Assessment."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Deep AWS partnership since 2015; Arcadia processes data for 170M patients and ~12 PB/month on AWS, and uses AWS HealthLake + FHIR adapters to ingest claims (BCDA) data. Strong cloud-anchored healthcare-analytics footprint.", source: "https://arcadia.io/resources/aws-partnership"}
     sources:
       - "https://www.prnewswire.com/news-releases/idc-marketscape-names-arcadia-a-leader-in-us-population-health-analytics-2020-vendor-assessment-301186936.html"
       - "https://arcadia.io/about-arcadia"
@@ -378,6 +408,9 @@ vendors:
     history: "Founded 1987 by Deepak Abbhi; provides the LifeSphere platform for pharmacovigilance, regulatory affairs and clinical development; serves 500+ life-sciences clients, CROs and health authorities."
     market_position: "Serves 500+ life-sciences clients (company-stated); market-share figure not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Went 'all-in' on AWS; the entire LifeSphere platform (clinical, regulatory, safety, medical affairs) is hosted on AWS, serving 40 of the top 50 life-sciences companies.", source: "https://www.arisglobal.com/blogs/arisglobal-going-all-in-on-amazon-aws-here-is-what-it-means-to-our-customers/"}
+      - {partner: "Snowflake", kind: "other", note: "Partnership (2022) to add Snowflake Data Cloud analytics capabilities to LifeSphere for life-sciences customers.", source: "https://www.prnewswire.com/news-releases/arisglobal-partners-with-snowflake-to-provide-data-cloud-capabilities-for-lifesphere-customers-301473689.html"}
     sources:
       - "https://www.arisglobal.com/leadership/"
       - "https://www.arisglobal.com/"
@@ -395,6 +428,9 @@ vendors:
     history: "Founded 2015 in Tel Aviv by Yevgeny Dibrov and Nadir Izrael; connected-device/IoT security vendor reportedly in 2025 talks to be acquired by ServiceNow (~$7B). HQ now San Francisco."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "ServiceNow", kind: "other", note: "Armis acquired by ServiceNow (acquisition completed 2026); Armis Centrix now integrated with the ServiceNow AI Platform for OT/IoT/IoMT cyber-risk visibility, still sold standalone.", source: "https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-completes-Armis-acquisition-closing-the-gap-between-asset-visibility-and-cyber-risk/default.aspx"}
+      - {partner: "CrowdStrike", kind: "other", note: "Expanded partnership: CrowdStrike Falcon Insight for IoT + Armis Centrix for unified IT/IoT/OT asset intelligence and risk; Armis leverages Falcon LogScale SIEM.", source: "https://www.armis.com/newsroom/press/armis-announces-expanded-partnership-with-crowdstrike/"}
     sources:
       - "https://insights.persana.ai/Armis"
       - "https://www.insightpartners.com/ideas/how-cofounders-yevgeny-dibrov-and-nadir-izrael-built-armis-cyber-exposure-management-and-security-giant/"
@@ -431,6 +467,9 @@ vendors:
     history: "Clinician-led smart-hospital platform (formerly Whiteboard Coordinator) co-founded by Andrew Gostine, Garrett Larance and Tim Koby; independent; NVIDIA-aligned edge-AI for virtual nursing and ambient monitoring."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Smart-hospital computer vision powered by NVIDIA Clara / NVIDIA GPUs on edge devices; NVIDIA is also an investor (Series A/B). Strong edge-inference hardware signal.", source: "https://www.fiercehealthcare.com/health-tech/how-nvidia-backed-artisight-taking-smart-hospitals-next-level-ai-and-computer-vision"}
+      - {partner: "KARL STORZ", kind: "clinical", note: "Expanded collaboration with KARL STORZ and NVIDIA (2025) for AI-driven smart operating rooms / real-time surgical insights.", source: "https://artisight.com/newsroom/artisight-expands-collaborations-with-nvidia-and-karl-storz-to-transform-operating-room-technology-through-ai-and-automation/"}
     sources:
       - "https://artisight.com/about/"
       - "https://www.crunchbase.com/person/andrew-gostine"
@@ -464,6 +503,8 @@ vendors:
     history: "Swiss communications/healthcare-tech group established 1987; SIX Swiss Exchange-listed; Ascom Healthcare Platform for clinical alerting and workflow."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Premier Inc.", kind: "channel", note: "National GPO agreement giving Premier members preferred pricing on Ascom Telligence nurse-call and mobile-collaboration software.", source: "https://www.gminsights.com/industry-analysis/nurse-call-system-market"}
     sources:
       - "https://www.ascom.com/news/ad-hoc-announcements/2025/en/ascom-appoints-david-hale-as-new-ceo/"
       - "https://en.wikipedia.org/wiki/Ascom_(company)"
@@ -480,6 +521,9 @@ vendors:
     history: "Founded 2017 by Shankar Somasundaram and Hithesh Nama; venture-backed (Series C) IoMT/IoT device security and risk-management vendor; independent."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "CrowdStrike", kind: "channel", note: "Technology/channel integration partner for IoMT/IoT security (endpoint + device risk).", source: "https://www.partnerbase.com/asimily"}
+      - {partner: "Okta", kind: "other", note: "Identity integration partner among Asimily's ~51 tracked tech/channel partnerships.", source: "https://www.partnerbase.com/asimily"}
     sources:
       - "https://asimily.com/about-us/"
       - "https://www.crunchbase.com/organization/asimily"
@@ -496,6 +540,10 @@ vendors:
     history: "Founded 1981 (MIT roots); process-optimization software (aspenONE, InfoPlus.21); Emerson took majority stake 2022 and fully acquired March 2025, making it an Emerson business unit. Antonio Pietri retired as CEO on completion; Vincent M. Servello leads the unit."
     market_position: "Wholly owned Emerson subsidiary since March 2025; industrial/process-optimization software provider (formerly Nasdaq: AZPN)."
     market_share: null
+    partnerships:
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Joint industrial digital-transformation / cloud migration; asset optimization on Azure.", source: "https://www.aspentech.com/en/partner-network/microsoft"}
+      - {partner: "AWS", kind: "cloud", note: "AspenTech achieved AWS Energy Competency status; solutions run on AWS.", source: "https://www.aspentech.com/en/partner-network/amazon-web-services"}
+      - {partner: "Emerson Electric", kind: "other", note: "Emerson holds majority ownership of AspenTech (2022 deal); corporate parent.", source: "https://pitchgrade.com/companies/aspen-technology-inc"}
     sources:
       - "https://www.prnewswire.com/news-releases/emerson-completes-acquisition-of-remaining-outstanding-shares-of-aspentech-302399867.html"
       - "https://en.wikipedia.org/wiki/Aspen_Technology"
@@ -546,7 +594,11 @@ vendors:
     leadership: "Bob Segert (Robert E. Segert), Chairman & CEO"
     history: "athenahealth, founded in 1997 by Jonathan Bush and Todd Park, is a leading US ambulatory cloud-based EHR, practice-management and patient-engagement vendor. Bob Segert has been Chairman and CEO since February 2019. Previously public, it was taken private by Veritas Capital (2019) and then acquired by Bain Capital and Hellman & Friedman for $17B in a deal completed in 2022."
     market_position: "#3 US ambulatory EHR: ~6.9% market share, 5,801 installations (Definitive Healthcare, Oct 2025)"
-    market_share: null
+    market_share: "~7.5% of the US ambulatory EHR market (3rd-largest vendor), per Definitive Healthcare data (cited via Ambula, 2024); more recent 2026 estimates put athenahealth at ~7%, behind Epic (~20%) and eClinicalWorks (~12%)."
+    market_share_pct: 7.5
+    partnerships:
+      - {partner: "Abridge", kind: "clinical", note: "Offers Abridge AI ambient scribe to its clinician network as an integrated Ambient Notes option.", source: "https://www.athenahealth.com/press-releases/athenahealth-and-abridge-partner"}
+      - {partner: "Suki AI / iScribe", kind: "clinical", note: "Additional ambient-documentation vendors in athenahealth's 'choose-your-player' scribe lineup.", source: "https://www.fiercehealthcare.com/health-tech/athenahealth-unveils-ai-upgrades-ehr-enhance-clinical-summaries-interoperability-and"}
     sources:
       - "https://www.definitivehc.com/blog/top-ambulatory-ehr-systems"
       - "https://www.prnewswire.com/news-releases/robert-e-segert-chairman-and-chief-executive-officer-of-athenahealth-to-receive-prestigious-2026-horatio-alger-award-302670551.html"
@@ -582,6 +634,10 @@ vendors:
     history: "Founded 2008 in Belmont, Michigan; pioneered the AvaSys TeleSitter virtual patient-monitoring solution (2009). Received growth investment from Goldman Sachs and Heritage Group (2021)."
     market_position: "Private; positions itself as a leader in acute-care virtual sitting/nursing; specific market share not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Bedside AI Virtual Care Assistant powered by NVIDIA H200 Tensor Core GPUs + NVIDIA NIM microservices.", source: "https://www.businesswire.com/news/home/20250304122705/en/AvaSure-Previews-Bedside-AI-Virtual-Care-Assistant-Accelerated-by-Oracle-Cloud-Infrastructure-and-NVIDIA"}
+      - {partner: "Oracle Cloud Infrastructure", kind: "cloud", note: "AI virtual care/concierge assistant runs on OCI (announced 2024/HIMSS25).", source: "https://avasure.com/news/avasure-oracle-collaborate-with-nvidia-on-ai-powered-virtual-concierge-for-hospitals-and-health-systems/"}
+      - {partner: "Equum Medical", kind: "clinical", note: "Expanded partnership to deliver physician-led virtual care on AvaSure's platform.", source: "https://businesswire.com/news/home/20260120159465/en/AvaSure-and-Equum-Medical-Expand-Partnership-to-Deliver-Physician-Led-Virtual-Care-Across-the-Enterprise"}
     sources:
       - "https://avasure.com/about/"
       - "https://avasure.com/news/avasure-ceo-adam-mcmullin-named-top-leader-in-digital-health/"
@@ -599,6 +655,10 @@ vendors:
     history: "British industrial-software firm founded 1967 in Cambridge; grew the Wonderware and PI System (OSIsoft) lines. Fully acquired by Schneider Electric in early 2023 (~$11B); now a subsidiary."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "Multi-year Strategic Collaboration Agreement; runs CONNECT industrial platform on AWS (EC2, Bedrock, Amazon RDS for PI).", source: "https://www.aveva.com/en/about/news/press-releases/2026/aveva-and-amazon-web-services-announce-multi-year-strategic-collaboration-to-accelerate-industrial-intelligence-in-the-cloud/"}
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Expanding CONNECT platform / digital-twin and real-time data capabilities on Azure.", source: "https://itbrief.co.uk/story/aveva-boosts-connect-platform-for-unified-industrial-data-insights"}
+      - {partner: "Schneider Electric", kind: "other", note: "Majority owner / corporate parent of AVEVA.", source: "https://www.aveva.com/en/about/news/press-releases/2025/aveva-is-recognised-as-a-leader-in-the-2024-2025-idc-marketscape-for-worldwide-manufacturing-execution-systems/"}
     sources:
       - "https://en.wikipedia.org/wiki/Aveva"
       - "https://www.aveva.com/en/about/news/press-releases/2023/aveva-announces-the-completion-of-its-acquisition-by-schneider-electric/"
@@ -671,6 +731,10 @@ vendors:
     history: "Founded 1935 in Pasadena by Arnold O. Beckman; combined with Coulter Electronics (1997); acquired by Danaher 2011; now Danaher's clinical diagnostics operating company."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Innovaccer", kind: "other", note: "Beckman Coulter Diagnostics selected Innovaccer Gravity as its enterprise AI/data platform for clinical-lab operations modernization.", source: "https://www.biospace.com/press-releases/beckman-coulter-diagnostics-selects-innovaccer-gravity-as-ai-and-data-platform-for-clinical-laboratory-operations-modernization"}
+      - {partner: "Automata", kind: "other", note: "Beckman Coulter Life Sciences integrates instruments into Automata's cloud-native LINQ AI-ready lab-automation platform (Danaher Ventures invested).", source: "https://www.beckman.com/news/partners-with-automata-to-accelerate-ai-ready-laboratory-automation"}
+      - {partner: "Danaher", kind: "other", note: "Corporate parent (Beckman Coulter is a Danaher operating company).", source: "https://www.marketsandmarkets.com/Market-Reports/ivd-in-vitro-diagnostics-market-703.html"}
     sources:
       - "https://en.wikipedia.org/wiki/Beckman_Coulter"
       - "https://www.beckman.com/about-us/company-history"
@@ -688,6 +752,10 @@ vendors:
     history: "Founded 2012 by Sajith Wickramasekara and Ashu Singhal; venture-backed cloud R&D life-sciences platform (ELN/LIMS/registry); private."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Integrating NVIDIA NIM microservices (e.g. OpenFold2 protein-structure) into Benchling AI (Benchtalk 2025).", source: "https://www.prnewswire.com/news-releases/benchling-reveals-the-next-chapter-of-rd-at-benchtalk-2025-302583467.html"}
+      - {partner: "AWS", kind: "cloud", note: "Member of the AWS Partner Network (Global Startups Program).", source: "https://www.benchling.com/news/benchling-joins-the-aws-partner-network-global-startups-program"}
+      - {partner: "Anthropic", kind: "other", note: "Partnership to bridge science and AI (LLM-powered R&D).", source: "https://www.prnewswire.com/news-releases/benchling-partners-with-anthropic-to-build-a-bridge-between-science-and-ai-302588430.html"}
     sources:
       - "https://research.contrary.com/company/benchling"
       - "https://tracxn.com/d/companies/benchling/__ydo8O2nLPIwT3Lr_xCT-60HH5G0gXw6eFkpppgV7hYM"
@@ -742,6 +810,10 @@ vendors:
     history: "Founded 2008 as an ETH Zurich spin-off from Ruedi Aebersold's lab. Develops Spectronaut for data-independent-acquisition (DIA) proteomics; Bruker acquired a majority stake in January 2023, with Rinner continuing as CEO."
     market_position: "Proteomics technology company; Spectronaut is a widely used software for DIA mass-spectrometry proteomics data analysis."
     market_share: null
+    partnerships:
+      - {partner: "Thermo Fisher Scientific / SCIEX", kind: "hardware", note: "Strategic partnerships with major mass-spec instrument vendors; software/kits run across their platforms.", source: "https://biognosys.com/our-collaborators/"}
+      - {partner: "Bruker", kind: "other", note: "Bruker took majority ownership (Jan 2023); Biognosys gains access to Bruker timsTOF 4D-proteomics MS; joint proteomics CRO services.", source: "https://www.bruker.com/en/news-and-events/news/2023/biognosys-and-bruker-form-partnership-for-advanced-proteomics-cro-services.html"}
+      - {partner: "Alamar Biosciences", kind: "other", note: "Strategic partnership in biofluid proteomics biomarkers (DIA-MS + immunoassays).", source: "https://biognosys.com/news/biognosys-and-alamar-biosciences-forge-strategic-partnership-in-proteomics-to-advance-biopharma-and-precision-medicine-research/"}
     sources:
       - "https://biognosys.com/news/biognosys-announces-release-of-spectronaut/"
       - "https://en.wikipedia.org/wiki/Biognosys"
@@ -759,6 +831,9 @@ vendors:
     history: "Founded 1980 as Quantum Software Systems (renamed QNX 1984); safety-certified embedded RTOS; acquired by BlackBerry in 2010; now BlackBerry's QNX division."
     market_position: "QNX software deployed in 255M+ vehicles worldwide (company figure; automotive-led, also used in medical devices)"
     market_share: "~37% of the global automotive operating-system market (2025, Global Market Insights est.); QNX embedded in 275M+ vehicles"
+    partnerships:
+      - {partner: "Johnson & Johnson MedTech", kind: "clinical", note: "QNX real-time OS adopted in a J&J AI-powered heart pump; medical-device design win.", source: "https://www.stocktitan.net/news/BB/qnx-to-showcase-innovations-for-software-defined-vehicles-and-cssotc2tt0w2.html"}
+      - {partner: "Automotive OEMs/Tier-1s (BMW, Bosch, Aptiv, GM, Ford, Mercedes-Benz, Toyota, VW)", kind: "other", note: "QNX embedded in 275M+ vehicles; ~67% of latest design wins direct with OEMs (installed base, not a market-share %).", source: "https://www.prnewswire.com/news-releases/blackberry-qnx-software-is-now-embedded-in-over-195-million-vehicles-301315834.html"}
     market_share_pct: 37
     sources:
       - "https://blackberry.qnx.com/en"
@@ -777,6 +852,9 @@ vendors:
     history: "Founded 2010 as a University of Edinburgh spin-out; imaging-AI orchestration/marketplace platform; acquired by Bayer February 2023, which later deprioritized the business (2025)."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Bayer", kind: "clinical", note: "Bayer acquired Blackford (2023); Blackford platform underpins Bayer's Calantic Digital Solutions imaging-AI marketplace.", source: "https://www.medtechdive.com/news/Bayer-BAYRY-acquire-Blackford-Analysis-radiology-AI/640614/"}
+      - {partner: "GE HealthCare / Philips / Intelerad", kind: "channel", note: "Enterprise-AI imaging platform trusted by/embedded with major imaging-system and PACS vendors; channel-reseller model.", source: "https://blackfordanalysis.com/providers/strategic-channel-partners"}
     sources:
       - "https://edinburgh-innovations.ed.ac.uk/news/blackford-analysis-acquired-by-bayer-following-sustained-growth"
       - "https://theimagingwire.com/2025/09/07/investment-in-ai-platform-company-blackford/"
@@ -793,6 +871,10 @@ vendors:
     history: "Founded 1985 as JDA Software; renamed Blue Yonder 2020 after acquiring the German AI firm of that name; acquired by Panasonic 2021, operates as an independent subsidiary."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Blue Yonder builds its supply-chain platform natively on Microsoft Azure (primary cloud infrastructure).", source: "https://blueyonder.com/partners/microsoft"}
+      - {partner: "Snowflake", kind: "cloud", note: "Snowflake data cloud is the unified data foundation for Blue Yonder's AI/cognitive supply-chain solutions.", source: "https://blueyonder.com/partners/snowflake"}
+      - {partner: "Panasonic", kind: "other", note: "Panasonic is Blue Yonder's corporate parent/owner.", source: "https://www.incisiv.com/blog/can-blue-yonder-take-supply-chains-into-the-blue-yonder"}
     sources:
       - "https://en.wikipedia.org/wiki/Blue_Yonder"
       - "https://blueyonder.com/about/leadership/duncan-angove"
@@ -808,6 +890,9 @@ vendors:
     history: "Founded 1989 in Munich by Stefan Vilsmeier; medical-technology firm in surgical navigation, radiosurgery and digital OR. Converted to an SE; Vilsmeier now chairs the administrative board."
     market_position: "Private; systems used in roughly 4,000 hospitals across ~120 countries (company-stated)."
     market_share: null
+    partnerships:
+      - {partner: "Nexstim", kind: "clinical", note: "Strategic development & distribution partnership for navigated TMS non-invasive brain mapping (Nov 2024).", source: "https://www.gminsights.com/industry-analysis/surgical-navigation-systems-market"}
+      - {partner: "Magic Leap", kind: "other", note: "Partnership using AR headset for digital-surgery / mixed-reality surgical visualization.", source: "https://www.biospace.com/brainlab-and-magic-leap-partner-in-digital-surgery"}
     sources:
       - "https://en.wikipedia.org/wiki/Brainlab"
       - "https://www.brainlab.com/about-brainlab/company/"
@@ -825,6 +910,10 @@ vendors:
     history: "Scientific-instruments maker founded 1960 in Karlsruhe, Germany by Günther Laukien; NYSE: BRKR. Acquired Optimal Industrial Technologies (synTQ PAT software) in 2022; HQ Billerica, Massachusetts."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Biognosys", kind: "other", note: "Bruker acquired majority stake (2023) to strengthen timsTOF MS-based proteomics; proteomics CRO services.", source: "https://www.bruker.com/en/news-and-events/news/2023/biognosys-and-bruker-form-partnership-for-advanced-proteomics-cro-services.html"}
+      - {partner: "Biocrates Life Sciences", kind: "other", note: "Acquired June 2025; adds standardized metabolomics kits/software to Bruker multiomics strategy.", source: "https://www.precedenceresearch.com/mass-spectrometry-market"}
+      - {partner: "Mass Dynamics", kind: "other", note: "Partnership for biological knowledge generation within Bruker 4D-Proteomics workflows.", source: "https://www.bruker.com/en/news-and-events/news/2023/bruker-introduces-novel-4d-proteomics-timstof-capabilities.html"}
     sources:
       - "https://en.wikipedia.org/wiki/Bruker"
       - "https://en.wikipedia.org/wiki/Frank_Laukien"
@@ -841,6 +930,9 @@ vendors:
     history: "NanoString, founded 2003 in Seattle, developed nCounter and CosMx spatial imagers; Bruker acquired its assets in May 2024, forming the Bruker Spatial Biology division."
     market_position: "Major spatial-multiomics platform vendor; the CosMx Spatial Molecular Imager competes with 10x Xenium and Vizgen MERSCOPE. Imaging and analysis run on on-prem instruments and local compute."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "NVIDIA GPUs sit on the CosMx Spatial Molecular Imager motherboard to accelerate cell segmentation / image data processing; cloud-based AtoMx informatics platform offloads compute.", source: "https://brukerspatialbiology.com/blog/nanostring-powered-by-nvidia-accelerates-scientific-discovery/"}
+      - {partner: "Macrogen / Propath UK / Sirona Dx (CROs)", kind: "clinical", note: "CRO partnerships making CosMx SMI available to global biopharma for translational drug development.", source: "https://brukerspatialbiology.com/pressrelease/news-news-details-2023-nanostring-expands-partnerships-with-contract-research-organizations-making-spatial-molecular-imaging-tools-widely-available-to-global-biopharma-researchers/"}
     sources:
       - "https://www.bruker.com/en/news-and-events/news/2024/bruker-announces-formation-of-spatial-biology-division.html"
       - "https://ir.bruker.com/press-releases/press-release-details/2024/Bruker-Completes-Asset-Acquisition-of-NanoString-Business/default.aspx"
@@ -859,6 +951,8 @@ vendors:
     history: "Founded 1983 (as SDA, renamed Cadence 1988) in San Jose; a 'big-three' EDA vendor (Nasdaq: CDNS); acquired OpenEye Scientific in 2022 for molecular-design/drug-discovery software."
     market_position: "Public (Nasdaq: CDNS); one of the three dominant electronic-design-automation vendors, with molecular-sciences software via its OpenEye unit."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Decade-plus collaboration; Cadence Molecular Sciences (OpenEye) Orion cloud platform integrates NVIDIA BioNeMo NIM microservices, and Cadence accelerates AI design/science workloads on NVIDIA Grace Blackwell.", source: "https://www.cadence.com/en_US/home/company/newsroom/press-releases/pr/2025/cadence-accelerates-ai-driven-engineering-design-and-science.html"}
     sources:
       - "https://en.wikipedia.org/wiki/Cadence_Design_Systems"
       - "https://www.cadence.com/en_US/home/company/leadership-team.html"
@@ -875,6 +969,8 @@ vendors:
     history: "Founded 1985, headquartered in Martinsburg, Pennsylvania; privately held industrial data-historian software vendor."
     market_position: "not publicly disclosed (private; vendor reports 30,000+ installations across 70+ countries, no market-share figure published)"
     market_share: null
+    partnerships:
+      - {partner: "Tatsoft", kind: "channel", note: "OEM/reseller: Canary Historian embedded in Tatsoft FrameworX Unlimited and FactoryStudio SCADA/HMI product lines.", source: "https://tatsoft.com/communication/tatsoft-provides-canary-labs-as-historian-solution/"}
     sources:
       - "https://www.canarylabs.com/about"
       - "https://www.zoominfo.com/p/Gary-Stern/41124290"
@@ -889,7 +985,8 @@ vendors:
     leadership: "Toshio Takiguchi — President & CEO"
     history: "Established 1948; formerly Toshiba Medical Systems; acquired by Canon (Dec 2016) and renamed Canon Medical Systems (Jan 2018); includes Vital Images advanced visualization."
     market_position: "not publicly disclosed"
-    market_share: null
+    market_share: "8.7% of the global medical/diagnostic imaging systems market in 2024 (down from 9.8% in 2017); one of the top-5 vendors that together hold ~90% (Market.us, Medical Imaging Statistics, 2026)."
+    market_share_pct: 8.7
     sources:
       - "https://en.wikipedia.org/wiki/Canon_Medical_Systems_Corporation"
       - "https://global.medical.canon/News/PressRelease/Detail/18401-834"
@@ -927,6 +1024,8 @@ vendors:
     history: "Founded 2019, spun out of Yorktel by Bin Guan and Ron Gaboury; enterprise virtual-care/telehealth platform; venture-backed and independent."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Media Plus / Yahman / Tamar / Granteq / Modern3", kind: "channel", note: "International distribution/reseller partners extending the Caregility Cloud virtual-care platform into Japan, Saudi Arabia, Jordan, Canada and Australia.", source: "https://www.businesswire.com/news/home/20250213793667/en/Caregility-Expands-Global-Reach"}
     sources:
       - "https://caregility.com/about/"
       - "https://www.crunchbase.com/organization/caregility"
@@ -942,6 +1041,9 @@ vendors:
     history: "Founded 2013 in Berlin by Dennis Kogan and Bjoern von Siemens; surgical-intelligence/video-analytics platform; founders remain on board after Krueger became CEO in 2025."
     market_position: "Company reports its surgical-intelligence software is used in 4,200+ operating rooms supporting 3M+ procedures per year."
     market_share: null
+    partnerships:
+      - {partner: "Rescale", kind: "cloud", note: "Expanded collaboration to run AI-powered surgical simulation/intelligence on Rescale's cloud HPC platform (via WEF AI in Health forum).", source: "https://rescale.com/news/rescale-and-caresyntax-expand-their-collaboration-to-provide-a-scalable-platform-for-ai-powered-simulation-and-intelligence-in-surgery-world-economic-forum-collaboration-enhances-access-to-surg/"}
+      - {partner: "Google Cloud", kind: "cloud", note: "Built the InfluenceOR application on Google Cloud for surgeons to publish/promote surgical videos.", source: "https://www.mobihealthnews.com/news/caresyntax-scores-180m-its-ai-enabled-surgery-platform"}
     sources:
       - "https://www.caresyntax.com/news/caresyntax-elevates-matt-krueger-to-chief-executive-officer"
       - "https://caresyntax.com/podcast/lse-focal-point-welcomes-bjoern-von-siemens/"
@@ -957,6 +1059,10 @@ vendors:
     history: "Founded 2018 (Delaware-incorporated, India roots via Mahajan Imaging); radiology-AI marketplace and orchestration platform (275+ AI apps). Raised $6M seed 2024; venture-backed. HQ location reported inconsistently."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "RamSoft", kind: "clinical", note: "AI marketplace integrated with RamSoft PowerServer and OmegaAI RIS/PACS platforms (announced HIMSS 2025).", source: "https://carpl.ai/news"}
+      - {partner: "Intelerad", kind: "clinical", note: "Joined Intelerad's AI partner ecosystem, integrated via the InteleGence platform.", source: "https://carpl.ai/news"}
+      - {partner: "Enlitic", kind: "clinical", note: "Partnership to improve imaging-data validation for AI model evaluation.", source: "https://carpl.ai/news"}
     sources:
       - "https://www.forbes.com/sites/davidprosser/2024/02/01/carpl-picks-up-6-million-for-its-one-stop-shop-for-healthcare-ai/"
       - "https://techcrunch.com/2024/02/01/carpl/"
@@ -974,6 +1080,9 @@ vendors:
     history: "Founded 2007 in Newtown, Pennsylvania; healthcare real-time location (RTLS) provider. Acquired by UK's Halma plc (2016); acquired managed-services firm Infinite Leap (2021)."
     market_position: "Used by 2,000+ healthcare organizations (company-stated); subsidiary of Halma plc."
     market_share: null
+    partnerships:
+      - {partner: "Epic", kind: "clinical", note: "Received Epic Toolbox designation for the RTLS category (Mar 2026), enabling native RTLS integration into Epic workflows.", source: "https://www.dotmed.com/news/story/66166"}
+      - {partner: "Rauland (Ametek)", kind: "clinical", note: "Completed Rauland Vendor Integration Partner Program validation for nurse-call / RTLS integration (Mar 2026).", source: "https://www.dotmed.com/news/story/66166"}
     sources:
       - "https://centrak.com/news/andrew-robinson-appointed-ceo"
       - "https://www.halma.com/news/press-releases/2016/05-02-2016"
@@ -990,6 +1099,8 @@ vendors:
     history: "Formed in 2008 from Pharsight and Tripos assets; grew via acquisitions into a biosimulation leader. Phoenix WinNonlin/NLME are its core pharmacometrics tools."
     market_position: "Global leader in model-informed drug development (MIDD) and biosimulation; Phoenix WinNonlin/NLME is the de facto standard for non-compartmental and population PK/PD analysis."
     market_share: "Leading player (~12%+ share, 2025) in the global biosimulation market (MarketsandMarkets)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Integrating the NVIDIA BioNeMo Agent Toolkit into Certara's AI drug-discovery/development platform to run agentic biosimulation workflows (2026).", source: "https://www.certara.com/pressrelease/certara-accelerates-drug-discovery-and-development-with-nvidia-bionemo-agent-toolkit/"}
     market_share_pct: 12
     sources:
       - "https://www.certara.com/software/phoenix-nlme/"
@@ -1029,6 +1140,8 @@ vendors:
     history: "Privately held cheminformatics firm founded 1994 in Montreal; develops the MOE (Molecular Operating Environment) drug-discovery and molecular-modeling platform. Independent, founder-led."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "KNIME", kind: "other", note: "MOE Extensions distributed via the KNIME Partner Extension update site for workflow integration; MOE offers GPU-accelerated protein modeling and runs on-prem and cloud.", source: "https://en.wikipedia.org/wiki/Molecular_Operating_Environment"}
     sources:
       - "https://en.wikipedia.org/wiki/Chemical_Computing_Group"
       - "https://www.cbinsights.com/company/chemical-computing-group"
@@ -1045,6 +1158,9 @@ vendors:
     history: "Co-founded 2008 in Calgary by Greg Ogrodnick and cardiologist Matthias Friedrich; flagship cvi42 cardiac-imaging analysis platform; owned by private-equity firm Thoma Bravo."
     market_position: "Private (Thoma Bravo-owned); company states cvi42 interprets millions of exams yearly across 1,700+ hospitals in 90+ countries."
     market_share: null
+    partnerships:
+      - {partner: "Aidoc / inHEART", kind: "clinical", note: "Integrations for automated cardiac analysis and patient-specific procedure planning within the cvi42 platform.", source: "https://www.circlecvi.com/"}
+      - {partner: "OneMedNet", kind: "other", note: "Uses OneMedNet's iRWD platform to access de-identified cardiovascular imaging data (1,750+ sites, 131M exams) for AI model development and cardiac diagnostics.", source: "https://www.stocktitan.net/news/ONMD/one-med-net-initiates-new-subscription-revenue-model-in-partnership-qbi5vzi61cmp.html"}
     sources:
       - "https://www.theglobeandmail.com/business/article-calgary-software-star-circle-cardiovascular-promises-the-answer-to/"
       - "https://www.thomabravo.com/press-releases/circle-cardiovascular-imaging-announces-leadership-transition"
@@ -1062,6 +1178,9 @@ vendors:
     history: "Founded 2015 by Galina Antova, Amir Zilberstein and Benny Porat (Team8-incubated); OT/IoT/IoMT cyber-physical-systems security; acquired Medigate; HQ New York."
     market_position: "KLAS 2026 healthcare IoT security score 92.1 (xDome/Medigate)."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Multi-year Strategic Collaboration Agreement; Claroty xDome SaaS runs on AWS backend, and Claroty holds the AWS Manufacturing & Industrial Competency for OT security.", source: "https://claroty.com/press-releases/claroty-announces-strategic-collaboration-agreement-with-amazon-web-services"}
+      - {partner: "Siemens Healthineers", kind: "clinical", note: "Strategic relationship combining software, managed services and medical-device security data-sharing to protect healthcare enterprises.", source: "https://claroty.com/press-releases/claroty-celebrates-ten-years-of-industry-leading-protection-for-the-worlds-mission-critical-cyber-physical-systems"}
     sources:
       - "https://claroty.com/press-releases/claroty-establishes-global-headquarters-in-new-york"
       - "https://team8.vc/portfolio/claroty/"
@@ -1138,6 +1257,9 @@ vendors:
     history: "Founded 2016 by Musheer Ahmed and Mustaque Ahamad (Atlanta); AI payment-integrity/FWA software; backed by CVS Health Ventures. (Some sources cite 2017.)"
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "HealthEdge", kind: "clinical", note: "Strategic partnership embedding Codoxo's GenAI payment-integrity capabilities directly into HealthEdge payer core platforms.", source: "https://healthedge.com/resources/press-releases/transforming-payment-integrity-with-generative-artificial-intelligence-genai-healthedge-and-codoxo-announce-strategic-partnership"}
+      - {partner: "Optum Serve", kind: "channel", note: "Partnership bringing prevention-first payment integrity to US federal health programs.", source: "https://www.codoxo.com/codoxo-and-optum-serve-partner-to-strengthen-payment-integrity-across-federal-health-programscodoxos-2025-forensic-ai-alerts-reveal-where-payment-integrity-risk-is-headed-in-2026/"}
     sources:
       - "https://www.codoxo.com/leadership/"
       - "https://www.crunchbase.com/person/musheer-ahmed"
@@ -1154,7 +1276,8 @@ vendors:
     leadership: "Matt Moschner — President & Chief Executive Officer"
     history: "Founded 1981 by Robert Shillman, William Silver and Marilyn Matz; publicly traded (Nasdaq: CGNX) machine-vision (deep-learning inspection) leader based in Natick, Massachusetts; Matt Moschner serves as President & CEO after Robert Willett's tenure."
     market_position: "Publicly traded (Nasdaq: CGNX); FY2024 revenue ~$915M; described as world-leading machine-vision provider."
-    market_share: null
+    market_share: "11.4% of the global machine vision market in 2024 (its primary market), second to Keyence at 14.2% (Market.us, Machine Vision Market report). A separate marginal source cites ~17-20% of the high-end segment."
+    market_share_pct: 11.4
     sources:
       - "https://en.wikipedia.org/wiki/Cognex_Corporation"
       - "https://www.forbes.com/companies/cognex/"
@@ -1171,6 +1294,10 @@ vendors:
     history: "TriZetto (Facets/QNXT payer cores) acquired by Cognizant for $2.7B in 2014 from Apax Partners. Cognizant itself founded 1994, headquartered Teaneck NJ."
     market_position: "TriZetto Facets and QNXT are leading U.S. payer claims-administration cores; at the 2014 acquisition the combined Cognizant/TriZetto healthcare unit served ~350 payers and 245,000 providers (Everest Group / Cognizant)."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services", kind: "cloud", note: "TriZetto core administration (Facets/QNXT) optimized for AWS; 5-yr/17-product innovation roadmap plus turnkey managed services (infra, apps, security, DR)", source: "https://www.cognizant.com/us/en/cmp/trizetto-aws-partnership-managed-services"}
+      - {partner: "Microsoft", kind: "cloud", note: "TriZetto products integrated with Microsoft Cloud for Healthcare (since its 2020 launch)", source: "https://www.healthcareitnews.com/news/cognizant-and-microsoft-collaborate-new-cloud-offerings"}
+      - {partner: "Google Cloud", kind: "cloud", note: "Cognizant-Google Cloud alliance for AI/ML and cloud-native platforms", source: "https://www.cognizant.com/us/en/about-cognizant/partners/google-cloud"}
     sources:
       - "https://news.cognizant.com/2014-09-15-Cognizant-to-Acquire-TriZetto-Creating-a-Fully-Integrated-Healthcare-Technology-and-Operations-Leader"
       - "https://www.everestgrp.com/2014-09-cognizant-acquires-trizetto-the-new-big-blue-of-healthcare-it-sherpas-in-blue-shirts-15544.html"
@@ -1188,6 +1315,9 @@ vendors:
     history: "Founded circa 2014 in Atlanta; venture-backed RTLS/asset-intelligence provider using low-power radio and cloud analytics for healthcare, automotive and logistics."
     market_position: "Private; revenue not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "Siemens Healthineers", kind: "channel", note: "Apr 2023: Siemens Healthineers selected Cognosos and became a reseller of its hospital RTLS asset-tracking portfolio", source: "https://cognosos.com/blog/cognosos-to-provide-siemens-next-generation-technology/"}
+      - {partner: "Cox Prosight", kind: "other", note: "Oct 2024: Cognosos acquired Cox Prosight, adding a unified hospital RTLS software platform", source: "https://www.rfidjournal.com/news/cognosos-acquisition-to-expand-healthcare-rtls/222001/"}
     sources:
       - "https://www.cbinsights.com/company/cognosos"
       - "https://cognosos.com/blog/cognosos-triples-revenue-2022-solidify-leadership-position-asset-visibility-intelligence/"
@@ -1245,6 +1375,8 @@ vendors:
     history: "Connexall alarm/event-integration middleware is the flagship product of GlobeStar Systems, founded 1992 in Toronto by David Tavares (d. 2021); privately held."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Epic Systems", kind: "clinical", note: "Jul 2025: Connexall became available in Epic Toolbox as an Alert Manager Integration solution", source: "https://www.connexall.com/"}
     sources:
       - "https://www.canhealth.com/2022/08/03/connexall-promotes-sandy-saggar-to-interim-ceo/"
       - "https://en.everybodywiki.com/GlobeStar_Systems"
@@ -1282,6 +1414,8 @@ vendors:
     history: "Roots in Connolly (founded 1979); formed as Cotiviti via 2018 Verscend–Cotiviti merger; KKR-backed; HQ South Jordan, Utah; payment-integrity analytics leader."
     market_position: "Everest Group highest-designated Leader for Payment Integrity Solutions PEAK Matrix (2025 and 2026)."
     market_share: "Highest-designated Leader for market impact, Everest Group 2026 Pre-payment Integrity Solutions PEAK Matrix"
+    partnerships:
+      - {partner: "Everest Group", kind: "other", note: "Analyst recognition (not a supply partnership): named highest-designated Leader for market impact in the 2026 Pre-payment Integrity PEAK Matrix, 4th consecutive year", source: "https://www.businesswire.com/news/home/20260701943009/en/Cotiviti-Recognized-by-Everest-Group-as-the-Highest-Designated-Leader-for-Market-Impact-in-the-2026-Pre-payment-Integrity-Solutions-PEAK-Matrix-Assessment"}
     sources:
       - "https://www.cotiviti.com/press-release/cotiviti-named-highest-designated-leader-by-everest-group-in-payment-integrity-solutions-peak-matrix-assessment-2025"
       - "https://www.cotiviti.com/press-release/cotiviti-recognized-by-everest-group-as-the-highest-designated-leader-for-market-impact-in-the-2026-pre-payment-integrity-solutions-peak-matrix-assessment"
@@ -1299,6 +1433,8 @@ vendors:
     history: "Founded 2002 (Dr Andy Vinter and colleagues); UK computational-chemistry/drug-discovery software (Flare, Torx) plus contract research; Robert Scoffin CEO 2010–2024, now President."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services", kind: "cloud", note: "Cresset Engine Broker run on Slurm-managed AWS ParallelCluster for biotech HPC drug-discovery workloads (BioTeam case study; confidence C)", source: "https://bioteam.net/blog/case-studies/license-aware-cloud-hpc-accelerating-discovery-with-schrodinger-cresset-and-posit/"}
     sources:
       - "https://cresset-group.com/about/people/"
       - "https://cresset-group.com/about/news/ceo-end-of-year-message-2024/"
@@ -1315,6 +1451,9 @@ vendors:
     history: "Founded 2009 in Maia, Portugal; Industry 4.0 MES for semiconductor, electronics and medical devices. Became a subsidiary of ASMPT in 2018. Francisco Almada Lobo has been CEO since founding (2010)."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Canonical", kind: "other", note: "Critical Manufacturing MES validated on Canonical Kubernetes for secure cloud-native / hybrid / on-prem deployment", source: "https://www.criticalmanufacturing.com/press-releases/critical-manufacturing-partners-with-canonical-to-expand-cloud-native-deployment-options-for-manufacturers/"}
+      - {partner: "ASMPT", kind: "other", note: "Parent/owner; ASMPT is a global semiconductor & electronics assembly equipment maker (Critical Manufacturing is its MES software arm)", source: "https://en.wikipedia.org/wiki/Critical_Manufacturing"}
     sources:
       - "https://en.wikipedia.org/wiki/Critical_Manufacturing"
       - "https://www.criticalmanufacturing.com/company/leadership/"
@@ -1352,6 +1491,8 @@ vendors:
     history: "Founded 2018 by Leon Lerman and Daniel Brodie; healthcare IoMT security; acquired by Axonius July 2025 for $100M+, now part of Axonius."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Axonius", kind: "other", note: "Jul 2025: Cynerio acquired by cybersecurity firm Axonius for $100M+ (up to ~$250M with earn-out) to build unified healthcare IoT / cyber-physical-systems security", source: "https://www.axonius.com/newsroom/press-release/axonius-acquires-medical-device-security-specialist-cynerio"}
     sources:
       - "https://www.axonius.com/newsroom/press-release/axonius-acquires-medical-device-security-specialist-cynerio"
       - "https://hitconsultant.net/2025/07/30/axonius-acquires-cynerio-for-over-100m-strengthening-medical-device-security/"
@@ -1368,6 +1509,9 @@ vendors:
     history: "Founded 1981 as a Dassault Aviation spin-off; publicly traded 3D/PLM software leader; BIOVIA (ex-Accelrys) unit supplies molecular-modeling and simulation. Daloz succeeded Bernard Charlès as CEO January 2024 and became Chairman in February 2026."
     market_position: "Publicly traded (Euronext Paris); FY2024 revenue €6.21B."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Feb 2026 long-term strategic partnership; NVIDIA BioNeMo + BIOVIA science-validated world models for molecular/materials discovery; AI factories built on NVIDIA infra offered via Dassault's Outscale cloud", source: "https://nvidianews.nvidia.com/news/dassault-systemes-nvidia-industrial-ai"}
+      - {partner: "AWS / Microsoft Azure", kind: "cloud", note: "BIOVIA supports public-cloud (AWS, Azure), on-prem and hybrid deployment", source: "https://aidoos.com/products/biovia-by-dassault-syst%C3%A8mes/"}
     sources:
       - "https://en.wikipedia.org/wiki/Dassault_Syst%C3%A8mes"
   - id: data-innovations
@@ -1383,6 +1527,9 @@ vendors:
     history: "Founded 1989, Colchester Vermont; maker of the Instrument Manager lab middleware. Owned by Battery Ventures, then acquired by Roper Technologies in 2015."
     market_position: "Instrument Manager is described as the dominant vendor-neutral lab middleware, deployed in 6,000+ laboratories with 1,200+ instrument drivers (Data Innovations)."
     market_share: null
+    partnerships:
+      - {partner: "Beckman Coulter", kind: "channel", note: "Instrument Manager connectivity/workflow with Beckman Coulter analyzers (order-to-result without manual entry); one of 40+ IVD instrument-vendor partnerships", source: "https://www.beckman.com/flow-cytometry/software/instrument-manager"}
+      - {partner: "Technopath Clinical Diagnostics", kind: "other", note: "IAMQC bidirectional QC-data driver integrated with Instrument Manager", source: "https://dns0.datainnovations.com/resource/technopath-clinical-diagnostics-and-data-innovations-announce-partnership/"}
     sources:
       - "https://www.datainnovations.com/product/instrument-manager/"
       - "https://www.globenewswire.com/news-release/2015/02/05/1052256/0/en/Battery-Ventures-Owned-Data-Innovations-Acquired-by-Unit-of-Roper-Industries.html"
@@ -1400,6 +1547,11 @@ vendors:
     history: "Founded 2013 by the UC Berkeley creators of Apache Spark, led by Ali Ghodsi; data-and-AI 'lakehouse' platform; still privately held."
     market_position: "Private; valued ~$134B (Dec 2025) with a reported annual revenue run-rate exceeding $4.8B."
     market_share: "~11% of the global data-lakehouse market (2024, Global Market Insights est.)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "NVIDIA is a strategic investor and GPU/technology partner (accelerated compute for Mosaic AI / model training)", source: "https://www.tradingkey.com/analysis/stocks/us-stocks/261995963-databricks-ai-data-snow-nvda-amzn-tradingkey"}
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Azure Databricks is a jointly developed first-party Microsoft service", source: "https://www.databricks.com/partners/cloud-partners"}
+      - {partner: "Amazon Web Services", kind: "cloud", note: "Native on AWS — most mature deployment with widest instance selection", source: "https://www.databricks.com/partners/cloud-partners"}
+      - {partner: "Google Cloud", kind: "cloud", note: "Runs on GKE (first Kubernetes-based runtime); Gemini integrated natively; 2,500+ joint customers", source: "https://www.databricks.com/blog/databricks-google-cloud-innovate-faster-smarter-together"}
     market_share_pct: 11
     sources:
       - "https://en.wikipedia.org/wiki/Databricks"
@@ -1458,6 +1610,10 @@ vendors:
     history: "Munich-based radiology-AI startup; deepcOS is a vendor-neutral orchestration/marketplace platform for imaging AI. Co-founded by CEO Franz Pfister and CTO Julia Moosbauer; venture-backed and independent. Founding year not verified."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NHS AI Centre for Value-Based Healthcare (King's College London / Guy's & St Thomas')", kind: "clinical", note: "Partnership to enhance radiology-AI adoption and deployment across the NHS", source: "https://finance.yahoo.com/news/deepc-announces-strategic-partnership-improve-095556557.html"}
+      - {partner: "Konica Minolta Healthcare", kind: "channel", note: "deepcOS AI-integration platform embedded into Konica Minolta's Exa imaging platform for hospitals/imaging centers in North America", source: "https://www.dotmed.com/news/story/65920"}
+      - {partner: "Cortechs.ai", kind: "other", note: "Jun 2025: strategic alliance bringing Cortechs.ai neuro/imaging AI tools into deepcOS clinical workflows", source: "https://www.appliedradiology.com/articles/cortechs-ai-and-deepc-partner-to-bring-ai-powered-radiology-tools-into-clinical-workflows"}
     sources:
       - "https://www.deepc.ai/about"
       - "https://www.bio-m.org/en/news/news-detail/detail/News/lmu-university-hospital-munich-relies-on-deepcs-ai-platform-in-radiology.html"
@@ -1538,6 +1694,10 @@ vendors:
     history: "Founded 1914 in Cincinnati by John Dolbey (partnering with Thomas Edison on early dictation); family-owned; provides computer-assisted coding, transcription and speech-recognition software."
     market_position: "Best in KLAS for Computer-Assisted Coding (Fusion CAC), 2017-2025."
     market_share: "#1 Best in KLAS, Computer-Assisted Coding (score 89.6, 9th consecutive year, 2025)"
+    partnerships:
+      - {partner: "SOAP Health", kind: "clinical", note: "Strategic partnership pairing Dolbey speech recognition with SOAP Health's AI medical-practice tools", source: "https://www.dolbey.com/category/press-releases/"}
+      - {partner: "ScribeEMR", kind: "channel", note: "Partnership to offer combined live/virtual/cloud medical-charting and documentation solutions", source: "https://www.dolbey.com/dolbey-partners-with-scribeemr-to-offer-a-full-range-of-medical-charting-solutions/"}
+      - {partner: "nVoq", kind: "other", note: "Dolbey's Fusion Narrate front-end speech recognition is powered by the nVoq cloud speech engine", source: "https://www.dolbey.com/"}
     sources:
       - "https://www.dolbey.com/company/"
       - "https://www.dolbey.com/solutions/coding/fusion-cac/"
@@ -1556,6 +1716,8 @@ vendors:
     history: "Founded 2005; scientific R&D informatics suite (ELN, registration, inventory) built by acquisition; acquired by Siemens July 2025 for ~$5.1B; Brian Lee became CEO Dec 2025."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Siemens", kind: "other", note: "Acquired by Siemens for $5.1B (completed 2025); Dotmatics R&D-informatics portfolio (GraphPad Prism, SnapGene, Geneious) folds into Siemens' AI/Digital-Twin software business, aligned with Siemens' NVIDIA industrial-AI collaboration", source: "https://press.siemens.com/global/en/pressrelease/siemens-completes-acquisition-dotmatics"}
     sources:
       - "https://press.siemens.com/global/en/pressrelease/siemens-completes-acquisition-dotmatics"
       - "https://en.wikipedia.org/wiki/Dotmatics"
@@ -1630,7 +1792,11 @@ vendors:
     leadership: "Jakob Just-Bomholt — President & CEO"
     history: "Founded 1972 by Lars and Laurent Leksell to commercialize the Gamma Knife; radiation-oncology TPS/OIS (Monaco, MOSAIQ); listed on Nasdaq Stockholm."
     market_position: "not publicly disclosed"
-    market_share: null
+    market_share: "~42% of the global medical linear accelerator market; Varian (Siemens Healthineers) + Elekta together hold ~75% of the global radiotherapy market (medical linear accelerator / radiotherapy market reports, 2024-2025)"
+    market_share_pct: 42
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Elekta leverages NVIDIA GPU + Azure AI infrastructure for MR-guided radiotherapy and brain-imaging R&D", source: "https://venturebeat.com/ai/how-cloud-ai-infrastructure-enables-radiotherapy-breakthroughs-at-elekta"}
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Elekta Axis / Elekta ONE cloud built on Microsoft Azure (security, DR, cost-predictability for radiotherapy centers)", source: "https://www.elekta.com/focus/french-cancer-center-achieves-data-security-and-cost-predictability-with-elekta-axis-cloud/"}
     sources:
       - "https://en.wikipedia.org/wiki/Elekta"
       - "https://www.elekta.com/company/about-us/story/the-early-years/"
@@ -1663,6 +1829,8 @@ vendors:
     history: "Founded 1890 in St. Louis; Fortune 500 industrial automation and software company. Holds a majority stake in Aspen Technology and acquired Open Systems International."
     market_position: "Publicly traded (NYSE: EMR); Fortune 500 industrial automation and software company."
     market_share: null
+    partnerships:
+      - {partner: "AspenTech", kind: "other", note: "Emerson (majority owner) fuses AspenTech's modeling/AI software with DeltaV DCS under 'Boundless Automation' / 'Project Beyond' (May 2025), a software-defined edge+cloud industrial-AI platform.", source: "https://www.emerson.com/en-us/news/2025/05-emerson-project-beyond-to-modernize-and-seamlessly-integrate-the-industrial-automation-technology-stack"}
     sources:
       - "https://en.wikipedia.org/wiki/Emerson_Electric"
   - id: ennov
@@ -1754,6 +1922,8 @@ vendors:
     history: "EQ2 commercialized the University of Vermont-developed HEMS biomedical CMMS in 1993; acquired by TMA Systems (announced March 2025)."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "TMA Systems", kind: "other", note: "EQ2 (HEMS healthcare CMMS) acquired by TMA Systems, an enterprise asset/maintenance-management software vendor, March 2025; now part of TMA's portfolio.", source: "https://www.tmasystems.com/press/tma-systems-acquires-eq2-hems"}
     sources:
       - "https://www.eq2llc.com/about-us"
       - "https://www.healthcarefacilitiestoday.com/posts/EQ2-LLC-moves-headquarters-from-Vermont-to-North-Carolina--12896"
@@ -1788,6 +1958,9 @@ vendors:
     history: "Founded 1992; ETQ Reliance no-code eQMS; acquired by Hexagon AB (2022); product rebranded 'Octave Reliance' under Hexagon's Octave spin-off."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "ETQ Reliance Go (cloud-native EQMS, launched Dec 2025) is built on AWS; ETQ Reliance is delivered as an AWS-hosted SaaS.", source: "https://www.prnewswire.com/news-releases/etq-launches-etq-reliance-go-delivers-automated-quality-management-for-small--to-mid-sized-manufacturers-302630935.html"}
+      - {partner: "Octave (ex-Hexagon)", kind: "other", note: "ETQ owned by Hexagon AB (acquired Feb 2022); moved into Octave, the company spun off from Hexagon in May 2026.", source: "https://hexagon.com/products/product-groups/etq-reliance"}
     sources:
       - "https://www.etq.com/press-releases/hexagon-acquires-etq/"
       - "https://hexagon.com/company/newsroom/press-releases/2022/hexagon-acquires-etq-adding-market-leading-saas-based-qms-software-platform-to-its-portfolio"
@@ -1846,6 +2019,8 @@ vendors:
     history: "Founded 1996 in Germany by Martin Schmid; regulatory-information-management (EXTEDOpulse RIM/eCTD publishing) vendor; part of Bertelsmann Group (Digital Health division) since February 2024."
     market_position: "Vendor states EXTEDOpulse is used by 850+ organizations and ~80% of eCTD-accepting regulatory agencies."
     market_share: null
+    partnerships:
+      - {partner: "Bertelsmann (Bertelsmann India Investments)", kind: "other", note: "EXTEDO (RIM/eCTD regulatory software) acquired by Bertelsmann India Investments, February 2024.", source: "https://www.cbinsights.com/company/extedo"}
     sources:
       - "https://www.cbinsights.com/company/extedo/people"
       - "https://www.extedo.com/company/about"
@@ -1896,6 +2071,8 @@ vendors:
     history: "Fidelity National Information Services (FIS) acquired SunGard in 2015, gaining the Prophet actuarial-modeling platform now central to its Insurance Risk Suite for valuation, pricing and IFRS 17."
     market_position: "Prophet is a widely deployed enterprise actuarial-modeling engine for life and P&C insurers; runs on compute-intensive on-prem HPC grids or FIS-managed cloud/SaaS, a strong actuarial-HPC target."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Prophet Managed Cloud Service (PMCS) delivers the Prophet actuarial application on AWS compute/storage; FIS is an AWS Partner with AWS Financial Services Competency.", source: "https://aws.amazon.com/financial-services/partner-solutions/fis-prophet/"}
     sources:
       - "https://www.fisglobal.com/products/fis-insurance-risk-suite"
       - "https://en.wikipedia.org/wiki/FIS_(company)"
@@ -1951,6 +2128,8 @@ vendors:
     history: "Healthcare arm of Japan's FUJIFILM Holdings; the Americas unit (Lexington, MA) was formed in 2021 when Fujifilm acquired Hitachi's diagnostic-imaging business (~$1.56B) and merged it with Fujifilm Medical Systems."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Strategic Collaboration Agreement (March 2025) to host the cloud-based, AI-powered Synapse Enterprise Imaging platform on AWS; AWS validated Synapse Radiology/Cardiology/Digital Pathology PACS + VNA; also on AWS Marketplace. (Note: Fujifilm reports Synapse holds the largest global PACS market share, per its 2023 IR briefing, but no third-party % figure was found.)", source: "https://www.fujifilm.com/us/en/news/healthcare/fujifilm-signs-strategic-collaboration-agreement-with-amazon-web-services"}
     sources:
       - "https://healthcaresolutions-us.fujifilm.com/resources/press-release/fujifilm-to-acquire-hitachis-diagnostic-imaging-related-business-to-accelerate-growth-of-its-healthcare-business/"
       - "https://www.globenewswire.com/news-release/2021/10/01/2307092/0/en/Fujifilm-Integrates-Two-Medical-Technology-Businesses-to-Drive-Growth-Collaboration-and-Innovation.html"
@@ -1968,6 +2147,9 @@ vendors:
     history: "Founded 1964; electron-microscopy instrumentation/software maker (DigitalMicrograph); acquired by AMETEK from Roper Technologies in 2019 for $925M; now part of AMETEK's Electron Microscopy Technologies group."
     market_position: "Part of AMETEK (NYSE: AME); described by AMETEK as the world's leading manufacturer of instrumentation and software for electron microscopes."
     market_share: null
+    partnerships:
+      - {partner: "Thermo Fisher Scientific / JEOL / Hitachi", kind: "hardware", note: "Gatan (AMETEK) cameras/detectors (K3, BioContinuum, etc.) and DigitalMicrograph software integrate as OEM add-ons onto the three major TEM/cryo-EM microscope platforms (Thermo Fisher/FEI, JEOL, Hitachi).", source: "https://www.gatan.com/products/tem-imaging-spectroscopy/latitude-s-software"}
+      - {partner: "DECTRIS", kind: "hardware", note: "Co-developed integrated low-voltage EELS/EFTEM/4D-STEM solution combining Gatan's GIF Continuum K3 with the DECTRIS-powered Stela hybrid-pixel camera.", source: "https://www.dectris.com/company/news/newsroom/news/dectris-and-gatan-are-launching-an-integrated-solution-for-studies-at-low-voltage/"}
     sources:
       - "https://www.gatan.com/company/about-gatan"
       - "https://www.gatan.com/company/news/ametek-acquire-gatan-roper-technologies"
@@ -2004,6 +2186,9 @@ vendors:
     history: "Formed April 2, 2024 as the energy spin-off from General Electric (NYSE: GEV); Proficy historian/MES software carries the former GE Digital industrial-software lineage."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Multi-year Strategic Collaboration Agreement to deliver cloud-based Proficy software / APM solutions for manufacturers and utilities on AWS.", source: "https://www.gevernova.com/news/press-releases/ge-vernovas-digital-business-collaborates-with-aws"}
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Proficy Cloud Historian is offered via both AWS Marketplace and Azure Marketplace.", source: "https://www.gevernova.com/software/products/proficy/historian/cloud"}
     sources:
       - "https://www.gevernova.com/news/articles/transition-energies-timeline-ge-vernovas-spin"
       - "https://en.wikipedia.org/wiki/GE_Vernova"
@@ -2060,6 +2245,8 @@ vendors:
     history: "Founded 1998 (Bozeman, Montana); bioinformatics/NGS variant-interpretation software (VarSeq, VSWarehouse); privately held; Andreas Scherer succeeded founder Christophe Lambert as CEO."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Illumina / PacBio / Oxford Nanopore", kind: "other", note: "VarSeq 3 NGS analysis platform integrates short-read data from Illumina and long-read data from PacBio and Oxford Nanopore sequencing platforms.", source: "https://www.morningstar.com/news/pr-newswire/20251106la16629/golden-helix-launches-varseq-3-and-vswarehouse-3"}
     sources:
       - "https://www.bozemandailychronicle.com/news/economy/golden-helix-brings-in-new-ceo/article_4b278d9a-b2e2-11e2-b25b-0019bb2963f4.html"
       - "https://www.linkedin.com/in/scherer/"
@@ -2097,6 +2284,9 @@ vendors:
     history: "Founded 1982 by Dan O'Dowd and Carl Rosenberg; private, Santa Barbara-based vendor of safety-certified embedded RTOS (INTEGRITY) and compiler/development tools."
     market_position: "not publicly disclosed (privately held)"
     market_share: null
+    partnerships:
+      - {partner: "NXP Semiconductors", kind: "hardware", note: "Long-standing (since 1983) partnership; INTEGRITY RTOS, Multivisor and MULTI IDE run on NXP S32, MPC5xxx and i.MX processors, incl. collaboration on an SDV vehicle software platform.", source: "https://www.ghs.com/customers/nxp_partner.html"}
+      - {partner: "Infineon Technologies", kind: "hardware", note: "Joint automotive safety/security ecosystem pairing Infineon TRAVEO T2G MCUs with Green Hills' u-velOSity RTOS and MULTI (announced CES 2023). Also supports Qualcomm, Renesas, ST, TI, Arm/RISC-V.", source: "https://www.ghs.com/news/20230105_CES_infineon_traveo.html"}
     sources:
       - "https://en.wikipedia.org/wiki/Green_Hills_Software"
       - "https://www.ghs.com/corporate/management_team.html"
@@ -2130,7 +2320,8 @@ vendors:
     leadership: "Tadashi Maruno — President & CEO"
     history: "Founded 1953; publicly traded photonics maker (TSE: 6965); NanoZoomer whole-slide scanner family is its digital-pathology / WSI acquisition instrument line."
     market_position: "not publicly disclosed"
-    market_share: null
+    market_share: "~40% of the global photomultiplier tube (PMT) market (Global Growth Insights, 'Photomultiplier Tube Market' report, 2024). Figures vary widely by source: some market-research reports cite Hamamatsu at >90% of the PMT market. Both are third-party market-report estimates, not audited data."
+    market_share_pct: 40
     sources:
       - "https://nanozoomer.hamamatsu.com/"
       - "https://www.hamamatsu.com/us/en/our-company/history.html"
@@ -2167,6 +2358,9 @@ vendors:
     history: "Founded 2005 in Burlington, Massachusetts; payer core-administration software (HealthRules Payor). Majority-acquired by Blackstone (2020), then acquired by Bain Capital (2025)."
     market_position: "Private (Bain Capital-owned); revenue not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Enterprise-wide migration to AWS announced May 2025 to become an 'AI-native enterprise' across products/infrastructure (incl. HealthRules Payer).", source: "https://healthedge.com/resources/press-releases/healthedge-sets-course-to-become-an-ai-native-enterprise-with-enterprise-wide-migration-to-aws"}
+      - {partner: "Loka", kind: "other", note: "AWS Partner (2024 Partner of the Year) engaged to build/scale generative-AI apps on Amazon Bedrock as part of HealthEdge's AWS migration.", source: "https://healthedge.com/resources/press-releases/healthedge-sets-course-to-become-an-ai-native-enterprise-with-enterprise-wide-migration-to-aws"}
     sources:
       - "https://healthedge.com/about-us/"
       - "https://www.baincapital.com/news/healthedge-secures-strategic-investment-bain-capital"
@@ -2220,6 +2414,8 @@ vendors:
     history: "Formed November 2015 from the split of Hewlett-Packard Co. into HPE (enterprise) and HP Inc.; HQ relocated to Texas; HPC/AI portfolio includes former Cray and Determined AI assets."
     market_position: "Public (NYSE: HPE); among the largest enterprise infrastructure and HPC-server vendors globally."
     market_share: "#2 supercomputer vendor by TOP500 system share (~115 of 500 systems, June 2024, behind Lenovo)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Deep AI Factory integration: HPE Private Cloud AI and Compute XD/ProLiant nodes built on NVIDIA Blackwell (B300, RTX PRO 6000) GPUs — direct SMCI competitor in GPU-server co-sell.", source: "https://www.hpe.com/us/en/newsroom/press-release/2025/05/hewlett-packard-enterprise-deepens-integration-with-nvidia-on-ai-factory-portfolio.html"}
     market_share_pct: 23
     sources:
       - "https://en.wikipedia.org/wiki/Hewlett_Packard_Enterprise"
@@ -2256,6 +2452,9 @@ vendors:
     history: "Founded 1906 (Wabash, Indiana); diversified industrial/technology conglomerate; moved HQ to Charlotte, North Carolina (2019); announced 2025 plan to split into three companies."
     market_position: "Fortune 100 industrial conglomerate; 2025 announcement to split into three separate publicly traded businesses."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Collaboration pairing NVIDIA simulation/AI infrastructure with Honeywell process-control domain expertise for industrial autonomy (Honeywell Users Group).", source: "https://www.controlglobal.com/show-coverage/honeywell-users-group/article/55383664/honeywell-nvidia-chart-new-path-for-industrial-autonomy"}
+      - {partner: "Google Cloud", kind: "cloud", note: "Oct 2024 partnership pairing Google Vertex AI/Gemini with the Honeywell Forge industrial IoT platform for autonomous operations.", source: "https://www.honeywell.com/us/en/press/2024/10/honeywell-and-google-cloud-to-accelerate-autonomous-operations-with-ai-agents-for-the-industrial-sector"}
     sources:
       - "https://en.wikipedia.org/wiki/Honeywell"
       - "https://businessnc.com/honeywell-picks-its-new-charlotte-headquarters-home/"
@@ -2336,6 +2535,9 @@ vendors:
     history: "Founded 1911 as Computing-Tabulating-Recording Co., renamed IBM 1924; Spectrum LSF is its long-standing on-prem HPC workload manager."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Expanded partnership (GTC 2025): NVIDIA NIM microservices in watsonx.ai and cuDF GPU-accelerated Presto queries in watsonx.data.", source: "https://www.storagereview.com/news/ibm-and-nvidia-announce-expanded-partnership-to-operationalize-enterprise-ai"}
+      - {partner: "AWS", kind: "cloud", note: "watsonx (ai/data/governance/Orchestrate) delivered as native SaaS on AWS; reported ~$475M deal for AWS to supply IBM NVIDIA GPU capacity.", source: "https://www.ibm.com/new/announcements/ibm-brings-its-data-and-ai-products-as-native-saas-services-avai"}
     sources:
       - "https://en.wikipedia.org/wiki/IBM"
       - "https://www.ibm.com/history/arvind-krishna"
@@ -2350,7 +2552,8 @@ vendors:
     leadership: "Barry Balfe — CEO (effective Oct 1, 2025)"
     history: "CRO founded 1990 in Dublin. Through its acquisition of GloboMax/ICON Development Solutions it maintains and distributes NONMEM, the standard nonlinear mixed-effects modeling package for population PK/PD."
     market_position: "Owner and distributor of NONMEM, used by the majority of population-pharmacokinetics groups; NONMEM runs on workstations and HPC clusters for pharmacometric analysis."
-    market_share: null
+    market_share: "35% of decentralized/remote clinical trials globally in 2025 (Mordor Intelligence CRO report). This is a sub-segment (DCT) figure, NOT ICON's overall CRO market share; ICON is a top-3 global CRO alongside Thermo Fisher/PPD and IQVIA, but no clean single-vendor overall-CRO % was found."
+    market_share_pct: 35
     sources:
       - "https://www.iconplc.com/solutions/technologies/nonmem"
       - "https://en.wikipedia.org/wiki/NONMEM"
@@ -2385,6 +2588,9 @@ vendors:
     history: "Founded 1998 in San Diego; dominant next-generation-sequencing systems/consumables provider; publicly traded (Nasdaq: ILMN); Clarity LIMS came via the GenoLogics acquisition."
     market_position: "Publicly traded (Nasdaq: ILMN); leading global NGS provider with an active installed base of ~21,000 instruments worldwide."
     market_share: "Dominant global NGS provider; >90% share of clinical genomics sequencing (DeciBio estimate, cited by GEN, 2023)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "AI genomics partnership — NVIDIA BioNeMo on DGX Cloud for multimodal model training; DRAGEN secondary analysis is GPU-accelerated.", source: "https://www.genengnews.com/topics/artificial-intelligence/illumina-nvidia-launch-ai-based-genomics-partnership/"}
+      - {partner: "AWS", kind: "cloud", note: "Official partnership: DRAGEN pipelines and multiomics analysis run on AWS (used by Broad Institute); DRAGEN available via AWS Marketplace pay-as-you-go.", source: "https://aws.amazon.com/health/genomics/"}
     market_share_pct: 90
     sources:
       - "https://www.prnewswire.com/news-releases/illuminas-board-appoints-jacob-thaysen-phd-as-its-new-chief-executive-officer-301917362.html"
@@ -2536,6 +2742,8 @@ vendors:
     history: "Founded 2010 by Gary Hamilton (out of Integrated Healthcare Solutions, 2001); EHR-agnostic patient-engagement platform (Healthy Outcomes); HQ Charlotte, North Carolina."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "athenahealth", kind: "clinical", note: "Certified athenahealth partner; InteliChart's Healthy Outcomes platform integrates with 40+ EHRs incl. Epic, Oracle Cerner, MEDITECH, NextGen (62M+ patients).", source: "https://www.businesswire.com/news/home/20200305005779/en/InteliChart%C2%AE-Recognized-as-Certified-athenahealth-Partner"}
     sources:
       - "https://www.intelichart.com/who-we-are"
       - "https://www.prnewswire.com/news-releases/intelichart-expands-leadership-team-with-new-chief-operating-officer-301658382.html"
@@ -2662,6 +2870,8 @@ vendors:
     history: "Founded by Dr. Lyle Berkowitz; virtual-care company built natively on the Epic platform, supplying on-demand virtualist physician teams to Epic-using health systems."
     market_position: "Private, venture-backed; revenue not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "Epic", kind: "clinical", note: "Built entirely on Epic — first Epic-based virtual-care company; runs on a KeyCare instance of Epic and uses Epic 'Telehealth Anywhere'/MyChart for on-demand virtual urgent care.", source: "https://www.healthcareitnews.com/news/inside-new-virtual-first-epic-based-nationwide-telehealth-services-company"}
     sources:
       - "https://councils.forbes.com/profile/Lyle-Berkowitz-MD-CEO-Founder-KeyCare-Inc/cf350a9e-3d7e-42b8-b614-110cacbeb5ba"
       - "https://www.chiefhealthcareexecutive.com/view/keycare-ceo-talks-about-hospital-partnerships-virtual-care-and-opening-digital-front-door"
@@ -2714,6 +2924,8 @@ vendors:
     history: "Körber AG founded 1946 in Hamburg by Kurt A. Körber; Körber Pharma business includes Werum (founded 1969, PAS-X MES) and Seidenader visual-inspection; PAS-X is a leading pharma MES."
     market_position: "Körber describes Werum PAS-X as the world's leading manufacturing-execution system (MES) for pharma and biotech."
     market_share: "Market-leading pharma/biotech MES (Werum PAS-X); used by >50% of the world's top-30 pharma & biotech companies, 1,000+ installations (company-stated; Gartner MQ Leader)"
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "Körber delivers Werum PAS-X MES as a fully managed SaaS solution hosted on AWS for life-sciences manufacturing.", source: "https://www.koerber.com/en/about-us/news-and-press/pas-x-mes-aws-life-sciences-manufacturing"}
     sources:
       - "https://en.wikipedia.org/wiki/K%C3%B6rber"
       - "https://www.koerber.com/en/about-us/news-and-press/planned-werum-it-solutions-acquisition"
@@ -2753,6 +2965,9 @@ vendors:
     history: "Founded 2013 in Kraków, Poland (with US offices in New York and North Charleston, SC); BLE/AI RTLS 'Kio Cloud' for healthcare asset/staff tracking; private."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Cisco (Cisco Spaces / DNA Spaces)", kind: "hardware", note: "First vendor in Cisco's DNA Spaces IoT Device Marketplace (2020); BLE IoT tags run gateway-free on Cisco Catalyst access points.", source: "https://kontakt.io/press-releases/kontakt-io-joins-cisco-dna-spaces-to-expand-ble-iot-services-for-cisco-customers/"}
+      - {partner: "AWS", kind: "cloud", note: "Kio Cloud can stream location/IoT events to AWS Kinesis (data-integration level, not a formal alliance).", source: "https://support.kontakt.io/hc/en-gb/articles/4533778959900-About-integrating-Kontakt-io-solutions-with-Cisco-Spaces"}
     sources:
       - "https://www.highperformr.ai/company/kontakt-io"
       - "https://tracxn.com/d/companies/kontakt/__3T01v49V8gWjUGPDXQBva8UXWOnk-T6Pwd-_I9NraFc"
@@ -2770,6 +2985,9 @@ vendors:
     history: "Founded 2010 by Graham Gardner and Julie Yoo; provider-search/patient-access platform; acquired HealthSparq 2021."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Microsoft Azure & AWS", kind: "cloud", note: "Cited public-cloud platform integrations for the SaaS care-access platform.", source: "https://smarterway.ai/tools/kyruushealth (third-party review aggregator, 2026 — low-authority)"}
+      - {partner: "Epic / Oracle Health (Cerner)", kind: "clinical", note: "EHR integrations that push Kyruus provider-data + Search/Schedule into major EHRs (care-access platform).", source: "https://smarterway.ai/tools/kyruushealth (third-party review aggregator, 2026 — low-authority)"}
     sources:
       - "https://tracxn.com/d/companies/kyruus-health/__uZdicDiwioyVx_8ttGO6ywfH1KxT1A17__l_Mpd2190"
       - "https://kyruushealth.com/kyruus-completes-acquisition-of-healthsparq-paving-way-for-seamless-cross-channel-care-navigation/"
@@ -2786,6 +3004,11 @@ vendors:
     history: "Founded 2013 as Lab7 Systems, renamed L7 Informatics in 2018 under CEO Vasu Rangadass; Austin-based lab-informatics vendor (L7|ESP unified LIMS/ELN/workflow-orchestration)."
     market_position: "not publicly disclosed (privately held)"
     market_share: null
+    partnerships:
+      - {partner: "Microsoft (Azure)", kind: "cloud", note: "Technology partner; Azure cloud + genomics integration; L7|ESP listed on Azure Marketplace.", source: "https://l7informatics.com/partners/ ; https://marketplace.microsoft.com/en-us/product/saas/l7informaticsinc.l7informatics-esp"}
+      - {partner: "Leica Biosystems", kind: "clinical", note: "OEM partner (digital/anatomic pathology).", source: "https://l7informatics.com/partners/"}
+      - {partner: "Waters", kind: "other", note: "Analytical-instrument vendor technology partner.", source: "https://l7informatics.com/partners/"}
+      - {partner: "SciBite", kind: "other", note: "Semantic-analytics / ontology software technology partner.", source: "https://l7informatics.com/partners/"}
     sources:
       - "https://en.wikipedia.org/wiki/L7_Informatics"
       - "https://l7informatics.com/news/lab7-systems-appoints-new-ceo-and-changes-name-to-l7-informatics/"
@@ -2802,6 +3025,8 @@ vendors:
     history: "AgileBio founded 2002 by Pierre Rodrigues (Paris and San Diego); develops LabCollector, a web-based LIMS/ELN/inventory platform. Privately held."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "Cloud/SaaS LIMS hosted on Amazon servers; listed on AWS Marketplace.", source: "https://labcollector.com/lims-flexible-hosting-pricing/ ; https://aws.amazon.com/marketplace/pp/prodview-l3xneavlsbh2y"}
     sources:
       - "https://labcollector.com/about/company/"
       - "https://leadiq.com/c/agilebio/5a1d9050540000590075e192"
@@ -2818,6 +3043,11 @@ vendors:
     history: "Founded 1981 as Laboratory MicroSystems in Troy, New York; laboratory information management system (LIMS) and lab-informatics vendor headquartered in Somerset, New Jersey."
     market_position: "Private; positioned among leading LIMS vendors; market-share figure not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "SaaS LIMS hosted on AWS (e.g. EU SaaS environment runs on AWS).", source: "https://www.labvantage.com/who-we-are/partners/"}
+      - {partner: "Microsoft", kind: "cloud", note: "Named cloud/technology partner in LabVantage partner network.", source: "https://www.labvantage.com/who-we-are/partners/"}
+      - {partner: "Accenture", kind: "channel", note: "Global systems-integrator / implementation partner.", source: "https://www.labvantage.com/who-we-are/partners/"}
+      - {partner: "SAP", kind: "other", note: "Integration/technology partner.", source: "https://www.labvantage.com/who-we-are/partners/"}
     sources:
       - "https://en.wikipedia.org/wiki/LabVantage"
       - "https://www.labvantage.com/who-we-are/leadership/"
@@ -2885,6 +3115,10 @@ vendors:
     history: "Lineage to 1872 (Leica optics); histopathology and digital-pathology unit (acquired Aperio); Danaher acquired 2005 and made it a standalone operating company in 2011; HQ Nussloch, Germany."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Paige.ai", kind: "clinical", note: "Preferred SaaS image-management & embedded AI for Aperio GT 450 slide scanners.", source: "https://www.paige.ai/press-releases/paige-and-leica-biosystems-announce-expanded-partnership"}
+      - {partner: "Indica Labs", kind: "other", note: "Co-developed the Aperio HALO AP AI-powered image-management platform.", source: "https://www.prnewswire.com/news-releases/leica-biosystems-expands-leading-digital-pathology-portfolio-for-the-us-with-multiple-launches-at-pathology-visions-2025-302572031.html"}
+      - {partner: "Aperio AI Store ISVs (Lunit, Deep Bio, Mindpeak, Diadeep, Histofy)", kind: "other", note: "Third-party AI-application partners on Leica's Aperio AI marketplace.", source: "https://www.leicabiosystems.com/us/news/aperio-ai-store-accelerates-growth-expands-ai-tools-and-welcomes-mindpeak-to-its/"}
     sources:
       - "https://en.wikipedia.org/wiki/Leica_Biosystems"
       - "https://www.leicabiosystems.com/news/celebrating-leica-biosystems-150th-anniversary/"
@@ -2938,6 +3172,9 @@ vendors:
     history: "Founded 2019 in Oakland by Narinder Singh and Tom Hata; computer-vision/AI inpatient-monitoring startup (virtual nursing, fall prevention) with in-room edge cameras."
     market_position: "not publicly disclosed (early-stage private)"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Vision-AI models trained on NVIDIA GPUs (RTX 3070); component usage, not a formal alliance.", source: "https://www.frontiersin.org/journals/imaging/articles/10.3389/fimag.2025.1547166/full (2025)"}
+      - {partner: "Rockchip", kind: "hardware", note: "Edge inference runs on Rockchip RKNN embedded in LookDeep LVU camera/edge devices (zero-cost-hardware model).", source: "https://www.frontiersin.org/journals/imaging/articles/10.3389/fimag.2025.1547166/full (2025)"}
     sources:
       - "https://councils.forbes.com/profile/Narinder-Singh-CEO-LookDeep-Health/0e55f47c-e345-49c8-8bda-67055554a21a"
       - "https://lookdeep.health/about-us/"
@@ -2995,6 +3232,8 @@ vendors:
     history: "Founded 1990 in Atlanta; publicly traded (NASDAQ: MANH) supply-chain commerce software vendor spanning warehouse management, cold-chain and omnichannel. Eric Clark succeeded Eddie Capel as CEO in February 2025."
     market_position: "Publicly traded (NASDAQ: MANH); specific market-share figure not publicly disclosed."
     market_share: "Leader in the Gartner Magic Quadrant for Warehouse Management Systems (2024, 16th consecutive year; a Leader in every WMS MQ since 2006)"
+    partnerships:
+      - {partner: "Google Cloud", kind: "cloud", note: "Global Platinum partner; Manhattan Active runs on Google Cloud and is on GCP Marketplace; named 2025 Google Cloud Business Applications Partner of the Year (Supply Chain & Logistics). Note: Manhattan Active is GCP-hosted SaaS — limited SMCI co-sell room.", source: "https://www.manh.com/about-us/partners/global-partners/google-partner ; https://www.businesswire.com/news/home/20250424833809/en/Manhattan-Associates-Wins-Google-Cloud-Business-Applications-Partner-of-the-Year-Award-for-Supply-Chain-and-Logistics"}
     sources:
       - "https://www.manh.com/about-us/newsroom/press-releases/manhattan-associates-announces-ceo-succession"
       - "https://www.businesswire.com/news/home/20250210935455/en/Manhattan-Associates-Announces-CEO-Succession"
@@ -3012,6 +3251,8 @@ vendors:
     history: "Founded in the early 1990s in Salt Lake City; cloud QMS/MES for regulated life sciences. Privately held; acquired asset-management firm Qualer. Long-time CEO Jon Beckstrand became Board Chair in 2026, succeeded by David Edwards."
     market_position: "Reported $200M+ annual recurring revenue and ~$1.3B valuation; named a Leader in multiple QMS analyst reports (KSL/hjnews)."
     market_share: null
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "Cloud QMS built on AWS since 2010; Qx Gov (FedRAMP) runs segregated, FIPS 140-2 encrypted environments on AWS. AWS-committed SaaS.", source: "https://lightstream.io/lightstream-helps-major-software-provider-achieve-business-growth-with-aws-even-during-pandemic/ ; https://www.mastercontrol.com/industries/government-agencies-fedramp-compliance/"}
     sources:
       - "https://www.prnewswire.com/news-releases/mastercontrol-appoints-david-edwards-as-ceo-to-drive-next-phase-of-growth-302737707.html"
       - "https://www.ksl.com/article/50582388/utah-company-mastercontrol-has-quietly-become-a-software-leader-worth-13b"
@@ -3028,6 +3269,8 @@ vendors:
     history: "Founded 1998 by John Cottrell and David Creasy. Develops Mascot, a search engine matching mass-spectrometry data against sequence databases for protein identification, plus Mascot Distiller and Insight."
     market_position: "Long-standing market-leading vendor of the Mascot protein-identification search engine, one of the most widely used tools in MS-based proteomics."
     market_share: null
+    partnerships:
+      - {partner: "Mass-spec instrument vendors (Thermo Scientific, Bruker, SCIEX, Agilent, Shimadzu, Waters)", kind: "other", note: "Mascot Server ingests/supports data from all major MS instrument makers (data compatibility, not a compute/hardware alliance). Mascot is on-prem compute software — relevant hardware pull.", source: "https://www.matrixscience.com/"}
     sources:
       - "https://www.matrixscience.com/about.html"
       - "https://www.matrixscience.com/blog/25-years-of-matrix-science.html"
@@ -3064,6 +3307,12 @@ vendors:
     history: "Houston-based; co-founded by Emma Fauss; developed the FDA-cleared Sickbay vendor-neutral platform for real-time waveform ingest and virtual patient monitoring; privately held."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Intel", kind: "hardware", note: "Intel Capital co-led $27M Series B (2022); joint Cleveland Clinic CAM-ICU automation pilot.", source: "https://www.intelcapital.com/medical-informatics-corp-raises-27-million-... ; https://sickbay.com/intel-capital-partners-with-medical-informatics-to-power-sickbay-clinical-platform/"}
+      - {partner: "Dell", kind: "hardware", note: "Strategic alliance; infrastructure in Cleveland Clinic ICU pilot.", source: "https://www.cbinsights.com/company/medical-informatics-corp"}
+      - {partner: "Cisco", kind: "hardware", note: "Strategic technology/infrastructure (networking) alliance.", source: "https://www.cbinsights.com/company/medical-informatics-corp"}
+      - {partner: "HPE", kind: "hardware", note: "Feeds medical data to HPE AI models; infrastructure collaboration.", source: "https://www.cbinsights.com/company/medical-informatics-corp"}
+      - {partner: "Cadwell", kind: "clinical", note: "Dec 2025 partnership bringing neurodiagnostic data into the Sickbay clinical-intelligence platform.", source: "https://www.prnewswire.com/news-releases/cadwell-and-medical-informatics-corp-announce-partnership-to-bring-neurodiagnostic-data-into-clinical-intelligence-ecosystem-302639437.html"}
     sources:
       - "https://www.linkedin.com/in/emmafauss/"
       - "https://www.biospace.com/medical-informatics-corp-accelerates-growth-with-opening-of-new-office-in-heart-of-texas-medical-center"
@@ -3080,6 +3329,10 @@ vendors:
     history: "Founded 1999 in New York by Tarek Sherif, Glen de Vries and Edward Ikeguchi; leading clinical-trial EDC/CTMS platform (Rave); acquired by Dassault Systèmes for $5.8B, 2019."
     market_position: "One of the two dominant enterprise eClinical/EDC platforms; acquired by Dassault Systèmes for $5.8 billion (2019)."
     market_share: null
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "Clinical data platform built on AWS (modern lakehouse, Apache Iceberg) serving 33,000+ trials. AWS-committed clinical SaaS — per SMCI scope, near-zero co-sell room.", source: "https://aws.amazon.com/blogs/big-data/medidatas-journey-to-a-modern-lakehouse-architecture-on-aws/"}
+      - {partner: "CRIO", kind: "clinical", note: "eSource-to-Rave EDC digital pipeline across 2,500+ research sites.", source: "https://www.medidata.com/en/about-us/news-and-press/medidata-and-crio-empower-over-2500-global-research-sites-with-seamless-integration-to-accelerate-clinical-trials/"}
+      - {partner: "Worldwide Clinical Trials", kind: "clinical", note: "Strategic partnership embedding Medidata AI across the full trial lifecycle.", source: "https://www.3ds.com/newsroom/press-releases/worldwide-clinical-trials-and-medidata-announce-strategic-partnership-embed-medidata-ai-across-full-trial-lifecycle-bolstering-study-execution-and-delivery-excellence"}
     sources:
       - "https://en.wikipedia.org/wiki/Medidata_Solutions"
       - "https://www.3ds.com/newsroom/press-releases/dassault-systemes-completes-acquisition-medidata-opening-new-world-virtual-twin-experiences-healthcare"
@@ -3098,6 +3351,9 @@ vendors:
     history: "Founded 1983 out of a biomedical service company; independent biomedical/HTM and facilities CMMS software (MediMizer) for hospitals and third-party service organizations; private."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Asimily", kind: "other", note: "IoMT cybersecurity integration; auto-discovery of connected medical-device inventory into the CMMS.", source: "https://24x7mag.com/medical-equipment/software/cmms/medimizer-healthcare-cmms-asimily-iomt-integrate-address-cybersecurity-risks/"}
+      - {partner: "Fluke Biomedical / PartsSource", kind: "other", note: "Deep test-equipment (Fluke OneQA, Ansur, medTester) and parts-procurement integrations.", source: "https://medimizer.com/"}
     sources:
       - "https://tracxn.com/d/companies/medimizer/__KGosSbn-GwX7BPgf51YxqN5fb_0Y7a4BaYcxSw5ioYM"
       - "https://medimizer.com/"
@@ -3152,6 +3408,9 @@ vendors:
     history: "Founded 1949 in Minneapolis (operational HQ), incorporated in Dublin. Touch Surgery surgical-video ecosystem came via the 2020 acquisition of London-based Digital Surgery. Geoff Martha has been Chairman & CEO since 2020."
     market_position: "One of the world's largest medical-device companies; Touch Surgery Enterprise is a leading AI surgical-video platform."
     market_share: "World's largest medical device company by revenue (MDO Medtech Big 100, 2024)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Collaboration to build an AI platform for medical devices; GI Genius intelligent-endoscopy module embeds NVIDIA IGX edge hardware + Holoscan real-time AI (OEM design-win / edge-AI pattern).", source: "https://nvidianews.nvidia.com/news/medtronic-and-nvidia-collaborate-to-build-ai-platform-for-medical-devices ; https://www.nvidia.com/en-us/case-studies/medtronic-accelerates-real-time-medical-ai/"}
+      - {partner: "Cosmo Pharmaceuticals", kind: "other", note: "Develops and manufactures the GI Genius module distributed by Medtronic.", source: "https://nvidianews.nvidia.com/news/medtronic-and-nvidia-collaborate-to-build-ai-platform-for-medical-devices"}
     sources:
       - "https://www.medtronic.com/en-us/healthcare-professionals/specialties/touch-surgery.html"
       - "https://www.fiercebiotech.com/medtech/medtronic-to-bolster-its-ai-and-surgical-robotics-work-digital-surgery-acquisition"
@@ -3187,6 +3446,9 @@ vendors:
     history: "Founded 2004; pharmacometrics and QSP consultancy that develops open-source R tools (e.g., mrgsolve) and the Metworx cloud computation platform for model-informed drug development."
     market_position: "Specialist pharmacometrics/QSP consultancy and developer of widely used open-source modeling tools plus the Metworx cloud modeling-and-simulation platform."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Metrum's Metworx pharmacometrics/modeling compute platform is built and scales on AWS.", source: "https://metrumrg.com/publication/building-scalable-pharmacometrics-platform-cloud/"}
+      - {partner: "Aplos Analytics", kind: "other", note: "Aplos NCA integrated into Metrum's Metworx cloud platform to unify NCA-to-PK/PD workflows.", source: "https://aplosanalytics.com/blog/aplos-analytics-and-metrum-research-group-partner-to-transform-pharmacometric-workflows"}
     sources:
       - "https://www.metrumrg.com/"
       - "https://github.com/metrumresearchgroup"
@@ -3224,6 +3486,9 @@ vendors:
     history: "Nuance Communications (AI speech and clinical documentation; originally Burlington, Massachusetts) was acquired by Microsoft in 2022 for ~$19B. DAX Copilot is its ambient clinical-documentation product."
     market_position: "DAX Copilot used by 550+ health systems and 200,000+ clinicians (company-stated); Microsoft acquired Nuance for ~$19B (2022)."
     market_share: "Dominant US medical speech-recognition / clinical-documentation vendor: Nuance solutions reported used by 55%+ of US physicians, 75% of radiologists and 77% of US hospitals (Microsoft, 2021)"
+    partnerships:
+      - {partner: "Microsoft", kind: "cloud", note: "Nuance acquired by Microsoft (2022); DAX Copilot runs on Microsoft Azure / Azure OpenAI; deployed across 550+ health systems.", source: "https://revcycleai.com/blog/microsoft-nuance-vendor-deep-dive/"}
+      - {partner: "Epic", kind: "clinical", note: "DAX Copilot ambient documentation integrated into Epic EHR clinical workflows.", source: "https://www.veroscribe.com/blog/nuance-dax-review-2026"}
     sources:
       - "https://www.healthcaredive.com/news/nuance-dax-copilot-epic-available-artificial-intelligence-clinical-documentation/705026/"
       - "https://hmacademy.com/insights/AI-Catalyst/health-technology/microsoft-nuance-ai-powered-clinical-documentation-vendor-snapshot"
@@ -3239,7 +3504,12 @@ vendors:
     leadership: "Satya Nadella — Chairman & CEO"
     history: "Microsoft acquired Nuance Communications in 2022; its Dragon Ambient eXperience (DAX) Copilot delivers GPT-4-powered ambient clinical documentation via Microsoft Azure to 500+ health systems."
     market_position: "Dominant ambient-clinical-documentation vendor via Nuance DAX/Dragon Copilot, but CLOUD-LOCKED to Microsoft Azure with no on-premises serving option — effectively out of scope for direct on-prem hardware co-sell."
-    market_share: null
+    market_share: "~80% of the U.S. radiologist (radiology reporting/speech-recognition) market; solutions used by 77% of U.S. hospitals and 550,000+ clinicians (Nuance Healthcare fact sheet, self-reported, ~2021)"
+    market_share_pct: 80
+    partnerships:
+      - {partner: "Microsoft", kind: "cloud", note: "Dragon Medical One is Microsoft's cloud speech-recognition platform (Azure); Nuance is a Microsoft company.", source: "https://www.nuance.com/asset/en_us/collateral/healthcare/fact-sheet/fs-nuance-healthcare-fact-sheet-en-us.pdf"}
+      - {partner: "Epic", kind: "clinical", note: "Dragon Medical One embedded in Epic and other EHRs for clinician dictation.", source: "https://www.nuance.com/asset/en_us/collateral/healthcare/fact-sheet/fs-nuance-healthcare-fact-sheet-en-us.pdf"}
+      - {partner: "Philips (Speech Processing Solutions)", kind: "channel", note: "Philips Speech Processing Solutions became a Dragon Medical One distributor.", source: "https://www.dictation.philips.com/us/resources/press/press/speech-processing-solutions-becomes-a-nuance-dragon-medical-one-distributor/"}
     sources:
       - "https://www.healthcaredive.com/news/dax-copilot-nuance-automated-doctor-tool-artificial-intelligence-healthcare/694818/"
       - "https://marketplace.microsoft.com/en-us/product/web-apps/nuance_gskaff.dax_copilot_usa?tab=overview"
@@ -3256,6 +3526,9 @@ vendors:
     history: "Founded 1915 in Ohio as the Cummings Machine Company (concrete mixers); renamed Midmark in 1969. Family-owned maker of medical, dental and veterinary equipment and related software; HQ Versailles, Ohio."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Epic", kind: "clinical", note: "CareFlow RTLS Staff Duress integrates with Epic (Staff Duress category) via HL7 FHIR to deliver location-aware duress alerts (2025).", source: "https://www.midmark.com/medical/rtls"}
+      - {partner: "Primex", kind: "other", note: "Interface with Primex environmental monitoring offered as part of Midmark's best-in-class RTLS solution set.", source: "https://www.midmark.com/medical/rtls/our-approach"}
     sources:
       - "https://en.wikipedia.org/wiki/Midmark"
       - "https://www.midmark.com/about-us/our-history-and-culture"
@@ -3290,6 +3563,11 @@ vendors:
     history: "Healthcare data-and-analytics business of actuarial firm Milliman; MedInsight platform serves value-based-care, risk-adjustment and payer analytics; Microsoft-certified AI partner, Azure-aligned."
     market_position: "Company states MedInsight is trusted by 300+ payers, providers/ACOs, employers and government agencies worldwide."
     market_share: null
+    partnerships:
+      - {partner: "Microsoft", kind: "cloud", note: "Named partner in MedInsight's Strategic Alliance Program (cloud/technology).", source: "https://medinsight.com/healthcare-data-analytics-about/strategic-alliance-program/"}
+      - {partner: "Databricks", kind: "cloud", note: "Strategic Alliance Program partner for data/analytics platform.", source: "https://medinsight.com/healthcare-data-analytics-about/strategic-alliance-program/"}
+      - {partner: "Epic", kind: "clinical", note: "Strategic Alliance Program partner (EHR data/integration).", source: "https://medinsight.com/healthcare-data-analytics-about/strategic-alliance-program/"}
+      - {partner: "MCG Health", kind: "clinical", note: "Strategic Alliance Program partner (clinical guidelines/analytics).", source: "https://medinsight.com/healthcare-data-analytics-about/strategic-alliance-program/"}
     sources:
       - "https://medinsight.com/healthcare-data-analytics-about/press-releases/milliman-medinsight-integrates-ai-and-next-generation-analytics-to-strengthen-value-based-care-decision-making/"
       - "https://www.linkedin.com/company/milliman-medinsight"
@@ -3343,6 +3621,9 @@ vendors:
     history: "Moody's Analytics acquired actuarial-software firm GGY (AXIS) in 2016 and catastrophe-risk modeler RMS for $2B in 2021, building an insurance risk-and-actuarial analytics platform."
     market_position: "Major insurance risk-analytics vendor; RMS catastrophe models (Intelligent Risk Platform, cloud/SaaS) and the AXIS actuarial system (grid/HPC) serve P&C and life insurers and reinsurers."
     market_share: null
+    partnerships:
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Moody's committed to Azure for its GenAI/cloud apps; joint risk & analytics solutions built on Azure OpenAI (2023).", source: "https://news.microsoft.com/source/2023/06/29/moodys-and-microsoft-develop-enhanced-risk-data-analytics-research-and-collaboration-solutions-powered-by-generative-ai/"}
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Moody's RMS Intelligent Risk Platform (catastrophe modeling) is built on AWS.", source: "https://www.rms.com/risk-intelligence"}
     sources:
       - "https://ir.moodys.com/press-releases/news-details/2021/Moodys-to-Acquire-RMS-Leader-in-Climate--Natural-Disaster-Risk/default.aspx"
       - "https://www.artemis.bm/news/rms-sold-to-moodys-2-billion/"
@@ -3455,6 +3736,8 @@ vendors:
     history: "Founded 1989 by Will Dracup; developed the Progenesis LC-MS software for proteomics and metabolomics/lipidomics. Acquired by Waters Corporation (2013) and operated as a Waters company."
     market_position: "Developer of Progenesis QI, a widely used LC-MS software for label-free proteomics and metabolomics analysis; a Waters subsidiary (Waters CEO Udit Batra)."
     market_share: null
+    partnerships:
+      - {partner: "Waters Corporation", kind: "other", note: "Acquired by Waters in 2013; Progenesis QI / Progenesis QI for proteomics now a Waters informatics product for LC-MS omics.", source: "https://www.technologynetworks.com/proteomics/news/waters-acquires-nonlinear-dynamics-213840"}
     sources:
       - "https://www.nonlinear.com/progenesis/"
       - "https://www.technologynetworks.com/proteomics/news/waters-acquires-nonlinear-dynamics-213840"
@@ -3509,6 +3792,9 @@ vendors:
     history: "Founded c.2013 by Tom Stanford; Connected Workplace EAM/CMMS built natively on ServiceNow; acquired by Trane Technologies (completed Nov 2023)."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "ServiceNow", kind: "other", note: "Nuvolo Connected Workplace / EAM is built natively on the ServiceNow platform.", source: "https://investors.tranetechnologies.com/news-and-events/news-releases/news-release-details/2023/Trane-Technologies-to-Acquire-Connected-Workplace-and-Enterprise-Asset-Management-Leader-Nuvolo/default.aspx"}
+      - {partner: "Trane Technologies", kind: "other", note: "Parent company; acquired Nuvolo Nov 2023 to expand SaaS/digital building & asset management.", source: "https://www.businesswire.com/news/home/20231103526265/en/Trane-Technologies-Completes-Acquisition-of-Connected-Workplace-and-Enterprise-Asset-Management-Leader-Nuvolo"}
     sources:
       - "https://investors.tranetechnologies.com/news-and-events/news-releases/news-release-details/2023/Trane-Technologies-Completes-Acquisition-of-Connected-Workplace-and-Enterprise-Asset-Management-Leader-Nuvolo/default.aspx"
       - "https://www.nuvolo.com/news/trane-technologies-to-acquire-connected-workplace-and-enterprise-asset-management-leader-nuvolo/"
@@ -3542,6 +3828,12 @@ vendors:
     history: "Founded 1993 in Santa Clara; NVIDIA's NIM inference microservices and BioNeMo platform package optimized LLM/biomodel serving in containers deployable on-premises, at edge, or in cloud."
     market_position: "Dominant AI-compute supplier; NIM/BioNeMo provide the on-premises and hybrid inference-serving stack for healthcare and drug-discovery LLMs and biomodels, self-hostable via Docker/Kubernetes on GPU servers."
     market_share: "NVIDIA holds an estimated ~85-90% of the data-center AI GPU / accelerator market (2025-2026 analyst estimates)"
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "BioNeMo available via AWS ParallelCluster, SageMaker & HealthOmics; NIM microservices on AWS Marketplace.", source: "https://blogs.nvidia.com/blog/nim-ai-microservices-for-healthcare-integrate-with-aws"}
+      - {partner: "Microsoft Azure", kind: "cloud", note: "NIM/BioNeMo microservices distributed via Azure marketplace.", source: "https://nvidianews.nvidia.com/news/nvidia-partners-with-industry-leaders-to-advance-genomics-drug-discovery-and-healthcare"}
+      - {partner: "Google Cloud", kind: "cloud", note: "NIM/BioNeMo microservices distributed via Google Cloud marketplace.", source: "https://nvidianews.nvidia.com/news/nvidia-partners-with-industry-leaders-to-advance-genomics-drug-discovery-and-healthcare"}
+      - {partner: "Oracle Cloud Infrastructure", kind: "cloud", note: "NIM/BioNeMo microservices distributed via Oracle Cloud marketplace.", source: "https://nvidianews.nvidia.com/news/nvidia-partners-with-industry-leaders-to-advance-genomics-drug-discovery-and-healthcare"}
+      - {partner: "Novo Nordisk", kind: "clinical", note: "NVIDIA building custom AI models/agents for Novo Nordisk early research & clinical development (2024).", source: "https://www.pharmavoice.com/news/pharma-nvidia-microsoft-google-research-drug-market-bubble/803407/"}
     market_share_pct: 87
     sources:
       - "https://www.nvidia.com/en-us/ai-data-science/products/nim-microservices/"
@@ -3560,6 +3852,9 @@ vendors:
     history: "Established 1919 in Tokyo; global endoscopy leader. Surgical imaging / OR integration (endoscopy systems, EASYSUITE OR integration) building beyond hardware toward integrated care. Bob White (ex-Medtronic) appointed President & CEO effective June 1, 2025, following the October 2024 resignation of Stefan Kaufmann and an interim period under chairman Yasuo Takeuchi."
     market_position: "Global market leader in flexible endoscopy with a large installed base of endoscopy systems."
     market_share: "More than 70% share of the global gastrointestinal endoscope market (Olympus IR; figure consistently cited through 2025)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Olympus/Odin Vision cloud-AI endoscopy (CADDIE) runs real-time inference on NVIDIA GPUs; Odin Vision is an NVIDIA Inception alum.", source: "https://blogs.nvidia.com/blog/ai-powered-endoscopy-odin-vision-olympus/"}
+      - {partner: "Ziosoft", kind: "clinical", note: "Strategic partnership to launch an AI-powered surgical planning tool (2025).", source: "https://www.prnewswire.com/news-releases/olympus-announces-launch-of-ai-powered-surgical-planning-tool-through-strategic-partnership-with-ziosoft-302400208.html"}
     market_share_pct: 70
     sources:
       - "https://www.olympus-global.com/news/2025/nr02932.html"
@@ -3647,7 +3942,11 @@ vendors:
     leadership: "Louis Roy — Founder & CEO"
     history: "Founded 1989 in Quebec City by Louis Roy (still CEO); provides pharma serialization, track-and-trace and automated visual-inspection systems for regulatory compliance."
     market_position: "Private; revenue not publicly disclosed."
-    market_share: null
+    market_share: "25.7% of the pharmaceutical serialization / track-and-trace market; largest installed base (~6,000+ systems) per MarketsandMarkets"
+    market_share_pct: 25.7
+    partnerships:
+      - {partner: "Körber", kind: "channel", note: "OPTEL acquired Körber's Pharma Track & Trace unit; OPTEL becomes Körber's preferred T&T partner for pharma.", source: "https://www.koerber.com/en/about-us/news-and-press/optel-acquires-koerber-pharma-track-trace-unit"}
+      - {partner: "ERM", kind: "other", note: "Partnership (June 2024) for supply-chain visibility and CSRD/CBAM sustainability reporting.", source: "https://www.optelgroup.com/en/news/optel-techno-service-partnership/"}
     sources:
       - "https://www.optelgroup.com/en/about-optel/"
       - "https://leadiq.com/c/optel-group/5a1d966a2300005400850ce3"
@@ -3776,6 +4075,8 @@ vendors:
     history: "Founded 1993 in Auckland by Ian McCrae; health-integration and population-health software vendor; majority acquired by Canada's HEALWELL AI (completed April 2025), with Brad Porter as CEO succeeding founder McCrae."
     market_position: "not publicly disclosed (acquired by HEALWELL AI, completed 2025)."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "AWS is Orion Health's cloud platform of choice; deploys Amazon HealthLake for HIE data normalization, analytics and ML, delivered SaaS on AWS.", source: "https://orionhealth.com/nz/media-releases/orion-health-teams-up-with-aws-for-amazon-healthlake/"}
     sources:
       - "https://orionhealth.com/nz/media-releases/healwell-ai-completes-acquisition-of-orion-health-mccrae-tech-launched/"
       - "https://en.wikipedia.org/wiki/Orion_Health"
@@ -3792,6 +4093,8 @@ vendors:
     history: "Founded 2009 in Cambridge Massachusetts by Barry Wark and Winston Brasor; cloud-native LIMS for molecular/NGS diagnostic laboratories. Venture-backed (Series A)."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services (AWS) / Amazon Omics", kind: "cloud", note: "Cloud LIMS runs on AWS; partners with Amazon Omics to store/query linked omics + phenotypic data; data also listed on AWS Data Exchange.", source: "https://aws.amazon.com/marketplace/seller-profile?id=e6519a4a-1bcc-4e08-8d9a-67b927c40cd8"}
     sources:
       - "https://www.businesswire.com/news/home/20200320005137/en/Tech-Startup-Ovation.io-Launches-Effort-That-Could-Double-COVID-19-Testing-Capacity-Across-the-U.S."
       - "https://www.madrona.com/ff-ovation/"
@@ -3923,6 +4226,9 @@ vendors:
     history: "Founded 1981 in the Detroit area (Southfield, Michigan); developer of the AIMS healthcare CMMS, first delivered to Michigan hospitals in 1984; privately held."
     market_position: "not publicly disclosed (vendor reports AIMS used in ~3,000 hospitals across 20 countries)"
     market_share: null
+    partnerships:
+      - {partner: "Drawbase Software", kind: "other", note: "CMMS + CAFM integration partnership: AIMS (CMMS) combined with Drawbase visual space/infrastructure management for hospital facilities.", source: "https://24x7mag.com/medical-equipment/software/cmms/phoenix-data-systems-drawbase-software-forge-cmms-partnership/"}
+      - {partner: "ECRI", kind: "other", note: "Medical device data integration: AIMS interfaces to ECRI UMDNS nomenclature, device manufacturer codes and Alerts Tracker recall/alert management.", source: "https://www.itnonline.com/content/ecri-phoenix-data-systems-offer-cmms-integration-package"}
     sources:
       - "https://www.goaims.com/phoenix-data-systems-about-us/"
       - "https://www.zoominfo.com/p/Ben-Mannisto/1179934999"
@@ -3957,6 +4263,9 @@ vendors:
     history: "Founded 1996 by Jorge Yant (Ashland, Oregon); payer core-administration and claims-adjudication software; privately held."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Payer Compass", kind: "other", note: "Payer Compass' Visium pricing/editing SaaS integrates with PLEXIS Quantum Choice auto-adjudication for configurable, transparent claims pricing.", source: "https://www.plexishealth.com/resources/plexis-healthcare-payer-technology-leverages-visium-transparent-configurable-pricing-platform-payer-compass/"}
+      - {partner: "Santech", kind: "other", note: "Strategic partnership to combine provider-network management with PLEXIS core administration/claims for payers.", source: "https://www.biospace.com/plexis-healthcare-systems-and-santech-announce-a-strategic-partnership-to-empower-payers-with-agile-provider-network-management-and-claims-administration"}
     sources:
       - "https://www.plexishealth.com/about/leadership-team/"
       - "https://www.newswire.com/news/plexis-celebrates-25-years-of-empowering-healthcare-payer-businesses-21456807"
@@ -4030,6 +4339,9 @@ vendors:
     history: "Founded 1984 at Heinrich Heine University, Düsseldorf; molecular-diagnostics and sample-technology firm, HQ Venlo. QIAGEN Digital Insights (est. 2014) is its bioinformatics arm (Ingenuity, CLC bio, BIOBASE)."
     market_position: "Publicly listed (NYSE/Frankfurt: QGEN); market-share figure not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "2026 collaboration integrating NVIDIA accelerated computing and the BioNeMo platform with QIAGEN Digital Insights biomedical knowledge bases for AI drug discovery (graph-based AI for targets/biomarkers).", source: "https://www.pharmaceutical-technology.com/news/qiagen-nvidia-ai-drug-discovery/"}
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Listed AWS Partner; CLC Genomics Cloud Engine delivers cloud-based NGS bioinformatics on AWS.", source: "https://partners.amazonaws.com/partners/001E000001KdXeyIAF/QIAGEN%20Digital%20Insights"}
     sources:
       - "https://en.wikipedia.org/wiki/Qiagen"
       - "https://corporate.qiagen.com/newsroom/press-releases/press-release-details/2020/QIAGEN-names-Thierry-Bernard-as-Chief-Executive-Officer/default.aspx"
@@ -4085,6 +4397,8 @@ vendors:
     history: "Founded 2012 by two McKinsey/Stanford veterans (CEO Mudit Garg and Ian Christopher); venture-backed AI platform automating hospital operations (patient flow, perioperative, inpatient). Founder-led, independent."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Epic / Oracle Health (Cerner)", kind: "clinical", note: "AI care-automation platform integrates deeply with Epic and Cerner EHRs; embeds ML-driven workflows into the EHR.", source: "https://www.qventus.com/solutions/healthcare-automation-platform/"}
     sources:
       - "https://qventus.com/company/story-team/"
       - "https://qventus.com/company/our-team/"
@@ -4141,6 +4455,8 @@ vendors:
     history: "Founded 2000 by Johan Löf as a Karolinska Institutet spin-off; listed on Nasdaq Stockholm since 2003; develops RayStation TPS and RayCare OIS."
     market_position: "Public (Nasdaq Stockholm); RayStation treatment-planning system used at clinics worldwide, distributed via OEM licensing to leading medtech firms."
     market_share: "Self-described market leader in ion-therapy treatment planning (~110 ion centers); RayStation in 1,000+ radiotherapy centers across 43 countries (2024, company press release)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "RayStation is GPU-accelerated with NVIDIA CUDA/TensorRT on RTX 6000 / dual L40S servers and RTX workstations; up to 20x faster dose calculation; positioned as 'radiotherapy software powered by NVIDIA-accelerated computing'.", source: "https://www.nvidia.com/en-us/case-studies/raysearch-ai-powered-oncology-breakthroughs"}
     sources:
       - "https://en.wikipedia.org/wiki/RaySearch_Laboratories"
       - "https://www.raysearchlabs.com/organization/"
@@ -4273,7 +4589,11 @@ vendors:
     leadership: "Blake Moret — Chairman & CEO"
     history: "Founded 1903 (Allen-Bradley heritage); industrial automation/MES/SCADA leader; Rockwell Automation name adopted 2001; NYSE-listed (ROK), Milwaukee."
     market_position: "FY2025 revenue US$8.34 billion"
-    market_share: null
+    market_share: "Cited as holding over 50% of the North American PLC (programmable logic controller / Allen-Bradley) market and as the world's largest pure-play industrial-automation company (Luminix company-overview report, 2025-2026). Figure is a segment/geographic share, not total automation market, and the source is a third-party aggregator."
+    market_share_pct: 50
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Collaboration on AI-powered autonomous mobile robots (AMRs) using the NVIDIA Isaac robotics platform and Omniverse for manufacturing logistics.", source: "https://www.rockwellautomation.com/en-us/company/news/press-releases/Rockwell-Automation-to-Advance-Intelligent-Automation-Mobile-Robotics-in-Manufacturing-Logistics-in-Collaboration-with-NVIDIA.html"}
+      - {partner: "Microsoft (Azure)", kind: "cloud", note: "Expanded partnership embedding Azure OpenAI Service into FactoryTalk Design Studio; generative AI to accelerate industrial automation design, bridging OT and IT.", source: "https://www.rockwellautomation.com/en-us/company/news/press-releases/Rockwell-Automation-and-Microsoft-Expand-Partnership-to-Leverage-Generative-AI-Capabilities-for-Enhanced-Productivity-and-Faster-Time-to-Market.html"}
     sources:
       - "https://en.wikipedia.org/wiki/Rockwell_Automation"
       - "https://www.rockwellautomation.com/en-us/company/investor-relations/governance/executive-leadership.html"
@@ -4309,6 +4629,9 @@ vendors:
     history: "Founded 2004 by Kevin Cramer, Baltimore; unified low-code/no-code LIMS/ELN/SDMS platform for life-sciences labs. Received growth investment from GHO Capital."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "NVIDIA BioNeMo (DiffDock and MolMIM NIM microservices) integrated into Sapio ELaiN AI lab notebook for structure-based design / high-performance scientific workflows.", source: "https://www.bio-itworld.com/news/2026/01/15/sapio-sciences-announces-partner-ecosystem-for-elain-its-third-generation-ai-lab-notebook"}
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "AWS Bedrock integrated into the Sapio Platform (LIMS/ELN), giving scientists foundation models (Anthropic, AI21, Stability) inside the same AWS environment that already hosts Sapio.", source: "https://www.businesswire.com/news/home/20241029252426/en/Sapio-Sciences-Expands-Collaboration-With-AWS-to-Advance-Science-Aware-AI-Vision"}
     sources:
       - "https://www.sapiosciences.com/our-leadership/"
       - "https://en.wikipedia.org/wiki/Sapio_Sciences"
@@ -4342,6 +4665,8 @@ vendors:
     history: "Founded 1976 in Cary, North Carolina, spun out of NC State University; privately held analytics-software company still led by co-founder James Goodnight."
     market_position: "Privately held; reported revenue of US$3B+ in 2024 (Wikipedia/SAS)."
     market_share: "#1 in worldwide advanced & predictive analytics software market share for 20+ consecutive years per IDC (~27.7% share, 2018)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "SAS maintains a dedicated NVIDIA alliance-partner page in its partner directory; the alliance covers GPU-accelerated SAS Viya analytics/AI. (Partnership existence confirmed via SAS.com alliance-partners directory; product specifics widely reported but not separately cited here.)", source: "https://www.sas.com/en_us/partners/find-a-partner/alliance-partners/nvidia.html"}
     market_share_pct: 27.7
     sources:
       - "https://en.wikipedia.org/wiki/SAS_Institute"
@@ -4375,6 +4700,9 @@ vendors:
     history: "Founded 1836 by the Schneider brothers; French energy-management and automation multinational (Euronext: SU); EcoStruxure Building Operation serves hospital campuses; Olivier Blum became CEO November 2024."
     market_position: "Public (Euronext: SU); global leader in energy management and industrial automation."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Dec 2024 partnership to co-design liquid-cooling / reference designs for AI-factory data centers", source: "https://en.wikipedia.org/wiki/Schneider_Electric"}
+      - {partner: "AVEVA", kind: "other", note: "Wholly-owned industrial-software subsidiary (full acquisition Jan 2023); AVEVA PI historian/MES is heavily used in GxP/pharma plants (SMCI Play C angle)", source: "https://en.wikipedia.org/wiki/Schneider_Electric"}
     sources:
       - "https://en.wikipedia.org/wiki/Schneider_Electric"
       - "https://sustainabilitymag.com/articles/olivier-blum-named-new-ceo-of-schneider-electric"
@@ -4408,6 +4736,10 @@ vendors:
     history: "Founded 1990 (New York) by Richard Friesner and William Goddard; physics-based computational drug-discovery and materials-science software; Ramy Farid CEO since 2017; public on Nasdaq (SDGR) since 2020."
     market_position: "Publicly traded (Nasdaq: SDGR); leading physics-based computational drug-discovery platform."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Apr 2021 partnership optimizing Schrödinger's physics-based drug-discovery platform on NVIDIA DGX A100 / DGX SuperPOD; supports NVIDIA Clara Discovery", source: "https://nvidianews.nvidia.com/news/nvidia-partners-with-schrodinger-to-further-accelerate-drug-discovery-worldwide"}
+      - {partner: "Amazon Web Services", kind: "cloud", note: "Ran a record 156,000-core cloud screen of 205,000+ molecules on AWS", source: "https://en.wikipedia.org/wiki/Schr%C3%B6dinger,_Inc."}
+      - {partner: "Bayer, Takeda, Gilead (Nimbus)", kind: "clinical", note: "Large-pharma computational drug-discovery collaborations", source: "https://en.wikipedia.org/wiki/Schr%C3%B6dinger,_Inc."}
     sources:
       - "https://en.wikipedia.org/wiki/Schr%C3%B6dinger,_Inc."
       - "https://www.crunchbase.com/organization/schrodinger"
@@ -4456,7 +4788,10 @@ vendors:
     leadership: "Mike Coughlin — President & CEO (Founder)"
     history: "Founded 1994 by Mike Coughlin (Mission, Kansas); pharmacy-automation robotics and software deployed in 7,000+ pharmacies; privately held."
     market_position: "not publicly disclosed"
-    market_share: null
+    market_share: "≈13% share of the U.S. central-fill pharmacy-automation market (Verified Market Research, 'Top Central Fill Pharmacy Automation Companies', 2024)"
+    market_share_pct: 13
+    partnerships:
+      - {partner: "Omnicell", kind: "other", note: "Acquired by Omnicell (May 2023); ScriptPro robotics/software now part of Omnicell's pharmacy-automation portfolio", source: "https://www.verifiedmarketresearch.com/blog/top-central-fill-pharmacy-automation-companies/"}
     sources:
       - "https://scriptpro.com/our-story/"
       - "https://scriptpro.com/mike-coughlin/"
@@ -4507,6 +4842,9 @@ vendors:
     history: "Founded 2014; genomics secondary-analysis software (DNAseq/DNAscope, TNseq) known for speed and accuracy; headquartered in San Jose, California."
     market_position: "Private; revenue not publicly disclosed."
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services", kind: "cloud", note: "Sentieon DNAseq/TNseq pipelines offered as Amazon Omics Ready2Run workflows; CPU-optimized on AWS Hpc6a (30x WGS in ~32 min)", source: "https://aws.amazon.com/blogs/industries/amazon-omics-now-supports-sentieon-genomic-analysis-pipelines"}
+      - {partner: "QIAGEN", kind: "clinical", note: "Partnership to advance precision medicine using Sentieon's efficient variant-calling software", source: "https://www.biospace.com/qiagen-and-sentieon-partner-to-advance-precision-medicine-with-highly-efficient-variant-calling-software"}
     sources:
       - "https://www.genomeweb.com/informatics/sentieon-seeks-build-business-around-faster-more-accurate-genomic-analysis-software"
       - "https://www.zoominfo.com/c/sentieon-inc/368359769"
@@ -4523,6 +4861,9 @@ vendors:
     history: "Founded 2018 in Barcelona by Evan Floden and Paolo Di Tommaso, creators of the open-source Nextflow workflow engine (2013); venture-backed bioinformatics-pipeline platform (Seqera Platform / Tower)."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services", kind: "cloud", note: "Achieved AWS HPC Competency; Seqera Platform (Tower) runs Nextflow pipelines on AWS Batch", source: "https://seqera.io/blog/tag-partners/"}
+      - {partner: "Google Cloud", kind: "cloud", note: "Seqera Platform deploys Nextflow pipelines to Google Cloud (Life Sciences/Batch)", source: "https://en.wikipedia.org/wiki/Seqera_Labs"}
     sources:
       - "https://seqera.io/about/"
   - id: siemens
@@ -4538,6 +4879,10 @@ vendors:
     history: "Founded 1847 in Berlin by Werner von Siemens and Johann Georg Halske; German industrial-technology conglomerate (FWB: SIE); Desigo CC building management widely deployed in hospitals."
     market_position: "Public (FWB: SIE); the largest industrial manufacturing company in Europe."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Jun 2023 partnership integrating NVIDIA Omniverse with the Siemens Xcelerator platform for the industrial metaverse / photorealistic 3D design", source: "https://en.wikipedia.org/wiki/Siemens"}
+      - {partner: "Microsoft", kind: "cloud", note: "Siemens Industrial Copilot generative-AI assistant launched Oct 2023; broader Azure digital collaboration", source: "https://en.wikipedia.org/wiki/Siemens"}
+      - {partner: "Amazon Web Services", kind: "cloud", note: "Digital-technology partnership expanded under CEO Roland Busch", source: "https://en.wikipedia.org/wiki/Siemens"}
     sources:
       - "https://en.wikipedia.org/wiki/Siemens"
       - "https://www.siemens.com/en-us/corporate-information/"
@@ -4586,6 +4931,9 @@ vendors:
     history: "Founded 1996 by Walter Woltosz. Acquired Lixoft (MonolixSuite) and Cognigen; develops GastroPlus PBPK and Monolix population-modeling software. Agreed to be acquired by Altaris (~$375M, $18.50/share) in June 2026."
     market_position: "Leading vendor of PBPK (GastroPlus) and nonlinear mixed-effects (MonolixSuite) modeling and simulation software for drug discovery and development."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "May 2026 collaboration to scale GPU-accelerated, AI-assisted PBPK / PK-PD / QSP modeling workflows on NVIDIA AI infrastructure", source: "https://www.businesswire.com/news/home/20260506350085/en/Simulations-Plus-and-NVIDIA-Collaborate-to-Scale-GPU-Accelerated-AI-Assisted-Modeling-Workflows"}
+      - {partner: "Enabling Technologies Consortium", kind: "other", note: "Strategic collaboration to advance GastroPlus enhancements", source: "https://www.biospace.com/press-releases/simulations-plus-and-enabling-technologies-consortium-announce-strategic-collaboration-to-advance-gastroplus-enhancements"}
     sources:
       - "https://www.simulations-plus.com/software/monolix/"
       - "https://www.simulations-plus.com/software/gastroplus/"
@@ -4605,6 +4953,10 @@ vendors:
     history: "Founded 2012 in San Mateo, CA; cloud data platform / AI Data Cloud; IPO 2020 (NYSE: SNOW); Sridhar Ramaswamy CEO since Feb 2024."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Amazon Web Services", kind: "cloud", note: "Snowflake Data Cloud has run on AWS since 2014", source: "https://en.wikipedia.org/wiki/Snowflake_Inc."}
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Snowflake runs on Microsoft Azure since 2018", source: "https://en.wikipedia.org/wiki/Snowflake_Inc."}
+      - {partner: "Google Cloud", kind: "cloud", note: "Snowflake runs on Google Cloud Platform since 2019", source: "https://en.wikipedia.org/wiki/Snowflake_Inc."}
     sources:
       - "https://en.wikipedia.org/wiki/Snowflake_Inc."
       - "https://www.snowflake.com/en/news/press-releases/sridhar-ramaswamy-named-chief-executive-officer-of-snowflake/"
@@ -4744,6 +5096,8 @@ vendors:
     history: "Founded 2016 as a University of Toronto computer-science spin-out by Ali Punjani and Marcus Brubaker; makes CryoSPARC cryo-EM single-particle-analysis software; collaborates with Thermo Fisher."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "cryoSPARC cryo-EM reconstruction software is GPU-accelerated and optimized for NVIDIA GPUs (ecosystem/optimization, not a co-sell alliance) — direct SMCI GPU-server signal for cryo-EM workloads", source: "NVIDIA GPU-accelerated applications documentation (developer.nvidia.com / ngc.nvidia.com)"}
     sources:
       - "https://ca.linkedin.com/in/ali-punjani-a7b42b82"
       - "https://www.utoronto.ca/news/run-brother-sister-team-u-t-startup-leading-big-pharma-out-dark"
@@ -4836,6 +5190,8 @@ vendors:
     history: "Established 1969 as Robert Bosch Apparatebau; formerly Bosch Packaging Technology, sold by Bosch to CVC Capital Partners in 2020 and rebranded Syntegon; pharma/food processing & packaging equipment maker."
     market_position: "not publicly disclosed (private; owned by CVC Capital Partners)."
     market_share: null
+    partnerships:
+      - {partner: "Bayer", kind: "other", note: "Strategic partnership to co-develop and standardize continuous oral-solid-dose manufacturing on Syntegon's Xelum (Hüttlin) platform", source: "Syntegon press release (syntegon.com)"}
     sources:
       - "https://www.linkedin.com/company/syntegon"
       - "https://www.syntegon.com/about-us/history/"
@@ -4889,6 +5245,10 @@ vendors:
     history: "Founded 2002 in Dallas; publicly traded (NYSE: TDOC) telehealth pioneer, now HQ New York City. Acquired Livongo (2020). Chuck Divita became CEO in 2024."
     market_position: "Publicly traded (NYSE: TDOC); a leading US telehealth provider; specific market share not publicly disclosed."
     market_share: "#1 in US telehealth, ~25%+ market share (2024, Market.us)"
+    partnerships:
+      - {partner: "Microsoft", kind: "cloud", note: "2021 collaboration integrating Teladoc's virtual-care delivery platform with Microsoft Teams for hospitals/health systems", source: "https://en.wikipedia.org/wiki/Teladoc_Health"}
+      - {partner: "CVS Health", kind: "channel", note: "2018 partnership for remote consults at CVS MinuteClinics", source: "https://en.wikipedia.org/wiki/Teladoc_Health"}
+      - {partner: "Amazon", kind: "other", note: "Feb 2022 Alexa/device integration for virtual care; joined Amazon Health Benefits Connector Jan 2025", source: "https://en.wikipedia.org/wiki/Teladoc_Health"}
     market_share_pct: 25
     sources:
       - "https://en.wikipedia.org/wiki/Teladoc_Health"
@@ -4906,7 +5266,8 @@ vendors:
     leadership: "Christopher Johnson — Co-CEO (with Michael Zamagias — Chairman & Co-CEO)"
     history: "Founded 1991 in Pittsburgh; patient-flow, capacity-management and RTLS software for hospitals. Privately held; led by co-CEOs Michael Zamagias (chairman) and Christopher Johnson."
     market_position: "not publicly disclosed"
-    market_share: null
+    market_share: "~17% of the patient throughput & capacity management market (Global Growth Insights, Patient Throughput & Capacity Management Market report)"
+    market_share_pct: 17
     sources:
       - "https://www.teletracking.com/about"
   - id: tempus
@@ -4921,6 +5282,12 @@ vendors:
     history: "Founded 2015 in Chicago by Eric Lefkofsky (formerly Tempus Labs); multi-modal precision-medicine, genomics and real-world-data platform; IPO on Nasdaq (TEM) in June 2024."
     market_position: "Public (Nasdaq: TEM) since June 2024; ~2,300 employees (2024)."
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Building large-scale oncology AI/foundation models leveraging NVIDIA compute (highlighted at J.P. Morgan Healthcare Conference, Jan 2025)", source: "https://www.fiercehealthcare.com/providers/jpm25-day-2-healthcare-conference-draws-protesters-news-nvidia-tempus-ai-and-health"}
+      - {partner: "AstraZeneca (with Pathos AI)", kind: "clinical", note: "$200M, 3-year partnership to build one of the largest oncology foundation models (data licensing + shared compute)", source: "https://www.nasdaq.com/articles/zacks-analyst-blog-highlights-tempus-ai-nvidia-astrazeneca-and-novo-nordisk"}
+      - {partner: "Illumina", kind: "clinical", note: "Partnership to apply AI to genomic/precision-medicine data", source: "https://www.tipranks.com/news/the-fly/illumina-and-tempus-ai-partner-for-ai-application-in-precision-medicine"}
+      - {partner: "Recursion Pharmaceuticals", kind: "clinical", note: "Data-collaboration deal (Recursion runs an NVIDIA-powered top-50-class supercomputer for drug discovery)", source: "https://ir.recursion.com/news-releases/news-release-details/recursion-announces-data-collaboration-deal-tempus-top-50"}
+      - {partner: "SoftBank", kind: "other", note: "June 2024 JV 'SB Tempus' in Japan for AI-driven personalized treatment recommendations (SoftBank/Google also investors)", source: "https://en.wikipedia.org/wiki/Tempus_AI"}
     sources:
       - "https://en.wikipedia.org/wiki/Tempus_AI"
       - "https://www.tempus.com/about-us/our-history/"
@@ -4936,6 +5303,10 @@ vendors:
     history: "Founded 1997 by Japanese radiologists; advanced-visualization pioneer (iNtuition); acquired by SymphonyAI Group (2020) and integrated with sister company ConcertAI."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "June 2024 collaboration using NVIDIA NIM (Llama 3), CUDA-X and NeMo to power ConcertAI's oncology AI; TeraRecon AV integrates NVIDIA NIM 3D-segmentation models", source: "https://www.prnewswire.com/news-releases/concertai-to-advance-translational-and-clinical-development-solutions-in-collaboration-with-nvidia-302161245.html"}
+      - {partner: "AWS", kind: "cloud", note: "ConcertAI cites AWS among core technology partners powering its healthcare/life-sciences AI infrastructure", source: "https://www.concertai.com/"}
+      - {partner: "3DR Labs", kind: "channel", note: "Expanded partnership to deliver AI-enabled image post-processing clinical services to US providers", source: "https://www.terarecon.com/news/announce-expanded-partnership-to-transform-the-delivery-of-ai-enabled-image-post-processing-clinical-services-for-us-healthcare-providers"}
     sources:
       - "https://www.terarecon.com/about"
       - "https://www.terarecon.com/news/symphonyai-group-acquires-healthcare-imaging-ai-technology-leader-terarecon"
@@ -4953,6 +5324,8 @@ vendors:
     history: "Formed 2006 by merger of Thermo Electron (founded 1956) and Fisher Scientific; NYSE: TMO; lab informatics incl. SampleManager LIMS and Chromeleon CDS."
     market_position: "not publicly disclosed"
     market_share: "~24.5% of the global mass-spectrometry market; cited as the #1 mass-spec vendor (analyst est.)"
+    partnerships:
+      - {partner: "NVIDIA", kind: "hardware", note: "Jan 12, 2026 strategic collaboration to power AI-based scientific instrumentation and laboratory automation at scale", source: "Thermo Fisher Investor Relations / BusinessWire (Jan 12, 2026)"}
     market_share_pct: 24.5
     sources:
       - "https://en.wikipedia.org/wiki/Thermo_Fisher_Scientific"
@@ -5005,6 +5378,8 @@ vendors:
     history: "Founded 2009 by Shabbir Dahod; cloud serialization/track-and-trace network for pharma supply chains (41B+ serialized IDs); privately held; North Reading, MA."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "TraceLink platform built on AWS (EC2/S3/RDS/Redshift, GxP-compliant); joined AWS Partner Network Aug 2022; solutions listed on AWS Marketplace", source: "AWS Partner Network / AWS Marketplace (aws.amazon.com); TraceLink (tracelink.com)"}
     sources:
       - "https://www.tracelink.com/about-us/leadership/management/shabbir-dahod"
       - "https://www.tracelink.com/about/news-room/tracelink-hosts-openscs-working-group-at-its-us-headquarters"
@@ -5021,6 +5396,8 @@ vendors:
     history: "Cambridge, Massachusetts-based operator of a global federated real-world-data/clinical-research network linking healthcare organizations with life-sciences and academic researchers."
     market_position: "Company reports a federated network of 309M+ patient lives across 14,200+ clinical sites in 20+ countries."
     market_share: null
+    partnerships:
+      - {partner: "AWS", kind: "cloud", note: "TriNetX de-identified real-world datasets distributed via AWS Data Exchange / AWS Marketplace", source: "AWS Data Exchange / AWS Marketplace (aws.amazon.com)"}
     sources:
       - "https://trinetx.com/about/leadership/"
       - "https://trinetx.com/contact-us/"
@@ -5075,6 +5452,11 @@ vendors:
     history: "Founded 2014 by Natan Linder and Rony Kubat, spun out of MIT Media Lab (Pattie Maes). No-code frontline operations / composable MES platform with edge connectivity."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Zebra Technologies", kind: "hardware", note: "Mobile-computing / barcode data-capture hardware integration for frontline manufacturing", source: "https://tulip.co/ecosystem/"}
+      - {partner: "Snowflake", kind: "cloud", note: "Cloud data-platform integration partner in Tulip's ecosystem", source: "https://tulip.co/ecosystem/"}
+      - {partner: "SAP (HANA)", kind: "other", note: "ERP/database integration partner", source: "https://tulip.co/ecosystem/"}
+      - {partner: "Oracle NetSuite", kind: "other", note: "ERP integration partner", source: "https://tulip.co/ecosystem/"}
     sources:
       - "https://tulip.co/platform/"
       - "https://tulip.co/frontline-operations/"
@@ -5092,6 +5474,8 @@ vendors:
     history: "Formed April 2020 by the merger of Ultimate Software and Kronos; HCM, payroll and workforce-management vendor. Private-equity owned; dual HQ Lowell, MA and Weston, FL. Jennifer Morgan became CEO in 2024."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Google Cloud", kind: "cloud", note: "UKG Pro/HCM suites and specialty products run on Google Cloud infrastructure; partnership expanded 2023 and again 2025 for agentic AI (Gemini, BigQuery, AlloyDB in UKG Bryte).", source: "Google Cloud Press Corner (2023) / ukg.com newsroom (2025)"}
     sources:
       - "https://en.wikipedia.org/wiki/UKG"
   - id: vaisala
@@ -5107,6 +5491,8 @@ vendors:
     history: "Founded 1936 in Finland by Vilho Väisälä; environmental and industrial measurement firm (Nasdaq Helsinki: VAIAS); viewLinc continuous monitoring for GxP warehouse/cold-chain."
     market_position: "Public (Nasdaq Helsinki: VAIAS); global leader in environmental and industrial measurement."
     market_share: null
+    partnerships:
+      - {partner: "AI model providers (ChatGPT/Claude ecosystem)", kind: "other", note: "Vaisala Xweather exposes weather-data APIs consumed by third-party AI models; positions itself as '#1 weather player' (company claim, no citable share). No named hyperscaler/GPU infrastructure partner found.", source: "vaisala.com / Xweather (2026)"}
     sources:
       - "https://en.wikipedia.org/wiki/Vaisala"
       - "https://www.highperformr.ai/company/vaisala"
@@ -5122,6 +5508,8 @@ vendors:
     history: "Founded 1948 as Varian Associates, Palo Alto; radiation-oncology systems and treatment-planning software leader; acquired by Siemens Healthineers for $16.4B (2021), now its oncology business."
     market_position: "Acquired by Siemens Healthineers for $16.4 billion (completed 2021)."
     market_share: ">60% of the radiotherapy market (2025; up ~10 percentage points since 2021, per Siemens Healthineers)"
+    partnerships:
+      - {partner: "Siemens Healthineers", kind: "other", note: "Parent company; acquired Varian in April 2021 for $16.4B all-stock. Varian remains the radiotherapy/linac unit (Ethos AI-driven radiotherapy).", source: "en.wikipedia.org/wiki/Varian_Medical_Systems"}
     market_share_pct: 60
     sources:
       - "https://padailypost.com/2020/08/03/palo-altos-varian-medical-to-be-taken-over-by-siemens-spinoff/"
@@ -5142,6 +5530,9 @@ vendors:
     history: "Founded 2007 by Peter Gassner and Matt Wallach; cloud software for life sciences (Vault suite); IPO 2013 (NYSE: VEEV); public-benefit corporation."
     market_position: "not publicly disclosed"
     market_share: "~80% of the global life-sciences (pharma) CRM market (2024-25, analyst est.)"
+    partnerships:
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "June 2025 expanded 10-year relationship; 50+ Veeva life-sciences applications run on AWS compute/database/global infra; Amazon Connect integration.", source: "Veeva/AWS announcement, June 2025 (veeva.com / Nasdaq)"}
+      - {partner: "Salesforce", kind: "other", note: "Ended 15+ year platform relationship; Veeva migrating off Salesforce to its own Vault CRM (3 of top-20 biopharma adopted Vault CRM as of 2025).", source: "Industry news, June 2025 (Nasdaq / Zacks / Drug Store News)"}
     market_share_pct: 80
     sources:
       - "https://en.wikipedia.org/wiki/Veeva_Systems"
@@ -5197,6 +5588,8 @@ vendors:
     history: "Founded 2013 by Deepak Gaddipati (Peoria, Illinois); AI vision-based fall-prevention/patient-safety monitoring (VSTAlert); privately held; Deepak Gaddipati is founder/CTO."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Epic", kind: "clinical", note: "VSTOne acute-care fall-prevention/patient-monitoring integrates with the Epic EHR. Privately held (founded 2013); claims fall-prevention leadership but no citable market share.", source: "Health Tech World (htworld.co.uk) / VirtuSense press kit"}
     sources:
       - "https://www.virtusense.ai/about/story"
       - "https://www.virtusense.ai/about/team"
@@ -5283,6 +5676,9 @@ vendors:
     history: "Vocera Communications was founded in Silicon Valley in 2000, headquartered in San Jose, California. In 2002 it shipped the first hands-free, voice-controlled Vocera Badge, becoming a leader in clinical communication and workflow — wearable communication badges/Smartbadges, nurse-call and clinical alerting integration, and secure messaging via the Vocera Platform, which integrates with 150+ clinical and operational systems (EHRs, nurse call, physiologic monitors, lab, radiology, bed management). Vocera went public in 2012. Stryker announced a definitive agreement to acquire Vocera on Jan 6, 2022 at $79.25/share (~$2.97B equity value, ~$3.09B enterprise value including convertible notes) and completed the acquisition on Feb 23, 2022 (tender offer expired Feb 22, 2022 with ~85% of shares tendered). Vocera now operates as part of Stryker's Medical division under its Advanced Digital Healthcare offerings. Leadership is recorded as null: pre-acquisition CEO Brent Lang led the independent public company but is a former, not current, leader; post-acquisition Vocera is a Stryker business unit with no independently verifiable standalone current Vocera leader, so no current-tenure claim is made."
     market_position: "Established leader in clinical/hands-free healthcare communication (wearable Badge/Smartbadge plus clinical alerting and secure messaging); now part of Stryker's Medical division, extending Stryker's Advanced Digital Healthcare portfolio. Category: clinical-communication-collaboration. Deployed primarily on hospital-side infrastructure (Vocera Platform on Windows Server / Microsoft Hyper-V, Windows Server 2016 or later), with wearable endpoint devices at the point of care."
     market_share: null
+    partnerships:
+      - {partner: "Apple / Zebra Technologies", kind: "hardware", note: "Commercial-grade Apple (iPhone) and Zebra rugged handhelds are the most widely used endpoints for hospital CC&C platforms like Vocera's smartphone client.", source: "KLAS / Clinical Communication & Collaboration market report (2024)"}
+      - {partner: "Stryker", kind: "other", note: "Parent company; acquired Vocera January 2022 for $2.97B. Now 'Stryker Vocera Platform', a top-rated clinical communication & collaboration (CC&C) vendor (KLAS), though no published market-share %.", source: "en.wikipedia.org/wiki/Stryker; KLAS CC&C report"}
     sources:
       - "https://investors.stryker.com/press-releases/news-details/2022/Stryker-completes-acquisition-of-Vocera-Communications/default.aspx"
       - "https://www.globenewswire.com/news-release/2022/01/06/2362418/0/en/Stryker-announces-definitive-agreement-to-acquire-Vocera-Communications.html"
@@ -5305,6 +5701,8 @@ vendors:
     history: "Founded 1958 by James Waters; analytical instruments and lab informatics (Empower CDS, NuGenesis). NYSE: WAT; merged with BD's Biosciences & Diagnostic Solutions unit in 2026."
     market_position: "Publicly traded (NYSE: WAT); its Empower is a market-leading chromatography data system."
     market_share: null
+    partnerships:
+      - {partner: "Becton Dickinson (BD Biosciences & Diagnostics)", kind: "other", note: "Completed merger Feb 2026 with BD's biosciences & diagnostic-solutions division. LC/MS instruments plus Empower/MassLynx informatics; historical LC share (~40%) is 1978-era only, not current.", source: "en.wikipedia.org/wiki/Waters_Corporation"}
     sources:
       - "https://en.wikipedia.org/wiki/Waters_Corporation"
       - "https://finance.yahoo.com/quote/WAT/profile/"
@@ -5360,6 +5758,11 @@ vendors:
     history: "Founded 1981 in Alameda, California; makes the VxWorks RTOS and embedded/edge software for safety-critical systems. Owned successively by Intel (2009-18), TPG Capital (2018-22) and Aptiv (2022, ~$4.3B)."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Arm", kind: "hardware", note: "Wind River Studio / VxWorks / Wind River Linux support Arm architectures; listed in Arm partner catalog.", source: "arm.com/partners/catalog/wind-river"}
+      - {partner: "Amazon Web Services (AWS)", kind: "cloud", note: "Wind River Studio runs on AWS (Amazon EC2) for cloud-to-edge software-defined-vehicle development.", source: "windriver.com/partners/aws; BusinessWire (2024)"}
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Wind River Studio available as SaaS on Azure Marketplace for cloud-native embedded development.", source: "marketplace.microsoft.com"}
+      - {partner: "Aptiv", kind: "other", note: "Parent company; Aptiv acquired Wind River in 2022 for $4.3B (from TPG; Intel owned it 2009-2018).", source: "en.wikipedia.org/wiki/Wind_River_Systems"}
     sources:
       - "https://en.wikipedia.org/wiki/Wind_River_Systems"
       - "https://www.windriver.com/company/bios"
@@ -5375,6 +5778,9 @@ vendors:
     history: "Health division of information-services group Wolters Kluwer; flagship UpToDate clinical decision support and Lippincott/Ovid; Stacey Caywood led the Health division before becoming group CEO, succeeding Nancy McKinstry."
     market_position: "Division of publicly traded Wolters Kluwer; UpToDate is a widely used physician-authored clinical decision support resource."
     market_share: null
+    partnerships:
+      - {partner: "Epic", kind: "clinical", note: "Expanded integration embedding UpToDate clinical decision support inside the Epic EHR workflow.", source: "MobiHealthNews"}
+      - {partner: "Oracle Health (Cerner) / athenahealth", kind: "clinical", note: "UpToDate integrates with Cerner and athenahealth EHRs alongside Epic.", source: "wolterskluwer.com (UpToDate)"}
     sources:
       - "https://www.wolterskluwer.com/en/news/stacey-caywood-has-officially-assumed-the-role-of-ceo-at-wolters-kluwer"
       - "https://www.wolterskluwer.com/en/news/wolters-kluwer-appoints-leaders-for-health-legal-regulatory-divisions"
@@ -5409,6 +5815,8 @@ vendors:
     history: "Willis Towers Watson (WTW), formed by the 2016 Willis–Towers Watson merger, offers RiskAgility Financial Modeler for actuarial modeling and ResQ for P&C loss reserving."
     market_position: "Leading actuarial-software vendor; RiskAgility FM (valuation, pricing, capital, VM-22) and ResQ reserving run compute-intensive workloads on-prem or private cloud, orchestrated via WTW Unify — an actuarial-HPC target."
     market_share: null
+    partnerships:
+      - {partner: "Microsoft Azure", kind: "cloud", note: "RiskAgility FM Cloud (actuarial financial modeling engine) is built on and delivered via Microsoft Azure; listed on Microsoft Marketplace/AppSource.", source: "WTW / Microsoft Marketplace (marketplace.microsoft.com)"}
     sources:
       - "https://www.wtwco.com/en-us/solutions/products/riskagility-financial-modeler"
       - "https://www.wtwco.com/en-th/solutions/products/resq"
@@ -5426,6 +5834,9 @@ vendors:
     history: "Founded 1915 in Tokyo; industrial automation and measurement (CENTUM VP DCS); Tokyo Stock Exchange-listed. Current president/CEO not verified from a live source this round."
     market_position: "not publicly disclosed"
     market_share: null
+    partnerships:
+      - {partner: "Microsoft Azure", kind: "cloud", note: "Yokogawa uses Azure IoT suite in multi-party industrial-IoT initiatives; also runs its own OpreX/Yokogawa Cloud platform. Major DCS vendor (Centum) but no citable share found.", source: "manufacturing trade press; en.wikipedia.org/wiki/Yokogawa"}
+      - {partner: "NTT Communications", kind: "other", note: "2021 partnership to jointly develop a shared-use operational-technology (OT) cloud service.", source: "yokogawa.com/news/press-releases/2021/2021-10-19/"}
     sources:
       - "https://en.wikipedia.org/wiki/Yokogawa_Electric"
       - "https://automationforum.co/here-are-top-10-dcs-manufacturing-companies-with-their-dcs-model-name-software-name-and-its-controllers/"
@@ -5443,6 +5854,11 @@ vendors:
     history: "Founded 1969; barcode, RFID and RTLS/asset-tracking leader; acquired Motorola Solutions' enterprise business 2014; NYSE-listed (ZBRA), Lincolnshire, Illinois."
     market_position: "2025 revenue US$5.40 billion"
     market_share: null
+    partnerships:
+      - {partner: "Qualcomm", kind: "hardware", note: "Chipset partner; joint GenAI-on-device enablement for enterprise mobility with Google/Android.", source: "Zebra press release"}
+      - {partner: "NVIDIA", kind: "hardware", note: "GPU-accelerated training for Zebra Aurora machine-vision and AI/ML models via hybrid on-prem/cloud GPU clusters (Run:ai/NVIDIA).", source: "casestudies.com (Zebra + Run:ai/NVIDIA)"}
+      - {partner: "Google Cloud", kind: "cloud", note: "Partnered with Google Cloud (plus Android and Qualcomm) to bring generative AI to enterprise/frontline devices.", source: "Zebra / Google Cloud announcement"}
+      - {partner: "Verizon", kind: "channel", note: "2023 private-5G package; Zebra tablets/computers certified to run on Verizon private networks.", source: "en.wikipedia.org/wiki/Zebra_Technologies"}
     sources:
       - "https://en.wikipedia.org/wiki/Zebra_Technologies"
       - "https://www.zebra.com/us/en/about-zebra/company-information/company-leadership.html"

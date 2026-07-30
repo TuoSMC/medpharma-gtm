@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-07-29 — researched the remaining 169 non-leaderboard vendors + v3.8
+Tuo: research the rest too. Ran the same verified pipeline on all 169 non-leaderboard vendors → 25 share candidates + **135 with partnerships**. After the same reality-check curation (kept 12, rejected/skipped the rest), the registry now has **245/309 vendors with partnerships and 45 with a cited market share** (the remaining 64 genuinely have no public partner/share — left blank, not fabricated).
+- **Kept 12** genuine market-share figures: Nuance 80% (US radiology speech-rec), Rockwell 50% (NA PLC), Elekta 42% (linac), Hamamatsu 40% (PMT), ICON 35% (decentralized trials), OPTEL 25.7% (serialization), TeleTracking 17% (patient throughput), Amwell 13.7% (telehealth), ScriptPro 13% (pharmacy automation), Cognex 11.4% (machine vision), Canon Medical 8.7% (imaging), athenahealth-2 7.5%.
+- **Rejected/skipped:** adoption ("Wolters Kluwer UpToDate — 90% of AMCs *use* it"), reach ("Advarra — 60% of NA *trials*"), market-mismatch (Cadence 30% EDA vs its OpenEye comp-chem role; Medtronic 5.8% whole-conglomerate), tech-tracker precision (UKG 7.81%, Manhattan 4.85%), and 7 vendors that already carried a share figure — **never overwritten** (e.g. ABB kept its 19% DCS, not the new 13% robotics).
+- Co-sell payoff, e.g. Play C / SCADA-DCS: every industrial vendor's NVIDIA + cloud ties are now visible — ABB→NVIDIA, Rockwell→NVIDIA+Azure, Siemens→NVIDIA+MS+AWS, AVEVA→AWS+Azure.
+- **97 GREEN**; deterministic; browser-verified (DOM), zero console errors, no emoji. **Tagged `v3.8`.**
+
 ## 2026-07-29 — researched vendor market share + partnerships; Back nav + a partner-landscape drawer + v3.6/v3.7
 Three asks from Tuo: fill the "未公開" market-share gaps (with sources), add a back button, and surface each vendor's peer ranking + who they partner with.
 - **Back navigation (v3.6):** every drill-down (door → brief → battle card; play chip ⇄ trigger chip ⇄ category) now pushes a `{catFilter, detail-view}` snapshot onto a nav stack; a sticky "← Back" button pops it and restores the prior view. Verified: PlayD → trigger → market, Back → trigger brief, Back → play brief.
