@@ -1236,5 +1236,54 @@ class TestNoUndefinedRenderRefs(unittest.TestCase):
         self.assertIsNotNone(m, "langtog.onclick must be bound immediately after renderAll()")
 
 
+# ============================================================
+# Vendor bundle-filters + ranking matrix (region / state / coverage / Fortune / US share)
+# ============================================================
+
+class TestVendorFiltersAndRanking(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import subprocess
+        subprocess.run([sys.executable, "tools/build_app.py"], cwd=str(REPO),
+                       capture_output=True, text=True, timeout=60)
+        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        cls.vd = yaml.safe_load(open(REPO / "data" / "vendors.yaml", encoding="utf-8"))
+        cls.vs = cls.vd["vendors"]
+
+    def test_filter_helpers_and_ranking_defined(self):
+        for fn in ("hqParse", "coverageOf", "fortuneOf", "usShareOf", "bundleScore",
+                   "vfMatch", "renderFilterBar", "renderBundleRankingInto"):
+            self.assertRegex(self.src, r"function\s+%s\s*\(" % fn,
+                             f"vendor filter/ranking needs {fn}() defined")
+
+    def test_ranking_wired_into_vendor_subnav(self):
+        self.assertIn("renderBundleRankingInto]", self.src,
+                      "Bundle ranking must be a Vendors sub-tab")
+
+    def test_fortune_blocks_are_sourced_and_valid(self):
+        """No fabrication: every fortune block carries a valid list + a source string."""
+        valid = {"fortune-500", "fortune-1000", "global-500"}
+        fort = [v for v in self.vs if v.get("fortune")]
+        self.assertGreaterEqual(len(fort), 50, "expected the researched Fortune members")
+        for v in fort:
+            f = v["fortune"]
+            self.assertIn(f.get("list"), valid, f"{v['id']}: bad fortune list {f.get('list')}")
+            self.assertTrue(str(f.get("source", "")).strip(),
+                            f"{v['id']}: fortune claim must carry a source")
+
+    def test_us_share_is_sourced_us_only(self):
+        us = [v for v in self.vs if isinstance(v.get("us_market_share_pct"), (int, float))]
+        self.assertGreaterEqual(len(us), 10, "expected researched US market-share figures")
+        for v in us:
+            self.assertTrue(0 < v["us_market_share_pct"] <= 100, f"{v['id']}: US share out of range")
+            self.assertTrue(str(v.get("us_share_basis", "")).strip(),
+                            f"{v['id']}: US share needs a basis note (proves it is a US figure)")
+
+    def test_no_null_headquarters(self):
+        """HQ-fill closed every gap — region/state derivation depends on a parseable HQ."""
+        nulls = [v["id"] for v in self.vs if not v.get("headquarters")]
+        self.assertEqual(nulls, [], f"vendors with null HQ break region filtering: {nulls}")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

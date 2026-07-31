@@ -383,6 +383,27 @@ tr:last-child td{border-bottom:0}
 .flab{display:flex;flex-direction:column;gap:2px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
 .flab>select,.flab>input{margin:0}
 #fTxt{min-width:170px}
+/* vendor filter bar + bundle-ranking matrix */
+.filterbar{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;margin:2px 0 6px}
+.vflab{display:flex;flex-direction:column;gap:3px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.vfsel{margin:0;font:inherit;font-size:12px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
+.covchips{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:2px 0 6px}
+.covchip{font-size:11px;padding:3px 10px;border-radius:15px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;user-select:none}
+.covchip:hover{border-color:var(--accent);color:var(--accent)}
+.covchip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.vfclear{font:inherit;font-size:11px;padding:5px 11px;border:1px solid var(--line);border-radius:15px;background:transparent;color:var(--muted);cursor:pointer;align-self:flex-end}
+.vfclear:hover{border-color:var(--accent);color:var(--accent)}
+.fortpill{border-color:var(--accent);color:var(--accent);font-weight:700}
+.uspill{border-color:var(--b);color:var(--b);font-weight:700}
+.gtag{font-size:10px;padding:1px 7px;border-radius:6px;background:var(--panel);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+table.rankmatrix{border-collapse:collapse;width:100%;font-size:12px}
+table.rankmatrix th,table.rankmatrix td{text-align:left;padding:6px 9px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+table.rankmatrix th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px;position:sticky;top:0;background:var(--bg)}
+table.rankmatrix td.rnum{color:var(--muted);font-variant-numeric:tabular-nums}
+table.rankmatrix tr:hover td{background:var(--accentbg)}
+.scbar{display:inline-block;width:70px;height:7px;border-radius:4px;background:var(--line);overflow:hidden;vertical-align:middle}
+.scbarfill{display:block;height:100%;background:var(--accent)}
+.rankmatrix .vflag,.rankmatrix .vhot{margin-right:4px}
 </style>
 </head>
 <body>
@@ -466,6 +487,47 @@ const vendorVal=v=>catsVal(v.categories);
 function valBadges(v,into){if(v.flag)into.append(el('span',{class:'vflag',title:'flagship categories (opportunity 4)'},v.flag+' '+T('flagship','旗艦')));if(v.hot)into.append(el('span',{class:'vhot',title:'customer-HOT categories (opportunity ≥3)'},v.hot+' HOT'));return into;}
 function goVendor(id){goTab('vendors');const q=$('#tab-vendors input[type=search]');const v=VBYID[id];if(q&&v){q.value=v.name;q.dispatchEvent(new Event('input'));}}
 function goCategory(id){goTab('taxonomy');const ft=$('#fTxt');const c=CATBYID[id];if(ft&&c){ft.value=c.name_en;ft.dispatchEvent(new Event('input'));}}
+
+// ===== vendor filter derivations — region/state/coverage computed in-app from existing data;
+//        fortune + us_market_share_pct come from data/vendors.yaml (web-researched, §8-sourced) =====
+const US_STATES_SET=new Set(['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','District of Columbia']);
+const EU_SET=new Set(['Germany','United Kingdom','UK','Scotland','England','Switzerland','France','Netherlands','Sweden','Denmark','Ireland','Finland','Italy','Belgium','Portugal','Poland','Spain','Norway','Austria','Czech Republic','Luxembourg','Iceland']);
+const APAC_SET=new Set(['Japan','South Korea','Korea','China','Hong Kong','Taiwan','Singapore','Australia','New Zealand','India','Malaysia','Thailand']);
+const ME_SET=new Set(['Israel','United Arab Emirates','UAE','Saudi Arabia','Qatar']);
+function hqParse(v){
+  const hq=v.headquarters; if(!hq)return {region:'Unknown',country:null,state:null};
+  const toks=String(hq).split(',').map(t=>t.replace(/[)]/g,'').trim()).filter(Boolean);
+  const last=toks.length?toks[toks.length-1]:'';
+  const isUS=/\b(USA|United States)\b/.test(hq)||US_STATES_SET.has(last);
+  if(isUS){let st=null;for(let i=toks.length-1;i>=0;i--){if(US_STATES_SET.has(toks[i])){st=toks[i];break;}}return {region:'North America',country:'USA',state:st};}
+  if(last==='Canada'||last==='Mexico')return {region:'North America',country:last,state:null};
+  if(EU_SET.has(last))return {region:'Europe',country:last,state:null};
+  if(APAC_SET.has(last))return {region:'Asia-Pacific',country:last,state:null};
+  if(ME_SET.has(last))return {region:'Middle East',country:last,state:null};
+  if(/United States/.test(hq))return {region:'North America',country:'USA',state:null};
+  return {region:'Other',country:last||null,state:null};
+}
+const REGIONS=['North America','Europe','Asia-Pacific','Middle East','Other'];
+function coverageOf(v){const s=new Set();(v.categories||[]).forEach(id=>{const c=CATBYID[id];if(c&&c.domain)s.add(c.domain);});return [...s];}
+const FORT_LABEL={'fortune-500':'Fortune 500','fortune-1000':'Fortune 1000','global-500':'Global 500'};
+const FORT_WT={'fortune-500':3,'global-500':2,'fortune-1000':1};
+function fortuneOf(v){const f=v.fortune;return (f&&f.list&&f.list!=='none')?f:null;}
+function usShareOf(v){return (typeof v.us_market_share_pct==='number')?v.us_market_share_pct:null;}
+// bundle-fit score (0-100): hardware pull (the anchor) + coverage breadth + US share + Fortune + US-region
+function bundleScore(v){
+  const val=vendorVal(v);
+  const hw=Math.min(1,(val.flag*2+val.hot)/6);
+  const cover=coverageOf(v);
+  const cov=Math.min(1,cover.length/3);
+  const share=usShareOf(v);
+  const sh=Math.min(1,(share||0)/50);
+  const f=fortuneOf(v);
+  const ft=f?((FORT_WT[f.list]||0)/3):0;
+  const p=hqParse(v);
+  const rg=p.country==='USA'?1:(p.region==='North America'?0.7:0.3);
+  const score=Math.round(hw*35+cov*20+sh*20+ft*15+rg*10);
+  return {score,hw,cov,sh,ft,rg,val,cover,region:p.region,state:p.state,country:p.country,fort:f,share};
+}
 
 // ---- header ----
 $('#ver').textContent='taxonomy v'+DATA.taxonomy.version+' · '+DATA.taxonomy.status;
@@ -927,34 +989,68 @@ function renderTaxonomy(){
 }
 
 // ================= VENDORS (enriched registry) =================
+// ===== shared vendor filter model (drives both Registry and Bundle ranking) =====
+const VF={region:'',state:'',fortune:'',cover:new Set(),share:''};
+function usStatesPresent(){const s=new Set();(DATA.vendors.vendors||[]).forEach(v=>{const p=hqParse(v);if(p.country==='USA'&&p.state)s.add(p.state);});return [...s].sort();}
+function vfMatch(v){
+  const p=hqParse(v);
+  if(VF.region&&p.region!==VF.region)return false;
+  if(VF.state&&p.state!==VF.state)return false;
+  if(VF.fortune){const f=fortuneOf(v);
+    if(VF.fortune==='any'){if(!f)return false;}
+    else if(VF.fortune==='na'){if(f)return false;}
+    else if(!f||f.list!==VF.fortune)return false;}
+  if(VF.cover.size){const cov=new Set(coverageOf(v));let ok=false;VF.cover.forEach(k=>{if(cov.has(k))ok=true;});if(!ok)return false;}
+  if(VF.share){const sh=usShareOf(v);if(VF.share==='has'){if(sh==null)return false;}else if(sh==null||sh<+VF.share)return false;}
+  return true;
+}
+function vfActive(){return VF.region||VF.state||VF.fortune||VF.cover.size||VF.share;}
+function renderFilterBar(host,onChange){
+  const bar=el('div',{class:'filterbar'});
+  const mk=(label,opts,cur,cb)=>{const sel=el('select',{class:'vfsel'});opts.forEach(([val,txt])=>{const o=el('option',{value:val},txt);if(val===cur)o.selected=true;sel.append(o);});sel.onchange=()=>cb(sel.value);return el('label',{class:'vflab'},el('span',{},label),sel);};
+  bar.append(mk(T('Region (HQ)','地區(總部)'),[['',T('All','全部')]].concat(REGIONS.map(r=>[r,r])),VF.region,val=>{VF.region=val;if(val!=='North America')VF.state='';onChange();}));
+  if(VF.region==='North America'){bar.append(mk(T('State','州'),[['',T('All states','全部州')]].concat(usStatesPresent().map(s=>[s,s])),VF.state,val=>{VF.state=val;onChange();}));}
+  bar.append(mk('Fortune',[['',T('All','全部')],['fortune-500','Fortune 500'],['fortune-1000','Fortune 1000'],['global-500','Global 500'],['any',T('On any list','任一榜')],['na','N/A']],VF.fortune,val=>{VF.fortune=val;onChange();}));
+  bar.append(mk(T('US market share','美國市佔'),[['',T('Any','不限')],['has',T('Has a figure','有數據')],['1','≥1%'],['5','≥5%'],['10','≥10%'],['25','≥25%']],VF.share,val=>{VF.share=val;onChange();}));
+  const clr=el('button',{class:'vfclear'},T('Clear','清除'));clr.onclick=()=>{VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';onChange();};
+  if(vfActive())bar.append(clr);
+  const covwrap=el('div',{class:'covchips'});covwrap.append(el('span',{class:'vflab',style:'flex-direction:row;align-items:center'},el('span',{},T('Coverage','涵蓋'))));
+  Object.keys(DOM_EN).forEach(k=>{const on=VF.cover.has(k);const c=el('span',{class:'covchip'+(on?' on':'')},domLabel(k));c.onclick=()=>{if(VF.cover.has(k))VF.cover.delete(k);else VF.cover.add(k);onChange();};covwrap.append(c);});
+  host.append(bar,covwrap);
+}
 function renderRegistryInto(host){
   const root=host;
   const vsAll=(DATA.vendors.vendors||[]);
   const conf=(DATA.vendors.version)||'?';
   const cnt=el('span',{class:'count'});
   const q=el('input',{type:'search',placeholder:T('search vendor / HQ / leader / category...','搜尋廠商 / 總部 / 負責人 / 類別...')});
-  root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vsAll.length+' vendors, web-researched + adversarially verified. Sort by value = the vendors serving the most flagship / customer-HOT SMCI categories, market leaders first.','廠商登錄 v'+conf+' — '+vsAll.length+' 家,網路研究 + 對抗式查核。依價值排序 = 服務最多旗艦／客戶-HOT SMCI 類的廠商,市場領導者在前。')));
+  root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vsAll.length+' vendors, web-researched + adversarially verified. Filter by HQ region / state, Fortune standing, software coverage, or US market share; sort by value = the vendors serving the most flagship / customer-HOT SMCI categories.','廠商登錄 v'+conf+' — '+vsAll.length+' 家,網路研究 + 對抗式查核。可依總部地區／州、Fortune 地位、軟體涵蓋、美國市佔篩選;依價值排序 = 服務最多旗艦／客戶-HOT SMCI 類的廠商。')));
   let sortMode='value';
   function byValue(a,b){const A=vendorVal(a),B=vendorVal(b);return B.flag-A.flag||B.hot-A.hot||((LB_BY_VID[b.id]?1:0)-(LB_BY_VID[a.id]?1:0))||a.name.localeCompare(b.name);}
   const sseg=el('div',{class:'seg',style:'margin:0'});
   [['value',T('by value','依價值')],['az','A–Z']].forEach(([k,lab])=>{const b=el('button',{'data-k':k,class:k==='value'?'on':''},lab);b.onclick=()=>{sortMode=k;[...sseg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.k===k));render();};sseg.append(b);});
+  const fbHost=el('div',{});root.append(fbHost);
   root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
   const vhost=el('div',{});root.append(vhost);
-  function excl(v){return "exclud" in Object.assign({},v)?false:/exclud/i.test(v.note||'');}
   function card(v){
     const c=el('div',{class:'card'});c.style.marginBottom='8px';
     const h=el('div',{class:'row'},el('h3',{style:'margin:0'},v.name));
     const bd=lbBadge(v.id);
     if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goVendorsBoard();h.append(lp);}
     valBadges(vendorVal(v),h);
+    const fo=fortuneOf(v);if(fo){const fp=el('span',{class:'pill fortpill'},FORT_LABEL[fo.list]+(fo.rank?' #'+fo.rank:''));fp.title=T('Fortune standing of ','Fortune 地位 — ')+(fo.parent||v.name);h.append(fp);}
+    const us=usShareOf(v);if(us!=null){const up=el('span',{class:'pill uspill'},'US '+us+'%');if(v.us_share_basis)up.title=v.us_share_basis;h.append(up);}
     if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
     c.append(h);
     const kv=el('dl',{class:'kv'});
     const add=(k,x)=>{if(x==null||x==='')return;kv.append(el('dt',{},k),el('dd',{},String(x)));};
-    add(T('HQ','總部'),v.headquarters); add(T('Founded','成立'),v.founded); add(T('Leadership','負責人'),v.leadership);
+    const p=hqParse(v);
+    add(T('HQ','總部'),v.headquarters); add(T('Region','地區'),p.region+(p.state?' · '+p.state:'')); add(T('Founded','成立'),v.founded); add(T('Leadership','負責人'),v.leadership);
     add(T('Market position','市場地位'),v.market_position); add(T('Market share','市佔'),v.market_share);
+    if(fo)add('Fortune',(FORT_LABEL[fo.list]+(fo.rank?' #'+fo.rank:''))+(fo.parent&&fo.parent!==v.name?' ('+fo.parent+')':''));
     add(T('Deployment','部署'),(v.deployment_models||[]).join(', '));
     c.append(kv);
+    const cov=coverageOf(v);if(cov.length){const cg=el('div',{class:'row'});cg.append(el('span',{class:'tagk'},T('coverage','涵蓋')));cov.forEach(k=>cg.append(el('span',{class:'gtag'},domLabel(k))));c.append(cg);}
     const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>{const cc=CATBYID[x];const ch=el('span',{class:'chip',style:'cursor:pointer'},cc?nm(cc):x);ch.title=T('view category','看類別');ch.onclick=()=>goCategory(x);seg.append(ch);});c.append(seg);
     if(v.history)c.append(el('div',{class:'notes'},v.history));
     const srcs=(v.sources&&v.sources.length)?v.sources:(v.source?[v.source]:[]);
@@ -966,12 +1062,47 @@ function renderRegistryInto(host){
   }
   function render(){
     const s=q.value.toLowerCase();
-    const shown=vsAll.filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s))
+    const shown=vsAll.filter(vfMatch).filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s))
       .slice().sort(sortMode==='az'?(a,b)=>a.name.localeCompare(b.name):byValue);
     clear(vhost);shown.forEach(v=>vhost.append(card(v)));
     cnt.textContent=shown.length+' / '+vsAll.length+T(' shown',' 顯示');
   }
-  q.oninput=render;render();
+  function refresh(){clear(fbHost);renderFilterBar(fbHost,refresh);render();}
+  q.oninput=render;refresh();
+}
+// ===== Bundle-fit ranking matrix — the promising-target ranking the filters drive =====
+function renderBundleRankingInto(host){
+  const root=host;
+  root.append(el('div',{class:'rollup'},T('Bundle-fit ranking — which vendors are most promising to co-engineer a Supermicro hardware bundle with. Score 0-100 = hardware pull 35 (flagship/HOT categories — the anchor) + software coverage 20 + US market share 20 + Fortune standing 15 + US-region fit 10. Apply the filters above; the matrix re-ranks live.','捆綁契合排名 — 哪些廠商最值得與 Supermicro 共同設計硬體捆綁。分數 0-100 = 硬體拉動 35(旗艦/HOT 類別 — 核心)+ 軟體涵蓋 20 + 美國市佔 20 + Fortune 地位 15 + 美國地區契合 10。套用上方篩選,矩陣即時重排。')));
+  const fbHost=el('div',{});root.append(fbHost);
+  const cnt=el('span',{class:'count'});root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('ranked by bundle-fit score','依捆綁契合分數排名')),el('span',{style:'flex:1'}),cnt));
+  const tblHost=el('div',{class:'wrap'});root.append(tblHost);
+  function render(){
+    const rows=(DATA.vendors.vendors||[]).filter(vfMatch).map(v=>({v,b:bundleScore(v)})).sort((a,b)=>b.b.score-a.b.score||b.b.val.flag-a.b.val.flag||a.v.name.localeCompare(b.v.name));
+    clear(tblHost);
+    const t=el('table',{class:'rankmatrix'});
+    t.append(el('thead',{},el('tr',{},el('th',{},'#'),el('th',{},T('Vendor','廠商')),el('th',{},T('Bundle score','捆綁分數')),el('th',{},T('HW pull','硬體拉動')),el('th',{},T('Coverage','涵蓋')),el('th',{},T('US share','美國市佔')),el('th',{},'Fortune'),el('th',{},T('Region','地區')))));
+    const tb=el('tbody');
+    rows.forEach((r,i)=>{const b=r.b,v=r.v;
+      const nm=el('span',{style:'cursor:pointer;font-weight:600;text-decoration:underline dotted var(--accent)'},v.name);nm.onclick=()=>goVendor(v.id);
+      const vcell=el('td',{},nm);const bd=lbBadge(v.id);if(bd)vcell.append(el('span',{class:'pill',style:'margin-left:6px'},bd));
+      const bar=el('span',{class:'scbar'},el('span',{class:'scbarfill',style:'width:'+b.score+'%'}));
+      const hwc=el('td',{});if(b.val.flag)hwc.append(el('span',{class:'vflag'},b.val.flag+' F'));if(b.val.hot)hwc.append(el('span',{class:'vhot'},b.val.hot+' HOT'));if(!b.val.flag&&!b.val.hot)hwc.append(el('span',{class:'muted'},'—'));
+      const fo=b.fort;
+      tb.append(el('tr',{},
+        el('td',{class:'rnum'},String(i+1)),vcell,
+        el('td',{},el('div',{class:'row',style:'gap:7px'},el('b',{style:'min-width:22px'},String(b.score)),bar)),
+        hwc,
+        el('td',{},String(b.cover.length)+'/8'),
+        el('td',{},b.share!=null?('US '+b.share+'%'):el('span',{class:'muted'},'—')),
+        el('td',{},fo?el('span',{class:'pill fortpill'},FORT_LABEL[fo.list]+(fo.rank?' #'+fo.rank:'')):el('span',{class:'muted'},'—')),
+        el('td',{},b.region+(b.state?' · '+b.state:''))));
+    });
+    t.append(tb);tblHost.append(t);
+    cnt.textContent=rows.length+T(' vendors ranked',' 家排名');
+  }
+  function refresh(){clear(fbHost);renderFilterBar(fbHost,refresh);render();}
+  refresh();
 }
 
 // ================= PLAYS =================
@@ -1138,6 +1269,7 @@ function renderVendors(){
   root.append(el('h2',{style:'margin:2px 0 8px'},T('Market players — vendors & leaders','市場玩家 — 廠商與領導者')));
   _vendorsNav=subNav(root,[
     ['registry',T('Registry','登錄')+' ('+(DATA.vendors.vendors||[]).length+')',renderRegistryInto],
+    ['ranking',T('Bundle ranking','捆綁排名'),renderBundleRankingInto],
     ['leaderboards',T('Leaderboards','榜單'),renderLeaderboardsInto]],'registry');
 }
 function goVendorsBoard(){goTab('vendors');if(_vendorsNav)_vendorsNav.pick('leaderboards');}
