@@ -327,6 +327,17 @@ tr:last-child td{border-bottom:0}
 .uspill{border-color:var(--b);color:var(--b);font-weight:700}
 .listpill{border-color:var(--muted);color:var(--ink);font-weight:600}
 .neuropill{border-color:oklch(0.58 0.17 300);color:oklch(0.58 0.17 300);font-weight:700}
+/* compute_class pills — colour+weight distinguish (no emoji) */
+.ccpill{font-weight:700}
+.ccws{border-color:oklch(0.6 0.15 150);color:oklch(0.5 0.15 150)}
+.ccgpu{border-color:var(--accent);color:var(--accent)}
+.ccdb{border-color:oklch(0.6 0.13 255);color:oklch(0.52 0.13 255)}
+.ccedge{border-color:oklch(0.65 0.14 60);color:oklch(0.52 0.14 60)}
+.ccstor{border-color:var(--muted);color:var(--muted)}
+.ccsaas{border-color:var(--line);color:var(--muted);font-weight:500}
+.ccchip{cursor:pointer;border:1px solid var(--line);border-radius:8px;padding:5px 9px;display:inline-flex;gap:6px;align-items:center;background:var(--panel)}
+.ccchip:hover{border-color:var(--accent);background:var(--accentbg)}
+.ccchip .dn{font-weight:700;color:var(--muted);font-size:11px}
 .gtag{font-size:10px;padding:1px 7px;border-radius:6px;background:var(--panel);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 table.rankmatrix{border-collapse:collapse;width:100%;font-size:12px}
 table.rankmatrix th,table.rankmatrix td{text-align:left;padding:6px 9px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
@@ -393,6 +404,36 @@ const PLINE={
  'disaster-recovery-backup':['deploy','DR / backup','災難備援','recover after disaster','災後復原']};
 const PGRP=[['compute','Compute','運算'],['storage','Storage','儲存'],['deploy','Deploy & resilience','部署・韌性']];
 const plineGloss=h=>PLINE[h]?(LANG==='zh'?PLINE[h][4]:PLINE[h][3]):'';
+
+// ===== compute_class — "what iron does the software pull" (the actionable SKU axis) =====
+// Derived from workload gpu_role + hardware_profile + sizing. Buyer axis carries ~no signal
+// (near-universal vendor co-sell); THIS decides which SMCI box you walk in with. Two CPU tiers
+// are kept separate per Tuo: cpu-workstation (single/small node, no GPU) vs cpu-server (DB/edge).
+function computeClassOf(c){
+  const hp=new Set(c.hardware_profile||[]);
+  const gr=(c.workload_envelope||{}).gpu_role;
+  if(hp.has('gpu-server')||gr==='inference'||gr==='training'||gr==='mixed') return gr==='mixed'?'gpu-mixed':'gpu';
+  if(hp.has('high-performance-computing-cpu')||hp.has('high-memory')) return 'cpu-workstation';
+  if(hp.has('high-availability-redundant')) return 'cpu-db';
+  if(hp.has('edge-industrial')) return 'cpu-edge';
+  if(hp.has('capacity-archive-storage')||hp.has('nvme-performance-storage')||hp.has('disaster-recovery-backup')) return 'storage';
+  return 'saas-light';
+}
+// [label_en, label_zh, gloss_en, gloss_zh, sku_en, sku_zh, cssclass, noGpu]
+const CC_META={
+ 'cpu-workstation':['CPU workstation','CPU 工作站','CPU-bound, memory-heavy, single/small node — no GPU','純 CPU、吃記憶體、單/小節點 — 無 GPU','Workstation / dual-socket CPU node','工作站／雙路 CPU 節點','ccws',true],
+ 'gpu-mixed':['GPU + CPU','GPU + CPU','GPU rack with a heavy CPU co-stage','GPU 機架 + 重 CPU 階段','GPU server + CPU nodes','GPU 伺服器 + CPU 節點','ccgpu',false],
+ 'gpu':['GPU','GPU','GPU inference / training','GPU 推論／訓練','GPU server (NVIDIA HGX/MGX)','GPU 伺服器 (HGX/MGX)','ccgpu',false],
+ 'cpu-db':['CPU server · DB/OLTP','CPU 伺服器 · DB/OLTP','transactional DB, no GPU — resilience play','交易型 DB、無 GPU — 韌性打法','1U/2U NVMe OLTP + HA pair + DR','1U/2U NVMe OLTP + HA 配對 + DR','ccdb',true],
+ 'cpu-edge':['CPU edge','CPU 邊緣','industrial / on-site, no GPU','工業／現場、無 GPU','Industrial / short-depth edge server','工業／短機身邊緣伺服器','ccedge',true],
+ 'storage':['Storage / DR','儲存／DR','archive + fast NVMe + backup, no compute','封存 + NVMe + 備援、非運算','Archive JBOD + NVMe + DR nodes','封存 JBOD + NVMe + DR','ccstor',true],
+ 'saas-light':['SaaS-light','SaaS 輕量','no dedicated on-prem box','無專屬機房機箱','—','—','ccsaas',false]};
+const CC_ORDER=['cpu-workstation','gpu-mixed','gpu','cpu-db','cpu-edge','storage','saas-light'];
+const ccLabel=k=>{const m=CC_META[k];return m?(LANG==='zh'?m[1]:m[0]):k;};
+const ccGloss=k=>{const m=CC_META[k];return m?(LANG==='zh'?m[3]:m[2]):'';};
+const ccSku=k=>{const m=CC_META[k];return m?(LANG==='zh'?m[5]:m[4]):'';};
+const ccClass=k=>(CC_META[k]||[])[6]||'';
+const ccNoGpu=k=>!!(CC_META[k]||[])[7];
 
 // ---- derived infra-control rollup (mirrors tools/rollup.py; Tuo-approved mapping) ----
 const ONPREM_SIDE=new Set(['on-premises','edge','private-cloud','original-equipment-manufacturer']);
@@ -522,6 +563,7 @@ function renderTaxonomy(){
         fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'opportunity ≥'),
         fProfile=mk('fProfile',['gpu-server','high-performance-computing-cpu','nvme-performance-storage','capacity-archive-storage','high-memory','edge-industrial','high-availability-redundant','disaster-recovery-backup'],'all hardware'),
+        fCompute=mk('fCompute',CC_ORDER,'all compute types'),
         fGroup={value:''},
         fSpansBox=el('input',{type:'checkbox'}),
         cnt=el('span',{class:'count'});
@@ -529,12 +571,12 @@ function renderTaxonomy(){
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
         hotO=cats.filter(c=>(c.hardware_opportunity_by_buyer.operator||0)>=3).length,
         nOem=cats.filter(c=>(c.hardware_opportunity_by_buyer['original-equipment-manufacturer']||0)>=3).length;
-  const resetSel=()=>{[fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';};
+  const resetSel=()=>{[fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fCompute].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';};
   // ---- toolbar: one segmented control to regroup all categories, + search ----
   const seg=el('div',{class:'seg'});
   function setGroup(g){hotFilter=null;catFilter=null;fGroup.value=g;[...seg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===g));render();}
-  [['domain',T('care area','照護領域')],['primary_buyer',T('who buys','誰買硬體')],['stakeholder',T('who uses it','使用者')],
-   ['ai',T('AI / no-AI','AI／非AI')],['play',T('play','打法')],['hardware_profile',T('hardware','硬體元件')]]
+  [['domain',T('care area','照護領域')],['compute',T('compute type','計算類型')],['stakeholder',T('who uses it','使用者')],
+   ['ai',T('AI / no-AI','AI／非AI')],['play',T('play','打法')],['primary_buyer',T('who buys','誰買硬體')],['hardware_profile',T('hardware','硬體元件')]]
     .forEach(([g,lab])=>{const b=el('button',{'data-g':g},lab);b.onclick=()=>setGroup(g);seg.append(b);});
   const tb=el('div',{class:'toolbar'});
   tb.append(el('span',{class:'tagk'},T('view by','檢視')),seg,el('span',{style:'flex:1 1 20px'}),cnt);
@@ -556,6 +598,7 @@ function renderTaxonomy(){
       labeled(T('segment','客群'),fSeg),labeled(T('play','play'),fPlay),
       labeled(T('deployment','部署'),fDep),labeled(T('min opportunity','最低機會'),fHw),
       labeled(T('hardware component','硬體元件'),fProfile),
+      labeled(T('compute type (SKU)','計算類型(SKU)'),fCompute),
       el('div',{style:'display:flex;align-items:flex-end'},fSpans))));
   const treePane=el('div',{class:'tree'}), detailPane=el('div',{class:'detail'});
   let selected=null;
@@ -618,6 +661,14 @@ function renderTaxonomy(){
     brow(T('Segments','客群'),(p.target_segments||[]).join(' · '));
     if(p.regulatory_notes)brow(T('Notes','備註'),p.regulatory_notes);
     cd.append(bc);
+    // compute split — which SMCI box each part of the play pulls (GPU vs CPU-workstation vs CPU-server)
+    const pmem0=cats.filter(c=>(c.plays||[]).includes(pid));
+    const csec=el('div',{class:'dsec'});csec.append(el('div',{class:'dsh'},T('Compute split — the CPU / GPU parts of this play','計算拆分 — 此打法的 CPU／GPU 部分')));
+    const cw0=el('div',{style:'display:flex;flex-wrap:wrap;gap:6px'});
+    CC_ORDER.forEach(cc=>{const n=pmem0.filter(c=>computeClassOf(c)===cc).length;if(!n)return;
+      const chip=el('span',{class:'pill ccpill '+ccClass(cc),style:'cursor:pointer',title:ccGloss(cc)+' → '+ccSku(cc)},ccLabel(cc)+' · '+n);
+      chip.onclick=()=>window.exploreCompute(cc);cw0.append(chip);});
+    csec.append(cw0);cd.append(csec);
     const feed=(DATA.triggers.triggers||[]).filter(t=>(t.related_plays||[]).includes(pid))
       .sort((a,b)=>({critical:0,high:1,medium:2,low:3}[a.urgency]-{critical:0,high:1,medium:2,low:3}[b.urgency]));
     if(feed.length){const ts=el('div',{class:'dsec'});ts.append(el('div',{class:'dsh'},T('Triggers that open this play — click for the signal brief','開啟此打法的訊號 — 點看訊號簡報')));
@@ -704,6 +755,8 @@ function renderTaxonomy(){
       el('span',{class:'by '+BUYER_C[c.primary_buyer]},c.primary_buyer+(pbP?'·'+pbP:'')));
     (c.hardware_buyer||[]).filter(x=>x!==c.primary_buyer).forEach(x=>head.append(el('span',{class:'byo'},x+(c.hardware_opportunity_by_buyer[x]?'·'+c.hardware_opportunity_by_buyer[x]:''))));
     (c.plays||[]).forEach(p=>{const ch=el('span',{class:'play '+playClass(p),style:'cursor:pointer',title:playName(p)},playName(p).split(' ')[0]);ch.onclick=()=>goPlay(p);head.append(ch);});
+    const cck=computeClassOf(c);
+    head.append(el('span',{class:'pill ccpill '+ccClass(cck),style:'cursor:pointer',title:ccGloss(cck)+' → '+ccSku(cck)},ccLabel(cck)));
     cd.append(head);
     cd.append(el('h3',{style:'margin:6px 0 0'},nm(c)));
     cd.append(el('div',{class:'zh'},sub(c)));
@@ -721,6 +774,9 @@ function renderTaxonomy(){
     if((c.hardware_profile||[]).length)c.hardware_profile.forEach(h=>ra.append(el('span',{class:'raxx',title:plineGloss(h)},smciFam(h)+((c.hardware_profile_sizing||{})[h]?' · '+c.hardware_profile_sizing[h]:''))));
     else ra.append(el('span',{class:'muted'},T('SaaS-light — little on-prem iron to sell.','SaaS 輕量 — 幾乎無地端硬體可賣。')));
     brow(T('Reference arch','建議配置'),ra);
+    brow(T('Compute · SMCI box','計算 · SMCI 機箱'),el('span',{},
+      el('span',{class:'pill ccpill '+ccClass(cck)},ccLabel(cck)),
+      el('span',{class:'muted',style:'margin-left:7px'},ccSku(cck)+(ccNoGpu(cck)?' · '+T('no GPU','無 GPU'):' · '+T('GPU','GPU')))));
     const trigs=(DATA.triggers.triggers||[]).filter(t=>(t.related_categories||[]).includes(c.id));
     if(trigs.length){const tw=el('div',{});trigs.forEach(t=>{const row=el('div',{class:'twrow'});
       row.append(el('span',{class:'u '+t.urgency,style:'font-size:10px;font-weight:700;text-transform:uppercase'},t.urgency));
@@ -802,6 +858,7 @@ function renderTaxonomy(){
     if(axis==='play')return (c.plays&&c.plays.length)?c.plays.slice():['(no play)'];
     if(axis==='hardware_profile')return (c.hardware_profile&&c.hardware_profile.length)?c.hardware_profile.slice():['(no hardware)'];
     if(axis==='domain')return [c.domain];
+    if(axis==='compute')return [computeClassOf(c)];
     if(axis==='ai')return [isAI(c)?T('AI-driven','AI 驅動'):T('No-AI','非 AI')];
     return (c[axis]||[]).slice();
   }
@@ -872,6 +929,19 @@ function renderTaxonomy(){
       const chip=el('button',{class:'dchip'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),' '+p.name+' ',el('span',{class:'dn'},String(ids.length)));
       chip.onclick=()=>goPlay(p.id);prow.append(chip);});
     box.append(prow);
+    // door: compute type (SKU) — the actionable "which SMCI box" cut (buyer axis carries ~no signal; this does).
+    // Chip number = ★flagship (deal size) · direct-HOT (can we sell direct) — NOT raw category count, which
+    // over-weights low-value buckets (saas-light 8, cpu-db 14 look big but carry ~no flagship deals).
+    const crow=el('div',{class:'drow'});crow.append(el('span',{class:'dlab'},T('Compute (SKU)','計算(SKU)')));
+    CC_ORDER.forEach(cc=>{const mem=cats.filter(c=>computeClassOf(c)===cc);if(!mem.length)return;
+      const flag=mem.filter(c=>c.hardware_opportunity===4).length,
+            hot=mem.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length;
+      const chip=el('button',{class:'ccchip',title:ccGloss(cc)+' → '+ccSku(cc)+'  ·  '+mem.length+T(' categories',' 類')});
+      chip.append(el('span',{class:'pill ccpill '+ccClass(cc)},ccLabel(cc)),
+        el('span',{class:'dn'},'★'+flag+' · '+(LANG==='zh'?('直銷'+hot):(hot+' direct'))));
+      chip.onclick=()=>window.exploreCompute(cc);crow.append(chip);});
+    box.append(crow);
+    box.append(el('div',{class:'muted',style:'font-size:11px;margin:2px 0 5px'},T('★ = flagship deals (biggest SMCI box) · direct = the end org buys its own iron. Deliberately NOT category count — that over-weights low-value buckets.','★ = 旗艦單(最大 SMCI 機箱)· 直銷 = 終端機構自購硬體。刻意不用類別數 — 類別數會高估低價值桶。')));
     // folded signal key — definitions preserved, no longer the dominant surface
     const key=el('details',{class:'hkey'});key.append(el('summary',{},T('What do flagship / customer-HOT / market-leader mean?','旗艦／客戶-HOT／市場領導者是什麼意思?')));
     [['g-flag',T('flagship','旗艦'),T('the biggest SMCI box the category pulls (opportunity 4/4) — how big the deal is.','該類別拉動的最大 SMCI 機箱(機會 4/4)— 單子多大。')],
@@ -884,12 +954,13 @@ function renderTaxonomy(){
   let hotFilter=null, catFilter=null;
   function render(){
     const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg2=fSeg.value,pl=fPlay.value,dep=fDep.value,
-          hw=+fHw.value||0,prof=fProfile.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
+          hw=+fHw.value||0,prof=fProfile.value,cmp=fCompute.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
     const shown=cats.filter(c=>{
       if(catFilter&&!catFilter.includes(c.id))return false;
       if(hotFilter&&(c.hardware_opportunity_by_buyer[hotFilter.buyer]||0)<hotFilter.min)return false;
       if(by&&!c.hardware_buyer.includes(by))return false;
       if(prof&&!(c.hardware_profile||[]).includes(prof))return false;
+      if(cmp&&computeClassOf(c)!==cmp)return false;
       if(bk&&bucketOf(c)!==bk)return false;
       if(sp&&!spansOf(c))return false;
       if(seg2&&!(c.segments||[]).includes(seg2))return false;
@@ -912,16 +983,21 @@ function renderTaxonomy(){
       let keys=[...map.keys()];
       if(gp==='hardware_opportunity')keys.sort((a,b)=>b-a);
       else if(gp==='play')keys.sort((a,b)=>((a==='(no play)')-(b==='(no play)'))||a.localeCompare(b));
+      else if(gp==='compute')keys.sort((a,b)=>CC_ORDER.indexOf(a)-CC_ORDER.indexOf(b));
       else keys.sort((a,b)=>flagN(map.get(b))-flagN(map.get(a))||hotN(map.get(b))-hotN(map.get(a))||map.get(b).length-map.get(a).length);
-      keys.forEach(k=>{const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):gp==='domain'?domLabel(k):k);l1node(label,map.get(k),false,openIf(map.get(k)));});
+      keys.forEach(k=>{const label=gp==='hardware_opportunity'?('opportunity '+k+' ('+OPP[k]+')'):(gp==='play'?playName(k):gp==='domain'?domLabel(k):gp==='compute'?ccLabel(k):k);l1node(label,map.get(k),false,openIf(map.get(k)));});
     }
     showDetail(sel);
   }
-  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;catFilter=null;render();});
+  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fCompute,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;catFilter=null;render();});
   window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};catFilter=null;
-    [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';
+    [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fCompute].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';
     fGroup.value='domain';[...seg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.g==='domain'));
     render();window.scrollTo(0,0);};
+  // compute-type door: filter to a compute_class and regroup by play so the per-play split shows
+  window.exploreCompute=function(cc){catFilter=null;hotFilter=null;
+    [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';
+    fCompute.value=cc;setGroup('play');window.scrollTo(0,0);};
   fSpansBox.onchange=()=>{hotFilter=null;catFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;catFilter=null;render();};setGroup('domain');
 }
 

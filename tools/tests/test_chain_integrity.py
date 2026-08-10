@@ -1294,6 +1294,67 @@ class TestVendorFiltersAndRanking(unittest.TestCase):
         self.assertEqual(nulls, [], f"vendors with null HQ break region filtering: {nulls}")
 
 
+class TestComputeClass(unittest.TestCase):
+    """v4.2: compute_class — the 'what iron does the software pull' axis (GPU rack / CPU
+    workstation / CPU server / edge / storage). Derived, surfaced as an Explore lens + a
+    launcher door + a per-play split. Locks the derivation to the current taxonomy."""
+    _tax = yaml.safe_load(open(REPO / "data" / "taxonomy.yaml", encoding="utf-8"))["categories"]
+
+    @classmethod
+    def setUpClass(cls):
+        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+
+    @staticmethod
+    def _cc(c):
+        hp = set(c.get("hardware_profile") or [])
+        gr = (c.get("workload_envelope") or {}).get("gpu_role")
+        if "gpu-server" in hp or gr in ("inference", "training", "mixed"):
+            return "gpu-mixed" if gr == "mixed" else "gpu"
+        if hp & {"high-performance-computing-cpu", "high-memory"}:
+            return "cpu-workstation"
+        if "high-availability-redundant" in hp:
+            return "cpu-db"
+        if "edge-industrial" in hp:
+            return "cpu-edge"
+        if hp & {"capacity-archive-storage", "nvme-performance-storage", "disaster-recovery-backup"}:
+            return "storage"
+        return "saas-light"
+
+    def test_helpers_and_lens_wired_in_app(self):
+        for fn in ("computeClassOf", "ccLabel", "ccSku", "exploreCompute"):
+            self.assertRegex(self.src, r"function\s+%s\s*\(|%s\s*=" % (fn, fn),
+                             f"compute lens needs {fn}")
+        self.assertIn("fCompute", self.src, "compute-type filter must exist")
+        self.assertRegex(self.src, r"\['compute',", "compute must be a group-by option")
+        self.assertIn("exploreCompute", self.src, "the compute-type door must call exploreCompute")
+        self.assertRegex(self.src, r"axis===?'compute'", "groupsOf must handle the compute axis")
+
+    def test_class_distribution_locked(self):
+        from collections import Counter
+        dist = Counter(self._cc(c) for c in self._tax)
+        # regression lock — matches the verified web/taxonomy state (v4.2)
+        self.assertEqual(dist["cpu-workstation"], 5, f"cpu-workstation drift: {dist}")
+        self.assertEqual(dist["gpu"] + dist["gpu-mixed"], 22, f"GPU total drift: {dist}")
+        self.assertEqual(dist["cpu-db"], 14, f"cpu-db drift: {dist}")
+        self.assertEqual(sum(dist.values()), len(self._tax))
+
+    def test_key_categories_classified_right(self):
+        byid = {c["id"]: c for c in self._tax}
+        expect = {"pharmacometrics-modeling-simulation": "cpu-workstation",
+                  "ehr-emr-core": "cpu-db", "pacs-vna": "storage"}
+        for cid, want in expect.items():
+            if cid in byid:
+                self.assertEqual(self._cc(byid[cid]), want, f"{cid} should be {want}")
+
+    def test_no_gpu_in_cpu_classes(self):
+        """A CPU-* class must never carry a gpu-server component (would contradict the badge)."""
+        for c in self._tax:
+            k = self._cc(c)
+            if k.startswith("cpu-") or k == "storage":
+                self.assertNotIn("gpu-server", c.get("hardware_profile") or [],
+                                 f"{c['id']}: {k} but has gpu-server")
+
+
 class TestVendorListingNeuro(unittest.TestCase):
     """v4.1: public-listing status + brain/neuro flag enrichment (web-verified). §8: every
     listing verdict carries a confidence AND a source; a ticker only on a public status."""
