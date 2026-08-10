@@ -1252,13 +1252,22 @@ class TestVendorFiltersAndRanking(unittest.TestCase):
 
     def test_filter_helpers_and_ranking_defined(self):
         for fn in ("hqParse", "coverageOf", "fortuneOf", "usShareOf", "bundleScore",
-                   "vfMatch", "renderFilterBar", "renderBundleRankingInto"):
+                   "vfMatch", "renderFilterBar", "renderBundleRankingInto",
+                   "listedOf", "neuroOf", "listedLabel"):
             self.assertRegex(self.src, r"function\s+%s\s*\(" % fn,
                              f"vendor filter/ranking needs {fn}() defined")
 
     def test_ranking_wired_into_vendor_subnav(self):
         self.assertIn("renderBundleRankingInto]", self.src,
                       "Bundle ranking must be a Vendors sub-tab")
+
+    def test_listing_and_neuro_filters_wired(self):
+        """The listing (public/private) and neuro filters must live in the shared VF model
+        and be applied by vfMatch, so both the registry and the bundle ranking honour them."""
+        self.assertRegex(self.src, r"VF\s*=\s*\{[^}]*listed\s*:", "VF must carry a listed filter")
+        self.assertRegex(self.src, r"VF\s*=\s*\{[^}]*neuro\s*:", "VF must carry a neuro filter")
+        self.assertIn("VF.listed", self.src)
+        self.assertIn("VF.neuro", self.src)
 
     def test_fortune_blocks_are_sourced_and_valid(self):
         """No fabrication: every fortune block carries a valid list + a source string."""
@@ -1283,6 +1292,65 @@ class TestVendorFiltersAndRanking(unittest.TestCase):
         """HQ-fill closed every gap — region/state derivation depends on a parseable HQ."""
         nulls = [v["id"] for v in self.vs if not v.get("headquarters")]
         self.assertEqual(nulls, [], f"vendors with null HQ break region filtering: {nulls}")
+
+
+class TestVendorListingNeuro(unittest.TestCase):
+    """v4.1: public-listing status + brain/neuro flag enrichment (web-verified). §8: every
+    listing verdict carries a confidence AND a source; a ticker only on a public status."""
+    LISTED = {"public", "subsidiary_of_public", "subsidiary_of_private", "private",
+              "acquired", "nonprofit_or_gov", "unknown"}
+
+    def test_every_vendor_has_listing_block(self):
+        for v in _VDOC["vendors"]:
+            l = v.get("listing")
+            self.assertIsInstance(l, dict, f"{v['id']}: missing listing block")
+            self.assertIn(l.get("status"), self.LISTED, f"{v['id']}: bad listing status {l.get('status')!r}")
+            self.assertIn(l.get("confidence"), {"A", "B", "C", "D"}, f"{v['id']}: listing needs A/B/C/D confidence")
+
+    def test_listing_is_sourced(self):
+        """No fabrication: a resolved listing status (anything but unknown) must carry a
+        source — a URL or a named basis (Fortune / ticker-in-registry)."""
+        for v in _VDOC["vendors"]:
+            l = v["listing"]
+            if l["status"] != "unknown":
+                self.assertTrue(str(l.get("source", "")).strip(),
+                                f"{v['id']}: listing '{l['status']}' has no source (§8)")
+
+    def test_ticker_only_on_public(self):
+        for v in _VDOC["vendors"]:
+            l = v["listing"]; tk = l.get("ticker")
+            if tk:
+                self.assertIn(l["status"], {"public", "subsidiary_of_public"},
+                              f"{v['id']}: ticker {tk} but status {l['status']}")
+                # EXCHANGE:SYMBOL (web-verified) or a bare SYMBOL (from the registry name); never empty
+                self.assertRegex(tk, r"^([A-Za-z.\-]+:)?[A-Za-z0-9.\-]{1,7}$",
+                                 f"{v['id']}: ticker {tk!r} not a valid symbol / EXCHANGE:SYMBOL")
+
+    def test_no_unknown_left_after_verification(self):
+        """The web sweep resolved every vendor; publishing 'unknown' to the public site is
+        not allowed (that was the whole point of the verification pass)."""
+        unk = [v["id"] for v in _VDOC["vendors"] if v["listing"]["status"] == "unknown"]
+        self.assertEqual(unk, [], f"unresolved listing status must not ship: {unk}")
+
+    def test_neuro_flag_shape_and_known_members(self):
+        byid = {v["id"]: v for v in _VDOC["vendors"]}
+        for v in _VDOC["vendors"]:
+            if "neuro" in v:
+                self.assertIsInstance(v["neuro"], bool, f"{v['id']}: neuro must be boolean")
+        neuro_ids = {v["id"] for v in _VDOC["vendors"] if v.get("neuro") is True}
+        self.assertGreaterEqual(len(neuro_ids), 8, "expected the researched neuro set")
+        for nid in ("brainlab", "viz-ai", "rapidai", "qure-ai", "elekta"):
+            if nid in byid:
+                self.assertTrue(byid[nid].get("neuro") is True, f"{nid} should be flagged neuro")
+        # a clearly non-neuro system-of-record vendor must not be flagged
+        if "epic-systems" in byid:
+            self.assertNotEqual(byid["epic-systems"].get("neuro"), True, "epic-systems is not neuro")
+
+    def test_no_bci_makers_in_a_software_list(self):
+        """The full 309 web scan found zero implantable brain-chip makers; guard that no
+        vendor is mislabelled with a bci=true (this is a software registry, not implants)."""
+        bci = [v["id"] for v in _VDOC["vendors"] if v.get("bci") is True]
+        self.assertEqual(bci, [], f"no implantable-BCI makers expected in a software registry: {bci}")
 
 
 if __name__ == "__main__":

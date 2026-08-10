@@ -395,6 +395,8 @@ tr:last-child td{border-bottom:0}
 .vfclear:hover{border-color:var(--accent);color:var(--accent)}
 .fortpill{border-color:var(--accent);color:var(--accent);font-weight:700}
 .uspill{border-color:var(--b);color:var(--b);font-weight:700}
+.listpill{border-color:var(--muted);color:var(--ink);font-weight:600}
+.neuropill{border-color:oklch(0.58 0.17 300);color:oklch(0.58 0.17 300);font-weight:700}
 .gtag{font-size:10px;padding:1px 7px;border-radius:6px;background:var(--panel);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 table.rankmatrix{border-collapse:collapse;width:100%;font-size:12px}
 table.rankmatrix th,table.rankmatrix td{text-align:left;padding:6px 9px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
@@ -513,6 +515,11 @@ const FORT_LABEL={'fortune-500':'Fortune 500','fortune-1000':'Fortune 1000','glo
 const FORT_WT={'fortune-500':3,'global-500':2,'fortune-1000':1};
 function fortuneOf(v){const f=v.fortune;return (f&&f.list&&f.list!=='none')?f:null;}
 function usShareOf(v){return (typeof v.us_market_share_pct==='number')?v.us_market_share_pct:null;}
+// public-listing status (web-verified) + brain/neuro clinical flag — enrichment from data/vendors.yaml
+function listedOf(v){return v.listing||null;}
+function neuroOf(v){return v.neuro===true;}
+const LISTED_LABEL={public:['Public','上市'],subsidiary_of_public:['Sub · public parent','母公司上市'],subsidiary_of_private:['Sub · private','私有·子公司'],private:['Private','私有'],acquired:['Acquired','被併'],'nonprofit_or_gov':['Nonprofit / Gov','非營利 / 政府'],unknown:['Unknown','未知']};
+function listedLabel(l){const m=LISTED_LABEL[(l&&l.status)]||LISTED_LABEL.unknown;return T(m[0],m[1]);}
 // bundle-fit score (0-100): hardware pull (the anchor) + coverage breadth + US share + Fortune + US-region
 function bundleScore(v){
   const val=vendorVal(v);
@@ -990,7 +997,7 @@ function renderTaxonomy(){
 
 // ================= VENDORS (enriched registry) =================
 // ===== shared vendor filter model (drives both Registry and Bundle ranking) =====
-const VF={region:'',state:'',fortune:'',cover:new Set(),share:''};
+const VF={region:'',state:'',fortune:'',cover:new Set(),share:'',listed:'',neuro:''};
 function usStatesPresent(){const s=new Set();(DATA.vendors.vendors||[]).forEach(v=>{const p=hqParse(v);if(p.country==='USA'&&p.state)s.add(p.state);});return [...s].sort();}
 function vfMatch(v){
   const p=hqParse(v);
@@ -1002,9 +1009,11 @@ function vfMatch(v){
     else if(!f||f.list!==VF.fortune)return false;}
   if(VF.cover.size){const cov=new Set(coverageOf(v));let ok=false;VF.cover.forEach(k=>{if(cov.has(k))ok=true;});if(!ok)return false;}
   if(VF.share){const sh=usShareOf(v);if(VF.share==='has'){if(sh==null)return false;}else if(sh==null||sh<+VF.share)return false;}
+  if(VF.listed){const l=listedOf(v);const s=l&&l.status;const pub=s==='public'||s==='subsidiary_of_public';const pri=s==='private'||s==='subsidiary_of_private';if(VF.listed==='public'&&!pub)return false;if(VF.listed==='private'&&!pri)return false;if(VF.listed==='other'&&(pub||pri))return false;}
+  if(VF.neuro==='yes'&&!neuroOf(v))return false;
   return true;
 }
-function vfActive(){return VF.region||VF.state||VF.fortune||VF.cover.size||VF.share;}
+function vfActive(){return VF.region||VF.state||VF.fortune||VF.cover.size||VF.share||VF.listed||VF.neuro;}
 function renderFilterBar(host,onChange){
   const bar=el('div',{class:'filterbar'});
   const mk=(label,opts,cur,cb)=>{const sel=el('select',{class:'vfsel'});opts.forEach(([val,txt])=>{const o=el('option',{value:val},txt);if(val===cur)o.selected=true;sel.append(o);});sel.onchange=()=>cb(sel.value);return el('label',{class:'vflab'},el('span',{},label),sel);};
@@ -1012,7 +1021,9 @@ function renderFilterBar(host,onChange){
   if(VF.region==='North America'){bar.append(mk(T('State','州'),[['',T('All states','全部州')]].concat(usStatesPresent().map(s=>[s,s])),VF.state,val=>{VF.state=val;onChange();}));}
   bar.append(mk('Fortune',[['',T('All','全部')],['fortune-500','Fortune 500'],['fortune-1000','Fortune 1000'],['global-500','Global 500'],['any',T('On any list','任一榜')],['na','N/A']],VF.fortune,val=>{VF.fortune=val;onChange();}));
   bar.append(mk(T('US market share','美國市佔'),[['',T('Any','不限')],['has',T('Has a figure','有數據')],['1','≥1%'],['5','≥5%'],['10','≥10%'],['25','≥25%']],VF.share,val=>{VF.share=val;onChange();}));
-  const clr=el('button',{class:'vfclear'},T('Clear','清除'));clr.onclick=()=>{VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';onChange();};
+  bar.append(mk(T('Listing','上市/私有'),[['',T('All','全部')],['public',T('Public','上市')],['private',T('Private','私有')],['other',T('Other','其他')]],VF.listed,val=>{VF.listed=val;onChange();}));
+  bar.append(mk(T('Neuro','神經'),[['',T('All','全部')],['yes',T('Neuro only','只神經')]],VF.neuro,val=>{VF.neuro=val;onChange();}));
+  const clr=el('button',{class:'vfclear'},T('Clear','清除'));clr.onclick=()=>{VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';onChange();};
   if(vfActive())bar.append(clr);
   const covwrap=el('div',{class:'covchips'});covwrap.append(el('span',{class:'vflab',style:'flex-direction:row;align-items:center'},el('span',{},T('Coverage','涵蓋'))));
   Object.keys(DOM_EN).forEach(k=>{const on=VF.cover.has(k);const c=el('span',{class:'covchip'+(on?' on':'')},domLabel(k));c.onclick=()=>{if(VF.cover.has(k))VF.cover.delete(k);else VF.cover.add(k);onChange();};covwrap.append(c);});
@@ -1024,7 +1035,7 @@ function renderRegistryInto(host){
   const conf=(DATA.vendors.version)||'?';
   const cnt=el('span',{class:'count'});
   const q=el('input',{type:'search',placeholder:T('search vendor / HQ / leader / category...','搜尋廠商 / 總部 / 負責人 / 類別...')});
-  root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vsAll.length+' vendors, web-researched + adversarially verified. Filter by HQ region / state, Fortune standing, software coverage, or US market share; sort by value = the vendors serving the most flagship / customer-HOT SMCI categories.','廠商登錄 v'+conf+' — '+vsAll.length+' 家,網路研究 + 對抗式查核。可依總部地區／州、Fortune 地位、軟體涵蓋、美國市佔篩選;依價值排序 = 服務最多旗艦／客戶-HOT SMCI 類的廠商。')));
+  root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vsAll.length+' vendors, web-researched + adversarially verified. Filter by HQ region / state, Fortune standing, software coverage, US market share, public-listing status, or brain / neuro focus; sort by value = the vendors serving the most flagship / customer-HOT SMCI categories.','廠商登錄 v'+conf+' — '+vsAll.length+' 家,網路研究 + 對抗式查核。可依總部地區／州、Fortune 地位、軟體涵蓋、美國市佔、上市／私有、腦神經領域篩選;依價值排序 = 服務最多旗艦／客戶-HOT SMCI 類的廠商。')));
   let sortMode='value';
   function byValue(a,b){const A=vendorVal(a),B=vendorVal(b);return B.flag-A.flag||B.hot-A.hot||((LB_BY_VID[b.id]?1:0)-(LB_BY_VID[a.id]?1:0))||a.name.localeCompare(b.name);}
   const sseg=el('div',{class:'seg',style:'margin:0'});
@@ -1040,6 +1051,8 @@ function renderRegistryInto(host){
     valBadges(vendorVal(v),h);
     const fo=fortuneOf(v);if(fo){const fp=el('span',{class:'pill fortpill'},FORT_LABEL[fo.list]+(fo.rank?' #'+fo.rank:''));fp.title=T('Fortune standing of ','Fortune 地位 — ')+(fo.parent||v.name);h.append(fp);}
     const us=usShareOf(v);if(us!=null){const up=el('span',{class:'pill uspill'},'US '+us+'%');if(v.us_share_basis)up.title=v.us_share_basis;h.append(up);}
+    const lg=listedOf(v);if(lg){const lp=el('span',{class:'pill listpill'},listedLabel(lg)+(lg.ticker?' · '+lg.ticker:''));lp.title=(lg.parent?T('parent: ','母公司:')+lg.parent+' · ':'')+T('evidence ','證據 ')+(lg.confidence||'?');h.append(lp);}
+    if(neuroOf(v)){const np=el('span',{class:'pill neuropill'},T('Neuro','神經'));np.title=T('brain / neuro / stroke domain','腦 / 神經 / 中風領域');h.append(np);}
     if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
     c.append(h);
     const kv=el('dl',{class:'kv'});
@@ -1048,12 +1061,14 @@ function renderRegistryInto(host){
     add(T('HQ','總部'),v.headquarters); add(T('Region','地區'),p.region+(p.state?' · '+p.state:'')); add(T('Founded','成立'),v.founded); add(T('Leadership','負責人'),v.leadership);
     add(T('Market position','市場地位'),v.market_position); add(T('Market share','市佔'),v.market_share);
     if(fo)add('Fortune',(FORT_LABEL[fo.list]+(fo.rank?' #'+fo.rank:''))+(fo.parent&&fo.parent!==v.name?' ('+fo.parent+')':''));
+    if(lg)add(T('Listing','上市/私有'),listedLabel(lg)+(lg.ticker?' · '+lg.ticker:'')+(lg.parent?' ('+lg.parent+')':'')+' · '+T('evidence ','證據 ')+(lg.confidence||'?'));
     add(T('Deployment','部署'),(v.deployment_models||[]).join(', '));
     c.append(kv);
     const cov=coverageOf(v);if(cov.length){const cg=el('div',{class:'row'});cg.append(el('span',{class:'tagk'},T('coverage','涵蓋')));cov.forEach(k=>cg.append(el('span',{class:'gtag'},domLabel(k))));c.append(cg);}
     const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>{const cc=CATBYID[x];const ch=el('span',{class:'chip',style:'cursor:pointer'},cc?nm(cc):x);ch.title=T('view category','看類別');ch.onclick=()=>goCategory(x);seg.append(ch);});c.append(seg);
     if(v.history)c.append(el('div',{class:'notes'},v.history));
-    const srcs=(v.sources&&v.sources.length)?v.sources:(v.source?[v.source]:[]);
+    const srcs=[...((v.sources&&v.sources.length)?v.sources:(v.source?[v.source]:[]))];
+    if(lg&&lg.source&&/^https?:\/\//.test(lg.source)&&!srcs.includes(lg.source))srcs.push(lg.source);
     if(srcs.length){const sr=el('div',{class:'row'});sr.append(el('span',{class:'tagk'},T('sources','來源')));
       srcs.forEach(u=>{const isurl=/^https?:\/\//.test(u);
         sr.append(isurl?el('a',{href:u,target:'_blank',class:'pill'},u.replace(/^https?:\/\//,'').split('/')[0]):el('span',{class:'pill'},u.slice(0,40)));});
@@ -1086,6 +1101,7 @@ function renderBundleRankingInto(host){
     rows.forEach((r,i)=>{const b=r.b,v=r.v;
       const nm=el('span',{style:'cursor:pointer;font-weight:600;text-decoration:underline dotted var(--accent)'},v.name);nm.onclick=()=>goVendor(v.id);
       const vcell=el('td',{},nm);const bd=lbBadge(v.id);if(bd)vcell.append(el('span',{class:'pill',style:'margin-left:6px'},bd));
+      const lg3=listedOf(v);if(lg3&&lg3.ticker)vcell.append(el('span',{class:'pill listpill',style:'margin-left:6px'},lg3.ticker));if(neuroOf(v))vcell.append(el('span',{class:'pill neuropill',style:'margin-left:6px'},T('Neuro','神經')));
       const bar=el('span',{class:'scbar'},el('span',{class:'scbarfill',style:'width:'+b.score+'%'}));
       const hwc=el('td',{});if(b.val.flag)hwc.append(el('span',{class:'vflag'},b.val.flag+' F'));if(b.val.hot)hwc.append(el('span',{class:'vhot'},b.val.hot+' HOT'));if(!b.val.flag&&!b.val.hot)hwc.append(el('span',{class:'muted'},'—'));
       const fo=b.fort;

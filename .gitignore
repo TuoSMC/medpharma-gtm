@@ -1,2 +1,15 @@
 __pycache__/
 *.pyc
+.DS_Store
+
+# internal SMCI lead-availability data — never publish (repo is public)
+/private/
+# internal SMCI deliverables (owner/team/lead data) — never publish, any location
+SMCI_shortlist_TuoSerena.xlsx
+SMCI_bundle_targets_availability.xlsx
+*.xlsx
+# Added by code-review-graph
+.code-review-graph/
+CLAUDE.local.md
+.mcp.json
+/.claude/
