@@ -425,6 +425,8 @@ tr:last-child td{border-bottom:0}
 .vsec{font-size:var(--f-1);text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:var(--s3) 0 var(--s0);font-weight:700}
 .vprose{font-size:var(--f-3);line-height:1.55;color:var(--ink);margin:0 0 var(--s1)}
 .vcard{margin-bottom:var(--s3);padding:var(--s5)}
+.vgrouphdr{font-size:var(--f-6);font-weight:700;color:var(--ink);margin:var(--s5) 0 var(--s2);padding:var(--s1) 0;border-bottom:2px solid var(--accent);display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s3);position:sticky;top:112px;background:var(--bg);z-index:2}
+.vgmot{font-size:var(--f-3);font-weight:400;color:var(--muted)}
 .rich-sparse{color:oklch(0.62 0.15 55);font-weight:600}
 .rich-rich{color:oklch(0.5 0.14 150);font-weight:600}
 .ccchip{cursor:pointer;border:1px solid var(--line);border-radius:var(--r-tag);padding:var(--s2) var(--s3);display:inline-flex;gap:var(--s2);align-items:center;background:var(--panel)}
@@ -1121,12 +1123,16 @@ function renderRegistryInto(host){
   const cnt=el('span',{class:'count'});
   const q=el('input',{type:'search',placeholder:T('search vendor / HQ / leader / category...','搜尋廠商 / 總部 / 負責人 / 類別...')});
   root.append(el('div',{class:'rollup'},T('Vendor registry v'+conf+' — '+vsAll.length+' vendors, web-researched + adversarially verified. Filter by HQ region / state, Fortune standing, software coverage, US market share, public-listing status, or brain / neuro focus; sort by value = the vendors serving the most flagship / customer-HOT SMCI categories.','廠商登錄 v'+conf+' — '+vsAll.length+' 家,網路研究 + 對抗式查核。可依總部地區／州、Fortune 地位、軟體涵蓋、美國市佔、上市／私有、腦神經領域篩選;依價值排序 = 服務最多旗艦／客戶-HOT SMCI 類的廠商。')));
-  let sortMode='value';
+  let sortMode='value', groupMode='none';
   function byValue(a,b){const A=vendorVal(a),B=vendorVal(b);return B.flag-A.flag||B.hot-A.hot||((LB_BY_VID[b.id]?1:0)-(LB_BY_VID[a.id]?1:0))||a.name.localeCompare(b.name);}
+  const PT_GROUP_ORDER=['isv','oem-device','si','msp','var','channel-partner','reseller'], RICH_ORDER=['rich','medium','sparse'];
+  function groupKeyOf(v){if(groupMode==='partner-type'){const pt=partnerTypeOf(v);return pt?pt.primary:'(unclassified)';}if(groupMode==='richness')return richnessOf(v).tier;return null;}
   const sseg=el('div',{class:'seg',style:'margin:0'});
   [['value',T('by value','依價值')],['az','A–Z']].forEach(([k,lab])=>{const b=el('button',{'data-k':k,class:k==='value'?'on':''},lab);b.onclick=()=>{sortMode=k;[...sseg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.k===k));render();};sseg.append(b);});
+  const gseg=el('div',{class:'seg',style:'margin:0'});
+  [['none',T('none','不分')],['partner-type',T('partner type','夥伴類型')],['richness',T('richness','豐富度')]].forEach(([k,lab])=>{const b=el('button',{'data-g':k,class:k==='none'?'on':''},lab);b.onclick=()=>{groupMode=k;[...gseg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===k));render();};gseg.append(b);});
   const fbHost=el('div',{});root.append(fbHost);
-  root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
+  root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('group','分組')),gseg,el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
   const vhost=el('div',{});root.append(vhost);
   function card(v){
     const c=el('div',{class:'card vcard'});
@@ -1174,8 +1180,18 @@ function renderRegistryInto(host){
     const s=q.value.toLowerCase();
     const shown=vsAll.filter(vfMatch).filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s))
       .slice().sort(sortMode==='az'?(a,b)=>a.name.localeCompare(b.name):byValue);
-    clear(vhost);shown.forEach(v=>vhost.append(card(v)));
-    cnt.textContent=shown.length+' / '+vsAll.length+T(' shown',' 顯示');
+    clear(vhost);
+    if(groupMode==='none'){shown.forEach(v=>vhost.append(card(v)));}
+    else{
+      const map=new Map();shown.forEach(v=>{const k=groupKeyOf(v);if(!map.has(k))map.set(k,[]);map.get(k).push(v);});
+      const order=groupMode==='partner-type'?PT_GROUP_ORDER:RICH_ORDER;
+      const keys=[...map.keys()].sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib)||map.get(b).length-map.get(a).length;});
+      keys.forEach(k=>{const lab=(groupMode==='partner-type'?ptLabel(k):richLabel(k));
+        const mot=(groupMode==='partner-type'&&PT_META[k])?' — '+ptMotion(k):'';
+        vhost.append(el('div',{class:'vgrouphdr'},el('span',{},lab+' · '+map.get(k).length),mot?el('span',{class:'vgmot'},mot):''));
+        map.get(k).forEach(v=>vhost.append(card(v)));});
+    }
+    cnt.textContent=shown.length+' / '+vsAll.length+T(' shown',' 顯示')+(groupMode!=='none'?' · '+T('grouped by ','分組:')+(groupMode==='partner-type'?T('partner type','夥伴類型'):T('richness','豐富度')):'');
   }
   function refresh(){clear(fbHost);renderFilterBar(fbHost,refresh);render();}
   q.oninput=render;refresh();

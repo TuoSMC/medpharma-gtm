@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-08-10 — vendor registry: group-by partner-type / richness + v4.8
+Tuo: group vendors by partner-type. Added a GROUP control to the registry (none / partner-type / data-richness) beside SORT. Grouping renders a sticky group header per bucket — e.g. **"ISV · 244 — co-sell / OEM / reference architecture"**, **"OEM/Device · 58 — embedded BOM"**, SI · 4, MSP · 2, Channel · 1 — each carrying its SMCI motion, groups ordered by the GTM order, cards inside sorted by the active sort. Browser-verified. 122 tests green; app=docs. **v4.8.**
+
 ## 2026-08-10 — vendor page: partner-type classification + data-richness + card redesign + v4.7
 Tuo: the vendor card is too cramped / feels thin, and wanted vendors classified by GTM partner-type (ISV / VAR / SI / MSP / channel-partner / reseller) + data richness. (Data wasn't actually sparse — every vendor has HQ/history/market-position/sources/listing; the card layout was crushing it, and partner-type was missing.)
 - **partner_type** (new web-verified public fact) — an 11-agent sweep (10 classify + 1 QA, grounded in our vendor context + web) tagged all **309** vendors, multi-tag, from the view of how SMCI engages them: **244 ISV · 58 OEM/device · 4 SI · 2 MSP · 1 channel** (86 multi-tag; 182 confidence-B). Each carries `{primary, also[], confidence}` in vendors.yaml.
