@@ -210,6 +210,19 @@ main{max-width:none;margin:0 auto;padding:var(--s6) clamp(16px,3vw,44px) 60px}
 .trow .tname{flex:1;min-width:0;overflow-wrap:anywhere}
 .trow .tby{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
 .tby.bcust{background:var(--a)}.tby.boper{background:var(--b)}.tby.boem{background:var(--c)}.tby.bhyp{background:var(--muted)}
+/* Play spine — the 4-level accordion (Play → AI/No-AI → category → 子市場): progressive indent + sub caret */
+.tnode.l1play{margin-top:6px}
+.tnode.l2ai{margin-top:3px;padding-left:14px;font-size:var(--f-3);font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);border-bottom:1px dashed var(--line)}
+.tnode.l2ai .tcar{color:var(--muted)}
+.trow.l3cat{padding-left:16px}
+.tcar.sub{color:var(--accent);cursor:pointer;width:12px;text-align:center}
+.tcar.sub:hover{color:var(--ink)}
+.tcar.ph{width:12px;visibility:hidden}
+.l4wrap{padding-left:8px;margin-left:24px;border-left:1px solid var(--line)}
+.trow.l4sub{padding:2px var(--s3);font-size:var(--f-3);opacity:.92}
+.trow.l4sub .tname{font-weight:500}
+@keyframes subhitflash{0%{background:var(--hw4);color:#fff}100%{background:transparent}}
+.subhit{animation:subhitflash 1.5s ease-out}
 .tiers6{margin:12px 0}
 .tier6{display:grid;grid-template-columns:92px 1fr;gap:var(--s4);padding:var(--s3) 0 var(--s3) var(--s5);position:relative;border-left:1px solid var(--line)}
 .tier6:before{content:"";position:absolute;left:-5px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
@@ -707,22 +720,20 @@ function renderTaxonomy(){
   masterTable();
   const mk=(id,opts,label)=>{const s=el('select',{id});s.append(el('option',{value:''},label));
     opts.forEach(o=>s.append(el('option',{value:o},o)));return s;};
-  const fBuyer=mk('fBuyer',['customer','operator','original-equipment-manufacturer','hyperscaler'],'all buyers'),
-        fBucket=mk('fBucket',['on-prem','cloud'],'all substrate'),
+  // filter selects — only the three LIVE ones survive (fBucket/fSeg/fHw, shown in the More-filters drawer).
+  // fCompute/fGroup are inert {value} holders written by exploreCompute()/setGroup() and read by render();
+  // the old fBuyer/fPlay/fDep/fProfile selects + fSpans checkbox were dead orphans (built, read, wired, never
+  // shown) each shadowing a live control (jump row / view-by / Product-line drawer) — removed (Explore audit).
+  const fBucket=mk('fBucket',['on-prem','cloud'],'all substrate'),
         fSeg=mk('fSeg',E.segments,'all segments'),
-        fPlay=mk('fPlay',['play-a','play-b','play-c'],'all plays'),
-        fDep=mk('fDep',E.deployment,'all deployments'),
         fHw=mk('fHw',['1','2','3','4'],'opportunity ≥'),
-        fProfile=mk('fProfile',['gpu-server','high-performance-computing-cpu','nvme-performance-storage','capacity-archive-storage','high-memory','edge-industrial','high-availability-redundant','disaster-recovery-backup'],'all hardware'),
-        fCompute=mk('fCompute',CC_ORDER,'all compute types'),
+        fCompute={value:''},
         fGroup={value:''},
-        fSpansBox=el('input',{type:'checkbox'}),
         cnt=el('span',{class:'count'});
-  const fSpans=el('label',{class:'ckbox'},fSpansBox,T('spans on-prem↔cloud','橫跨 on-prem↔雲'));
   const hotC=cats.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length,
         hotO=cats.filter(c=>(c.hardware_opportunity_by_buyer.operator||0)>=3).length,
         nOem=cats.filter(c=>(c.hardware_opportunity_by_buyer['original-equipment-manufacturer']||0)>=3).length;
-  const resetSel=()=>{[fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fCompute].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';};
+  const resetSel=()=>{[fBucket,fSeg,fHw,fCompute].forEach(x=>x.value='');fTxt.value='';};
   // ---- toolbar: one segmented control to regroup all categories, + search ----
   const seg=el('div',{class:'seg'});
   function setGroup(g){hotFilter=null;catFilter=null;fGroup.value=g;[...seg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===g));render();}
@@ -744,9 +755,8 @@ function renderTaxonomy(){
   const labeled=(lab,elm)=>el('label',{class:'flab'},el('span',{},lab),elm);
   root.append(el('details',{class:'refine'},el('summary',{},T('More filters','更多篩選')),
     el('div',{class:'filters'},
-      labeled(T('substrate','substrate'),fBucket),labeled(T('segment','客群'),fSeg),
-      labeled(T('min opportunity','最低機會'),fHw),
-      labeled(T('compute type (SKU)','計算類型(SKU)'),fCompute))));
+      labeled(T('substrate','substrate'),fBucket),labeled(T('customer segment','客群'),fSeg),
+      labeled(T('min opportunity','最低機會'),fHw))));
   const treePane=el('div',{class:'tree'}), detailPane=el('div',{class:'detail'});
   let selected=null;
   let navStack=[], dv={kind:'none',id:null};
@@ -865,6 +875,67 @@ function renderTaxonomy(){
     hdr.onclick=()=>{const o=body.style.display!=='none';body.style.display=o?'none':'';car.textContent=o?'▸':'▾';};
     treePane.append(hdr,body);
     if(leaf)list.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));else l2into(body,list);}
+  // ---- the Play SPINE: a dedicated 4-level accordion  Play → AI-driven/No-AI → category → 子市場.
+  //      Isolated from l1node/l2into/catRow (the other view-by lenses share those, must stay untouched).
+  //      The tree is fully rebuilt each render, so open-state is DERIVED from the filter, never persisted:
+  //      default opens the single Play holding the selected/first category (siblings collapsed — "the tree
+  //      reshapes into that Play"); any active filter/search auto-expands every surviving path. L4 (子市場)
+  //      stays collapsed — it is redundant with the right-pane battle card, reachable via its caret.
+  function playBadges(hdr,list){const fl=flagN(list),ho=hotN(list);
+    if(fl)hdr.append(el('span',{class:'tflag',title:T('flagship (opportunity 4)','旗艦 (機會 4)')},fl+' '+T('flagship','旗艦')));
+    if(ho)hdr.append(el('span',{class:'thot',title:T('customer-HOT (opportunity ≥3)','客戶-HOT (機會≥3)')},ho+' HOT'));
+    hdr.append(el('span',{class:'tcount'},String(list.length)));}
+  function showPlayFromSpine(pid){pushNav();selected=null;clear(detailPane);detailPane.append(playBrief(pid));dv={kind:'play',id:pid};
+    [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.remove('sel'));const L=pid.split('-')[1].toUpperCase();const p=PLAY_BY[pid];
+    setNote(el('span',{},el('span',{class:'play play'+L.toLowerCase()},'Play '+L),' ',el('b',{},p?p.name:''),T(' — brief on the right','— 右側簡報')));}
+  function spineSubRow(c,s){const sr=el('div',{class:'trow l4sub','data-sub':s.id});
+    sr.append(el('span',{class:'hw hw'+s.hardware_opportunity,style:'font-size:var(--f-1);padding:0 var(--s2)',title:OPP[s.hardware_opportunity]},String(s.hardware_opportunity)));
+    sr.append(el('span',{class:'tname'},LANG==='zh'?s.name_zh:s.name_en));
+    sr.append(el('span',{class:'tby '+BUYER_C[s.primary_buyer],title:s.primary_buyer}));
+    sr.onclick=()=>{viewCat(c);  // showDetail() appends the subcards synchronously, so no rAF needed (rAF pauses when the tab is backgrounded)
+      const eln=document.getElementById('sub-'+s.id);
+      if(eln){eln.scrollIntoView({block:'nearest',behavior:'smooth'});eln.classList.remove('subhit');void eln.offsetWidth;eln.classList.add('subhit');}};
+    return sr;}
+  function playTree(shown){
+    const narrowed=!!(catFilter||hotFilter||fTxt.value||fCompute.value||fBucket.value||fSeg.value||(+fHw.value||0));
+    const sel=(selected&&shown.find(c=>c.id===selected.id))||shown[0]||null;
+    const groups=DATA.plays.plays.map(p=>[p.id,playName(p.id),shown.filter(c=>(c.plays||[]).includes(p.id))]);
+    const noPlay=shown.filter(c=>!(c.plays&&c.plays.length));
+    if(noPlay.length)groups.push(['(no play)',T('(no play)','（無打法）'),noPlay]);
+    let openPid=null;
+    if(!narrowed){const g=(sel&&groups.find(x=>x[2].indexOf(sel)>=0))||groups.find(x=>x[2].length);openPid=g?g[0]:null;}
+    const L1=[];
+    groups.forEach(([pid,label,list])=>{if(!list.length)return;
+      const openL1=narrowed?true:(pid===openPid);
+      const car=el('span',{class:'tcar'},openL1?'▾':'▸');
+      const hdr=el('div',{class:'tnode l1play'},car,el('span',{style:'flex:1'},label));playBadges(hdr,list);
+      const body=el('div',{class:'tbody'});if(!openL1)body.style.display='none';
+      const rec={car,body};L1.push(rec);
+      hdr.onclick=()=>{const wasOpen=body.style.display!=='none';
+        L1.forEach(o=>{o.body.style.display='none';o.car.textContent='▸';});
+        if(!wasOpen){body.style.display='';car.textContent='▾';if(pid!=='(no play)')showPlayFromSpine(pid);}};
+      treePane.append(hdr,body);
+      [['ai',T('AI-driven','AI 驅動')],['no',T('No-AI','非 AI')]].forEach(([ak,alab])=>{
+        const subl=list.filter(c=>ak==='ai'?isAI(c):!isAI(c));if(!subl.length)return;
+        const c2=el('span',{class:'tcar'},'▾');
+        const h2=el('div',{class:'tnode l2ai'},c2,el('span',{style:'flex:1'},alab),el('span',{class:'tcount'},String(subl.length)));
+        const b2=el('div',{class:'tbody'});
+        h2.onclick=()=>{const o=b2.style.display!=='none';b2.style.display=o?'none':'';c2.textContent=o?'▸':'▾';};
+        body.append(h2,b2);
+        subl.slice().sort(byOpp).forEach(c=>{const subs=subcatsOf(c.id);
+          const row=el('div',{class:'trow l3cat','data-id':c.id});
+          row.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:var(--f-1);padding:0 var(--s2)',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
+          const car3=subs.length?el('span',{class:'tcar sub',title:subs.length+T(' sub-markets','個子市場')},'▸'):el('span',{class:'tcar ph'});
+          row.append(car3,el('span',{class:'tname'},nm(c)),el('span',{class:'tby '+BUYER_C[c.primary_buyer],title:c.primary_buyer}));
+          row.onclick=()=>viewCat(c);b2.append(row);
+          if(subs.length){const b3=el('div',{class:'tbody l4wrap'});b3.style.display='none';
+            car3.onclick=(e)=>{e.stopPropagation();const o=b3.style.display!=='none';b3.style.display=o?'none':'';car3.textContent=o?'▸':'▾';};
+            subs.forEach(s=>b3.append(spineSubRow(c,s)));b2.append(b3);}
+        });
+      });
+    });
+    if(sel)[...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===sel.id));
+  }
   // (dead taxonomy card() + tagRow() removed in P2 — live category renderer is detailCard(); the vendor
   //  registry has its own card(v). Both used a removed buyer-pill layout + a ⇄ glyph.)
   function detailCard(c){
@@ -874,7 +945,7 @@ function renderTaxonomy(){
     const head=el('div',{class:'row'},el('span',{class:'hw hw'+c.hardware_opportunity,title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
     (c.plays||[]).forEach(p=>{const ch=el('span',{class:'play '+playClass(p),style:'cursor:pointer',title:playName(p)},playName(p).split(' ')[0]);ch.onclick=()=>goPlay(p);head.append(ch);});
     const cck=computeClassOf(c);
-    head.append(el('span',{class:'pill ccpill '+ccClass(cck),style:'cursor:pointer',title:ccGloss(cck)+' → '+ccSku(cck)},ccLabel(cck)));
+    {const ccp=el('span',{class:'pill ccpill '+ccClass(cck),style:'cursor:pointer',title:ccGloss(cck)+' → '+ccSku(cck)},ccLabel(cck));ccp.onclick=()=>window.exploreCompute(cck);head.append(ccp);}
     cd.append(head);
     cd.append(el('h3',{style:'margin:6px 0 0'},nm(c)));
     cd.append(el('div',{class:'zh'},sub(c)));
@@ -904,7 +975,7 @@ function renderTaxonomy(){
     if(subs.length){
       const ss=el('div',{class:'dsec'});
       ss.append(el('div',{class:'dsh'},T('Sub-markets','子市場')+' · '+subs.length+T(' — finer classification, each with its own SMCI hardware pull','—更細分類,各有其 SMCI 硬體拉動')));
-      subs.forEach(s=>{const sc=el('div',{class:'subcard'});
+      subs.forEach(s=>{const sc=el('div',{class:'subcard',id:'sub-'+s.id});
         const sh=el('div',{class:'row',style:'align-items:baseline;gap:var(--s2)'},el('b',{style:'font-size:var(--f-4)'},LANG==='zh'?s.name_zh:s.name_en),
           el('span',{class:'hw hw'+s.hardware_opportunity,title:OPP[s.hardware_opportunity]},String(s.hardware_opportunity)),
           el('span',{class:'by '+BUYER_C[s.primary_buyer]},s.primary_buyer));
@@ -1046,12 +1117,9 @@ function renderTaxonomy(){
     });
     tdrawer.append(tlist);
     box.append(tdrawer);
-    // door: play
-    const prow=el('div',{class:'drow'});prow.append(el('span',{class:'dlab'},T('Play','打法')));
-    DATA.plays.plays.forEach(p=>{const letter=p.id.split('-')[1].toUpperCase();const ids=cats.filter(c=>(c.plays||[]).includes(p.id)).map(c=>c.id);
-      const chip=el('button',{class:'dchip'},el('span',{class:'play play'+letter.toLowerCase()},'Play '+letter),' '+p.name+' ',el('span',{class:'dn'},String(ids.length)));
-      chip.onclick=()=>goPlay(p.id);prow.append(chip);});
-    box.append(prow);
+    // door: play — DELETED (Explore audit). Play is now the top of the tree spine (playTree): each Play is
+    // an L1 drawer whose header loads the same playBrief(pid). goPlay/playBrief stay, reused by the header
+    // and by the trigger/detail cross-link chips.
     // door: compute type (SKU) — the actionable "which SMCI box" cut (buyer axis carries ~no signal; this does).
     // Chip number = flagship (deal size) · direct-HOT (can we sell direct) — NOT raw category count, which
     // over-weights low-value buckets (saas-light 8, cpu-db 14 look big but carry ~no flagship deals).
@@ -1076,19 +1144,14 @@ function renderTaxonomy(){
   }
   let hotFilter=null, catFilter=null;
   function render(){
-    const by=fBuyer.value,bk=fBucket.value,sp=fSpansBox.checked,seg2=fSeg.value,pl=fPlay.value,dep=fDep.value,
-          hw=+fHw.value||0,prof=fProfile.value,cmp=fCompute.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
+    const bk=fBucket.value,seg2=fSeg.value,
+          hw=+fHw.value||0,cmp=fCompute.value,gp=fGroup.value,q=fTxt.value.toLowerCase();
     const shown=cats.filter(c=>{
       if(catFilter&&!catFilter.includes(c.id))return false;
       if(hotFilter&&(c.hardware_opportunity_by_buyer[hotFilter.buyer]||0)<hotFilter.min)return false;
-      if(by&&!c.hardware_buyer.includes(by))return false;
-      if(prof&&!(c.hardware_profile||[]).includes(prof))return false;
       if(cmp&&computeClassOf(c)!==cmp)return false;
       if(bk&&bucketOf(c)!==bk)return false;
-      if(sp&&!spansOf(c))return false;
       if(seg2&&!(c.segments||[]).includes(seg2))return false;
-      if(pl&&!(c.plays||[]).includes(pl))return false;
-      if(dep&&!(c.deployment||[]).includes(dep))return false;
       if(hw&&c.hardware_opportunity<hw)return false;
       if(q&&!((c.name_en+' '+c.name_zh+' '+(c.infrastructure_notes||'')).toLowerCase().includes(q)))return false;
       return true;
@@ -1098,7 +1161,8 @@ function renderTaxonomy(){
     // auto-collapse groups when browsing many; keep open when narrowed, and always open the group holding the selected category
     const sel=(selected&&shown.find(c=>c.id===selected.id))||shown[0]||null;
     const openIf=list=>shown.length<=12||(sel&&list.indexOf(sel)>=0);
-    if(gp==='stakeholder'){STAKE.forEach(([k,lab])=>{const li=shown.filter(c=>stakeKey(c)===k);l1node(lab,li,false,openIf(li));});}
+    if(gp==='play'){playTree(shown);}   // the Play spine — its own 4-level renderer (Play→AI/No-AI→category→子市場)
+    else if(gp==='stakeholder'){STAKE.forEach(([k,lab])=>{const li=shown.filter(c=>stakeKey(c)===k);l1node(lab,li,false,openIf(li));});}
     else if(gp==='ai'){l1node(T('AI-driven','AI 驅動'),shown.filter(isAI),true);l1node(T('No-AI','非 AI'),shown.filter(c=>!isAI(c)),true);}
     else if(!gp){l1node(T('All categories','全部類別'),shown);}
     else{
@@ -1112,16 +1176,16 @@ function renderTaxonomy(){
     }
     showDetail(sel);
   }
-  [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fCompute,fGroup].forEach(x=>x.onchange=()=>{hotFilter=null;catFilter=null;render();});
+  [fBucket,fSeg,fHw].forEach(x=>x.onchange=()=>{hotFilter=null;catFilter=null;render();});
   window.exploreFilter=function(buyer,minOpp){hotFilter={buyer:buyer,min:minOpp||3};catFilter=null;
-    [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile,fCompute].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';
-    fGroup.value='domain';[...seg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.g==='domain'));
+    [fBucket,fSeg,fHw,fCompute].forEach(x=>x.value='');fTxt.value='';
+    fGroup.value='play';[...seg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.g==='play'));
     render();window.scrollTo(0,0);};
-  // compute-type door: filter to a compute_class and regroup by play so the per-play split shows
+  // compute-type door: filter to a compute_class; the Play spine shows the per-play split
   window.exploreCompute=function(cc){catFilter=null;hotFilter=null;
-    [fBuyer,fBucket,fSeg,fPlay,fDep,fHw,fProfile].forEach(x=>x.value='');fSpansBox.checked=false;fTxt.value='';
+    [fBucket,fSeg,fHw].forEach(x=>x.value='');fTxt.value='';
     fCompute.value=cc;setGroup('play');window.scrollTo(0,0);};
-  fSpansBox.onchange=()=>{hotFilter=null;catFilter=null;render();};fTxt.oninput=()=>{hotFilter=null;catFilter=null;render();};setGroup('domain');
+  fTxt.oninput=()=>{hotFilter=null;catFilter=null;render();};setGroup('play');
 }
 
 // ================= VENDORS (enriched registry) =================

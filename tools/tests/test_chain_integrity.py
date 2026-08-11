@@ -1516,5 +1516,35 @@ class TestSubcategories(unittest.TestCase):
         self.assertIn("subcatsOf", src, "build_app.py must expose a subcatsOf helper")
 
 
+# ============================================================
+# Explore redesign — the Play spine + the dead-control sweep (audit-driven)
+# ============================================================
+class TestExploreSpine(unittest.TestCase):
+    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+
+    def test_playtree_defined_and_routed(self):
+        self.assertIn("function playTree(", self.SRC, "the Play-spine renderer must exist")
+        self.assertIn("if(gp==='play'){playTree(shown);}", self.SRC,
+                       "render() must route the 'play' grouping to playTree")
+
+    def test_four_dead_orphan_selects_stay_removed(self):
+        # each was created via mk('fX',...) but never appended — shadowing a live control. Guard re-introduction.
+        for dead in ("mk('fBuyer'", "mk('fPlay'", "mk('fDep'", "mk('fProfile'"):
+            self.assertNotIn(dead, self.SRC, f"dead orphan select re-introduced: {dead}")
+        self.assertNotIn("fSpansBox=el(", self.SRC, "dead fSpans checkbox re-introduced")
+
+    def test_compute_filter_not_duplicated(self):
+        # the one LIVE duplicate: fCompute select in the More-filters drawer duplicated the launcher chip.
+        self.assertNotIn("compute type (SKU)','計算類型(SKU)'),fCompute", self.SRC,
+                         "fCompute must not be re-added to the More-filters drawer (duplicates the launcher chip)")
+
+    def test_launcher_play_chip_row_removed(self):
+        # Play is the tree spine now; the launcher .dchip Play-chip row was deleted.
+        self.assertNotIn("class:'dchip'", self.SRC, "launcher Play-chip row re-introduced (Play is the spine)")
+
+    def test_subcard_scroll_anchor_present(self):
+        self.assertIn("id:'sub-'+s.id", self.SRC, "subcards need id=sub-<id> for the L4 spine scroll target")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
