@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-08-11 — vendor filter bar → two labelled clusters + "value" renamed (impeccable P3) + v5.1
+Implemented the remaining critique findings:
+- **[P3] Filter hierarchy** — the flat equal-weight bar split into two labelled clusters: **"How I sell"** (Partner-type · Data-richness · Coverage-by-play) in a soft accent panel with primacy, and **"Who they are"** (Region · Fortune · US-share · Listing · Neuro) below. The sell-driving axes no longer look identical to the niche Neuro flag; identity and sell-mechanics filters are chunked so the eye reads 2 groups, not 8 controls. (Primacy via an `--accentbg` panel + accent label — NOT a side-stripe, which the slop guard bans.)
+- **["value" overload]** — the registry sort "by value" renamed **"by opportunity"** (and the rollup copy) so it no longer competes with the "Bundle ranking" weighted score and the "Fortune" standing.
+- 122 tests green (the side-stripe guard caught a first-attempt accent border and forced the panel treatment); app=docs; impeccable detector clean; browser-verified (2 clusters, sell-panel, "by opportunity", 0 console errors). **v5.1.**
+
 ## 2026-08-11 — vendor page a11y/UX: keyboard scan + sticky group headers + zero-state (impeccable critique) + v5.0
 Ran an impeccable **dual-agent critique** of the Vendors page (Design Health 26/40; detector 0 slop). Implemented the top findings:
 - **[P1] Keyboard scan** — the vendor list is now a `listbox` (role=listbox/option, tabindex, aria-selected); Arrow ↑/↓ moves the selection and streams the right-pane profile, Enter confirms, the selected row scrolls into view. The 309-row triage is no longer mouse-only.
