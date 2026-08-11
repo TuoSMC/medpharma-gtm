@@ -219,6 +219,8 @@ main{max-width:none;margin:0 auto;padding:var(--s6) clamp(16px,3vw,44px) 60px}
 .fbox{border:1px solid var(--accent);color:var(--accent);border-radius:var(--r-tag);padding:var(--s0) var(--s3);font-size:var(--f-3);background:var(--accentbg)}
 .farrow{color:var(--muted);font-weight:700}
 .dsec{margin:14px 0}
+.subcard{border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s3);margin:var(--s2) 0;background:var(--panel)}
+.subcard>.row:first-child{margin-top:0}
 .dsec .dsh{font-size:var(--f-2);font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:4px}
 /* battle card: the actionable sell layer at the top of a category */
 .battle{border-radius:var(--r-card);background:var(--accentbg);padding:var(--s4) 13px;margin:10px 0 6px}
@@ -566,6 +568,9 @@ const VNAME={};(DATA.vendors.vendors||[]).forEach(v=>VNAME[v.id]=v.name);
 // ---- relationship fusion: cross-tab lookups (category <-> vendor <-> leaderboard) ----
 const VBYID={};(DATA.vendors.vendors||[]).forEach(v=>VBYID[v.id]=v);
 const CATBYID={};(DATA.taxonomy.categories||[]).forEach(c=>CATBYID[c.id]=c);
+// taxonomy tree: level-2+ sub-markets nest under a category (or another subcategory) via `parent`
+const SUBCATS=(DATA.taxonomy.subcategories||[]);
+function subcatsOf(id){return SUBCATS.filter(s=>s.parent===id);}
 const LB_BY_VID={};
 (function(){const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;if(!LB)return;
   [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([bk,b])=>{if(!b)return;(b.entries||[]).forEach(e=>{
@@ -894,6 +899,22 @@ function renderTaxonomy(){
       row.append(el('span',{class:'tsig'},t.signal));row.append(el('span',{class:'tact'},'→ '+t.action));tw.append(row);});
       brow(T('Trigger → move','盯訊號 → 動作'),tw);}
     cd.append(bc);
+    // ---- sub-markets: the finer classification tree under this category (each with its own SMCI pull) ----
+    const subs=subcatsOf(c.id);
+    if(subs.length){
+      const ss=el('div',{class:'dsec'});
+      ss.append(el('div',{class:'dsh'},T('Sub-markets','子市場')+' · '+subs.length+T(' — finer classification, each with its own SMCI hardware pull','—更細分類,各有其 SMCI 硬體拉動')));
+      subs.forEach(s=>{const sc=el('div',{class:'subcard'});
+        const sh=el('div',{class:'row',style:'align-items:baseline;gap:var(--s2)'},el('b',{style:'font-size:var(--f-4)'},LANG==='zh'?s.name_zh:s.name_en),
+          el('span',{class:'hw hw'+s.hardware_opportunity,title:OPP[s.hardware_opportunity]},String(s.hardware_opportunity)),
+          el('span',{class:'by '+BUYER_C[s.primary_buyer]},s.primary_buyer));
+        sc.append(sh);
+        sc.append(el('div',{class:'vprose',style:'font-size:var(--f-2);color:var(--muted)'},LANG==='zh'?s.scope_zh:s.scope_en));
+        const hwr=el('div',{class:'row'});(s.hardware_profile||[]).forEach(h=>hwr.append(el('span',{class:'pill lead',title:plineGloss(h)},smciFam(h))));sc.append(hwr);
+        if((s.vendors||[]).length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));s.vendors.forEach(vn=>vr.append(el('span',{class:'chip'},vn)));sc.append(vr);}
+        ss.append(sc);});
+      cd.append(ss);
+    }
     // ---- context ladder: Who-uses scent only (Purpose/Flow/Tech folded into the drawer; Hardware/SMCI in the battle card) ----
     const tiers=el('div',{class:'tiers6'});
     const tier=(lab,cont)=>{tiers.append(el('div',{class:'tier6'},el('div',{class:'tlab'},lab),el('div',{class:'tcont'},cont)));};

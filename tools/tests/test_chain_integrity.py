@@ -1441,5 +1441,80 @@ class TestVendorListingNeuro(unittest.TestCase):
         self.assertEqual(bci, [], f"no implantable-BCI makers expected in a software registry: {bci}")
 
 
+# ============================================================
+# taxonomy-tree pilot — level-2 sub-markets nest under a category via `parent`
+# (categories stay LOCKED at 59 via TestInventoryLocked; the tree grows here)
+# ============================================================
+SUBS = TAX.get("subcategories", [])
+_CAT_IDS = {c["id"] for c in CATS}
+_SUB_REQUIRED = ["id", "parent", "name_en", "name_zh", "scope_en", "scope_zh",
+                 "role", "data_modality", "hardware_profile", "hardware_opportunity",
+                 "primary_buyer", "segments", "vendors", "confidence", "source"]
+
+
+class TestSubcategories(unittest.TestCase):
+    def test_present_and_nonempty(self):
+        self.assertTrue(SUBS, "taxonomy.yaml should carry a non-empty subcategories list")
+
+    def test_required_fields(self):
+        for s in SUBS:
+            for f in _SUB_REQUIRED:
+                self.assertIn(f, s, f"subcategory {s.get('id','?')} missing field {f}")
+
+    def test_ids_unique_kebab_and_no_category_collision(self):
+        seen = set()
+        for s in SUBS:
+            sid = s["id"]
+            self.assertRegex(sid, r"^[a-z0-9]+(-[a-z0-9]+)*$", f"{sid}: id must be kebab-case")
+            self.assertNotIn(sid, seen, f"{sid}: duplicate subcategory id")
+            seen.add(sid)
+            self.assertNotIn(sid, _CAT_IDS, f"{sid}: subcategory id collides with a category id")
+
+    def test_parent_resolves_and_no_cycle(self):
+        """parent must point at a category or another subcategory; walking parents terminates."""
+        sub_ids = {s["id"] for s in SUBS}
+        by_id = {s["id"]: s for s in SUBS}
+        for s in SUBS:
+            self.assertNotEqual(s["parent"], s["id"], f"{s['id']}: self-parent")
+            self.assertIn(s["parent"], _CAT_IDS | sub_ids, f"{s['id']}: parent {s['parent']} unknown")
+            # walk up: a subcategory chain must reach a category without looping
+            seen, cur, hops = set(), s, 0
+            while cur["parent"] in sub_ids:
+                self.assertNotIn(cur["id"], seen, f"{s['id']}: cycle in parent chain")
+                seen.add(cur["id"])
+                cur = by_id[cur["parent"]]
+                hops += 1
+                self.assertLess(hops, 50, f"{s['id']}: parent chain too deep / cyclic")
+            self.assertIn(cur["parent"], _CAT_IDS, f"{s['id']}: chain does not root at a category")
+
+    def test_vendors_nonempty(self):
+        for s in SUBS:
+            self.assertTrue(s.get("vendors"), f"{s['id']}: vendors must be non-empty")
+
+    def test_hardware_profile_subset_of_enum(self):
+        for s in SUBS:
+            bad = [h for h in s["hardware_profile"] if h not in TARGET_ENUMS["hardware_profile"]]
+            self.assertFalse(bad, f"{s['id']}: hardware_profile not in enum: {bad}")
+
+    def test_opportunity_in_range(self):
+        for s in SUBS:
+            self.assertIn(s["hardware_opportunity"], (1, 2, 3, 4), s["id"])
+
+    def test_primary_buyer_in_enum(self):
+        for s in SUBS:
+            self.assertIn(s["primary_buyer"], TARGET_ENUMS["hardware_buyer"], s["id"])
+
+    def test_no_forbidden_abbreviations(self):
+        for s in SUBS:
+            for h in s["hardware_profile"]:
+                self.assertNotIn(h, FORBIDDEN_ABBREVIATED_VALUES, f"{s['id']}: abbreviated {h}")
+
+    def test_app_renders_subcategories(self):
+        """build_app.py must load and render the sub-markets tree."""
+        src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        self.assertIn("subcategories", src, "build_app.py must read DATA.taxonomy.subcategories")
+        self.assertIn("subcatsOf", src, "build_app.py must expose a subcatsOf helper")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

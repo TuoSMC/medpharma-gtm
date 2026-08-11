@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-08-11 — taxonomy tree: level-2 sub-markets (PACS/VNA pilot) [branch: taxonomy-tree, NOT on main]
+First deepening of the taxonomy from a flat 59-category list into a **tree**. The 59 categories stay **locked** (TestInventoryLocked / APPROVED_IDS untouched); a new top-level `subcategories:` list grows under them via `parent` adjacency pointers (a subcategory can parent another subcategory → real recursion).
+- **Pilot = PACS/VNA → 8 verified sub-markets**: Radiology PACS · Cardiology/CVIS · VNA/Enterprise-imaging · Imaging-AI Orchestration · Advanced Visualization · Cloud-native PACS · Universal Viewer · Breast-imaging. Each adversarially web-verified (is_real_submarket=true, vendors_verified=true, confidence B, KLAS/Signify-sourced); the mis-attributed "Dell Technologies" vendor was dropped from VNA-enterprise on the verify pass.
+- **Why it matters — the deepening surfaces hardware the flat parent buried.** Flat "PACS/VNA" reads as a pure storage play (NVMe + archive + HA, zero GPU). Split, two children carry *different boxes and different buyers*: **Imaging-AI Orchestration** (opp 4, **operator co-sell**, pulls **gpu-server**) and **Advanced Visualization** (opp 3, customer, pulls **gpu-server + high-memory**). One "big category" → two motions the flat view could not have shown.
+- **App**: `subcatsOf(catId)` helper + a "Sub-markets · N" section at the top of the category detail card, each child rendered with its own opportunity badge, buyer badge, scope, SMCI hardware pull, and verified vendor chips. Data-driven from `DATA.taxonomy.subcategories`; SaaS-light-safe.
+- **Tests**: +10 `TestSubcategories` (parent resolves to a category or up a non-cyclic chain · id kebab-case + unique + no collision with category ids · vendors non-empty · hardware_profile ⊆ enum · opportunity 1–4 · buyer ∈ enum · no forbidden abbreviations · app renders the tree). **132 green**; app=docs byte-identical; 0 console errors; browser-verified PACS/VNA → 8 nested subcards.
+- Stays on branch `taxonomy-tree`; **main keeps deploying the stable v5.2**. Next: scale the pattern to the other flagship categories once the shape is approved.
+
 ## 2026-08-11 — vendor page: the remaining critique minors (search / multi-select / legend / deep-link) + v5.2
 Cleared the rest of the impeccable-critique backlog:
 - **Search covers everything** — the registry search now also matches the About/history prose and partnership partner names (search "nvidia" → 59 vendors whose partners include NVIDIA), not just name/HQ/leader/market/categories.
