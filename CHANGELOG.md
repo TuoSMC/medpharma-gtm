@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-08-11 — vendor page a11y/UX: keyboard scan + sticky group headers + zero-state (impeccable critique) + v5.0
+Ran an impeccable **dual-agent critique** of the Vendors page (Design Health 26/40; detector 0 slop). Implemented the top findings:
+- **[P1] Keyboard scan** — the vendor list is now a `listbox` (role=listbox/option, tabindex, aria-selected); Arrow ↑/↓ moves the selection and streams the right-pane profile, Enter confirms, the selected row scrolls into view. The 309-row triage is no longer mouse-only.
+- **[P1] Sticky grouped headers** — `.vghdr` is `position:sticky` within the list scroll container, so "ISV · 244" stays pinned while scanning that group.
+- **[P2] Zero-result recovery** — filtering to no matches now renders an empty-state block with an inline **"Clear filters"** button (+ a detail-pane placeholder) instead of a silent double blank.
+- **Recognition** — list-row flagship/HOT badges gained tooltips, and the flagship badge now reads "N flagship" (not a bare "F" that collided with the Fortune filter).
+- 122 tests green; app=docs; impeccable detector clean; browser-verified (↓↓ Philips→GE HealthCare, profile-synced; sticky header; partner-type=reseller → 0 → empty+Clear → recovers to 309); no emoji. **v5.0.**
+
 ## 2026-08-10 — vendor page → browsable list + rich profile (two-pane) + v4.9
 Tuo: the per-vendor card was both bare (陽春) and crowded (擁擠) — a wide card cramming shallow facts. Restructured the registry into **a scannable list + a spacious detail profile** (like Explore's tree→battle-card): a compact left list (name · partner-type · flag/HOT · richness · 2-line summary, honouring the group/filter/sort), click any vendor → a full-width right profile with room to breathe. Added an **SMCI hardware pull** section to the profile (the sell hook, un-陽春) — the SMCI boxes + compute classes the vendor's software footprint pulls (HGX/MGX GPU · NVMe · archive · edge · HA pairs …) with flagship/HOT counts, derived from its categories. Two-pane collapses to a single column on mobile. 122 tests green; app=docs; browser-verified (wide 1500px: list 44→486 + profile 502→1441 with the hardware-pull section; mobile 390px: single column, 0 overflow, no console errors). **v4.9.**
 

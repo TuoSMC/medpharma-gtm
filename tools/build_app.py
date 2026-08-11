@@ -439,7 +439,9 @@ tr:last-child td{border-bottom:0}
 .vrname{font-weight:600;font-size:var(--f-4);color:var(--ink)}
 .vrmeta{display:flex;flex-wrap:wrap;gap:var(--s1);margin-top:var(--s0);align-items:center}
 .vrsum{font-size:var(--f-2);color:var(--muted);margin-top:var(--s0);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.vghdr{font-size:var(--f-1);text-transform:uppercase;letter-spacing:.5px;color:var(--accent);font-weight:700;margin:var(--s3) 0 var(--s0);padding-bottom:var(--s0);border-bottom:1px solid var(--line)}
+.vghdr{font-size:var(--f-1);text-transform:uppercase;letter-spacing:.5px;color:var(--accent);font-weight:700;margin:var(--s3) 0 var(--s0);padding:var(--s1) 0 var(--s0);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1;background:var(--bg)}
+.vempty{padding:var(--s5);text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r-card);display:flex;flex-direction:column;gap:var(--s3);align-items:center;margin-top:var(--s3)}
+.vrow:focus-visible,.vlist:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .vdetail{position:sticky;top:118px;align-self:start}
 @media(max-width:840px){.vdetail{position:static}}
 .vprofile{margin:0}
@@ -1151,25 +1153,30 @@ function renderRegistryInto(host){
   const fbHost=el('div',{});root.append(fbHost);
   root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('group','分組')),gseg,el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
   const listPane=el('div',{class:'vlist'}),detailPane=el('div',{class:'vdetail'});
+  listPane.setAttribute('role','listbox');listPane.setAttribute('aria-label',T('Vendors','廠商'));listPane.tabIndex=0;
+  // keyboard scan: Arrow up/down moves the selection, Enter confirms — the 309-row triage motion
+  listPane.onkeydown=e=>{if(e.key!=='ArrowDown'&&e.key!=='ArrowUp'&&e.key!=='Enter')return;const rows=[...listPane.querySelectorAll('.vrow')];if(!rows.length)return;e.preventDefault();let i=rows.findIndex(r=>r.classList.contains('sel'));if(e.key==='ArrowDown')i=i<0?0:Math.min(rows.length-1,i+1);else if(e.key==='ArrowUp')i=i<0?0:Math.max(0,i-1);else if(i<0)i=0;const r=rows[i];if(r){r.click();r.scrollIntoView({block:'nearest'});}};
   root.append(el('div',{class:'twopane vtwopane'},listPane,detailPane));
   let selected=null;
+  function clearAll(){VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';VF.pt='';VF.rich='';q.value='';refresh();}
   // SMCI hardware pull — aggregate the SMCI boxes / compute classes the vendor's software footprint pulls
   function vendorHardware(v){const fams=new Set(),ccs=new Set();let flag=0,hot=0;(v.categories||[]).forEach(id=>{const c=CATBYID[id];if(!c)return;(c.hardware_profile||[]).forEach(h=>fams.add(h));ccs.add(computeClassOf(c));if(c.hardware_opportunity===4)flag++;if((c.hardware_opportunity_by_buyer.customer||0)>=3)hot++;});return {fams:[...fams],ccs:[...ccs],flag:flag,hot:hot};}
   // compact list row — click for the full profile on the right
   function vrow(v){const pt=partnerTypeOf(v),val=vendorVal(v),rich=richnessOf(v);
     const r=el('div',{class:'vrow'+(selected&&selected.id===v.id?' sel':'')});r.dataset.id=v.id;
+    r.setAttribute('role','option');r.setAttribute('aria-selected',selected&&selected.id===v.id?'true':'false');
     const top=el('div',{class:'vrtop'},el('span',{class:'vrname'},v.name));
     if(pt)top.append(el('span',{class:'pill ptpill '+ptClass(pt.primary)},ptLabel(pt.primary)));
     r.append(top);
     const meta=el('div',{class:'vrmeta'});
-    if(val.flag)meta.append(el('span',{class:'vflag'},val.flag+' F'));
-    if(val.hot)meta.append(el('span',{class:'vhot'},val.hot+' HOT'));
+    if(val.flag){const f=el('span',{class:'vflag'},val.flag+' '+T('flagship','旗艦'));f.title=T('flagship categories — the biggest SMCI box this vendor pulls','旗艦類別 — 此廠商拉動的最大 SMCI 機箱');meta.append(f);}
+    if(val.hot){const hh=el('span',{class:'vhot'},val.hot+' HOT');hh.title=T('customer-HOT categories — direct-sale opportunities','客戶-HOT 類別 — 直銷機會');meta.append(hh);}
     const lb=lbBadge(v.id);if(lb)meta.append(el('span',{class:'pill',style:'font-size:var(--f-1)'},lb));
     meta.append(el('span',{class:rich.tier==='sparse'?'rich-sparse':(rich.tier==='rich'?'rich-rich':'muted'),style:'font-size:var(--f-1)'},richLabel(rich.tier)));
     r.append(meta);
     if(v.market_position)r.append(el('div',{class:'vrsum'},v.market_position));
     r.onclick=()=>showVendor(v);return r;}
-  function showVendor(v){selected=v;clear(detailPane);detailPane.append(profile(v));[...listPane.querySelectorAll('.vrow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===v.id));}
+  function showVendor(v){selected=v;clear(detailPane);detailPane.append(profile(v));[...listPane.querySelectorAll('.vrow')].forEach(r=>{const on=r.dataset.id===v.id;r.classList.toggle('sel',on);r.setAttribute('aria-selected',on?'true':'false');});}
   function profile(v){
     const c=el('div',{class:'card vcard vprofile'});
     const p=hqParse(v), lg=listedOf(v), fo=fortuneOf(v), us=usShareOf(v), pt=partnerTypeOf(v), rich=richnessOf(v);
@@ -1231,6 +1238,13 @@ function renderRegistryInto(host){
         map.get(k).forEach(v=>listPane.append(vrow(v)));});
     }
     cnt.textContent=shown.length+' / '+vsAll.length+T(' shown',' 顯示')+(groupMode!=='none'?' · '+T('grouped','分組'):'');
+    if(!shown.length){
+      const emp=el('div',{class:'vempty'},el('div',{},T('No vendors match these filters.','沒有廠商符合這些篩選。')));
+      const cb=el('button',{class:'vfclear'},T('Clear filters','清除篩選'));cb.onclick=clearAll;emp.append(cb);
+      listPane.append(emp);clear(detailPane);
+      detailPane.append(el('div',{class:'muted',style:'padding:var(--s6)'},T('Adjust the filters on the left to see a vendor here.','調整左邊的篩選,這裡會顯示廠商。')));
+      cnt.textContent='0 / '+vsAll.length+T(' shown',' 顯示');return;
+    }
     const sel=(selected&&shown.find(v=>v.id===selected.id))||shown[0]||null;
     if(sel)showVendor(sel);else clear(detailPane);
   }
