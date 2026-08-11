@@ -337,6 +337,11 @@ tr:last-child td{border-bottom:0}
 .u{font-weight:700;font-size:var(--f-2);text-transform:uppercase}
 .u.critical{color:var(--u-crit)}.u.high{color:var(--u-high)}.u.medium{color:var(--u-med)}.u.low{color:var(--u-low)}
 .wrap{overflow-x:auto}
+/* narrow-width safety: long-text chips wrap instead of forcing overflow; grid content columns can shrink
+   (grid/flex items default to min-width:auto = content size, which overflows on long unbreakable strings) */
+.chip,.gtag,.hwc,.pchip,.raxx{white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.kv>*,.brow>*,.tier6>*,.msrow>*,.rarch{min-width:0;overflow-wrap:anywhere}
+.card,.battle,.notes,.detail{overflow-wrap:anywhere;min-width:0}
 .scorer{display:grid;grid-template-columns:1fr auto;gap:var(--s3) 14px;align-items:center;max-width:560px}
 .scorer label{font-size:var(--f-4)}
 .scorer input[type=range]{width:100%}
