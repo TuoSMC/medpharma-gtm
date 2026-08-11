@@ -1355,6 +1355,33 @@ class TestComputeClass(unittest.TestCase):
                                  f"{c['id']}: {k} but has gpu-server")
 
 
+class TestVendorPartnerType(unittest.TestCase):
+    """v4.7: GTM partner-type (web-verified) — how SMCI engages each vendor. Every vendor carries a
+    primary type from the closed set + confidence; also_types (multi-tag) are from the same set."""
+    SET = {"isv", "var", "si", "msp", "channel-partner", "reseller", "oem-device"}
+
+    def test_every_vendor_has_partner_type(self):
+        for v in _VDOC["vendors"]:
+            pt = v.get("partner_type")
+            self.assertIsInstance(pt, dict, f"{v['id']}: missing partner_type")
+            self.assertIn(pt.get("primary"), self.SET, f"{v['id']}: bad primary {pt.get('primary')!r}")
+            self.assertIn(pt.get("confidence"), {"A", "B", "C", "D"}, f"{v['id']}: partner_type needs confidence")
+            for t in (pt.get("also") or []):
+                self.assertIn(t, self.SET, f"{v['id']}: bad also-type {t!r}")
+                self.assertNotEqual(t, pt["primary"], f"{v['id']}: also duplicates primary")
+
+    def test_partner_type_distribution_sane(self):
+        from collections import Counter
+        dist = Counter(v["partner_type"]["primary"] for v in _VDOC["vendors"])
+        self.assertGreater(dist["isv"], 150, f"most software vendors should be ISV: {dist}")
+        self.assertGreater(dist["oem-device"], 20, f"expected the device/imaging OEMs: {dist}")
+        byid = {v["id"]: v for v in _VDOC["vendors"]}
+        # spot-checks: an imaging OEM and a pure ISV
+        for oem in ("philips", "canon-medical", "ge-healthcare"):
+            if oem in byid:
+                self.assertEqual(byid[oem]["partner_type"]["primary"], "oem-device", f"{oem} should be oem-device")
+
+
 class TestVendorListingNeuro(unittest.TestCase):
     """v4.1: public-listing status + brain/neuro flag enrichment (web-verified). §8: every
     listing verdict carries a confidence AND a source; a ticker only on a public status."""

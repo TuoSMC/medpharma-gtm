@@ -413,6 +413,20 @@ tr:last-child td{border-bottom:0}
 .ccedge{border-color:oklch(0.65 0.14 60);color:oklch(0.52 0.14 60)}
 .ccstor{border-color:var(--muted);color:var(--muted)}
 .ccsaas{border-color:var(--line);color:var(--muted);font-weight:500}
+/* partner-type pills (how SMCI engages the vendor) + richness + redesigned vendor-card sections */
+.ptpill{font-weight:700}
+.ptisv{border-color:var(--accent);color:var(--accent)}
+.ptsi{border-color:oklch(0.55 0.14 150);color:oklch(0.5 0.14 150)}
+.ptmsp{border-color:oklch(0.6 0.14 50);color:oklch(0.52 0.14 50)}
+.ptoem{border-color:oklch(0.56 0.15 300);color:oklch(0.55 0.15 300)}
+.ptchan{border-color:var(--muted);color:var(--muted);font-weight:600}
+.vspec{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s3);color:var(--muted);font-size:var(--f-3);margin:var(--s2) 0 var(--s1)}
+.vspec b{color:var(--ink);font-weight:600}
+.vsec{font-size:var(--f-1);text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:var(--s3) 0 var(--s0);font-weight:700}
+.vprose{font-size:var(--f-3);line-height:1.55;color:var(--ink);margin:0 0 var(--s1)}
+.vcard{margin-bottom:var(--s3);padding:var(--s5)}
+.rich-sparse{color:oklch(0.62 0.15 55);font-weight:600}
+.rich-rich{color:oklch(0.5 0.14 150);font-weight:600}
 .ccchip{cursor:pointer;border:1px solid var(--line);border-radius:var(--r-tag);padding:var(--s2) var(--s3);display:inline-flex;gap:var(--s2);align-items:center;background:var(--panel)}
 .ccchip:hover{border-color:var(--accent);background:var(--accentbg)}
 .ccchip .dn{font-weight:700;color:var(--muted);font-size:var(--f-2)}
@@ -567,6 +581,33 @@ function usShareOf(v){return (typeof v.us_market_share_pct==='number')?v.us_mark
 // public-listing status (web-verified) + brain/neuro clinical flag — enrichment from data/vendors.yaml
 function listedOf(v){return v.listing||null;}
 function neuroOf(v){return v.neuro===true;}
+// partner-type (web-verified GTM channel role) — how SMCI engages the vendor. v.partner_type={primary,also[]}
+function partnerTypeOf(v){return v.partner_type||null;}
+// [label_en, label_zh, SMCI motion en, zh, cssclass]
+const PT_META={
+ isv:['ISV','ISV','co-sell / OEM / reference architecture','共銷 / OEM / 參考架構','ptisv'],
+ var:['VAR','VAR','value-added reseller — channel co-sell','加值轉售 — 通路共銷','ptchan'],
+ si:['SI','SI','system integrator — spec SMCI into the build','系統整合 — 規格帶入','ptsi'],
+ msp:['MSP','MSP','managed operator — they buy the iron to host','代管營運 — 他們買鐵來 host','ptmsp'],
+ 'channel-partner':['Channel','通路','distribution / alliance partner','分銷 / 聯盟','ptchan'],
+ reseller:['Reseller','轉售','moves product — volume channel','走量通路','ptchan'],
+ 'oem-device':['OEM/Device','設備商','embedded BOM — or a competitor','嵌入 BOM — 或競品','ptoem']};
+function ptLabel(k){const m=PT_META[k];return m?(LANG==='zh'?m[1]:m[0]):k;}
+function ptMotion(k){const m=PT_META[k];return m?(LANG==='zh'?m[3]:m[2]):'';}
+function ptClass(k){return (PT_META[k]||[])[4]||'ptisv';}
+// data-richness tier — how complete this vendor's record is (find enrichment targets)
+function richnessOf(v){
+  let n=0;
+  if(v.market_share)n++; if(typeof v.market_share_pct==='number'||typeof v.us_market_share_pct==='number')n++;
+  if((v.partnerships||[]).length)n++; if((v.partnerships||[]).length>=2)n++;
+  if(v.fortune)n++; if(v.listing&&v.listing.status&&v.listing.status!=='unknown')n++;
+  if(v.leadership&&!/unknown|not /i.test(v.leadership))n++; if(v.founded)n++;
+  if((v.sources||[]).length>=2)n++; if(v.partner_type)n++; if(neuroOf(v))n++;
+  const tier=n>=7?'rich':(n>=4?'medium':'sparse');
+  return {score:n, tier:tier};
+}
+const RICH_LABEL={rich:['rich','資料豐富'],medium:['medium','中等'],sparse:['sparse','稀疏']};
+function richLabel(t){const m=RICH_LABEL[t];return m?(LANG==='zh'?m[1]:m[0]):t;}
 const LISTED_LABEL={public:['Public','上市'],subsidiary_of_public:['Sub · public parent','母公司上市'],subsidiary_of_private:['Sub · private','私有·子公司'],private:['Private','私有'],acquired:['Acquired','被併'],'nonprofit_or_gov':['Nonprofit / Gov','非營利 / 政府'],unknown:['Unknown','未知']};
 function listedLabel(l){const m=LISTED_LABEL[(l&&l.status)]||LISTED_LABEL.unknown;return T(m[0],m[1]);}
 // bundle-fit score (0-100): hardware pull (the anchor) + coverage breadth + US share + Fortune + US-region
@@ -1037,7 +1078,7 @@ function renderTaxonomy(){
 
 // ================= VENDORS (enriched registry) =================
 // ===== shared vendor filter model (drives both Registry and Bundle ranking) =====
-const VF={region:'',state:'',fortune:'',cover:new Set(),share:'',listed:'',neuro:''};
+const VF={region:'',state:'',fortune:'',cover:new Set(),share:'',listed:'',neuro:'',pt:'',rich:''};
 function usStatesPresent(){const s=new Set();(DATA.vendors.vendors||[]).forEach(v=>{const p=hqParse(v);if(p.country==='USA'&&p.state)s.add(p.state);});return [...s].sort();}
 function vfMatch(v){
   const p=hqParse(v);
@@ -1051,9 +1092,11 @@ function vfMatch(v){
   if(VF.share){const sh=usShareOf(v);if(VF.share==='has'){if(sh==null)return false;}else if(sh==null||sh<+VF.share)return false;}
   if(VF.listed){const l=listedOf(v);const s=l&&l.status;const pub=s==='public'||s==='subsidiary_of_public';const pri=s==='private'||s==='subsidiary_of_private';if(VF.listed==='public'&&!pub)return false;if(VF.listed==='private'&&!pri)return false;if(VF.listed==='other'&&(pub||pri))return false;}
   if(VF.neuro==='yes'&&!neuroOf(v))return false;
+  if(VF.pt){const pt=partnerTypeOf(v);const all=pt?[pt.primary].concat(pt.also||[]):[];if(!all.includes(VF.pt))return false;}
+  if(VF.rich&&richnessOf(v).tier!==VF.rich)return false;
   return true;
 }
-function vfActive(){return VF.region||VF.state||VF.fortune||VF.cover.size||VF.share||VF.listed||VF.neuro;}
+function vfActive(){return VF.region||VF.state||VF.fortune||VF.cover.size||VF.share||VF.listed||VF.neuro||VF.pt||VF.rich;}
 function renderFilterBar(host,onChange){
   const bar=el('div',{class:'filterbar'});
   const mk=(label,opts,cur,cb)=>{const sel=el('select',{class:'vfsel'});opts.forEach(([val,txt])=>{const o=el('option',{value:val},txt);if(val===cur)o.selected=true;sel.append(o);});sel.onchange=()=>cb(sel.value);return el('label',{class:'vflab'},el('span',{},label),sel);};
@@ -1063,7 +1106,9 @@ function renderFilterBar(host,onChange){
   bar.append(mk(T('US market share','美國市佔'),[['',T('Any','不限')],['has',T('Has a figure','有數據')],['1','≥1%'],['5','≥5%'],['10','≥10%'],['25','≥25%']],VF.share,val=>{VF.share=val;onChange();}));
   bar.append(mk(T('Listing','上市/私有'),[['',T('All','全部')],['public',T('Public','上市')],['private',T('Private','私有')],['other',T('Other','其他')]],VF.listed,val=>{VF.listed=val;onChange();}));
   bar.append(mk(T('Neuro','神經'),[['',T('All','全部')],['yes',T('Neuro only','只神經')]],VF.neuro,val=>{VF.neuro=val;onChange();}));
-  const clr=el('button',{class:'vfclear'},T('Clear','清除'));clr.onclick=()=>{VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';onChange();};
+  bar.append(mk(T('Partner type','夥伴類型'),[['',T('All','全部')],['isv','ISV'],['var','VAR'],['si','SI'],['msp','MSP'],['channel-partner',T('Channel','通路')],['reseller',T('Reseller','轉售')],['oem-device','OEM/Device']],VF.pt,val=>{VF.pt=val;onChange();}));
+  bar.append(mk(T('Data richness','資料豐富度'),[['',T('All','全部')],['rich',T('Rich','豐富')],['medium',T('Medium','中等')],['sparse',T('Sparse','稀疏')]],VF.rich,val=>{VF.rich=val;onChange();}));
+  const clr=el('button',{class:'vfclear'},T('Clear','清除'));clr.onclick=()=>{VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';VF.pt='';VF.rich='';onChange();};
   if(vfActive())bar.append(clr);
   const covwrap=el('div',{class:'covchips'});covwrap.append(el('span',{class:'vflab',style:'flex-direction:row;align-items:center'},el('span',{},T('Coverage','涵蓋'))));
   Object.keys(DOM_EN).forEach(k=>{const on=VF.cover.has(k);const c=el('span',{class:'covchip'+(on?' on':'')},domLabel(k));c.onclick=()=>{if(VF.cover.has(k))VF.cover.delete(k);else VF.cover.add(k);onChange();};covwrap.append(c);});
@@ -1084,35 +1129,44 @@ function renderRegistryInto(host){
   root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
   const vhost=el('div',{});root.append(vhost);
   function card(v){
-    const c=el('div',{class:'card'});c.style.marginBottom='8px';
-    const h=el('div',{class:'row'},el('h3',{style:'margin:0'},v.name));
+    const c=el('div',{class:'card vcard'});
+    const p=hqParse(v), lg=listedOf(v), fo=fortuneOf(v), us=usShareOf(v), pt=partnerTypeOf(v), rich=richnessOf(v);
+    // header: name + market-leaderboard + hardware-value badges
+    const h=el('div',{class:'row',style:'align-items:baseline'},el('h3',{style:'margin:0;font-size:var(--f-6)'},v.name));
     const bd=lbBadge(v.id);
     if(bd){const lp=el('span',{class:'pill',style:'cursor:pointer;background:var(--accentbg);color:var(--accent);font-weight:700'},bd);lp.title=T('on the market leaderboard — open','在市場榜單上 — 開啟');lp.onclick=()=>goVendorsBoard();h.append(lp);}
     valBadges(vendorVal(v),h);
-    // Fortune + Listing shown once, in the kv rows below (with parent + ticker + evidence) — not also as head pills.
-    const fo=fortuneOf(v);
-    const us=usShareOf(v);if(us!=null){const up=el('span',{class:'pill uspill'},'US '+us+'%');if(v.us_share_basis)up.title=v.us_share_basis;h.append(up);}
-    const lg=listedOf(v);
-    if(neuroOf(v)){const np=el('span',{class:'pill neuropill'},T('Neuro','神經'));np.title=T('brain / neuro / stroke domain','腦 / 神經 / 中風領域');h.append(np);}
-    if(/exclud/i.test(v.note||''))h.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
     c.append(h);
-    const kv=el('dl',{class:'kv'});
-    const add=(k,x)=>{if(x==null||x==='')return;kv.append(el('dt',{},k),el('dd',{},String(x)));};
-    const p=hqParse(v);
-    add(T('HQ','總部'),v.headquarters); add(T('Region','地區'),p.region+(p.state?' · '+p.state:'')); add(T('Founded','成立'),v.founded); add(T('Leadership','負責人'),v.leadership);
-    add(T('Market position','市場地位'),v.market_position); add(T('Market share','市佔'),v.market_share);
-    if(fo)add('Fortune',(FORT_LABEL[fo.list]+(fo.rank?' #'+fo.rank:''))+(fo.parent&&fo.parent!==v.name?' ('+fo.parent+')':''));
-    if(lg)add(T('Listing','上市/私有'),listedLabel(lg)+(lg.ticker?' · '+lg.ticker:'')+(lg.parent?' ('+lg.parent+')':'')+' · '+T('evidence ','證據 ')+(lg.confidence||'?'));
-    add(T('Deployment','部署'),(v.deployment_models||[]).join(', '));
-    c.append(kv);
-    const cov=coverageOf(v);if(cov.length){const cg=el('div',{class:'row'});cg.append(el('span',{class:'tagk'},T('coverage','涵蓋')));cov.forEach(k=>cg.append(el('span',{class:'gtag'},domLabel(k))));c.append(cg);}
-    const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>{const cc=CATBYID[x];const ch=el('span',{class:'chip',style:'cursor:pointer'},cc?nm(cc):x);ch.title=T('view category','看類別');ch.onclick=()=>goCategory(x);seg.append(ch);});c.append(seg);
-    if(v.history)c.append(el('div',{class:'notes'},v.history));
+    // tag strip: partner-type (how SMCI engages) · listing · fortune · US share · neuro · record richness
+    const tags=el('div',{class:'row',style:'gap:var(--s1) var(--s2);margin:var(--s1) 0'});
+    if(pt){[pt.primary].concat(pt.also||[]).forEach((k,i)=>{const pp=el('span',{class:'pill ptpill '+ptClass(k)},ptLabel(k));pp.title=(i===0?T('primary partner-type — ','主要類型 — '):'')+ptMotion(k);tags.append(pp);});}
+    if(lg&&lg.status!=='unknown'){const x=el('span',{class:'pill listpill'},listedLabel(lg)+(lg.ticker?' · '+lg.ticker:''));x.title=(lg.parent?lg.parent+' · ':'')+T('evidence ','證據 ')+(lg.confidence||'?');tags.append(x);}
+    if(fo){const fp=el('span',{class:'pill fortpill'},FORT_LABEL[fo.list]+(fo.rank?' #'+fo.rank:''));fp.title=fo.parent||v.name;tags.append(fp);}
+    if(us!=null){const up=el('span',{class:'pill uspill'},'US '+us+'%');if(v.us_share_basis)up.title=v.us_share_basis;tags.append(up);}
+    if(neuroOf(v))tags.append(el('span',{class:'pill neuropill'},T('Neuro','神經')));
+    tags.append(el('span',{class:'pill',title:T('record completeness','資料完整度')+' · '+rich.score},el('span',{class:rich.tier==='sparse'?'rich-sparse':(rich.tier==='rich'?'rich-rich':'')},richLabel(rich.tier))));
+    if(/exclud/i.test(v.note||''))tags.append(el('span',{class:'pill'},'§5.4 co-sell excluded'));
+    c.append(tags);
+    // compact identity spec strip
+    const spec=el('div',{class:'vspec'});
+    const sp=(k,x)=>{if(x==null||x==='')return;spec.append(el('span',{},k+' ',el('b',{},String(x))));};
+    sp(T('HQ','總部'),v.headquarters); sp(T('Region','地區'),p.region+(p.state?' · '+p.state:'')); sp(T('Founded','成立'),v.founded);
+    sp(T('Deploy','部署'),(v.deployment_models||[]).join(', '));
+    if(v.leadership&&!/unknown/i.test(v.leadership))sp(T('Lead','負責人'),v.leadership);
+    c.append(spec);
+    if(pt)c.append(el('div',{class:'vspec',style:'margin-top:0'},el('span',{},T('SMCI motion','SMCI 打法')+' ',el('b',{},ptMotion(pt.primary)))));
+    if(lg&&lg.status!=='unknown')c.append(el('div',{class:'vspec',style:'margin-top:0'},el('span',{},T('Listing','上市/私有')+' ',el('b',{},listedLabel(lg)+(lg.ticker?' · '+lg.ticker:'')+(lg.parent?' ('+lg.parent+')':'')))));
+    // prose sections
+    if(v.market_position){c.append(el('div',{class:'vsec'},T('Market position','市場地位')));c.append(el('div',{class:'vprose'},v.market_position));}
+    if(v.market_share){c.append(el('div',{class:'vsec'},T('Market share','市佔')));c.append(el('div',{class:'vprose'},v.market_share));}
+    const cov=coverageOf(v);if(cov.length){c.append(el('div',{class:'vsec'},T('Coverage','涵蓋')));const cg=el('div',{class:'row'});cov.forEach(k=>cg.append(el('span',{class:'gtag'},domLabel(k))));c.append(cg);}
+    if((v.categories||[]).length){c.append(el('div',{class:'vsec'},T('Software categories','軟體類別')+' · '+(v.categories||[]).length));const seg=el('div',{class:'row'});(v.categories||[]).forEach(x=>{const cc=CATBYID[x];const ch=el('span',{class:'chip',style:'cursor:pointer'},cc?nm(cc):x);ch.title=T('view category','看類別');ch.onclick=()=>goCategory(x);seg.append(ch);});c.append(seg);}
+    if(v.history){c.append(el('div',{class:'vsec'},T('About','簡介')));c.append(el('div',{class:'vprose'},v.history));}
+    if((v.partnerships||[]).length){c.append(el('div',{class:'vsec'},T('Partnerships','合作夥伴')+' · '+(v.partnerships||[]).length));const pr=el('div',{class:'row'});(v.partnerships||[]).forEach(pp=>{const hl=(pp.kind==='hardware'||pp.kind==='cloud');const ch=el('span',{class:'pill'+(hl?' lead':'')},pp.partner);ch.title=pp.kind+(pp.note?' — '+pp.note:'')+(pp.source?'  ['+pp.source+']':'');pr.append(ch);});c.append(pr);}
     const srcs=[...((v.sources&&v.sources.length)?v.sources:(v.source?[v.source]:[]))];
     if(lg&&lg.source&&/^https?:\/\//.test(lg.source)&&!srcs.includes(lg.source))srcs.push(lg.source);
-    if(srcs.length){const sr=el('div',{class:'row'});sr.append(el('span',{class:'tagk'},T('sources','來源')));
-      srcs.forEach(u=>{const isurl=/^https?:\/\//.test(u);
-        sr.append(isurl?el('a',{href:u,target:'_blank',class:'pill'},u.replace(/^https?:\/\//,'').split('/')[0]):el('span',{class:'pill'},u.slice(0,40)));});
+    if(srcs.length){c.append(el('div',{class:'vsec'},T('Sources','來源')));const sr=el('div',{class:'row'});
+      srcs.forEach(u=>{const isurl=/^https?:\/\//.test(u);sr.append(isurl?el('a',{href:u,target:'_blank',class:'pill'},u.replace(/^https?:\/\//,'').split('/')[0]):el('span',{class:'pill'},u.slice(0,40)));});
       c.append(sr);}
     return c;
   }

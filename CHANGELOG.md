@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-08-10 — vendor page: partner-type classification + data-richness + card redesign + v4.7
+Tuo: the vendor card is too cramped / feels thin, and wanted vendors classified by GTM partner-type (ISV / VAR / SI / MSP / channel-partner / reseller) + data richness. (Data wasn't actually sparse — every vendor has HQ/history/market-position/sources/listing; the card layout was crushing it, and partner-type was missing.)
+- **partner_type** (new web-verified public fact) — an 11-agent sweep (10 classify + 1 QA, grounded in our vendor context + web) tagged all **309** vendors, multi-tag, from the view of how SMCI engages them: **244 ISV · 58 OEM/device · 4 SI · 2 MSP · 1 channel** (86 multi-tag; 182 confidence-B). Each carries `{primary, also[], confidence}` in vendors.yaml.
+- **Card redesign** — replaced the crushed kv-dump with a sectioned layout: header + a tag strip (partner-type · listing · Fortune · US-share · neuro · richness), a compact one-line spec strip (HQ · Region · Founded · Deploy · Lead), an **SMCI-motion** line per partner-type, and prose sections with headers + breathing room (Market position / Market share / Coverage / Software categories / About / **Partnerships** [now surfaced] / Sources).
+- **Data-richness tier** (derived: rich / medium / sparse from field completeness) — a badge on each card + a filter to find enrichment targets.
+- **Filters** — added Partner-type + Data-richness to the vendor filter bar (both drive the registry + bundle ranking).
+- 12x+ tests green (+partner-type lock-in); app=docs; browser-verified (Philips → OEM/Device+ISV pills + "SMCI motion: embedded BOM"; partner-type filter oem-device = 69/309; sectioned card fills cleanly), no emoji. **v4.7.**
+
 ## 2026-08-10 — fix: narrow-viewport dead space / overflow (responsive) + v4.5
 Tuo flagged idiotic left/right dead space + messy layout on a narrow view. Root cause: several grids used `minmax(340px/430px/300px, 1fr)` — a hard min-width WIDER than a narrow viewport, so the content overflowed and the page couldn't shrink (min-content-width ~360px), leaving dead space + cramming below that. Real phones (≥390px) were fine; it broke on very narrow widths (the preview pane / a narrowed window). Fixes, desktop untouched:
 - `minmax(Npx,1fr)` → `minmax(min(Npx,100%),1fr)` on `.grid` (340), `.tiles` (300), the leaderboard grid (430), and `.ptbl` — columns can now shrink below their min instead of forcing overflow.
