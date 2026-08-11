@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-08-10 — fix: narrow-viewport dead space / overflow (responsive) + v4.5
+Tuo flagged idiotic left/right dead space + messy layout on a narrow view. Root cause: several grids used `minmax(340px/430px/300px, 1fr)` — a hard min-width WIDER than a narrow viewport, so the content overflowed and the page couldn't shrink (min-content-width ~360px), leaving dead space + cramming below that. Real phones (≥390px) were fine; it broke on very narrow widths (the preview pane / a narrowed window). Fixes, desktop untouched:
+- `minmax(Npx,1fr)` → `minmax(min(Npx,100%),1fr)` on `.grid` (340), `.tiles` (300), the leaderboard grid (430), and `.ptbl` — columns can now shrink below their min instead of forcing overflow.
+- `main` side padding `22px` → `clamp(12px,4vw,22px)` — reclaims side space on narrow screens, stays 22px on desktop.
+- Verified: at 158–350px content fills the full width, 0 overflow elements, 0 horizontal scroll; at desktop padding + grids are unchanged. 120 GREEN; app=docs. **v4.5.**
+
 ## 2026-08-10 — P2 declutter: token system (type ramp) + structural edits (design workflow) + v4.4
 Ran a 4-agent P2 design-system workflow (3 diverse token proposals — compact / balanced / airy → 1 judge, grounded in the real CSS value inventory: 12 gaps · 12 radii · 19 font-sizes · 26 pill classes). Verified key fact: **0 pre-existing `--s*` usages** — the scale was defined-but-dead, so redefining it moves nothing until each ad-hoc px is migrated. Landed the full structural + token migration of P2:
 - **Unified `:root` token set** — spacing `--s0..--s6` (2/4/6/8/12/16/24), radius `--r-tag/card/pill/dot`, type ramp `--f-1..--f-6` + `--f-d1..d3`. (Verified fact: 0 pre-existing `--s*` usages — the scale was defined-but-dead.)

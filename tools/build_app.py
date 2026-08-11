@@ -115,9 +115,9 @@ nav{display:flex;gap:var(--s1);flex-wrap:wrap;padding:var(--s4) 22px 0;backgroun
 nav button{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:600;
   padding:var(--s3) var(--s5);border-radius:var(--r-tag) var(--r-tag) 0 0;cursor:pointer;border-bottom:2px solid transparent}
 nav button.on{color:var(--accent);border-bottom-color:var(--accent);background:var(--accentbg)}
-main{max-width:1180px;margin:0 auto;padding:var(--s6) 22px 60px}
+main{max-width:1180px;margin:0 auto;padding:var(--s6) clamp(12px,4vw,22px) 60px}
 .tab{display:none}.tab.on{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:var(--s4)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:var(--s4)}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s5) 15px}
 .card h3{margin:0 0 2px;font-size:var(--f-5)}
 .zh{color:var(--muted);font-size:var(--f-3);margin-bottom:8px}
@@ -189,7 +189,7 @@ main{max-width:1180px;margin:0 auto;padding:var(--s6) 22px 60px}
 .play-h{display:flex;align-items:baseline;gap:var(--s4);margin:14px 0 5px;flex-wrap:wrap}
 .play-h .pl{font-weight:700;font-size:var(--f-4)}
 .play-h .ps{font-size:var(--f-2);color:var(--muted)}
-.ptbl{display:grid;grid-template-columns:minmax(150px,1.25fr) minmax(170px,2fr) auto;border:1px solid var(--line);border-radius:var(--r-tag);overflow:hidden}
+.ptbl{display:grid;grid-template-columns:minmax(min(150px,40%),1.25fr) minmax(min(140px,40%),2fr) auto;border:1px solid var(--line);border-radius:var(--r-tag);overflow:hidden}
 .ptbl .ph{font-size:var(--f-1);font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);background:var(--panel);padding:var(--s2) var(--s4);border-bottom:1px solid var(--line)}
 .ptbl .pc{padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);font-size:var(--f-3);display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;min-width:0}
 .ptbl .pc.last{border-bottom:none}
@@ -352,7 +352,7 @@ tr:last-child td{border-bottom:0}
 .hero{padding:var(--s2) 0 var(--s5)}
 .hero h2{margin:0 0 4px;font-size:var(--f-d2);letter-spacing:.2px}
 .hero p{margin:0;color:var(--muted);font-size:var(--f-4);max-width:760px}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--s4);margin:14px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:var(--s4);margin:14px 0}
 .tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s5);cursor:pointer;transition:border-color .12s,transform .12s}
 .tile:hover{border-color:var(--accent);transform:translateY(-2px)}
 .tile h3{margin:0 0 2px;font-size:var(--f-6)}
@@ -1292,7 +1292,7 @@ function renderLeaderboardsInto(host){
   const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;
   if(!LB){root.append(el('div',{class:'muted'},T('No leaderboards data.','無榜單資料。')));return;}
   root.append(el('div',{class:'rollup'},T('Market vendor leaderboards — ranked by market share / installed base. Every entry §8-sourced (a real figure or a sourced market position); grouped by sub-market. A vendor that plays both sides (e.g. GE, Philips) appears on both boards.','市場廠商榜 — 按市佔／裝機量排名。每一項 §8 有來源(真數字或有來源的市場地位),依次級市場分組。雙棲廠商(如 GE、Philips)兩榜都上。')));
-  const wrap=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fill,minmax(430px,1fr))'});
+  const wrap=el('div',{class:'grid',style:'grid-template-columns:repeat(auto-fill,minmax(min(430px,100%),1fr))'});
   [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([key,board])=>{
     if(!board)return;
     const col=el('div',{class:'card'});
