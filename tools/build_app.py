@@ -959,7 +959,7 @@ function renderTaxonomy(){
       chip.onclick=()=>goPlay(p.id);prow.append(chip);});
     box.append(prow);
     // door: compute type (SKU) — the actionable "which SMCI box" cut (buyer axis carries ~no signal; this does).
-    // Chip number = ★flagship (deal size) · direct-HOT (can we sell direct) — NOT raw category count, which
+    // Chip number = flagship (deal size) · direct-HOT (can we sell direct) — NOT raw category count, which
     // over-weights low-value buckets (saas-light 8, cpu-db 14 look big but carry ~no flagship deals).
     const crow=el('div',{class:'drow'});crow.append(el('span',{class:'dlab'},T('Compute (SKU)','計算(SKU)')));
     CC_ORDER.forEach(cc=>{const mem=cats.filter(c=>computeClassOf(c)===cc);if(!mem.length)return;
