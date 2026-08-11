@@ -445,6 +445,8 @@ tr:last-child td{border-bottom:0}
 .vrsum{font-size:var(--f-2);color:var(--muted);margin-top:var(--s0);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .vghdr{font-size:var(--f-1);text-transform:uppercase;letter-spacing:.5px;color:var(--accent);font-weight:700;margin:var(--s3) 0 var(--s0);padding:var(--s1) 0 var(--s0);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1;background:var(--bg)}
 .vempty{padding:var(--s5);text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r-card);display:flex;flex-direction:column;gap:var(--s3);align-items:center;margin-top:var(--s3)}
+.vlegend{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);font-size:var(--f-1);color:var(--muted);margin:0 0 var(--s2);align-items:center}
+.vlegend .vflag,.vlegend .vhot{margin-right:var(--s0)}
 .vrow:focus-visible,.vlist:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .vdetail{position:sticky;top:118px;align-self:start}
 @media(max-width:840px){.vdetail{position:static}}
@@ -1103,7 +1105,7 @@ function renderTaxonomy(){
 
 // ================= VENDORS (enriched registry) =================
 // ===== shared vendor filter model (drives both Registry and Bundle ranking) =====
-const VF={region:'',state:'',fortune:'',cover:new Set(),share:'',listed:'',neuro:'',pt:'',rich:''};
+const VF={region:'',state:'',fortune:'',cover:new Set(),share:'',listed:'',neuro:'',pt:new Set(),rich:''};
 function usStatesPresent(){const s=new Set();(DATA.vendors.vendors||[]).forEach(v=>{const p=hqParse(v);if(p.country==='USA'&&p.state)s.add(p.state);});return [...s].sort();}
 function vfMatch(v){
   const p=hqParse(v);
@@ -1117,19 +1119,22 @@ function vfMatch(v){
   if(VF.share){const sh=usShareOf(v);if(VF.share==='has'){if(sh==null)return false;}else if(sh==null||sh<+VF.share)return false;}
   if(VF.listed){const l=listedOf(v);const s=l&&l.status;const pub=s==='public'||s==='subsidiary_of_public';const pri=s==='private'||s==='subsidiary_of_private';if(VF.listed==='public'&&!pub)return false;if(VF.listed==='private'&&!pri)return false;if(VF.listed==='other'&&(pub||pri))return false;}
   if(VF.neuro==='yes'&&!neuroOf(v))return false;
-  if(VF.pt){const pt=partnerTypeOf(v);const all=pt?[pt.primary].concat(pt.also||[]):[];if(!all.includes(VF.pt))return false;}
+  if(VF.pt.size){const pt=partnerTypeOf(v);const all=pt?[pt.primary].concat(pt.also||[]):[];let ok=false;VF.pt.forEach(k=>{if(all.includes(k))ok=true;});if(!ok)return false;}
   if(VF.rich&&richnessOf(v).tier!==VF.rich)return false;
   return true;
 }
-function vfActive(){return VF.region||VF.state||VF.fortune||VF.cover.size||VF.share||VF.listed||VF.neuro||VF.pt||VF.rich;}
+function vfActive(){return VF.region||VF.state||VF.fortune||VF.cover.size||VF.share||VF.listed||VF.neuro||VF.pt.size||VF.rich;}
 function renderFilterBar(host,onChange){
   const mk=(label,opts,cur,cb)=>{const sel=el('select',{class:'vfsel'});opts.forEach(([val,txt])=>{const o=el('option',{value:val},txt);if(val===cur)o.selected=true;sel.append(o);});sel.onchange=()=>cb(sel.value);return el('label',{class:'vflab'},el('span',{},label),sel);};
   // Cluster 1 — HOW I SELL (primacy): the axes that drive the deal (partner-type = SMCI motion, coverage = which play, richness = enrichment target)
   const sell=el('div',{class:'fbcluster sell'});sell.append(el('div',{class:'fbclabel'},T('How I sell','我怎麼賣')));
   const sr=el('div',{class:'filterbar'});
-  sr.append(mk(T('Partner type','夥伴類型'),[['',T('All','全部')],['isv','ISV'],['var','VAR'],['si','SI'],['msp','MSP'],['channel-partner',T('Channel','通路')],['reseller',T('Reseller','轉售')],['oem-device','OEM/Device']],VF.pt,val=>{VF.pt=val;onChange();}));
   sr.append(mk(T('Data richness','資料豐富度'),[['',T('All','全部')],['rich',T('Rich','豐富')],['medium',T('Medium','中等')],['sparse',T('Sparse','稀疏')]],VF.rich,val=>{VF.rich=val;onChange();}));
   sell.append(sr);
+  // partner-type: multi-select chips (triage "ISV or SI" in one pass)
+  const ptwrap=el('div',{class:'covchips'});ptwrap.append(el('span',{class:'vflab',style:'flex-direction:row;align-items:center'},el('span',{},T('Partner type','夥伴類型'))));
+  ['isv','oem-device','si','msp','var','channel-partner','reseller'].forEach(k=>{const on=VF.pt.has(k);const c=el('span',{class:'covchip'+(on?' on':'')},ptLabel(k));c.title=ptMotion(k);c.onclick=()=>{if(VF.pt.has(k))VF.pt.delete(k);else VF.pt.add(k);onChange();};ptwrap.append(c);});
+  sell.append(ptwrap);
   const covwrap=el('div',{class:'covchips'});covwrap.append(el('span',{class:'vflab',style:'flex-direction:row;align-items:center'},el('span',{},T('Coverage (play)','涵蓋(打法)'))));
   Object.keys(DOM_EN).forEach(k=>{const on=VF.cover.has(k);const c=el('span',{class:'covchip'+(on?' on':'')},domLabel(k));c.onclick=()=>{if(VF.cover.has(k))VF.cover.delete(k);else VF.cover.add(k);onChange();};covwrap.append(c);});
   sell.append(covwrap);host.append(sell);
@@ -1143,7 +1148,7 @@ function renderFilterBar(host,onChange){
   wr.append(mk(T('Listing','上市/私有'),[['',T('All','全部')],['public',T('Public','上市')],['private',T('Private','私有')],['other',T('Other','其他')]],VF.listed,val=>{VF.listed=val;onChange();}));
   wr.append(mk(T('Neuro','神經'),[['',T('All','全部')],['yes',T('Neuro only','只神經')]],VF.neuro,val=>{VF.neuro=val;onChange();}));
   who.append(wr);host.append(who);
-  const clr=el('button',{class:'vfclear'},T('Clear all filters','清除所有篩選'));clr.onclick=()=>{VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';VF.pt='';VF.rich='';onChange();};
+  const clr=el('button',{class:'vfclear'},T('Clear all filters','清除所有篩選'));clr.onclick=()=>{VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';VF.pt.clear();VF.rich='';onChange();};
   if(vfActive())host.append(clr);
 }
 function renderRegistryInto(host){
@@ -1162,14 +1167,36 @@ function renderRegistryInto(host){
   const gseg=el('div',{class:'seg',style:'margin:0'});
   [['none',T('none','不分')],['partner-type',T('partner type','夥伴類型')],['richness',T('richness','豐富度')]].forEach(([k,lab])=>{const b=el('button',{'data-g':k,class:k==='none'?'on':''},lab);b.onclick=()=>{groupMode=k;[...gseg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===k));render();};gseg.append(b);});
   const fbHost=el('div',{});root.append(fbHost);
-  root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('group','分組')),gseg,el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
+  root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('group','分組')),gseg,el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,(function(){const b=el('button',{class:'vfclear'},T('Copy link','複製連結'));b.title=T('share this filtered view','分享這個篩選視圖');b.onclick=()=>doCopyLink(b);return b;})(),cnt));
+  // persistent badge legend (stays above the scrolling list, so the key never scrolls away)
+  root.append(el('div',{class:'vlegend'},
+    el('span',{},el('b',{class:'vflag'},T('flagship','旗艦')),' '+T('= biggest SMCI box','= 最大 SMCI 機箱')),
+    el('span',{},el('b',{class:'vhot'},'HOT'),' '+T('= direct sale','= 直銷(客戶自購)')),
+    el('span',{},T('sort "by opportunity" = most flagship + HOT','「依機會」= 最多旗艦 + HOT')),
+    el('span',{},T('partner-type pill = how SMCI engages the vendor','夥伴類型徽章 = SMCI 怎麼接觸該廠商'))));
   const listPane=el('div',{class:'vlist'}),detailPane=el('div',{class:'vdetail'});
   listPane.setAttribute('role','listbox');listPane.setAttribute('aria-label',T('Vendors','廠商'));listPane.tabIndex=0;
   // keyboard scan: Arrow up/down moves the selection, Enter confirms — the 309-row triage motion
   listPane.onkeydown=e=>{if(e.key!=='ArrowDown'&&e.key!=='ArrowUp'&&e.key!=='Enter')return;const rows=[...listPane.querySelectorAll('.vrow')];if(!rows.length)return;e.preventDefault();let i=rows.findIndex(r=>r.classList.contains('sel'));if(e.key==='ArrowDown')i=i<0?0:Math.min(rows.length-1,i+1);else if(e.key==='ArrowUp')i=i<0?0:Math.max(0,i-1);else if(i<0)i=0;const r=rows[i];if(r){r.click();r.scrollIntoView({block:'nearest'});}};
   root.append(el('div',{class:'twopane vtwopane'},listPane,detailPane));
   let selected=null;
-  function clearAll(){VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';VF.pt='';VF.rich='';q.value='';refresh();}
+  function clearAll(){VF.region='';VF.state='';VF.fortune='';VF.cover.clear();VF.share='';VF.listed='';VF.neuro='';VF.pt.clear();VF.rich='';q.value='';refresh();}
+  // deep-link: serialise the current triage (filters + group/sort + selected) into a #v/… hash to share
+  function vfSerialize(){const p=[];const add=(k,v)=>{if(v)p.push(k+'='+encodeURIComponent(v));};
+    add('region',VF.region);add('state',VF.state);add('fortune',VF.fortune);add('share',VF.share);add('listed',VF.listed);add('neuro',VF.neuro);add('rich',VF.rich);
+    if(VF.pt.size)add('pt',[...VF.pt].join(','));if(VF.cover.size)add('cover',[...VF.cover].join(','));
+    add('q',q.value);if(groupMode!=='none')add('g',groupMode);if(sortMode!=='value')add('s',sortMode);if(selected)add('sel',selected.id);return p.join('&');}
+  function vfApplyHash(){const h=location.hash||'';if(h.indexOf('#v/')!==0)return false;const p=new URLSearchParams(h.slice(3));const g=k=>p.get(k)||'';
+    VF.region=g('region');VF.state=g('state');VF.fortune=g('fortune');VF.share=g('share');VF.listed=g('listed');VF.neuro=g('neuro');VF.rich=g('rich');
+    VF.pt=new Set(g('pt').split(',').filter(Boolean));VF.cover=new Set(g('cover').split(',').filter(Boolean));
+    q.value=g('q');groupMode=g('g')||'none';sortMode=g('s')||'value';const sid=g('sel');selected=sid?(VBYID[sid]||null):null;
+    [...gseg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.g===groupMode));
+    [...sseg.querySelectorAll('button')].forEach(b=>b.classList.toggle('on',b.dataset.k===sortMode));return true;}
+  function doCopyLink(btn){const url=location.origin+location.pathname+'#v/'+vfSerialize();
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).catch(()=>{});btn.textContent=T('Copied','已複製');}else{location.hash='v/'+vfSerialize();btn.textContent=T('In URL bar','在網址列');}}
+    catch(e){location.hash='v/'+vfSerialize();btn.textContent=T('In URL bar','在網址列');}
+    setTimeout(()=>{btn.textContent=T('Copy link','複製連結');},1500);}
+  window._restoreVendorView=function(){if(vfApplyHash())refresh();};
   // SMCI hardware pull — aggregate the SMCI boxes / compute classes the vendor's software footprint pulls
   function vendorHardware(v){const fams=new Set(),ccs=new Set();let flag=0,hot=0;(v.categories||[]).forEach(id=>{const c=CATBYID[id];if(!c)return;(c.hardware_profile||[]).forEach(h=>fams.add(h));ccs.add(computeClassOf(c));if(c.hardware_opportunity===4)flag++;if((c.hardware_opportunity_by_buyer.customer||0)>=3)hot++;});return {fams:[...fams],ccs:[...ccs],flag:flag,hot:hot};}
   // compact list row — click for the full profile on the right
@@ -1236,7 +1263,7 @@ function renderRegistryInto(host){
   }
   function render(){
     const s=q.value.toLowerCase();
-    const shown=vsAll.filter(vfMatch).filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s))
+    const shown=vsAll.filter(vfMatch).filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,v.history,(v.categories||[]).join(' '),(v.partnerships||[]).map(pp=>pp.partner).join(' ')]).toLowerCase().includes(s))
       .slice().sort(sortMode==='az'?(a,b)=>a.name.localeCompare(b.name):byValue);
     clear(listPane);
     if(groupMode==='none'){shown.forEach(v=>listPane.append(vrow(v)));}
@@ -1473,6 +1500,8 @@ function relabelTabs(){TABS.forEach(([id,label])=>{if(NAVBTN[id])NAVBTN[id].text
 function renderAll(){setBuilt();renderTaxonomy();renderMethod();renderVendors();}
 renderAll();
 $('#langtog').onclick=()=>{LANG=(LANG==='zh')?'en':'zh';$('#langtog').textContent=(LANG==='zh')?'EN':'中文';relabelTabs();renderAll();window.scrollTo(0,0);};
+// deep-link restore: opening a shared #v/… URL lands on the Vendors tab with that filtered view applied
+if((location.hash||'').indexOf('#v/')===0){goTab('vendors');if(window._restoreVendorView)window._restoreVendorView();}
 </script>
 </body>
 </html>"""

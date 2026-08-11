@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-08-11 — vendor page: the remaining critique minors (search / multi-select / legend / deep-link) + v5.2
+Cleared the rest of the impeccable-critique backlog:
+- **Search covers everything** — the registry search now also matches the About/history prose and partnership partner names (search "nvidia" → 59 vendors whose partners include NVIDIA), not just name/HQ/leader/market/categories.
+- **Partner-type is multi-select** — the single-select dropdown became a chip toggle set (VF.pt is now a Set), so you can triage "SI **or** MSP" in one pass (SI 9 + MSP → 17) the way Coverage already worked.
+- **Persistent badge legend** — a compact key (flagship = biggest SMCI box · HOT = direct sale · sort-by-opportunity · partner-type = SMCI motion) sits above the scrolling list, so the vocabulary never scrolls out of view.
+- **Deep-link a view** — a "Copy link" button serialises the current filters + group/sort + selected vendor into a `#v/…` URL; opening that URL lands on the Vendors tab with the exact triage restored (verified roundtrip: `#v/pt=isv,si&g=partner-type` → chips on + grouped). Restore is bound after langtog so a bad hash can never orphan the language toggle.
+- 122 tests green (the langtog-adjacency guard caught the restore insertion and forced the correct order); app=docs; detector clean; browser-verified all four, 0 console errors. **v5.2.**
+
 ## 2026-08-11 — vendor filter bar → two labelled clusters + "value" renamed (impeccable P3) + v5.1
 Implemented the remaining critique findings:
 - **[P3] Filter hierarchy** — the flat equal-weight bar split into two labelled clusters: **"How I sell"** (Partner-type · Data-richness · Coverage-by-play) in a soft accent panel with primacy, and **"Who they are"** (Region · Fortune · US-share · Listing · Neuro) below. The sell-driving axes no longer look identical to the niche Neuro flag; identity and sell-mechanics filters are chunked so the eye reads 2 groups, not 8 controls. (Primacy via an `--accentbg` panel + accent label — NOT a side-stripe, which the slop guard bans.)
