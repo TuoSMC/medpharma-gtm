@@ -4518,3 +4518,664 @@ subcategories:
   - Three Palm Software
   confidence: B
   source: https://www.hologic.com/hologic-products/breast-skeletal/securview-workstations
+- id: digital-pathology-ims-primary-diagnosis
+  parent: digital-pathology
+  name_en: Primary-Diagnosis Image Management System (IMS)
+  name_zh: 初步診斷影像管理系統（IMS）
+  name_full: Whole-Slide Image Management System for Primary Histopathology Diagnosis
+  scope_en: FDA/CE-cleared enterprise platform for viewing, case management, LIS-integrated worklists and long-term archival of whole-slide images for primary clinical diagnosis. The hospital or reference lab owns and operates the infrastructure — a storage-dominant pull (PB-scale WSI archive on capacity/archive tiers, NVMe hot cache for interactive viewing, HA for a mission-critical clinical system) with only light GPU. This is the ~62% primary-diagnosis application share and the SMCI storage/HA anchor of the whole cluster.
+  scope_zh: 經 FDA/CE 核准的企業級平台，供全玻片影像的判讀、案件管理、與 LIS 整合的工作清單及長期歸檔，用於臨床初步診斷。醫院或參考實驗室自行擁有並營運基礎設施——以儲存為主的需求（PB 級 WSI 歸檔置於容量/歸檔層、NVMe 熱快取供互動判讀、任務關鍵臨床系統需高可用），GPU 需求輕微。此為約 62% 的初步診斷應用佔比，也是整個叢集的 SMCI 儲存/高可用錨點。
+  role:
+  - workflow
+  - system-of-record
+  - integration
+  data_modality:
+  - images
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  vendors:
+  - sectra
+  - philips
+  - proscia
+  - fujifilm
+  - leica-biosystems
+  - tribun-health
+  - lumea
+  confidence: B
+  source: KLAS Digital Pathology 2026 (HIT Consultant 2026-02-27; klasresearch.com report 3711) segments IMS vs scanners vs AI, naming Proscia/PathAI/LUMEA (pathology-native) and Sectra/Philips/Fujifilm (radiology-heritage); Proscia named Best in KLAS 2026 for digital pathology; Sectra+Leica first FDA clearance using DICOM for primary diagnostics; Proscia Concentriq AP-Dx FDA 510(k) primary diagnosis 2024.
+- id: digital-pathology-ai-clinical-algorithms
+  parent: digital-pathology
+  name_en: AI-Assisted Diagnostic Algorithms & Computational-Pathology Marketplace
+  name_zh: AI 輔助診斷演算法與運算病理演算法市集
+  name_full: Clinical Computational-Pathology Artificial-Intelligence Algorithms and Algorithm Marketplaces (CADe/CADx Software-as-a-Medical-Device)
+  scope_en: FDA/CE-regulated AI algorithms for cancer detection, grading and IHC quantification (SaMD), plus the open marketplaces that surface third-party algorithms directly inside the diagnostic worklist. GPU-inference workload; KLAS notes AI must integrate into the IMS rather than run standalone, so the lab typically deploys inference on its own GPU alongside the IMS (SMCI direct), with an ISV/marketplace-operated co-sell path (Roche navify open environment, Proscia Concentriq) as the operator upside.
+  scope_zh: 經 FDA/CE 監管、用於癌症偵測、分級與 IHC 定量的 AI 演算法（SaMD），以及在診斷工作清單中直接呈現第三方演算法的開放市集。屬 GPU 推論工作負載；KLAS 指出 AI 須整合進 IMS 而非獨立運行，故實驗室通常在自有 GPU 上與 IMS 並行部署推論（SMCI 直銷），並有 ISV/市集營運的共同銷售路徑（Roche navify 開放環境、Proscia Concentriq）作為 operator 增額機會。
+  role:
+  - analytics-artificial-intelligence
+  - regulated-software-as-a-medical-device
+  - integration
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - paige-ai
+  - ibex-analytics
+  - pathai
+  - mindpeak
+  - deep-bio
+  - lunit
+  - aiforia
+  confidence: B
+  source: KLAS Digital Pathology 2026 names Ibex/Paige.ai/PathAI as AI developers being evaluated; Roche navify Digital Pathology Open Environment integrates 3rd-party algorithms (Deep Bio, Lunit, Owkin, Mindpeak); AstraZeneca computational-pathology collaborations (Lunit, Mindpeak) per DeciBio 2025; Paige Prostate FDA approval.
+- id: digital-pathology-research-quantitative-analysis
+  parent: digital-pathology
+  name_en: Quantitative Tissue Image Analysis for Research, Pharma & Companion Dx
+  name_zh: 研究、製藥與伴隨式診斷用組織定量影像分析
+  name_full: Quantitative Whole-Slide Tissue Image Analysis for Drug Discovery, Translational Research and Companion-Diagnostic Development
+  scope_en: Non-clinical / CDx-development image-analysis software for tissue-based biomarker quantification, multiplex IHC and translational research, used by pharma/biotech R&D, CROs and academic labs. Batch GPU + HPC over large multiplexed image sets with fast NVMe scratch and deep archive — a pharma-R&D datacenter buyer and building entirely distinct from the clinical worklist. This is the ~30% / ~$840M (2025) 'drug discovery' application segment.
+  scope_zh: 非臨床／伴隨式診斷開發用的影像分析軟體，供組織生物標記定量、多重 IHC 與轉譯研究，由製藥/生技研發、CRO 及學術實驗室使用。針對大型多重影像集的批次 GPU + HPC，搭配高速 NVMe 暫存與深層歸檔——買方為製藥研發資料中心、場域與臨床工作清單完全不同。此為約 30%／約 8.4 億美元（2025）的『藥物探索』應用區隔。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  - data-acquisition
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  - academic-medical-center
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - indica-labs
+  - visiopharm
+  - aiforia
+  - pathai
+  - owkin
+  confidence: B
+  source: 'Indica Labs HALO/HALO AI + pharma-services & companion-Dx pages (indicalab.com); Visiopharm precision-medicine/CDx positioning; Indica+Visiopharm HALO Link integration press release (Apr 2025); market reports break out ''drug discovery'' as ~30% / $840M 2025 application distinct from primary diagnosis. NOTE: ''definiens'' removed — acquired by AstraZeneca, now internal pharma AI tooling, not an independent market vendor.'
+- id: digital-pathology-wsi-scanner-acquisition
+  parent: digital-pathology
+  name_en: Whole-Slide Imaging Scanner & Image Acquisition
+  name_zh: 全玻片影像掃描儀與影像擷取
+  name_full: Whole-Slide Imaging Scanners and Embedded Image-Acquisition / Ingest Software
+  scope_en: The WSI scanner instruments and their embedded acquisition/ingest and pre-processing software. The scanner-attached acquisition/ingest workstation is an original-equipment-manufacturer bill-of-materials path (per-unit compute + high memory to tile, compress and stream multi-gigapixel images off the instrument), commercially distinct from the hospital's IMS purchase and controlled by the device maker, not the lab.
+  scope_zh: WSI 掃描儀器及其內嵌的擷取／匯入與前處理軟體。掃描儀附掛的擷取／匯入工作站屬 OEM 物料清單路徑（每台需運算 + 高記憶體以切片、壓縮並將數十億像素影像串流出儀器），在商業上與醫院的 IMS 採購有別，且由設備製造商而非實驗室掌控。
+  role:
+  - data-acquisition
+  data_modality:
+  - images
+  hardware_profile:
+  - edge-industrial
+  - high-memory
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - medical-technology-in-vitro-diagnostics
+  - diagnostic-reference-laboratory
+  - hospital-health-system
+  vendors:
+  - leica-biosystems
+  - hamamatsu-photonics
+  - 3dhistech
+  - roche
+  - epredia
+  - grundium
+  confidence: B
+  source: FDA-cleared surgical-pathology WSI scanner list (Epredia E1000 Dx, Philips PIPS, Hamamatsu NanoZoomer S360MD, Leica Aperio AT2 DX / GT 450 DX, Roche VENTANA DP 200) per IJPCR review; KLAS 2026 scanner segment (Leica dominant, Roche); PathologyOutlines/Lumea WSI vendor lists add 3DHISTECH Pannoramic and Grundium Ocus.
+- id: bioinformatics-secondary-alignment-variant
+  parent: bioinformatics-secondary
+  name_en: Secondary-Analysis Acceleration Engines (alignment + variant calling)
+  name_zh: 二級分析加速引擎（比對＋變異偵測）
+  name_full: Genomic secondary-analysis acceleration engines — FASTQ-to-VCF alignment and germline/somatic variant calling accelerated on GPU or FPGA
+  scope_en: 'The read-to-variant engine: sequence alignment plus small-/structural-variant calling, accelerated on GPU or FPGA to cut a 30x whole-genome from ~30 CPU-hours to under two hours. This is the core compute-bound step and the single biggest SMCI GPU/FPGA-adjacent pull inside the parent; distinct from the workflow layer that schedules it and from the application-domain pipelines that consume its VCFs.'
+  scope_zh: 定序讀段到變異的核心引擎：序列比對加上小型／結構變異偵測，透過 GPU 或 FPGA 加速，將 30x 全基因組從約 30 CPU 小時縮短至兩小時內。此為最耗算力的步驟，也是母市場中最大的 SMCI GPU/FPGA 拉動點，區別於排程它的工作流層與消費其 VCF 的應用領域管線。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - Illumina (DRAGEN)
+  - NVIDIA (Parabricks / Clara)
+  - Sentieon
+  - Google (DeepVariant)
+  confidence: B
+  source: Benchmarking accelerated NGS analysis pipelines, PMC (2024) https://pmc.ncbi.nlm.nih.gov/articles/PMC12092081/ ; NVIDIA Parabricks https://developer.nvidia.com/blog/improve-variant-calling-accuracy-with-nvidia-parabricks/ ; Sentieon https://www.sentieon.com/
+- id: bioinformatics-secondary-workflow-orchestration
+  parent: bioinformatics-secondary
+  name_en: Bioinformatics Pipeline Orchestration / Workflow Platforms
+  name_zh: 生物資訊管線編排／工作流平台
+  name_full: Bioinformatics pipeline orchestration and workflow-management platforms (Nextflow/WDL/CWL) that schedule reproducible multi-step genomics pipelines across HPC and cloud
+  scope_en: The reproducibility and scheduling layer that chains alignment, variant calling and annotation into containerized, resumable pipelines and dispatches them across on-prem HPC schedulers, Kubernetes and cloud. Distinct commercial segment (Nextflow/Seqera ecosystem, DNAnexus, Terra) with its own buyer — the bioinformatics-platform team — separate from the compute engines it drives; drives HPC-cluster and NVMe-scratch demand more than raw GPU.
+  scope_zh: 可重現性與排程層，將比對、變異偵測與註解串成容器化、可續跑的管線，並分派到地端 HPC 排程器、Kubernetes 與雲端。為獨立商業區隔（Nextflow/Seqera 生態、DNAnexus、Terra），買方為生物資訊平台團隊，有別於其驅動的運算引擎；拉動 HPC 叢集與 NVMe 暫存需求多於純 GPU。
+  role:
+  - workflow
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - academic-medical-center
+  - diagnostic-reference-laboratory
+  - contract-research-organization
+  vendors:
+  - Seqera (Nextflow / Platform)
+  - DNAnexus
+  - Terra (Broad Institute)
+  - Lifebit
+  - Seven Bridges (Velsera)
+  confidence: B
+  source: Seqera Platform https://seqera.io/platform/ ; Workflow managers in bioinformatics (Excelra) https://www.excelra.com/blogs/bioinformatics-workflow-managers/ ; DNAnexus / Terra Nextflow compatibility
+- id: bioinformatics-secondary-metagenomics-pathogen
+  parent: bioinformatics-secondary
+  name_en: Clinical Metagenomics / Pathogen Genomics Analysis
+  name_zh: 臨床總體基因體／病原基因體分析
+  name_full: Metagenomic and pathogen-genomics bioinformatics — taxonomic classification, AMR-gene detection, and microbial/viral consensus-genome assembly from mNGS and isolate WGS
+  scope_en: 'The infectious-disease and microbial pipeline domain: taxonomic classification against very large reference databases, antimicrobial-resistance gene detection, and memory-heavy de-novo assembly of microbial/viral genomes from shotgun mNGS or isolate WGS. Distinct algorithms (k-mer/read classifiers, large-RAM assemblers), distinct buyers (clinical microbiology, public-health, ID labs) and distinct vendors from human-genome pipelines.'
+  scope_zh: 感染症與微生物管線領域：對超大參考資料庫進行分類鑑定、抗藥性基因偵測，以及對散彈式 mNGS 或分離株 WGS 進行高記憶體需求的微生物／病毒基因組從頭組裝。演算法（k-mer／讀段分類器、大記憶體組裝器）、買方（臨床微生物、公衛、感染症實驗室）與廠商皆與人類基因組管線不同。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-memory
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  - hospital-health-system
+  - biotechnology-pharmaceutical
+  vendors:
+  - CosmosID
+  - One Codex
+  - Illumina (IDbyDNA / Explify)
+  - Chan Zuckerberg ID (CZ ID)
+  confidence: B
+  source: Comparison of three commercial metagenomic shotgun tools, PubMed (2019) https://pubmed.ncbi.nlm.nih.gov/31826963/ ; CZ ID platform https://czid.org/ ; CosmosID https://www.cosmosid.com/
+- id: bioinformatics-secondary-population-cohort
+  parent: bioinformatics-secondary
+  name_en: Population-Scale / Biobank Cohort Analytics
+  name_zh: 族群規模／生物銀行世代分析
+  name_full: Population-scale and biobank cohort genomics — joint genotyping, imputation, and genome-wide association analysis across 100,000+ genome cohorts inside trusted research environments
+  scope_en: 'The at-scale cohort domain: joint genotyping, low-coverage imputation and genome-wide association studies (GWAS) across 100k-500k+ genome biobanks (UK Biobank, All of Us style). The parent''s flagship hardware pull and prime cloud-repatriation target — sustained joint-calling and Hail/PLINK sweeps over petabyte cohorts favor owned HPC + NVMe + object storage over metered cloud. Distinct at-scale workload (not covered by single-sample engines) and biobank-platform vendors; buyer = biobanks, pharma genetics centers.'
+  scope_zh: 大規模世代領域：跨 10 萬至 50 萬以上基因組生物銀行（UK Biobank、All of Us 型態）的聯合基因分型、低覆蓋補值與全基因組關聯研究（GWAS）。為母市場的旗艦硬體拉動點與首要雲端回遷標的——對 PB 級世代持續進行聯合偵測與 Hail/PLINK 掃描，自有 HPC＋NVMe＋物件儲存優於計量雲端。為有別於單樣本引擎的大規模工作負載，廠商與買方（生物銀行、藥廠遺傳學中心）具區隔。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  - infrastructure-platform
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  - real-world-data
+  hardware_profile:
+  - high-performance-computing-cpu
+  - gpu-server
+  - high-memory
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - DNAnexus
+  - Lifebit
+  - Broad Institute (Hail / Terra)
+  - DNAstack
+  confidence: B
+  source: UK Biobank Research Analysis Platform (built by DNAnexus) https://www.ukbiobank.ac.uk/use-our-data/research-analysis-platform/ ; Lifebit UK Biobank guide https://lifebit.ai/blog/uk-biobank-complete-guide/ ; DNAstack federated population genomics https://dnastack.com/
+- id: mes-ebr-process-pharma
+  parent: mes-ebr
+  name_en: Process pharma / biopharma MES + EBR
+  name_zh: 製藥／生物製藥流程型製造執行系統與電子批次紀錄
+  name_full: Process Pharmaceutical & Biopharmaceutical Manufacturing Execution System with Electronic Batch Record (small-molecule OSD, sterile, and biologics/bioprocess)
+  scope_en: 'The deep, validated shop-floor MES that runs GMP batch execution for chemical/small-molecule (oral solid dose, sterile fill-finish) AND biologics/bioprocess plants: master/electronic batch records, review-by-exception, weigh-and-dispense, equipment and material genealogy, e-signatures, tight integration to DeltaV/PLC/DCS process control. Spans small-molecule and biologics because the same four deep vendors serve both (Syncade/PharmaSuite merely lean sterile/biologics). This is the on-prem, HA-redundant plant-server + line-edge + DR anchor of the whole parent — SMCI direct.'
+  scope_zh: 在 GMP 工廠執行批次生產的深度、已驗證車間 MES，涵蓋化學／小分子（口服固體劑、無菌充填）與生物製劑／生物製程：主批次與電子批次紀錄、例外審查、稱量配料、設備與物料譜系、電子簽章，並與 DeltaV/PLC/DCS 製程控制緊密整合。因四大深度廠商同時服務小分子與生物製劑，故合為一子市場。此為整個母市場中地端、高可用冗餘工廠伺服器＋產線邊緣＋災備的硬體錨點，屬 SMCI 直銷。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  - time-series
+  - documents
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Körber (Werum PAS-X)
+  - Emerson (Syncade / DeltaV MES)
+  - Rockwell Automation (FactoryTalk PharmaSuite)
+  - Siemens (Opcenter Execution Pharma)
+  - Honeywell
+  - MasterControl (Mx)
+  - Apprentice.io
+  confidence: B
+  source: ABI Research 'MES Software for Pharmaceutical, Biotechnology & Cell/Gene' competitive ranking (Körber/Siemens lead); Emerson SPARK Matrix MES 2024; IntuitionLabs 'Pharma MES & eBR Software Guide'; Grand View Research MES-in-Life-Sciences report; vendor sites (Emerson Syncade, Rockwell PharmaSuite, Siemens Opcenter, Körber Werum PAS-X)
+- id: mes-ebr-cell-gene-therapy
+  parent: mes-ebr
+  name_en: Cell & gene therapy manufacturing orchestration + chain-of-identity
+  name_zh: 細胞與基因治療製造編排與身分鏈
+  name_full: Cell & Gene Therapy (ATMP) Manufacturing Orchestration, Electronic Batch Record and Chain-of-Identity / Chain-of-Custody
+  scope_en: 'The distinct software layer for autologous/allogeneic cell & gene therapy (ATMP) manufacturing: per-patient batch execution plus scheduling/orchestration and chain-of-identity / chain-of-custody linking apheresis → manufacturing → infusion. Genuinely distinct from process MES — distinct buyers (CGT developers, CGT CDMOs), distinct vendors (orchestration specialists), and a SaaS/cloud-heavy delivery model (TrakCel OCELLOS is Salesforce-hosted) where a platform operator/hyperscaler often runs the iron. The only SMCI-relevant on-prem angle is CGT batch execution (Lonza MODA-ES, Werum PAS-X CGT) at the plant, which overlaps process-pharma iron; the CoI/orchestration layer is operator-run co-sell — hence modest, not flagship.'
+  scope_zh: 自體／異體細胞與基因治療（ATMP）製造的獨立軟體層：每位病患的批次執行，加上排程／編排與身分鏈／保管鏈，串連血液成分分離→製造→輸注。與流程型 MES 明顯不同——買家不同（CGT 開發商、CGT 委託製造）、廠商不同（編排專門商）、且以 SaaS／雲端為主（TrakCel OCELLOS 由 Salesforce 託管），常由平台營運方／雲端擁有硬體。SMCI 相關的地端角度僅為工廠端 CGT 批次執行（Lonza MODA-ES、Werum PAS-X CGT），且與流程製藥硬體重疊；CoI／編排層屬營運方共同銷售，故為中度而非旗艦。
+  role:
+  - workflow
+  - integration
+  - system-of-record
+  data_modality:
+  - transactional
+  - documents
+  - real-world-data
+  - time-series
+  hardware_profile:
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - TrakCel (OCELLOS)
+  - Vineti
+  - Lonza (MODA-ES)
+  - Körber (Werum PAS-X for CGT)
+  - Title21
+  - Hypertrust Patient Data Care
+  confidence: B
+  source: ABI Research MES ranking names Cell & Gene as a distinct manufacturing track; TrakCel OCELLOS (300+ sites / 11 countries, Salesforce-hosted) & Lonza MODA-ES integration announcements (trakcel.com, biopharminternational.com); Körber CGT partnerships with TrakCel/Vineti/Hypertrust (koerber-pharma.com); Lonza–Vineti partnership (lonza.com)
+- id: mes-ebr-medical-device
+  parent: mes-ebr
+  name_en: Medical-device / IVD discrete MES + eDHR
+  name_zh: 醫療器材／體外診斷離散型製造執行系統與電子器材歷史紀錄
+  name_full: Medical Device & In-Vitro Diagnostics Discrete Manufacturing Execution System with Electronic Device History Record (eDHR)
+  scope_en: Discrete (assembly/serialized-unit) MES for medical-device and IVD manufacturing, whose system-of-record is the electronic Device History Record (eDHR) under ISO 13485 / 21 CFR Part 820 / EU MDR — a different regulatory and process world from GMP batch pharma. Distinct buyer (MedTech/IVD OEMs and their contract manufacturers) and a distinct vendor cohort built around discrete production and eDHR/BR. Mix of on-prem discrete MES (iBASEt, Critical Manufacturing → SMCI direct) and cloud/no-code (42Q, Tulip → operator co-sell).
+  scope_zh: 醫療器材與體外診斷製造的離散型（組裝／序號單件）MES，其記錄系統為 ISO 13485／21 CFR Part 820／歐盟 MDR 下的電子器材歷史紀錄（eDHR），與 GMP 批次製藥的法規與製程截然不同。買家不同（醫材／IVD 原廠及其委外製造），廠商群圍繞離散生產與 eDHR/BR。地端離散 MES（iBASEt、Critical Manufacturing，SMCI 直銷）與雲端／無程式碼（42Q、Tulip，營運方共銷）並存。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  - time-series
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - iBASEt
+  - Critical Manufacturing
+  - 42Q
+  - MasterControl (eDHR)
+  - Tulip
+  - Siemens (Opcenter Execution / Camstar)
+  confidence: B
+  source: 42Q medical-device eDHR case study (42-q.com); iBASEt DHR report (ibaset.com); Critical Manufacturing medical-device eDHR blog (criticalmanufacturing.com); Siemens eDHR & PTC eDHR pages; Gartner Peer Insights MES market
+- id: ehr-emr-core-acute-inpatient
+  parent: ehr-emr-core
+  name_en: Acute-Care / Inpatient EHR
+  name_zh: 急症住院電子病歷（醫院核心系統）
+  name_full: Acute-Care / Inpatient Electronic Health Record (Hospital Core System-of-Record)
+  scope_en: The inpatient system-of-record for hospitals and integrated delivery networks (IDNs) — order entry, results, documentation, pharmacy and revenue cycle for staffed acute beds. Large self-hosted deployments run HA transactional database clusters (Epic on Caché/IRIS, Oracle Health, MEDITECH) plus a full DR site, sized by bed count, concurrent clinicians and uptime SLAs. This is the flagship of Play D and the one EHR segment where the health system typically buys and operates its own iron (SMCI direct); a growing minority take vendor-managed single-tenant hosting (operator co-sell). Refresh cycles and DR-site builds are the main deal triggers.
+  scope_zh: 醫院與整合醫療網（IDN）的住院核心系統：醫囑、檢驗結果、病歷文件、藥事與收費循環。大型自建部署運行高可用交易資料庫叢集（Epic、Oracle Health、MEDITECH）加完整異地備援站，依床數、同時在線臨床人員與可用性SLA擴容。這是Play D的旗艦，也是醫療系統通常自購自營硬體（SMCI直銷）的唯一EHR區塊；少數採廠商託管單租戶（operator協銷）。汰換週期與DR建置為主要成交觸發點。
+  role:
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  - high-memory
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - epic-systems
+  - oracle-health
+  - meditech
+  - altera-digital-health
+  confidence: B
+  source: KLAS US Acute Care EHR Market Share 2026 (Epic ~43% acute share; MEDITECH Expanse Best in KLAS 1-150 beds); Definitive Healthcare inpatient EHR market share; Altera Sunrise Black Book top inpatient EHR (community 101-250 beds), 14 health-system Sunrise renewals 2026 (Becker's).
+- id: ehr-emr-core-ambulatory
+  parent: ehr-emr-core
+  name_en: Ambulatory / Physician-Practice EHR
+  name_zh: 門診／醫師診所電子病歷
+  name_full: Ambulatory / Physician-Practice Electronic Health Record and Practice Management
+  scope_en: 'Outpatient EHR + practice-management for independent physician groups, clinics and specialty practices. The install base is dominated by ISV-hosted cloud/SaaS — small practices buy no infrastructure of their own, so this is an operator co-sell (dedicated single-tenant hosting) at best, and modest. Important co-sell caveat: athenahealth is pure public-cloud / AWS-committed (near-zero SMCI room, per playbook scope rule 4), whereas eClinicalWorks, NextGen and Greenway still run owned datacenters where an ISV hardware conversation exists. Not a SMCI-direct segment.'
+  scope_zh: 獨立醫師集團、診所與專科診所的門診EHR＋診所管理。安裝基礎以ISV託管雲端/SaaS為主——小型診所不自購基礎設施，故最多為operator協銷（專屬單租戶託管），機會modest。重要協銷提醒：athenahealth為純公有雲/AWS綁定（依手冊範圍規則4，SMCI幾無空間），而eClinicalWorks、NextGen、Greenway仍營運自有機房，存在ISV硬體對話空間。非SMCI直銷區塊。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  vendors:
+  - eclinicalworks
+  - nextgen-healthcare
+  - greenway-health
+  - veradigm
+  - athenahealth
+  confidence: B
+  source: 'KLAS ambulatory EHR reporting (athenahealth athenaClinicals & EpicCare Ambulatory co-leaders); ehrsource ambulatory vendor rosters. Segment trimmed to hospital-health-system (AMC dropped: independent physician practices are the defining buyer).'
+- id: ehr-emr-core-community-critical-access
+  parent: ehr-emr-core
+  name_en: Community & Critical-Access Hospital EHR
+  name_zh: 社區與偏鄉急救（Critical-Access）醫院電子病歷
+  name_full: Community and Critical-Access Hospital Electronic Health Record (1-150 beds)
+  scope_en: 'Inpatient EHR for small, rural and critical-access hospitals (roughly 1-150 beds) where Epic is too costly/complex. A distinct vendor field from large-acute, and the segment is shifting hard to vendor-hosted single-tenant delivery (MEDITECH-as-a-Service, Oracle Health CommunityWorks hosted, TruBridge hosting, Altera Paragon Denali) — so predominantly operator co-sell, but each hosted site still needs real dedicated HA + DR iron, making the opportunity significant rather than modest. Ties to the rural-hospital EHR replacement wave (Black Book: ~55% of rural/CAH planning replacement within 18 months).'
+  scope_zh: 小型、偏鄉與critical-access醫院（約1-150床）的住院EHR，Epic對其過於昂貴複雜。廠商陣容與大型急症區塊不同，且此區塊正快速轉向廠商託管單租戶交付（MEDITECH-as-a-Service、Oracle CommunityWorks託管、TruBridge託管、Altera Paragon Denali）——故以operator協銷為主，但每個託管站點仍需實體專屬HA＋DR硬體，機會為significant而非modest。對應偏鄉醫院EHR汰換潮（Black Book：約55%偏鄉/CAH醫院18個月內規劃汰換）。
+  role:
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  vendors:
+  - meditech
+  - trubridge
+  - oracle-health
+  - azalea-health
+  - medhost
+  - juno-health
+  confidence: B
+  source: KLAS (MEDITECH Expanse Best in KLAS Community Hospital 1-150 beds); Black Book 2026 Rural & Critical-Access Hospital EHR replacement rankings (Juno Health top-rated 9.32/10, Azalea Health, Altera Paragon Denali, MEDHOST, MEDITECH Expanse Cloud, Oracle CommunityWorks).
+- id: ehr-emr-core-behavioral-health
+  parent: ehr-emr-core
+  name_en: Behavioral Health & Human-Services EHR
+  name_zh: 行為健康與人群服務電子病歷
+  name_full: Behavioral Health and Human-Services Electronic Health Record
+  scope_en: EHR for community mental-health centers, addiction/recovery, intellectual & developmental disability (IDD), foster-care and CCBHC / human-services providers — a distinct vendor world (Netsmart myAvatar/myEvolv, Qualifacts CareLogic/Credible, Streamline SmartCare, Core Solutions Cx360) that KLAS reports as its own Behavioral Health category. Delivery is overwhelmingly ISV-run SaaS, so operator co-sell only and modest; the providers themselves rarely buy infrastructure, and leaders increasingly run on public cloud, capping SMCI pull.
+  scope_zh: 社區心理衛生中心、成癮/康復、智能與發展障礙（IDD）、寄養照護與CCBHC/人群服務機構的EHR——為獨立廠商生態（Netsmart myAvatar/myEvolv、Qualifacts CareLogic/Credible、Streamline SmartCare、Core Solutions Cx360），KLAS列為獨立的行為健康類別。交付以ISV營運SaaS為壓倒性主流，故僅operator協銷且機會modest；服務機構本身幾乎不自購基礎設施，且領導廠商日益採用公有雲，限制SMCI拉動力。
+  role:
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  vendors:
+  - netsmart
+  - qualifacts
+  - streamline-healthcare
+  - core-solutions
+  confidence: B
+  source: Best in KLAS Behavioral Health category (Qualifacts 2023 Best in KLAS; Netsmart largest, 24,000+ orgs; Qualifacts 2,700+ orgs / 33% of CCBHCs; Streamline SmartCare for CMHCs; Core Solutions behavioral/IDD/human-services).
+- id: ehr-emr-core-ltpac
+  parent: ehr-emr-core
+  name_en: Long-Term & Post-Acute Care (LTPAC) EHR
+  name_zh: 長照與後急性照護（LTPAC）電子病歷
+  name_full: Long-Term and Post-Acute Care Electronic Health Record (Skilled Nursing, Senior Living, Home Health, Hospice)
+  scope_en: EHR for skilled-nursing facilities, senior living, home health and hospice — a distinct vendor world from acute/ambulatory, led by PointClickCare (~65% skilled-nursing share, 6-yr KLAS leader, 21,000+ facilities) and MatrixCare (15,000+ providers), with WellSky (Best-in-KLAS home health/hospice), Netsmart and American HealthTech. Delivery is vendor-run cloud/SaaS, so operator co-sell and modest; the care organizations themselves buy little to no iron and the leaders increasingly run on public cloud, capping SMCI pull. KLAS tracks this as its own Long-Term Care / Continuum-of-Care category.
+  scope_zh: 技術性護理機構、銀髮住宿、居家健康與安寧照護的EHR——廠商生態與急症/門診不同，由PointClickCare（技術性護理約65%市佔、KLAS連6年領先、逾21,000機構）與MatrixCare（逾15,000供應者）領銜，另有WellSky（居家健康/安寧Best in KLAS）、Netsmart、American HealthTech。交付為廠商營運雲端/SaaS，故operator協銷且機會modest；照護機構本身幾乎不購硬體，且領導廠商日益採用公有雲，限制SMCI拉動力。KLAS列為獨立的長照/照護連續體類別。
+  role:
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  vendors:
+  - pointclickcare
+  - matrixcare
+  - wellsky
+  - netsmart
+  - american-healthtech
+  confidence: B
+  source: 'Best in KLAS Long-Term Care / Continuum-of-Care (PointClickCare #1 LTC 6 consecutive years, ~65% skilled-nursing share, 21,000+ facilities; MatrixCare LTC leader, 15,000+ providers; WellSky Personal Care Best in KLAS 2025).'
+- id: pacs-radiology-core-enterprise
+  parent: pacs-radiology-core
+  name_en: Enterprise / Health-System Diagnostic PACS
+  name_zh: 企業級／醫療體系診斷 PACS
+  name_full: Enterprise / Health-System Diagnostic PACS (large-hospital core)
+  scope_en: 'Monolithic enterprise diagnostic PACS for large hospitals, multi-site health systems and academic centers: high-volume diagnostic reading, server-side rendering / thin-client, deep RIS/EHR/VNA integration, on-prem or hybrid deployment with PB-scale online archive and HA failover. This is where the mission-critical reading iron lives.'
+  scope_zh: 面向大型醫院、多院區醫療體系與學術醫學中心的企業級單體診斷 PACS：高影像量診斷判讀、伺服器端渲染／瘦客戶端、與 RIS/EHR/VNA 深度整合，多為地端或混合部署，配置 PB 級線上歸檔與高可用容錯。任務關鍵的判讀硬體集中於此。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - images
+  - documents
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Sectra
+  - Philips (Vue PACS / Enterprise Imaging)
+  - Fujifilm (Synapse)
+  - GE HealthCare (Centricity / True PACS)
+  - Agfa HealthCare (Enterprise Imaging)
+  - Merative (Merge PACS)
+  - Visage Imaging
+  confidence: B
+  source: KLAS PACS segmentation (large hospital >200 beds; '300K+ studies' tier) + radiologybusiness.com KLAS rankings; GM Insights / Grand View specialty-PACS reports; vendor sites (Sectra, Philips, Fujifilm Synapse; Visage 7 NVIDIA GPU server-side rendering case study, web-verified Aug 2026).
+- id: pacs-radiology-core-ambulatory
+  parent: pacs-radiology-core
+  name_en: Ambulatory / Imaging-Center PACS
+  name_zh: 門診／影像中心 PACS
+  name_full: Ambulatory / Imaging-Center Diagnostic PACS (outpatient & community)
+  scope_en: 'Diagnostic PACS for freestanding imaging centers, outpatient radiology groups, orthopedic practices and community hospitals: lighter-weight, cost-sensitive, single- or multi-site, typically on-prem or hybrid servers sized to modest study volumes. Distinct product lines and buyers from the enterprise tier.'
+  scope_zh: 面向獨立影像中心、門診放射診斷群組、骨科診所與社區醫院的診斷 PACS：輕量、成本敏感、單點或多點，多採地端或混合伺服器，因應中等影像量。產品線與採購者皆與企業級不同。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - images
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  vendors:
+  - Konica Minolta (Exa PACS)
+  - RamSoft (PowerServer)
+  - Novarad
+  - eRAD
+  - ScImage (PICOM365)
+  - Intelerad
+  confidence: B
+  source: KLAS 'community hospital / imaging center' segment; Grand View & GM Insights specialty-PACS reports; vendor positioning web-verified Aug 2026 (Konica Minolta Exa/Exa Lite historically aimed at independently-owned outpatient imaging centers per radiologybusiness.com & healthcare.konicaminolta.us; RamSoft PowerServer; Novarad; eRAD).
+- id: pacs-radiology-core-cloud-native
+  parent: pacs-radiology-core
+  name_en: Cloud-Native / SaaS PACS
+  name_zh: 雲端原生／SaaS PACS
+  name_full: Cloud-Native / SaaS Diagnostic PACS (zero-footprint)
+  scope_en: 'Ground-up cloud-native diagnostic PACS delivered as SaaS on public cloud: zero-footprint viewers, elastic object storage, unified cloud PACS/RIS/VNA. A real and fast-growing sub-market, but the compute and storage are bought by the hyperscaler, not the imaging provider — minimal SMCI direct pull (co-sell only if an ISV ran dedicated single-tenant iron, which is rare here).'
+  scope_zh: 原生雲端、以 SaaS 交付於公有雲的診斷 PACS：零安裝檢視器、彈性物件儲存、雲端整合 PACS/RIS/VNA。屬真實且快速成長的子市場，但運算與儲存由雲端業者採購而非影像機構，對 SMCI 直銷拉動極小（僅在 ISV 自建專屬單租戶硬體時才有共同銷售機會，此處罕見）。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - images
+  - documents
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: hyperscaler
+  segments:
+  - hospital-health-system
+  vendors:
+  - RamSoft (OmegaAI)
+  - Medicai
+  - PostDICOM
+  - Purview
+  - Ambra Health (Intelerad)
+  confidence: B
+  source: 'Web-verified Aug 2026: Medicai cloud-native on Microsoft Azure (medicai.io); PostDICOM SaaS cloud PACS, zero-footprint (postdicom.com); RamSoft OmegaAI ground-up cloud rebuild; Ambra Health (Intelerad) cloud image sharing. Grand View specialty-PACS cloud-deployment segment.'
+- id: pacs-ai-orchestration-marketplace
+  parent: pacs-ai-orchestration
+  name_en: Vendor-neutral AI orchestration platform / marketplace
+  name_zh: 廠商中立 AI 編排平台／演算法市集
+  name_full: Horizontal vendor-neutral radiology-AI marketplace + orchestration hub (hosts many third-party algorithms, routes inference to the worklist)
+  scope_en: 'The horizontal ''app-store'' layer: a single vendor-neutral hub that hosts, deploys, monitors and routes many third-party AI algorithms into the PACS/reporting worklist. Sold as shared infrastructure; a central multi-model GPU inference hub in the datacenter aggregating dozens of models (CARPL runs behind the hospital firewall; deepc/Blackford/Incepto offer on-prem de-identification + inference). The worklist-orchestration and marketplace-app-store functions are one commercial segment here (the same vendors do both), distinct from single-vendor clinical AI.'
+  scope_zh: 水平的『應用商店』層：單一廠商中立樞紐，託管、部署、監控並將多家第三方 AI 演算法路由進 PACS／報告工作清單。作為共享基礎設施銷售，於資料中心設置集中式多模型 GPU 推論樞紐彙整數十種模型（CARPL 於院內防火牆後運行；deepc／Blackford／Incepto 提供地端去識別化與推論）。工作清單編排與演算法市集在此為同一商業區隔（同一批廠商兼營），區別於單一廠商臨床 AI。
+  role:
+  - integration
+  - workflow
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - diagnostic-reference-laboratory
+  vendors:
+  - CARPL.ai
+  - Blackford Analysis
+  - deepc (deepcOS)
+  - Incepto Medical
+  - Ferrum Health
+  confidence: B
+  source: https://carpl.ai/ ; https://www.deepc.ai/products/infrastructure/clinical-integrations ; CARPL–RamSoft partnership (250+ FDA-cleared apps, world's largest radiology AI marketplace); Signify Research AI in Medical Imaging round-up
+- id: pacs-ai-orchestration-acute-triage
+  parent: pacs-ai-orchestration
+  name_en: Acute-care triage & care-coordination AI
+  name_zh: 急重症分流與照護協調 AI
+  name_full: Time-critical single-vendor imaging AI (stroke LVO/ICH, PE, aneurysm) with mobile notification and care-team activation
+  scope_en: 'Vertical, time-critical AI: a single vendor''s own deep algorithm portfolio (stroke LVO/ICH, ASPECTS, perfusion, pulmonary embolism, aneurysm) bundled with mobile notification and care-team activation, deployed as a low-latency on-prem/edge inference appliance near the modality (RapidAI/Brainomix/Avicenna offer on-prem; Viz.ai is cloud-led). Distinct clinical buyer (stroke/neuro/service-line, not just radiology) and distinct economics (reimbursement/door-to-needle, not the horizontal marketplace).'
+  scope_zh: 垂直、時效關鍵的 AI：單一廠商自有深度演算法組合（中風大血管阻塞／腦出血、ASPECTS、灌流、肺栓塞、動脈瘤）搭配行動推播與照護團隊啟動，於病灶模態旁以低延遲地端／邊緣推論設備部署（RapidAI／Brainomix／Avicenna 提供地端；Viz.ai 以雲端為主）。臨床買方不同（中風／神經科／服務線，非僅放射科），經濟模型亦不同（給付／到針時間，而非水平市集）。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  - regulated-software-as-a-medical-device
+  - data-acquisition
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  - time-series
+  hardware_profile:
+  - gpu-server
+  - edge-industrial
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Viz.ai
+  - RapidAI
+  - Aidoc
+  - Avicenna.ai
+  - Brainomix (e-Stroke)
+  confidence: B
+  source: 'https://doi.org/10.3390/medicina62030582 (scoping review: Brainomix, Aidoc, RapidAI, Viz.ai) ; https://www.marketsandmarkets.com/Market-Reports/stroke-ai-market-144234354.html'

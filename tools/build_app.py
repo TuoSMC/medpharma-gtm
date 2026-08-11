@@ -223,6 +223,12 @@ main{max-width:none;margin:0 auto;padding:var(--s6) clamp(16px,3vw,44px) 60px}
 .trow.l4sub .tname{font-weight:500}
 @keyframes subhitflash{0%{background:var(--hw4);color:#fff}100%{background:transparent}}
 .subhit{animation:subhitflash 1.5s ease-out}
+/* sub-market detail card — breadcrumb up the tree (root category › … › this node) */
+.crumb{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:var(--f-2);margin-bottom:4px}
+.crumb .crumblink{color:var(--accent);cursor:pointer;overflow-wrap:anywhere}
+.crumb .crumblink:hover{text-decoration:underline}
+.crumb .crumbcur{color:var(--muted);font-weight:600;overflow-wrap:anywhere}
+.crumb .crumbsep{color:var(--muted)}
 .tiers6{margin:12px 0}
 .tier6{display:grid;grid-template-columns:92px 1fr;gap:var(--s4);padding:var(--s3) 0 var(--s3) var(--s5);position:relative;border-left:1px solid var(--line)}
 .tier6:before{content:"";position:absolute;left:-5px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
@@ -581,9 +587,15 @@ const VNAME={};(DATA.vendors.vendors||[]).forEach(v=>VNAME[v.id]=v.name);
 // ---- relationship fusion: cross-tab lookups (category <-> vendor <-> leaderboard) ----
 const VBYID={};(DATA.vendors.vendors||[]).forEach(v=>VBYID[v.id]=v);
 const CATBYID={};(DATA.taxonomy.categories||[]).forEach(c=>CATBYID[c.id]=c);
-// taxonomy tree: level-2+ sub-markets nest under a category (or another subcategory) via `parent`
+// taxonomy tree: level-2+ sub-markets nest under a category (or another subcategory) via `parent`.
+// The tree is arbitrary-depth: category → 子市場 → 孫 → 曾孫 … (a subcategory can parent another subcategory).
 const SUBCATS=(DATA.taxonomy.subcategories||[]);
+const SUBBYID={};SUBCATS.forEach(s=>SUBBYID[s.id]=s);
 function subcatsOf(id){return SUBCATS.filter(s=>s.parent===id);}
+function nodeById(id){return SUBBYID[id]||CATBYID[id]||null;}      // resolve a parent pointer to its node
+function isCatNode(o){return !!(o&&CATBYID[o.id]);}                // level-1 category vs a deeper sub-market
+function subName(o){return isCatNode(o)?(LANG==='zh'?(o.name_zh||o.name_en):o.name_en):(LANG==='zh'?(o.name_zh||o.name_en):o.name_en);}
+function chainOf(o){const arr=[];let cur=o,g=0;while(cur&&g++<24){arr.unshift(cur);cur=nodeById(cur.parent);}return arr;} // [rootCategory … o]
 const LB_BY_VID={};
 (function(){const LB=DATA.leaderboards&&DATA.leaderboards.leaderboards;if(!LB)return;
   [['ai',LB.ai],['no_ai',LB.no_ai]].forEach(([bk,b])=>{if(!b)return;(b.entries||[]).forEach(e=>{
@@ -773,6 +785,7 @@ function renderTaxonomy(){
   function updateBack(){backBtn.style.display=navStack.length?'inline-flex':'none';}
   function pushNav(){navStack.push({cf:catFilter?catFilter.slice():null,dv:{kind:dv.kind,id:dv.id}});updateBack();}
   function applyDv(){if(dv.kind==='cat'&&CATBYID[dv.id])showDetail(CATBYID[dv.id]);
+    else if(dv.kind==='sub'&&SUBBYID[dv.id]){clear(detailPane);detailPane.append(subDetailCard(SUBBYID[dv.id]));}
     else if(dv.kind==='trigger'&&TRIG_BY[dv.id]){clear(detailPane);detailPane.append(triggerBrief(TRIG_BY[dv.id]));}
     else if(dv.kind==='play'){clear(detailPane);detailPane.append(playBrief(dv.id));}}
   function goBack(){if(!navStack.length)return;const s=navStack.pop();catFilter=s.cf;hotFilter=null;fTxt.value='';render();dv=s.dv;applyDv();updateBack();scrollToPanes();}
@@ -875,12 +888,13 @@ function renderTaxonomy(){
     hdr.onclick=()=>{const o=body.style.display!=='none';body.style.display=o?'none':'';car.textContent=o?'▸':'▾';};
     treePane.append(hdr,body);
     if(leaf)list.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));else l2into(body,list);}
-  // ---- the Play SPINE: a dedicated 4-level accordion  Play → AI-driven/No-AI → category → 子市場.
+  // ---- the Play SPINE: a dedicated accordion  Play → AI-driven/No-AI → category → 子市場 → 孫 → 曾孫 …
+  //      ARBITRARY depth — the category→sub-market levels recurse (treeNodeInto) as deep as the data goes.
   //      Isolated from l1node/l2into/catRow (the other view-by lenses share those, must stay untouched).
   //      The tree is fully rebuilt each render, so open-state is DERIVED from the filter, never persisted:
   //      default opens the single Play holding the selected/first category (siblings collapsed — "the tree
-  //      reshapes into that Play"); any active filter/search auto-expands every surviving path. L4 (子市場)
-  //      stays collapsed — it is redundant with the right-pane battle card, reachable via its caret.
+  //      reshapes into that Play"); any active filter/search auto-expands every surviving path. Sub-markets
+  //      stay collapsed (reachable via their caret); clicking one opens its own card on the right.
   function playBadges(hdr,list){const fl=flagN(list),ho=hotN(list);
     if(fl)hdr.append(el('span',{class:'tflag',title:T('flagship (opportunity 4)','旗艦 (機會 4)')},fl+' '+T('flagship','旗艦')));
     if(ho)hdr.append(el('span',{class:'thot',title:T('customer-HOT (opportunity ≥3)','客戶-HOT (機會≥3)')},ho+' HOT'));
@@ -888,14 +902,23 @@ function renderTaxonomy(){
   function showPlayFromSpine(pid){pushNav();selected=null;clear(detailPane);detailPane.append(playBrief(pid));dv={kind:'play',id:pid};
     [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.remove('sel'));const L=pid.split('-')[1].toUpperCase();const p=PLAY_BY[pid];
     setNote(el('span',{},el('span',{class:'play play'+L.toLowerCase()},'Play '+L),' ',el('b',{},p?p.name:''),T(' — brief on the right','— 右側簡報')));}
-  function spineSubRow(c,s){const sr=el('div',{class:'trow l4sub','data-sub':s.id});
-    sr.append(el('span',{class:'hw hw'+s.hardware_opportunity,style:'font-size:var(--f-1);padding:0 var(--s2)',title:OPP[s.hardware_opportunity]},String(s.hardware_opportunity)));
-    sr.append(el('span',{class:'tname'},LANG==='zh'?s.name_zh:s.name_en));
-    sr.append(el('span',{class:'tby '+BUYER_C[s.primary_buyer],title:s.primary_buyer}));
-    sr.onclick=()=>{viewCat(c);  // showDetail() appends the subcards synchronously, so no rAF needed (rAF pauses when the tab is backgrounded)
-      const eln=document.getElementById('sub-'+s.id);
-      if(eln){eln.scrollIntoView({block:'nearest',behavior:'smooth'});eln.classList.remove('subhit');void eln.offsetWidth;eln.classList.add('subhit');}};
-    return sr;}
+  // recursive node: a category (depth 0) or a sub-market (depth ≥1) + its children as a nested drawer.
+  // Same shape every level, so the tree descends category → 子市場 → 孫 → 曾孫 … as far as the data.
+  function treeNodeInto(container,obj,depth){
+    const isCat=depth===0,kids=subcatsOf(obj.id);
+    const row=el('div',{class:'trow '+(isCat?'l3cat':'l4sub')});
+    if(isCat)row.dataset.id=obj.id;else row.dataset.sub=obj.id;
+    row.style.paddingLeft=(16+depth*15)+'px';
+    row.append(el('span',{class:'hw hw'+obj.hardware_opportunity,style:'font-size:var(--f-1);padding:0 var(--s2)',title:OPP[obj.hardware_opportunity]},String(obj.hardware_opportunity)));
+    const car=kids.length?el('span',{class:'tcar sub',title:kids.length+T(' sub-markets','個子市場')},'▸'):el('span',{class:'tcar ph'});
+    row.append(car,el('span',{class:'tname'},isCat?nm(obj):subName(obj)),el('span',{class:'tby '+BUYER_C[obj.primary_buyer],title:obj.primary_buyer}));
+    row.onclick=()=>isCat?viewCat(obj):showSubDetail(obj);
+    container.append(row);
+    if(kids.length){const kb=el('div',{class:'tbody l4wrap'});kb.style.display='none';
+      car.onclick=(e)=>{e.stopPropagation();const o=kb.style.display!=='none';kb.style.display=o?'none':'';car.textContent=o?'▸':'▾';};
+      kids.slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity||a.id.localeCompare(b.id)).forEach(k=>treeNodeInto(kb,k,depth+1));
+      container.append(kb);}
+  }
   function playTree(shown){
     const narrowed=!!(catFilter||hotFilter||fTxt.value||fCompute.value||fBucket.value||fSeg.value||(+fHw.value||0));
     const sel=(selected&&shown.find(c=>c.id===selected.id))||shown[0]||null;
@@ -922,19 +945,50 @@ function renderTaxonomy(){
         const b2=el('div',{class:'tbody'});
         h2.onclick=()=>{const o=b2.style.display!=='none';b2.style.display=o?'none':'';c2.textContent=o?'▸':'▾';};
         body.append(h2,b2);
-        subl.slice().sort(byOpp).forEach(c=>{const subs=subcatsOf(c.id);
-          const row=el('div',{class:'trow l3cat','data-id':c.id});
-          row.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:var(--f-1);padding:0 var(--s2)',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
-          const car3=subs.length?el('span',{class:'tcar sub',title:subs.length+T(' sub-markets','個子市場')},'▸'):el('span',{class:'tcar ph'});
-          row.append(car3,el('span',{class:'tname'},nm(c)),el('span',{class:'tby '+BUYER_C[c.primary_buyer],title:c.primary_buyer}));
-          row.onclick=()=>viewCat(c);b2.append(row);
-          if(subs.length){const b3=el('div',{class:'tbody l4wrap'});b3.style.display='none';
-            car3.onclick=(e)=>{e.stopPropagation();const o=b3.style.display!=='none';b3.style.display=o?'none':'';car3.textContent=o?'▸':'▾';};
-            subs.forEach(s=>b3.append(spineSubRow(c,s)));b2.append(b3);}
-        });
+        subl.slice().sort(byOpp).forEach(c=>treeNodeInto(b2,c,0));  // recursive: category → 子市場 → 孫 → …
       });
     });
     if(sel)[...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===sel.id));
+  }
+  // clicking any sub-market (at any depth) shows ITS OWN card on the right — breadcrumb up to the root
+  // category, its motion + SMCI box, its own children (孫), and vendors. This is what makes deep nesting work.
+  function showSubDetail(s){pushNav();selected=null;clear(detailPane);detailPane.append(subDetailCard(s));dv={kind:'sub',id:s.id};
+    [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.sub===s.id));}
+  function subDetailCard(s){
+    const cd=el('div',{class:'card'});
+    const chain=chainOf(s),cr=el('div',{class:'crumb'});
+    chain.forEach((n,i)=>{if(i)cr.append(el('span',{class:'crumbsep'},'›'));
+      const lab=isCatNode(n)?nm(n):subName(n);
+      if(n===s){cr.append(el('span',{class:'crumbcur'},lab));}
+      else{const a=el('span',{class:'crumblink'},lab);a.onclick=()=>isCatNode(n)?viewCat(n):showSubDetail(n);cr.append(a);}});
+    cd.append(cr);
+    cd.append(el('div',{class:'row'},el('span',{class:'hw hw'+s.hardware_opportunity,title:OPP[s.hardware_opportunity]},String(s.hardware_opportunity)),
+      el('span',{class:'by '+BUYER_C[s.primary_buyer]},s.primary_buyer),el('span',{class:'tagk'},T('sub-market','子市場'))));
+    cd.append(el('h3',{style:'margin:6px 0 0'},subName(s)));
+    if(s.name_full)cd.append(el('div',{class:'muted',style:'font-size:var(--f-3);margin-bottom:6px'},s.name_full));
+    cd.append(el('div',{class:'zh'},LANG==='zh'?s.scope_zh:s.scope_en));
+    const bc=el('div',{class:'battle'});
+    const brow=(lab,node)=>{const r=el('div',{class:'brow'});r.append(el('div',{class:'blab'},lab));const v=el('div',{class:'bval'});v.append(node);r.append(v);bc.append(r);};
+    const mot=s.primary_buyer==='operator'?T('Co-sell — an ISV / service operator runs the iron; sell through them.','共銷 — ISV／服務營運商運行硬體;透過他們賣。')
+      :s.primary_buyer==='customer'?T('Direct sale — the end org buys and runs its own iron.','直銷 — 終端機構自己採購並運行硬體。'):T('—','—');
+    brow(T('Your motion','你的打法'),el('span',{},mot));
+    const ra=el('div',{class:'rarch'});
+    if((s.hardware_profile||[]).length)s.hardware_profile.forEach(h=>ra.append(el('span',{class:'raxx',title:plineGloss(h)},smciFam(h))));
+    else ra.append(el('span',{class:'muted'},T('SaaS-light — little on-prem iron to sell.','SaaS 輕量 — 幾乎無地端硬體可賣。')));
+    brow(T('Reference arch · SMCI box','建議配置 · SMCI 機箱'),ra);
+    cd.append(bc);
+    const kids=subcatsOf(s.id);
+    if(kids.length){const ks=el('div',{class:'dsec'});ks.append(el('div',{class:'dsh'},T('Sub-markets','子市場')+' · '+kids.length+T(' — click to go deeper','—點開更深一層')));
+      kids.slice().sort((a,b)=>b.hardware_opportunity-a.hardware_opportunity).forEach(k=>{const kc=el('div',{class:'subcard',id:'sub-'+k.id,style:'cursor:pointer'});
+        kc.append(el('div',{class:'row',style:'align-items:baseline;gap:var(--s2)'},el('b',{style:'font-size:var(--f-4)'},subName(k)),
+          el('span',{class:'hw hw'+k.hardware_opportunity,title:OPP[k.hardware_opportunity]},String(k.hardware_opportunity)),
+          el('span',{class:'by '+BUYER_C[k.primary_buyer]},k.primary_buyer)));
+        kc.append(el('div',{class:'vprose',style:'font-size:var(--f-2);color:var(--muted)'},LANG==='zh'?k.scope_zh:k.scope_en));
+        kc.onclick=()=>showSubDetail(k);ks.append(kc);});cd.append(ks);}
+    if((s.vendors||[]).length){const vs=el('div',{class:'dsec'});vs.append(el('div',{class:'dsh'},T('Vendors in this market','此市場的廠商')+' · '+s.vendors.length));
+      const vw=el('div',{class:'row'});s.vendors.forEach(vn=>vw.append(el('span',{class:'chip'},vn)));vs.append(vw);cd.append(vs);}
+    if(s.source)cd.append(el('div',{class:'notes',style:'font-size:var(--f-1)'},T('source','來源')+': '+s.source+(s.confidence?' · '+T('confidence','信心')+' '+s.confidence:'')));
+    return cd;
   }
   // (dead taxonomy card() + tagRow() removed in P2 — live category renderer is detailCard(); the vendor
   //  registry has its own card(v). Both used a removed buyer-pill layout + a ⇄ glyph.)
@@ -975,15 +1029,16 @@ function renderTaxonomy(){
     if(subs.length){
       const ss=el('div',{class:'dsec'});
       ss.append(el('div',{class:'dsh'},T('Sub-markets','子市場')+' · '+subs.length+T(' — finer classification, each with its own SMCI hardware pull','—更細分類,各有其 SMCI 硬體拉動')));
-      subs.forEach(s=>{const sc=el('div',{class:'subcard',id:'sub-'+s.id});
+      subs.forEach(s=>{const sc=el('div',{class:'subcard',id:'sub-'+s.id,style:'cursor:pointer'});const gk=subcatsOf(s.id).length;
         const sh=el('div',{class:'row',style:'align-items:baseline;gap:var(--s2)'},el('b',{style:'font-size:var(--f-4)'},LANG==='zh'?s.name_zh:s.name_en),
           el('span',{class:'hw hw'+s.hardware_opportunity,title:OPP[s.hardware_opportunity]},String(s.hardware_opportunity)),
           el('span',{class:'by '+BUYER_C[s.primary_buyer]},s.primary_buyer));
+        if(gk)sh.append(el('span',{class:'tcount',title:T('has deeper sub-markets — click to drill in','有更深子市場 — 點開下鑽')},'▸ '+gk));
         sc.append(sh);
         sc.append(el('div',{class:'vprose',style:'font-size:var(--f-2);color:var(--muted)'},LANG==='zh'?s.scope_zh:s.scope_en));
         const hwr=el('div',{class:'row'});(s.hardware_profile||[]).forEach(h=>hwr.append(el('span',{class:'pill lead',title:plineGloss(h)},smciFam(h))));sc.append(hwr);
         if((s.vendors||[]).length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));s.vendors.forEach(vn=>vr.append(el('span',{class:'chip'},vn)));sc.append(vr);}
-        ss.append(sc);});
+        sc.onclick=()=>showSubDetail(s);ss.append(sc);});
       cd.append(ss);
     }
     // ---- context ladder: Who-uses scent only (Purpose/Flow/Tech folded into the drawer; Hardware/SMCI in the battle card) ----

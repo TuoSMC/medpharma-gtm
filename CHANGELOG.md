@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-08-11 — taxonomy tree goes recursive + deep across every play [branch: taxonomy-tree, NOT on main]
+Two asks: (1) every play deepened, not just Play A; (2) the tree must recurse — 子市場 → 孫 → 曾孫, arbitrary depth. Both done.
+- **Recursive renderer.** The spine's category→sub-market levels are now one recursive `treeNodeInto(container,obj,depth)` — the same node shape at every level, so the tree descends **category → 子市場 → 孫 → 曾孫 …** as far as the data goes (was a hard-coded single L4 level). Each caret toggles its own nested body; indentation scales with depth.
+- **Every sub-market has its own card.** Clicking any node at any depth opens `subDetailCard(s)`: a **breadcrumb** up to the root category (each ancestor clickable — drill up or down), its motion (direct vs co-sell from `primary_buyer`), SMCI hardware pull, its own children (孫) as clickable cards, and vendors. This is what makes deep nesting navigable (a 孫 can't scroll-to a subcard the parent card never renders). Back-nav (`applyDv`) learns the `sub` view.
+- **Data — deepened every play (web-verified, 12-agent generate→adversarial-verify pipeline, 83 web checks).** +21 verified sub-markets, all `is_real=true` + `vendors_verified=true`, confidence B, sourced (KLAS 2026 / Signify / Black Book / ABI):
+  - **Play A** digital-pathology → 4 (IMS primary-dx · clinical-AI marketplace · pharma/CDx quant analysis · WSI-scanner OEM)
+  - **Play B** bioinformatics-secondary → 4 (alignment/variant · workflow-orchestration · metagenomics/pathogen · population-cohort)
+  - **Play C** mes-ebr → 3 (process-pharma · cell-gene-therapy · medical-device)
+  - **Play D** ehr-emr-core → 5 (acute-inpatient · ambulatory · community/critical-access · behavioral-health · LTPAC)
+  - **孫 (3rd level, real):** pacs-radiology-core → 3 (enterprise · ambulatory · cloud-native) · pacs-ai-orchestration → 2 (marketplace · acute-triage)
+  - Verifiers honestly pruned (bioinformatics 6→4) and corrected vendors (dropped Definiens — acquired by AstraZeneca, no longer an independent vendor). Subcategories now **29** (24 子市場 + 5 孫).
+- +5 test guards (multi-level tree present · every play has a deepened category · recursive `treeNodeInto`/`subDetailCard`/`chainOf` exist). **140 green**; app=docs; browser-verified the full 3-level path (PACS/VNA › Radiology PACS › Enterprise Diagnostic PACS) with breadcrumb drill up/down; 0 console errors; no emoji.
+
 ## 2026-08-11 — Explore rebuilt as one Play spine + dead-control sweep [branch: taxonomy-tree, NOT on main]
 Audited every element on the Explore tab (12-agent adversarial workflow: 4 region auditors → duplication matrix → 3 redesign proposals → 3-judge panel; all three judges picked the "One Spine" proposal). The tab had accreted duplicate entry-points; the audit found the rot and the fix.
 - **Dead-control sweep** — five orphan controls were built, read, and wired but **never added to the DOM**, each silently shadowing a live control: `fBuyer` (dup of the jump-to-targets buyer row), `fPlay` (dup of view-by play; also stale — missing Play D), `fDep` (deployment is only a substrate descriptor since v4), `fProfile` (dup of the Product-line drawer), `fSpans` checkbox. All deleted with every reference. Plus the detailCard head compute pill *looked* clickable (cursor:pointer) but had no handler — **wired** to `exploreCompute` to match its live sibling.

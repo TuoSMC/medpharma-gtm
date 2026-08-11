@@ -1515,6 +1515,21 @@ class TestSubcategories(unittest.TestCase):
         self.assertIn("subcategories", src, "build_app.py must read DATA.taxonomy.subcategories")
         self.assertIn("subcatsOf", src, "build_app.py must expose a subcatsOf helper")
 
+    def test_tree_is_multi_level(self):
+        """the tree must actually go deeper than one level — at least one 孫 (a subcategory
+        whose parent is itself a subcategory), proving the recursive category→子市場→孫 model."""
+        subids = {s["id"] for s in SUBS}
+        grandchildren = [s["id"] for s in SUBS if s["parent"] in subids]
+        self.assertTrue(grandchildren, "expected at least one grandchild sub-market (parent is a subcategory)")
+
+    def test_every_play_has_some_depth(self):
+        """each play should carry at least one deepened category (not just Play A) so the tree is even."""
+        by_cat = {c["id"]: c for c in CATS}
+        deepened_cat_ids = {s["parent"] for s in SUBS if s["parent"] in by_cat}
+        for pid in ("play-a", "play-b", "play-c", "play-d"):
+            plays_with_subs = [cid for cid in deepened_cat_ids if pid in (by_cat[cid].get("plays") or [])]
+            self.assertTrue(plays_with_subs, f"{pid} has no category with sub-markets yet")
+
 
 # ============================================================
 # Explore redesign — the Play spine + the dead-control sweep (audit-driven)
@@ -1544,6 +1559,12 @@ class TestExploreSpine(unittest.TestCase):
 
     def test_subcard_scroll_anchor_present(self):
         self.assertIn("id:'sub-'+s.id", self.SRC, "subcards need id=sub-<id> for the L4 spine scroll target")
+
+    def test_recursive_tree_and_sub_detail(self):
+        # the tree renders any depth via a recursive node builder + each sub-market gets its own card
+        self.assertIn("function treeNodeInto(", self.SRC, "recursive tree-node renderer must exist")
+        self.assertIn("function subDetailCard(", self.SRC, "each sub-market needs its own detail card")
+        self.assertIn("function chainOf(", self.SRC, "breadcrumb ancestry walk must exist")
 
 
 if __name__ == "__main__":
