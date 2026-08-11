@@ -357,6 +357,23 @@ tr:last-child td{border-bottom:0}
 .vcard{margin-bottom:var(--s3);padding:var(--s5)}
 .vgrouphdr{font-size:var(--f-6);font-weight:700;color:var(--ink);margin:var(--s5) 0 var(--s2);padding:var(--s1) 0;border-bottom:2px solid var(--accent);display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s3);position:sticky;top:112px;background:var(--bg);z-index:2}
 .vgmot{font-size:var(--f-3);font-weight:400;color:var(--muted)}
+/* vendor registry two-pane: compact scannable list (left) + spacious profile (right) */
+.vtwopane{grid-template-columns:minmax(240px,3.2fr) 6.8fr}
+@media(max-width:840px){.vtwopane{grid-template-columns:1fr}}
+.vlist{display:flex;flex-direction:column;gap:var(--s1);max-height:calc(100vh - 150px);overflow-y:auto;padding-right:var(--s1)}
+@media(max-width:840px){.vlist{max-height:none;overflow:visible}}
+.vrow{padding:var(--s2) var(--s3);border:1px solid transparent;border-radius:var(--r-tag);cursor:pointer;background:var(--panel)}
+.vrow:hover{border-color:var(--line);background:var(--accentbg)}
+.vrow.sel{border-color:var(--accent);background:var(--accentbg)}
+.vrtop{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2)}
+.vrname{font-weight:600;font-size:var(--f-4);color:var(--ink)}
+.vrmeta{display:flex;flex-wrap:wrap;gap:var(--s1);margin-top:var(--s0);align-items:center}
+.vrsum{font-size:var(--f-2);color:var(--muted);margin-top:var(--s0);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vghdr{font-size:var(--f-1);text-transform:uppercase;letter-spacing:.5px;color:var(--accent);font-weight:700;margin:var(--s3) 0 var(--s0);padding-bottom:var(--s0);border-bottom:1px solid var(--line)}
+.vdetail{position:sticky;top:118px;align-self:start}
+@media(max-width:840px){.vdetail{position:static}}
+.vprofile{margin:0}
+.vprofile h3{font-size:var(--f-d1)!important}
 .rich-sparse{color:oklch(0.62 0.15 55);font-weight:600}
 .rich-rich{color:oklch(0.5 0.14 150);font-weight:600}
 .ccchip{cursor:pointer;border:1px solid var(--line);border-radius:var(--r-tag);padding:var(--s2) var(--s3);display:inline-flex;gap:var(--s2);align-items:center;background:var(--panel)}
@@ -1063,9 +1080,28 @@ function renderRegistryInto(host){
   [['none',T('none','不分')],['partner-type',T('partner type','夥伴類型')],['richness',T('richness','豐富度')]].forEach(([k,lab])=>{const b=el('button',{'data-g':k,class:k==='none'?'on':''},lab);b.onclick=()=>{groupMode=k;[...gseg.querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x.dataset.g===k));render();};gseg.append(b);});
   const fbHost=el('div',{});root.append(fbHost);
   root.append(el('div',{class:'toolbar'},el('span',{class:'tagk'},T('group','分組')),gseg,el('span',{class:'tagk'},T('sort','排序')),sseg,el('span',{style:'flex:1 1 20px'}),q,cnt));
-  const vhost=el('div',{});root.append(vhost);
-  function card(v){
-    const c=el('div',{class:'card vcard'});
+  const listPane=el('div',{class:'vlist'}),detailPane=el('div',{class:'vdetail'});
+  root.append(el('div',{class:'twopane vtwopane'},listPane,detailPane));
+  let selected=null;
+  // SMCI hardware pull — aggregate the SMCI boxes / compute classes the vendor's software footprint pulls
+  function vendorHardware(v){const fams=new Set(),ccs=new Set();let flag=0,hot=0;(v.categories||[]).forEach(id=>{const c=CATBYID[id];if(!c)return;(c.hardware_profile||[]).forEach(h=>fams.add(h));ccs.add(computeClassOf(c));if(c.hardware_opportunity===4)flag++;if((c.hardware_opportunity_by_buyer.customer||0)>=3)hot++;});return {fams:[...fams],ccs:[...ccs],flag:flag,hot:hot};}
+  // compact list row — click for the full profile on the right
+  function vrow(v){const pt=partnerTypeOf(v),val=vendorVal(v),rich=richnessOf(v);
+    const r=el('div',{class:'vrow'+(selected&&selected.id===v.id?' sel':'')});r.dataset.id=v.id;
+    const top=el('div',{class:'vrtop'},el('span',{class:'vrname'},v.name));
+    if(pt)top.append(el('span',{class:'pill ptpill '+ptClass(pt.primary)},ptLabel(pt.primary)));
+    r.append(top);
+    const meta=el('div',{class:'vrmeta'});
+    if(val.flag)meta.append(el('span',{class:'vflag'},val.flag+' F'));
+    if(val.hot)meta.append(el('span',{class:'vhot'},val.hot+' HOT'));
+    const lb=lbBadge(v.id);if(lb)meta.append(el('span',{class:'pill',style:'font-size:var(--f-1)'},lb));
+    meta.append(el('span',{class:rich.tier==='sparse'?'rich-sparse':(rich.tier==='rich'?'rich-rich':'muted'),style:'font-size:var(--f-1)'},richLabel(rich.tier)));
+    r.append(meta);
+    if(v.market_position)r.append(el('div',{class:'vrsum'},v.market_position));
+    r.onclick=()=>showVendor(v);return r;}
+  function showVendor(v){selected=v;clear(detailPane);detailPane.append(profile(v));[...listPane.querySelectorAll('.vrow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===v.id));}
+  function profile(v){
+    const c=el('div',{class:'card vcard vprofile'});
     const p=hqParse(v), lg=listedOf(v), fo=fortuneOf(v), us=usShareOf(v), pt=partnerTypeOf(v), rich=richnessOf(v);
     // header: name + market-leaderboard + hardware-value badges
     const h=el('div',{class:'row',style:'align-items:baseline'},el('h3',{style:'margin:0;font-size:var(--f-6)'},v.name));
@@ -1092,6 +1128,10 @@ function renderRegistryInto(host){
     c.append(spec);
     if(pt)c.append(el('div',{class:'vspec',style:'margin-top:0'},el('span',{},T('SMCI motion','SMCI 打法')+' ',el('b',{},ptMotion(pt.primary)))));
     if(lg&&lg.status!=='unknown')c.append(el('div',{class:'vspec',style:'margin-top:0'},el('span',{},T('Listing','上市/私有')+' ',el('b',{},listedLabel(lg)+(lg.ticker?' · '+lg.ticker:'')+(lg.parent?' ('+lg.parent+')':'')))));
+    // SMCI hardware pull — the boxes / compute classes this vendor's software footprint pulls (the sell hook)
+    const hw=vendorHardware(v);
+    if(hw.fams.length){c.append(el('div',{class:'vsec'},T('SMCI hardware pull','SMCI 硬體拉動')+((hw.flag||hw.hot)?' · '+(hw.flag?hw.flag+'F ':'')+(hw.hot?hw.hot+' HOT':''):'')));
+      const hr=el('div',{class:'row'});hw.ccs.forEach(k=>{if(k!=='saas-light')hr.append(el('span',{class:'pill ccpill '+ccClass(k)},ccLabel(k)));});hw.fams.forEach(hf=>hr.append(el('span',{class:'pill lead',title:plineGloss(hf)},smciFam(hf))));c.append(hr);}
     // prose sections
     if(v.market_position){c.append(el('div',{class:'vsec'},T('Market position','市場地位')));c.append(el('div',{class:'vprose'},v.market_position));}
     if(v.market_share){c.append(el('div',{class:'vsec'},T('Market share','市佔')));c.append(el('div',{class:'vprose'},v.market_share));}
@@ -1110,18 +1150,19 @@ function renderRegistryInto(host){
     const s=q.value.toLowerCase();
     const shown=vsAll.filter(vfMatch).filter(v=>!s||JSON.stringify([v.name,v.headquarters,v.leadership,v.market_position,v.market_share,(v.categories||[]).join(' ')]).toLowerCase().includes(s))
       .slice().sort(sortMode==='az'?(a,b)=>a.name.localeCompare(b.name):byValue);
-    clear(vhost);
-    if(groupMode==='none'){shown.forEach(v=>vhost.append(card(v)));}
+    clear(listPane);
+    if(groupMode==='none'){shown.forEach(v=>listPane.append(vrow(v)));}
     else{
       const map=new Map();shown.forEach(v=>{const k=groupKeyOf(v);if(!map.has(k))map.set(k,[]);map.get(k).push(v);});
       const order=groupMode==='partner-type'?PT_GROUP_ORDER:RICH_ORDER;
       const keys=[...map.keys()].sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib)||map.get(b).length-map.get(a).length;});
       keys.forEach(k=>{const lab=(groupMode==='partner-type'?ptLabel(k):richLabel(k));
-        const mot=(groupMode==='partner-type'&&PT_META[k])?' — '+ptMotion(k):'';
-        vhost.append(el('div',{class:'vgrouphdr'},el('span',{},lab+' · '+map.get(k).length),mot?el('span',{class:'vgmot'},mot):''));
-        map.get(k).forEach(v=>vhost.append(card(v)));});
+        listPane.append(el('div',{class:'vghdr'},lab+' · '+map.get(k).length));
+        map.get(k).forEach(v=>listPane.append(vrow(v)));});
     }
-    cnt.textContent=shown.length+' / '+vsAll.length+T(' shown',' 顯示')+(groupMode!=='none'?' · '+T('grouped by ','分組:')+(groupMode==='partner-type'?T('partner type','夥伴類型'):T('richness','豐富度')):'');
+    cnt.textContent=shown.length+' / '+vsAll.length+T(' shown',' 顯示')+(groupMode!=='none'?' · '+T('grouped','分組'):'');
+    const sel=(selected&&shown.find(v=>v.id===selected.id))||shown[0]||null;
+    if(sel)showVendor(sel);else clear(detailPane);
   }
   function refresh(){clear(fbHost);renderFilterBar(fbHost,refresh);render();}
   q.oninput=render;refresh();

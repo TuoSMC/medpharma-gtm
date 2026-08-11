@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-08-10 — vendor page → browsable list + rich profile (two-pane) + v4.9
+Tuo: the per-vendor card was both bare (陽春) and crowded (擁擠) — a wide card cramming shallow facts. Restructured the registry into **a scannable list + a spacious detail profile** (like Explore's tree→battle-card): a compact left list (name · partner-type · flag/HOT · richness · 2-line summary, honouring the group/filter/sort), click any vendor → a full-width right profile with room to breathe. Added an **SMCI hardware pull** section to the profile (the sell hook, un-陽春) — the SMCI boxes + compute classes the vendor's software footprint pulls (HGX/MGX GPU · NVMe · archive · edge · HA pairs …) with flagship/HOT counts, derived from its categories. Two-pane collapses to a single column on mobile. 122 tests green; app=docs; browser-verified (wide 1500px: list 44→486 + profile 502→1441 with the hardware-pull section; mobile 390px: single column, 0 overflow, no console errors). **v4.9.**
+
 ## 2026-08-10 — vendor registry: group-by partner-type / richness + v4.8
 Tuo: group vendors by partner-type. Added a GROUP control to the registry (none / partner-type / data-richness) beside SORT. Grouping renders a sticky group header per bucket — e.g. **"ISV · 244 — co-sell / OEM / reference architecture"**, **"OEM/Device · 58 — embedded BOM"**, SI · 4, MSP · 2, Channel · 1 — each carrying its SMCI motion, groups ordered by the GTM order, cards inside sorted by the active sort. Browser-verified. 122 tests green; app=docs. **v4.8.**
 
