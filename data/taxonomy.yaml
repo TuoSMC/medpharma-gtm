@@ -20107,3 +20107,1825 @@ subcategories:
   - HST (a MultiPlan/Claritev company)
   confidence: B
   source: elapservices.com/reference-based-pricing/; claim-doc.com (co-fiduciary auditing + balance-bill/litigation defense); 6degreeshealth.com; advancedpricing.com; payercompass.com; calbrokermag.com RBP overview
+- id: icu-central-monitoring-realtime-surveillance-analytics-high-fidelity-waveform-platform
+  parent: icu-central-monitoring-realtime-surveillance-analytics
+  name_en: High-Fidelity Physiologic Waveform Capture & Analytics
+  name_zh: 高保真生理波形采集与分析平台
+  scope_en: On-prem data engines that capture, harmonize, stream and archive second-to-second / beat-by-beat physiologic waveforms from bedside monitors, vents and pumps across ICU/OR/telemetry, feeding risk indices, digital-twin models and research datasets. Distinct from discrete-vitals surveillance by full-fidelity high-frequency signal capture.
+  scope_zh: 本地部署的数据引擎，跨ICU/手术室/遥测采集、归一化、流式传输并归档来自床旁监护仪、呼吸机和输液泵的逐秒/逐搏高频生理波形，驱动风险指数、数字孪生模型与科研数据集；区别于离散生命体征监测的是全保真高频信号采集。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  - transactional
+  hardware_profile:
+  - edge-industrial
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  - gpu-server
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Medical Informatics Corp (Sickbay)
+  - Etiometry
+  - Excel Medical (WAVE Clinical Platform)
+  confidence: A
+  source: Cambridge Core / PubMed 40908946 systematic review of Sickbay & Etiometry high-fidelity physiologic streaming; sickbay.com FDA-cleared beat-by-beat waveform data engine; etiometry.com platform page. Sickbay & Excel WAVE are the pure on-prem waveform-capture plays; Etiometry is a real physiologic-streaming risk-analytics vendor in the same segment.
+- id: icu-central-monitoring-realtime-surveillance-analytics-sepsis-condition-predictive-samd
+  parent: icu-central-monitoring-realtime-surveillance-analytics
+  name_en: Sepsis & Condition-Specific Predictive AI (SaMD)
+  name_zh: 脓毒症及特定病症预测AI（医疗器械软件）
+  scope_en: Regulated / FDA-authorized AI algorithms that ingest EHR vitals, labs and biomarkers to compute continuous sepsis and deterioration risk scores. Distinct buyer economics (algorithm licensing, De Novo/510(k) clearance) and GPU training/inference footprint, separate from rules-based surveillance platforms. Delivery is largely cloud/EHR-embedded, so the on-prem SMCI pull is modest and sits with the algorithm vendor (operator co-sell), not the hospital.
+  scope_zh: 受监管/FDA获批的AI算法，摄取EHR生命体征、化验和生物标志物，连续计算脓毒症与恶化风险评分；具有独特的算法授权与De Novo/510(k)获批经济学及GPU训练/推理需求，区别于基于规则的监测平台。多以云端/嵌入EHR方式交付，本地SMCI硬件拉动有限，主要落在算法厂商（operator协销）。
+  role:
+  - analytics-artificial-intelligence
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - transactional
+  - time-series
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Prenosis (Sepsis ImmunoScore)
+  - Bayesian Health (TREWS Sepsis Flagging Device)
+  confidence: A
+  source: Prenosis Sepsis ImmunoScore FDA De Novo (Apr 2024); Bayesian Health first-ever FDA 510(k) clearance for continuous AI sepsis monitoring (BioSpace/PRNewswire, May 12 2026), judged substantially equivalent to Prenosis De Novo; Nature Medicine TREWS prospective study. Dropped Epic Sepsis Model from vendor list — embedded, non-FDA-authorized EHR model, not a standalone regulated SaMD sold into this segment.
+- id: icu-central-monitoring-realtime-surveillance-analytics-enterprise-ehr-surveillance-ews
+  parent: icu-central-monitoring-realtime-surveillance-analytics
+  name_en: Enterprise EHR-Driven Clinical Surveillance & Early Warning
+  name_zh: 企业级EHR驱动临床监测与早期预警
+  scope_en: Enterprise rules-and-analytics engines that pull EHR data to a central engine, run clinical rule sets / early-warning scores for multi-factorial deterioration, and push real-time alerts to clinician mobile devices. KLAS-named 'Enterprise Clinical Surveillance' category; broader than a single sepsis algorithm.
+  scope_zh: 企业级规则与分析引擎，将EHR数据汇入中央引擎，运行临床规则集/早期预警评分以识别多因素恶化，并向临床医生移动设备推送实时警报；即KLAS命名的'企业临床监测'类别，范围广于单一脓毒症算法。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - transactional
+  - time-series
+  - real-world-data
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  - high-memory
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Wolters Kluwer (POC Advisor / Sentri7)
+  - VigiLanz
+  - Ambient Clinical Analytics (AWARE)
+  - CLEW Medical
+  confidence: B
+  source: KLAS sepsis / 'Enterprise Clinical Surveillance' solution-area coverage naming Wolters Kluwer & VigiLanz; Ambient Clinical Analytics AWARE product; CLEW Medical FDA-cleared ICU predictive platform, confirmed operational and expanded to all inpatient settings (clewmed.com, PRNewswire, Healthcare IT News).
+- id: icu-central-monitoring-realtime-surveillance-analytics-general-ward-continuous-monitoring
+  parent: icu-central-monitoring-realtime-surveillance-analytics
+  name_en: General-Ward Continuous Surveillance Monitoring (Failure-to-Rescue)
+  name_zh: 普通病房连续监测预警（避免抢救失败）
+  scope_en: Device-connected surveillance-monitoring systems that stream continuous pulse-ox / vitals from med-surg bedside and wearable sensors to a central notification server to detect unmonitored ward deterioration and reduce failure-to-rescue. Compute is largely embedded in the monitoring-device OEM's system BOM at the edge.
+  scope_zh: 设备联网的监测系统，将普外科病房床旁及可穿戴传感器的连续血氧/生命体征流式传输至中央通知服务器，以发现未受监护病房患者的恶化并降低抢救失败率；算力主要以边缘方式嵌入监护设备OEM的系统物料清单中。
+  role:
+  - data-acquisition
+  - workflow
+  - integration
+  data_modality:
+  - time-series
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - hospital-health-system
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - Masimo (Patient SafetyNet)
+  - Sotera Wireless (ViSi Mobile)
+  - Medtronic
+  confidence: B
+  source: Masimo Patient SafetyNet product & clinical-evidence pages (masimo.com); Business Wire general-care surveillance-system article; PubMed 32270344 continuous pulse-ox before PEA arrest on general wards.
+- id: icu-central-monitoring-teleicu-command-center-enterprise-self-operated-analytics-platform
+  parent: icu-central-monitoring-teleicu-command-center
+  name_en: Enterprise Self-Operated Command-Center Analytics Platform
+  name_zh: 企業自營指揮中心分析平台
+  name_full: Licensed hub software a health system runs in its own eICU command center
+  scope_en: 'The licensed hub platform a health system deploys and runs in its OWN command center: aggregates near-real-time ventilator, patient-monitor, lab and EMR feeds from 50-500 remote ICU beds, runs AI deterioration-prediction algorithms, and serves high-fidelity waveform review. Buyer is the end org (customer) that builds and owns the command-center iron; distinct from an outsourced service and from the bedside AV layer.'
+  scope_zh: 由醫療體系自行在其指揮中心部署並運行的中樞平台：匯集50-500張遠端ICU床位的呼吸機、監護儀、檢驗與EMR近即時資料，執行AI惡化預測演算法並提供高保真波形回顧。買方為自建並自有指揮中心硬體的終端機構（customer），與外包服務及床旁音視訊層不同。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  - integration
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  - transactional
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Koninklijke Philips (eCareManager / eICU)
+  - GE HealthCare (Mural Virtual Care Solution)
+  confidence: A
+  source: ResearchAndMarkets 'U.S. Tele-ICU Market 2024-2029' (Business Wire, Aug 2024); Philips eCareManager Enterprise product page (510(k)-cleared hub at the core of eICU, HL-7 EMR ingest, centralized database); GE HealthCare Mural Virtual Care brochures (device-agnostic waveform access, EMR-based deterioration prediction). Verified Aug 2026.
+- id: icu-central-monitoring-teleicu-command-center-outsourced-managed-service-operator-noc
+  parent: icu-central-monitoring-teleicu-command-center
+  name_en: Outsourced Managed Tele-ICU Service Operator (Operations-Center NOC)
+  name_zh: 外包代管遠距ICU服務營運商（營運中心NOC）
+  name_full: BPO providers delivering 24/7 remote intensivist coverage plus platform as a consolidated service
+  scope_en: Business-process providers that deliver 24/7 remote intensivist coverage AND the platform as a service, consolidating 100+ partner hospitals into their own centralized operations centers. The hospital buys a clinical service, not iron; the OPERATOR owns, scales and runs the multi-tenant datacenter/NOC that ingests live feeds from many sites - the clearest SMCI co-sell target here (operator buys direct, needs DR).
+  scope_zh: 同時提供24/7遠端重症醫師覆蓋與平台即服務的業務流程外包商，將逾百家合作醫院整合進其自有的集中營運中心。醫院購買臨床服務而非硬體；營運商（operator）自有、擴充並運行接收多院即時資料的多租戶資料中心/NOC，是此處最清晰的SMCI協同銷售對象（營運商直接採購、需災備）。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  - transactional
+  - real-world-data
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Hicuity Health
+  - Access TeleCare
+  - Eagle Telemedicine
+  - Sound Physicians
+  confidence: A
+  source: 'ResearchAndMarkets ''U.S. Tele-ICU Market 2024-2029'' (vendor list: Eagle Telemedicine, Hicuity Health, Access TeleCare); Hicuity Health corporate/FAQ site (intensivists operate from centralized operations centers, nationwide 24/7/365, EMR integration Epic/Cerner/Meditech); Sound Physicians Telemedicine pages (24/7 Tele-ICU / Tele-Critical Care service, hybrid model). Verified Aug 2026.'
+- id: icu-central-monitoring-teleicu-command-center-bedside-av-telepresence-access-point-layer
+  parent: icu-central-monitoring-teleicu-command-center
+  name_en: Bedside AV Telepresence & Access-Point Endpoint Layer
+  name_zh: 床旁音視訊遠距與接入點終端層
+  name_full: Audio-video streaming access points and central media-routing infrastructure connecting bedside to the command center
+  scope_en: 'The audio-video streaming infrastructure that links the ICU bedside to the command center: fixed/cart access-point cameras and endpoints at the bedside plus central media-routing/video-session servers. Distinct edge-endpoint (and OEM-embedded) hardware footprint rather than the analytics hub - modest but real SMCI pull at the edge and in the media-server tier.'
+  scope_zh: 連接ICU床旁與指揮中心的音視訊串流基礎設施：床旁固定/推車式接入點攝影機與終端，加上中央媒體路由/視訊會話伺服器。屬於邊緣終端（及OEM嵌入）硬體，而非分析中樞——在邊緣與媒體伺服器層帶來雖溫和但真實的SMCI需求。
+  role:
+  - data-acquisition
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - images
+  - time-series
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Caregility
+  - Teladoc Health (InTouch Health)
+  - Amwell (Avizia)
+  confidence: B
+  source: Signify Research 'high acuity telehealth' market coverage; Caregility Cloud (tele-ICU program + APS access-point devices); Teladoc/InTouch and Amwell/Avizia acute-care AV endpoints. Overlaps partly with general telehealth carts, hence confidence B. Verified Aug 2026.
+- id: clinical-data-lakehouse-provider-edw-cdr-ehr-native-analytics-edw
+  parent: clinical-data-lakehouse-provider-edw-cdr
+  name_en: EHR-Native Packaged Analytics Warehouse (Epic Cogito/Caboodle, Oracle)
+  name_zh: 電子病歷原生打包分析數據倉庫
+  name_full: EHR-Native Packaged Clinical Analytics EDW (Epic Clarity/Caboodle-Cogito, Oracle Health Analytics)
+  scope_en: 'The relational analytics warehouse bundled with or derived from the core EHR: Epic''s Clarity (normalized reporting DB) plus Caboodle/Cogito (dimensional star-schema mart) and Oracle Health''s analytics stack. Nightly ETL pulls transactional EHR data into SQL Server marts for BI, quality, regulatory, and operational reporting (data up to ~24h behind). In most large Epic shops this runs on customer-owned on-prem SQL Server clusters, giving a heavy batch-ETL CPU + fast-storage footprint distinct from real-time CDR or cloud lakehouse.'
+  scope_zh: 與核心電子病歷捆綁或衍生的關聯式分析倉庫：Epic 的 Clarity 報表庫加上 Caboodle/Cogito 維度星型模型，以及 Oracle Health 分析堆疊。夜間 ETL 將交易型電子病歷資料匯入 SQL Server 資料市集，供 BI、品質、法規與營運報表使用（資料約落後 24 小時）。多數大型 Epic 醫院在客戶自有的本地 SQL Server 叢集上運行，形成有別於即時 CDR 或雲端 lakehouse 的批次 ETL 密集 CPU 與快速儲存負載。
+  role:
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Epic (Cogito / Caboodle / Clarity)
+  - Oracle Health (analytics / HealtheIntent)
+  confidence: A
+  source: Epic Caboodle/Clarity architecture docs; Gartner Peer Insights 'Epic Cogito'; healthtechresourcesinc Epic data-warehousing modules
+- id: clinical-data-lakehouse-provider-edw-cdr-realtime-cdr-interop-ods
+  parent: clinical-data-lakehouse-provider-edw-cdr
+  name_en: Real-Time Clinical Data Repository / Interoperability ODS (InterSystems)
+  name_zh: 即時臨床數據存儲庫／互操作運營數據存儲
+  name_full: Real-Time Aggregated Clinical Data Repository & Operational Data Store (InterSystems IRIS for Health / HealthShare)
+  scope_en: A live, continuously updated aggregated CDR / operational data store that ingests, normalizes, deduplicates and matches data across source systems in real time (HL7 v2, FHIR, DICOM) to power point-of-care access, clinical decision support, and a longitudinal Unified Care Record — an operational/OLTP data platform distinct from the batch analytics EDW. InterSystems IRIS for Health runs an in-memory/multi-model DB with synchronous mirroring, pulling a high-memory + NVMe + HA-redundant on-prem footprint rather than nightly-batch relational iron.
+  scope_zh: 即時、持續更新的聚合式 CDR／運營數據存儲，透過 HL7 v2、FHIR、DICOM 即時擷取、正規化、去重與病患匹配跨來源系統資料，支撐即時查閱、臨床決策支援與縱向統一照護紀錄——屬於運營型/OLTP 資料平台，有別於批次分析 EDW。InterSystems IRIS for Health 採記憶體內／多模型資料庫加同步鏡像，帶動高記憶體 + NVMe + 高可用冗餘的本地負載，而非夜間批次關聯式硬體。
+  role:
+  - integration
+  - system-of-record
+  - data-acquisition
+  data_modality:
+  - transactional
+  - documents
+  - images
+  hardware_profile:
+  - high-memory
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - InterSystems (IRIS for Health / HealthShare)
+  - Oracle Health (Millennium / operational data store)
+  confidence: A
+  source: InterSystems IRIS for Health & HealthShare product docs / 'Unlocking Clinical Data' white paper; Gartner Peer Insights 'InterSystems IRIS for Health'
+- id: clinical-data-lakehouse-provider-edw-cdr-legacy-data-archival
+  parent: clinical-data-lakehouse-provider-edw-cdr
+  name_en: Legacy Clinical Data Archival / Active Archive
+  name_zh: 遺留臨床數據歸檔／主動歸檔
+  name_full: Legacy / Active Clinical Data Archiving (KLAS 'Data Archiving' market)
+  scope_en: 'Governed archival platforms that ingest and retain data from decommissioned/legacy EHR, RCM, and ancillary systems (clinical, financial, imaging) after EHR consolidation, for compliance/retention, release-of-information, audit, and legacy-license cost takeout — the KLAS-tracked ''Data Archiving'' segment. Distinct buyers (CIO/HIM decommissioning teams), distinct vendors, and a distinctly storage-centric footprint: long-retention capacity/archive storage with DR and durable HA. NOTE: SMCI angle is weakening as leading vendors (Harmony, Clearsense) push cloud-hosted ''active archive''; the on-prem-electing customer segment (customer provides equipment/redundant power/secured location) is real but shrinking, hence a modest, storage-only opportunity.'
+  scope_zh: 在電子病歷整併後，將已停用/遺留 EHR、RCM 與周邊系統的資料（臨床、財務、影像）擷取並保存的受治理歸檔平台，用於合規保存、資訊釋出、稽核與遺留授權成本削減——即 KLAS 追蹤的『資料歸檔』區隔。買方（CIO／HIM 系統除役團隊）、供應商與硬體型態均不同：以長期保存的容量/歸檔儲存加上 DR 與耐久高可用為主。註：Harmony、Clearsense 等主要供應商推向雲端託管『主動歸檔』，SMCI 直接拉力減弱；選擇本地部署（客戶自備設備/冗餘電力/實體安全機房）的區隔仍真實但正在萎縮，故為僅儲存、適中的機會。
+  role:
+  - system-of-record
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  - images
+  hardware_profile:
+  - capacity-archive-storage
+  - disaster-recovery-backup
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - diagnostic-reference-laboratory
+  vendors:
+  - MediQuant
+  - Harmony Healthcare IT
+  - Olah Healthcare Technology
+  - Clearsense
+  - Triyam
+  confidence: A
+  source: KLAS 'Data Archiving 2024' & 2026 performance brief (klasresearch.com); TechTarget/HealthTech Analytics KLAS 2024 archiving coverage; HIT Consultant KLAS 2026 brief; Harmony HealthData Archiver (cloud-based active archive) product page
+- id: clinical-data-lakehouse-secure-research-tre-genomic-omics-analysis-workbench
+  parent: clinical-data-lakehouse-secure-research-tre
+  name_en: Genomic & Multi-Omics Secure Analysis Workbench
+  name_zh: 基因體與多體學安全分析工作台
+  name_full: Genomic & Multi-Omics Secure Analysis Workbench (bioinformatics TRE)
+  scope_en: 'A project-based TRE specialized for large-scale genomic/multi-omics analysis: secondary-analysis pipelines (alignment, variant calling), GPU-accelerated tools (NVIDIA Parabricks), and interactive notebooks run against petabyte-scale controlled cohorts/biobanks without data egress. Distinguished from a generic document/EHR TRE by the compute density and storage volume of sequencing workloads.'
+  scope_zh: 專為大規模基因體/多體學分析而設的專案式可信研究環境：在受控佇列與生物樣本庫（PB 級）上執行序列比對、變異呼叫等二級分析流程、GPU 加速工具（NVIDIA Parabricks）與互動式筆記本，且資料不外流。與一般文件/電子病歷 TRE 的差異在於定序工作負載的運算密度與儲存量。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  - images
+  hardware_profile:
+  - gpu-server
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - diagnostic-reference-laboratory
+  vendors:
+  - DNAnexus
+  - Velsera (Seven Bridges)
+  - Terra (Broad Institute / Verily)
+  - Lifebit
+  - Illumina Connected Analytics
+  confidence: A
+  source: Velsera + NVIDIA Parabricks on Seven Bridges Platform (velsera.com, GenomeWeb, Yahoo Finance, 2025); Seven Bridges Cancer Genomics Cloud (NCI CRDC); Lifebit federated genomic analysis (lifebit.ai)
+- id: clinical-data-lakehouse-secure-research-tre-national-sovereign-sde
+  parent: clinical-data-lakehouse-secure-research-tre
+  name_en: National / Sovereign Secure Data Environment (SDE)
+  name_zh: 國家級/主權級安全資料環境 (SDE)
+  name_full: National / Sovereign Secure Data Environment (population-scale, government-operated)
+  scope_en: Population-scale, government-mandated secure data environments serving a whole nation or region (e.g. the NHS Research SDE network, national biobanks) operated in-country for data sovereignty, with federated query across regional nodes, a common data model, and full Five-Safes audit. The distinguishing buyer is a national health system/government that builds and operates its own sovereign iron.
+  scope_zh: 服務整個國家或區域、由政府主導的人口規模安全資料環境（如 NHS 研究 SDE 網路、國家生物樣本庫），為資料主權而在境內營運，具跨區域節點的聯邦查詢、共通資料模型與完整 Five-Safes 稽核。其獨特買方為自建並自營主權級硬體的國家衛生體系/政府。
+  role:
+  - infrastructure-platform
+  - workflow
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - real-world-data
+  - transactional
+  - omics
+  - images
+  hardware_profile:
+  - capacity-archive-storage
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - diagnostic-reference-laboratory
+  vendors:
+  - Aridhia
+  - Lifebit
+  - IQVIA
+  - OpenSAFELY (Bennett Institute)
+  - Genomics England
+  confidence: A
+  source: NHS England Digital Secure Data Environment Service + Research SDE Network; OpenSAFELY (opensafely.org, deployed in TPP/Optum data centres); HDR UK common data model adoption
+- id: clinical-data-lakehouse-secure-research-tre-federated-privacy-preserving-ai
+  parent: clinical-data-lakehouse-secure-research-tre
+  name_en: Federated Privacy-Preserving AI Model Training
+  name_zh: 聯邦式隱私保護 AI 模型訓練
+  name_full: Federated Privacy-Preserving AI Model Training Network (weights move, data stays)
+  scope_en: 'Multi-institution networks that train and validate AI models (imaging, pathology, omics) across hospital sites without moving patient records — only model weights/gradients transit to a central orchestrator via edge compute nodes deployed at each site. Distinct from the RWD federated-analytics sibling: this is GPU-heavy model training (federated averaging), not statistical query over claims/EHR.'
+  scope_zh: 跨醫院站點訓練與驗證 AI 模型（影像、病理、體學）的多機構網路，病患資料不外移——僅模型權重/梯度經各站點的邊緣運算節點傳至中央協調器。與真實世界資料聯邦分析姊妹市場不同：此為 GPU 密集的模型訓練（聯邦平均），而非對理賠/電子病歷的統計查詢。
+  role:
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - artificial-intelligence-models
+  - images
+  - omics
+  hardware_profile:
+  - gpu-server
+  - edge-industrial
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  vendors:
+  - Owkin
+  - Rhino Health (Rhino FCP)
+  - NVIDIA FLARE / Clara
+  - Apheris
+  confidence: A
+  source: Rhino Health FCP — 100+ active edge nodes across hospitals/VPCs/secure environments, 50+ institutions (rhinofcp.com, AVIA Marketplace, CBInsights, 2025); Apheris federated drug-discovery training in-client-infra / NVIDIA DGX (apheris.com); NVIDIA FLARE technical docs
+- id: clinical-data-lakehouse-secure-research-tre-synthetic-data-deidentification
+  parent: clinical-data-lakehouse-secure-research-tre
+  name_en: Synthetic Data Generation & De-Identification
+  name_zh: 合成資料生成與去識別化
+  name_full: Synthetic Data Generation & De-Identification (privacy-preserving data engineering)
+  scope_en: Privacy-preserving data engineering that produces statistically faithful synthetic patient records or de-identified extracts so researchers can work outside the access constraints of a raw-data TRE. Generative synthesis (transformer/GAN models such as Syntegra's Medical Mind) carries model-training compute, and generation from PHI often runs inside the secure enclave; but the segment is largely SaaS-light and partly adjacent to (rather than strictly inside) the enclosed TRE, so the SMCI pull is modest.
+  scope_zh: 產生統計上高度擬真的合成病患記錄或去識別化萃取的隱私保護資料工程，讓研究者在原始資料 TRE 的存取限制外進行分析。生成式合成（如 Syntegra Medical Mind 的 transformer/GAN 模型）帶有模型訓練運算，且對含 PHI 資料的生成常須在封閉環境內執行；但此區段多為輕量 SaaS，相對於封閉式 TRE 屬鄰接而非嚴格內含，故對 SMCI 的硬體拉動有限。
+  role:
+  - analytics-artificial-intelligence
+  - integration
+  - workflow
+  data_modality:
+  - real-world-data
+  - transactional
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - biotechnology-pharmaceutical
+  - payer
+  vendors:
+  - MDClone
+  - Syntegra
+  - Syntho
+  - Replica Analytics (Aetion)
+  - MOSTLY AI
+  confidence: B
+  source: Syntegra Medical Mind synthetic EHR, Datavant + Atropos partnerships (datavant.com, atroposhealth.com, CBInsights — small ~$5.6M-funded vendor, confirms SaaS-light); MDClone in-environment synthetic-data deployment; MOSTLY AI / Syntho / Replica Analytics (Aetion) de-identification & synthesis
+- id: rwd-rwe-analytics-federated-network-tre-secure-workspace-sde
+  parent: rwd-rwe-analytics-federated-network-tre
+  name_en: TRE/SDE Secure Analytic Workspace Platforms
+  name_zh: 可信研究环境/安全数据环境（TRE/SDE）安全分析工作区平台
+  name_full: Trusted Research Environment / Secure Data Environment governed analytic workspaces (researchers analyze sensitive data in-place)
+  scope_en: Governed, project-based secure enclaves where credentialed researchers run interactive analysis on sensitive linked health/omics data that never leaves the environment. Drives national/sovereign SDE programs (NHS Secure Data Environment, Genomics England, HDR UK) and AMC research data platforms. SMCI pull is capacity + NVMe storage under HA/DR with high-memory analytics nodes inside an air-gapped or sovereign-cloud enclave.
+  scope_zh: 受治理的、以项目为单位的安全隔离环境，经审核的研究人员在其中对敏感的关联健康/组学数据进行交互式分析，数据永不离开环境。支撑国家级/主权级SDE项目（NHS安全数据环境、Genomics England、HDR UK）及学术医疗中心研究数据平台。SMCI拉动为高容量+NVMe存储、HA/DR冗余及高内存分析节点，部署于气隙或主权云隔离区。
+  role:
+  - infrastructure-platform
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - real-world-data
+  - omics
+  - documents
+  - transactional
+  hardware_profile:
+  - capacity-archive-storage
+  - nvme-performance-storage
+  - high-availability-redundant
+  - high-memory
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  vendors:
+  - Aridhia (DRE)
+  - Lifebit
+  - DNAnexus
+  - IQVIA E360
+  confidence: B
+  source: Aridhia (aridhia.com/tre), Lifebit TRE vendor guides (lifebit.ai/blog), NHS England Secure Data Environment programme; DNAnexus / IQVIA E360 product pages
+- id: rwd-rwe-analytics-federated-network-tre-federated-learning-pet
+  parent: rwd-rwe-analytics-federated-network-tre
+  name_en: Federated Learning & Privacy-Enhancing Computation Platforms
+  name_zh: 联邦学习与隐私增强计算平台
+  name_full: Federated learning / privacy-enhancing computation across data holders (train AI models where model updates move, raw data stays local)
+  scope_en: 'Software that trains and validates AI models across multiple hospital/pharma data nodes without centralizing raw records — gradients/model updates move, data does not. Distinct from the TRE workspace because the workload is GPU model training (medical imaging, digital pathology, multi-omics), making this the only GPU-pull segment under this parent. Bought by pharma sponsors and medtech for collaborative drug-discovery and diagnostic-AI consortia; the federation vendor typically co-sells GPU compute deployed at each node. Note: much FL today is cloud-deployed and per-node GPU is modest, so the SMCI angle is strongest where hospital/pharma nodes require local on-prem GPU.'
+  scope_zh: 在多个医院/药企数据节点间训练与验证AI模型的软件，不集中原始记录——传输的是梯度/模型更新而非数据。与TRE工作区不同，其负载为GPU模型训练（医学影像、数字病理、多组学），是本父市场下唯一的GPU拉动细分。买方为药企申办方与医疗器械厂商，用于协作药物发现和诊断AI联盟；联邦技术厂商通常在各节点协同销售GPU算力。注：当前多数联邦学习为云部署且单节点GPU规模有限，SMCI机会主要在需本地GPU的医院/药企节点。
+  role:
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - artificial-intelligence-models
+  - images
+  - omics
+  - real-world-data
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - medical-technology-in-vitro-diagnostics
+  - academic-medical-center
+  - hospital-health-system
+  vendors:
+  - Rhino Health (on NVIDIA FLARE)
+  - Owkin (Substra)
+  - Apheris
+  - Tune Insight
+  - Flower Labs
+  confidence: B
+  source: Rhino Health / NVIDIA FLARE (rhinofcp.com), Owkin Substra, Apheris (apheris.com, AISB Network); Tune Insight (tuneinsight.com); Federated Learning in Healthcare market reports (Future Market Insights, CB Insights)
+- id: rwd-rwe-analytics-federated-network-tre-federated-query-cohort-network
+  parent: rwd-rwe-analytics-federated-network-tre
+  name_en: Federated Query / Distributed Research Networks (cohort feasibility)
+  name_zh: 联邦查询/分布式研究网络（队列可行性）
+  name_full: Federated query networks that execute analytic packages locally and return aggregate cohort counts / summary statistics for feasibility and observational research
+  scope_en: 'Operator-run networks that broadcast executable analytic code (SQL/R packages against a common data model such as OMOP) to member sites, which run it locally behind their firewall and return only aggregate counts/summary stats for meta-analysis. Core use is cohort feasibility, site selection and multi-site observational studies. The honest SMCI pull is storage: each node holds the local common-data-model copy on NVMe/capacity storage and runs lightweight aggregate queries against it — a distinctly lighter footprint (no sustained GPU training, no interactive enclave) and a distinct operator buyer versus the other two segments.'
+  scope_zh: 由运营方运行的网络，将可执行分析代码（针对OMOP等通用数据模型的SQL/R程序包）分发至成员站点，站点在防火墙内本地运行，仅返回聚合计数/汇总统计用于荟萃分析。核心用途为队列可行性、站点筛选和多中心观察性研究。SMCI的真实拉动为存储：各节点在NVMe/容量存储上保存本地通用数据模型副本并运行轻量聚合查询——footprint显著低于前两者（无持续GPU训练、无交互式隔离区），买方为运营方，画像不同。
+  role:
+  - analytics-artificial-intelligence
+  - integration
+  - data-acquisition
+  data_modality:
+  - real-world-data
+  - transactional
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - biotechnology-pharmaceutical
+  - academic-medical-center
+  - contract-research-organization
+  vendors:
+  - TriNetX
+  - OHDSI / OMOP network (Odysseus Data Services)
+  - Datavant
+  confidence: B
+  source: 'TriNetX (trinetx.com/data), JAMIA Open ooad035 & ooae077 on TriNetX federated network; OHDSI/OMOP distributed research network (Odysseus Data Services); Datavant privacy-preserving record linkage (datavant.com). Dropped N3C: JAMIA 28(3):427 & HealthTech Magazine confirm N3C is a centralized Palantir Foundry enclave, not a federated-query vendor.'
+- id: rwd-rwe-analytics-regulatory-causal-external-control-eca-abstraction-cohort
+  parent: rwd-rwe-analytics-regulatory-causal-external-control
+  name_en: External/Synthetic Control Arm Cohort Construction (EHR-Abstraction)
+  name_zh: 外部/合成对照组队列构建（病历深度抽取）
+  name_full: Oncology & Rare-Disease External/Synthetic Control Arm Construction via Human+AI EHR Abstraction
+  scope_en: 'Building the comparator cohort itself to augment single-arm/Phase II trials for FDA/EMA submission: sourcing curated real-world data and abstracting disease stage, biomarkers, response and progression from unstructured oncology EHR, pathology and clinical notes using large-scale NLP/LLM curation with human-in-the-loop review. Distinct from the causal-analysis engine: the deliverable is a regulatory-grade patient-level comparator dataset, and the vendor typically owns/operates the curated RWD asset. The abstraction pipeline is the compute-heavy step (LLM/NLP over millions of documents), pulling GPU plus performance and archive storage for the curated corpus.'
+  scope_zh: 为增强单臂/II期试验、支撑FDA/EMA申报而构建对照队列本身：获取经策展的真实世界数据，并用大规模NLP/LLM结合人工复核，从非结构化肿瘤病历、病理与临床笔记中抽取分期、生物标志物、疗效与进展等要素。与因果分析引擎不同，交付物是监管级的患者层对照数据集，且厂商通常自有并运营策展RWD资产。抽取管线是算力密集环节（对数百万文档做LLM/NLP），拉动GPU及高性能与归档存储。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - real-world-data
+  - documents
+  - images
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  - diagnostic-reference-laboratory
+  vendors:
+  - Medidata AI (Synthetic Control Arm)
+  - Flatiron Health
+  - ConcertAI (Patient360)
+  - COTA Healthcare
+  - Cytel
+  - Tempus
+  confidence: B
+  source: Medidata AI Synthetic Control Arm + FDA-supported Medicenna glioblastoma Phase 3 precedent (medidata.com, 3ds.com, businesswire.com); ConcertAI External Control Arms & Patient360 (concertai.com); Cytel External Control Arms (cytel.com); COTA generative-AI RWD curation (drugdiscoverytrends.com); Friends of Cancer Research ECA pilot (friendsofcancerresearch.org)
+- id: rwd-rwe-analytics-regulatory-causal-external-control-causal-tte-engine
+  parent: rwd-rwe-analytics-regulatory-causal-external-control
+  name_en: Regulatory Causal-Inference & Target-Trial-Emulation Engines
+  name_zh: 监管级因果推断与目标试验仿真引擎
+  name_full: Validated Causal-Inference / Target-Trial-Emulation Analytic Platforms for Regulatory RWE
+  scope_en: 'The validated analytic engine that runs the causal study once a cohort exists: target-trial emulation, high-dimensional propensity scoring, TMLE/IPTW weighting, negative-control calibration, and bootstrap/quantitative-bias sensitivity analyses, executed under 21 CFR Part 11 audit and traceability. Distinct buyer conversation and distinct hardware from abstraction: the workload is large-scale statistical computation over tens of millions of linked claims+EHR rows, pulling CPU-HPC and high-memory rather than GPU. Sold as a validated platform (vendor-operated SaaS or pharma on-prem deployment). SaaS-light multi-tenant statistical compute, so a modest rather than flagship SMCI pull.'
+  scope_zh: 在队列就绪后运行因果研究的经验证分析引擎：目标试验仿真、高维倾向评分、TMLE/IPTW加权、阴性对照校准、自助法/定量偏倚敏感性分析，均在21 CFR Part 11审计与可追溯下执行。与抽取环节相比买家对话与硬件均不同：工作负载是对数千万条关联理赔+病历记录的大规模统计计算，拉动CPU-HPC与大内存而非GPU。以经验证平台形式销售（厂商托管SaaS或药企本地部署）。属SaaS-light多租户统计计算，对SMCI拉动为中等而非旗舰。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - real-world-data
+  - transactional
+  - time-series
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-memory
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  - payer
+  vendors:
+  - Aetion (Aetion Evidence Platform / Substantiate)
+  - Panalgo (IHD)
+  - TriNetX
+  - Cytel
+  confidence: B
+  source: Aetion Substantiate 21 CFR Part 11-aligned regulatory-grade causal inference & TTE (aetion.com, evidence-hub.aetion.com, intuitionlabs.ai); TriNetX target-trial-emulation network studies (nature.com npj Digital Medicine); ICH M14 / FDA TTE guidance; Panalgo Instant Health Data (rxalmanac.com)
+- id: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation-claims-panel-warehouse
+  parent: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation
+  name_en: Claims-Panel Aggregation Warehouses (Open + Closed Medical/Pharmacy Claims)
+  name_zh: 理賠面板聚合倉庫（開放+封閉醫療/藥房理賠）
+  name_full: Longitudinal Claims-Panel Aggregation Warehouses — national medical + pharmacy claims (open switch/clearinghouse feeds and closed payer/adjudicated feeds) assembled into de-identified patient-level panels
+  scope_en: Aggregators that license and stitch billions of structured medical and pharmacy claims per year — open claims from switches/clearinghouses/PBMs (timely, broad, pre-adjudicated) and closed claims from payers/self-insured employers (complete, financially authoritative) — into longitudinal de-identified patient panels sold to pharma HEOR/commercial and payers. Pure structured-transactional ETL at massive scale; no note-level NLP, hence no GPU.
+  scope_zh: 以每年數十億條結構化醫療與藥房理賠為原料的聚合商：開放理賠來自清算所/交換機/PBM（及時、覆蓋廣、未裁定），封閉理賠來自支付方/自保雇主（完整、財務權威），拼接成縱向去識別化病患面板，售予藥廠HEOR/商業團隊與支付方。純結構化交易型ETL、超大規模，無需GPU。
+  role:
+  - data-acquisition
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - real-world-data
+  hardware_profile:
+  - capacity-archive-storage
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - payer
+  - contract-research-organization
+  vendors:
+  - IQVIA
+  - Symphony Health (ICON)
+  - Komodo Health
+  - Merative MarketScan
+  - Optum (Clinformatics/OLDW)
+  - Inovalon
+  - HealthVerity
+  confidence: A
+  source: John Snow Labs RWD platform comparison (2024); HealthVerity 'Open claims vs closed claims' explainer; JHEOR 'Use of Open vs Closed Claims in Health Outcomes Research'; Merative MarketScan and IQVIA vendor data pages
+- id: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation-ehr-curated-clinical-dataset
+  parent: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation
+  name_en: EHR-Derived Curated Clinical Datasets (NLP/LLM Note Abstraction)
+  name_zh: EHR衍生的策展臨床數據集（NLP/LLM病歷抽取）
+  name_full: EHR-Derived Curated Clinical Datasets — de-identified EHR aggregated directly from health-system networks with NLP/LLM abstraction of unstructured notes, pathology and reports into research-grade longitudinal variables
+  scope_en: 'Vendors that license EHR directly from provider networks (not claims switches) and curate it — combining structured EHR with machine + human abstraction of unstructured clinical notes, path/radiology reports — into research-grade longitudinal datasets with clinical depth claims data lacks. The unstructured-note curation at 100M+ patient scale is the GPU pull that distinguishes this segment from claims warehouses (Truveta explicitly runs large-scale AI/LLM abstraction). NOTE: Truveta runs on Azure, which softens SMCI-direct exposure; SMCI co-sell realizable via operators running own iron (e.g., TriNetX / ConcertAI).'
+  scope_zh: 直接向醫療系統網絡（而非理賠交換機）授權EHR並加以策展的廠商：將結構化EHR與對非結構化臨床病歷、病理/放射報告的機器+人工抽取結合，形成具臨床深度、理賠數據所缺乏的研究級縱向數據集。在逾1億病患規模上對非結構化病歷做抽取，正是本細分相對理賠倉庫的GPU拉動（Truveta明確運行大規模AI/LLM抽取）。注意：Truveta運行於Azure，削弱SMCI直銷，SMCI協同銷售可經自建機房的運營商實現。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - documents
+  - transactional
+  - images
+  - real-world-data
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - hospital-health-system
+  - academic-medical-center
+  - contract-research-organization
+  vendors:
+  - Truveta
+  - TriNetX
+  - ConcertAI
+  - Veradigm
+  - Optum (EHR/Humedica)
+  confidence: A
+  source: John Snow Labs RWD platform comparison (2024); Truveta (120M+ patients, 30+ health systems, AI abstraction of notes/imaging/genomics); TriNetX curated real-world datasets page; arXiv survey 'Using EHR as real-world evidence' (2505.24767)
+- id: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation-tokenization-pprl-linkage
+  parent: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation
+  name_en: Tokenization & Privacy-Preserving Record Linkage (De-ID-as-a-Service)
+  name_zh: 令牌化與隱私保護記錄鏈接（去識別化即服務）
+  name_full: Tokenization & Privacy-Preserving Record Linkage (PPRL) — the de-identification and patient-matching layer that mints encrypted tokens to link disparate RWD assets across owners without exposing PHI
+  scope_en: 'The identity-resolution plumbing UNDER the aggregation warehouses: engines that hash PII into encrypted, interoperable tokens (Datavant tokens, HealthVerity HVID) so claims, EHR, lab, mortality and trial data can be linked across owners without moving PHI. Distinct always-on identity-matching workload and a distinct buyer (data owners + pharma pay for linkage, not for a dataset). WEAKEST SMCI play in the parent: the workload is cloud-native / SaaS-light (Datavant is Snowflake-native), so the on-prem hardware pull is modest, not significant. Distinct from the federated-TRE sibling: this builds the tokens; it does not run the analysis.'
+  scope_zh: 位於聚合倉庫之下的身份解析管道：將PII雜湊為加密、可互操作令牌（Datavant令牌、HealthVerity HVID）的引擎，使理賠、EHR、化驗、死亡與試驗數據可跨數據所有者鏈接而不移動PHI。獨特的常在身份匹配工作負載，且買方獨特（數據所有者+藥廠為鏈接付費，而非為數據集）。本母市場中最弱的SMCI機會：工作負載雲原生/SaaS化（Datavant為Snowflake原生），故本地硬體拉動為中等而非顯著。與聯邦TRE姊妹分離：此處構建令牌，不運行分析。
+  role:
+  - integration
+  - infrastructure-platform
+  data_modality:
+  - transactional
+  - real-world-data
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - diagnostic-reference-laboratory
+  - hospital-health-system
+  - contract-research-organization
+  vendors:
+  - Datavant
+  - HealthVerity
+  - LiveRamp (Health)
+  confidence: A
+  source: 'Datavant ''Analysis: 2025 Trends in Clinical Trial Tokenization and RWD Linkage''; HealthVerity Identity Manager (330M+ HVIDs); Elion ''Patient Data Tokenization Market Map''; NCI/SEER PPRL Systems Evaluation report. Verato pruned (EMPI/identity for providers-payers, not pharma-RWD tokenization).'
+- id: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation-oncology-clinico-genomic
+  parent: rwd-rwe-analytics-longitudinal-claims-ehr-aggregation
+  name_en: Oncology / Specialty Clinico-Genomic Datasets (EHR + NGS + Pathology)
+  name_zh: 腫瘤學/專科臨床-基因組數據集（EHR+NGS+病理）
+  name_full: Oncology & Specialty Clinico-Genomic Datasets — longitudinal EHR curated and linked to NGS genomics and digital pathology/imaging for a specific disease area (predominantly oncology)
+  scope_en: 'Premium specialty (mostly oncology) datasets that link deeply abstracted longitudinal EHR to NGS/tumor genomics and digital pathology-imaging at the patient level (e.g., Flatiron-Foundation Medicine CGDB, Tempus, Guardant GuardantINFORM). Distinct from generic EHR curation by the omics + imaging modalities and the heaviest hardware pull in the parent — GPU for pathology/genomics models, high-memory nodes for variant pipelines, and fast + capacity storage for image/omics volumes. Opportunity capped at 3 (top of the parent''s range): heaviest multimodal pull, but these operators are predominantly cloud-hosted so ''flagship'' overstates the SMCI-specific build.'
+  scope_zh: 高端專科（多為腫瘤學）數據集，在病患層面將深度抽取的縱向EHR與NGS/腫瘤基因組及數位病理-影像鏈接（如Flatiron-Foundation Medicine CGDB、Tempus、Guardant GuardantINFORM）。相對通用EHR策展的區別在於omics+影像模態，以及本母市場中最重的硬體拉動——用於病理/基因組模型的GPU、變異流程的高記憶體節點、影像/omics巨量的高速+容量存儲。機會上限為3（母市場範圍頂端）：多模態拉動最重，但運營商多為雲託管，故'旗艦'高估SMCI專屬建置。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - omics
+  - documents
+  - images
+  - transactional
+  - real-world-data
+  hardware_profile:
+  - gpu-server
+  - high-memory
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - academic-medical-center
+  - diagnostic-reference-laboratory
+  vendors:
+  - Flatiron Health (Foundation Medicine CGDB)
+  - Tempus
+  - ConcertAI
+  - Guardant Health
+  confidence: A
+  source: medRxiv 'Comparison of Population Characteristics in Real-World Clinical Oncology Databases' (Flatiron-Foundation CGDB, 2023); PMC 'Raising the Bar for Real-World Data in Oncology' (PMC10807898); Guardant GuardantINFORM launch (207k+ patients, genomics+claims+mortality+path reports); Tempus/ConcertAI clinico-genomic library materials
+- id: payer-um-fraud-analytics-prior-auth-um-automation-payer-ai-medical-necessity-decisioning
+  parent: payer-um-fraud-analytics-prior-auth-um-automation
+  name_en: Payer-Side AI Medical-Necessity Decisioning & Auto-Authorization
+  name_zh: 付方AI醫療必要性審核與自動授權決策引擎
+  name_full: Payer-Side AI Medical-Necessity Decisioning & Auto-Authorization Engines (clinical-criteria + LLM review)
+  scope_en: 'Payer/UM-delegate engines that ingest a PA request plus clinical documentation and render a medical-necessity determination — spanning classic evidence-based criteria libraries (InterQual, MCG) and newer AI/LLM auto-authorization that reads unstructured clinical notes and specialty guidelines (MSK, cardiology, radiology) to approve or route to review. GPU pull comes from NLP/LLM inference over clinical documents at payer transaction volume. Confirmed: Cohere Health processes ~12M auths/yr, auto-approving ~90% with AI while restricting denials to human reviewers.'
+  scope_zh: 付方或其UM委外方使用的引擎，讀取預授權請求與臨床文件並做出醫療必要性判定，涵蓋傳統循證準則庫（InterQual、MCG）與新型AI/LLM自動授權（解析非結構化病歷與專科指南以批准或轉人工審核）。GPU需求來自對臨床文件的NLP/LLM推理。已核實：Cohere Health年處理約1200萬筆授權，約90%由AI自動批准，拒付僅由人工審核。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - documents
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Cohere Health
+  - MCG (Hearst Health) Cite AutoAuth
+  - InterQual (Optum)
+  - eviCore by Evernorth
+  - Carelon Medical Benefits Management
+  confidence: A
+  source: coherehealth.com platform/decision pages; prnewswire.com Cohere ambient PA; intuitionlabs.ai Cohere profile; smiledigitalhealth.com + MCG FHIR partnership; medcitynews.com prior-auth 2026
+- id: payer-um-fraud-analytics-prior-auth-um-automation-provider-epa-rcm-integrated
+  parent: payer-um-fraud-analytics-prior-auth-um-automation
+  name_en: Provider-Side ePA Submission & RCM-Integrated Prior Auth
+  name_zh: 提供方電子預授權提交與RCM整合預授權
+  name_full: Provider-Side Electronic Prior Authorization (ePA) Submission, Status Tracking & RCM-Integrated Workflow
+  scope_en: 'Provider-facing automation that determines whether a PA is required, auto-fills payer forms from the EHR, submits, and tracks status to approval — embedded in EHR/RCM workflow. Distinct buyer (hospital/specialty practice, not payer) and distinct workflow (submission/tracking, not adjudication). Almost entirely SaaS delivered by the vendor, so near-zero SMCI iron sold to the provider — the weakest node for a Supermicro deal, retained for taxonomy completeness. Confirmed: Rhyme (formerly PriorAuthNow) partners 300+ health plans / 50+ large health systems, ~4M cases/yr.'
+  scope_zh: 面向提供方的自動化：判斷是否需要預授權、從EHR自動填寫付方表單、提交並追蹤至批准，嵌入EHR/RCM工作流。買方（醫院/專科診所）與工作流（提交追蹤而非裁定）均與付方側不同。幾乎全部由廠商以SaaS交付，向提供方售出的SMCI硬件近乎為零，為本層最弱節點，僅為分類完整而保留。已核實：Rhyme（原PriorAuthNow）合作逾300家健康計劃與50餘家大型醫療系統，年約400萬案例。
+  role:
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Rhyme (formerly PriorAuthNow)
+  - Waystar
+  - Availity
+  - Myndshft
+  - Infinx
+  - Experian Health
+  confidence: A
+  source: getrhyme.com; beckerspayer.com Ohio Hospital Assoc x Rhyme; healthtechalpha.com Rhyme profile; intuitionlabs.ai ePA platforms guide
+- id: payer-um-fraud-analytics-prior-auth-um-automation-pharmacy-medication-epa-network
+  parent: payer-um-fraud-analytics-prior-auth-um-automation
+  name_en: Pharmacy / Medication Electronic Prior Authorization Networks
+  name_zh: 藥品電子預授權交易網絡
+  name_full: Pharmacy / Medication Electronic Prior Authorization (ePA) Transaction Networks (NCPDP SCRIPT)
+  scope_en: Medication-benefit ePA run as a high-volume transaction network connecting prescribers, EHRs, pharmacies and PBMs via NCPDP SCRIPT — a fundamentally different rail from medical/procedural PA (distinct standard, distinct vendor roster). Volume is enormous (CoverMyMeds cited 43M+ PA in a single quarter; Surescripts 30B+ transactions/yr), which pulls NVMe throughput and HA/DR uptime rather than GPU. Network-operator economics (co-sell), not per-provider iron.
+  scope_zh: 藥品福利電子預授權以高吞吐交易網絡運行，經由NCPDP SCRIPT連接處方醫師、EHR、藥房與PBM，與醫療/手術類預授權是不同的通道（標準與廠商名單均不同）。交易量巨大（CoverMyMeds單季逾4300萬筆；Surescripts年逾300億筆），拉動NVMe吞吐與HA/DR可用性而非GPU。屬網絡運營商經濟模型（co-sell）。
+  role:
+  - integration
+  - workflow
+  - data-acquisition
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  - hospital-health-system
+  vendors:
+  - CoverMyMeds (McKesson)
+  - Surescripts
+  - ExpressPAth (Express Scripts)
+  - CVS Caremark ePA
+  confidence: A
+  source: surescripts.com ePA; covermymeds.health prior authorization; caremark.com e-prior-authorization; medcitynews.com prior-auth 2026
+- id: payer-um-fraud-analytics-prior-auth-um-automation-fhir-pa-api-interoperability
+  parent: payer-um-fraud-analytics-prior-auth-um-automation
+  name_en: FHIR Prior-Auth Interoperability (CMS-0057 Da Vinci PAS/CRD/DTR)
+  name_zh: FHIR預授權互操作性層（CMS-0057 Da Vinci PAS/CRD/DTR）
+  name_full: FHIR-Based Prior-Authorization Interoperability & API Enablement (CMS-0057-F, Da Vinci PAS/CRD/DTR)
+  scope_en: 'Mandate-driven interoperability layer that lets payers stand up FHIR Prior-Authorization APIs (Da Vinci CRD/DTR/PAS) required by CMS-0057-F, effective Jan 1 2027, for FHIR-based ePA exchange at scale. Distinct emerging vendor set selling FHIR servers/gateways and PA API middleware to payers; pulls HA/DR and NVMe for always-on, high-throughput API endpoints rather than GPU. Buyer is the payer complying with the federal rule. Confirmed: Smile Digital Health ships pre-packaged CMS-0057-F FHIR APIs (CRD/DTR/PAS); 1upHealth and Edifecs (FHIR/EDI gateways) sell the same compliance layer.'
+  scope_zh: 受法規驅動的互操作性層，使付方能建立CMS-0057-F要求的FHIR預授權API（Da Vinci CRD/DTR/PAS），2027年1月1日生效，用於大規模FHIR電子預授權交換。新興廠商向付方銷售FHIR服務器/網關與PA API中間件；拉動HA/DR與NVMe以支撐常在、高吞吐的API端點而非GPU。買方為需合規的付方。已核實：Smile Digital Health提供預封裝CMS-0057-F FHIR API（CRD/DTR/PAS）；1upHealth與Edifecs（FHIR/EDI網關）銷售同一合規層。
+  role:
+  - integration
+  - infrastructure-platform
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Smile Digital Health
+  - 1upHealth
+  - Edifecs
+  - Availity
+  - MCG Cite AutoAuth (Da Vinci)
+  confidence: B
+  source: smiledigitalhealth.com CMS suite / prior-auth-fhir-solution; 1up.health CMS-0057 webinar Q&A; edifecs.com/products/cms-0057-f; businesswire.com Edifecs PA mandate (Jan 1 2027)
+- id: payer-um-fraud-analytics-payment-integrity-fwa-prepay-claim-editing-prospective
+  parent: payer-um-fraud-analytics-payment-integrity-fwa
+  name_en: Prepay Claim Editing & Prospective Payment Integrity
+  name_zh: 预付理赔编辑与前瞻性支付完整性
+  name_full: Prepayment Claim Editing / Prospective Payment Integrity Engines
+  scope_en: Rules-and-AI claim editing engines that screen claims BEFORE payment, inline with adjudication, to catch coding errors, unbundling, NCCI/medical-policy violations and duplicate/aberrant billing ('shift-left' from pay-and-chase to prevent). High-volume, low-latency, uptime-critical transactional processing embedded in the payer/TPA claim pipeline.
+  scope_zh: 在支付前、与理赔裁决同步运行的规则加AI理赔编辑引擎，拦截编码错误、拆分收费、NCCI/医疗政策违规及重复异常账单（从事后追讨前移为事前预防）。属高并发、低延迟、高可用的交易型处理，内嵌于支付方/TPA的理赔流水线。
+  role:
+  - workflow
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  - high-performance-computing-cpu
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Lyric (formerly ClaimsXten / Change Healthcare)
+  - Optum (Claims Edit System)
+  - Cotiviti (prepay Claim Pattern Review)
+  - Zelis
+  - Codoxo (Point Zero prepay)
+  confidence: A
+  source: https://healthedge.com/resources/white-paper/prospective-payment-integrity-moving-from-pay-and-chase-to-predictive ; https://www.cotiviti.com/solutions/payment-accuracy
+- id: payer-um-fraud-analytics-payment-integrity-fwa-postpay-clinical-chart-drg-review
+  parent: payer-um-fraud-analytics-payment-integrity-fwa
+  name_en: Postpay Clinical Chart / DRG / Itemized-Bill Review
+  name_zh: 事后临床病历/DRG/明细账单审核
+  name_full: Retrospective Clinical Chart Validation, DRG Validation & Itemized Bill Review (IBR)
+  scope_en: 'Retrospective (and increasingly prepay) medical-record audits: DRG validation, clinical chart validation, and line-item itemized-bill review. Requires ingesting and reasoning over medical-record documents and images at scale with OCR, clinical NLP and GenAI to detect coding/clinical mismatches and recover overpayments. The heaviest AI + document-archive lane in payment integrity.'
+  scope_zh: 回溯性（并日益前移）的病历审核：DRG校验、临床病历核实与逐行明细账单审核。需以OCR、临床NLP与生成式AI大规模摄取并推理病历文档与影像，识别编码/临床不符并追回超额支付。是支付完整性中AI与文档归档负载最重的板块。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  - data-acquisition
+  data_modality:
+  - documents
+  - images
+  - transactional
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - capacity-archive-storage
+  - nvme-performance-storage
+  hardware_opportunity: 4
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Machinify (Audit / IBR / DRG)
+  - Cotiviti (Clinical Chart Validation, IBR)
+  - Codoxo (GenAI DRG / chart review)
+  - EXL
+  - Optum
+  confidence: A
+  source: https://www.machinify.com/products/audit ; https://www.cotiviti.com/solutions/payment-accuracy/clinical-chart-validation ; https://www.codoxo.com/medical-record-review-chart-review-solutions/
+- id: payer-um-fraud-analytics-payment-integrity-fwa-fraud-detection-siu-analytics
+  parent: payer-um-fraud-analytics-payment-integrity-fwa
+  name_en: FWA Fraud Detection & SIU Analytics
+  name_zh: 欺诈浪费滥用侦测与SIU分析
+  name_full: Fraud, Waste & Abuse Detection and Special Investigations Unit (SIU) Analytics
+  scope_en: 'AI/ML and graph-analytics platforms for SIU teams: provider/member anomaly detection, network/link analysis of collusion rings, real-time claim scoring, and emerging deepfake-document/diagnostic-image screening. Compute-intensive model training and near-real-time inference over claims time-series; distinct from payment-accuracy editing because it targets intentional fraud and investigative casework.'
+  scope_zh: 面向SIU团队的AI/ML与图分析平台：提供方/会员异常侦测、团伙勾结的网络/关联分析、实时理赔评分，以及新兴的深伪文档/诊断影像筛查。对理赔时序数据进行算力密集的模型训练与近实时推理；因其针对蓄意欺诈与调查取证，区别于支付准确性编辑。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - transactional
+  - time-series
+  - artificial-intelligence-models
+  - images
+  hardware_profile:
+  - gpu-server
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Codoxo (Fraud Scope)
+  - SAS Institute
+  - Shift Technology
+  - ClarisHealth (Pareo Fraud Detection)
+  - FICO
+  - Qlarant
+  confidence: A
+  source: https://www.codoxo.com/healthcare-fraud-scope/ ; https://www.clarishealth.com/press-release/pr-payment-integrity-technology-company-launches-solution-to-combat-fwa/
+- id: payer-um-fraud-analytics-payment-integrity-fwa-cob-subrogation-other-party-liability
+  parent: payer-um-fraud-analytics-payment-integrity-fwa
+  name_en: Coordination of Benefits / Subrogation / Other-Party Liability
+  name_zh: 福利协调/代位求偿/第三方责任
+  name_full: Coordination of Benefits (COB), Subrogation & Other-Party-Liability Recovery
+  scope_en: 'Identifying when another payer or third party is responsible for a claim: COB validation, Medicare/commercial coordination, subrogation and other-party-liability recovery. Driven by large-scale entity resolution and record-matching across eligibility/enrollment, claims, and external coverage datasets, plus document workflow for recovery cases. CPU/HPC data-matching lane rather than GPU-first.'
+  scope_zh: 识别应由其他支付方或第三方承担的理赔：COB核实、Medicare/商业保险协调、代位求偿与第三方责任追偿。核心是跨资格/参保、理赔与外部承保数据集的大规模实体解析与记录匹配，并配合追偿案件的文档工作流。属CPU/HPC数据匹配板块，而非以GPU为先。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  - real-world-data
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Rawlings Group
+  - Cotiviti (COB Validation)
+  - Discovery Health Partners (MultiPlan)
+  - Equian / Optum
+  - Conduent
+  confidence: A
+  source: https://resources.cotiviti.com/payment-integrity/the-three-pillars-of-coordination-of-benefits-cob-success-for-health-plans ; https://rawlingsgroup.com/services/subrogation-services/
+- id: samd-embedded-oem-platform-edge-ai-computational-sensing-intraoperative-surgical-realtime-video-ai
+  parent: samd-embedded-oem-platform-edge-ai-computational-sensing
+  name_en: Intraoperative / Surgical Real-Time Video-AI (Edge GPU)
+  name_zh: 术中手术实时影像AI（边缘GPU）
+  name_full: Intraoperative surgical & endoscopy real-time computer-vision AI embedded at the edge of the OR (surgical copilots, polyp detection, robotic-surgery vision)
+  scope_en: 'Ultra-low-latency computer-vision AI streamed off live surgical/endoscopic video inside the operating room: polyp/lesion detection, surgical scene understanding, autonomy for surgical robots. Runs on embedded edge-GPU (NVIDIA IGX/Holoscan class) inside the device; model development and validation run on GPU-server clusters. Distinct from post-hoc image reading by its hard real-time, deterministic-latency requirement.'
+  scope_zh: 手术室内对实时手术/内窥镜视频流做超低延迟计算机视觉推理：息肉/病灶检测、术野理解、手术机器人自主视觉。推理运行于设备内嵌入式边缘GPU（NVIDIA IGX/Holoscan级），模型研发与验证在GPU服务器集群完成。因其硬实时、确定性延迟要求而区别于事后影像判读。
+  role:
+  - regulated-software-as-a-medical-device
+  - analytics-artificial-intelligence
+  - data-acquisition
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - edge-industrial
+  hardware_opportunity: 3
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - medical-technology-in-vitro-diagnostics
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Medtronic (GI Genius)
+  - Activ Surgical
+  - Moon Surgical
+  - Virtual Incision (MIRA)
+  - Johnson & Johnson MedTech (Polyphonic)
+  - Karl Storz
+  confidence: A
+  source: NVIDIA IGX/Holoscan surgical partner announcements (Medtronic, Karl Storz, Moon Surgical, J&J MedTech, Virtual Incision); Activ Surgical + Clara Holoscan on IGX (nvidianews.nvidia.com, blogs.nvidia.com, activsurgical.com)
+- id: samd-embedded-oem-platform-edge-ai-computational-sensing-handheld-poc-imaging-embedded-ai
+  parent: samd-embedded-oem-platform-edge-ai-computational-sensing
+  name_en: Handheld / Point-of-Care Imaging Embedded AI
+  name_zh: 手持/即时诊断影像嵌入式AI
+  name_full: On-device AI embedded in handheld point-of-care ultrasound and portable imaging (image-capture guidance, anatomy ID, real-time interpretation)
+  scope_en: 'AI baked into portable/handheld imaging probes (ultrasound-on-chip, pocket devices) that runs on the probe/tablet at the point of care: acquisition guidance, view classification, auto-measurement, real-time feedback for novice users. Inference sits on small embedded/edge silicon (OEM per-unit BOM); training and continuous-learning pipelines run on GPU servers. Distinct buyer economics (per-device embed) and lighter deployed footprint than OR real-time AI. SMCI pull is the training/continuous-learning cluster, not the probe silicon.'
+  scope_zh: 嵌入便携/手持影像探头（芯片超声、口袋设备）的AI，在探头/平板本地即时运行：采集引导、切面分类、自动测量、面向新手的实时反馈。推理位于小型嵌入式/边缘芯片（OEM按台BOM），训练与持续学习管线在GPU服务器完成。买方经济学（按设备嵌入）与部署占用均区别于术中实时AI。SMCI牵引来自训练/持续学习集群而非探头芯片。
+  role:
+  - regulated-software-as-a-medical-device
+  - data-acquisition
+  - analytics-artificial-intelligence
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - edge-industrial
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - medical-technology-in-vitro-diagnostics
+  - hospital-health-system
+  vendors:
+  - Butterfly Network
+  - Exo
+  - Caption Health (GE HealthCare)
+  - Philips (Lumify)
+  confidence: A
+  source: Butterfly iQ3 on-device AI & Ultrasound-on-Chip; Butterfly-Caption AI partnership; Exo AI ultrasound platform (butterflynetwork.com, fiercebiotech.com, massdevice.com)
+- id: samd-embedded-oem-platform-edge-ai-computational-sensing-contactless-ambient-vitals-sensing
+  parent: samd-embedded-oem-platform-edge-ai-computational-sensing
+  name_en: Contactless / Ambient Vital-Sign Sensing (Radar & Vision)
+  name_zh: 非接触/环境式生命体征感知（雷达与视觉）
+  name_full: Radar- and camera-based contactless computational sensing of vital signs and events, embedded into in-room edge devices and virtual-care platforms
+  scope_en: 'Sensor-fusion AI that derives heart rate, respiration, falls and sleep from radar returns or overhead-camera video with no patch or wearable. Compute lives on an in-room edge-industrial node embedded into a fixture or a virtual-care endpoint; the raw signal-to-vital transform is the core IP. Distinct hardware pull (edge-industrial sensing node, not GPU render), distinct data modality (time-series), and OEM/operator embed model (e.g. into virtual-care platforms). SMCI pull is modest: training and fleet-aggregation backend rather than the low-compute sensing node.'
+  scope_zh: 以雷达回波或吸顶摄像视频、无贴片无穿戴地推算心率、呼吸、跌倒与睡眠的传感融合AI。算力位于嵌入固定装置或虚拟照护端点的室内边缘工业节点，原始信号到体征的转换即核心IP。硬件牵引独特（边缘工业感知节点而非GPU渲染），数据模态为时序，采用OEM/运营方嵌入模式（如嵌入虚拟照护平台）。SMCI牵引有限：来自训练与设备群聚合后端而非低算力感知节点。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  hardware_profile:
+  - edge-industrial
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - hospital-health-system
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - Xandar Kardian
+  - Oxehealth (Oxevision)
+  - Circadia Health
+  - Emerald Innovations
+  - Caregility
+  confidence: A
+  source: Xandar Kardian XK300 FDA clearance & Caregility embedded partnership (Apr 2023, verified fiercebiotech.com, prnewswire.com); Oxehealth Vital Signs FDA De Novo clearance Mar 2021 (verified mobihealthnews.com, biospace.com)
+- id: payer-actuarial-hpc-modeling-capital-grid-life-annuity-nested-stochastic
+  parent: payer-actuarial-hpc-modeling-capital-grid
+  name_en: Life & Annuity Nested-Stochastic Economic-Capital Modeling Grid
+  name_zh: 壽險與年金巢式隨機經濟資本建模計算網格
+  name_full: Life & Annuity / Long-Duration Nested-Stochastic Economic-Capital & Reserving Modeling Grid (Solvency II / VM-20 / LDTI)
+  scope_en: 'The heavy-compute core of the actuarial stack: long-duration life and annuity liability projection running stochastic-on-stochastic (nested) simulations for economic capital, Solvency II SCR, US VM-20/VM-21 principle-based reserves, LDTI and hedging/ALM. Each outer real-world scenario spawns thousands of inner risk-neutral valuations, so a single production run fans out across a large grid; ML/GPU-accelerated proxy models (LSMC, deep-learning proxies) are increasingly used to compress the inner loop.'
+  scope_zh: 精算技術棧中運算最重的核心：壽險與年金長期負債投影，執行隨機套隨機（巢式）模擬以計算經濟資本、Solvency II SCR、美國 VM-20/VM-21 原則基礎準備金、LDTI 及避險/資產負債管理。每個外層真實世界情境衍生出數千個內層風險中性評價，單次生產運算需在大型計算網格上大規模平行展開；以機器學習/GPU 加速的代理模型（LSMC、深度學習代理）日益用於壓縮內層迴圈。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - simulation
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-performance-computing-cpu
+  - gpu-server
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - payer
+  vendors:
+  - Moody's Analytics (AXIS / AXIS Grid)
+  - FIS (Prophet)
+  - Milliman (MG-ALFA / Integrate)
+  - RNA Analytics (RiskAgility FM / ROME)
+  confidence: A
+  source: Moody's AXIS actuarial-modeling page (AXIS Grid, nested stochastic at multiple levels); FIS Prophet product info; Milliman MG-ALFA (grid computing for massive stochastic runs, economic capital & hedging); RNA Analytics RiskAgility FM (ex-Towers Watson) — vendor sites / InsuranceERM
+- id: payer-actuarial-hpc-modeling-capital-grid-economic-scenario-generator
+  parent: payer-actuarial-hpc-modeling-capital-grid
+  name_en: Economic Scenario Generators (ESG)
+  name_zh: 經濟情境產生器（ESG）
+  name_full: Economic Scenario Generators (Real-World & Risk-Neutral Stochastic Capital-Market Simulation)
+  scope_en: A distinct upstream product category that generates the stochastic capital-market and economic paths (interest rates, equities, credit, FX, inflation, and increasingly climate indices) consumed by the life/annuity and capital-modeling engines. Sold as a separate license and used not only by insurers but also by pension funds and asset managers; regulator-sanctioned scenario sets (e.g. NAIC/AAA field-test files) are produced here. Compute is Monte-Carlo simulation of scenario tables — real but a materially lighter footprint than the nested-stochastic life grid it feeds, hence a modest (not flagship) SMCI pull.
+  scope_zh: 獨立的上游產品類別，產生供壽險/年金與資本建模引擎使用的隨機資本市場與經濟路徑（利率、股票、信用、匯率、通膨，並日益納入氣候指數）。以獨立授權銷售，使用者不僅是保險公司，也包括退休基金與資產管理業者；監管認可的情境檔（如 NAIC/AAA 檔案）即由此產生。運算為情境表的蒙地卡羅模擬——真實但硬體拉動遠低於其所餵入的巢式隨機壽險網格，故為中等（非旗艦）SMCI 機會。
+  role:
+  - analytics-artificial-intelligence
+  - data-acquisition
+  data_modality:
+  - simulation
+  - time-series
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - payer
+  vendors:
+  - Conning (GEMS)
+  - Moody's Analytics (Scenario Generator / Barrie & Hibbert)
+  - Ortec Finance (ESG)
+  - FIS
+  confidence: A
+  source: Conning GEMS ESG product sheet & NAIC scenario-file mandate; Moody's Barrie & Hibbert; Ortec Finance ESG solution page; InsuranceERM coverage of ESG/climate scenario vendors
+- id: payer-actuarial-hpc-modeling-capital-grid-pc-reserving-triangles
+  parent: payer-actuarial-hpc-modeling-capital-grid
+  name_en: P&C Loss-Reserving (Triangle Analysis)
+  name_zh: 產險損失準備金評估（三角形分析）
+  name_full: Property & Casualty / General Insurance Loss-Reserving & Triangle Analysis Platforms
+  scope_en: 'Short-tail/general-insurance reserving: claims-triangle development, deterministic chain-ladder and Bornhuetter-Ferguson methods plus bootstrap/stochastic reserve variability, roll-forwards, audit trails and statutory reserve reporting. Distinct from life modeling in buyer (P&C/reinsurance actuaries), method and compute footprint — largely desktop/workflow with a central database, increasingly vendor-hosted cloud (e.g. Arius on Azure); SaaS-light with only a small server pull, so a marginal Supermicro target.'
+  scope_zh: 短尾/產險準備金評估：理賠三角形發展、確定性連鎖梯法與 Bornhuetter-Ferguson 方法，加上 bootstrap/隨機準備金變異性、滾動更新、稽核軌跡與法定準備金報表。在買方（產險/再保精算師）、方法與運算量上皆與壽險建模不同——多為桌面/工作流搭配中央資料庫，並日益由廠商託管於雲端（如 Arius 於 Azure）；屬輕量 SaaS，伺服器拉動有限，為邊際性 SMCI 目標。
+  role:
+  - system-of-record
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - time-series
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - payer
+  vendors:
+  - WTW (ResQ)
+  - Akur8 (Arius, acquired from Milliman 2024)
+  - Insureware (ICRFS)
+  confidence: A
+  source: WTW ResQ product page (P&C loss reserving); Akur8 acquisition of Arius from Milliman announced 2024-09-09 (GlobeNewswire/Akur8/Carrier Management); Insureware ICRFS
+- id: payer-actuarial-hpc-modeling-capital-grid-pc-capital-dfa
+  parent: payer-actuarial-hpc-modeling-capital-grid
+  name_en: P&C Capital / DFA Monte-Carlo Modeling
+  name_zh: 產險資本／DFA 蒙地卡羅建模
+  name_full: Property & Casualty Internal Capital Models & Dynamic Financial Analysis (DFA) Simulation Platforms
+  scope_en: 'Internal capital models for P&C/reinsurance: dynamic financial analysis simulating the whole balance sheet — underwriting risk, reserve risk, catastrophe, reinsurance structures, asset risk and dependency copulas — via large Monte-Carlo runs to derive economic/regulatory capital and allocation. A separate, heavier-compute segment from triangle reserving, dominated by three platforms per the Grant Thornton capital-modelling survey (Igloo, ReMetrica, Tyche); runs benefit from simulation-grid scale-out.'
+  scope_zh: 產險/再保的內部資本模型：以動態財務分析（DFA）透過大規模蒙地卡羅模擬整張資產負債表——核保風險、準備金風險、巨災、再保結構、資產風險與相依 copula——推導經濟/監管資本及其配置。此為與三角形準備金評估不同、運算更重的區隔；依 Grant Thornton 資本建模調查由三大平台（Igloo、ReMetrica、Tyche）主導，運算受益於模擬網格的橫向擴展。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - simulation
+  - time-series
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - payer
+  vendors:
+  - WTW (Igloo)
+  - Aon (ReMetrica)
+  - Aon (Tyche, acquired from RPC Tyche 2022)
+  confidence: A
+  source: Grant Thornton UK Capital Modelling Survey (Igloo/ReMetrica/Tyche dominate participants); WTW Igloo product page; Aon ReMetrica page; Aon acquisition of Tyche from RPC Tyche announced 2022-03-01 (Aon mediaroom/PRNewswire/Reinsurance News)
+- id: payer-actuarial-hpc-risk-adjustment-analytics-retrospective-nlp-chart-coding
+  parent: payer-actuarial-hpc-risk-adjustment-analytics
+  name_en: Retrospective HCC Chart Review & NLP/GenAI Coding
+  name_zh: 回顾性病历审查与 NLP/生成式 AI 编码
+  name_full: 'Retrospective Risk Adjustment: Chart Retrieval, NLP/GenAI HCC Coding & RADV Evidence'
+  scope_en: Industrial-scale ingestion of retrieved medical records and NLP/LLM extraction of defensible HCC diagnoses after the fact (chart chase, coding, audit-defensible evidence). Runs models over billions of pages of unstructured charts — the compute-heavy core of risk adjustment.
+  scope_zh: 对回收的病历进行工业级摄取，事后用 NLP/大模型抽取可辩护的 HCC 诊断（病历追索、编码、RADV 审计证据）。在数十亿页非结构化病历上运行模型，是风险调整中最耗算力的核心环节。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  - data-acquisition
+  data_modality:
+  - documents
+  - artificial-intelligence-models
+  - images
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 4
+  primary_buyer: operator
+  segments:
+  - payer
+  - hospital-health-system
+  vendors:
+  - Reveleer
+  - Apixio (Datavant)
+  - Cotiviti
+  - Inovalon
+  - Pentavere
+  confidence: A
+  source: Reveleer (~1.1B pages / 2.5M diagnoses 2024); Cotiviti (10M+ charts coded 2023, >97% accuracy); Apixio/Datavant chart-review; Inovalon retrospective RA. WebSearch 2026-08 confirmed anchors; Astrata trimmed (quality-measure NLP positioning, not core HCC retrospective coding).
+- id: payer-actuarial-hpc-risk-adjustment-analytics-prospective-point-of-care-suspecting
+  parent: payer-actuarial-hpc-risk-adjustment-analytics
+  name_en: Prospective Point-of-Care Risk Adjustment (Suspecting)
+  name_zh: 前瞻性诊疗现场风险调整（疑似诊断提示）
+  name_full: 'Prospective Risk Adjustment: EHR-Embedded Pre-Visit Suspecting & Point-of-Care HCC Capture'
+  scope_en: Physician-facing, EHR-integrated surfacing of suspected/undocumented HCC conditions and care gaps before or during the encounter, so the clinician documents to specificity in real time. SaaS-light, real-time inference delivered into the clinical workflow rather than batch chart processing.
+  scope_zh: 面向医生、集成于 EHR，在就诊前或就诊中提示疑似/未记录的 HCC 病症与照护缺口，使临床医生实时记录到应有精细度。轻 SaaS、实时推理嵌入临床流程，而非批量病历处理。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - documents
+  - transactional
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - payer
+  vendors:
+  - Navina
+  - RAAPID
+  - Vatica Health
+  - Persivia
+  - Curation Health
+  confidence: B
+  source: navina.ai products/risk-adjustment (EHR-native point-of-care suspecting, WebSearch confirmed); vaticahealth.com Vatica Connect in-EMR; raapidinc.com prospective; persivia.com AI risk adjustment.
+- id: payer-actuarial-hpc-risk-adjustment-analytics-encounter-submission-edps-reconciliation
+  parent: payer-actuarial-hpc-risk-adjustment-analytics
+  name_en: Encounter Data Submission & EDPS/RAPS Reconciliation
+  name_zh: 就诊数据申报与 EDPS/RAPS 对账
+  name_full: 'Risk Adjustment Encounter Management: EDPS/RAPS Submission, Error Correction & Risk-Score Reconciliation'
+  scope_en: Transactional back-office pipeline that validates, submits and reconciles Medicare Advantage / Managed Medicaid encounter data to CMS (EDPS, legacy RAPS, EDGE server) and reconciles resulting risk scores. Compliance/throughput workload, not AI — high-availability claims/encounter processing.
+  scope_zh: 交易型后台管道：向 CMS 校验、申报并对账 Medicare Advantage / 托管 Medicaid 就诊数据（EDPS、旧 RAPS、EDGE 服务器），并对最终风险分数对账。属合规/吞吐量负载而非 AI——高可用理赔/就诊处理。
+  role:
+  - integration
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Edifecs
+  - Cognizant TriZetto
+  - Inovalon
+  - Smart Data Solutions
+  confidence: B
+  source: edifecs.com/products/encounter-submissions + hosted encounter management (BusinessWire 2018, WebSearch confirmed 99%+ acceptance edits/reconciliation); Cognizant TriZetto Encounter Data Manager / Risk Score Manager for EDGE Server.
+- id: rcm-billing-claims-denials-appeals-ai-predictive-denial-prevention-prebill
+  parent: rcm-billing-claims-denials-appeals-ai
+  name_en: Predictive Denial Prevention & Pre-Bill Scrubbing
+  name_zh: 预测性拒付预防与账单前审查
+  name_full: Predictive Denial Prevention & Pre-Bill Scrubbing (AI)
+  scope_en: Pre-submission ML that scores each claim's propensity to be denied, learns undocumented payer adjudication rules from ERA/remit history, and routes high-risk claims to billers for correction before they go out the door. Classical predictive analytics / gradient-boosted models over transactional claims data, not generative — a CPU/analytics workload rather than a GPU-LLM one.
+  scope_zh: 在理赔提交前用机器学习为每笔理赔评估被拒付概率，从付款方历史汇款/裁定数据中学习未公开的规则，并在提交前将高风险理赔分派给账单人员修正。属于经典预测分析（非生成式），主要是CPU/分析类负载而非GPU大模型负载。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - transactional
+  - real-world-data
+  - artificial-intelligence-models
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  vendors:
+  - Experian Health (AI Advantage / ClaimSource)
+  - Waystar
+  - FinThrive
+  - SmarterDx (SmarterPrebill)
+  - Inovalon
+  confidence: B
+  source: Experian Health 'Prevent claim denials with AI and automation' + AI Advantage (ClaimSource) predictive denials pages; Waystar AltitudeAI predictive analytics ($15.5B denials prevented); SmarterDx SmarterPrebill product page
+- id: rcm-billing-claims-denials-appeals-ai-genai-appeal-generation
+  parent: rcm-billing-claims-denials-appeals-ai
+  name_en: Generative AI Appeal Letter & Package Generation
+  name_zh: 生成式AI申诉信与申诉材料生成
+  name_full: Generative AI Appeal Letter & Package Generation
+  scope_en: Post-denial LLM workflow that mines the clinical record for supporting evidence and auto-drafts payer-specific appeal letters and full appeal packages in minutes (including DRG-downgrade and level-of-service defense). LLM inference over PHI-heavy clinical documents drives sustained GPU demand and favors private/on-prem inference for PHI control.
+  scope_zh: 拒付后的大模型工作流：从临床病历中挖掘支持证据，几分钟内自动起草针对特定付款方的申诉信和完整申诉材料包（含DRG下调与服务等级争议辩护）。针对含大量受保护健康信息的临床文档进行大模型推理，产生持续GPU需求，并倾向于私有/本地推理以控制PHI。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - documents
+  - transactional
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Waystar (AltitudeCreate)
+  - SmarterDx (SmarterDenials)
+  - Thoughtful AI
+  confidence: B
+  source: Waystar AltitudeAI / AltitudeCreate announcement (generative appeal letters, 1,100+ payer templates, 3x faster); SmarterDx SmarterDenials launch (Oct 2024, evidence-backed appeal letters, DRG-downgrade defense); Thoughtful AI 'DAN' denials-management agent (autonomous appeal-letter drafting)
+- id: ngs-lab-lims-sequencer-run-control-basecalling-nanopore-gpu-live-basecalling
+  parent: ngs-lab-lims-sequencer-run-control-basecalling
+  name_en: GPU-Accelerated Long-Read Live Basecalling & Adaptive Sampling
+  name_zh: GPU 加速長讀長實時鹼基識別與自適應採樣
+  name_full: GPU-Accelerated Long-Read (Nanopore) Live Basecalling & Adaptive-Sampling Run Control
+  scope_en: Neural-network basecalling of raw nanopore signal in real time (Oxford Nanopore MinKNOW + Dorado/Guppy basecall server) plus ReadUntil / adaptive-sampling selective sequencing that streams and decides per-read at low latency. Dorado is GPU-optimized for NVIDIA A100/H100 with multi-GPU linear scaling, so HAC/SUP models are the single most GPU-hungry node in the sequencing stack; labs buy discrete NVIDIA GPU servers to keep basecalling real-time and to re-basecall archived signal at scale (e.g. PromethION output). This discrete GPU box is the SMCI-addressable pull (customer buys its own iron); the GridION/PromethION integrated GPU is ONT's own vertically-integrated compute and is NOT an SMCI sale.
+  scope_zh: 對纳米孔原始信號進行實時神經網絡鹼基識別（Oxford Nanopore MinKNOW 搭配 Dorado/Guppy 鹼基識別服務器），並包含 ReadUntil／自適應採樣的低延遲逐讀選擇性測序。Dorado 針對 NVIDIA A100/H100 優化並支持多卡線性擴展，HAC/SUP 模型是整個測序棧中最耗 GPU 的環節；實驗室採購獨立 NVIDIA GPU 服務器以維持實時識別並對存檔信號大規模重新識別。可供 SMCI 銷售的是這台獨立 GPU 機箱（客戶自購硬件）；GridION/PromethION 內置 GPU 屬 ONT 自研垂直整合算力，非 SMCI 銷售範圍。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  - omics
+  hardware_profile:
+  - gpu-server
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - diagnostic-reference-laboratory
+  - hospital-health-system
+  vendors:
+  - Oxford Nanopore Technologies
+  - NVIDIA
+  confidence: A
+  source: nanoporetech.com Dorado docs & GitHub (GPU real-time basecalling; A100/H100 optimization; multi-GPU linear scaling; HAC/SUP/Fast models; MinKNOW ReadUntil adaptive sampling); NVIDIA GPU/Parabricks genomics acceleration
+- id: rd-lab-informatics-scientific-data-management-cloud-lab-ipaas-instrument-connectivity
+  parent: rd-lab-informatics-scientific-data-management-cloud
+  name_en: Lab Instrument Connectivity / Lab-iPaaS Data Pipelines
+  name_zh: 實驗室儀器連接 / 實驗室 iPaaS 資料管道
+  name_full: Lab Instrument Connectivity and iPaaS Scientific Data Pipelines (SDMS acquisition layer)
+  scope_en: The point-of-capture layer that connects heterogeneous lab instruments (chromatography, MS, spectroscopy, plate readers) to apps and pipelines, parsing/standardizing raw instrument files at ingestion. Lab-specific integration-platform-as-a-service (iPaaS) and low-code connectors, distinct from the downstream lakehouse/analytics.
+  scope_zh: 在採集點將異質實驗室儀器（色譜、質譜、光譜、酶標儀）連接到應用與管道，並在攝取時解析／標準化原始儀器檔案的層。實驗室專用整合平台即服務（iPaaS）與低代碼連接器，與下游的資料湖倉／分析相區分。
+  role:
+  - integration
+  - data-acquisition
+  - workflow
+  data_modality:
+  - time-series
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-performance-computing-cpu
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  - academic-medical-center
+  vendors:
+  - Scitara (DLX iPaaS)
+  - Ganymede Bio
+  - TetraScience (industrialized integrations)
+  confidence: A
+  source: https://scitara.com/platform/ ; https://www.ganymede.bio/ ; https://www.tetrascience.com/platform/universal-sdms
+- id: rd-lab-informatics-scientific-data-management-cloud-scientific-imaging-microscopy-hcs
+  parent: rd-lab-informatics-scientific-data-management-cloud
+  name_en: Scientific Imaging Data Management (Microscopy / HCS / Cryo-EM / Digital Pathology)
+  name_zh: 科研影像資料管理（顯微鏡／高內涵篩選／冷凍電鏡／數位病理）
+  name_full: Enterprise Scientific Image Data Repositories for Microscopy, High-Content Screening, Cryo-EM and Research Digital Pathology
+  scope_en: Purpose-built repositories and management for petascale bio-image data — light/electron microscopy, high-content screening, cryo-EM, research-grade digital pathology — with 150+ format support (Bio-Formats/OME-Zarr), central viewers, and GPU-assisted analysis. Distinct from generic SDMS by its image-native storage and compute pull.
+  scope_zh: 為 PB 級生物影像資料（光學／電子顯微鏡、高內涵篩選、冷凍電鏡、科研級數位病理）打造的專用倉儲與管理，支援 150+ 格式（Bio-Formats/OME-Zarr）、中央檢視器與 GPU 輔助分析。因其影像原生的儲存與算力需求而與通用 SDMS 區分。
+  role:
+  - system-of-record
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - academic-medical-center
+  - contract-research-organization
+  vendors:
+  - Glencoe Software (OMERO Plus / PathViewer)
+  - Revvity Signals (Signals Image Artist)
+  - Indica Labs (HALO)
+  confidence: A
+  source: https://www.glencoesoftware.com/products/omeroplus/ ; https://revvitysignals.com/products/research/signals-image-artist ; https://www.openmicroscopy.org/omero/
+- id: rd-lab-informatics-scientific-data-management-cloud-ai-ready-scientific-lakehouse
+  parent: rd-lab-informatics-scientific-data-management-cloud
+  name_en: AI-Ready Scientific Data Lakehouse / Data Engineering
+  name_zh: AI 就緒的科研資料湖倉 / 資料工程
+  name_full: AI-Ready Scientific Data Lakehouse and Data Engineering for Scientific AI/ML
+  scope_en: 'The harmonization-and-engineering layer that turns standardized R&D data into FAIR, multimodal, AI-ready datasets on a Delta/lakehouse architecture, feeding HPC and GPU model training. Distinct from the connectivity layer: focus is on scientific data engineering, ML-lifecycle tooling and foundation-model readiness rather than instrument plumbing.'
+  scope_zh: 將標準化 R&D 資料在 Delta／湖倉架構上轉化為 FAIR、多模態、AI 就緒資料集，並饋送 HPC 與 GPU 模型訓練的協調與工程層。與連接層區分：聚焦科研資料工程、ML 生命週期工具與基礎模型就緒，而非儀器連接。
+  role:
+  - analytics-artificial-intelligence
+  - integration
+  - infrastructure-platform
+  data_modality:
+  - artificial-intelligence-models
+  - images
+  - omics
+  - time-series
+  - documents
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - high-performance-computing-cpu
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  - academic-medical-center
+  vendors:
+  - TetraScience (Tetra Data Platform / Scientific Data & AI Cloud)
+  - Databricks (Lakehouse for Life Sciences)
+  - Dotmatics (Luma)
+  confidence: B
+  source: https://www.tetrascience.com/platform/data-engineering ; https://www.dotmatics.com/solutions/luma ; https://www.databricks.com/solutions/industries/life-sciences
+- id: rd-lab-informatics-scientific-data-management-cloud-gxp-validated-data-archival
+  parent: rd-lab-informatics-scientific-data-management-cloud
+  name_en: GxP-Validated Scientific Data Archival & Digital Preservation
+  name_zh: GxP 驗證的科研資料歸檔與數位保存
+  name_full: GxP-Validated Long-Term Scientific and Lab Data Archival and Digital Preservation (ALCOA+/21 CFR Part 11)
+  scope_en: Validated long-term retention and digital preservation of raw scientific, lab and clinical data under GxP/ALCOA+/21 CFR Part 11 — with CSV documentation, integrity checking and readable-format migration over decades. A distinct validated-archiving vendor cohort separate from live SDMS, with a capacity-archive + DR footprint rather than performance compute.
+  scope_zh: 在 GxP／ALCOA+／21 CFR Part 11 下對原始科研、實驗室與臨床資料進行經驗證的長期保留與數位保存——含 CSV 文檔、完整性校驗與跨數十年的可讀格式遷移。這是與線上 SDMS 分離的、獨立的驗證歸檔供應商群，其硬體足跡為容量歸檔＋災備而非高效能運算。
+  role:
+  - system-of-record
+  - infrastructure-platform
+  data_modality:
+  - documents
+  - images
+  - real-world-data
+  hardware_profile:
+  - capacity-archive-storage
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  - contract-development-manufacturing-organization
+  vendors:
+  - Arkivum
+  - Iron Mountain (InSight)
+  - Montrium
+  confidence: B
+  source: https://arkivum.com/regulatory/ ; https://arkivum.com/blog/how-arkivum-supports-21-cfr-part-11-compliance-for-pharma-and-life-sciences/ ; https://arkivum.com/pharmaceutical-life-sciences/
+- id: pv-regulatory-information-signal-detection-analytics-disproportionality-spontaneous-icsr
+  parent: pv-regulatory-information-signal-detection-analytics
+  name_en: Disproportionality & Statistical Signal Detection (Spontaneous ICSR)
+  name_zh: 自發個案報告不相稱性統計信號檢測
+  name_full: Disproportionality & Statistical Signal Detection over Spontaneous ICSR Databases (FAERS / VigiBase / EudraVigilance)
+  scope_en: Quantitative data-mining engines (PRR, ROR, BCPNN/IC, MGPS-EBGM) that scan spontaneous adverse-event report databases (FAERS, WHO VigiBase, EudraVigilance) to flag disproportionately reported drug-event pairs. Batch statistical recomputation across tens of millions of ICSRs is the compute-intensive core of PV; still deployed on-prem at large pharma via Oracle Empirica/Argus Insight.
+  scope_zh: 以定量資料探勘方法（PRR、ROR、BCPNN/IC、MGPS-EBGM）掃描FAERS、WHO VigiBase、EudraVigilance等自發不良事件報告資料庫，標記報告比例異常的藥物-事件配對。跨數千萬份個案安全報告的批次統計重算是藥物警戒運算最密集的環節，大型藥廠常以Oracle Empirica/Argus Insight本地部署運行。
+  role:
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - real-world-data
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - Oracle (Empirica Signal / Argus Insight)
+  - ArisGlobal (LifeSphere Signal)
+  - IQVIA (Vigilance Platform / Detect)
+  - Ennov
+  confidence: A
+  source: https://intuitionlabs.ai/articles/pharmacovigilance-software-systems-overview ; https://intuitionlabs.ai/articles/pharmacovigilance-software-comparison-argus-lifesphere-veeva
+- id: pv-regulatory-information-signal-detection-analytics-rwd-active-surveillance
+  parent: pv-regulatory-information-signal-detection-analytics
+  name_en: RWD Active Surveillance Signal Detection (EHR/Claims)
+  name_zh: 真實世界數據主動監測信號檢測
+  name_full: Real-World-Data Active Surveillance Signal Detection over EHR & Claims Networks
+  scope_en: Signal detection and evaluation run over large real-world datasets (EHR, claims, registries) as active surveillance that complements spontaneous reporting — Sentinel-style monitoring against 100M+ patient records. Vendor-hosted RWD networks blend public safety data (FAERS/VigiBase) with de-identified longitudinal patient data, so the storage/compute footprint sits with the ISV rather than the pharma buyer.
+  scope_zh: 在大型真實世界資料集（電子病歷、理賠、登記庫）上進行的信號檢測與評估，作為補充自發報告的主動監測，類似Sentinel對逾一億筆病患記錄的監控。廠商託管的RWD網路將公開安全資料（FAERS/VigiBase）與去識別化縱向病患資料融合，儲存與運算負擔落在ISV而非藥廠。
+  role:
+  - analytics-artificial-intelligence
+  data_modality:
+  - real-world-data
+  - transactional
+  hardware_profile:
+  - capacity-archive-storage
+  - nvme-performance-storage
+  - high-performance-computing-cpu
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - TriNetX (EVIDEX)
+  - IQVIA (RWD signal detection)
+  confidence: B
+  source: https://trinetx.com/drug-safety/evidex-signal-detection/ ; https://www.iqvia.com/blogs/2025/07/enhancing-signal-detection-with-real-world-data-a-new-era-in-pharmacovigilance
+- id: pv-regulatory-information-signal-detection-analytics-literature-monitoring-nlp
+  parent: pv-regulatory-information-signal-detection-analytics
+  name_en: Safety Literature Monitoring & Screening (NLP)
+  name_zh: 安全文獻監測與篩查（自然語言處理）
+  name_full: Pharmacovigilance Safety Literature Monitoring & AI/NLP Screening (Global & Local Literature)
+  scope_en: Automated NLP screening of global and local scientific literature to surface case reports (ICSRs) and emerging safety signals, cutting manual abstract review by 70-90%. A SaaS-light segment with distinct low-cost buyers (small/mid MAHs, PV service providers); the only hardware pull is modest GPU-NLP inference on the hosting vendor's side.
+  scope_zh: 以自然語言處理自動篩查全球與本地科學文獻，找出個案報告（ICSR）與新興安全信號，可減少70-90%人工摘要審閱。屬SaaS為主、硬體較輕的區隔，買方多為中小型上市許可持有人與PV服務商；唯一硬體需求是託管廠商端的中等GPU-NLP推論。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - documents
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - DrugCard
+  - Compier (TechSol Life Sciences)
+  - Tepsivo
+  - ProQuest / Embase (Elsevier)
+  confidence: B
+  source: https://drug-card.io/local-literature/ ; https://www.techsollifesciences.com/pharmacovigilance/compier-literature-screening/ ; https://www.tepsivo.com/pharmacovigilance-services-and-software/literature-monitoring/
+- id: pv-regulatory-information-genai-safety-automation-icsr-case-intake-coding-narrative
+  parent: pv-regulatory-information-genai-safety-automation
+  name_en: ICSR Case Intake, Auto-Coding & Narrative Generation
+  name_zh: 个例安全报告智能摄取、自动编码与叙述生成
+  name_full: GenAI ICSR Case Intake, MedDRA Auto-Coding & Narrative Generation
+  scope_en: GenAI/LLM pipelines that ingest unstructured adverse-event source documents (emails, call transcripts, intake forms, PDFs), then auto-extract fields, MedDRA/WHODrug auto-code, run duplicate/seriousness triage, and draft the ICSR narrative into the safety database. This is the heaviest LLM-inference workload in PV; PHI sensitivity and GxP validation push large pharma and BPOs toward on-prem / private-VPC GPU deployment rather than public LLM APIs. MedDRA coding and narrative writing are bundled as agents inside these same platforms (ArisGlobal NavaX Agents, Oracle/Veeva Safety.AI), so they are folded here rather than split as separate sub-markets.
+  scope_zh: 以生成式AI/LLM流水线摄取非结构化不良事件源文件（邮件、通话记录、摄取表单、PDF），自动抽取字段、进行MedDRA/WHODrug自动编码、执行重复与严重性分诊，并将ICSR叙述起草写入安全数据库。这是药物警戒中最重的LLM推理负载；PHI敏感性与GxP验证促使大型药企和BPO倾向本地/私有VPC的GPU部署，而非公有LLM API。MedDRA编码与叙述撰写作为同一平台内的智能体捆绑提供（ArisGlobal NavaX Agents、Oracle/Veeva Safety.AI），故归入此处而非单列。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - documents
+  - transactional
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - ArisGlobal (LifeSphere NavaX / Advanced Intake)
+  - Oracle (Argus / Health Sciences Safety AI)
+  - Veeva (Safety.AI)
+  - IQVIA (Vigilance Detect)
+  - Genpact (Cora)
+  - Saama
+  confidence: A
+  source: arisglobal.com Advanced Intake (65% intake efficiency, GenAI extraction+narrative) + NavaX MedDRA Coding Agent press release; intuitionlabs.ai PV software overview; iqvia.com Vigilance Detect
+- id: pv-regulatory-information-genai-safety-automation-literature-monitoring-screening
+  parent: pv-regulatory-information-genai-safety-automation
+  name_en: Automated Literature Monitoring & Screening
+  name_zh: 自动化文献监测与筛查
+  name_full: AI Scientific & Local Literature Monitoring / Screening for PV
+  scope_en: AI-driven continuous screening of global and local scientific literature (2,200+ local journals across 100+ countries) to surface adverse events and safety references, with LLM auto-summarization, relevance pre-assessment/triage, multilingual coverage, and one-click article-to-ICSR conversion. Carries a distinct vendor set (literature-specialist players like DrugCard) separate from the case-processing safety-database platforms, plus a corpus-storage pull for the ingested and indexed publication archive. SaaS-light relative to case intake, so the GPU pull is embedding/summarization-class rather than flagship.
+  scope_zh: 以AI持续筛查全球及本地科学文献（100多个国家、2,200多种本地期刊），发现不良事件与安全参考文献，利用LLM自动摘要、相关性预评估与分诊、多语种覆盖，并一键将文章转换为ICSR。拥有独立的供应商群体（如文献专业厂商DrugCard），区别于个例处理的安全数据库平台，并对已摄取和索引的出版物档案有语料存储需求。相较个例摄取更偏SaaS，GPU需求属嵌入/摘要级而非旗舰级。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - data-acquisition
+  data_modality:
+  - documents
+  - real-world-data
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - capacity-archive-storage
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - DrugCard
+  - IQVIA (Literature)
+  - ProPharma
+  - Elsevier (Embase)
+  - ArisGlobal
+  confidence: A
+  source: drug-card.io platform/local-literature/about pages (2,200+ journals, 112 countries, 21 CFR Part 11); iqvia.com literature services; European Drug Safety & AI 2026 (b2match) DrugCard listing
+- id: pv-regulatory-information-genai-safety-automation-multilingual-safety-translation-mt
+  parent: pv-regulatory-information-genai-safety-automation
+  name_en: Multilingual Safety Translation & Localization (Neural MT)
+  name_zh: 多语种安全翻译与本地化（神经机器翻译）
+  name_full: AI Neural-MT Safety Translation & Localization for Multilingual PV Reporting
+  scope_en: Neural machine translation and localization of safety content (ICSRs, local-language literature, RMPs/REMS, PV documentation) for multilingual regulatory reporting, delivered mainly by life-science language service providers running secure MT engines (e.g., RWS Language Weaver / Language Weaver Edge on-prem) on GPU. Distinct LSP vendor set separate from the safety-database and literature players, with a real neural-MT inference pull; SMCI relevance is modest because most volume runs on the LSP's own or cloud infrastructure rather than pharma-owned iron, though on-prem MT-engine deployments (Language Weaver Edge) are a genuine co-sell angle.
+  scope_zh: 针对多语种法规报送，对安全内容（ICSR、本地语言文献、风险管理计划/REMS、药物警戒文档）进行神经机器翻译与本地化，主要由生命科学语言服务商在GPU上运行安全MT引擎（如RWS Language Weaver / 本地部署的Language Weaver Edge）提供。语言服务商供应商群体独立于安全数据库与文献厂商，具有真实的神经MT推理需求；由于多数量级运行在语言服务商自有或云基础设施而非药企自有硬件上，SMCI相关性为中等，但本地部署的MT引擎（Language Weaver Edge）构成真实的协同销售切入点。
+  role:
+  - workflow
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - documents
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - RWS (Language Weaver)
+  - Welocalize
+  - TransPerfect
+  - Lionbridge
+  - CSOFT Health Sciences
+  confidence: B
+  source: rws.com Language Weaver life-sciences + PV MT pages, Language Weaver Edge on-prem MT; pharmaceutical-technology.com RWS PV MT sponsored feature
+- id: telehealth-platform-high-acuity-teleicu-telespecialty-critical-care-surveillance
+  parent: telehealth-platform-high-acuity-teleicu-telespecialty
+  name_en: Tele-ICU Critical-Care Surveillance Platform
+  name_zh: 遠距重症監護中央監視平台
+  name_full: Centralized 24/7 Tele-ICU / eICU Continuous-Surveillance & Predictive-Deterioration Platform
+  scope_en: 'Centralized round-the-clock remote critical-care surveillance: continuous vitals and waveforms from distributed ICU beds stream into an intensivist command center running smart-alarm and predictive-deterioration analytics (e.g. Philips eCareManager, CLEW). Sold either as licensed software the health system runs, or as a managed service delivered on the operator''s own command-center iron (Hicuity, Equum). The high-throughput ingest + 24/7 uptime + AI scoring is the densest hardware pull inside this parent. Note: pure-play AI layers like CLEW are increasingly cloud-hosted, so the on-prem SMCI pull concentrates in the operator-run command centers and health-system-licensed deployments.'
+  scope_zh: 集中式全天候遠距重症監護：分散各 ICU 床位的連續生命徵象與波形串流進駐重症醫師指揮中心，運行智慧警報與惡化預測分析（如 Philips eCareManager、CLEW）。以授權軟體交付予醫療系統自建，或由服務商在自有指揮中心機房上以託管服務交付（Hicuity、Equum）。高吞吐擷取＋全天候可用性＋AI 評分為本母市場中最密集的硬體拉力。註：如 CLEW 之純 AI 層日益雲端化，故本地 SMCI 拉力集中於服務商營運之指揮中心與醫療系統授權自建部署。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - data-acquisition
+  data_modality:
+  - time-series
+  - transactional
+  - artificial-intelligence-models
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  - gpu-server
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Philips (eCareManager/eICU)
+  - Hicuity Health
+  - CLEW Medical
+  - Equum Medical
+  - GE HealthCare
+  - iMDsoft
+  confidence: B
+  source: CLEW Medical vendor site (FDA-cleared CLEWICU; UMass Memorial & Penn State Health deployments); Hicuity Health About page (nation's largest 24x7 high-acuity provider, 145 hospitals, centralized command centers); Signify Research high-acuity telehealth; Grand View Research Tele-ICU Market Report; verified Aug 2026
+- id: telehealth-platform-high-acuity-teleicu-telespecialty-acute-consult-network
+  parent: telehealth-platform-high-acuity-teleicu-telespecialty
+  name_en: Acute Telespecialty Consult Network (Telestroke/Neuro/Psych)
+  name_zh: 急性遠距專科會診網路（遠距中風／神經／精神）
+  name_full: Episodic Acute-Specialty Emergent Consult Network — Telestroke, Tele-Neurohospitalist, Telepsychiatry
+  scope_en: 'Episodic, physician-staffed emergent consult networks that put a board-certified specialist on a video cart in an ED or ward within minutes — telestroke/teleneurology, tele-neurohospitalist rounding, telepsychiatry. Video-centric and SaaS-light: routing runs in the cloud and stroke CT typically flows through existing PACS, so on-prem SMCI pull is minimal. Delivered almost entirely as an operator-run staffing service, not customer iron.'
+  scope_zh: 以醫師人力為核心的間歇性急診會診網路，數分鐘內將具委員會認證之專科醫師透過視訊車推送至急診或病房——遠距中風／神經、遠距神經住院醫師查房、遠距精神科。以視訊為主、SaaS 輕量：路由於雲端運行，中風 CT 多經既有 PACS 流轉，故本地 SMCI 拉力極小。幾乎全數以服務商營運之人力服務交付，而非客戶自置機房。
+  role:
+  - workflow
+  - integration
+  data_modality:
+  - images
+  - transactional
+  - documents
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - TeleSpecialists
+  - Access TeleCare (formerly SOC Telemed)
+  - Blue Sky Telehealth
+  - Teladoc Health
+  - Equum Medical
+  confidence: B
+  source: TeleSpecialists and Blue Sky Telehealth service pages; Access TeleCare (SOC Telemed rebrand); Towards Healthcare teleneurology report; Signify Research high-acuity telehealth
+- id: telehealth-platform-high-acuity-teleicu-telespecialty-virtual-nursing-ai-observation
+  parent: telehealth-platform-high-acuity-teleicu-telespecialty
+  name_en: Virtual Nursing & AI Inpatient Patient Observation
+  name_zh: 虛擬護理與 AI 住院病患觀察
+  name_full: Inpatient Virtual Nursing, AI Tele-Sitting & Ambient Patient-Safety Observation
+  scope_en: 'Inpatient virtual nursing plus AI patient observation (tele-sitting): ceiling/room cameras feed computer-vision models for fall detection, elopement, bed-exit and continuous safety monitoring, layered with virtual admit/discharge/rounding workflows. The CV inference footprint is the distinguishing hardware — edge capture plus GPU inference deployed on-prem inside the health system (Artisight is Nvidia-backed on-prem CV; Ouva, VirtuSense). Note: some entrants (LookDeep) are cloud-native rather than on-prem edge, so the SMCI-relevant pull concentrates in the on-prem/edge-inference deployers. Buyer is typically the health system deploying its own edge+GPU iron.'
+  scope_zh: 住院虛擬護理加 AI 病患觀察（虛擬陪護）：天花板／房間攝影機餵入電腦視覺模型進行跌倒偵測、離院、離床與連續安全監控，並疊加虛擬入院／出院／查房流程。電腦視覺推論足跡為其標誌性硬體——邊緣擷取加 GPU 推論部署於醫療系統本地（Artisight 為 Nvidia 支持之本地 CV；Ouva、VirtuSense）。註：部分業者（LookDeep）為雲端原生而非本地邊緣，故 SMCI 相關拉力集中於本地／邊緣推論之部署者。買方通常為部署自有邊緣＋GPU 機房的醫療系統。
+  role:
+  - workflow
+  - data-acquisition
+  - analytics-artificial-intelligence
+  data_modality:
+  - images
+  - time-series
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - edge-industrial
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - AvaSure
+  - Caregility
+  - Artisight
+  - Ouva
+  - LookDeep Health
+  - VirtuSense
+  confidence: B
+  source: FierceHealthcare 'Nvidia-backed Artisight' + Artisight smart patient room pages (on-prem CV/edge); AVIA Marketplace virtual nursing map; VirtuSense Top Virtual Nursing Platforms 2026; LookDeep (cloud-native caveat noted); verified Aug 2026
+- id: population-health-analytics-payer-risk-adjustment-retrospective-ai-chart-review-coding
+  parent: population-health-analytics-payer-risk-adjustment
+  name_en: Retrospective AI Chart-Review & HCC Coding (Record Retrieval + NLP/GenAI)
+  name_zh: 回顾性 AI 病历审查与 HCC 编码（病历调取 + NLP/生成式 AI）
+  name_full: Retrospective AI Chart-Review & HCC Coding (Record Retrieval + NLP/GenAI)
+  scope_en: 'Post-encounter risk capture: bulk medical-record retrieval from provider EHRs, then NLP/GenAI reads unstructured charts to surface undocumented/unsupported HCCs with MEAT evidence for coder review and submission. This is the compute-intensive leg — millions of chart pages OCR''d and run through clinical NLP/LLM inference each cycle.'
+  scope_zh: 就诊后风险捕获：从医疗机构 EHR 批量调取病历，用 NLP/生成式 AI 阅读非结构化病历，找出未记录/证据不足的 HCC 并附 MEAT 证据供编码员复核提交。此为算力密集环节——每周期需 OCR 数百万页病历并跑临床 NLP/LLM 推理。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - documents
+  - images
+  - artificial-intelligence-models
+  - transactional
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - payer
+  - hospital-health-system
+  vendors:
+  - Reveleer
+  - Datavant (Apixio)
+  - Episource (Optum)
+  - RAAPID
+  - Cotiviti
+  - Solventum
+  - Astrata
+  confidence: B
+  source: 'KLAS ''Risk Adjustment: Coding, Retrieval & Compliance'' segment; vendor sites (Reveleer, RAAPID retrospective solution, Cotiviti NLP/AI HCC reconciliation, Datavant/Apixio AI-assisted coding). Verified: Apixio value-based-care/coding platform moved to Datavant in New Mountain Capital 2024-25 restructuring (payment-integrity leg went to separate firm).'
+- id: population-health-analytics-payer-risk-adjustment-prospective-poc-gap-closure
+  parent: population-health-analytics-payer-risk-adjustment
+  name_en: Prospective / Point-of-Care Risk Capture & In-Home Assessments
+  name_zh: 前瞻性 / 就诊点风险捕获与入户评估
+  name_full: Prospective / Point-of-Care Risk Capture & In-Home Assessments
+  scope_en: 'Pre-visit suspecting and point-of-care gap closure: surfacing suspected HCCs to providers before/at the encounter and via in-home health risk assessments so conditions are documented in real time. Workflow/SaaS-light — no material on-prem compute pull beyond the platform''s own hosting. Retained as a genuine distinct segment but a no-SMCI-play (opp 1, empty hardware).'
+  scope_zh: 就诊前疑似识别与就诊点缺口闭合：在就诊前/就诊时以及通过入户健康风险评估向医生提示疑似 HCC，实现实时记录。以工作流/轻 SaaS 为主，除平台自身托管外无显著本地算力需求。保留为真实独立细分，但对 SMCI 无硬件机会（opp 1，硬件为空）。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - documents
+  - real-world-data
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - payer
+  - hospital-health-system
+  vendors:
+  - Signify Health (CVS)
+  - Matrix Medical Network
+  - Vatica Health
+  - Reveleer
+  - Episource (Optum)
+  confidence: B
+  source: 3Gen Consulting prospective risk adjustment overview; Reveleer point-of-care prospective coding; Signify Health / Matrix Medical / Vatica Health in-home & point-of-care HRA programs (all real, distinct from coding-platform vendors)
+- id: population-health-analytics-payer-risk-adjustment-radv-audit-encounter-submission-compliance
+  parent: population-health-analytics-payer-risk-adjustment
+  name_en: RADV Audit Defense, Encounter Data Submission (EDPS) & Compliance
+  name_zh: RADV 审计应对、就诊数据提交（EDPS）与合规
+  name_full: RADV Audit Defense, Encounter Data Submission (EDPS) & Compliance
+  scope_en: 'CMS-facing accuracy and audit layer: encounter/EDPS submission integrity, overpayment/deletion (two-way) coding, and RADV audit defense — sharply elevated by the 2025 CMS RADV crackdown. High-volume transactional edit/submission pipelines with strong availability requirements; compute-light versus retrospective NLP.'
+  scope_zh: 面向 CMS 的准确性与审计层：就诊/EDPS 提交完整性、退款/删除（双向）编码及 RADV 审计应对——因 2025 年 CMS RADV 加强稽查而急剧升温。高吞吐交易型编辑/提交管线，可用性要求高；相较回顾性 NLP 算力需求较轻。
+  role:
+  - integration
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Edifecs (Cotiviti)
+  - Cotiviti
+  - Inovalon
+  - Pareto Intelligence
+  - Veradigm
+  - Advantmed
+  confidence: B
+  source: CMS 2025 RADV audit expansion coverage; Edifecs 'Risk Adjustment - Encounter Submissions' product (Cotiviti completed Edifecs acquisition 2025, verified); Cotiviti Encounter Management; Inovalon, Pareto Intelligence EDPS/submission tooling
