@@ -7065,3 +7065,688 @@ subcategories:
   - Bruker Spatial Biology (AtoMx SIP)
   confidence: B
   source: https://bioturing.com/single-cell-and-spatial-database-talk2data ; https://blog.omnibusx.com/comparing-tools-for-single-cell-and-spatial-transcriptomics-analysis/
+- id: scada-dcs-distributed-control-plant
+  parent: scada-dcs
+  name_en: Distributed Control System (DCS) for Integrated Plants
+  name_zh: 集散控制系统(DCS)——大型一体化工厂
+  name_full: Distributed Control System (DCS) — continuous & batch process control for large integrated (bio)pharma / chemical plants
+  scope_en: The heavyweight control tier for large, tightly-integrated continuous and batch process plants (API synthesis, large-scale biologics, fill-finish at scale). Redundant controllers plus operator/engineering workstations and application servers, engineered as one validated system under GAMP 5. This is the dominant control platform in high-value pharma/biopharma manufacturing lines.
+  scope_zh: 面向大型、紧耦合连续与批次工艺工厂(原料药合成、大规模生物制品、大规模灌装)的重型控制层。冗余控制器加操作/工程工作站与应用服务器,按 GAMP 5 作为一个已验证系统整体工程化。是高价值制药/生物制药产线的主导控制平台。
+  role:
+  - workflow
+  - data-acquisition
+  - infrastructure-platform
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - edge-industrial
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Emerson (DeltaV)
+  - Siemens (SIMATIC PCS 7 / PCS neo)
+  - Honeywell (Experion PKS)
+  - ABB (800xA)
+  - Yokogawa (CENTUM VP)
+  - Rockwell Automation (PlantPAx)
+  confidence: A
+  source: Mordor Intelligence DCS Market report; processcontrolguide.com 'DCS in Pharmaceutical'; vendor sites. DeltaV & PCS 7 named pharma leaders; Honeywell/ABB/Yokogawa/Rockwell verified pharma deployments. hardware_profile trimmed (removed HPC-CPU — DCS pulls redundant app/engineering servers + edge controllers, not compute clusters).
+- id: scada-dcs-scada-hmi-supervisory
+  parent: scada-dcs
+  name_en: SCADA / HMI Supervisory Platform
+  name_zh: SCADA / HMI 监控平台
+  name_full: SCADA / HMI supervisory software platform — object-oriented supervisory layer + operator visualization for skids, utilities and distributed assets
+  scope_en: 'The lighter, more distributed supervisory tier: object-oriented SCADA platforms and HMI visualization used for clean utilities (WFI, HVAC, purified water), OEM skids, packaging lines and geographically distributed assets — often where a full DCS is not warranted. Distinct vendor set and buyer profile from DCS; frequently deployed by system integrators.'
+  scope_zh: 更轻量、更分布式的监控层:面向洁净公用工程(注射用水、暖通、纯化水)、OEM 撬块、包装线及地理分散资产的面向对象 SCADA 平台与 HMI 可视化——通常用于无需完整 DCS 的场景。厂商与买家画像与 DCS 明显不同,常由系统集成商部署。
+  role:
+  - data-acquisition
+  - workflow
+  - integration
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - edge-industrial
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - AVEVA (System Platform / InTouch HMI)
+  - Inductive Automation (Ignition)
+  - Siemens (WinCC)
+  - Rockwell Automation (FactoryTalk View SE)
+  - GE Vernova (iFIX / CIMPLICITY)
+  - Schneider Electric (EcoStruxure Plant SCADA)
+  confidence: A
+  source: Gartner Peer Insights SCADA Software market; Industrial Monitor Direct 'Ignition vs WinCC vs AVEVA'; vendor sites. Distinct vendor set (AVEVA/Ignition/WinCC/FactoryTalk View/iFIX) confirmed and non-overlapping with DCS tier.
+- id: scada-dcs-control-virtualization-ft
+  parent: scada-dcs
+  name_en: Control-System Virtualization / Fault-Tolerant Server Infrastructure
+  name_zh: 控制系统虚拟化 / 容错服务器基础设施
+  name_full: Control-system virtualization & fault-tolerant server infrastructure — hosting DCS/SCADA/HMI/historian as validated VMs on redundant industrial servers
+  scope_en: 'The infrastructure tier that consolidates DCS/SCADA/HMI/historian workloads onto virtualized, continuously-available industrial servers (HCI clusters) in the control room and at the edge, replacing racks of single-purpose appliances. The genuine SMCI landing zone: HA/redundant + DR + NVMe-backed x86 hosts running validated control VMs (Emerson DeltaV Virtual Studio on qualified x86/HCI; AVEVA validated virtualization via Stratus everRun on standard servers; Schneider EcoStruxure). NOTE the competitive nuance: Stratus ftServer is a proprietary lockstep fault-tolerant appliance that competes with Supermicro on hardware — the SMCI opportunity is the standard-server HCI/hypervisor path hosting the control VMs, not the ftServer appliance itself.'
+  scope_zh: 将 DCS/SCADA/HMI/历史库工作负载整合到控制室与边缘的虚拟化、持续可用工业服务器(超融合集群)上的基础设施层,取代成排的单用途设备。真正落地 SMCI 硬件之处:承载已验证控制虚机的高可用/冗余 + 灾备 + NVMe 标准 x86 主机(Emerson DeltaV Virtual Studio 运行于合格 x86/HCI;AVEVA 经 Stratus everRun 在标准服务器上的已验证虚拟化;施耐德 EcoStruxure)。注意竞争关系:Stratus ftServer 为专有锁步容错一体机,在硬件上与 Supermicro 竞争——SMCI 机会在于承载控制虚机的标准服务器 HCI/虚拟化路径,而非 ftServer 一体机本身。
+  role:
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - disaster-recovery-backup
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Emerson (DeltaV Virtual Studio / HCI)
+  - AVEVA (validated virtualization w/ Stratus everRun)
+  - 'Stratus Technologies (ftServer / everRun — note: FT-appliance competitor on hardware)'
+  - Schneider Electric (EcoStruxure Micro Data Center)
+  confidence: B
+  source: emerson.com DeltaV Virtualization & Virtual Studio for HCI datasheets (2026); aveva.com 'Stratus ftServer for Control Room Applications'; stratus.com AVEVA strategic-partner page; waterworld.com virtualized SCADA/HMI. Segment confirmed real; hardware_opportunity corrected 4->3 (control-room/HCI cluster + DR, significant not flagship); Stratus flagged as hardware competitor, SMCI path = standard-x86 HCI hosting control VMs.
+- id: plant-historian-edge-plant-collection
+  parent: plant-historian
+  name_en: Plant/Edge Real-Time Historian Collection
+  name_zh: 工厂/边缘实时数据历史库采集
+  name_full: Plant/Edge Real-Time Process Historian (OT Data Collection)
+  scope_en: The OT-side historian that sits at the plant/line, ingesting high-frequency sensor, DCS, PLC and OPC-UA tags in real time, buffering during network loss (store-and-forward), and serving as the validated 21 CFR Part 11 / EU Annex 11 system of record for process data. Deployed as ruggedized/edge servers at the site, typically in redundant HA pairs for zero-loss capture.
+  scope_zh: 位于工厂/产线的OT侧历史库，实时采集高频传感器、DCS、PLC与OPC-UA点位，网络中断时本地缓冲（存储转发），并作为符合21 CFR Part 11/EU Annex 11的经验证过程数据系统记录。以边缘/工业级服务器部署于现场，通常采用冗余高可用双机以实现零丢失采集。
+  role:
+  - data-acquisition
+  - system-of-record
+  - infrastructure-platform
+  data_modality:
+  - time-series
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - AVEVA (PI Server / PI Data Archive)
+  - AspenTech (InfoPlus.21 / IP.21)
+  - Canary Labs
+  - Capstone Technology (dataPARC)
+  - GE Vernova (Proficy Historian)
+  - Rockwell Automation (FactoryTalk Historian)
+  - Siemens (SIMATIC Process Historian)
+  confidence: A
+  source: Verified Market Research 'Top Data Historian Software & Market Share'; AVEVA PI System and AspenTech IP.21 vendor pages; eTech Group biotech case study (FTView + PI, 21 CFR Part 11); Mordor Intelligence Data Historian Market (on-premise dominant in pharma for data sovereignty)
+- id: plant-historian-enterprise-aggregation-platform
+  parent: plant-historian
+  name_en: Enterprise Historian & IIoT Aggregation Platform
+  name_zh: 企业级历史库与工业物联网聚合平台
+  name_full: Enterprise Historian Aggregation, Unified Namespace & Long-Term Archive Platform
+  scope_en: The enterprise tier that aggregates multiple plant historians into a cross-site operational data platform / unified namespace, contextualizes tags to asset models, and provides long-term tiered retention (years of high-resolution history) plus an integration layer feeding MES, analytics and data lakehouses. Storage-heavy and integration-heavy; deployed on-prem or private-cloud where data sovereignty rules.
+  scope_zh: 企业级层，将多个工厂历史库聚合为跨厂运营数据平台/统一命名空间，将点位关联到资产模型，提供长期分层保留（多年高分辨率历史）以及为MES、分析与数据湖仓供数的集成层。存储与集成密集，在需数据主权的场景以本地或私有云部署。
+  role:
+  - integration
+  - infrastructure-platform
+  - system-of-record
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - capacity-archive-storage
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Cognite (Data Fusion)
+  - AVEVA (CONNECT / PI Integrators & AF)
+  - AspenTech (inmation)
+  - HighByte (Intelligence Hub)
+  - Litmus Automation (Litmus Edge)
+  - Element Analytics
+  confidence: B
+  source: 'Verdantix ''Green Quadrant: Industrial Data Management Solutions 2025''; uReason ''Unlocking the Value of AVEVA PI Data with AVEVA CONNECT''; AspenTech inmation acquisition; Cognite Data Fusion and HighByte/Litmus unified-namespace vendor material; Mordor Intelligence Data Historian Market (multi-site aggregation, hybrid/cloud trend)'
+- id: plant-historian-advanced-process-analytics
+  parent: plant-historian
+  name_en: Advanced Process & Time-Series Analytics
+  name_zh: 高级过程与时序分析
+  name_full: Self-Service Advanced Process Analytics on Historian Time-Series Data
+  scope_en: 'A distinct vendor category layered on top of historian data: self-service analytics, pattern search, root-cause and ML/predictive tooling for process engineers (golden-batch comparison, multivariate monitoring, soft sensors). Sold to process/manufacturing science teams, not OT infrastructure teams; in pharma runs as GxP-validated deployments. Compute-oriented and predominantly CPU/in-memory (high-memory for large batch histories).'
+  scope_zh: 叠加在历史库数据之上的独立厂商品类：面向工艺工程师的自助分析、模式搜索、根因与机器学习/预测工具（黄金批次对比、多变量监控、软测量）。销售对象是工艺/制造科学团队而非OT基础设施团队；在制药领域以GxP经验证方式部署。以计算为主，主要为CPU与内存密集（大批次历史需大内存）。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-memory
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Seeq
+  - Siemens (TrendMiner)
+  - AspenTech (Aspen ProMV / Mtell)
+  - Capstone Technology (dataPARC ParcView)
+  confidence: A
+  source: Seeq 'Managing Time-Series Data with Historians and Advanced Analytics' and GxP analytics suite pages; Siemens/TrendMiner 'Software for Process Manufacturing'; G2 Seeq-vs-TrendMiner comparison; Viewpoint Analysis 'Who are Seeq'; Averroes 'Top 10 Manufacturing Analytics Tools 2026'
+- id: plant-historian-opensource-tsdb
+  parent: plant-historian
+  name_en: Open-Source / Modern Time-Series Databases
+  name_zh: 开源/现代时序数据库
+  name_full: Open-Source & Modern Time-Series Databases for IT/OT Convergence
+  scope_en: 'Modern, developer-driven time-series databases used as historian alternatives or complements in IT/OT-convergence and Industry 4.0 stacks. Distinct buyer (data-engineering/IT rather than OT/automation), distinct vendors, and self-managed on-prem deployments that pull NVMe throughput and memory for high-ingest, high-cardinality workloads; SaaS-light in cloud but frequently self-hosted in regulated pharma environments. Borderline: these are general-purpose TSDBs (also used for observability) marketed into OT historian-replacement.'
+  scope_zh: 现代、以开发者为主导的时序数据库，在IT/OT融合与工业4.0技术栈中作为历史库的替代或补充。买家不同（数据工程/IT而非OT/自动化），厂商不同，自管本地部署对高摄入、高基数负载拉动NVMe吞吐与内存；云端偏SaaS，但在受监管制药环境常自托管。属边缘品类：为通用时序数据库（亦用于可观测性），被推向OT历史库替代场景。
+  role:
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - time-series
+  hardware_profile:
+  - nvme-performance-storage
+  - high-memory
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - InfluxData (InfluxDB)
+  - Tiger Data (TimescaleDB)
+  - QuestDB
+  - GreptimeDB
+  - VictoriaMetrics
+  confidence: B
+  source: 'InfluxData ''Data Historians vs. Time Series Databases: A Practical Path Forward'' (InfluxDB recommended for industrial IoT/edge); QuestDB ''Comparing InfluxDB, TimescaleDB, QuestDB''; Tiger Data ''5 InfluxDB Alternatives''; UMH/Learn.umh ''Historians vs Open-Source databases''; iFactory ''Historian Databases Explained: PI System, InfluxDB, TimescaleDB'''
+- id: pat-process-twin-real-time-orchestration
+  parent: pat-process-twin
+  name_en: Real-Time PAT Orchestration & Spectral Process Monitoring
+  name_zh: 实时PAT编排与光谱过程监测
+  name_full: Real-Time Process Analytical Technology Orchestration & In-line Spectral Monitoring
+  scope_en: Vendor-agnostic PAT data-management/orchestration software that connects in-line and on-line process analyzers (NIR, Raman, UV/Vis) to MVA engines, historians, MES and automation systems, executes chemometric models in real time, and orchestrates PAT methods across the manufacturing line for real-time release testing and continuous-manufacturing control.
+  scope_zh: 与仪器厂商无关的PAT数据管理/编排软件，将在线光谱分析仪(NIR、拉曼、UV/Vis)连接到多变量分析引擎、历史库、MES和自动化系统，实时执行化学计量学模型，并在生产线上编排PAT方法，用于实时放行检测与连续制造控制。
+  role:
+  - data-acquisition
+  - workflow
+  - integration
+  data_modality:
+  - time-series
+  - real-world-data
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Bruker / Optimal Industrial Technologies (synTQ)
+  - Applied Materials (PharmaMV / Perceptive Engineering)
+  - Emerson
+  confidence: B
+  source: Bruker IR / BusinessWire (2022-04-05, Bruker acquires Optimal Industrial Technologies, synTQ); manufacturingchemist.com (2020-11, Applied Materials acquires Perceptive Engineering / PharmaMV); syntq.com
+- id: pat-process-twin-mvda-chemometrics
+  parent: pat-process-twin
+  name_en: Multivariate Data Analysis & Chemometrics (MVDA / Batch SPC)
+  name_zh: 多变量数据分析与化学计量学
+  name_full: Multivariate Data Analysis, Chemometrics & Batch Statistical Process Control
+  scope_en: Offline/at-line multivariate modeling (PCA, PLS, OPLS), batch statistical process control, golden-batch fingerprinting and chemometric model building used for process understanding, root-cause analysis and calibration of the models later deployed in real-time PAT. Workstation-class, SaaS-light compute footprint — retained for taxonomy completeness, not an SMCI target.
+  scope_zh: 离线/线边多变量建模(PCA、PLS、OPLS)、批次统计过程控制、黄金批次指纹识别与化学计量学模型构建，用于工艺理解、根因分析以及为后续实时PAT部署的模型做校准。以工作站级、轻SaaS的算力为主——列入以求分类完整，非SMCI目标。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - time-series
+  - real-world-data
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Sartorius (Umetrics SIMCA)
+  - ProSensus (ProMV)
+  - Aspen Technology (Camo / The Unscrambler)
+  confidence: B
+  source: sartorius.com Umetrics/SIMCA MVDA pages; prosensus.ca ProMV; Aspen Technology (Camo Analytics acquisition, The Unscrambler)
+- id: pat-process-twin-mechanistic-flowsheet-simulation
+  parent: pat-process-twin
+  name_en: Mechanistic Process Simulation & Flowsheet Modeling
+  name_zh: 机理过程仿真与流程建模
+  name_full: First-Principles Mechanistic Process Simulation & End-to-End Flowsheet Digital Twin
+  scope_en: First-principles/mechanistic modeling of chemical and biopharma unit operations — reaction kinetics, crystallization, chromatography, drying, drug-product processing — for digital process design, scale-up, risk assessment and end-to-end flowsheet digital twins. The compute-heavy, HPC-CPU/high-memory pull of the category and the basis for the parent's opportunity-3 rating.
+  scope_zh: 对化学与生物制药单元操作(反应动力学、结晶、层析、干燥、制剂加工)进行第一性原理/机理建模，用于数字化工艺设计、放大、风险评估以及端到端流程数字孪生。这是本类别中算力密集、拉动HPC-CPU/大内存的部分，也是父类opportunity=3评级的依据。
+  role:
+  - analytics-artificial-intelligence
+  data_modality:
+  - simulation
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-memory
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Siemens (gPROMS FormulatedProducts)
+  - Aspen Technology (Aspen Plus / BioProcess Designer)
+  - Intelligen (SuperPro Designer)
+  - Scale-up Systems (DynoChem)
+  confidence: B
+  source: xcelerator.siemens.com gPROMS (Siemens/PSE); aspentech.com; intelligen.com SuperPro Designer; scale-up.com DynoChem; pharmtech.com flowsheet-modeling articles
+- id: pat-process-twin-hybrid-ai-bioprocess
+  parent: pat-process-twin
+  name_en: Hybrid AI Bioprocess Digital Twin & Soft Sensors
+  name_zh: 混合AI生物工艺数字孪生与软测量
+  name_full: Hybrid (Mechanistic + Machine-Learning) Bioprocess Digital Twin & ML Soft Sensors
+  scope_en: Hybrid models that fuse a mechanistic backbone with a data-driven ML layer, plus ML soft sensors, for upstream/downstream bioprocessing (cell culture, chromatography) — enabling predictive process development, DoE reduction and model-predictive control of biologics manufacturing. Real and distinct from mechanistic simulation, but data-lean bioprocess datasets and predominantly cloud/SaaS delivery make the on-prem SMCI GPU pull minimal.
+  scope_zh: 将机理骨架与数据驱动的机器学习层融合的混合模型及ML软测量，用于上下游生物工艺(细胞培养、层析)，实现预测性工艺开发、减少实验设计(DoE)以及生物药制造的模型预测控制。虽真实且区别于机理仿真，但生物工艺数据稀疏且多为云/SaaS交付，故本地SMCI的GPU拉动很小。
+  role:
+  - analytics-artificial-intelligence
+  data_modality:
+  - artificial-intelligence-models
+  - time-series
+  - real-world-data
+  hardware_profile:
+  - gpu-server
+  hardware_opportunity: 1
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - DataHow (DataHowLab)
+  - Insilico Biotechnology (Yokogawa)
+  - Novasign (Novasign Studio)
+  confidence: B
+  source: datahow.ch hybrid-modeling / DataHowLab (cloud-based); genengnews.com (Yokogawa acquires Insilico Biotechnology); novasign.at Novasign Studio
+- id: automated-visual-inspection-parenteral-injectable-avi
+  parent: automated-visual-inspection
+  name_en: Parenteral / Injectable Automated Visual Inspection (fill-finish AVI machines)
+  name_zh: 注射剂自动目检系统（无菌灌装线在线机检）
+  scope_en: 'High-speed inline inspection of sterile injectables (vials, ampoules, prefilled syringes, cartridges, lyo) on fill-finish lines: detection of visible particulates, fill-level, cracks/cosmetic glass defects and container-closure integrity, increasingly with deep-learning defect classifiers embedded in the machine (e.g. Syntegon AIM 9, validated 2025). Vision compute is embedded in the inspection machine (multi-camera stations up to ~600 units/min, up to ~13 stations), so the SMCI pull is edge/industrial compute in the machine BOM plus GPU servers for classifier training and Annex-1 validation image sets. Because the sale is a per-unit embedded BOM inside the OEM''s machine, the SMCI opportunity is modest rather than significant.'
+  scope_zh: 无菌注射剂（西林瓶、安瓿、预灌封注射器、卡式瓶、冻干品）在灌装线上的高速在线检测：可见异物、装量、玻璃裂纹/外观缺陷及容器密封完整性，越来越多在机内嵌入深度学习缺陷分类器（如Syntegon AIM 9，2025年验证）。视觉算力嵌入检测机（多相机工位，最高约600支/分钟，最多约13工位），SMCI机会在于机器BOM内的边缘/工业算力，以及用于分类器训练和Annex-1验证图像集的GPU服务器。由于销售是OEM机内的按台嵌入式BOM，SMCI机会为中等而非显著。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - edge-industrial
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Korber (Seidenader)
+  - Syntegon (Bosch)
+  - Stevanato Group
+  - Brevetti CEA
+  - Antares Vision
+  confidence: B
+  source: IntuitionLabs 'Computer Vision in Pharmaceutical QC' (2025); Syntegon visual-inspection / AIM 9 AI-inspection pages (deep-learning option, first AI-equipped AVI validated 2025); Stevanato Group visual-inspection/AI pages; jidoka-tech AVI vendor comparison (Korber/Syntegon/Stevanato/Brevetti at ~600 cpm, up to 13 camera stations)
+- id: automated-visual-inspection-dl-defect-model-platform
+  parent: automated-visual-inspection
+  name_en: Deep-Learning Defect-Model Training & Machine-Vision AI Platform
+  name_zh: 深度学习缺陷模型训练与机器视觉AI平台
+  scope_en: 'The software/model-development layer distinct from any one inspection machine: labeling large annotated image sets and training/validating CNN and anomaly-detection defect classifiers, then deploying runtime to lines. GxP image data (batch inspection records, training corpora) is retained on-prem for 21 CFR Part 11 / EU Annex 1, so training runs on customer- or ISV-owned GPU servers rather than cloud. This is the clearest concentrated SMCI GPU + fast-storage + archive pull in the category (training on GPUs from large image sets, NVMe for the dataset, capacity archive for retained inspection images).'
+  scope_zh: 独立于任何单台检测机的软件/模型开发层：标注大规模图像集，训练与验证CNN及异常检测缺陷分类器，再将运行时部署到产线。GxP图像数据（批检测记录、训练语料）因21 CFR Part 11/EU Annex 1须本地留存，训练在客户或ISV自有GPU服务器而非云端进行。这是本品类中最集中的SMCI GPU+高速存储+归档机会（大图像集GPU训练、数据集NVMe、留存检测图像的容量归档）。
+  role:
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - Cognex (VisionPro Deep Learning / ViDi)
+  - MVTec (HALCON)
+  - Zebra Aurora Vision (formerly Adaptive Vision)
+  - Landing AI (LandingLens)
+  - Stevanato Group (AI platform)
+  confidence: B
+  source: Cognex VisionPro Deep Learning docs/training pages (compatible successor to ViDi; on-prem training requires compatible NVIDIA GPU); MVTec HALCON deep-learning pages (GPU-accelerated classification/anomaly detection); Overview.ai VisionPro-DL alternatives 2026 (Zebra Aurora Vision multi-GPU, Landing AI LandingLens managed training); IntuitionLabs QC report (edge inference vs on-prem training split)
+- id: automated-visual-inspection-oral-solid-dose
+  parent: automated-visual-inspection
+  name_en: Oral Solid Dose (Tablet / Capsule) Surface Inspection
+  name_zh: 口服固体制剂（片剂/胶囊）表面目检
+  scope_en: 100% surface inspection of tablets and capsules for cosmetic/color/print defects, cracks and foreign matter at very high throughput (six-camera full-surface machines, hundreds of thousands of pieces/hour), a distinct machine class and distinct OSD-line buyer versus sterile fill-finish. Deep learning is used for cosmetic-defect classification. Compute is embedded/edge at the sorter with GPU servers behind for model training; lower and more SaaS-light SMCI pull than the sterile-injectable and platform sub-markets.
+  scope_zh: 片剂与胶囊的100%表面检测：外观/颜色/印字缺陷、裂纹和异物，超高通量（六相机全表面机型，每小时数十万粒），是有别于无菌灌装的独立机型和口服固体产线买家。深度学习用于外观缺陷分类。算力在分选机处嵌入/边缘，后端GPU服务器做模型训练；相较无菌注射与平台子市场，SMCI拉动更低、更偏SaaS轻量。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - edge-industrial
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - Sensum
+  - Antares Vision
+  - Cognex
+  - Keyence
+  confidence: B
+  source: Sensum SPINE product/brochure pages (six-camera full-surface inspection, up to ~830,000 pcs/hr, image-analysis/CNN cosmetic rejection; ResearchGate CNN surface-defect study on SPINE); Cognex tablet/capsule inspection page (deep-learning damaged-tablet/foreign-matter detection); IntuitionLabs QC report; jidoka-tech tablet/capsule inspection providers 2025
+- id: qc-lims-cds-lims-sample-management
+  parent: qc-lims-cds
+  name_en: QC LIMS (Sample Management & System of Record)
+  name_zh: QC 实验室信息管理系统（样品管理与记录系统）
+  name_full: Quality Control Laboratory Information Management System — sample login, testing workflow, specification/limit checking, stability and batch-release recordkeeping
+  scope_en: 'The regulated system-of-record for the GMP QC lab: sample login and chain-of-custody, test scheduling and result entry, specification/limit checking, stability study management, and batch disposition. Also absorbs adjacent LES/ELN paperless method-execution modules, which share the same transactional infrastructure. Predominantly validated on-prem or private-cloud deployments on a relational (often Oracle/SQL Server) backbone.'
+  scope_zh: GMP 质量控制实验室的受监管记录系统：样品登记与链式管控、检测排程与结果录入、规格/限度检查、稳定性研究管理、批放行处置；并整合共享同一事务型基础设施的 LES/ELN 无纸化方法执行模块。多为经验证的本地部署或私有云，基于关系型数据库（常为 Oracle/SQL Server）。
+  role:
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  - disaster-recovery-backup
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  - diagnostic-reference-laboratory
+  vendors:
+  - LabWare
+  - Thermo Fisher SampleManager
+  - STARLIMS
+  - LabVantage
+  confidence: A
+  source: MarketsandMarkets LIMS market report; IntuitionLabs '2026 Commercial LIMS Comparison / LabWare vs STARLIMS'; top-4 vendors (LabWare, Thermo SampleManager, LabVantage, STARLIMS) hold ~80% share. Vendors re-confirmed as top pharma QC LIMS vendors during verification.
+- id: qc-lims-cds-cds-chromatography
+  parent: qc-lims-cds
+  name_en: Chromatography Data System (CDS) — Enterprise Instrument Control & Acquisition
+  name_zh: 色谱数据系统（CDS）——企业级仪器控制与数据采集
+  name_full: Enterprise Chromatography Data System for HPLC/UHPLC/GC instrument control, data acquisition, peak integration and processing in GMP QC
+  scope_en: Direct control, data acquisition, peak integration and processing for HPLC/UHPLC/GC (increasingly MS) instruments in GMP QC and batch release. Deployed as enterprise client-server systems with a central database and distributed acquisition servers/clients across a 24/7 lab floor; business continuity and HA clustering are explicit design concerns because batch release cannot stop. A distinct vendor set and a distinct time-series/acquisition hardware pull separate it from LIMS.
+  scope_zh: 在 GMP 质量控制与批放行中，对 HPLC/UHPLC/GC（日益扩展至质谱）仪器进行直接控制、数据采集、色谱峰积分与处理。以企业级客户端-服务器方式部署，中央数据库加分布式采集服务器/客户端覆盖 7×24 实验室；因批放行不可中断，业务连续性与高可用集群是明确设计要点。其独立的供应商群与时间序列/采集型硬件需求使之区别于 LIMS。
+  role:
+  - data-acquisition
+  - workflow
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - disaster-recovery-backup
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  - diagnostic-reference-laboratory
+  vendors:
+  - Waters Empower
+  - Thermo Fisher Chromeleon
+  - Agilent OpenLab CDS
+  - Shimadzu LabSolutions
+  confidence: A
+  source: LCGC/chromatographyonline 'Chromatography Data Systems' (CDS ~$700M, top 3 = Waters/Thermo/Agilent); Thermo Chromeleon scales to 1000+ instruments with local secure data vault for network-failure continuity; Waters Empower markets 'high-availability corporate architecture' — HA/client-server pull confirmed in verification.
+- id: qc-lims-cds-sdms-data-archiving
+  parent: qc-lims-cds
+  name_en: Scientific Data Management System (SDMS) — Regulated Data Archiving
+  name_zh: 科学数据管理系统（SDMS）——受监管数据归档
+  name_full: Scientific Data Management System for automated multi-instrument raw-data capture, long-term GxP/21 CFR Part 11 archival, search and disaster recovery
+  scope_en: 'The storage/archive tier beneath LIMS and CDS: automated capture of heterogeneous raw instrument data and reports into a centralized repository, with long-term (often decades-long) GxP/21 CFR Part 11-compliant retention, indexed search/retrieval, and disaster recovery. This is the one sub-market of the parent with a genuine capacity-archive storage footprint, making it the primary SMCI hardware target here.'
+  scope_zh: 位于 LIMS 与 CDS 之下的存储/归档层：自动采集异构仪器原始数据与报告至集中式仓库，提供长期（常达数十年）符合 GxP/21 CFR Part 11 的留存、索引检索与灾难恢复。这是本父类中唯一具备真正大容量归档存储需求的子市场，因而是此处 SMCI 硬件的主要落点。
+  role:
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - documents
+  - time-series
+  - images
+  hardware_profile:
+  - capacity-archive-storage
+  - disaster-recovery-backup
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  vendors:
+  - Waters NuGenesis SDMS
+  - Agilent OpenLab ECM XT
+  - Agaram Logilab SDMS
+  - ZONTAL
+  confidence: A
+  source: Waters NuGenesis SDMS product page (multi-instrument archival, 21 CFR Part 11); Agaram Logilab SDMS (21 CFR Part 11 raw-data capture/archival, verified agaramtech.com) and ZONTAL (scientific data infrastructure for pharma R&D, verified zontal.io) confirmed as real SDMS vendors; IntuitionLabs 'ELN vs LIMS vs SDMS'.
+- id: serialization-track-trace-enterprise-repository-l4
+  parent: serialization-track-trace
+  name_en: Enterprise Serialization Repository (L4)
+  name_zh: 企业序列化中央库 (L4)
+  name_full: L4 Enterprise Serialization Repository / Corporate Serial-Number System of Record
+  scope_en: The brand-owner/CDMO corporate system of record that generates, allocates and manages serial numbers across all packaging sites and contract manufacturers, holds unit/case/pallet parent-child (aggregation) hierarchies, and feeds L3 line systems below and the L5 network above. Typically deployed on-premise or in a private datacenter on a heavy transactional/in-memory database (SAP ATTP on HANA/S4HANA, Oracle/SQL Server for others), which is the concentrated SMCI iron pull in this parent.
+  scope_zh: 品牌商/CDMO 的企业级序列号系统记录中心：跨所有包装厂和代工厂生成、分配和管理序列号，维护单品/箱/托盘的父子聚合层级，向下对接 L3 产线系统、向上对接 L5 网络。通常部署在本地或私有数据中心的重型事务/内存数据库上（SAP ATTP 跑在 HANA/S4HANA，其他厂商用 Oracle/SQL Server），是本大类中最集中的 SMCI 硬件拉动点。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-memory
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - SAP (Advanced Track and Trace for Pharmaceuticals / ATTP)
+  - Systech (SystechOne)
+  - TraceLink
+  - Antares Vision (rfxcel)
+  - OPTEL Group
+  - Movilitas
+  confidence: B
+  source: SAP.com ATTP-on-S/4HANA product page + community.sap.com (corporate serialization repository on HANA, aggregation/EPCIS, MAH/CMO/3PL users, VERIFIED 2026); Pharmaceutical Commerce SAP ATTP intro; SystechOne L1-L5 stack
+- id: serialization-track-trace-network-exchange-l5
+  parent: serialization-track-trace
+  name_en: Compliance Network & Data Exchange (L5)
+  name_zh: 合规网络与数据交换 (L5)
+  name_full: L5 Trading-Partner Compliance Network — EPCIS Exchange, VRS Verification, Saleable Returns
+  scope_en: The inter-company network layer that exchanges EPCIS 2.0 serialization/traceability events between manufacturers, wholesale distributors, 3PLs and dispensers, routes verification queries via the DSCSA Verification Router Service (VRS), handles saleable-returns verification, ATP credentialing and exception management. Predominantly a multi-tenant SaaS/network business (TraceLink, LSPedia on hyperscaler cloud), so direct SMCI pull is modest and comes mainly from operators building sovereign/private compliance-network appliances and on-prem exchange gateways.
+  scope_zh: 跨企业网络层：在制造商、批发商、3PL 和药房之间交换 EPCIS 2.0 序列化/追溯事件，通过 DSCSA 验证路由服务 (VRS) 路由验证请求，处理可售退货验证、ATP 授信和异常管理。以多租户 SaaS/网络业务为主（TraceLink、LSPedia 跑在公有云上），因此直接的 SMCI 拉动有限，主要来自运营商自建主权/私有合规网络设备和本地交换网关。
+  role:
+  - integration
+  - workflow
+  - system-of-record
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  vendors:
+  - TraceLink
+  - Systech
+  - LSPedia
+  - Movilitas
+  - Covectra
+  - Antares Vision (rfxcel)
+  confidence: B
+  source: TraceLink US DSCSA compliance (EPCIS 2.0 exchange + VRS); LSPedia DSCSA buyer's guide 2026; Covectra DSCSA; rxerp.com VRS explainer
+- id: serialization-track-trace-national-verification-hub
+  parent: serialization-track-trace
+  name_en: National / Government Traceability Hub (L5 sovereign)
+  name_zh: 国家/政府级追溯枢纽 (L5 主权)
+  name_full: National Medicines Verification System / Government-Mandated Aggregation Hub
+  scope_en: 'The country-level verification and aggregation hub operated by a national medicines verification organization (NMVO) or a state-designated operator, into which every pack in a jurisdiction is uploaded and verified (EU EMVS/NMVS, and sovereign national systems in Russia, Saudi, Brazil, Turkey, etc.). Distinct from the commercial L5 network: distinct buyer (government/NMVO), millions-of-packs-per-day transactional scale, and frequent sovereign/on-prem hosting mandates outside the EU — a genuine large-transaction SMCI pull for non-hyperscaler national deployments. Note the EU EMVS itself runs on Azure (hyperscaler); the SMCI angle is the sovereign non-EU national systems.'
+  scope_zh: 由国家药品验证组织 (NMVO) 或国家指定运营商运营的国家级验证与聚合枢纽，管辖区内每个药盒都要上传并验证（欧盟 EMVS/NMVS，以及俄罗斯、沙特、巴西、土耳其等主权国家系统）。与商业 L5 网络不同：买方不同（政府/NMVO）、每天数百万盒的事务规模、且欧盟外常有主权/本地部署强制要求——对非公有云的国家级部署是真实的大事务 SMCI 拉动。注意欧盟 EMVS 本身跑在 Azure（公有云）上，SMCI 机会主要在欧盟外的主权国家系统。
+  role:
+  - system-of-record
+  - integration
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-memory
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  vendors:
+  - Solidsoft Reply
+  - Arvato Systems
+  - OPTEL Group
+  - Antares Vision
+  - Systech
+  confidence: B
+  source: Reply.com/Solidsoft Reply EMVS (blueprint national systems live in 16 EU countries on Azure, VERIFIED 2026); EFPIA/EMVO framework agreements naming Solidsoft Reply + Arvato Systems + Aegate as blueprint providers
+- id: warehouse-cold-chain-facility-ems
+  parent: warehouse-cold-chain
+  name_en: Facility Continuous Environmental Monitoring (EMS/CMS)
+  name_zh: 厂区连续环境监测系统 (EMS/CMS)
+  name_full: GxP Continuous Environmental & Cold-Storage Monitoring System (warehouse, cold room, ULT freezer, stability chamber)
+  scope_en: Fixed wired/wireless sensor networks monitoring temperature, humidity, differential pressure and CO2 across GxP warehouses, cold rooms, refrigerators, ULT/cryo freezers and stability chambers, feeding a 21 CFR Part 11 / GAMP 5 validated monitoring, alarming and audit-trail server. Emphasis on gap-free continuous logging through power and network outages and long-retention audit records.
+  scope_zh: 在GxP仓库、冷库、冰箱、超低温/深冷冷冻柜及稳定性试验箱内布设固定式有线/无线传感器网络,监测温度、湿度、压差和CO2,数据汇入符合21 CFR Part 11 / GAMP 5的验证监控、报警与审计追踪服务器。强调断电断网时的无间断连续记录与长期审计留存。
+  role:
+  - data-acquisition
+  - workflow
+  - system-of-record
+  data_modality:
+  - time-series
+  - documents
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  - capacity-archive-storage
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  vendors:
+  - Vaisala (viewLinc)
+  - Rees Scientific
+  - Ellab
+  - XiltriX International
+  - Eupry
+  - Dickson
+  confidence: A
+  source: Vaisala viewLinc CMS product pages; Rees Scientific pharma/biotech environmental monitoring; Ellab warehouse temperature monitoring & continuous monitoring; XiltriX Monitoring-as-a-Service — GxP/FDA 21 CFR Part 11 compliant, SOC 2 Type 2, GAMP, GMP-validated deployments (e.g. 5 Eurofins NL sites) — vaisala.com, reesscientific.com, ellab.com, xiltrix.com/xiltrixusa.com (verified 2026)
+- id: warehouse-cold-chain-intransit-visibility
+  parent: warehouse-cold-chain
+  name_en: In-Transit Cold-Chain Monitoring & Logistics Visibility
+  name_zh: 在途冷链监测与物流可视化
+  name_full: In-Transit / Last-Mile Cold-Chain Temperature Monitoring and Real-Time Supply-Chain Visibility (IoT loggers + cloud)
+  scope_en: IoT data loggers and real-time cellular/satellite trackers placed in shipments, parcels and pallets that stream temperature, humidity, location and shock to a cloud SaaS platform for GDP-compliant shipment monitoring, excursion alerting and lane analytics. Predominantly cloud-hosted with OEM low-power sensing devices; minimal on-prem server footprint.
+  scope_zh: 在货件、包裹和托盘中放置IoT数据记录仪及蜂窝/卫星实时追踪器,将温度、湿度、位置和震动数据上传至云端SaaS平台,用于符合GDP的在途监控、偏差报警和路线分析。以云端托管为主,配合OEM低功耗传感设备;本地服务器需求极小。
+  role:
+  - data-acquisition
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - time-series
+  - real-world-data
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  - contract-development-manufacturing-organization
+  vendors:
+  - Sensitech
+  - Controlant
+  - ELPRO (LIBERO)
+  - Berlinger
+  - Tive
+  - Roambee
+  - ORBCOMM
+  - DeltaTrak
+  confidence: A
+  source: 'Sensitech pharma cold-chain monitoring; ELPRO cold-chain solutions; Controlant real-time platform; Berlinger (Sensitech) cold-chain; Cold Chain Telematics Market listing ORBCOMM/Controlant/Sensitech/DeltaTrak/Tive/Roambee — sensitech.com, elpro.com, roambee.com, fortunebusinessinsights.com (2026). Note: backends largely hyperscaler-hosted; SMCI pull ~nil, retained for completeness.'
+- id: warehouse-cold-chain-wms-gdp
+  parent: warehouse-cold-chain
+  name_en: Pharma WMS / GDP Distribution Execution
+  name_zh: 医药WMS / GDP配送执行系统
+  name_full: Pharmaceutical Warehouse Management System for GDP-Regulated Distribution & Fulfillment
+  scope_en: 'Warehouse management / execution systems configured for GDP-regulated pharma distribution: lot and expiry control, quarantine/release status, serialization-aware picking, cold-storage location logic, and audit-ready inventory transactions. Transactional enterprise workload, typically on shared HA infrastructure rather than dedicated accelerated hardware.'
+  scope_zh: 面向GDP监管医药配送的仓库管理/执行系统:批次与效期管理、待检/放行状态、支持序列化的拣货、冷库库位逻辑及可审计的库存事务。属事务型企业级负载,通常运行于共享高可用基础设施,而非专用加速硬件。
+  role:
+  - workflow
+  - system-of-record
+  - integration
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - biotechnology-pharmaceutical
+  - contract-development-manufacturing-organization
+  - hospital-health-system
+  vendors:
+  - SAP EWM
+  - Körber Supply Chain
+  - Blue Yonder
+  - Manhattan Associates
+  - KNAPP
+  confidence: B
+  source: KNAPP 'SAP EWM Building Blocks' for pharma sector; Körber SAP EWM pharma add-ons; SAP EWM pharma implementations (Kwizda Pharmahandel); Blue Yonder/Manhattan pharma-distribution WMS — knapp.com, koerber-supplychain.com (verified 2026). Vertical config of general WMS, not pure-play → confidence B.
