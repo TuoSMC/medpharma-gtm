@@ -33455,3 +33455,858 @@ subcategories:
   - Advantmed
   confidence: B
   source: https://www.reveleer.com/solutions/radv-audit ; https://www.prnewswire.com/news-releases/reveleer-launches-industrys-first-all-in-one-radv-audit-saas-solution-for-medicare-advantage-compliance-302584299.html ; https://www.raapidinc.com/blogs/cms-radv-audit-checklist/
+- id: pacs-radiology-core-enterprise-worklist-orchestration-teleradiology-distributed-reading-platform-server-side-rendering-thin-client-streaming-diagnostic-delivery-render-farm-gpu
+  parent: pacs-radiology-core-enterprise-worklist-orchestration-teleradiology-distributed-reading-platform
+  name_en: Server-Side Rendering Thin-Client Streaming Diagnostic Delivery Engine (GPU render farm)
+  name_zh: 服务器端渲染瘦客户端流式诊断影像交付引擎（GPU 渲染农场）
+  name_full: Teleradiology Distributed-Reading — Server-Side Rendering Thin-Client Streaming Diagnostic Delivery Engine (GPU render farm)
+  scope_en: 'The GPU/high-memory image-delivery tier a teleradiology operator runs so geographically dispersed radiologists read full-fidelity CT/MR/3D/tomosynthesis studies over constrained bandwidth without moving the DICOM payload: massive thin-slice volumes are pre-processed and rendered on server-side GPUs and only the required pixels are adaptively streamed to zero-footprint thin clients. Distinct from the routing control plane — this is the render farm.'
+  scope_zh: 远程放射操作方运行的 GPU/大内存影像交付层：将大体量薄层 CT/MR/3D/断层合成影像在服务器端 GPU 上预处理与渲染，仅把所需像素自适应流式推送到零安装瘦客户端，使地理分散的放射科医生在受限带宽下阅读全保真影像而无需搬移 DICOM 原始数据。与调度控制面不同——这是渲染农场层。
+  role:
+  - workflow
+  - infrastructure-platform
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - images
+  hardware_profile:
+  - gpu-server
+  - high-memory
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Visage Imaging (Pro Medicus) — Visage 7
+  - TeraRecon (ConcertAI) — AquariusNET/iNtuition render nodes
+  - Agfa HealthCare — Enterprise Imaging Streaming Client
+  - Mach7 Technologies — eUnity FDA-cleared zero-footprint diagnostic viewer
+  confidence: A
+  source: promed.com.au/visage-7; itnonline.com Rays selects Visage 7 for teleradiology; visageimaging.com Backend+Render Server streaming architecture; TeraRecon iNtuition/AquariusNET brochure (pdf.medicalexpo.com/pdf/terarecon) + terarecon.com VP-CUDA GPU virtualization; agfahealthcare.com/teleradiology; mach7t.com/teleradiology
+- id: pacs-radiology-core-enterprise-worklist-orchestration-teleradiology-distributed-reading-platform-always-on-orchestration-worklist-control-plane-ha-dr-transactional-engine
+  parent: pacs-radiology-core-enterprise-worklist-orchestration-teleradiology-distributed-reading-platform
+  name_en: Always-On Distributed-Reading Orchestration & Worklist Control Plane (HA/DR transactional engine)
+  name_zh: 永续在线分布式阅片调度与工作清单控制面（高可用/容灾事务引擎）
+  name_full: Teleradiology Distributed-Reading — Always-On Orchestration & Worklist Control Plane (HA/DR transactional engine)
+  scope_en: 'The 24/7 mission-critical routing/worklist orchestration engine an on-prem teleradiology operator runs on redundant HA clusters with disaster-recovery failover: intelligent case distribution, subspecialty/credential load-balancing, cherry-pick prevention, and turnaround-SLA management across many client sites. Sold as standalone orchestration middleware distinct from the viewer. Hardware pull is transactional + high-availability + DR (never-down), NOT GPU — the distinct tier from the render farm. Cloud-shift caveat: leading vendors increasingly run this on hyperscaler cloud, so on-prem SMCI pull is modest and shrinking.'
+  scope_zh: 本地部署的远程放射操作方在冗余高可用集群与容灾故障切换上运行的全天候关键调度/工作清单引擎：智能分派、亚专科/资质负载均衡、防挑单、以及跨多客户端点的周转时限（SLA）管理。作为独立于阅片器的编排中间件销售。硬件诉求为事务型 + 高可用 + 容灾（永不宕机），而非 GPU——是与渲染农场不同的层。注意：领先厂商日益转向公有云，本地 SMCI 需求有限且在收缩。
+  role:
+  - workflow
+  - integration
+  - infrastructure-platform
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  vendors:
+  - DataFirst — Silverback Workflow/Routing Engine
+  - Intelerad — InteleOrchestrator
+  - RamSoft — PowerServer/OmegaAI
+  - Mach7 Technologies — routing engine/universal worklist
+  confidence: B
+  source: datafirst.com/enterprise-imaging-workflow-orchestration + datafirst.com/silverback (standalone intelligent DICOM routing/workload-balancing for high-volume teleradiology); intelerad.com/all-products/inteleorchestrator (subspecialty/credential/workload/SLA worklist routing; now marketed 'cloud-native' — cloud-shift); ramsoft.com/who-we-serve/by-industry/teleradiology (Azure); mach7t.com/teleradiology
+- id: pacs-ai-orchestration-acute-triage-patient-flow-command-center-acute-imaging-ai-triage-stroke-pe-care-coordination-ct-perfusion-quantitative-neuroimaging-engine-gpu-perfusion-map-thrombectomy-selection
+  parent: pacs-ai-orchestration-acute-triage-patient-flow-command-center-acute-imaging-ai-triage-stroke-pe-care-coordination
+  name_en: CT-perfusion quantitative neuroimaging engine (GPU perfusion-map generation for thrombectomy selection)
+  name_zh: CT灌注定量神经影像引擎（GPU灌注图生成，用于取栓筛选）
+  name_full: CT-perfusion quantitative neuroimaging engine — deconvolution + deep-learning generation of rCBF/Tmax perfusion maps and infarct-core/penumbra mismatch volumes for DAWN/DEFUSE-3 mechanical-thrombectomy patient selection
+  scope_en: 'The compute-heaviest sub-layer beneath acute stroke triage: automated post-processing of 4D CT-perfusion (and MR-perfusion) volumes into quantitative rCBF<30% infarct-core and Tmax>6s penumbra maps that drive DAWN/DEFUSE-3 thrombectomy eligibility. Distinct from the parent''s lightweight binary LVO/ICH triage flag: this is regulated quantitative measurement SaMD running heavy deconvolution and DL segmentation on large 4D image stacks — a GPU/throughput problem, not a notification problem. Its own clinical category with repeated head-to-head software-package comparison literature (RAPID vs Viz CTP vs e-CTP).'
+  scope_zh: 急性卒中分诊之下计算最密集的子层：将4D CT灌注（及MR灌注）体数据自动后处理为定量rCBF<30%梗死核心与Tmax>6s半暗带图，驱动DAWN/DEFUSE-3取栓资格判定。区别于父节点的轻量LVO/ICH二元分诊标志：这是运行重去卷积与深度学习分割、处理大体积4D影像的受监管定量测量型SaMD——是GPU/吞吐问题而非推送问题。拥有独立临床类别与多篇软件包头对头对比文献（RAPID对Viz CTP对e-CTP）。
+  role:
+  - analytics-artificial-intelligence
+  - regulated-software-as-a-medical-device
+  - data-acquisition
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - RapidAI (RAPID CTP / iSchemaView)
+  - Viz.ai (Viz CTP)
+  - Brainomix (e-CTP / e-Stroke)
+  - Olea Medical (Olea Sphere)
+  confidence: B
+  source: 'AJNR 2024 ''A Comparison of CT Perfusion Output of RapidAI and Viz.ai''; Pisani et al., Annals of Neurology 2023 ''Comparison of CT Perfusion Software Packages for Thrombectomy Eligibility'' (PMID 37584452); Practical Neurology ''RAPID Automated CT Perfusion in Clinical Practice''; vendor product pages (rapidai.com, viz.ai, brainomix.com, olea-medical.com). Web check Aug 2026: comparison literature consistently names RAPID / Viz CTP / e-CTP (Brainomix); Aidoc NOT found as a quantitative-perfusion vendor — removed.'
+- id: pacs-ai-orchestration-acute-triage-patient-flow-command-center-acute-imaging-ai-triage-stroke-pe-care-coordination-onprem-edge-ha-triage-appliance-data-residency-alwayson-alerting
+  parent: pacs-ai-orchestration-acute-triage-patient-flow-command-center-acute-imaging-ai-triage-stroke-pe-care-coordination
+  name_en: On-prem / edge always-on triage & coordination appliance (data-residency, HA/DR uptime)
+  name_zh: 本地/边缘常开分诊与协调一体机（数据驻留、高可用/容灾在线）
+  name_full: On-premise / edge deployment of acute-imaging triage + care-coordination as a hospital-owned always-on appliance — data-residency and sovereignty compliance plus high-availability/redundant uptime for time-critical stroke/PE alerting where cloud latency or connectivity is unacceptable
+  scope_en: 'The customer-buys-the-iron deployment variant of acute-imaging AI triage, distinct from the dominant ISV-cloud model. Hospitals and national networks that cannot send stroke/PE CT to a vendor cloud (data-sovereignty regimes, compliance requirements, or connectivity/latency constraints) run the same triage+coordination stack on an on-prem edge node in an HA/redundant configuration so time-critical alerting never goes dark. Distinct SMCI pull: edge + high-availability/DR iron sold to the end org, versus the GPU-cloud compute of the CTP engine. This is a deployment-defined segment (distinct buyer + distinct hardware axis) that cuts across the triage products above rather than a classic standalone product market — kept for the direct customer-owned SMCI angle, not for product distinctness.'
+  scope_zh: 急性影像AI分诊中由客户自购硬件的部署变体，区别于主流的ISV云模式。受数据主权制度、合规要求或连接/时延约束、无法将卒中/PE的CT送往厂商云的医院与国家级网络，将同一分诊+协调栈运行于本地边缘节点，并采用高可用/冗余配置，使时间关键告警不中断。独特的SMCI拉动：面向终端机构销售的边缘+高可用/容灾硬件，区别于CTP引擎的GPU云算力。这是按部署定义的细分（不同买家+不同硬件轴），横切上述分诊产品，而非经典的独立产品市场——保留是为直连客户自有硬件的SMCI角度，而非产品独特性。
+  role:
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  - regulated-software-as-a-medical-device
+  - workflow
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  - disaster-recovery-backup
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - RapidAI (Rapid Edge Cloud on-prem/hybrid)
+  - Aidoc (aiOS on-prem/hybrid)
+  - Qure.ai (qER on-prem / hub-and-spoke deployment)
+  confidence: C
+  source: 'RapidAI ''Enterprise Infrastructure / Rapid Edge Cloud'' (rapidai.com); Aidoc aiOS enterprise platform (aidoc.com); Qure.ai qER + Qure App hub-and-spoke deployments (qure.ai, incl. Aster MIMS / CMC Ludhiana / rural-India PLOS Global Public Health study). Web check Aug 2026: RapidAI Rapid Edge on-prem/hybrid solidly confirmed; Qure.ai on-prem/hub-and-spoke confirmed in emerging markets though its acute product is ICH/head-CT triage rather than CTP; Aidoc on-prem/hybrid plausible but softer.'
+- id: bioinformatics-secondary-alignment-variant-long-read-structural-variant-cnv-accelerated-secondary-analysis-engine-gpu-cpu-gpu-parabricks-multi-gpu-longread-sv-cnv-h100-workflow-engine
+  parent: bioinformatics-secondary-alignment-variant-long-read-structural-variant-cnv-accelerated-secondary-analysis-engine-gpu-cpu
+  name_en: GPU-Accelerated Long-Read SV/CNV Lane (Parabricks Multi-GPU Sniffles2 / GPU DeepVariant-PEPPER, H100 Workflow Engine)
+  name_zh: GPU 加速長讀長 SV/CNV 通道（Parabricks 多 GPU Sniffles2 / GPU 版 DeepVariant-PEPPER，H100 工作流引擎）
+  scope_en: 'The GPU-substrate half of accelerated long-read secondary analysis: end-to-end ONT/PacBio germline+SV workflows where alignment and deep-learning small-variant calling are GPU-offloaded (Parabricks minimap2/DeepVariant/PEPPER-Margin) and Sniffles2/cuteSV2 SV calling is orchestrated behind them, targeting minutes-per-genome on H100-class multi-GPU nodes. Distinct product line from the CPU-optimized sibling; the pull is dense GPU servers.'
+  scope_zh: 加速長讀長二級分析中以 GPU 為運算基底的一半：端到端 ONT/PacBio 生殖系+SV 工作流，其比對與深度學習小變異判讀由 GPU 卸載（Parabricks minimap2/DeepVariant/PEPPER-Margin），後接 Sniffles2/cuteSV2 SV 判讀，於 H100 級多 GPU 節點上追求每基因組分鐘級。與 CPU 優化的兄弟節點為不同產品線；拉動的是高密度 GPU 伺服器。
+  role:
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - NVIDIA (Parabricks / Clara)
+  - Google (DeepVariant, PEPPER-Margin-DeepVariant)
+  - Oxford Nanopore (EPI2ME wf-human-variation, dorado GPU)
+  confidence: B
+  source: developer.nvidia.com/blog/long-read-sequencing-workflows-and-higher-throughputs-in-nvidia-parabricks-4-1; NVIDIA Parabricks v4.2 ONT germline workflow (H100, Sniffles2 SV); github.com/fritzsedlazeck/sniffles
+- id: bioinformatics-secondary-alignment-variant-long-read-structural-variant-cnv-accelerated-secondary-analysis-engine-gpu-cpu-cpu-sentieon-vectorized-longreadsv-high-core-hpc-node-engine
+  parent: bioinformatics-secondary-alignment-variant-long-read-structural-variant-cnv-accelerated-secondary-analysis-engine-gpu-cpu
+  name_en: CPU-Optimized Long-Read SV/CNV Lane (Sentieon LongReadSV / DNAscope LongRead, pbsv, High-Core HPC Node)
+  name_zh: CPU 優化長讀長 SV/CNV 通道（Sentieon LongReadSV / DNAscope LongRead、pbsv，高核心 HPC 節點）
+  scope_en: 'The GPU-free half: vectorized/multithreaded long-read SV+germline pipelines that hit near-GPU turnaround on commodity high-core-count CPU nodes without accelerators (Sentieon DNAscope LongRead + DNAscope LongReads SV; PacBio pbsv for HiFi). Distinct buyer economics (no GPU capex, runs on general HPC/cluster fleets); pull is high-core, high-memory CPU nodes with fast local NVMe scratch.'
+  scope_zh: 無 GPU 的一半：向量化/多執行緒長讀長 SV+生殖系管線，在無加速器的高核心數通用 CPU 節點上達到接近 GPU 的周轉（Sentieon DNAscope LongRead + DNAscope LongReads SV；PacBio HiFi 的 pbsv）。買方經濟性不同（無 GPU 資本支出，跑在通用 HPC/叢集機隊上）；拉動的是高核心、高記憶體 CPU 節點與快速本地 NVMe 暫存。
+  role:
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  data_modality:
+  - omics
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-memory
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - contract-research-organization
+  vendors:
+  - Sentieon (DNAscope LongRead, DNAscope LongReads SV)
+  - PacBio (pbsv, SMRT Tools)
+  - Oxford Nanopore (CPU wf-human-variation / Sniffles2 runs)
+  confidence: B
+  source: sentieon.com/news/dnascope-longreads-sv-a-structural-variation-detection-tool-designed-for-ont-and-pacbio-data/; sentieon.com/dnascope-nanopore/ (~190 min ONT FASTQ-to-VCF on 120-vCPU, DNAscope LongRead 30x HiFi <4h on 16-core)
+- id: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-fhe-mpc-compute-node-accelerated-crypto-analytics-fhe-single-party-ciphertext-genome-compute-gpu-fpga-accelerator-node
+  parent: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-fhe-mpc-compute-node-accelerated-crypto-analytics
+  name_en: FHE Single-Party Ciphertext Genome Compute (GPU/FPGA-Accelerated FHE Node)
+  name_zh: 全同态加密单方密文基因组运算节点（GPU/FPGA 加速）
+  name_full: Fully-Homomorphic-Encryption single-party ciphertext genome computation — GPU/FPGA-accelerated FHE node for outsourced encrypted genotype imputation, variant scoring and encrypted GWAS on ciphertext
+  scope_en: 'The compute-bound FHE branch: a single data owner encrypts genomes and outsources computation to an untrusted node that operates directly on ciphertext (bootstrapping, NTT, key-switch). Extremely arithmetic-heavy — 1-2 orders of magnitude speedup from GPU/FPGA accelerators, huge ciphertext/key blow-up drives high-memory. Distinct from MPC: no inter-party network round-trips, all cost is local dense compute.'
+  scope_zh: 计算密集型 FHE 分支：单一数据持有方加密基因组后外包给不可信节点，节点直接在密文上运算（bootstrapping、NTT、密钥切换）。算术极度密集，GPU/FPGA 加速可提速 1-2 个数量级，密文与密钥膨胀带来高内存需求。与 MPC 不同：无多方网络往返，成本全在本地密集计算。
+  role:
+  - infrastructure-platform
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - high-memory
+  - high-performance-computing-cpu
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - diagnostic-reference-laboratory
+  vendors:
+  - Zama
+  - Duality Technologies
+  - Cornami
+  - Optalysys
+  confidence: B
+  source: Zama TFHE-rs CUDA GPU + AMD Alveo FPGA HPU; Optalysys E-series optical FHE accelerator (scientific-computing.com); Cornami FHE accelerator (cornami.com/the-rise-of-fully-homomorphic-encryption); Duality TREBUCHET (arxiv 2304.05237); DARPA DPRIVE program (eetimes.com); Springer Genome Biology Sequre / homomorphic genotype-imputation research
+- id: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-fhe-mpc-compute-node-accelerated-crypto-analytics-mpc-secret-sharing-multiparty-federated-genome-compute-distributed-cpu-network-node
+  parent: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-fhe-mpc-compute-node-accelerated-crypto-analytics
+  name_en: MPC / Secret-Sharing Multi-Party Federated Genome Compute (Distributed CPU/Network Node)
+  name_zh: MPC/秘密共享多方联邦基因组运算（分布式 CPU/网络节点）
+  name_full: Multiparty-computation / secret-sharing multi-institution genome compute — each biobank runs a computing node holding secret shares, cooperating on federated GWAS / association studies with no party seeing raw genotypes
+  scope_en: 'The communication-bound MPC branch: multiple custodian institutions each run a computing node holding secret shares (Shamir/additive) and exchange masked intermediates over the network to jointly compute GWAS/association without revealing raw genomes. Hardware pull is fundamentally different from FHE — moderate per-node CPU but many synchronized nodes, low-latency high-bandwidth interconnect, and HA because a stalled party stalls the protocol. Distinct buyer pattern: each consortium member buys its own iron.'
+  scope_zh: 通信密集型 MPC 分支：多个数据托管机构各自运行持有秘密份额（Shamir/加法）的计算节点，通过网络交换掩码中间量，联合计算 GWAS/关联分析而不泄露原始基因组。硬件需求与 FHE 根本不同：单节点 CPU 中等，但需多节点同步、低延迟高带宽互连，且需高可用（任一方停滞即协议停滞）。买方模式不同：每个联盟成员各买各的硬件。
+  role:
+  - infrastructure-platform
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - omics
+  - real-world-data
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - hospital-health-system
+  vendors:
+  - Inpher
+  - Cybernetica (Sharemind)
+  - Galois
+  confidence: B
+  source: Sharemind secure GWAS with Cybernetica/Univ. of Tartu (sharemind.cyber.ee/genome-privacy-testing); Nature Biotechnology secure GWAS via MPC (nbt.4108); Nature Genetics SF-GWAS biobank-scale (s41588-025-02109-1); Inpher / Galois (Jana) MPC platforms
+- id: ai-hpc-orchestration-kubernetes-gpu-scheduler-fractional-gpu-virtualization-software-timeslicing-mps-soft-sharing-gpu-over-ip-remote-attach-pooling-disaggregation-software-api-remoting-cuda-interception-tcp-rdma-gpuaas-overlay
+  parent: ai-hpc-orchestration-kubernetes-gpu-scheduler-fractional-gpu-virtualization-software-timeslicing-mps-soft-sharing-gpu-over-ip-remote-attach-pooling-disaggregation
+  name_en: Pure-Software API-Remoting (CUDA Interception over TCP/RDMA, No Special Fabric)
+  name_zh: 纯软件 API 远程化(CUDA 拦截,基于 TCP/RDMA 以太网,无需专用总线)
+  name_full: Pure-Software GPU-over-IP API-Remoting — CUDA/framework call interception on the client redirected over commodity Ethernet/RDMA to a remote GPU pool (GPUaaS overlay)
+  scope_en: A software-only layer that intercepts CUDA / framework (PyTorch, TensorFlow) API calls on a diskless or GPU-less client, marshals them over standard TCP/IP or RDMA (RoCE/InfiniBand) to a remote GPU server, and returns results transparently — no PCIe/CXL fabric switch or special enclosure. SMCI pull is dense standard GPU servers plus high-speed NICs; runs on commodity Ethernet.
+  scope_zh: 纯软件层:在无 GPU 客户端拦截 CUDA/框架(PyTorch、TensorFlow)调用,经标准 TCP/IP 或 RDMA(RoCE/InfiniBand)转发至远端 GPU 服务器并透明返回结果;无需 PCIe/CXL 交换机或专用机箱。对 SMCI 的拉动为高密度标准 GPU 服务器加高速网卡,跑在通用以太网上。
+  role:
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - hospital-health-system
+  vendors:
+  - Juice Labs (Juice)
+  - VMware vSphere Bitfusion (legacy/EOL)
+  - Thundercompute
+  confidence: B
+  source: docs.juicelabs.co (Juice GPU-over-IP intro & CUDA/PyTorch/TensorFlow compatibility — web-verified 2026-08); thundercompute.com/blog 'How Thunder Compute works (GPU-over-TCP)' — CUDA-layer virtualization over TCP, web-verified; arXiv 2401.13354 GPU API remoting network requirements; Bitfusion CUDA-driver interception (VMware, discontinued)
+- id: ai-hpc-orchestration-kubernetes-gpu-scheduler-fractional-gpu-virtualization-software-timeslicing-mps-soft-sharing-gpu-over-ip-remote-attach-pooling-disaggregation-pcie-cxl-composable-fabric-jbog-enclosure-hardware-disaggregation
+  parent: ai-hpc-orchestration-kubernetes-gpu-scheduler-fractional-gpu-virtualization-software-timeslicing-mps-soft-sharing-gpu-over-ip-remote-attach-pooling-disaggregation
+  name_en: Composable PCIe/CXL Fabric Disaggregation (JBOG Enclosure + Fabric Switch)
+  name_zh: 可组合 PCIe/CXL 总线解耦(JBOG 机箱 + 总线交换机)
+  name_full: Hardware-Fabric Composable GPU Disaggregation — GPUs physically pooled in JBOG enclosures connected by PCIe/CXL fabric switches, composed to bare-metal hosts in real time by orchestration software
+  scope_en: 'Hardware-fabric composability: GPUs live in shared JBOG (Just-a-Bunch-of-GPUs) enclosures wired to hosts through a low-latency PCIe/CXL fabric switch (~140-150ns port-to-port), with a command-center layer mapping accelerators to bare-metal servers and reallocating them on the fly. Distinct from software API-remoting: requires special fabric switches and JBOG chassis. SMCI ships composable systems and its SuperCloud Composer directly composes GigaIO FabreX GPU pools — flagship on-prem iron and co-sell.'
+  scope_zh: 硬件总线可组合:GPU 置于共享 JBOG(一堆 GPU)机箱,经低延迟 PCIe/CXL 总线交换机(约 140-150 纳秒端到端)接入主机,由指挥中心软件将加速器实时映射到裸金属服务器并动态重新分配。与软件 API 远程化不同,需专用总线交换机与 JBOG 机箱。SMCI 出货可组合系统,其 SuperCloud Composer 可直接编排 GigaIO FabreX GPU 池,属旗舰级本地硬件与联合销售。
+  role:
+  - infrastructure-platform
+  data_modality:
+  - artificial-intelligence-models
+  - simulation
+  hardware_profile:
+  - gpu-server
+  - high-availability-redundant
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - hospital-health-system
+  vendors:
+  - Liqid (Matrix/Command Center)
+  - GigaIO (FabreX)
+  - H3 Platform
+  confidence: B
+  source: gigaio.com/products (FabreX PCIe memory fabric, 256Gb/s, 140ns latency, 32 GPUs to 1 server) + storagereview.com/gigaio.com 'Supermicro SuperCloud Composer composes disaggregated GPU/NVMe with FabreX' — SMCI integration web-verified 2026-08; h3platform.com (PCIe Gen5 composable JBOG, dynamic GPU assignment via GUI/API) — web-verified; liqid.com composable GPU solutions
+- id: ms-proteomics-dl-de-novo-sequencing-mab-therapeutic-antibody-assembly-cro-service-lab-operator-run-pipeline-monoclonal-purified-single-clone-de-novo-assembly-ms-cpu-service
+  parent: ms-proteomics-dl-de-novo-sequencing-mab-therapeutic-antibody-assembly-cro-service-lab-operator-run-pipeline
+  name_en: Monoclonal / Purified Single-Clone De Novo Assembly Service (MS-CPU)
+  name_zh: 單株純化抗體 de novo 組裝服務 (質譜-CPU)
+  name_full: Monoclonal / Purified Single-Clone Antibody De Novo Assembly CRO Service (bottom-up + middle-down MS, CPU-bound assembly)
+  scope_en: Operator-run CRO service that sequences a single purified monoclonal antibody from small protein samples by multi-enzyme bottom-up plus middle-down MS/MS, with de novo peptide reads assembled into contiguous heavy/light variable-plus-constant chains (Ile/Leu resolution, PTM/sequence-variant mapping). One-protein-per-project workload; used for IP recovery, hybridoma-free recovery, and biosimilar/QC characterization. Compute is dominated by MS database/de-novo search over a bounded search space, not by huge personalized databases.
+  scope_zh: 由服務商 (CRO) 運行的單株純化抗體定序服務：以多酶 bottom-up 加 middle-down 質譜對單一純化抗體取得肽段，de novo 讀段再組裝成完整重/輕鏈 (含 Ile/Leu 判別、PTM 與序列變異定位)。每案僅一條蛋白，工作量以有界搜索空間的質譜檢索為主，用於專利回收、無融合瘤回收與生物相似藥/QC 表徵。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - contract-research-organization
+  - biotechnology-pharmaceutical
+  vendors:
+  - Rapid Novor (REmAb)
+  - Creative Proteomics
+  - BiologicsCorp (Biologics International)
+  - BioPharmaSpec
+  - Abterra Biosciences (Griffin)
+  confidence: B
+  source: rapidnovor.com/services/antibody-sequencing (REmAb, 50ug purified, multi-enzyme LC-MS/MS de novo, full-length H/L assembly); creative-proteomics.com/services/de-novo-antibody-sequencing; biologicscorp.com/antibody-sequencing-service; abterrabio.com/griffin-overview (MS-only clone sequencing)
+- id: ms-proteomics-dl-de-novo-sequencing-mab-therapeutic-antibody-assembly-cro-service-lab-operator-run-pipeline-serum-polyclonal-repertoire-proteogenomics-igseq-ngs-ms-fusion-service
+  parent: ms-proteomics-dl-de-novo-sequencing-mab-therapeutic-antibody-assembly-cro-service-lab-operator-run-pipeline
+  name_en: Serum / Polyclonal Repertoire Proteogenomic Sequencing (Ig-Seq, NGS+MS Fusion)
+  name_zh: 血清/多株抗體庫 蛋白基因組定序 (Ig-Seq，NGS+質譜融合)
+  name_full: Serum / Polyclonal Antibody Repertoire Proteogenomic De Novo Sequencing CRO Service (NGS BCR repertoire + MS mixture deconvolution, ML-assisted)
+  scope_en: 'Operator-run CRO service that deconvolutes thousands of co-eluting antibody clones directly from serum or a purified polyclonal mixture by fusing next-generation BCR-repertoire sequencing with mixture MS de novo (proteogenomics). Distinct from single-clone work: it builds large personalized NGS-derived search databases, retains longitudinal serum time-course + raw NGS/MS data lakes, and applies ML to rank functional candidates. This is the heavy-compute, big-storage end of the antibody-sequencing service market.'
+  scope_zh: 由服務商運行、直接從血清或純化多株混合物中拆解上千條共洗脫抗體克隆的服務：融合次世代 BCR 抗體庫定序與混合物質譜 de novo (蛋白基因組學)。與單株案不同，需建立龐大的個人化 NGS 衍生搜索庫、保存縱向血清時序與原始 NGS/MS 資料湖，並以機器學習排序功能性候選。屬抗體定序服務中運算與儲存最重的一端。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  - time-series
+  hardware_profile:
+  - high-performance-computing-cpu
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - contract-research-organization
+  - biotechnology-pharmaceutical
+  - academic-medical-center
+  vendors:
+  - Rapid Novor (REpAb / NovorIg)
+  - Abterra Biosciences (Alicanto / Griffin / Reptor)
+  confidence: B
+  source: 'rapidnovor.com/services/polyclonal-antibody-sequencing (REpAb: affinity-purified polyclonal IgG + MS + Ig-sequencing, big-data bioinformatics, direct-from-serum); abterrabio.com/alicanto-overview (NGS of B cells + serum MS + ML proteogenomics) and /griffin-overview'
+- id: ehr-emr-core-acute-inpatient-critical-care-cis-adult-bedside-pdms-best-of-breed-standalone-icu-cis-anesthesia-information-management-system-aims-perioperative-standalone-intraop-record
+  parent: ehr-emr-core-acute-inpatient-critical-care-cis-adult-bedside-pdms-best-of-breed-standalone-icu-cis
+  name_en: Standalone Anesthesia Information Management System (AIMS) — perioperative intraoperative record
+  name_zh: 独立麻醉信息管理系统 (AIMS) — 围手术期术中记录
+  name_full: Standalone Anesthesia Information Management System (AIMS) — perioperative intraoperative record / 独立麻醉信息管理系统 (AIMS) — 围手术期术中记录
+  scope_en: 'Best-of-breed perioperative AIMS: automated pre-op / intra-op / PACU anesthesia record capturing high-frequency intraoperative vitals, ventilator and gas-delivery data from OR devices. Sold as a dedicated line by the same PDMS vendors but to a distinct buyer (anesthesiology / perioperative service), and a KLAS-tracked segment separate from the ICU CIS. Mission-critical intraoperative record with the same on-prem HA/DR + NVMe transactional footprint as the ICU PDMS — no hardware profile distinct from the parent.'
+  scope_zh: 最佳品类围手术期 AIMS：自动化术前/术中/PACU 麻醉记录，采集手术室设备高频术中生命体征、呼吸机与麻醉气体数据。由同一批 PDMS 厂商作为独立产品线销售，但面向不同买方（麻醉科/围手术期），是 KLAS 单独跟踪、与 ICU CIS 区分的细分市场。作为关键术中记录，其本地 HA/DR + NVMe 事务型硬件占用与父级 ICU PDMS 相同，硬件画像并无区别。
+  role:
+  - system-of-record
+  - workflow
+  - data-acquisition
+  - integration
+  data_modality:
+  - transactional
+  - time-series
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - iMDsoft (MetaVision Anesthesia)
+  - Philips (IntelliSpace Critical Care and Anesthesia — anesthesia module)
+  - Draeger (Innovian Anesthesia)
+  - GE HealthCare (Centricity/Carescape Anesthesia)
+  confidence: B
+  source: iMDsoft MetaVision Anesthesia product page (imd-soft.com/metavision/anesthesia); KLAS Anesthesia Documentation report (iMDsoft MV-OR); Philips ICCA product page
+- id: medical-device-integration-waveform-analytics-platform-realtime-predictive-surveillance-neonatal-pediatric-predictive-index-samd-highfidelity-physiologic-data-lake-risk-model-platform-vendor-neutral-highfidelity-capture-research-data-lake-replay-byo-model-storage-substrate
+  parent: medical-device-integration-waveform-analytics-platform-realtime-predictive-surveillance-neonatal-pediatric-predictive-index-samd-highfidelity-physiologic-data-lake-risk-model-platform
+  name_en: Vendor-Neutral High-Fidelity Capture & Research Data-Lake / Replay Archive Substrate (Bring-Your-Own-Model)
+  name_zh: 厂商中立高保真采集与科研数据湖/回放归档底座（自建模型）
+  name_full: Vendor-Neutral High-Fidelity Waveform Capture & Research Data-Lake / Retrospective Replay Archive Substrate (Bring-Your-Own-Algorithm)
+  scope_en: Vendor-neutral capture of time-synchronized, multi-device high-fidelity waveforms (240Hz+ physiologic streams) from NICU/PICU bedside monitors and devices, landed in an on-prem research data lake for retrospective replay, cohort extraction, and bring-your-own-algorithm model development. Children's hospitals and academic PICUs buy this as a storage-and-compute substrate on which their own research teams build and validate risk models (e.g. grant-funded pediatric physiologic waveform datasets); the vendor supplies the pipeline and archive, not the clinical index.
+  scope_zh: 厂商中立地从新生儿/儿科重症床旁监护仪及设备采集时间同步的多设备高保真波形（240Hz以上生理信号流），落入本地科研数据湖，用于回顾性回放、队列抽取与自建算法的模型开发。儿童医院与学术型儿科重症中心将其作为存储与计算底座采购，由本院科研团队在归档之上构建并验证风险模型；厂商提供采集管线与归档，而非临床指数本身。
+  role:
+  - data-acquisition
+  - infrastructure-platform
+  - integration
+  data_modality:
+  - time-series
+  - real-world-data
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - gpu-server
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - hospital-health-system
+  vendors:
+  - Medical Informatics Corp (Sickbay)
+  - Excel Medical / Hillrom (BedMasterEx)
+  - Moberg Analytics (CNS Monitor)
+  confidence: B
+  source: sickbay.com / globenewswire (Sickbay vendor-neutral FDA-cleared Time Series Data Engine; captures beat-by-beat waveform data; researchers 'directly develop and deploy algorithms and analytics at scale'); Excel Medical/Hillrom BedMasterEx (240Hz waveform capture, compressed binary archive); moberganalytics.com CNS Monitor; Lucile Packard WAVES pediatric physiologic waveform dataset (PMC9992360). Web-verified 2026-08.
+- id: medical-device-integration-waveform-analytics-platform-realtime-predictive-surveillance-neonatal-pediatric-predictive-index-samd-highfidelity-physiologic-data-lake-risk-model-platform-turnkey-fda-cleared-risk-index-engine-model-retraining-qi-platform
+  parent: medical-device-integration-waveform-analytics-platform-realtime-predictive-surveillance-neonatal-pediatric-predictive-index-samd-highfidelity-physiologic-data-lake-risk-model-platform
+  name_en: Turnkey Pediatric/Neonatal Risk-Model Platform (FDA-Cleared Index Engine + QI / Aggregation System)
+  name_zh: 交钥匙儿科/新生儿风险模型平台（FDA许可指数引擎+聚合/质改系统）
+  name_full: Turnkey Vendor-Supplied Pediatric/Neonatal Risk-Model Analytics Platform with FDA-Cleared Index Engine and Integrated Aggregation / Quality-Improvement System
+  scope_en: 'Vendor-supplied end-to-end platform that aggregates and archives continuous physiologic data and runs pre-built, FDA-cleared pediatric/neonatal risk indices, bundled with an integrated data-aggregation and quality-improvement engine. Distinct from the bring-your-own-model storage substrate: here the vendor owns the algorithm IP and regulatory clearance and sells turnkey clinical intelligence. Distinct from the bedside index-display sibling node in that the commercial object is the central data-management + analytics platform infrastructure (aggregation, archiving, QI/analytics engine), which carries an HA compute + archive pull rather than only an edge display. Indices themselves are lightweight statistical/Bayesian models, not GPU-training workloads.'
+  scope_zh: 厂商提供的端到端平台，聚合并归档连续生理数据，运行预置的、经FDA许可的儿科/新生儿风险指数，并捆绑集成的数据聚合与质量改进引擎。与自建模型的存储底座不同：此处算法知识产权与监管许可归厂商所有，出售的是交钥匙式临床智能。与床旁指数显示同级节点不同之处在于：商业对象是中央数据管理+分析平台基础设施（聚合、归档、质改/分析引擎），带来高可用计算与归档需求，而非仅边缘显示。指数本身为轻量统计/贝叶斯模型，非GPU训练负载。
+  role:
+  - analytics-artificial-intelligence
+  - infrastructure-platform
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  - real-world-data
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Etiometry (T3 + Risk Analytics Engine / IDO2, IVCO2)
+  - Medical Predictive Science Corp (HeRO)
+  confidence: C
+  source: 'etiometry.com + accessdata.fda.gov K202306/K190273/K223578 (T3 Software 510(k); Risk Analytics Engine computes IDO2/IVCO2 indices, FDA-cleared for ICU patients 0d-12y; deployed via hospital network); heroscore.com / Medical Predictive Science Corp (HeRO neonatal heart-rate-characteristics sepsis index, multicenter VLBW RCT). Web-verified 2026-08. Hardware corrected downward: cleared indices are lightweight, not GPU-training workloads.'
+- id: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-ambulatory-home-wearable-eeg-scalp-ambulatory-video-eeg-diagnostic-service-reading-center-managed-athome-fleet-acquisition-video-archive-operator
+  parent: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-ambulatory-home-wearable-eeg-scalp-ambulatory-video-eeg-diagnostic-service-reading-center
+  name_en: Full-Service At-Home Ambulatory Video-EEG Operator (Device Fleet + Acquisition + Video Archive + Reading)
+  name_zh: 居家动态视频脑电全流程服务运营商(设备机队+采集+视频归档+判读)
+  name_full: Full-service managed at-home scalp ambulatory video-EEG service bureau that owns the device fleet, runs patient hook-up/logistics, ingests multi-day synchronized video + multichannel EEG, and retains/serves the studies to its own reader network
+  scope_en: 'Vertically integrated ambulatory vEEG operators that ship/apply the recorder, run in-home 24-72h+ synchronized video and EEG acquisition, then centrally archive and serve the large video-EEG studies to a captive neurophysiology reader pool. The distinguishing hardware pull is the study repository: multi-day time-synced HD video plus 16-32+ channel EEG generates GB-per-study volumes that must land on performance NVMe for active review, tier to bulk capacity/archive for medical-record retention, and increasingly feed GPU spike/seizure pre-marking before human read. Operator-run (co-sell) iron, on-prem or colo where cloud egress/retention economics favor it.'
+  scope_zh: 垂直整合的动态视频脑电运营商:自有记录设备机队、负责居家佩戴与物流、完成24-72小时以上视频与多通道脑电同步采集,再集中归档并向自有神经电生理判读团队分发大体积视频脑电检查。区别性硬件拉动来自检查数据仓储——多日高清视频叠加16-32通道脑电,单例达GB级,需NVMe承载在线复阅、容量/归档层承担病历留存,并日益需要GPU进行棘波/发作预标注。运营商自运营(联合销售)硬件,视云端出流与留存经济性可落地本地或托管机房。
+  role:
+  - data-acquisition
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - images
+  - time-series
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - gpu-server
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - contract-research-organization
+  vendors:
+  - Stratus Neuro
+  - CortiCare
+  - NeuLine Health
+  - Neurotech EEG
+  - First Choice Neurology
+  confidence: B
+  source: stratusneuro.com/ambulatory-eeg (nation's leading in-home EEG provider, owns fleet, StratusEEG software, national reader group, AI spike/seizure detection, long-term storage — web-confirmed Aug 2026); corticare.com/ambulatory-and-at-home-video-eeg + corticare.com/services/in-home-ambulatory-and-routine-eeg (in-home 72h vEEG setup/monitoring, CortiCloud storage, physician-led interpretation across 20+ states — web-confirmed Aug 2026); neulinehealth.com (at-home 72h ambulatory vEEG); neurotecheeg.com (home EEG since 2006)
+- id: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-ambulatory-home-wearable-eeg-scalp-ambulatory-video-eeg-diagnostic-service-reading-center-teleneurology-remote-overread-interpretation-reader-network
+  parent: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-ambulatory-home-wearable-eeg-scalp-ambulatory-video-eeg-diagnostic-service-reading-center
+  name_en: Pure Teleneurology Remote EEG Overread / Interpretation-Only Reader Network
+  name_zh: 纯远程神经科脑电判读/仅解读判读医师网络
+  name_full: Interpretation-only teleneurology reader network that provides 24/7 remote overread of ambulatory (and routine/LTM) EEG studies acquired by others, without operating its own device fleet
+  scope_en: 'Read-side pure-plays: a 24/7/365 board-certified neurophysiologist network plus a remote review/worklist platform that ingests EEG studies acquired by hospitals, practices, or fleet operators and returns interpretations into the EMR. No device fleet and lighter long-term retention (the acquirer keeps the record), so the hardware center of gravity shifts from bulk archive to a highly-available, low-latency review platform: redundant worklist/streaming servers sized for uptime and concurrent reader access, NVMe cache for smooth scrub of remote studies, optional GPU for AI pre-marking. Genuinely SaaS/service-heavy and often cloud-hosted, so on-prem SMCI pull is modest and confined to self-hosted/HA review deployments.'
+  scope_zh: 判读侧纯业务:7×24全天候执业神经电生理医师网络,配合远程复阅/工作列表平台,接收由医院、诊所或机队运营商采集的脑电检查并将解读回填至EMR。无自有设备机队、长期留存较轻(记录由采集方保存),因此硬件重心由批量归档转向高可用、低时延的复阅平台——为正常运行时间与并发判读扩容的冗余工作列表/串流服务器、用于流畅回放远程检查的NVMe缓存,以及可选的AI预标注GPU。本质偏SaaS/服务且常为云托管,故本地SMCI拉动有限,仅限自托管/高可用复阅部署。
+  role:
+  - workflow
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - time-series
+  - images
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - TeleSpecialists (TeleEEG)
+  - Sevaro
+  - Equum Medical
+  - Next Gen Neuro
+  confidence: B
+  source: tstelemed.com/services/tele-eeg (dedicated TeleEEG line, remote interpretation of routine/ambulatory/LTM/cEEG, no own fleet, 400+ partner hospitals, EMR delivery — web-confirmed Aug 2026); sevaro.com/remote-eeg (physician-led remote EEG interpretation, 24/7 epileptologist/neurointensivist reads, hospitals acquire in-house — web-confirmed Aug 2026); equummedical.com (remote interpretation of ambulatory/adult EEG monitoring, staffing model); teamngn.com (independent neurologist/epileptologist overread network)
+- id: payer-core-admin-caps-adjudication-engine-tpa-self-funded-rbp-repricing-advocacy-reference-price-benchmarking-transparency-data-platform-petabyte-mrf-ingestion-normalization-rate-data-as-a-service-streaming-json-parse-pipeline
+  parent: payer-core-admin-caps-adjudication-engine-tpa-self-funded-rbp-repricing-advocacy-reference-price-benchmarking-transparency-data-platform
+  name_en: Petabyte-Scale MRF Ingestion & Normalization Pipeline (Rate Data-as-a-Service, Streaming-JSON Parse)
+  name_zh: PB级机器可读文件(MRF)采集与标准化管道(费率数据即服务,流式JSON解析)
+  name_full: Petabyte-Scale Transparency-in-Coverage MRF Ingestion & Normalization Pipeline — Rate Data-as-a-Service (Streaming-JSON Parse, Dedup, Cross-File Join)
+  scope_en: 'The raw data-engineering layer beneath price-transparency benchmarking: downloading, streaming-parsing, deduplicating and normalizing CMS Transparency-in-Coverage payer MRFs (and hospital/drug MRFs) into queryable negotiated-rate tables sold as a cleaned feed/API. Individual JSON documents exceed 1 TB, a single payer''s monthly disclosure is tens-to-hundreds of TB, and a full month is 300B+ rate rows — standard JSON parsers fail, forcing custom streaming parsers over massive NVMe-staged + capacity-archive storage with heavy CPU/high-memory dedup and cross-file joins. Distinct from the benchmarking-analytics application (the parent) both in buyer (data/platform engineering, or an ISV reselling feeds) and in hardware (storage+CPU, not GPU).'
+  scope_zh: 价格透明度基准分析之下的原始数据工程层:下载、流式解析、去重并标准化CMS《Transparency in Coverage》支付方MRF(及医院/药品MRF),整理为可查询的协商费率表,以清洗后的数据源/API形式出售。单个JSON文档超过1TB,单一支付方月度披露达数十至数百TB,一个月全量超3000亿条费率行——标准JSON解析器无法处理,需在NVMe暂存+大容量归档存储上运行自研流式解析器,并进行CPU/大内存密集的去重与跨文件连接。与基准分析应用(父节点)在买方(数据/平台工程,或转售数据源的ISV)与硬件(存储+CPU,而非GPU)上均不同。
+  role:
+  - data-acquisition
+  - integration
+  - infrastructure-platform
+  data_modality:
+  - transactional
+  - documents
+  - real-world-data
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-performance-computing-cpu
+  - high-memory
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - payer
+  - hospital-health-system
+  - biotechnology-pharmaceutical
+  vendors:
+  - Serif Health
+  - Payerset
+  - Turquoise Health
+  - Trilliant Health
+  - DeductibleData
+  confidence: B
+  source: Serif Health payer-transparency-data page (serifhealth.com — ingests 200+ payers/month, 350B+ rate rows, normalizes/cleans, REST API to millions of queries/mo); Payerset (ingests every payer & hospital MRF, standardizes file/schema formats, NPI-TIN mapping); DeductibleData FAQ (terabytes of nested JSON per payer, specialized parsing, cross-file joins, normalization into single queryable dataset); corroborating scale — single Cigna network MRF >200GB, UHC files reach TB, 12TB compressed JSON for 3 payers/month, standard JSON parsers fail; Turquoise Health & Trilliant Health TiC pipelines. Web-verified 2026-08.
+- id: pacs-ai-orchestration-acute-triage-patient-flow-command-center-perioperative-or-throughput-surgical-capacity-optimization-ambient-computer-vision-surgical-video-realtime-turnover-phase-analytics-edge-gpu-inference-appliance
+  parent: pacs-ai-orchestration-acute-triage-patient-flow-command-center-perioperative-or-throughput-surgical-capacity-optimization
+  name_en: Ambient OR computer-vision surgical-video throughput analytics (real-time phase/turnover detection, edge-GPU appliance)
+  name_zh: 手术室环境计算机视觉手术视频通量分析（实时手术阶段/周转检测，边缘 GPU 推理设备）
+  scope_en: 'In-OR ceiling cameras/sensors streaming surgical video into a real-time computer-vision engine that auto-detects up to ~14 perioperative case events (wheels-in, drape, incision, close, wheels-out), computes room status/turnover, forecasts case duration, and writes timestamps back to the EHR to drive throughput and staffing. Distinguished from the parent''s schedule/block-time optimization (LeanTaaS iQueue, Qventus, Epic OR Marketplace), which is cloud SaaS ML on transactional data with no on-prem pull. Here the load-bearing hardware is a per-OR (or per-hospital) edge GPU inference appliance: continuous high-bitrate surgical video is PHI-heavy, latency-sensitive, and frequently kept on-prem, pulling local GPU inference plus NVMe video buffering rather than round-tripping to public cloud. Note the on-prem thesis is not universal across every vendor in the space (some competitors are wholly cloud-delivered) — the SMCI pull comes specifically from the in-OR-sensor / real-time-detection vendors (Apella, Caresyntax) whose video capture and low-latency inference sit at the edge.'
+  scope_zh: 手术室内吊装摄像头/传感器将手术视频实时送入计算机视觉引擎，自动识别约 14 个围手术期事件（入室、铺单、切皮、关闭、出室），计算房间状态/周转、预测手术时长，并将时间戳回写 EHR 以驱动通量与排班。区别于母节点的排程/block time 优化（LeanTaaS iQueue、Qventus、Epic OR Marketplace，纯云端 SaaS、基于交易数据、无本地硬件拉动）。此处的关键硬件是每手术室（或每医院）的边缘 GPU 推理设备：连续高码率手术视频含大量 PHI、对延迟敏感、常须留在本地，因而拉动本地 GPU 推理与 NVMe 视频缓冲，而非回传公有云。注意并非该领域所有厂商都走本地部署（部分竞品完全云端交付）；SMCI 拉动具体来自装在手术室内的传感器 / 实时检测厂商（Apella、Caresyntax），其视频采集与低延迟推理位于边缘。
+  role:
+  - data-acquisition
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - images
+  - time-series
+  - transactional
+  hardware_profile:
+  - gpu-server
+  - edge-industrial
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Apella
+  - Caresyntax
+  confidence: B
+  source: Apella product page (apella.io/product) and Apella $80M Series B blog + Fierce Healthcare 2025 (ambient computer vision, in-OR sensors, ~14 case events, autonomous EHR writeback, turnover phase detection); Unite.AI/Houston Methodist peer-reviewed study (~7% case-volume lift, ~25 extra cases/month in cardiothoracic suite after Apella deployment). Caresyntax (caresyntax.com; in-OR surgical-video capture hub + OR efficiency/analytics, on-prem capture hardware). Parent-core scheduling SaaS (LeanTaaS iQueue, Qventus Perioperative, Epic OR Marketplace) confirmed cloud-delivered and deliberately kept at the parent, not enumerated as a child. Theator DROPPED after verification (see note).
+- id: bioinformatics-secondary-alignment-variant-long-read-structural-variant-cnv-on-instrument-realtime-tethered-edge-oem-ultrarapid-acute-clinical-genome-concurrent-gpu-secondary-analysis-cluster
+  parent: bioinformatics-secondary-alignment-variant-long-read-structural-variant-cnv-on-instrument-realtime-tethered-edge-oem
+  name_en: Ultra-Rapid Acute / Critical-Care Clinical Long-Read Genome (concurrent-with-sequencing basecalling + SV/CNV/small-variant, adjacent customer-owned flagship GPU secondary-analysis cluster; hours-to-diagnosis nanopore WGS in ICU/NICU)
+  name_zh: 超快速急重症临床长读长全基因组（测序同步碱基识别+SV/CNV/小变异，配套医院自购旗舰级GPU二次分析集群；ICU/NICU数小时出诊断的纳米孔WGS）
+  name_full: Ultra-Rapid Acute/Critical-Care Clinical Long-Read Genome — on-instrument tethered basecalling running concurrently with an adjacent customer-owned GPU compute cluster (Parabricks/Clara + Sniffles2/Spectre/DeepVariant) to reach a Mendelian diagnosis in hours at the bedside
+  scope_en: The acute clinical deployment of tethered real-time long-read sequencing where the on-instrument onboard GPU (ONT PromethION / PacBio Revio) streams reads to an ADJACENT, hospital-owned high-density GPU server that runs basecalling and SV/CNV/small-variant calling concurrently with sequencing to deliver a rapid Mendelian diagnosis (target hours, not days) in ICU/NICU/critical-care settings. Distinct from the parent OEM-embedded per-unit case because the buyer shifts to the end hospital (customer buys its own iron) and the hardware pull escalates to a dedicated multi-GPU secondary-analysis box (DGX-class / SMCI GPU server) plus NVMe read-streaming staging.
+  scope_zh: 拴机式实时长读长测序的急重症临床落地：仪器板载GPU（ONT PromethION / PacBio Revio）将读段流式送往一台医院自购的高密度GPU服务器，边测序边完成碱基识别与SV/CNV/小变异检测，目标数小时内为ICU/NICU危重患者给出孟德尔遗传诊断。与父节点OEM按台嵌入不同，买方转为终端医院（客户自购硬件），硬件拉动升级为专用多GPU二次分析机箱（DGX级/SMCI GPU服务器）加NVMe读段暂存。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Oxford Nanopore Technologies
+  - NVIDIA (Parabricks / Clara)
+  - PacBio (Revio / SMRT Link)
+  confidence: B
+  source: NVIDIA Technical Blog 'Boosting Ultra-Rapid Nanopore Sequencing Analysis on NVIDIA DGX A100' (developer.nvidia.com); Gorzynski et al., NEJM 2022 'Ultrarapid Nanopore Genome Sequencing in a Critical Care Setting'; Nature Biotechnology 2022 s41587-022-01221-5; ONT EPI2ME wf-human-variation docs (Sniffles2 SV + Spectre CNV integrated); PacBio Revio onboard-GPU + pbsv/DeepVariant.
+- id: bioinformatics-secondary-population-cohort-gwas-statistical-genetics-polygenic-score-clinical-scoring-consumer-reproductive-embryo-wgs-polygenic-screening-clia-lab-wgs-embryo-genome-reconstruction-imputation-prs-engine
+  parent: bioinformatics-secondary-population-cohort-gwas-statistical-genetics-polygenic-score-clinical-scoring-consumer-reproductive-embryo-wgs-polygenic-screening
+  name_en: CLIA-Lab Whole-Genome Embryo Reconstruction, Imputation & PRS-Scoring Engine (PGT-P)
+  name_zh: CLIA 实验室胚胎全基因组重建·填补·多基因评分计算引擎 (PGT-P)
+  name_full: CLIA/CAP Preimplantation Embryo Whole-Genome Reconstruction, Variant Imputation and Polygenic-Risk-Scoring Compute Engine
+  scope_en: The compute-heavy secondary/tertiary pipeline operated in-house by CLIA/CAP embryo-screening labs that receive ~5-cell trophectoderm biopsies, run 30x whole-genome sequencing (Orchid) or dense SNP-array/low-pass genotyping (Genomic Prediction/LifeView, Herasight), reconstruct the trace-DNA embryo genome via HMM/parental-haplotype phasing (e.g. ImputePGTA), impute millions of variants, and compute polygenic risk scores across dozens of conditions. This is the SMCI-relevant subset that owns and runs its own alignment/imputation/PRS iron — distinct from interpretation-only DNA-upload apps that carry no lab and no on-prem compute.
+  scope_zh: 由 CLIA/CAP 胚胎筛查实验室自建运行的计算密集型二级/三级流水线:接收约 5 个滋养层细胞活检样本,进行 30x 全基因组测序(Orchid)或高密度 SNP 芯片/低深度分型(Genomic Prediction/LifeView、Herasight),通过 HMM/亲本单倍型定相(如 ImputePGTA)从微量 DNA 重建胚胎基因组,填补数百万位点,并对数十种性状计算多基因风险评分。此为 SMCI 相关子集——自持并运行比对/填补/评分算力,区别于无实验室、无本地算力的纯上传解读类应用。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - omics
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - diagnostic-reference-laboratory
+  vendors:
+  - Orchid Health
+  - Genomic Prediction (LifeView)
+  - Herasight
+  confidence: B
+  source: Orchid Health science/clinician pages (30x WGS of ~5-cell trophectoderm biopsy, CLIA/CAP lab, ~1200 monogenic + PRS); Herasight whole-genome imputed embryo PGS (17 diseases, 0.16 SD MAD vs post-birth genotypes); Kumar et al., Nature Medicine 2022 'Whole-genome risk prediction of common diseases in human preimplantation embryos' (Genomic Prediction); ImputePGTA medRxiv 2025 (HMM embryo-genome reconstruction + PGS from ultra-low-pass/array data). Web-verified Aug 2026.
+- id: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-tee-confidential-computing-enclave-clean-room-cpu-sgx-tdx-sev-encrypted-data-collaboration-clean-room
+  parent: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-tee-confidential-computing-enclave-clean-room
+  name_en: CPU-TEE Encrypted Genomic Data-Collaboration Clean Room (SGX / TDX / SEV-SNP)
+  name_zh: CPU 可信执行环境加密基因组数据协作洁净室（SGX/TDX/SEV-SNP）
+  name_full: CPU-TEE Encrypted Genomic Data-Collaboration Clean Room (Intel SGX / TDX, AMD SEV-SNP)
+  scope_en: Multi-party genomic/clinical data-collaboration clean rooms where analytics run inside CPU trusted-execution enclaves (Intel SGX/TDX, AMD SEV-SNP). Data stewards attest the enclave, then admit encrypted cohort data for query/analytics without exposing raw records to the host. Established, CPU-bound segment; hardware pull is high-memory attested CPU nodes with HA, not GPUs.
+  scope_zh: 多方基因组/临床数据协作洁净室，分析在 CPU 可信执行飞地（Intel SGX/TDX、AMD SEV-SNP）内运行；数据持有方远程验证飞地后再注入加密队列数据进行查询分析，主机无法接触原始记录。成熟且以 CPU 为主的细分，硬件拉动为高内存、可远程认证的 CPU 节点加高可用，而非 GPU。
+  role:
+  - infrastructure-platform
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - omics
+  - real-world-data
+  - transactional
+  hardware_profile:
+  - high-memory
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - biotechnology-pharmaceutical
+  - academic-medical-center
+  - diagnostic-reference-laboratory
+  - hospital-health-system
+  vendors:
+  - Decentriq
+  - Fortanix
+  - Anjuna
+  - Cosmian
+  confidence: B
+  source: Decentriq Data Clean Rooms use Intel SGX driver enclave + AMD SEV-SNP/Intel TDX workers for life-sciences genomic/clinical data collaboration (decentriq.com/healthcare, Microsoft Learn confidential-computing partner page); Fortanix Confidential Computing Manager (SGX enclave lifecycle); Anjuna / Cosmian confidential-computing runtimes — web-verified 2026-08.
+- id: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-tee-confidential-computing-enclave-clean-room-gpu-h100-h200-confidential-computing-accelerated-enclave-ai
+  parent: bioinformatics-secondary-population-cohort-federated-analytics-privacy-enhancing-computation-encrypted-genomics-tee-confidential-computing-enclave-clean-room
+  name_en: GPU Confidential-Computing Accelerated Enclave for Genomic/Health AI (H100/H200 CC mode)
+  name_zh: GPU 机密计算加速飞地——基因组/医疗 AI（H100/H200 机密计算模式）
+  name_full: GPU Confidential-Computing Accelerated Enclave for Genomic/Health AI (NVIDIA Hopper/Blackwell CC mode)
+  scope_en: 'Emerging split where the enclave extends onto the GPU: NVIDIA Hopper/Blackwell Confidential Computing mode runs accelerated genomic/health AI (model training, inference, deep secondary analysis) inside a hardware-enforced CPU+GPU TEE with encrypted PCIe transfers. Distinct from the CPU clean room — carries a flagship GPU-server pull rather than a CPU one.'
+  scope_zh: 飞地向 GPU 延伸的新兴细分：NVIDIA Hopper/Blackwell 机密计算模式在硬件强制的 CPU+GPU 可信执行环境内运行加速基因组/医疗 AI（模型训练、推理、深度二级分析），PCIe 传输全程加密。与 CPU 洁净室不同，拉动的是旗舰级 GPU 服务器而非 CPU。
+  role:
+  - infrastructure-platform
+  - analytics-artificial-intelligence
+  data_modality:
+  - omics
+  - artificial-intelligence-models
+  - images
+  hardware_profile:
+  - gpu-server
+  - high-memory
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - biotechnology-pharmaceutical
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - BeeKeeperAI
+  - Fortanix
+  - Edgeless Systems
+  - NVIDIA
+  confidence: B
+  source: NVIDIA Hopper H100 first GPU with Confidential Computing mode, extended to Blackwell (nvidia.com data-center confidential-computing); Edgeless Systems Continuum runs confidential AI on NVIDIA H100 CVM+GPU TEE (edgeless.systems); BeeKeeperAI EscrowAI enclave collaboration supports CPU+GPU confidential computing for clinical AI (beekeeperai.com, Microsoft Azure customer story) — web-verified 2026-08.
+- id: healthcare-llm-serving-realtime-voice-agent-onprem-speech-engine-neural-tts-patient-aac-embedded-voice-onprem-clinical-tts-serving-engine-kiosk-ivr-readback-accessibility-mrcp-telephony-ivr-concurrency-tts-server-patient-notification-readback
+  parent: healthcare-llm-serving-realtime-voice-agent-onprem-speech-engine-neural-tts-patient-aac-embedded-voice-onprem-clinical-tts-serving-engine-kiosk-ivr-readback-accessibility
+  name_en: On-Prem MRCP Telephony/IVR Clinical TTS Concurrency Server
+  name_zh: 院内 MRCP 电话/IVR 临床语音合成并发服务器
+  name_full: On-Premise MRCP/SIP Telephony & IVR Clinical Neural TTS High-Concurrency Serving Server (appointment reminders, lab/med-result readback, patient notification)
+  scope_en: 'Server-class on-prem neural TTS that serves many simultaneous telephony sessions over MRCP/SIP for patient appointment reminders, prescription/lab-result readback, and clinical IVR prompts. Distinct from the parent by its concurrency-scaled data-center server footprint (dozens-to-hundreds of 8kHz streams, HA/redundant) rather than a single kiosk endpoint. Web-verified: ReadSpeaker speechServer MRCP is an on-prem neural TTS drop-in replacement for on-prem Nuance Vocalizer across Avaya/Cisco/Genesys/Mitel IVR platforms.'
+  scope_zh: 服务器级院内神经网络语音合成，通过 MRCP/SIP 为大量并发电话会话提供预约提醒、检验/处方结果回读与临床 IVR 播报；以并发扩展的数据中心服务器（数十至数百路 8kHz 语音、高可用冗余）区别于单一自助机端点。已核实：ReadSpeaker speechServer MRCP 为院内神经网络 TTS，可在 Avaya/Cisco/Genesys/Mitel IVR 平台上直接替换院内 Nuance Vocalizer。
+  role:
+  - infrastructure-platform
+  - workflow
+  - integration
+  data_modality:
+  - artificial-intelligence-models
+  - documents
+  hardware_profile:
+  - gpu-server
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - payer
+  vendors:
+  - ReadSpeaker (speechServer MRCP)
+  - Acapela Group
+  - NVIDIA (Riva TTS)
+  confidence: C
+  source: ReadSpeaker speechServer MRCP product page (readspeaker.com/solutions/text-to-speech-software/readspeaker-speechserver-mrcp) — standards-based multi-thread neural TTS for IVR, MRCPv2, on-prem drop-in for Nuance Vocalizer (readspeaker.com/blog/nuance-migration-plan; Avaya-compliant per prnewswire.com). NVIDIA Riva TTS is GPU-served neural TTS. Concurrency/GPU sizing corroborated by on-prem voice-AI deployment guides.
+- id: ehr-emr-core-acute-inpatient-critical-care-cis-predictive-acuity-analytics-realtime-physiologic-risk-analytics-platform-multistream-fusion-onprem-realtime-streaming-samd-risk-index-compute-engine-bedside-unit-edge-ha
+  parent: ehr-emr-core-acute-inpatient-critical-care-cis-predictive-acuity-analytics-realtime-physiologic-risk-analytics-platform-multistream-fusion-onprem
+  name_en: Real-Time Streaming SaMD Risk-Index Compute Engine (Bedside/Unit, Edge + HA)
+  name_zh: 实时流式 SaMD 风险指数计算引擎（床旁/病区，边缘＋高可用）
+  name_full: Real-Time Streaming SaMD Risk-Index Compute Engine — continuous low-latency FDA-cleared physiologic risk indices computed on live multi-stream data at the bedside/unit (edge + high-availability)
+  scope_en: 'The DEPLOYED clinical layer: continuous, low-latency FDA-cleared risk indices (Etiometry IDO2 inadequate-oxygen-delivery / IVCO2 inadequate-ventilation, computed second-by-second in the T3 Risk Analytics Engine; Fifth Eye AHI hemodynamic-instability from single-lead ECG, updated every ~2 minutes) computed on live fused multi-stream physiologic data and pushed to clinicians as a SaMD. Distinct from a data lake: deterministic 24/7 uptime, CPU-light per-unit edge compute with HA/redundancy so the regulated index never drops. Modest per-unit footprint.'
+  scope_zh: 已部署的临床层：在活体融合多流生理数据上连续计算的低延迟 FDA 认证风险指数（Etiometry IDO2 氧供不足／IVCO2 通气不足，在 T3 Risk Analytics Engine 中逐秒计算；Fifth Eye 基于单导联 ECG 的 AHI 血流动力学不稳定，约每 2 分钟更新），作为 SaMD 推送给临床医生。与数据湖不同：确定性 7×24 在线、CPU 轻量的病区级边缘算力配高可用冗余，确保受监管指数不中断。每单元占用适中。
+  role:
+  - analytics-artificial-intelligence
+  - regulated-software-as-a-medical-device
+  - data-acquisition
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Etiometry (T3 / Risk Analytics Engine, IDO2, IVCO2)
+  - Fifth Eye (AHI System)
+  - Ambient Clinical Analytics (AWARE)
+  confidence: B
+  source: Etiometry T3 Risk Analytics Engine computing IDO2/IVCO2 indices, FDA 510(k) K190273/K202306, adult IDO2 clearance 2023 (etiometry.com, accessdata.fda.gov, businesswire.com); Fifth Eye AHI System FDA De Novo DEN200022 (Mar 2021) + AHI System 510(k) (Dec 2021), every-2-min hemodynamic reads, UMich PLOS Digital Health AHI-PI study (prnewswire.com, mobihealthnews.com, medresearch.umich.edu); Ambient Clinical Analytics AWARE (Mayo Clinic spinout).
+- id: ehr-emr-core-acute-inpatient-critical-care-cis-predictive-acuity-analytics-realtime-physiologic-risk-analytics-platform-multistream-fusion-onprem-highfidelity-waveform-data-lake-digital-twin-model-development-substrate-nvme-archive-gpu
+  parent: ehr-emr-core-acute-inpatient-critical-care-cis-predictive-acuity-analytics-realtime-physiologic-risk-analytics-platform-multistream-fusion-onprem
+  name_en: High-Fidelity Waveform Data Lake / Digital-Twin & Retrospective Model-Development Substrate (NVMe + Archive + GPU)
+  name_zh: 高保真波形数据湖／数字孪生与回顾性模型开发底座（NVMe＋归档＋GPU）
+  name_full: High-Fidelity Physiologic Waveform Data Lake — high-frequency capture-and-retain substrate powering digital-twin views and retrospective algorithm training/validation, storage-heavy plus GPU for model dev
+  scope_en: 'The high-frequency capture-and-RETAIN substrate beneath the real-time index: full-resolution waveforms + vitals harmonized in a vendor-neutral Time Series Data Engine and held from seconds to years, powering digital-twin views, retrospective algorithm training/validation, and grant-funded research. Storage-flagship pull — NVMe hot tier for waveform ingest/replay plus large capacity-archive tier — with GPU/HPC for model development. Distinct hardware and distinct (research/AMC) use versus the deployed SaMD index engine.'
+  scope_zh: 实时指数之下的高频采集与长期保留底座：全分辨率波形＋生命体征在厂商中立的时序数据引擎中归一化，保存从秒到年，支撑数字孪生视图、回顾性算法训练／验证与基金资助研究。存储旗舰级拉动——用于波形摄取／回放的 NVMe 热层加大容量归档层——并配 GPU/HPC 做模型开发。与已部署的 SaMD 指数引擎在硬件和用途（科研／学术医疗中心）上均不同。
+  role:
+  - analytics-artificial-intelligence
+  - data-acquisition
+  - infrastructure-platform
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  - real-world-data
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - gpu-server
+  - high-performance-computing-cpu
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - hospital-health-system
+  vendors:
+  - Medical Informatics Corp (Sickbay TSDE / digital twin)
+  - Philips (ICCA / data-warehouse waveform research stack)
+  - Moberg Analytics (CNS multimodal physiologic data)
+  confidence: B
+  source: Sickbay vendor-neutral Time Series Data Engine, high-frequency waveform capture/harmonize/retain, Class II clearance, digital-twin substrate (sickbay.com, hitconsultant.net); Philips ICCA research data warehouse; Moberg CNS Monitor + Moberg Clinical/Cloud Platform for high-resolution multimodal neuromonitoring data, research-use (moberganalytics.com, natus.com).
+- id: medical-device-integration-waveform-analytics-platform-realtime-predictive-surveillance-adult-deterioration-risk-index-samd-sepsis-specific-ai-early-warning-samd-molecular-host-response-ai-ivd-instrument-embedded-ml-analyzer-diagnostic
+  parent: medical-device-integration-waveform-analytics-platform-realtime-predictive-surveillance-adult-deterioration-risk-index-samd-sepsis-specific-ai-early-warning-samd
+  name_en: Molecular Host-Response AI-IVD Sepsis Diagnostic (Instrument-Embedded ML Analyzer)
+  name_zh: 分子宿主反應 AI 體外診斷儀器內嵌機器學習敗血症診斷
+  name_full: Molecular Host-Response AI-IVD Sepsis Diagnostic — instrument-embedded ML on a dedicated benchtop analyzer (mRNA gene-expression or high-speed imaging deformability cytometry), FDA-cleared SaMD sold as a device, distinct from software-only EHR/vital-signs predictive sepsis SaMD
+  scope_en: 'Sepsis diagnosis by measuring the patient''s own immune/host response in whole blood and interpreting it with an embedded machine-learning classifier that runs on a dedicated benchtop analyzer instrument, not on EHR data. Two technology families: (a) host-response mRNA gene-expression + ML classifier (Inflammatix TriVerity/InSep on the cartridge-based Myrna instrument; Immunexpress SeptiCyte, qPCR gene-expression), and (b) microfluidic leukocyte deformability cytometry with ultra-high-speed imaging + deep-learning image classification (Cytovale IntelliSep). The ML/vision compute is embedded in the analyzer (OEM per-unit BOM), giving this segment a distinct buyer, distinct vendor set, and distinct hardware footprint versus the parent''s software-only predictive sepsis SaMD. SMCI angle is honestly minimal: embedded board-level BOM inside a small benchtop box, not a server-class pull.'
+  scope_zh: 透過量測病人自身免疫/宿主反應（全血）並由儀器內嵌機器學習分類器判讀來診斷敗血症，運算在專用桌上型分析儀內執行，而非在電子病歷資料上。兩種技術路線：(a) 宿主反應 mRNA 基因表現 + 機器學習分類器（Inflammatix TriVerity/InSep，卡匣式 Myrna 儀器；Immunexpress SeptiCyte，qPCR 基因表現），(b) 微流體白血球變形細胞術 + 超高速影像 + 深度學習影像分類（Cytovale IntelliSep）。機器學習/視覺運算內嵌於分析儀（OEM 單機物料成本），使此子市場在買方、供應商與硬體上皆與母節點的純軟體預測型敗血症 SaMD 明顯區隔。SMCI 硬體機會誠實地評為最低：內嵌於小型桌上儀器的板級物料，非伺服器級拉動。
+  role:
+  - regulated-software-as-a-medical-device
+  - analytics-artificial-intelligence
+  - data-acquisition
+  data_modality:
+  - omics
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - edge-industrial
+  hardware_opportunity: 1
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - medical-technology-in-vitro-diagnostics
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  vendors:
+  - Inflammatix (TriVerity / InSep, Myrna instrument)
+  - Cytovale (IntelliSep)
+  - Immunexpress (SeptiCyte)
+  confidence: B
+  source: 'Web-verified: Inflammatix TriVerity FDA clearance Jan 21 2025, TriVerity Test System = cartridge + Myrna benchtop instrument, 29-mRNA panel + ML-derived algorithms (biospace.com, myadlm.org 2025, prnewswire 302355591). Cytovale IntelliSep FDA cleared 2024, K220991, microfluidic deformability cytometry + ultra-high-speed imaging + ML image analysis, ISI score in ~8 min (cytovale.com, 360Dx, accessdata.fda.gov K220991). Immunexpress SeptiCyte RAPID host-response qPCR gene expression, FDA cleared (360Dx).'
+- id: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-intraoperative-neuromonitoring-ionm-acquisition-clinical-data-management-archive-platform-enterprise-onprem-case-archive-data-management-server-multimodal-waveform-video-retention-storage
+  parent: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-intraoperative-neuromonitoring-ionm-acquisition-clinical-data-management-archive-platform
+  name_en: Enterprise On-Prem Neuro/IONM Case-Archive & Clinical Data-Management Server (Multimodal Waveform + Video Retention Storage)
+  name_zh: 企業級本地部署 神經監測/術中神經監測 病例歸檔與臨床資料管理伺服器（多模態波形＋影像長期保存儲存）
+  name_full: Enterprise On-Prem Neuro/IONM Case-Archive & Clinical Data-Management Server — Multimodal EEG/EMG/IONM Waveform + Video Case Retention Storage (CadLink-class centralized server, HL7-integrated, auto-archiving)
+  scope_en: 'The centralized, health-system-owned server that ingests, indexes and retains multimodal neuro case files (EEG/EMG/IONM traces plus intra-op video) streamed from recording stations, with HL7/EMR integration and policy-driven auto-archiving. This is the true storage/server split of the parent: years of large waveform+video surgical/neuro cases retained on-prem for clinical review and medico-legal reasons. Distinct from the sibling remote-telemonitoring NOC (which is a service network) and from the in-OR acquisition appliance (child below).'
+  scope_zh: 由醫療機構自有、集中式的伺服器，負責從各記錄站串流匯入、索引並長期保存多模態神經病例檔（EEG/EMG/IONM 波形加術中影像），具 HL7/EMR 整合與策略化自動歸檔。這是母節點中真正的儲存/伺服器切分：多年累積的大體量波形加影像手術/神經病例本地保存，供臨床複閱與醫療法律留證，有別於遠端遙測 NOC 與術中採集設備。
+  role:
+  - system-of-record
+  - infrastructure-platform
+  - integration
+  - workflow
+  data_modality:
+  - time-series
+  - documents
+  hardware_profile:
+  - capacity-archive-storage
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Cadwell Industries (CadLink Server / Cascade Surgical Studio enterprise)
+  - Natus Medical (NeuroWorks / Xltek enterprise database)
+  - Nihon Kohden (neurology enterprise / DataStation)
+  - Computational Diagnostics (Neuro Software Suite, enterprise/remote data management)
+  confidence: B
+  source: 'Web-verified: Cadwell CadLink product page (cadwell.com/cadlink) and CadLink Server System Configuration doc (cadwell.support 369044-624 Rev08, 2024) confirm centralized on-prem storage, bidirectional HL7 ADT/ORM/embedded-results, and optional Auto-Archiving triggered by time/file-size with email status — a genuine capacity-archive + NVMe-ingest + HA SMCI target for multiyear EEG/EMG/IONM waveform + intra-op video. Natus (NeuroWorks/Xltek) and Nihon Kohden are established neuro enterprise-database vendors; Computational Diagnostics (cdi.com, est. 1988, Neuro Software Suite v6 with archive/storage) verified as real but is more monitoring-services-oriented, so its standalone on-prem archive-server SKU is softer.'
+- id: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-intraoperative-neuromonitoring-ionm-acquisition-clinical-data-management-archive-platform-in-or-acquisition-amplifier-appliance-acquisition-software-oem-edge-device
+  parent: medical-device-integration-waveform-analytics-platform-continuous-eeg-neuromonitoring-intraoperative-neuromonitoring-ionm-acquisition-clinical-data-management-archive-platform
+  name_en: In-OR IONM Acquisition Amplifier Appliance + Bedside Acquisition Software (OEM / Edge Device)
+  name_zh: 術中 IONM 採集放大器設備＋床旁採集軟體（OEM／邊緣設備）
+  name_full: In-OR IONM Acquisition Amplifier Appliance + Bedside Acquisition/Stimulation Software — proprietary edge medical device (headbox/amplifier + cart PC), OEM per-unit BOM
+  scope_en: 'The physical in-OR acquisition tier itself: proprietary amplifier/headbox plus a cart-mounted acquisition-and-stimulation workstation running the vendor''s real-time SW (SEP/MEP/EMG/EEG capture and stimulation). This is a regulated, self-contained edge medical device sold as capital equipment; its compute is a vendor-locked embedded/cart PC, not a general-purpose SMCI server — so SMCI pull is minimal and only via any OEM cart-PC/edge BOM. Kept separate to make the parent''s storage-vs-device distinction explicit and honest.'
+  scope_zh: 術中採集層本身：專有放大器/頭盒加推車式採集與刺激工作站，運行廠商即時軟體（SEP/MEP/EMG/EEG 採集與刺激）。屬受監管、自成一體的邊緣醫療設備，以資本設備形式銷售；其算力為廠商鎖定的嵌入/推車 PC，而非通用 SMCI 伺服器，故 SMCI 拉動極小，僅可能經 OEM 推車 PC／邊緣 BOM。單列以誠實呈現母節點『儲存 vs 設備』之分。
+  role:
+  - data-acquisition
+  - regulated-software-as-a-medical-device
+  - workflow
+  data_modality:
+  - time-series
+  hardware_profile:
+  - edge-industrial
+  hardware_opportunity: 1
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - hospital-health-system
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - Cadwell Industries (Cascade IOMAX / Cascade Elite / Guardian)
+  - Natus Medical (Xltek Protektor / Quantum)
+  - Medtronic (NIM-Neuro / NIM-Eclipse)
+  - inomed (ISIS)
+  - Dr. Langer Medical
+  - Nihon Kohden
+  confidence: B
+  source: 'Web-verified: Cadwell IONM/Cascade Surgical Studio/Guardian product pages; Technavio ''Top Seven Vendors in Intraoperative Neuromonitoring'' (Natus, Nihon Kohden, Medtronic, Cadwell, inomed) via Sleep Review. Device tier is a proprietary amplifier + vendor-locked cart workstation, not a SMCI-server target — retained as the honest low-SMCI (opportunity 1, OEM BOM) counterpart to the archive-server child.'
