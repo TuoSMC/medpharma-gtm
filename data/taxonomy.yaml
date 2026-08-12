@@ -7750,3 +7750,933 @@ subcategories:
   - KNAPP
   confidence: B
   source: KNAPP 'SAP EWM Building Blocks' for pharma sector; Körber SAP EWM pharma add-ons; SAP EWM pharma implementations (Kwizda Pharmahandel); Blue Yonder/Manhattan pharma-distribution WMS — knapp.com, koerber-supplychain.com (verified 2026). Vertical config of general WMS, not pure-play → confidence B.
+- id: hospital-erp-financials-hcm-core
+  parent: hospital-erp
+  name_en: Core ERP Financials & HCM Suite
+  name_zh: 核心 ERP 财务与人力资本管理套件
+  name_full: Healthcare Enterprise Resource Planning — Core Financials (GL/AP/AR) & Human Capital Management / Payroll
+  scope_en: 'The back-office system-of-record suite: general ledger, accounts payable/receivable, procurement-to-pay, fixed assets, plus bundled HR core / payroll / benefits. The financial and workforce transaction backbone of a health system, increasingly delivered as multi-tenant cloud SaaS but still run on-prem or in private cloud by the largest IDNs and academic medical centers.'
+  scope_zh: 后台记录系统套件：总账、应付/应收账款、采购到付款、固定资产，外加捆绑的人力资源核心、薪酬与福利。是医疗系统的财务与人力交易骨干，越来越多以多租户云 SaaS 交付，但大型医疗集团与学术医疗中心仍在本地或私有云运行。
+  role:
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Workday
+  - Oracle (Fusion ERP / PeopleSoft)
+  - Infor (CloudSuite Healthcare / Lawson)
+  - SAP
+  - Multiview ERP
+  confidence: A
+  source: 'Fortune Business Insights Healthcare ERP Market 2026-2034; ERP Research Oracle vs Workday for Healthcare; KLAS Best in KLAS 2025-2026 (Multiview #1 ERP <300 beds, score 91)'
+- id: hospital-erp-supply-chain-management
+  parent: hospital-erp
+  name_en: Healthcare Supply Chain & Inventory Management
+  name_zh: 医疗供应链与库存管理
+  name_full: Provider Supply Chain Management — Materials Management, Point-of-Use Inventory, Perpetual Inventory & Logistics
+  scope_en: 'Purpose-built provider-side supply chain execution: materials management, perpetual and point-of-use inventory (incl. lot/serial traceability for implants, consumables and pharmacy recall management), par-level replenishment, internal logistics and demand forecasting. A distinct KLAS/AHRMM category separate from the ERP financial core, often integrated to but not sold by the ERP vendor.'
+  scope_zh: 为医疗提供方打造的供应链执行：物料管理、永续与使用点库存（含植入物、耗材及药房召回的批号/序列号追溯）、定量补货、内部物流与需求预测。是独立于 ERP 财务核心的 KLAS/AHRMM 类别，常与 ERP 集成但由不同厂商销售。
+  role:
+  - workflow
+  - system-of-record
+  - data-acquisition
+  data_modality:
+  - transactional
+  - time-series
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  - edge-industrial
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Tecsys (Elite Healthcare)
+  - Infor Healthcare SCM
+  - Jump Technologies
+  - Oracle Health (Cerner) Supply Chain
+  - LogiQuip
+  - Syft (GHX)
+  confidence: A
+  source: Tecsys Hospital Supply Chain Software; AHRMM25 top client-rated vendor rankings; Precedence Research Healthcare SCM Market to $6.63B by 2035
+- id: hospital-erp-procurement-exchange-spend
+  parent: hospital-erp
+  name_en: Procurement Exchange, GPO & Spend Management Network
+  name_zh: 采购交易网络、集团采购与支出管理
+  name_full: Healthcare Procurement Trading Exchange, Group Purchasing (GPO) Connectivity & Spend/Contract Management
+  scope_en: 'The shared provider-supplier-distributor trading network layer: electronic ordering/EDI exchange, catalog and item-master data standardization, GPO contract loading, spend analytics and vendor contract/credential management. Distinct from in-house SCM because it is a multi-tenant network operated by an ISV/GPO as a service (co-sell), running at cross-industry scale rather than inside one hospital.'
+  scope_zh: 连接提供方-供应商-分销商的共享交易网络层：电子订购/EDI 交换、目录与主数据标准化、GPO 合同加载、支出分析及供应商合同/资质管理。区别于院内自建 SCM，它是由 ISV/GPO 以服务方式运营的多租户网络（联合销售），跨行业规模运行。
+  role:
+  - integration
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - real-world-data
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  - capacity-archive-storage
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - GHX (Global Healthcare Exchange)
+  - Vizient
+  - Premier
+  - symplr Spend Management
+  confidence: B
+  source: symplr Spend Management / Value Analysis product docs (symplr.com, GreenLight Medical acquisition); Procurement Magazine / Healthcare Digital Top 10 Procurement Platforms; GHX platform docs; AHRMM25 (GHX rankings)
+- id: hospital-erp-cost-accounting-decision-support
+  parent: hospital-erp
+  name_en: Cost Accounting & Financial Decision Support (EPM)
+  name_zh: 成本核算与财务决策支持 (EPM)
+  name_full: Healthcare Cost Accounting, Decision Support & Enterprise Performance Management — Profitability, Budgeting & Financial Planning
+  scope_en: 'Enterprise performance management for providers: activity/RVU-based cost accounting allocating hundreds of millions of transaction-level costs down to encounter, service-line and physician; profitability analytics, budgeting, long-range financial planning and Medicare cost-report modeling. The one ERP-adjacent segment with a real compute pull — large in-memory allocation engines and analytics over the full financial + clinical transaction set.'
+  scope_zh: 面向医疗提供方的企业绩效管理：基于作业/RVU 的成本核算，将数亿条交易级成本分摊到诊次、服务线与医师；盈利能力分析、预算、长期财务规划及 Medicare 成本报告建模。是 ERP 相邻领域中唯一具真实算力需求的细分——大型内存分摊引擎及跨完整财务与临床交易集的分析。
+  role:
+  - analytics-artificial-intelligence
+  - system-of-record
+  data_modality:
+  - transactional
+  - real-world-data
+  hardware_profile:
+  - high-memory
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Strata Decision Technology (StrataJazz)
+  - Syntellis (Axiom EDS, now part of Strata)
+  - Health Catalyst
+  - Harris Affinity (Affinity Decision Support)
+  confidence: A
+  source: KLAS Business Decision Support / Cost Accounting (Strata, Syntellis Axiom); Roper/Strata-Syntellis combination Aug-2023 ($1.25B); Harris Affinity ADS (HFMA Peer Review, KLAS Emerging Tech 'A'); vendor product docs
+- id: medical-device-integration-bedside-connectivity-middleware
+  parent: medical-device-integration
+  name_en: Bedside Device Connectivity Middleware
+  name_zh: 床旁设备连接与集成中间件
+  name_full: Bedside Device Connectivity & Vendor-Neutral MDI Middleware
+  scope_en: Vendor-neutral medical device integration platforms that acquire vitals, ventilator, infusion-pump and monitor data at the bedside via connectivity gateways and stream it into the EHR flowsheet. The commercial layer is the integration engine plus bedside computing hubs; the pull is edge appliances at the bedside and a resilient HA integration-server tier in the data center.
+  scope_zh: 厂商中立的医疗设备集成平台，通过床旁连接网关采集生命体征、呼吸机、输液泵和监护仪数据并写入电子病历流程表。商业层是集成引擎加床旁计算枢纽；硬件拉动为床旁边缘设备与数据中心的高可用集成服务器层。
+  role:
+  - integration
+  - data-acquisition
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Philips Capsule (MDIP / Neuron)
+  - Oracle Health CareAware iBus
+  - NantHealth / iSirona DeviceConX
+  - Masimo (Hospital Automation / MDI)
+  confidence: A
+  source: Philips Capsule MDIP & Neuron product pages; Oracle Health CareAware iBus BMDI; Masimo Medical Device Integration (masimo.com/products/medical-device-integration); KLAS Medical Device Integration category (Capsule / CareAware iBus / DeviceConX). Trimmed Sensmetics & Interneuron as unconfirmable in this sub-market.
+- id: medical-device-integration-clinical-alarm-management
+  parent: medical-device-integration
+  name_en: Clinical Alarm Management
+  name_zh: 临床报警管理与二级报警通知
+  name_full: Clinical Alarm Management & Secondary Alarm Notification Middleware
+  scope_en: 'FDA-cleared (typically Class II) secondary alarm-notification middleware that ingests alarms from monitors, nurse call, smart beds and IV pumps, applies filtering/escalation to fight alarm fatigue, and routes actionable alerts to caregiver devices. Distinct from general clinical communication: this is the regulated alarm-integration/surveillance layer. Modest but resilient HA/DR server footprint.'
+  scope_zh: 经FDA批准（通常为II类）的二级报警通知中间件，汇集监护仪、护士呼叫、智能床和输液泵的报警，进行过滤与升级以缓解报警疲劳，并将可操作警报路由至医护设备。与通用临床通信不同，这是受监管的报警集成与监测层。硬件为适度但高可用/容灾的服务器。
+  role:
+  - workflow
+  - integration
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  vendors:
+  - Connexall (GlobeStar)
+  - Bernoulli Health
+  - Ascom (Unite)
+  - Spok
+  - Vocera (Stryker)
+  - Critical Alert Systems
+  confidence: A
+  source: Connexall patient-alarm-management site; Bernoulli One FDA Class II secondary alarm clearance (confirmed via Spok–Bernoulli BusinessWire release); Ascom clinical alarm management page; Voalte–Connexall–Bernoulli waveform-to-smartphone partnership (PRWeb); AAMI third-party alarm notification reference.
+- id: medical-device-integration-waveform-analytics-platform
+  parent: medical-device-integration
+  name_en: High-Fidelity Waveform Capture & Analytics
+  name_zh: 高保真波形数据采集与实时分析
+  name_full: High-Fidelity Physiologic Waveform Capture & Real-Time Analytics Platform
+  scope_en: 'Platforms that capture, archive and stream high-frequency physiologic waveform data (ECG, ABP, EEG/multimodal neuromonitoring, ventilator waveforms) from bedside devices and run real-time and retrospective AI/ML on it for deterioration prediction, digital-twin and research. This is the flagship SMCI pull in the parent: NVMe performance tier for high-rate ingest, GPU for model training/inference, and large capacity-archive for years of waveform data. Distinct research/AMC and neurocritical-care buyer.'
+  scope_zh: 采集、归档并推送高频生理波形数据（心电、动脉压、脑电/多模态脑监测、呼吸机波形）的平台，对其运行实时与回顾性AI/ML用于恶化预测、数字孪生与研究。这是本父类中最具旗舰意义的SMCI硬件拉动：高频摄取的NVMe性能层、模型训练/推理的GPU、以及多年波形数据的大容量归档。买方为科研/学术医疗中心与神经重症。
+  role:
+  - analytics-artificial-intelligence
+  - data-acquisition
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - time-series
+  - artificial-intelligence-models
+  - real-world-data
+  hardware_profile:
+  - nvme-performance-storage
+  - gpu-server
+  - capacity-archive-storage
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - academic-medical-center
+  - hospital-health-system
+  vendors:
+  - Medical Informatics Corp (Sickbay)
+  - Moberg Analytics (Moberg Clinical Platform)
+  - Etiometry
+  confidence: A
+  source: Sickbay/Medical Informatics Corp platform pages (sickbay.com/platform — archives high-resolution waveform + ML/AI); Etiometry physiology risk-analytics platform (confirmed as Sickbay competitor); Moberg Analytics multimodal neuromonitoring / Moberg Clinical Platform. Removed Bernoulli Health here to sharpen boundary vs. sibling alarm-management child.
+- id: lis-clinical-hospital-general
+  parent: lis
+  name_en: Clinical / Hospital LIS (General Laboratory)
+  name_zh: 临床／医院综合实验室信息系统
+  name_full: Clinical Laboratory Information System for hospital general labs (chemistry, hematology, coagulation, microbiology)
+  scope_en: 'The transactional system-of-record for the hospital general clinical lab: order entry, specimen accessioning, instrument interfacing, autoverification, and result release for chemistry, hematology, coagulation and microbiology. Typically deployed as a module of, or tightly coupled to, the enterprise EHR. Workload is transactional-DB with strict 24/7 uptime, favoring HA/redundant + DR, not GPU.'
+  scope_zh: 医院综合临床实验室的事务型记录系统：医嘱录入、标本接收、仪器接口、自动审核、化学／血液／凝血／微生物结果发布，通常作为企业级EHR的模块或与其紧密集成。负载为事务型数据库，要求7×24不间断，倾向高可用冗余与灾备，非GPU。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Epic (Beaker)
+  - Oracle Health / Cerner (Millennium PathNet)
+  - Sunquest Information Systems
+  - SCC Soft Computer (SoftLab)
+  - Clinisys
+  confidence: A
+  source: Mordor Intelligence LIS market report (hospitals/clinics lead share); Verified Market Research 'Top LIS' (Clinical LIS type); SCC Soft Computer + Sunquest vendor sites; Dark Daily Epic/Beaker EHR-LIS coverage
+- id: lis-anatomic-pathology
+  parent: lis
+  name_en: Anatomic Pathology LIS (AP-LIS)
+  name_zh: 解剖病理实验室信息系统
+  name_full: Anatomic Pathology Laboratory Information System (surgical pathology, cytology, gross/histology case management and reporting)
+  scope_en: 'Specialty system-of-record for anatomic pathology: specimen/block/slide tracking, gross and histology workflow, cytology, synoptic/structured diagnostic reporting, and case management. Distinct data model and vocabularies from clinical LIS; integrates with (but is not) the whole-slide-image store handled by digital-pathology systems. Carries some gross-image/document and archive storage pull alongside transactional case data.'
+  scope_zh: 解剖病理专用记录系统：标本／蜡块／切片追踪、取材与组织学流程、细胞学、结构化诊断报告与病例管理。数据模型与术语不同于临床LIS，与数字病理的全切片图像库集成但本身不是图像存储。除事务型病例数据外带有一定取材图像／文档与归档存储需求。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  - images
+  hardware_profile:
+  - nvme-performance-storage
+  - capacity-archive-storage
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  vendors:
+  - Sunquest (CoPathPlus)
+  - Epic (Beaker AP)
+  - LigoLab
+  - NovoPath
+  - XIFIN (AP Suite)
+  confidence: A
+  source: Verified Market Research LIS blog (Anatomic Pathology LIS type); NovoPath 'Top LIS Companies 2026'; LigoLab AP platform pages; XIFIN AP Suite / anatomic-pathology industry-solutions page (verified XIFIN ships its own AP-LIS)
+- id: lis-reference-outreach-independent
+  parent: lis
+  name_en: Reference / Independent / Outreach Lab LIS
+  name_zh: 第三方／独立／外送实验室信息系统
+  name_full: Reference, independent commercial and hospital-outreach Laboratory Information System (high-throughput, RCM-integrated, multi-client)
+  scope_en: 'LIS built for commercial reference labs and hospital outreach programs running very high test volumes for many external client accounts: high-throughput result processing, multi-site/multi-client rules engines, EHR-connectivity outreach portals, and tight coupling to lab revenue-cycle-management/billing. Fastest-growing LIS segment (independent labs lead growth) and the strongest SMCI pull — HPC-class CPU for batch result processing plus HA/DR — with the lab operator itself running the iron as a service provider.'
+  scope_zh: 面向商业第三方实验室与医院外送业务的LIS，为大量外部客户账户处理极高检验量：高吞吐结果处理、多站点／多客户规则引擎、EHR互联外送门户，并与实验室收入周期管理／计费紧密集成。这是LIS中增长最快的细分（独立实验室领先），也是SMCI拉动最强的一块——批量结果处理所需的HPC级CPU加上高可用与灾备——由实验室运营方作为服务提供者自建运行硬件。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-performance-computing-cpu
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - diagnostic-reference-laboratory
+  - hospital-health-system
+  vendors:
+  - Clinisys (Orchard Enterprise)
+  - LigoLab
+  - XIFIN
+  - Comp Pro Med (Polytech)
+  - SCC Soft Computer (SoftLab Outreach)
+  confidence: A
+  source: Clinisys Orchard Enterprise high-volume-labs page; Comp Pro Med Polytech reference-lab/outreach interface pages (verified); LigoLab & XIFIN outreach/RCM material; Mordor Intelligence (independent labs lead LIS growth)
+- id: lis-blood-bank-transfusion
+  parent: lis
+  name_en: Blood Bank / Transfusion Information System (BBIS)
+  name_zh: 血库／输血信息系统
+  name_full: Blood Bank & Transfusion Management Information System (FDA 510(k)-cleared donor, inventory, crossmatch and transfusion safety)
+  scope_en: Regulated transfusion-management software governing donor management, blood-product inventory, serologic/crossmatch testing, and pre-transfusion product-suitability decisions. In the US these are FDA 510(k)-cleared as medical-device software (SaMD), a distinct regulatory and vendor set from general clinical LIS. Life-safety, 24/7 availability drives a strong HA/redundant + DR profile; workload is transactional, not GPU.
+  scope_zh: 受监管的输血管理软件，管辖献血者管理、血制品库存、血清学／交叉配血检测及输血前血制品适配决策。在美国按FDA 510(k)以医疗器械软件（SaMD）获批，监管与供应商群体均不同于通用临床LIS。生命安全、7×24可用性带来强高可用冗余与灾备需求；负载为事务型，非GPU。
+  role:
+  - system-of-record
+  - workflow
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Haemonetics (SafeTrace Tx)
+  - WellSky (Transfusion)
+  - SCC Soft Computer (SoftBank)
+  - Oracle Health / Cerner
+  - Mak-System
+  confidence: A
+  source: Haemonetics SafeTrace Tx product pages (FDA-cleared, 6 of top-10 US hospitals); WellSky Transfusion overview (FDA 510(k)-cleared, SOC2/ISO 13485); SCC SoftBank; CAP Today blood-bank systems survey
+- id: payer-core-admin-caps-adjudication-engine
+  parent: payer-core-admin
+  name_en: CAPS Claims Adjudication Engine (Core System of Record)
+  name_zh: 核心行政处理系统（CAPS）理赔裁定引擎
+  name_full: Core Administrative Processing System (CAPS) — claims adjudication, benefits configuration, capitation and provider reimbursement engine of record
+  scope_en: 'The transactional system-of-record that adjudicates medical/pharmacy claims end to end: benefits configuration, auto-adjudication rules, capitation, provider reimbursement, and accumulators. Mission-critical OLTP with high first-pass auto-adjudication rates (90-97%), demanding in-memory processing, hard high-availability and disaster recovery. Large plans self-host; HealthEdge/Cognizant increasingly offer it as BPaaS.'
+  scope_zh: 对医疗/药品理赔进行端到端裁定的交易型记录系统：福利配置、自动裁定规则、按人头付费、供方偿付与累计器。任务关键的联机事务处理，首过自动裁定率高（90-97%），要求内存计算、强高可用与容灾。大型计划自建，HealthEdge/Cognizant 日益以 BPaaS 形式提供。
+  role:
+  - system-of-record
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  hardware_profile:
+  - high-memory
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 4
+  primary_buyer: customer
+  segments:
+  - payer
+  vendors:
+  - Optum (Facets)
+  - Optum (QNXT)
+  - Cognizant TriZetto
+  - HealthEdge (HealthRules Payer)
+  - Vitech (V3locity)
+  - Plexis Healthcare Systems
+  - HealthAxis
+  confidence: A
+  source: Gartner Peer Insights 'US Healthcare Payer Core Administration' market; KLAS 'Payer Claims & Administration Platforms 2022 Vendor Guide'; HealthEdge HealthRules Payer product pages (auto-adjudication 90-97%)
+- id: payer-core-admin-payment-integrity-editing
+  parent: payer-core-admin
+  name_en: Payment Integrity — Prepay/Postpay Claims Editing & Pricing Accuracy
+  name_zh: 支付完整性——预付/后付理赔编辑与定价准确性
+  name_full: Payment integrity claims editing and pricing accuracy (prepay first-pass and second-pass, postpay), distinct from fraud/waste/abuse analytics
+  scope_en: 'Rules- and AI-driven editing that ensures claims are coded and priced correctly before or after payment: first-pass/second-pass prepay edits, clinical/coding policy management, pricing and ''what-if'' modeling. Vendors are specialist services/SaaS that plug into the CAPS engine and never sell a full CAPS. Scoped to coding/pricing correctness — kept distinct from the existing payer UM/fraud-analytics id. Delivery is predominantly cloud/SaaS (Lyric.ai, HealthEdge Source), so it carries the only, and still modest, GPU angle in this parent via emerging AI edit/explainability models.'
+  scope_zh: 以规则和 AI 驱动的编辑，确保理赔在付款前后编码与定价正确：一次/二次预付编辑、临床/编码政策管理、定价与假设建模。厂商为接入 CAPS 引擎的专业服务/SaaS，从不销售完整 CAPS。范围限定于编码/定价正确性，与既有的支付方 UM/欺诈分析条目区分。交付以云/SaaS 为主（Lyric.ai、HealthEdge Source），因此本父类中唯一（且仍适中）的 GPU 角度来自新兴的 AI 编辑与可解释性模型。
+  role:
+  - analytics-artificial-intelligence
+  - workflow
+  data_modality:
+  - transactional
+  - real-world-data
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - nvme-performance-storage
+  - capacity-archive-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Cotiviti
+  - Lyric (ClaimsXten)
+  - HealthEdge Source
+  - Optum
+  - ClarisHealth (Pareo)
+  confidence: A
+  source: KLAS 'Payment Accuracy & Integrity Solutions' (Lyric 2025 Best in KLAS Pre-Payment, verified as renamed ClaimsXten portfolio); Cotiviti and Lyric.ai prepay-editing product pages; HealthEdge Source (Burgess) prepay/postpay editing product pages
+- id: payer-core-admin-enrollment-membership-billing
+  parent: payer-core-admin
+  name_en: Enrollment, Membership & Premium Billing
+  name_zh: 参保登记、会员管理与保费账单
+  name_full: Member enrollment (incl. ACA Enhanced Direct Enrollment / Medicare Advantage), membership administration, premium billing and payments
+  scope_en: Shopping, eligibility and enrollment (ACA EDE, Medicare Advantage, group/individual), membership administration, premium billing, payments and member communications. A distinct SaaS segment led by specialist vendors that often sit alongside rather than inside the CAPS engine; transactional OLTP with seasonal open-enrollment surge and HA needs, but modest per-workload iron.
+  scope_zh: 投保选择、资格与登记（ACA 增强直接登记、Medicare Advantage、团体/个人）、会员管理、保费账单、支付与会员沟通。由专业厂商主导的独立 SaaS 细分，常与 CAPS 引擎并列而非内嵌；交易型 OLTP，开放登记季有峰值与高可用需求，但单负载硬件适中。
+  role:
+  - system-of-record
+  - workflow
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Softheon
+  - Benefitfocus
+  - Connecture
+  - Vitech
+  - HealthAxis
+  confidence: A
+  source: KLAS 'Health Insurance Enrollment Solutions'; Softheon (marketplace enrollment/premium billing) and Benefitfocus (eligibility & enrollment) product pages; Connecture (Medicare Advantage enrollment)
+- id: payer-core-admin-provider-data-network-management
+  parent: payer-core-admin
+  name_en: Provider Data & Network Management (Credentialing, Directory, Adequacy)
+  name_zh: 供方数据与网络管理（资质认证、目录、网络充足性）
+  name_full: Provider data management, credentialing/payer enrollment, contracting, directory management and network adequacy compliance
+  scope_en: 'Maintains accurate provider records that drive claims pricing and directory compliance: provider data management, credentialing and payer enrollment, contracting, directory management and network adequacy measurement. A distinct Gartner-recognized market; increasingly AI-enabled for automated provider-data maintenance, but a document/transactional workload with modest dedicated iron.'
+  scope_zh: 维护驱动理赔定价与目录合规的准确供方记录：供方数据管理、资质认证与支付方登记、签约、目录管理与网络充足性测量。Gartner 认可的独立市场；日益以 AI 实现供方数据自动维护，但属文档/交易型负载，专用硬件适中。
+  role:
+  - data-acquisition
+  - integration
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Availity
+  - symplr
+  - Quest Analytics
+  - Andros
+  - HealthEdge (Provider Data Management)
+  - Zelis
+  confidence: B
+  source: Gartner Peer Insights 'US Healthcare Payers' Provider Data Management Applications; Quest Analytics payer/plan and network-adequacy (QES) pages (works with ~90% of payers); symplr + Andros credentialing/directory; HealthEdge AI-driven Provider Data Management
+- id: payer-core-admin-edi-clearinghouse-transaction
+  parent: payer-core-admin
+  name_en: EDI Clearinghouse & Claims Transaction Gateway
+  name_zh: EDI 清算中心与理赔交易网关
+  name_full: Payer-side EDI/X12 clearinghouse and claims/eligibility transaction gateway feeding the adjudication engine
+  scope_en: The high-throughput intake layer that receives, validates, translates and routes X12/EDI claim, eligibility and remittance transactions between providers and the adjudication engine. Distinct from clinical HIE; run by network operators moving billions of transactions, so it pulls high-volume transactional compute, fast NVMe and strong HA/DR. Buyer is typically the clearinghouse/network operator (co-sell) rather than the plan.
+  scope_zh: 高吞吐的接入层，在供方与裁定引擎之间接收、校验、转换并路由 X12/EDI 理赔、资格与汇款交易。区别于临床 HIE；由处理数十亿笔交易的网络运营商运行，因而拉动高并发交易计算、快速 NVMe 与强高可用/容灾。买方通常是清算/网络运营商（联合销售）而非计划本身。
+  role:
+  - integration
+  - data-acquisition
+  - workflow
+  data_modality:
+  - transactional
+  hardware_profile:
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  - high-performance-computing-cpu
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - payer
+  vendors:
+  - Availity
+  - Optum (Change Healthcare)
+  - Edifecs
+  - Waystar
+  - SSI Group
+  confidence: B
+  source: Availity network scale (4,000+ payers, 3.5M providers); Edifecs payer EDI/interoperability; KLAS Payer Claims & Administration vendor landscape
+- id: patient-access-scheduling-self-scheduling-digital-front-door
+  parent: patient-access-scheduling
+  name_en: Patient Self-Scheduling & Digital Front Door
+  name_zh: 患者自助预约与数字前门
+  name_full: Consumer-Facing Online Self-Scheduling / Digital Front Door
+  scope_en: Consumer-facing online appointment booking layered on top of EHR scheduling rules — real-time slot search, provider-rule matching, new/returning/referral workflows, and the 'digital front door' that routes patients into care. Sold as a co-sold SaaS layer that integrates into Epic/Cerner/athena/MEDITECH schedules.
+  scope_zh: 面向消费者的在线预约层，叠加在EHR排班规则之上——实时时段搜索、按医生规则匹配、新患者/复诊/转诊工作流，以及将患者导入就诊的'数字前门'。作为与EHR（Epic/Cerner/athena/MEDITECH）集成的联合销售SaaS层出售。
+  role:
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Kyruus Health
+  - Relatient
+  - DexCare
+  - Experian Health
+  - Zocdoc
+  - Solv
+  confidence: A
+  source: KLAS 'Patient Self-Scheduling Software' comparison (klasresearch.com/compare/patient-self-scheduling/467); Kyruus Health Schedule; Relatient Dash; Experian Health digital front door
+- id: patient-access-scheduling-provider-data-directory-search
+  parent: patient-access-scheduling
+  name_en: Provider Data Management & Directory Search
+  name_zh: 医生数据管理与目录搜索
+  name_full: Provider Data Management (PDM) & 'Find-a-Doctor' Directory Search
+  scope_en: 'Unifies disparate provider data (EHR, credentialing, CMS) into a single golden record and powers NLP-driven ''find-a-doctor'' / symptom search and click-to-schedule. Distinct buyer split: health systems (patient acquisition) and health plans (member directory / regulatory accuracy). Delivered as SaaS with a modest NLP/search-AI component but no direct SMCI hardware pull.'
+  scope_zh: 将分散的医生数据（EHR、资质认证、CMS）统一为单一黄金记录，并驱动基于NLP的'找医生'/症状搜索和一键预约。买方明显分化：医疗系统（患者获取）与健康计划（会员目录/合规准确性）。以SaaS交付，带有适度NLP/搜索AI组件，但无直接SMCI硬件拉动。
+  role:
+  - system-of-record
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - payer
+  - academic-medical-center
+  vendors:
+  - Kyruus Health
+  - Ribbon Health
+  - Quest Analytics
+  confidence: B
+  source: Kyruus Provider Data Management for Health Systems & Provider Search for Health Plans (kyruushealth.com); Ribbon Health provider-directory API; Quest Analytics (BetterDoctor) provider data accuracy for health plans
+- id: patient-access-scheduling-referral-management-orchestration
+  parent: patient-access-scheduling
+  name_en: Referral Management & Care Orchestration
+  name_zh: 转诊管理与就诊编排
+  name_full: Closed-Loop Referral Management & Network Care Orchestration
+  scope_en: End-to-end closed-loop referral capture, routing, status tracking and leakage analytics that fill the gap EHRs leave — inbound/outbound referrals, referring-provider portals, waitlist fill, and network supply/demand analytics. Distinct vendor set from pure self-scheduling; sold to health systems and specialty networks to retain referral volume.
+  scope_zh: 端到端闭环转诊的捕获、路由、状态跟踪和流失分析，填补EHR留下的空白——进出转诊、转诊医生门户、候补名单填补，以及网络供需分析。与纯自助预约的供应商群体不同；出售给医疗系统和专科网络以留住转诊量。
+  role:
+  - workflow
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Luma Health
+  - ReferralMD
+  - Alluvium Healthcare (formerly Blockit)
+  - Linear Health
+  confidence: A
+  source: Luma Health patient referrals product; ReferralMD closed-loop platform; Blockit rebrand to Alluvium Healthcare (businesswire/HIT Consultant 2026); Linear Health referral coordination software (linear.health)
+- id: patient-access-scheduling-digital-intake-registration
+  parent: patient-access-scheduling
+  name_en: Digital Patient Intake & Registration
+  name_zh: 数字化患者登记与注册
+  name_full: Digital Patient Intake, Registration & Check-In (Mobile / Tablet / Kiosk)
+  scope_en: 'Pre-visit and point-of-service registration: digital forms, self-service check-in, insurance eligibility, and payment collection across patient mobile, in-office tablet, and standing kiosk. Has a physical device footprint (check-in kiosks/tablets), but those are commodity consumer devices — not SMCI edge servers — so there is no genuine SMCI hardware angle.'
+  scope_zh: 就诊前及就诊现场登记：数字表单、自助签到、保险资格核验和收款，覆盖患者手机、院内平板和立式自助机。有物理设备足迹（签到自助机/平板），但均为商用消费设备，而非SMCI边缘服务器，因此不存在真正的SMCI硬件机会。
+  role:
+  - workflow
+  - data-acquisition
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile: []
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Phreesia
+  - Clearwave
+  - NexHealth
+  - Yosi Health
+  confidence: A
+  source: Phreesia Registration product; Clearwave patient check-in (mobile/tablet/kiosk); NexHealth intake; Yosi Health pre-registration; MEDITECH vendor page for Phreesia
+- id: patient-access-scheduling-ai-voice-contact-center
+  parent: patient-access-scheduling
+  name_en: AI Voice Agents & Patient Access Contact Center
+  name_zh: AI语音助理与患者接入呼叫中心
+  name_full: AI Voice / Conversational Agents for Patient-Access Call Automation
+  scope_en: Conversational AI (ASR + LLM + TTS) that automates inbound patient-access call centers — scheduling, referral triage, intake and follow-up over voice. This is the ONLY patient-access segment with a real GPU / LLM-inference pull; large health systems seeking HIPAA-scoped, sovereign, low-latency voice inference are a genuine on-prem/co-located GPU-server opportunity, though most vendors run inference on cloud today.
+  scope_zh: 对话式AI（ASR+LLM+TTS）自动化处理患者接入呼叫中心——通过语音完成预约、转诊分诊、登记和随访。这是患者接入中唯一具有真正GPU/LLM推理拉动力的细分；寻求HIPAA范围内、主权化、低延迟语音推理的大型医疗系统是真正的本地/托管GPU服务器机会，尽管目前多数供应商在云端推理。
+  role:
+  - workflow
+  - analytics-artificial-intelligence
+  - integration
+  data_modality:
+  - time-series
+  - documents
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  hardware_opportunity: 2
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Hyro
+  - Assort Health
+  - Syllable
+  - Notable
+  confidence: B
+  source: Hyro AI Agents for Healthcare (hyro.ai); Assort Health voice AI; healthcare voice-agent roundups naming Syllable and Notable
+- id: lab-middleware-automation-vendor-neutral-autoverification
+  parent: lab-middleware-automation
+  name_en: Vendor-Neutral Middleware & Autoverification Rules Engine
+  name_zh: 厂商中立中间件与自动审核规则引擎
+  name_full: Vendor-Neutral Clinical Laboratory Middleware with Autoverification & Rules Engine
+  scope_en: The classic instrument-to-LIS middleware layer that consolidates connectivity across any analyzer vendor and applies a rules engine to auto-release (autoverify) in-range results, routing only exceptions to techs. Runs as an on-prem, always-on service gating results in real time between analyzers and the LIS/EHR.
+  scope_zh: 连接各厂商分析仪与LIS的经典中间件层，通过规则引擎自动放行（自动审核）在控结果、仅将异常推送给技术人员。作为本地常驻服务，在分析仪与LIS/EHR之间实时把关结果。
+  role:
+  - integration
+  - workflow
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - time-series
+  hardware_profile:
+  - high-availability-redundant
+  - nvme-performance-storage
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  vendors:
+  - Data Innovations (Instrument Manager)
+  - Beckman Coulter (Remisol Advance / DL2000)
+  - Abbott (AlinIQ AMS)
+  - Orchard Software
+  - Roche (cobas middleware)
+  confidence: A
+  source: datainnovations.com/product/instrument-manager, datainnovations.com/autoverification; ScienceDirect autoverification core-chem study (S2153353922002826)
+- id: lab-middleware-automation-tla-orchestration-control
+  parent: lab-middleware-automation
+  name_en: Total Laboratory Automation Orchestration & Process Control
+  name_zh: 全实验室自动化编排与过程控制软件
+  name_full: Total Laboratory Automation (TLA) Track Orchestration & Process-Control Software
+  scope_en: The real-time control and orchestration software that drives physical total-lab-automation lines — sample track/conveyor routing, smart incubation, robotic workcells and analyzer scheduling. Runs on redundant control servers near the line, coordinating hardware-in-the-loop; typically co-sold bundled with the IVD vendor's automation track.
+  scope_zh: 驱动物理全实验室自动化产线的实时控制与编排软件——样本轨道/传送路由、智能孵育、机器人工作单元与分析仪调度。运行于产线旁的冗余控制服务器，协调硬件在环；通常随IVD厂商自动化轨道捆绑共售。
+  role:
+  - workflow
+  - data-acquisition
+  - integration
+  - infrastructure-platform
+  data_modality:
+  - transactional
+  - time-series
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  - high-performance-computing-cpu
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - diagnostic-reference-laboratory
+  - academic-medical-center
+  vendors:
+  - Roche (cobas connection modules / CCM)
+  - Beckman Coulter (DxA 5000 / Intelligent Routing)
+  - Siemens Healthineers (Aptio / CentraLink)
+  - Abbott (Accelerator / GLP)
+  - Inpeco (FlexLab)
+  confidence: B
+  source: inpeco.com FlexLab TLA; beckmancoulter.com DxA 5000 (Intelligent Routing dynamic system software, FDA 510(k) 2019); mordorintelligence.com total-lab-automation-market
+- id: lab-middleware-automation-digital-microbiology-ai
+  parent: lab-middleware-automation
+  name_en: Digital & AI Microbiology Middleware (Colony Imaging / Plate Reading)
+  name_zh: 数字与AI微生物学中间件（菌落成像/平板判读）
+  name_full: Digital Microbiology Middleware with AI Colony Imaging & Automated Plate Reading
+  scope_en: The image-analysis and AI interpretation layer inside microbiology automation — smart-incubator plate imaging, computer-vision colony detection/counting, chromogenic sorting and AI-assisted culture read (several FDA-cleared, SaMD). GPU-served inference against high-resolution plate images, predominantly embedded in the IVD vendor's automation instrument (per-unit BOM); the only sub-market here with a real accelerator pull.
+  scope_zh: 微生物自动化内部的图像分析与AI判读层——智能孵育平板成像、计算机视觉菌落检测/计数、显色分选与AI辅助培养判读（多项已获FDA批准，属SaMD）。基于GPU对高分辨率平板图像进行推理，通常嵌入IVD厂商自动化仪器内（按台计入BOM）；是本类别下唯一具备真实加速器需求的子市场。
+  role:
+  - analytics-artificial-intelligence
+  - data-acquisition
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - images
+  - artificial-intelligence-models
+  hardware_profile:
+  - gpu-server
+  - edge-industrial
+  - nvme-performance-storage
+  hardware_opportunity: 3
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - diagnostic-reference-laboratory
+  - hospital-health-system
+  - academic-medical-center
+  - medical-technology-in-vitro-diagnostics
+  vendors:
+  - Copan (WASPLab / PhenoMATRIX)
+  - BD (Kiestra / Synapsys, Urine Culture App)
+  - Clever Culture Systems (APAS Independence, distributed by Thermo Fisher)
+  confidence: B
+  source: cleverculturesystems.com APAS Independence (first US FDA-cleared AI plate reading; Urine + MRSA modules); copanusa.com WASPLab/PhenoMATRIX; ASM JCM 10.1128/jcm.00971-21 (APAS); ScienceDirect S0031302525001606 (BD Kiestra Urine Culture AI)
+- id: hie-interoperability-engine-integration-interface-engine
+  parent: hie-interoperability-engine
+  name_en: Integration / Interface Engine (Middleware)
+  name_zh: 整合引擎／接口引擎（中介軟體）
+  name_full: Healthcare Integration / Interface Engine (HL7/FHIR message routing middleware)
+  scope_en: On-prem or self-hosted message-routing middleware that translates and routes HL7 v2/v3, FHIR, X12, DICOM and CCDA between EHR, LIS, RIS, pharmacy and external systems. The always-on interface hub of a health system, running thousands of interfaces and tens-to-hundreds of millions of messages/day.
+  scope_zh: 本地部署或自架的訊息路由中介軟體，在 EHR、LIS、RIS、藥局與外部系統之間轉換並路由 HL7 v2/v3、FHIR、X12、DICOM、CCDA 等訊息。是醫療系統全天候的接口中樞，運行數千條介面、每日數千萬至上億筆訊息。
+  role:
+  - integration
+  - infrastructure-platform
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - diagnostic-reference-laboratory
+  vendors:
+  - Rhapsody (Lyniate)
+  - InterSystems Health Connect / IRIS for Health
+  - Infor Cloverleaf
+  - NextGen Connect (Mirth Connect)
+  - Corepoint (Rhapsody)
+  confidence: A
+  source: 'KLAS Interoperability/Integration Engine coverage; InterSystems, Rhapsody vendor sites; NextGen/Mirth. Note: Corepoint and Rhapsody are now the same corporate parent (Lyniate rebranded Rhapsody) but remain distinct product brands in-market.'
+- id: hie-interoperability-engine-shared-care-record-cdr
+  parent: hie-interoperability-engine
+  name_en: HIE Platform / Shared Care Record & Clinical Data Repository
+  name_zh: 健康資訊交換平台／共享照護紀錄與臨床資料庫
+  name_full: HIE / Shared Care Record platform with longitudinal Clinical Data Repository (CDR)
+  scope_en: 'Regional, statewide or national aggregation platforms that normalize, deduplicate and persist a longitudinal unified care record across many organizations, exposing query, care-coordination and analytics on a large clinical data repository. Distinct from a pass-through engine: it stores the data.'
+  scope_zh: 區域、州級或全國性的匯聚平台，將跨機構資料標準化、去重並持久化為縱向的統一照護紀錄，並在大型臨床資料庫（CDR）上提供查詢、照護協調與分析。與純轉發引擎不同，它會儲存資料。
+  role:
+  - system-of-record
+  - integration
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - documents
+  - real-world-data
+  hardware_profile:
+  - capacity-archive-storage
+  - nvme-performance-storage
+  - high-availability-redundant
+  - disaster-recovery-backup
+  hardware_opportunity: 3
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  - payer
+  vendors:
+  - InterSystems HealthShare
+  - Orion Health (Amadeus)
+  - Smile Digital Health
+  - MphRx Minerva
+  - NextGen (Mirth) HIE
+  confidence: A
+  source: KLAS 'Global Shared Care Records' (InterSystems, Orion Health leaders); InterSystems HealthShare; MphRx Minerva product page + Mount Sinai longitudinal FHIR record deployment (mphrx.com, hcinnovationgroup.com); Smile Digital Health (Smile CDR) FHIR repository.
+- id: hie-interoperability-engine-empi-patient-identity
+  parent: hie-interoperability-engine
+  name_en: EMPI / Patient Identity Matching
+  name_zh: 企業主索引／病患身分比對（EMPI）
+  name_full: Enterprise Master Person Index (EMPI) and referential/probabilistic patient matching
+  scope_en: Enterprise master person index and probabilistic/ML referential matching that links and reconciles records for the same person across systems and sites of care. The identity backbone under any HIE or CDR; increasingly ML-driven referential matching. Sold as a standalone product, not merely a CDR feature.
+  scope_zh: 企業主索引（EMPI）與機率式／機器學習參照比對，跨系統與跨照護站點連結並調解同一人的紀錄。是任何 HIE 或 CDR 底層的身分骨幹，日益採用機器學習參照比對，並以獨立產品銷售，非僅為 CDR 的附屬功能。
+  role:
+  - integration
+  - infrastructure-platform
+  - analytics-artificial-intelligence
+  data_modality:
+  - transactional
+  - real-world-data
+  hardware_profile:
+  - high-performance-computing-cpu
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - payer
+  - diagnostic-reference-laboratory
+  vendors:
+  - NextGate
+  - Verato
+  - InterSystems EMPI
+  confidence: A
+  source: Gartner 2024/2025 Hype Cycle for Real-Time Health System Technologies, Next-Generation EMPI (Verato, six years running); NextGate MatchMetrix vendor-neutral EMPI; InterSystems EMPI (HealthShare). Verified via verato.com, cbinsights NextGate.
+- id: clinical-communication-collaboration-secure-messaging-platform
+  parent: clinical-communication-collaboration
+  name_en: Clinical Secure Messaging & Care-Team Collaboration Platforms
+  name_zh: 临床安全消息与照护团队协作平台
+  name_full: Clinical Secure Messaging & Care-Team Collaboration Platforms (HIPAA-compliant clinical texting, care-team routing, EHR-integrated messaging)
+  scope_en: 'HIPAA-compliant clinical texting and care-team collaboration: secure messaging, role/on-call-aware routing, EHR context integration, and clinician-to-clinician/patient coordination. The SaaS core of CC&C — overwhelmingly delivered as multi-tenant cloud; only a shrinking minority of large health systems self-host, so the SMCI-addressable server market is small.'
+  scope_zh: 符合HIPAA的临床短信与照护团队协作：安全消息、基于角色/值班的路由、EHR上下文集成、医护之间及医患协调。是CC&C的SaaS核心——绝大多数以多租户云交付，仅少数大型医疗系统自托管，因此SMCI可寻址的服务器市场较小。
+  role:
+  - workflow
+  - integration
+  data_modality:
+  - transactional
+  - documents
+  hardware_profile:
+  - high-availability-redundant
+  hardware_opportunity: 1
+  primary_buyer: operator
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - TigerConnect
+  - PerfectServe
+  - Stryker (Vocera Platform)
+  - Spok
+  - symplr (Halo Health)
+  - Mobile Heartbeat
+  confidence: A
+  source: 'KLAS Clinical Communication Platforms 2021/2023; MarketsandMarkets CC&C market report; Healthcare IT News (KLAS: secure-texting vendors morphing into communication platforms)'
+- id: clinical-communication-collaboration-nurse-call-systems
+  parent: clinical-communication-collaboration
+  name_en: Nurse Call Systems
+  name_zh: 护士呼叫系统
+  name_full: Nurse Call Systems (IP-based patient-to-staff call, workflow, integration hub)
+  scope_en: On-premise, real-time, life-safety patient-to-staff call and bedside workflow, increasingly IP/software-defined and acting as a communication hub that bridges nurse call, monitors, and mobile devices. Sold as turnkey integrated systems by med-tech OEMs — the compute is bundled/embedded (per-unit BOM), demands high-availability redundancy and in-facility edge deployment. Analysts treat this as a med-tech category converging with CC&C.
+  scope_zh: 本地部署、实时、涉及生命安全的患者呼叫与床旁工作流，日益IP化/软件定义，充当连接护士呼叫、监护仪与移动设备的通信中枢。由医疗科技OEM以交钥匙集成系统销售——算力捆绑/嵌入（按台BOM），要求高可用冗余与院内边缘部署。分析师将其视为与CC&C融合的医疗科技品类。
+  role:
+  - workflow
+  - data-acquisition
+  - integration
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - edge-industrial
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Rauland (AMETEK)
+  - Ascom
+  - Baxter (Hillrom)
+  - Honeywell
+  - Jeron Electronic Systems
+  confidence: A
+  source: MarketsandMarkets Nurse Call Systems market (Ametek/Rauland & Baxter leaders); GlobeNewswire US Nurse Call 2023 (Ascom, Rauland, Hill-Rom, Honeywell); GMInsights nurse call analysis (IP/mobile-enabled trend); Jeron Provider nurse-call product line
+- id: clinical-communication-collaboration-alarm-event-middleware
+  parent: clinical-communication-collaboration
+  name_en: Clinical Alarm & Event Notification Middleware
+  name_zh: 临床报警与事件通知中间件
+  name_full: Clinical Alarm & Event Notification Middleware (alarm surveillance, rules-based escalation, secondary alarm routing)
+  scope_en: On-premise middleware that captures live physiologic-monitor and device alarms, applies rules-based filtering/escalation to fight alarm fatigue, and routes actionable secondary alerts to the right caregiver's device. Ingests device time-series/waveforms, is patient-safety-critical (HA), sits at the network edge next to the device fleet, and several products are FDA-cleared (regulated).
+  scope_zh: 本地部署中间件，采集实时生理监护仪与设备报警，应用基于规则的过滤/升级以对抗报警疲劳，并将可执行的二级告警路由到合适照护者的设备。摄取设备时序/波形数据，涉及患者安全（高可用），部署在靠近设备群的网络边缘，多款产品已获FDA许可（受监管）。
+  role:
+  - integration
+  - data-acquisition
+  - workflow
+  - regulated-software-as-a-medical-device
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - high-availability-redundant
+  - edge-industrial
+  hardware_opportunity: 2
+  primary_buyer: customer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Connexall
+  - Spok (Alarm Surveillance, powered by Bernoulli)
+  - Ascom
+  - Stryker (Vocera)
+  - Capsule (Philips)
+  - Masimo
+  confidence: A
+  source: KLAS Alarm Management 2016; PRNewswire Global Clinical Alarm Management (Philips, Vocera, Ascom, Spok, Bernoulli, Connexall, Capsule, Masimo); Spok–Bernoulli alarm surveillance partnership (2018, verified as alliance not acquisition); Vocera acquisition of Extension Healthcare 2016 (verified — Engage folded into Vocera/Stryker); Connexall.com
+- id: clinical-communication-collaboration-realtime-voice-badge
+  parent: clinical-communication-collaboration
+  name_en: Real-Time Voice & Hands-Free Badge Infrastructure
+  name_zh: 实时语音与免提徽章通信基础设施
+  name_full: Real-Time Voice & Hands-Free Communication Badge Infrastructure (voice-controlled wearables + on-prem voice/telephony servers)
+  scope_en: 'Hands-free, voice-controlled wearable badges/smartbadges for clinicians plus the on-premise voice and telephony server infrastructure that powers them in real time. Distinct edge + real-time on-prem footprint (historically Vocera''s on-prem voice server is the most hardware-distinct part of CC&C); badge+server ships as an integrated OEM system. Vendor set overlaps the messaging platforms, so separability as a distinct SMCI market is moderate. Note: ''ambient/GPU voice'' is a separate ambient-clinical-documentation market and is NOT part of this sub-market.'
+  scope_zh: 面向临床医生的免提、语音控制可穿戴徽章/智能徽章，以及为其提供实时支持的本地语音与电话服务器基础设施。具备独特的边缘+实时本地占用（Vocera的本地语音服务器历来是CC&C中硬件属性最独立的部分）；徽章+服务器以集成OEM系统交付。厂商与消息平台重叠，作为独立SMCI市场的可分性中等。注：'环境/GPU语音'属于独立的环境临床记录市场，不在本子市场范围内。
+  role:
+  - workflow
+  - data-acquisition
+  - integration
+  data_modality:
+  - time-series
+  - transactional
+  hardware_profile:
+  - edge-industrial
+  - high-availability-redundant
+  hardware_opportunity: 2
+  primary_buyer: original-equipment-manufacturer
+  segments:
+  - hospital-health-system
+  - academic-medical-center
+  vendors:
+  - Stryker (Vocera Smartbadge)
+  - Ascom (Myco)
+  - Zebra Technologies
+  - Spectralink
+  confidence: B
+  source: Healthcare IT News / Healthcare Dive Vocera Smartbadge launch; Vocera Infrastructure Planning Guide (on-prem voice server); Zebra clinical smart-device KLAS report; Stryker Vocera Smartbadge product page
