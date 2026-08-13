@@ -51,6 +51,7 @@ def main():
         "triggers": load(DATA / "triggers.yaml"),
         "scoring": load(DATA / "scoring.yaml"),
         "vendors": load(DATA / "vendors.yaml"),
+        "vendor_intel": (load(DATA / "vendor_intel.yaml") if (DATA / "vendor_intel.yaml").exists() else {"vendors": []}),
         "leaderboards": load(DATA / "leaderboards.yaml"),
         "accounts": accounts,
         "built": f"taxonomy v{load(DATA / 'taxonomy.yaml').get('version', '?')} · vendors v{load(DATA / 'vendors.yaml').get('version', '?')}",
@@ -240,6 +241,20 @@ main{max-width:none;margin:0 auto;padding:var(--s6) clamp(16px,3vw,44px) 60px}
 .dsec{margin:14px 0}
 .subcard{border:1px solid var(--line);border-radius:var(--r-card);padding:var(--s3);margin:var(--s2) 0;background:var(--panel)}
 .subcard>.row:first-child{margin-top:0}
+/* vendor-intel drawers — each vendor with intel is a clickable chip that opens a per-vendor detail box */
+.vlist{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:flex-start}
+.vintel-wrap{display:block;flex:0 0 100%}
+.vintel-chip{cursor:pointer;border:1px solid var(--accent)}
+.vintel-chip .vcar{margin-right:4px;font-size:var(--f-1)}
+.vintelbox{border:1px solid var(--line);border-radius:var(--r-tag);background:var(--bg);padding:var(--s3);margin:var(--s1) 0 var(--s2)}
+.vintelbox .vir{display:flex;gap:var(--s3);margin:var(--s1) 0;font-size:var(--f-2)}
+.vintelbox .vil{flex:0 0 84px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;font-size:var(--f-1);font-weight:700;padding-top:1px}
+.vintelbox .viv{flex:1;min-width:0;overflow-wrap:anywhere}
+.vintelbox .viprod{margin:1px 0}
+.isvtag{font-size:var(--f-1);font-weight:700;text-transform:uppercase;letter-spacing:.3px;padding:var(--s0) var(--s2);border-radius:var(--r-tag);background:var(--accentbg);color:var(--accent)}
+.depbadge{font-size:var(--f-1);font-weight:700;padding:var(--s0) var(--s2);border-radius:var(--r-tag);color:#fff}
+.depbadge.dep-onprem{background:var(--hw4)}.depbadge.dep-hybrid{background:var(--hw3)}.depbadge.dep-cloud{background:var(--muted)}.depbadge.dep-unk{background:var(--line);color:var(--muted)}
+.basisbadge{font-size:var(--f-1);margin-left:4px;padding:0 var(--s1);border-radius:var(--r-tag);border:1px solid var(--muted);color:var(--muted);text-transform:uppercase}
 .dsec .dsh{font-size:var(--f-2);font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:4px}
 /* battle card: the actionable sell layer at the top of a category */
 .battle{border-radius:var(--r-card);background:var(--accentbg);padding:var(--s4) 13px;margin:10px 0 6px}
@@ -592,6 +607,44 @@ const CATBYID={};(DATA.taxonomy.categories||[]).forEach(c=>CATBYID[c.id]=c);
 const SUBCATS=(DATA.taxonomy.subcategories||[]);
 const SUBBYID={};SUBCATS.forEach(s=>SUBBYID[s.id]=s);
 function subcatsOf(id){return SUBCATS.filter(s=>s.parent===id);}
+// ---- vendor intel: per-vendor drawer (ISV identity · products · cloud-vs-on-prem · end-user count/who).
+//      keyed by a normalized company name; MUST match the python norm used to build data/vendor_intel.yaml.
+function normVendor(v){v=String(v).split(/[(\/—]/)[0].toLowerCase().replace(/\b(inc|llc|ltd|gmbh|corp|co|sa|ag|plc|the)\b/g,'');return v.replace(/[^a-z0-9]+/g,' ').trim();}
+const VINTEL={};((DATA.vendor_intel||{}).vendors||[]).forEach(v=>{[v.key].concat(v.aliases||[]).forEach(k=>{if(k&&!VINTEL[k])VINTEL[k]=v;});});
+function vintelOf(vn){return VINTEL[normVendor(vn)]||null;}
+function buildVintel(box,it){
+  const dep=it.deployment_pref||'unknown';
+  const depcls={'on-prem':'dep-onprem','hybrid':'dep-hybrid','cloud':'dep-cloud'}[dep]||'dep-unk';
+  const deplab={'on-prem':T('on-prem','地端'),'cloud':T('cloud','雲'),'hybrid':T('hybrid','混合')}[dep]||'?';
+  const row=(lab,node)=>{const r=el('div',{class:'vir'});r.append(el('div',{class:'vil'},lab));const v=el('div',{class:'viv'});v.append(node);r.append(v);box.append(r);};
+  box.append(el('div',{class:'row',style:'gap:var(--s2);margin:0 0 var(--s1)'},
+    el('span',{class:'isvtag'},it.isv_type||'ISV'),
+    el('span',{class:'depbadge '+depcls,title:it.deployment_note||''},deplab)));
+  if(it.who)box.append(el('div',{class:'vprose',style:'font-size:var(--f-2);color:var(--ink)'},it.who));
+  if(it.makes)row(T('Makes','做什麼'),el('span',{},it.makes));
+  if((it.products||[]).length){const pl=el('div',{});it.products.forEach(p=>pl.append(el('div',{class:'viprod'},el('b',{},p.name),el('span',{class:'muted'},' — '+p.purpose))));row(T('Products','軟體'),pl);}
+  const eu=el('span',{});eu.append(el('b',{},it.end_user_count||'—'));
+  if(it.count_basis&&it.count_basis!=='cited'&&it.count_basis!=='unknown')eu.append(el('span',{class:'basisbadge'},it.count_basis));
+  row(T('End users','終端用戶'),eu);
+  if(it.end_user_who)row(T('Who uses','誰用'),el('span',{},it.end_user_who));
+  if((it.marquee_customers||[]).length)row(T('Marquee','指標客戶'),el('span',{},it.marquee_customers.join(' · ')));
+  if(it.source)box.append(el('div',{class:'muted',style:'font-size:var(--f-1);margin-top:var(--s1);line-height:1.4'},T('source','來源')+': '+it.source+(it.confidence?' · '+T('confidence','信心')+' '+it.confidence:'')));
+}
+// render a vendor list where each vendor WITH intel becomes a toggleable drawer; others stay plain chips.
+function vendorList(vendors){
+  const box=el('div',{class:'vlist'});
+  (vendors||[]).forEach(vn=>{
+    const it=vintelOf(vn);
+    if(!it){box.append(el('span',{class:'chip'},vn));return;}
+    const wrap=el('span',{class:'vintel-wrap'});
+    const car=el('span',{class:'vcar'},'▸');
+    const chip=el('span',{class:'chip vintel-chip',title:T('vendor intel — click to open','廠商情報 — 點開')},car,vn);
+    const draw=el('div',{class:'vintelbox'});draw.style.display='none';
+    chip.onclick=()=>{const o=draw.style.display!=='none';draw.style.display=o?'none':'';car.textContent=o?'▸':'▾';if(!o&&!draw._built){buildVintel(draw,it);draw._built=true;}};
+    wrap.append(chip,draw);box.append(wrap);
+  });
+  return box;
+}
 function nodeById(id){return SUBBYID[id]||CATBYID[id]||null;}      // resolve a parent pointer to its node
 function isCatNode(o){return !!(o&&CATBYID[o.id]);}                // level-1 category vs a deeper sub-market
 function subName(o){return isCatNode(o)?(LANG==='zh'?(o.name_zh||o.name_en):o.name_en):(LANG==='zh'?(o.name_zh||o.name_en):o.name_en);}
@@ -986,7 +1039,7 @@ function renderTaxonomy(){
         kc.append(el('div',{class:'vprose',style:'font-size:var(--f-2);color:var(--muted)'},LANG==='zh'?k.scope_zh:k.scope_en));
         kc.onclick=()=>showSubDetail(k);ks.append(kc);});cd.append(ks);}
     if((s.vendors||[]).length){const vs=el('div',{class:'dsec'});vs.append(el('div',{class:'dsh'},T('Vendors in this market','此市場的廠商')+' · '+s.vendors.length));
-      const vw=el('div',{class:'row'});s.vendors.forEach(vn=>vw.append(el('span',{class:'chip'},vn)));vs.append(vw);cd.append(vs);}
+      vs.append(vendorList(s.vendors));cd.append(vs);}
     if(s.source)cd.append(el('div',{class:'notes',style:'font-size:var(--f-1)'},T('source','來源')+': '+s.source+(s.confidence?' · '+T('confidence','信心')+' '+s.confidence:'')));
     return cd;
   }
@@ -1037,7 +1090,7 @@ function renderTaxonomy(){
         sc.append(sh);
         sc.append(el('div',{class:'vprose',style:'font-size:var(--f-2);color:var(--muted)'},LANG==='zh'?s.scope_zh:s.scope_en));
         const hwr=el('div',{class:'row'});(s.hardware_profile||[]).forEach(h=>hwr.append(el('span',{class:'pill lead',title:plineGloss(h)},smciFam(h))));sc.append(hwr);
-        if((s.vendors||[]).length){const vr=el('div',{class:'row'});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));s.vendors.forEach(vn=>vr.append(el('span',{class:'chip'},vn)));sc.append(vr);}
+        if((s.vendors||[]).length){const vr=el('div',{});vr.append(el('span',{class:'tagk'},T('vendors','廠商')));vr.append(vendorList(s.vendors));sc.append(vr);}
         sc.onclick=()=>showSubDetail(s);ss.append(sc);});
       cd.append(ss);
     }
