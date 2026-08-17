@@ -1723,5 +1723,34 @@ class TestE3bSplit(unittest.TestCase):
                       "build must embed only L1 subs; deep_subs go to taxonomy_tree.js")
 
 
+class TestE4aIntelFK(unittest.TestCase):
+    """plan-v6.1 E4a — every vendor_intel record carries a nullable vendor_id; non-null FKs resolve
+    to a REAL vendors.id (never invented). The app resolves intel by the FK first, name fallback second."""
+
+    _V = {v["id"] for v in yaml.safe_load((REPO / "data" / "vendors.yaml").read_text(encoding="utf-8"))["vendors"]}
+    _I = yaml.safe_load((REPO / "data" / "vendor_intel.yaml").read_text(encoding="utf-8"))["vendors"]
+    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+
+    def test_every_record_has_vendor_id_field(self):
+        for r in self._I:
+            self.assertIn("vendor_id", r, f"{r.get('key')}: missing vendor_id (run migrate_intel_vendor_id.py)")
+
+    def test_nonnull_fk_resolves_to_real_vendor(self):
+        """the FK integrity guarantee — no invented slugs (CLAUDE.md: never fabricate)."""
+        for r in self._I:
+            vid = r.get("vendor_id")
+            if vid is not None:
+                self.assertIn(vid, self._V, f"{r['key']}: vendor_id '{vid}' is not a real vendors.id")
+
+    def test_coverage_recorded(self):
+        n = sum(1 for r in self._I if r.get("vendor_id"))
+        self.assertGreaterEqual(n, 250, f"FK coverage fell to {n}/{len(self._I)} — the migration may be broken")
+
+    def test_app_prefers_fk_then_name(self):
+        self.assertIn("const VINTEL_BY_ID={}", self.SRC, "app must build the vendor_id FK lookup")
+        self.assertIn("VINTEL_BY_ID[vn]||VINTEL[normVendor(vn)]", self.SRC,
+                      "vintelOf must try the FK first, then the normalized-name fallback")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

@@ -697,7 +697,11 @@ function loadArchive(cb){
 //      keyed by a normalized company name; MUST match the python norm used to build data/vendor_intel.yaml.
 function normVendor(v){v=String(v).split(/[(\/—]/)[0].toLowerCase().replace(/\b(inc|llc|ltd|gmbh|corp|co|sa|ag|plc|the)\b/g,'');return v.replace(/[^a-z0-9]+/g,' ').trim();}
 const VINTEL={};((DATA.vendor_intel||{}).vendors||[]).forEach(v=>{[v.key].concat(v.aliases||[]).forEach(k=>{if(k&&!VINTEL[k])VINTEL[k]=v;});});
-function vintelOf(vn){return VINTEL[normVendor(vn)]||null;}
+// plan-v6.1 E4a — resolve intel by the real FK first (vendor_id -> vendors.id), then fall back to the
+// normalized-name key. The FK is exact (set by tools/migrate_intel_vendor_id.py); normVendor is the
+// lossy fallback for prose vendor strings that carry no id.
+const VINTEL_BY_ID={};((DATA.vendor_intel||{}).vendors||[]).forEach(v=>{if(v.vendor_id)VINTEL_BY_ID[v.vendor_id]=v;});
+function vintelOf(vn){return VINTEL_BY_ID[vn]||VINTEL[normVendor(vn)]||null;}
 function buildVintel(box,it){
   const row=(lab,node)=>{const r=el('div',{class:'vir'});r.append(el('div',{class:'vil'},lab));const v=el('div',{class:'viv'});v.append(node);r.append(v);box.append(r);};
   box.append(el('div',{class:'row',style:'gap:var(--s2);margin:0 0 var(--s1)'},el('span',{class:'isvtag'},it.isv_type||'ISV')));
