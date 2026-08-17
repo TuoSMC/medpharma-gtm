@@ -39,50 +39,64 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", str(s).lower()).strip("-")
 
 
-def main():
-    vendors = all_vendors()  # curated + provisional
-    subs = yaml.safe_load((DATA / "taxonomy.yaml").read_text(encoding="utf-8")).get("subcategories", [])
+def load_aliases():
+    """hand-authored overrides for ambiguous cases the matcher can't resolve (e.g. "Thermo Fisher"
+    when 2 vendor ids share the prefix). data/vendor_aliases.yaml: {aliases: {prose-or-norm: vendor_id}}."""
+    p = DATA / "vendor_aliases.yaml"
+    if not p.exists():
+        return {}
+    return (yaml.safe_load(p.read_text(encoding="utf-8")) or {}).get("aliases", {}) or {}
 
+
+def build_fk(vendors, subs, aliases=None):
+    """PURE — resolve every sub-vendor prose string to a vendor id. Returns (fk, uniq, mentions).
+    No file write, so tests can re-derive and check for staleness."""
+    aliases = aliases or {}
     id_set = {v["id"] for v in vendors}
     vnorm = {}
     for v in vendors:
         vnorm.setdefault(norm(v["name"]), set()).add(v["id"])
-    # prefix candidates only for vendor names long enough to be unambiguous (avoid "ge"/"hp" noise)
-    prefixes = {nv: ids for nv, ids in vnorm.items() if len(nv) >= 6}
+    prefixes = {nv: ids for nv, ids in vnorm.items() if len(nv) >= 6}  # avoid "ge"/"hp" noise
 
     def resolve(strn):
+        if strn in aliases:          # hand-authored alias wins (#8: ambiguous cases)
+            return aliases[strn]
+        ns = norm(strn)              # company part (norm strips at "(")
+        if ns in aliases:
+            return aliases[ns]
+        cs = slug(ns)                # company-part slug
         cands = set()
-        ns = norm(strn)                       # company part (norm strips at "(")
-        cs = slug(ns)                         # company-part slug
         if slug(strn) in id_set:
             cands.add(slug(strn))
-        if cs in id_set:                      # company-part slug -> matches fuller stored names
+        if cs in id_set:             # company-part slug -> matches fuller stored names
             cands.add(cs)
         cands |= vnorm.get(ns, set())
         for nv, ids in prefixes.items():
             if ns == nv or ns.startswith(nv + " "):
                 cands |= ids
-        # company slug is a UNIQUE hyphen-prefix of a vendor id: "Baxter" -> baxter-international,
-        # "Veeva" -> veeva-systems. Deterministic alias fix (0 tokens); only when exactly one id matches.
+        # company slug is a UNIQUE hyphen-prefix of a vendor id: "Baxter" -> baxter-international.
         if cs and len(cs) >= 4 and cs not in cands:
             pref = [i for i in id_set if i == cs or i.startswith(cs + "-")]
             if len(pref) == 1:
                 cands.add(pref[0])
         exact, comp = slug(strn), cs
-        if exact in cands:          # exact full-string slug wins
+        if exact in cands:
             return exact
-        if comp in cands:           # else the exact company-part slug (the canonical company)
+        if comp in cands:
             return comp
         return next(iter(cands)) if len(cands) == 1 else None
 
     mentions = [str(vn) for s in subs for vn in (s.get("vendors") or [])]
     uniq = Counter(mentions)
-    fk = {}
-    for strn in uniq:
-        vid = resolve(strn)
-        if vid:
-            fk[strn] = vid
+    fk = {strn: resolve(strn) for strn in uniq}
+    fk = {k: v for k, v in fk.items() if v}
+    return fk, uniq, mentions
 
+
+def main():
+    vendors = all_vendors()  # curated + provisional
+    subs = yaml.safe_load((DATA / "taxonomy.yaml").read_text(encoding="utf-8")).get("subcategories", [])
+    fk, uniq, mentions = build_fk(vendors, subs, load_aliases())
     resolved_mentions = sum(uniq[s] for s in fk)
     # deterministic + stable output (block mapping, sorted keys — safe_dump handles quoting)
     doc = {"version": 1, "generated_by": "tools/build_sub_vendor_fk.py",

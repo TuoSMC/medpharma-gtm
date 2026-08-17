@@ -1,0 +1,8 @@
+# Hand-authored vendor aliases for ambiguous sub-vendor prose the matcher cannot safely resolve
+# (multiple vendor ids share a prefix, so the deterministic rules abstain). Key = exact prose OR its
+# normalized company form; value = the CORRECT vendors.id (curated or provisional). Every target must
+# be a real id (a test enforces it). Grows only as clear cases surface — never a guess.
+aliases:
+  thermo fisher: thermo-fisher-scientific
+  thermo fisher scientific: thermo-fisher-scientific
+  thermo fisher samplemanager: thermo-fisher-scientific-samplemanager-lims

@@ -3,9 +3,9 @@ version: 1
 generated_by: tools/build_sub_vendor_fk.py
 counts:
   unique_strings: 3426
-  resolved: 1545
+  resolved: 1551
   total_mentions: 4416
-  resolved_mentions: 2283
+  resolved_mentions: 2294
 map:
   10x Genomics (Space Ranger / Xenium Ranger): 10x-genomics
   10x Genomics (Xenium Explorer / Loupe Browser): 10x-genomics
@@ -1360,6 +1360,12 @@ map:
   TetraScience (Tetra Data Platform / Scientific Data & AI Cloud): tetrascience
   TetraScience (industrialized integrations): tetrascience
   The SSI Group: ssi-group
+  Thermo Fisher: thermo-fisher-scientific
+  Thermo Fisher (Compound Discoverer): thermo-fisher-scientific
+  Thermo Fisher (Ion Torrent Suite): thermo-fisher-scientific
+  Thermo Fisher (LipidSearch): thermo-fisher-scientific
+  Thermo Fisher (Sensititre SWIN expert-system comments): thermo-fisher-scientific
+  Thermo Fisher SampleManager: thermo-fisher-scientific-samplemanager-lims
   Thermo Fisher Scientific (AI-enabled culture-plate imaging): thermo-fisher-scientific
   Thermo Fisher Scientific (Amira / Avizo): thermo-fisher-scientific
   Thermo Fisher Scientific (Amira-Avizo, AI-assisted cryo-EM segmentation Xtra): thermo-fisher-scientific

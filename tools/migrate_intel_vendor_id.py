@@ -38,16 +38,13 @@ def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", str(s).lower()).strip("-")
 
 
-def main():
-    vendors = all_vendors()  # curated + provisional
-    intel = yaml.safe_load(INT.read_text(encoding="utf-8"))["vendors"]
-
+def resolve_all(vendors, intel):
+    """PURE — return a vendor_id (or None) per intel record, in order. No file write (tests re-derive)."""
     id_set = {v["id"] for v in vendors}
     norm_to_ids = {}
     for v in vendors:
         norm_to_ids.setdefault(norm(v["name"]), set()).add(v["id"])
-
-    resolved = []  # vendor_id or None, in record order
+    out = []
     for rec in intel:
         cands = set()
         for t in [rec.get("key"), rec.get("name")] + list(rec.get("aliases") or []):
@@ -56,16 +53,17 @@ def main():
             if slug(t) in id_set:
                 cands.add(slug(t))
             cands |= norm_to_ids.get(norm(t), set())
-        # an EXACT slug(key)==vendor id is the canonical company match; it breaks a tie with product /
-        # duplicate variants (e.g. "meditech" wins over "meditech-expanse-laboratory"). This is not a
-        # fabricated slug — the exact company slug is the strongest possible signal.
+        # exact slug(key)==vendor id is the canonical company match (breaks ties with product variants).
         exact = slug(rec.get("key", ""))
-        if exact in cands:
-            resolved.append(exact)
-        elif len(cands) == 1:
-            resolved.append(next(iter(cands)))
-        else:
-            resolved.append(None)
+        out.append(exact if exact in cands else (next(iter(cands)) if len(cands) == 1 else None))
+    return out
+
+
+def main():
+    vendors = all_vendors()  # curated + provisional
+    intel = yaml.safe_load(INT.read_text(encoding="utf-8"))["vendors"]
+
+    resolved = resolve_all(vendors, intel)
 
     # text insertion: one vendor_id line after each `key:` line (i-th key line == i-th record)
     lines = INT.read_text(encoding="utf-8").splitlines()

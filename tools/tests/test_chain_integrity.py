@@ -1856,6 +1856,71 @@ class TestE4bSubVendorFK(unittest.TestCase):
         self.assertIn("s=SUBFK[vn]", APP_BUILD_SRC, "vintelOf must try the sub-vendor FK first")
 
 
+def _load_tool(name):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(name, REPO / "tools" / (name + ".py"))
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+# hand-verified prose -> correct vendor id (guards against a matcher that resolves to a real-but-WRONG
+# vendor as it gains heuristics). Keys are exact map keys; only unambiguously-correct pairs belong here.
+KNOWN_SUB_VENDOR_FK = {
+    "10x Genomics (Space Ranger / Xenium Ranger)": "10x-genomics",
+    "ABB": "abb",
+    "AGFA HealthCare (Enterprise Imaging VNA)": "agfa-healthcare",
+    "Baxter (DoseEdge)": "baxter-international",
+    "Veeva (Crossix / SafeMine)": "veeva-systems",
+    "Agilent (Lipid Annotator)": "agilent",
+    "Ansys (Fluent GPU solver)": "ansys",
+    "Draeger (Infinity CentralStation)": "draeger",
+    "Copan (PhenoMATRIX / PhenoMATRIX PLUS)": "copan",
+    "Roche": "roche",
+    "Philips": "philips",
+    "GE HealthCare": "ge-healthcare",
+    "Medtronic": "medtronic",
+    "Fujifilm": "fujifilm",
+    "Sectra": "sectra",
+    "Siemens (Desigo CC)": "siemens",
+    "Thermo Fisher": "thermo-fisher-scientific",
+}
+
+
+class TestFKHardening(unittest.TestCase):
+    """plan-v6.1 — guard the FK layer: (1) not-stale (re-derive from source, catch forgotten rebuilds,
+    brain #4); (2) correctness fixture (resolves to the RIGHT id, not just a real one); (3) alias targets real."""
+
+    def test_sub_vendor_fk_not_stale(self):
+        m = _load_tool("build_sub_vendor_fk")
+        fk, _, _ = m.build_fk(m.all_vendors(), SUBS, m.load_aliases())
+        committed = yaml.safe_load((REPO / "data" / "sub_vendor_fk.yaml").read_text(encoding="utf-8"))["map"]
+        self.assertEqual(dict(sorted(fk.items())), dict(sorted(committed.items())),
+                         "data/sub_vendor_fk.yaml is STALE — run: python3 tools/build_sub_vendor_fk.py")
+
+    def test_intel_fk_not_stale(self):
+        m = _load_tool("migrate_intel_vendor_id")
+        intel = yaml.safe_load((REPO / "data" / "vendor_intel.yaml").read_text(encoding="utf-8"))["vendors"]
+        live = m.resolve_all(m.all_vendors(), intel)
+        committed = [r.get("vendor_id") for r in intel]
+        self.assertEqual(live, committed,
+                         "vendor_intel vendor_id is STALE — run: python3 tools/migrate_intel_vendor_id.py")
+
+    def test_known_mappings_are_correct(self):
+        fk = yaml.safe_load((REPO / "data" / "sub_vendor_fk.yaml").read_text(encoding="utf-8"))["map"]
+        for prose, expected in KNOWN_SUB_VENDOR_FK.items():
+            self.assertEqual(fk.get(prose), expected,
+                             f"{prose!r} must map to {expected!r}, got {fk.get(prose)!r} (matcher regression?)")
+
+    def test_alias_targets_are_real(self):
+        p = REPO / "data" / "vendor_aliases.yaml"
+        if not p.exists():
+            self.skipTest("no aliases")
+        al = (yaml.safe_load(p.read_text(encoding="utf-8")) or {}).get("aliases", {}) or {}
+        for k, vid in al.items():
+            self.assertIn(vid, ALL_VENDOR_IDS, f"alias {k!r} -> {vid!r} is not a real vendor id")
+
+
 class TestVendorsProvisional(unittest.TestCase):
     """expand-vendor-registry — the provisional (web-sourced) vendor tier. Lighter bar than the curated
     vendors.yaml (no resolved listing/HQ), but still: sourced, kebab id unique vs curated, enum-valid,
