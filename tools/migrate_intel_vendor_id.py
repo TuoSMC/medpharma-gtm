@@ -53,7 +53,16 @@ def main():
             if slug(t) in id_set:
                 cands.add(slug(t))
             cands |= norm_to_ids.get(norm(t), set())
-        resolved.append(next(iter(cands)) if len(cands) == 1 else None)
+        # an EXACT slug(key)==vendor id is the canonical company match; it breaks a tie with product /
+        # duplicate variants (e.g. "meditech" wins over "meditech-expanse-laboratory"). This is not a
+        # fabricated slug — the exact company slug is the strongest possible signal.
+        exact = slug(rec.get("key", ""))
+        if exact in cands:
+            resolved.append(exact)
+        elif len(cands) == 1:
+            resolved.append(next(iter(cands)))
+        else:
+            resolved.append(None)
 
     # text insertion: one vendor_id line after each `key:` line (i-th key line == i-th record)
     lines = INT.read_text(encoding="utf-8").splitlines()

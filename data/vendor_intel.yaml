@@ -1171,7 +1171,7 @@ vendors:
   confidence: B
   source: athenahealth public materials / widely cited provider-count (site returned 403 on fetch; figure from athenahealth's own marketing)
   key: athenahealth
-  vendor_id: null
+  vendor_id: athenahealth
   aliases: []
 - name: Availity
   isv_type: platform
@@ -3673,7 +3673,7 @@ vendors:
   confidence: A
   source: itnonline.com Fujifilm Synapse enterprise imaging article; appliedradiology.com HIMSS 2025 AWS cloud collaboration; businesswire.com DoD DIN-PACS IV contract; healthcare-eu.fujifilm.com Synapse PACS product page
   key: fujifilm
-  vendor_id: null
+  vendor_id: fujifilm
   aliases:
   - fujifilm healthcare
 - name: FUJIFILM Healthcare Americas Corporation
@@ -5351,7 +5351,7 @@ vendors:
   confidence: C
   source: labvantage.com; en.wikipedia.org/wiki/LabVantage_Solutions (older named customers)
   key: labvantage solutions
-  vendor_id: null
+  vendor_id: labvantage-solutions
   aliases: []
 - name: LabWare, Inc.
   isv_type: ISV
@@ -6024,7 +6024,7 @@ vendors:
   confidence: B
   source: ehr.meditech.com (Expanse, MaaS, Cloud Platform, Google Cloud collaboration); Google Cloud MEDITECH case study; BusinessWire
   key: meditech
-  vendor_id: null
+  vendor_id: meditech
   aliases:
   - meditech expanse oncology
   - meditech lis
@@ -6156,7 +6156,7 @@ vendors:
   confidence: B
   source: microsoft.com/nuance healthcare pages; Wikipedia (Nuance Communications, Microsoft acquisition); widely cited Nuance/Microsoft press figures (DMO 600k+ clinicians, 77% US hospitals). Marquee accounts from public Nuance/Microsoft DAX press.
   key: microsoft
-  vendor_id: null
+  vendor_id: microsoft
   aliases:
   - microsoft azure aks
   - microsoft nuance
@@ -6794,7 +6794,7 @@ vendors:
   confidence: B
   source: nvidia.com/en-us/clara/bionemo; docs.nvidia.com bionemo-framework overview; nvidianews.nvidia.com BioNeMo/NIM microservices announcements
   key: nvidia
-  vendor_id: null
+  vendor_id: nvidia
   aliases:
   - nvidia base command manager
   - nvidia bionemo
@@ -7077,7 +7077,7 @@ vendors:
   confidence: B
   source: business.optum.com EDI / network-connectivity pages; revcycleai.com Change Healthcare vendor deep dive (2026); intuitionlabs.ai clearinghouse analysis
   key: optum
-  vendor_id: null
+  vendor_id: optum
   aliases:
   - optum cdi 3d
   - optum ces
@@ -8952,7 +8952,7 @@ vendors:
   confidence: B
   source: thessigroup.com (products, customer types, 50+ states); DuckDuckGo/Tracxn/LinkedIn (Mobile AL, founded 1988, RCM/clearinghouse identity, 2025 exec appointments)
   key: ssi group
-  vendor_id: null
+  vendor_id: ssi-group
   aliases: []
 - name: STARLIMS Corporation
   isv_type: ISV
@@ -9451,7 +9451,7 @@ vendors:
   confidence: A
   source: thermofisher.com SampleManager product & cloud-services pages; SampleManager LIMS brochure (BR-LIMS)
   key: thermo fisher scientific
-  vendor_id: null
+  vendor_id: thermo-fisher-scientific
   aliases:
   - thermo fisher scientific chromeleon
 - name: TigerConnect
