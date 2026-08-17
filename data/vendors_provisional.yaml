@@ -1177,3 +1177,721 @@ vendors:
   market_position: Medical imaging and healthcare IT solutions provider with 100+
     years in medical imaging
   provenance: expand-registry
+- id: exl
+  name: EXL Service
+  categories:
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: service-provider
+  confidence: C
+  source: https://www.exlservice.com/industries/health-and-life-sciences
+  sources:
+  - https://www.exlservice.com/industries/health-and-life-sciences
+  - https://www.exlservice.com/industries/health-and-life-sciences/pharmacy-services
+  - https://thehealthcareinsights.com/exl-leveraging-technologies-to-revolutionize-the-healthcare-industry/
+  headquarters: New York City
+  founded: '1999'
+  market_position: Global analytics and digital solutions provider for healthcare
+    and life sciences
+  provenance: expand-registry
+- id: fico
+  name: FICO
+  categories:
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.fico.com/en/industries/healthcare
+  sources:
+  - https://www.fico.com/en/industries/healthcare
+  - https://www.fico.com/en/solutions/health-care
+  headquarters: null
+  founded: null
+  market_position: Analytics software for healthcare decisioning and medication adherence
+  provenance: expand-registry
+- id: hyro
+  name: Hyro
+  categories:
+  - healthcare-llm-serving
+  - patient-access-scheduling
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.hyro.ai/healthcare/
+  sources:
+  - https://www.hyro.ai/healthcare/
+  - https://www.prnewswire.com/news-releases/hyro-raises-45m-strategic-growth-round-to-accelerate-ai-agent-adoption-in-healthcare-302589268.html
+  headquarters: null
+  founded: '2018'
+  market_position: HIPAA-compliant AI voice and chat agents for healthcare, deployed
+    across 50+ health systems
+  provenance: expand-registry
+- id: ansys
+  name: Ansys
+  categories:
+  - advanced-visualization-3d
+  - comp-chem-simulation
+  - pat-process-twin
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.ansys.com/industries/healthcare/pharmaceuticals-biopharmaceuticals
+  sources:
+  - https://www.ansys.com/industries/healthcare/pharmaceuticals-biopharmaceuticals
+  - https://www.ansys.com/blog/simulation-helps-bring-new-drugs-to-patients-faster
+  headquarters: null
+  founded: null
+  market_position: Engineering simulation software for pharmaceutical manufacturing
+    and drug delivery
+  provenance: expand-registry
+- id: cisco
+  name: Cisco
+  categories:
+  - medical-iot-security
+  - telehealth-platform
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: oem
+  confidence: C
+  source: https://www.cisco.com/c/en/us/solutions/industries/healthcare.html
+  sources:
+  - https://www.cisco.com/c/en/us/solutions/industries/healthcare.html
+  headquarters: null
+  founded: null
+  market_position: Healthcare networking and IoT infrastructure serving 46,000+ healthcare
+    organizations
+  provenance: expand-registry
+- id: copan
+  name: Copan Diagnostics
+  categories:
+  - lab-middleware-automation
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: C
+  source: https://www.copanusa.com/laboratory-automation/microbiology-laboratory-automation-ai/phenomatrix/
+  sources:
+  - https://www.copanusa.com/laboratory-automation/microbiology-laboratory-automation-ai/phenomatrix/
+  - https://www.prnewswire.com/news-releases/fda-510k-clearance-establishes-broad-intended-use-for-copans-phenomatrix-expanding-clinical-microbiology-capabilities-302688166.html
+  headquarters: null
+  founded: null
+  market_position: Clinical laboratory automation with FDA-cleared AI-powered microbiology
+    interpretation system (PhenoMATRIX)
+  provenance: expand-registry
+- id: elpro
+  name: ELPRO
+  categories:
+  - hospital-bms
+  - warehouse-cold-chain
+  deployment_models:
+  - hybrid
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.elpro.com/en/cold-chain
+  sources:
+  - https://www.elpro.com/en/cold-chain
+  - https://www.elpro.com/en/cold-chain-solutions
+  headquarters: null
+  founded: '1986'
+  market_position: GxP-compliant temperature monitoring and cold chain solutions for
+    pharma and life sciences
+  provenance: expand-registry
+- id: xifin
+  name: XiFin
+  categories:
+  - lis
+  - ngs-lab-lims
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.xifin.com/
+  sources:
+  - https://www.xifin.com/
+  - https://www.businesswire.com/news/home/20260224897073/en/XiFin-Reports-Double-Digit-Segment-Growth-and-21.1-Increase-in-Empower-RCM-Volume-Names-New-CTO-to-Accelerate-AI-Strategy
+  headquarters: null
+  founded: null
+  market_position: SaaS-based RCM and workflow automation for specialty pharmacy and
+    health systems
+  provenance: expand-registry
+- id: hyland
+  name: Hyland Software
+  categories:
+  - clinical-data-lakehouse
+  - him-coding
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://www.hyland.com/en/solutions/products/onbase
+  sources:
+  - https://www.hyland.com/en/solutions/products/onbase
+  - https://www.biospace.com/hyland-named-2019-klas-category-leader-for-document-management-and-amp-imaging
+  headquarters: null
+  founded: null
+  market_position: Enterprise content management and document imaging for healthcare
+    organizations (OnBase)
+  provenance: expand-registry
+- id: inpeco
+  name: Inpeco
+  categories:
+  - lab-middleware-automation
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: C
+  source: https://www.inpeco.com/
+  sources:
+  - https://www.inpeco.com/
+  - https://www.inpeco.com/our-automation-solutions/lab-automation-system/flexlab-x/
+  headquarters: null
+  founded: null
+  market_position: Total laboratory automation systems (FlexLab) for clinical and
+    diagnostic labs with multi-analyzer connectivity
+  provenance: expand-registry
+- id: raapid
+  name: RAAPID
+  categories:
+  - payer-actuarial-hpc
+  - population-health-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.raapidinc.com/press-room/industry-forerunner-delivering-ai-powered-risk-adjustment-technology/
+  sources:
+  - https://www.raapidinc.com/press-room/industry-forerunner-delivering-ai-powered-risk-adjustment-technology/
+  - https://venturebeat.com/business/raapid-secures-series-a-extension-to-scale-neuro-symbolic-ai-powered-medical-coding
+  headquarters: null
+  founded: null
+  market_position: AI-powered medical coding and risk adjustment platform for Medicare
+    Advantage and healthcare plans
+  provenance: expand-registry
+- id: sensum
+  name: Sensum
+  categories:
+  - automated-visual-inspection
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://www.sensum.eu/
+  sources:
+  - https://www.sensum.eu/
+  - https://www.pharmaexcipients.com/sensum/
+  - https://www.pharmaceutical-technology.com/contractors/process_automation/sensum-automatic-visual-inspection-systems/
+  headquarters: Ljubljana, Slovenia
+  founded: '2000'
+  market_position: Technology leader in automatic visual inspection systems for pharmaceutical
+    manufacturing; trusted by Pfizer, Novartis, Roche, Bayer, Eli Lilly, Merck, and
+    Teva
+  provenance: expand-registry
+- id: agilent
+  name: Agilent
+  categories:
+  - ms-proteomics-metabolomics
+  - qc-lims-cds
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://www.agilent.com/
+  sources:
+  - https://www.agilent.com/
+  - https://pubmed.ncbi.nlm.nih.gov/32178227/
+  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7142889/
+  headquarters: Santa Clara, California, USA
+  founded: '1999'
+  market_position: Leading provider of analytical instruments and software for pharmaceutical
+    research and development
+  provenance: expand-registry
+- id: arkivum
+  name: Arkivum
+  categories:
+  - qc-lims-cds
+  - rd-lab-informatics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://arkivum.com/
+  sources:
+  - https://arkivum.com/
+  - https://www.cioreview.com/arkivum
+  - https://www.businesswire.com/news/home/20190903005016/en/Arkivum-Provides-Pioneering-e-Archive-to-Idorsia-Pharmaceuticals-Delivering-GxP-Compliant-Long-term-Access-to-Valuable-Product-and-Clinical-Trial-Data
+  headquarters: Berkshire, United Kingdom
+  founded: null
+  market_position: Only GxP-validated digital archiving and preservation solution
+    for pharmaceutical and life sciences organizations
+  provenance: expand-registry
+- id: cadence
+  name: Cadence
+  categories:
+  - comp-chem-simulation
+  - patient-portal-engagement
+  - telehealth-platform
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://www.cadence.com/
+  sources:
+  - https://www.cadence.com/
+  - https://medcitynews.com/2022/07/big-tech-firm-cadence-expands-to-drug-software-simulations-through-500m-deal/
+  - https://www.cadence.com/en_US/home/company/newsroom/press-releases/pr/2022/cadence-expands-into-molecular-simulation-with-acquisition-of.html
+  headquarters: San Jose, California, USA
+  founded: '1988'
+  market_position: Major EDA and design software company that expanded into pharma
+    through $500M acquisition of OpenEye Scientific; OpenEye software used by 19 of
+    top 20 pharma companies
+  provenance: expand-registry
+- id: draeger
+  name: Draeger
+  categories:
+  - ehr-emr-core
+  - icu-central-monitoring
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: C
+  source: https://www.draeger.com/
+  sources:
+  - https://www.draeger.com/
+  - https://www.draeger.com/en-us_us/Products/Infinity-CentralStation
+  headquarters: Lübeck, Germany
+  founded: '1889'
+  market_position: Leading provider of medical devices and patient monitoring systems
+    for hospitals and critical care
+  provenance: expand-registry
+- id: open-eye
+  name: OpenEye
+  categories:
+  - ai-drug-discovery
+  - comp-chem-simulation
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.eyesopen.com/
+  sources:
+  - https://www.eyesopen.com/
+  - https://aws.amazon.com/blogs/hpc/virtual-screening-of-drug-compounds-with-orion/
+  - https://www.prnewswire.com/news-releases/gigadocking-in-orion-molecular-design-platform-rapidly-identifies-novel-chemical-entities-for-gpcr-targets-301152671.html
+  headquarters: null
+  founded: null
+  market_position: Computational chemistry software used by 19 of top 20 pharmaceutical
+    companies; acquired by Cadence in 2022
+  provenance: expand-registry
+- id: perigen
+  name: PeriGen
+  categories:
+  - cdss-clinical-ai
+  - ehr-emr-core
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://perigen.com/
+  sources:
+  - https://perigen.com/
+  - https://perigen.com/perigen-receives-fda-clearance-for-patterns-3-0-expanding-ai-powered-fetal-monitoring-to-32-weeks/
+  - https://femtechinsider.com/perigens-ai-powered-fetal-monitoring-system-receives-fda-clearance-for-use-from-32-weeks/
+  headquarters: null
+  founded: null
+  market_position: Only FDA-cleared automated early warning system for labor and delivery
+    with AI-powered fetal monitoring
+  provenance: expand-registry
+- id: persyst
+  name: Persyst
+  categories:
+  - medical-device-integration
+  deployment_models:
+  - on-premises
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.persyst.com/
+  sources:
+  - https://www.persyst.com/
+  - https://accessgudid.nlm.nih.gov/devices/00869732000104
+  - https://www.healthaidb.com/software/persyst-15-eeg-review-and-analysis-software/
+  headquarters: null
+  founded: null
+  market_position: EEG software used by 97 of 100 top US neurology hospitals; integrated
+    with all major EEG manufacturers
+  provenance: expand-registry
+- id: scitara
+  name: Scitara
+  categories:
+  - qc-lims-cds
+  - rd-lab-informatics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://scitara.com/
+  sources:
+  - https://scitara.com/
+  - https://www.crunchbase.com/organization/scitara
+  - https://scitara.com/about-us/
+  headquarters: Marlborough, Massachusetts, USA
+  founded: '2019'
+  market_position: First integration-platform-as-a-service (iPaaS) solution designed
+    specifically for science-based laboratories; GxP compliant
+  provenance: expand-registry
+- id: conduent
+  name: Conduent
+  categories:
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: service-provider
+  confidence: C
+  source: https://www.conduent.com/
+  sources:
+  - https://www.conduent.com/
+  - https://www.globenewswire.com/en/news-release/2023/01/12/2587906/0/en/Conduent-Launches-Digital-Solution-to-Help-Pharmas-with-Faster-and-More-Effective-Product-Commercialization.html
+  headquarters: null
+  founded: null
+  market_position: Serves 6 of top 10 pharma manufacturers with product commercialization,
+    patient access, and HCP engagement solutions
+  provenance: expand-registry
+- id: fortanix
+  name: Fortanix
+  categories:
+  - bioinformatics-secondary
+  - healthcare-llm-serving
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.fortanix.com/
+  sources:
+  - https://www.fortanix.com/
+  - https://www.fortanix.com/solutions/industry/data-security-for-healthcare
+  - https://www.healthcareitnews.com/news/ucsf-fortanix-intel-microsoft-team-accelerate-clinical-ai-development
+  headquarters: Mountain View, California, USA
+  founded: '2016'
+  market_position: Cloud data security platform providing confidential computing and
+    encryption for healthcare AI and pharmaceutical research
+  provenance: expand-registry
+- id: genomics-plc
+  name: Genomics plc
+  categories:
+  - bioinformatics-secondary
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.eisai.com/news/news201525.html
+  sources:
+  - https://www.eisai.com/news/news201525.html
+  - https://www.foresitecapital.com/portfolio/genomics-plc/
+  headquarters: Oxford, UK
+  founded: '2014'
+  market_position: Provider of polygenic risk scores for 30+ diseases; partnerships
+    with Vertex Pharmaceuticals and IQVIA
+  provenance: expand-registry
+- id: decentriq
+  name: Decentriq
+  categories:
+  - bioinformatics-secondary
+  - healthcare-llm-serving
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.decentriq.com/healthcare
+  sources:
+  - https://www.decentriq.com/healthcare
+  - https://www.decentriq.com/article/the-switzerland-of-data
+  headquarters: Zurich, Switzerland
+  founded: '2019'
+  market_position: Leader in healthcare data clean rooms for pharma and healthcare
+    organizations
+  provenance: expand-registry
+- id: instadeep
+  name: InstaDeep
+  categories:
+  - ai-drug-discovery
+  - ms-proteomics-metabolomics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://instadeep.com/about-us/
+  sources:
+  - https://instadeep.com/about-us/
+  - https://instanovo.ai/
+  headquarters: London, UK (subsidiary of BioNTech)
+  founded: '2014'
+  market_position: AI company with InstaNovo for de novo peptide sequencing; subsidiary
+    of BioNTech
+  provenance: expand-registry
+- id: oxehealth
+  name: Oxehealth
+  categories:
+  - samd-embedded-oem-platform
+  - smart-room-ambient-ai
+  deployment_models:
+  - on-premises
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://innovation.ox.ac.uk/case-study/oxehealth-supporting-safer-patient-care
+  sources:
+  - https://innovation.ox.ac.uk/case-study/oxehealth-supporting-safer-patient-care
+  - https://www.nsmedicaldevices.com/news/oxehealth-sleep-monitoring-solution/
+  headquarters: Oxford, UK
+  founded: null
+  market_position: Vision-based patient monitoring for mental health; FDA De Novo
+    clearance and CE mark approved; supports 30+ million hours of patient care
+  provenance: expand-registry
+- id: healthaxis
+  name: HealthAxis
+  categories:
+  - payer-core-admin
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://healthaxis.com/
+  sources:
+  - https://healthaxis.com/
+  - https://www.getapp.com/healthcare-pharmaceuticals-software/a/healthaxis/
+  headquarters: Tampa, Florida
+  founded: null
+  market_position: Cloud-native core administrative processing for healthcare payors;
+    HxOne suite includes HxPro, HxLogic, HxOps
+  provenance: expand-registry
+- id: haemonetics
+  name: Haemonetics
+  categories:
+  - lis
+  deployment_models:
+  - on-premises
+  - hybrid
+  partner_type: oem
+  confidence: C
+  source: https://hospital.haemonetics.com/transfusion-management/bloodtrack
+  sources:
+  - https://hospital.haemonetics.com/transfusion-management/bloodtrack
+  - https://info.haemonetics.com/en-gb/bloodtracksoftware
+  headquarters: null
+  founded: null
+  market_position: Global leader in integrated blood management; BloodTrack software
+    for bedside transfusion verification
+  provenance: expand-registry
+- id: medicapture
+  name: MediCapture
+  categories:
+  - or-surgical-video
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  - edge
+  partner_type: oem
+  confidence: C
+  source: https://medicapture.com/about-us/
+  sources:
+  - https://medicapture.com/about-us/
+  - https://medicapture.com/medicapture-launches-aiscope-pilot-for-veterinary-sciences-at-vmx-2026/
+  headquarters: Plymouth Meeting, PA
+  founded: null
+  market_position: 20-year industry leader in imaging/recording solutions for 80+
+    countries; aiScope AI imaging software
+  provenance: expand-registry
+- id: quest-analytics
+  name: Quest Analytics
+  categories:
+  - patient-access-scheduling
+  - payer-core-admin
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.zoominfo.com/c/quest-analytics-llc/99107406
+  sources:
+  - https://www.zoominfo.com/c/quest-analytics-llc/99107406
+  - https://www.crunchbase.com/organization/quest-analytics
+  headquarters: Overland Park, Kansas
+  founded: null
+  market_position: Network management partner for health plans; processes 150B+ provider
+    records monthly; 90% healthcare network adoption
+  provenance: expand-registry
+- id: rees-scientific
+  name: Rees Scientific
+  categories:
+  - hospital-bms
+  - warehouse-cold-chain
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://reesscientific.com/industries/pharmaceutical-biotechnology
+  sources:
+  - https://reesscientific.com/industries/pharmaceutical-biotechnology
+  - https://www.zoominfo.com/c/rees-scientific-corp/42829134
+  headquarters: Trenton, New Jersey
+  founded: '1982'
+  market_position: Market leader in pharmaceutical and biotech environmental monitoring
+  provenance: expand-registry
+- id: moberg-analytics
+  name: Moberg Analytics
+  categories:
+  - ehr-emr-core
+  - medical-device-integration
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://moberganalytics.com/
+  sources:
+  - https://moberganalytics.com/
+  - https://www.crunchbase.com/organization/moberg-analytics
+  headquarters: null
+  founded: null
+  market_position: Provider of AI-powered brain monitoring and clinical intelligence
+    platform for critical care
+  provenance: expand-registry
+- id: shift-technology
+  name: Shift Technology
+  categories:
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.shift-technology.com/solutions/healthcare
+  sources:
+  - https://www.shift-technology.com/solutions/healthcare
+  - https://www.microsoft.com/en/customers/story/23202-shift-technology-azure-ai-vision
+  headquarters: null
+  founded: null
+  market_position: AI-powered fraud detection and payment integrity platform for health
+    insurers
+  provenance: expand-registry
+- id: duality-technologies
+  name: Duality Technologies
+  categories:
+  - bioinformatics-secondary
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://dualitytech.com/use-cases/healthcare-industry/life-sciences/
+  sources:
+  - https://dualitytech.com/use-cases/healthcare-industry/life-sciences/
+  - https://www.prnewswire.com/news-releases/duality-technologies-joins-the-fight-against-cancer-with-a-new-secure-data-collaboration-toolkit-enabling-analytics-and-ai-on-oncological-real-world-data-301901187.html
+  headquarters: null
+  founded: null
+  market_position: Provider of secure multi-party computation and privacy-preserving
+    data collaboration for life sciences
+  provenance: expand-registry
+- id: inductive-automation
+  name: Inductive Automation
+  categories:
+  - plant-historian
+  - scada-dcs
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://inductiveautomation.com/resources/video/why-ignition-is-the-perfect-platform-for-life-sciences-pharma
+  sources:
+  - https://inductiveautomation.com/resources/video/why-ignition-is-the-perfect-platform-for-life-sciences-pharma
+  - https://inductiveautomation.com/resources/article/21-cfr-part-11-and-pharmaceutical-best-practices-with-ignition
+  headquarters: null
+  founded: '2003'
+  market_position: Leader in industrial automation software for life sciences and
+    pharmaceutical manufacturing with 21 CFR Part 11 compliance
+  provenance: expand-registry
+- id: smile-digital-health
+  name: Smile Digital Health
+  categories:
+  - hie-interoperability-engine
+  - payer-um-fraud-analytics
+  - population-health-analytics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.smiledigitalhealth.com/
+  sources:
+  - https://www.smiledigitalhealth.com/
+  - https://aws.amazon.com/marketplace/pp/prodview-eh4rnt6hyipxe
+  headquarters: null
+  founded: null
+  market_position: World's first FHIR-based clinical data repository as a service,
+    operating in 23+ countries
+  provenance: expand-registry
+- id: waters-nugenesis-sdms
+  name: Waters NuGenesis SDMS
+  categories:
+  - qc-lims-cds
+  - rd-lab-informatics
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.waters.com/nextgen/us/en/products/informatics-and-software/lms-and-data-management/nugenesis-software/nugenesis-sdms.html
+  sources:
+  - https://www.waters.com/nextgen/us/en/products/informatics-and-software/lms-and-data-management/nugenesis-software/nugenesis-sdms.html
+  - https://www.scientific-computing.com/press-releases/nugenesis-sdms
+  headquarters: null
+  founded: null
+  market_position: Automated scientific data management system for pharmaceutical
+    and life sciences laboratories with GLP, GxP, cGMP, and 21 CFR Part 11 compliance
+  provenance: expand-registry
+- id: strata-decision-technology
+  name: Strata Decision Technology
+  categories:
+  - hospital-erp
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.stratadecision.com/
+  sources:
+  - https://www.stratadecision.com/
+  - https://www.hfma.org/finance-and-business-strategy/strata-decision-technology-helps-healthcare-organizations-make-informed-decisions/
+  headquarters: Chicago, Illinois
+  founded: '1996'
+  market_position: No. 1 KLAS-rated decision support and cost accounting platform
+    serving 2,300+ organizations with 95% customer satisfaction
+  provenance: expand-registry

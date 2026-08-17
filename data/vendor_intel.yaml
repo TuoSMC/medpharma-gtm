@@ -4292,7 +4292,7 @@ vendors:
   confidence: B
   source: hyland.com (healthcare overview '>2,000 healthcare organizations', cloud articles, OneContent acquisition); en.wikipedia.org/wiki/Hyland_Software
   key: hyland
-  vendor_id: null
+  vendor_id: hyland
   aliases:
   - hyland brainware
   - hyland onbase
