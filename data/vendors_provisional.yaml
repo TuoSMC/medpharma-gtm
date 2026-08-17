@@ -14,6 +14,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.datavant.com/
   sources:
@@ -36,6 +37,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.inovalon.com/
   sources:
@@ -57,6 +59,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: customer
   confidence: B
   source: https://us.nihonkohden.com/
   sources:
@@ -78,6 +81,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://lifebit.ai/
   sources:
@@ -101,6 +105,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.crunchbase.com/organization/rhino-health
   sources:
@@ -120,6 +125,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: customer
   confidence: B
   source: https://www.sec.gov/Archives/edgar/data/1299130/000129913024000054/pacb-20231231.htm
   sources:
@@ -142,6 +148,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.reveleer.com/company
   sources:
@@ -162,6 +169,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.zelis.com/
   sources:
@@ -183,6 +191,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: oem
+  buyer_signal: customer
   confidence: B
   source: https://www.abbott.com/
   sources:
@@ -203,6 +212,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://imd-soft.com/
   sources:
@@ -224,6 +234,7 @@ vendors:
   - hybrid
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.mach7t.com/mach-speed
   sources:
@@ -246,6 +257,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: oem
+  buyer_signal: customer
   confidence: B
   source: https://www.masimo.com/
   sources:
@@ -266,6 +278,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.ramsoft.com/
   sources:
@@ -285,6 +298,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.clarishealth.com/about-us/
   sources:
@@ -304,6 +318,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://healthverity.com/about-us/
   sources:
@@ -325,6 +340,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: service-provider
+  buyer_signal: operator
   confidence: B
   source: https://hicuityhealth.com/about/
   sources:
@@ -346,6 +362,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://prenosis.com/
   sources:
@@ -367,6 +384,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.apheris.com
   sources:
@@ -388,6 +406,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.aridhia.com/about-us/
   sources:
@@ -406,6 +425,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.brainomix.com/company/
   sources:
@@ -424,6 +444,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: original-equipment-manufacturer
   confidence: B
   source: https://www.brevetti-cea.com/company/about-us
   sources:
@@ -443,6 +464,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.coherehealth.com/
   sources:
@@ -464,6 +486,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: original-equipment-manufacturer
   confidence: B
   source: https://www.getinge.com/us/
   sources:
@@ -483,6 +506,7 @@ vendors:
   - edge
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.highbyte.com
   sources:
@@ -502,6 +526,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.icadmed.com
   sources:
@@ -521,6 +546,7 @@ vendors:
   - on-premises
   - vendor-managed
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://nanoporetech.com
   sources:
@@ -541,6 +567,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.piemedicalimaging.com
   sources:
@@ -561,6 +588,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.sisfirst.com
   sources:
@@ -581,6 +609,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: B
   source: https://www.tetrascience.com
   sources:
@@ -599,6 +628,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: original-equipment-manufacturer
   confidence: B
   source: https://website.kardian.com/about/
   sources:
@@ -616,6 +646,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: B
   source: https://www.medhost.com/about-us/
   sources:
@@ -636,6 +667,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: service-provider
+  buyer_signal: operator
   confidence: B
   source: https://mrocorp.com/about-us/
   sources:
@@ -655,6 +687,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.bioinfor.com/
   sources:
@@ -677,6 +710,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.geekwire.com/2021/health-software-company-edifecs-continues-acquisition-run-swoops-up-health-fidelity/
   sources:
@@ -698,6 +732,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.crunchbase.com/organization/ferrum-health
   sources:
@@ -718,6 +753,7 @@ vendors:
   - on-premises
   - vendor-managed
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://www.materialise.com/en/healthcare
   sources:
@@ -738,6 +774,7 @@ vendors:
   - on-premises
   - vendor-managed
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://www.3dsystems.com/healthcare
   sources:
@@ -759,6 +796,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://ambientclinical.com/
   sources:
@@ -783,6 +821,7 @@ vendors:
   - on-premises
   - software-as-a-service
   partner_type: oem
+  buyer_signal: operator
   confidence: C
   source: https://www.businesswire.com/news/home/20241125891507/en/BioIntelliSense-Announces-Observational-Study-in-Journal-of-Clinical-Medicine-Demonstrating-Early-Detection-of-Patient-Deterioration-with-FDA-cleared-BioButton-Continuous-Monitoring-Wearable-Device
   sources:
@@ -802,6 +841,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.concertai.com/
   sources:
@@ -822,6 +862,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.novarad.net/
   sources:
@@ -840,6 +881,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://cancercare.siemens-healthineers.com/
   sources:
@@ -861,6 +903,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.wolterskluwer.com/en/solutions/sentri7-clinical-surveillance
   sources:
@@ -878,6 +921,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.crunchbase.com/organization/allelica
   sources:
@@ -898,6 +942,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://apella.io/
   sources:
@@ -916,6 +961,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.assorthealth.com
   sources:
@@ -934,6 +980,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.care.ai/
   sources:
@@ -953,6 +1000,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: original-equipment-manufacturer
   confidence: C
   source: https://www.mennenmedical.com/about/
   sources:
@@ -970,6 +1018,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.indx.com/
   sources:
@@ -991,6 +1040,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.nuance.com/healthcare/provider-solutions/speech-recognition/dragon-medical-one.html
   sources:
@@ -1014,6 +1064,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.opentext.com/solutions/life-sciences-document-management
   sources:
@@ -1034,6 +1085,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.proximie.com
   sources:
@@ -1053,6 +1105,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: original-equipment-manufacturer
   confidence: C
   source: https://pro.sony/en_BG/healthcare/digital-transformation-insights/e-saturnus
   sources:
@@ -1072,6 +1125,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://akasa.com/about-us/
   sources:
@@ -1092,6 +1146,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.elsevier.com/products/clinicalkey
   sources:
@@ -1109,6 +1164,7 @@ vendors:
   deployment_models:
   - software-as-a-service
   partner_type: unknown
+  buyer_signal: operator
   confidence: C
   source: https://www.cbinsights.com/company/enable-medicine-1
   sources:
@@ -1127,6 +1183,7 @@ vendors:
   - public-cloud
   - hybrid
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://incepto-medical.com/
   sources:
@@ -1147,6 +1204,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.infinitus.ai/why-infinitus/
   sources:
@@ -1166,6 +1224,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://healthcare.konicaminolta.us/exa-pacsris
   sources:
@@ -1186,6 +1245,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: service-provider
+  buyer_signal: operator
   confidence: C
   source: https://www.exlservice.com/industries/health-and-life-sciences
   sources:
@@ -1205,6 +1265,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.fico.com/en/industries/healthcare
   sources:
@@ -1222,6 +1283,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.hyro.ai/healthcare/
   sources:
@@ -1242,6 +1304,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.ansys.com/industries/healthcare/pharmaceuticals-biopharmaceuticals
   sources:
@@ -1261,6 +1324,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://www.cisco.com/c/en/us/solutions/industries/healthcare.html
   sources:
@@ -1277,6 +1341,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: operator
   confidence: C
   source: https://www.copanusa.com/laboratory-automation/microbiology-laboratory-automation-ai/phenomatrix/
   sources:
@@ -1296,6 +1361,7 @@ vendors:
   - hybrid
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.elpro.com/en/cold-chain
   sources:
@@ -1315,6 +1381,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.xifin.com/
   sources:
@@ -1335,6 +1402,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.hyland.com/en/solutions/products/onbase
   sources:
@@ -1352,6 +1420,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: original-equipment-manufacturer
   confidence: C
   source: https://www.inpeco.com/
   sources:
@@ -1371,6 +1440,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.raapidinc.com/press-room/industry-forerunner-delivering-ai-powered-risk-adjustment-technology/
   sources:
@@ -1388,6 +1458,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: isv
+  buyer_signal: original-equipment-manufacturer
   confidence: C
   source: https://www.sensum.eu/
   sources:
@@ -1408,6 +1479,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.agilent.com/
   sources:
@@ -1428,6 +1500,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://arkivum.com/
   sources:
@@ -1449,6 +1522,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.cadence.com/
   sources:
@@ -1469,6 +1543,7 @@ vendors:
   deployment_models:
   - on-premises
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://www.draeger.com/
   sources:
@@ -1487,6 +1562,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.eyesopen.com/
   sources:
@@ -1507,6 +1583,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://perigen.com/
   sources:
@@ -1527,6 +1604,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.persyst.com/
   sources:
@@ -1546,6 +1624,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://scitara.com/
   sources:
@@ -1565,6 +1644,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: service-provider
+  buyer_signal: operator
   confidence: C
   source: https://www.conduent.com/
   sources:
@@ -1583,6 +1663,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.fortanix.com/
   sources:
@@ -1602,6 +1683,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.eisai.com/news/news201525.html
   sources:
@@ -1622,6 +1704,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.decentriq.com/healthcare
   sources:
@@ -1641,6 +1724,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://instadeep.com/about-us/
   sources:
@@ -1660,6 +1744,7 @@ vendors:
   - on-premises
   - software-as-a-service
   partner_type: isv
+  buyer_signal: original-equipment-manufacturer
   confidence: C
   source: https://innovation.ox.ac.uk/case-study/oxehealth-supporting-safer-patient-care
   sources:
@@ -1678,6 +1763,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://healthaxis.com/
   sources:
@@ -1696,6 +1782,7 @@ vendors:
   - on-premises
   - hybrid
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://hospital.haemonetics.com/transfusion-management/bloodtrack
   sources:
@@ -1715,6 +1802,7 @@ vendors:
   - on-premises
   - edge
   partner_type: oem
+  buyer_signal: customer
   confidence: C
   source: https://medicapture.com/about-us/
   sources:
@@ -1734,6 +1822,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.zoominfo.com/c/quest-analytics-llc/99107406
   sources:
@@ -1753,6 +1842,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://reesscientific.com/industries/pharmaceutical-biotechnology
   sources:
@@ -1770,6 +1860,7 @@ vendors:
   deployment_models:
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://moberganalytics.com/
   sources:
@@ -1789,6 +1880,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.shift-technology.com/solutions/healthcare
   sources:
@@ -1808,6 +1900,7 @@ vendors:
   - public-cloud
   - on-premises
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://dualitytech.com/use-cases/healthcare-industry/life-sciences/
   sources:
@@ -1827,6 +1920,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://inductiveautomation.com/resources/video/why-ignition-is-the-perfect-platform-for-life-sciences-pharma
   sources:
@@ -1848,6 +1942,7 @@ vendors:
   - on-premises
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.smiledigitalhealth.com/
   sources:
@@ -1867,6 +1962,7 @@ vendors:
   - on-premises
   - public-cloud
   partner_type: isv
+  buyer_signal: customer
   confidence: C
   source: https://www.waters.com/nextgen/us/en/products/informatics-and-software/lms-and-data-management/nugenesis-software/nugenesis-sdms.html
   sources:
@@ -1885,6 +1981,7 @@ vendors:
   - public-cloud
   - software-as-a-service
   partner_type: isv
+  buyer_signal: operator
   confidence: C
   source: https://www.stratadecision.com/
   sources:

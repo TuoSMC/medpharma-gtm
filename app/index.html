@@ -617,6 +617,10 @@ function vendorList(vendors){
     const row=el('div',{class:'vrow2'},car,el('span',{class:'vnm'},vn));
     if(it){const dep=it.deployment_pref||'unknown';const dc={'on-prem':'dep-onprem','hybrid':'dep-hybrid','cloud':'dep-cloud'}[dep]||'dep-unk';const dl={'on-prem':T('on-prem','地端'),'cloud':T('cloud','雲'),'hybrid':T('hybrid','混合')}[dep]||'?';
       row.append(el('span',{class:'depbadge '+dc,title:it.deployment_note||''},dl));}
+    // plan-v6.1 #5: flag provisional (web-sourced, partially-verified) vendors; show the GROUNDED
+    // buyer_signal (from the sub-markets naming it) rather than the less-reliable haiku partner_type.
+    const _vr=VBYID[subVendorSlug(vn)||vn];
+    if(_vr&&_vr.provisional){row.append(el('span',{style:'font-size:var(--f-1);padding:0 6px;margin-left:auto;border:1px dashed var(--line);border-radius:var(--r-tag);color:var(--muted)',title:T('web-sourced, partially verified (provisional tier)','網路查證,部分驗證(暫定層)')},T('provisional','暫定')+(_vr.buyer_signal?' · '+_vr.buyer_signal:'')));}
     item.append(row);
     if(it){const draw=el('div',{class:'vintelbox'});draw.style.display='none';item.append(draw);
       row.onclick=(e)=>{e.stopPropagation();const o=draw.style.display!=='none';draw.style.display=o?'none':'';car.textContent=o?'▸':'▾';if(!o&&!draw._built){buildVintel(draw,it);draw._built=true;}};}

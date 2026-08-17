@@ -32,7 +32,7 @@ DEPLOY = {
 }
 DEFAULT_DEPLOY = {"oem": "on-premises", "isv": "software-as-a-service",
                   "service-provider": "vendor-managed", "hyperscaler": "public-cloud", "unknown": "software-as-a-service"}
-ORDER = ["id", "name", "categories", "deployment_models", "partner_type", "confidence",
+ORDER = ["id", "name", "categories", "deployment_models", "partner_type", "buyer_signal", "confidence",
          "source", "sources", "headquarters", "founded", "market_position", "provenance"]
 
 
@@ -56,12 +56,17 @@ def main():
             seen.add(cur); cur = sub_by_id[cur]["parent"]
         return cur if cur in cat_ids else None
 
-    cats_for = {}
+    from collections import Counter
+    cats_for, buyer_for = {}, {}
     for s in subs:
         rc = root_cat(s["id"])
-        if rc:
-            for prose in (s.get("vendors") or []):
-                cats_for.setdefault(norm(prose), set()).add(rc)
+        pb = s.get("primary_buyer")
+        for prose in (s.get("vendors") or []):
+            k = norm(prose)
+            if rc:
+                cats_for.setdefault(k, set()).add(rc)
+            if pb:
+                buyer_for.setdefault(k, Counter())[pb] += 1
 
     out, skipped = [], []
     for d in drafts:
@@ -81,11 +86,18 @@ def main():
         if not srcs:
             skipped.append((pid, "no sources"))
             continue
-        cats = sorted(cats_for.get(norm(d["name"]), set()) or cats_for.get(pid.replace("-", " "), set()))
+        nk = norm(d["name"])
+        cats = sorted(cats_for.get(nk, set()) or cats_for.get(pid.replace("-", " "), set()))
+        # buyer_signal: the dominant primary_buyer of the sub-markets that actually name this vendor —
+        # a GROUNDED GTM signal (customer=direct, operator=co-sell, oem=design-win), unlike the haiku
+        # partner_type guess. Derived from taxonomy data, 0 tokens. null if no referencing sub-market.
+        bc = buyer_for.get(nk) or buyer_for.get(pid.replace("-", " "))
+        buyer_signal = bc.most_common(1)[0][0] if bc else None
         rec = {"id": pid, "name": d.get("name"), "categories": cats, "deployment_models": dm,
-               "partner_type": pt, "confidence": d.get("confidence", "C"), "source": srcs[0],
-               "sources": srcs, "headquarters": d.get("headquarters"), "founded": d.get("founded"),
-               "market_position": d.get("market_position"), "provenance": "expand-registry"}
+               "partner_type": pt, "buyer_signal": buyer_signal, "confidence": d.get("confidence", "C"),
+               "source": srcs[0], "sources": srcs, "headquarters": d.get("headquarters"),
+               "founded": d.get("founded"), "market_position": d.get("market_position"),
+               "provenance": "expand-registry"}
         out.append({k: rec[k] for k in ORDER})
 
     OUT.write_text(
