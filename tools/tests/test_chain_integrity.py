@@ -1818,5 +1818,33 @@ class TestC3Finish(unittest.TestCase):
         self.assertIn("DATA.vendor_intel.vendors=window.__VINTEL__", self.TPL, "template must reattach vendor_intel")
 
 
+class TestE4bSubVendorFK(unittest.TestCase):
+    """plan-v6.1 E4b — {sub-vendor prose -> vendors.id} FK map (data/sub_vendor_fk.yaml). Deterministic;
+    every mapped slug is a REAL vendor (never invented); the app resolves sub vendors via the FK first."""
+
+    _V = {v["id"] for v in yaml.safe_load((REPO / "data" / "vendors.yaml").read_text(encoding="utf-8"))["vendors"]}
+    _FK = yaml.safe_load((REPO / "data" / "sub_vendor_fk.yaml").read_text(encoding="utf-8"))
+
+    def test_every_mapped_slug_is_real(self):
+        for prose, vid in self._FK["map"].items():
+            self.assertIn(vid, self._V, f"sub_vendor_fk[{prose!r}] = {vid!r} is not a real vendors.id")
+
+    def test_coverage_recorded(self):
+        n = len(self._FK["map"])
+        self.assertGreaterEqual(n, 500, f"sub-vendor FK coverage fell to {n} — matcher may be broken")
+        self.assertEqual(self._FK["counts"]["resolved"], n, "header count drifted from the map")
+
+    def test_map_keys_are_real_sub_vendors(self):
+        """freshness guard — every mapped key must actually appear in some sub's vendors[] (not stale)."""
+        strings = {str(vn) for s in SUBS for vn in (s.get("vendors") or [])}
+        orphans = [k for k in self._FK["map"] if k not in strings]
+        self.assertEqual(orphans, [], f"sub_vendor_fk has {len(orphans)} keys not in any sub vendors[] (stale?)")
+
+    def test_app_uses_the_fk(self):
+        self.assertIn('"sub_vendor_fk"', APP_BUILD_SRC, "build_app must inject sub_vendor_fk")
+        self.assertIn("const SUBFK=", APP_BUILD_SRC, "app must build the SUBFK lookup")
+        self.assertIn("s=SUBFK[vn]", APP_BUILD_SRC, "vintelOf must try the sub-vendor FK first")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

@@ -93,6 +93,8 @@ def main():
         # The app reads HOT + descendant_profiles + divergent_children from here; it does NOT recompute.
         # Regenerate with tools/build_index.py after any taxonomy change.
         "taxonomy_index": (load(DATA / "taxonomy_index.yaml") if (DATA / "taxonomy_index.yaml").exists() else {"rows": []}),
+        # plan-v6.1 E4b: {sub-vendor prose -> vendors.id} FK map (deterministic; tools/build_sub_vendor_fk.py).
+        "sub_vendor_fk": (load(DATA / "sub_vendor_fk.yaml") if (DATA / "sub_vendor_fk.yaml").exists() else {"map": {}}),
         "leaderboards": load(DATA / "leaderboards.yaml"),
         "accounts": accounts,
         "built": f"taxonomy v{taxonomy.get('version', '?')} · vendors v{vendors.get('version', '?')}",  # reuse loaded objs
