@@ -10,7 +10,7 @@
 |---|---|---|---|
 | 1 | Pick candidate (trigger fired or list import) | Name + facility | No facility identifiable → park |
 | 2 | Gate question: who controls infra behind the software? | Y/N/partial | Pure SaaS user, no control → drop now |
-| 3 | Segment + play mapping | 1 of 8 segments, 1 of 3 plays | Fits no play → cross-play deal or drop (§5.1) |
+| 3 | Segment + play mapping | 1 of 8 segments, 1 of 4 plays (A/B/C/D) | Fits no play → cross-play standalone infra deal or drop |
 | 4 | Software stack ID (domain + vendor) | software block | — |
 | 5 | Deployment operator → GTM motion | direct / ISV / service-provider / OEM | — |
 | 6 | Trigger + timing | trigger block | No trigger, no timeline → Monitor tier max |

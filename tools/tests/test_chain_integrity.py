@@ -23,6 +23,11 @@ TRIGGERS = yaml.safe_load(open(REPO / "data" / "triggers.yaml", encoding="utf-8"
 SCORING = yaml.safe_load(open(REPO / "data" / "scoring.yaml", encoding="utf-8"))
 PLAYS = yaml.safe_load(open(REPO / "data" / "plays.yaml", encoding="utf-8"))
 CATS = TAX["categories"]
+# plan-v6.1 E5: the app's JS moved from build_app.py's TEMPLATE literal into app/template.html.
+# Tests that assert app JS/HTML read the COMBINED build source (Python assembler + the template).
+_BA = REPO / "tools" / "build_app.py"
+_TPL = REPO / "app" / "template.html"
+APP_BUILD_SRC = _BA.read_text(encoding="utf-8") + "\n<!--template-->\n" + _TPL.read_text(encoding="utf-8")
 ENUMS = TAX["enums"]
 
 # ---- D1: target enum vocabularies (lazy abbreviations expanded; GPU/CPU/NVMe
@@ -1212,7 +1217,7 @@ class TestNoUndefinedRenderRefs(unittest.TestCase):
         import subprocess
         subprocess.run([sys.executable, "tools/build_app.py"], cwd=str(REPO),
                        capture_output=True, text=True, timeout=60)
-        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        cls.src = APP_BUILD_SRC
 
     def test_every_render_into_called_is_defined(self):
         """Any render*Into wired into a subNav/renderAll must have a definition —
@@ -1246,7 +1251,7 @@ class TestVendorFiltersAndRanking(unittest.TestCase):
         import subprocess
         subprocess.run([sys.executable, "tools/build_app.py"], cwd=str(REPO),
                        capture_output=True, text=True, timeout=60)
-        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        cls.src = APP_BUILD_SRC
         cls.vd = yaml.safe_load(open(REPO / "data" / "vendors.yaml", encoding="utf-8"))
         cls.vs = cls.vd["vendors"]
 
@@ -1302,7 +1307,7 @@ class TestComputeClass(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        cls.src = APP_BUILD_SRC
 
     @staticmethod
     def _cc(c):
@@ -1439,6 +1444,346 @@ class TestVendorListingNeuro(unittest.TestCase):
         vendor is mislabelled with a bci=true (this is a software registry, not implants)."""
         bci = [v["id"] for v in _VDOC["vendors"] if v.get("bci") is True]
         self.assertEqual(bci, [], f"no implantable-BCI makers expected in a software registry: {bci}")
+
+
+# ============================================================
+# taxonomy-tree pilot — level-2 sub-markets nest under a category via `parent`
+# (categories stay LOCKED at 59 via TestInventoryLocked; the tree grows here)
+# ============================================================
+SUBS = TAX.get("subcategories", [])
+_CAT_IDS = {c["id"] for c in CATS}
+_SUB_REQUIRED = ["id", "parent", "name_en", "name_zh", "scope_en", "scope_zh",
+                 "role", "data_modality", "hardware_profile", "hardware_opportunity",
+                 "primary_buyer", "segments", "vendors", "confidence", "source"]
+
+
+class TestSubcategories(unittest.TestCase):
+    def test_present_and_nonempty(self):
+        self.assertTrue(SUBS, "taxonomy.yaml should carry a non-empty subcategories list")
+
+    def test_required_fields(self):
+        for s in SUBS:
+            for f in _SUB_REQUIRED:
+                self.assertIn(f, s, f"subcategory {s.get('id','?')} missing field {f}")
+
+    def test_ids_unique_kebab_and_no_category_collision(self):
+        seen = set()
+        for s in SUBS:
+            sid = s["id"]
+            self.assertRegex(sid, r"^[a-z0-9]+(-[a-z0-9]+)*$", f"{sid}: id must be kebab-case")
+            self.assertNotIn(sid, seen, f"{sid}: duplicate subcategory id")
+            seen.add(sid)
+            self.assertNotIn(sid, _CAT_IDS, f"{sid}: subcategory id collides with a category id")
+
+    def test_parent_resolves_and_no_cycle(self):
+        """parent must point at a category or another subcategory; walking parents terminates."""
+        sub_ids = {s["id"] for s in SUBS}
+        by_id = {s["id"]: s for s in SUBS}
+        for s in SUBS:
+            self.assertNotEqual(s["parent"], s["id"], f"{s['id']}: self-parent")
+            self.assertIn(s["parent"], _CAT_IDS | sub_ids, f"{s['id']}: parent {s['parent']} unknown")
+            # walk up: a subcategory chain must reach a category without looping
+            seen, cur, hops = set(), s, 0
+            while cur["parent"] in sub_ids:
+                self.assertNotIn(cur["id"], seen, f"{s['id']}: cycle in parent chain")
+                seen.add(cur["id"])
+                cur = by_id[cur["parent"]]
+                hops += 1
+                self.assertLess(hops, 50, f"{s['id']}: parent chain too deep / cyclic")
+            self.assertIn(cur["parent"], _CAT_IDS, f"{s['id']}: chain does not root at a category")
+
+    def test_vendors_nonempty(self):
+        for s in SUBS:
+            self.assertTrue(s.get("vendors"), f"{s['id']}: vendors must be non-empty")
+
+    def test_hardware_profile_subset_of_enum(self):
+        for s in SUBS:
+            bad = [h for h in s["hardware_profile"] if h not in TARGET_ENUMS["hardware_profile"]]
+            self.assertFalse(bad, f"{s['id']}: hardware_profile not in enum: {bad}")
+
+    def test_opportunity_in_range(self):
+        for s in SUBS:
+            self.assertIn(s["hardware_opportunity"], (1, 2, 3, 4), s["id"])
+
+    def test_primary_buyer_in_enum(self):
+        for s in SUBS:
+            self.assertIn(s["primary_buyer"], TARGET_ENUMS["hardware_buyer"], s["id"])
+
+    def test_no_forbidden_abbreviations(self):
+        for s in SUBS:
+            for h in s["hardware_profile"]:
+                self.assertNotIn(h, FORBIDDEN_ABBREVIATED_VALUES, f"{s['id']}: abbreviated {h}")
+
+    def test_app_renders_subcategories(self):
+        """build_app.py must load and render the sub-markets tree."""
+        src = APP_BUILD_SRC
+        self.assertIn("subcategories", src, "build_app.py must read DATA.taxonomy.subcategories")
+        self.assertIn("subcatsOf", src, "build_app.py must expose a subcatsOf helper")
+
+    def test_tree_depth_is_optional_but_wellformed(self):
+        """plan-v6 E1: depth is LEGAL, not REQUIRED. The old test forced grandchildren to exist
+        (the deepen-factory root cause). A flat 59→子 tree is now equally valid; but IF any 孫
+        exists (a subcategory whose parent is itself a subcategory), its parent must be a real
+        subcategory id. Structure check only — never forces the tree to go deeper.
+        (The spine-invariant guard that DOES assert 'default tree = 59' arrives in E3.)"""
+        subids = {s["id"] for s in SUBS}
+        for s in SUBS:
+            if s["parent"] in subids:  # this node is a grandchild-or-deeper
+                self.assertIn(s["parent"], subids,
+                              f"{s['id']}: deeper node's parent must be a real subcategory")
+
+    def test_play_depth_is_optional(self):
+        """plan-v6 E1: a play is NOT required to carry deepened categories. The old test forced
+        every play to have sub-markets (drove the factory). Now: depth per play is optional; if a
+        deepened category exists it must belong to a real category with a well-formed plays list."""
+        by_cat = {c["id"]: c for c in CATS}
+        for s in SUBS:
+            if s["parent"] in by_cat:  # a 子 hanging directly off a category
+                self.assertIsInstance(by_cat[s["parent"]].get("plays") or [], list,
+                                      f"{s['parent']}: plays must be a list")
+
+
+# ============================================================
+# Explore redesign — the Play spine + the dead-control sweep (audit-driven)
+# ============================================================
+class TestExploreSpine(unittest.TestCase):
+    SRC = APP_BUILD_SRC
+
+    def test_playtree_defined_and_routed(self):
+        self.assertIn("function playTree(", self.SRC, "the Play-spine renderer must exist")
+        self.assertIn("if(gp==='play'){playTree(shown);}", self.SRC,
+                       "render() must route the 'play' grouping to playTree")
+
+    def test_four_dead_orphan_selects_stay_removed(self):
+        # each was created via mk('fX',...) but never appended — shadowing a live control. Guard re-introduction.
+        for dead in ("mk('fBuyer'", "mk('fPlay'", "mk('fDep'", "mk('fProfile'"):
+            self.assertNotIn(dead, self.SRC, f"dead orphan select re-introduced: {dead}")
+        self.assertNotIn("fSpansBox=el(", self.SRC, "dead fSpans checkbox re-introduced")
+
+    def test_compute_filter_not_duplicated(self):
+        # the one LIVE duplicate: fCompute select in the More-filters drawer duplicated the launcher chip.
+        self.assertNotIn("compute type (SKU)','計算類型(SKU)'),fCompute", self.SRC,
+                         "fCompute must not be re-added to the More-filters drawer (duplicates the launcher chip)")
+
+    def test_launcher_play_chip_row_removed(self):
+        # Play is the tree spine now; the launcher .dchip Play-chip row was deleted.
+        self.assertNotIn("class:'dchip'", self.SRC, "launcher Play-chip row re-introduced (Play is the spine)")
+
+    def test_subcard_scroll_anchor_present(self):
+        self.assertIn("id:'sub-'+s.id", self.SRC, "subcards need id=sub-<id> for the L4 spine scroll target")
+
+    def test_recursive_tree_and_sub_detail(self):
+        # the tree renders any depth via a recursive node builder + each sub-market gets its own card
+        self.assertIn("function treeNodeInto(", self.SRC, "recursive tree-node renderer must exist")
+        self.assertIn("function subDetailCard(", self.SRC, "each sub-market needs its own detail card")
+        self.assertIn("function chainOf(", self.SRC, "breadcrumb ancestry walk must exist")
+
+
+# ============================================================
+# plan-v6.1 E2 — the retrieval index (data/taxonomy_index.yaml + _tree_index.yaml)
+# ============================================================
+def _load_index(name):
+    p = REPO / "data" / name
+    doc = yaml.safe_load(p.read_text(encoding="utf-8"))
+    return doc, {r["id"]: r for r in (doc.get("rows") or [])}
+
+
+_SPINE_DOC, _SPINE = _load_index("taxonomy_index.yaml")
+_TREE_DOC, _TREE = _load_index("taxonomy_tree_index.yaml")
+_INDEX = {**_SPINE, **_TREE}
+
+
+class TestTaxIndex(unittest.TestCase):
+    """The index is the single retrieval surface + source of truth for visibility/HOT (D7).
+    These guard E2: models query this instead of reading the 2.27 MB taxonomy.yaml (D2)."""
+
+    def test_spine_is_the_59_categories_default_visible(self):
+        self.assertEqual(len(_SPINE), len(CATS), "spine index must hold exactly the categories")
+        self.assertEqual({r["id"] for r in _SPINE.values()}, {c["id"] for c in CATS})
+        for r in _SPINE.values():
+            self.assertEqual(r["depth"], 0, r["id"])
+            self.assertEqual(r["visibility"], "default", r["id"])
+            self.assertIsNone(r["parent"], r["id"])
+
+    def test_hot_default_is_35(self):
+        """the acceptance gate (D4): default-visible categories with hardware_opportunity>=3 == 35.
+        If this is not 35 the index is stale or the taxonomy changed — rebuild + reconcile."""
+        hot = [r for r in _SPINE.values() if (r.get("hardware_opportunity") or 0) >= 3]
+        self.assertEqual(len(hot), 35, f"HOT_default={len(hot)} (expected 35)")
+        self.assertEqual(_SPINE_DOC["counts"]["hot_default"], 35, "spine header hot_default drifted from rows")
+
+    def test_tree_is_the_999_subs_depth_and_visibility(self):
+        self.assertEqual(len(_TREE), len(SUBS), "tree index must hold exactly the subcategories")
+        for r in _TREE.values():
+            self.assertGreaterEqual(r["depth"], 1, r["id"])
+            expected = "card" if r["depth"] == 1 else "archived"
+            self.assertEqual(r["visibility"], expected, f"{r['id']} depth {r['depth']} -> {r['visibility']}")
+
+    def test_every_index_row_parent_resolves(self):
+        for r in _TREE.values():
+            self.assertIn(r["parent"], _INDEX, f"{r['id']}: parent {r['parent']} not in index")
+
+    def test_c1_rollup_wellformed(self):
+        """C1: category rows carry child_count / descendant_profiles / divergent_children;
+        divergent is <=3 real L1 child ids whose profile-set or buyer differs from the parent."""
+        for r in _SPINE.values():
+            self.assertIn("divergent_children", r, r["id"])
+            self.assertLessEqual(len(r["divergent_children"]), 3, r["id"])
+            l1 = {s["id"] for s in SUBS if s["parent"] == r["id"]}
+            self.assertEqual(r["child_count"], len(l1), r["id"])
+            for cid in r["divergent_children"]:
+                self.assertIn(cid, l1, f"{r['id']}: divergent child {cid} is not an L1 child")
+
+    def test_spine_index_under_100kb(self):
+        """L1 lamp: the loadable retrieval surface stays small. (The tree index is machine-only.)"""
+        kb = (REPO / "data" / "taxonomy_index.yaml").stat().st_size / 1024
+        self.assertLess(kb, 100, f"spine index {kb:.1f} KB exceeds the 100 KB L1 target")
+
+    def test_index_not_stale(self):
+        """freshness signal (brain #4): rebuilding from taxonomy.yaml must reproduce the committed
+        counts. Catches 'edited taxonomy.yaml but forgot to run build_index.py'."""
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("build_index", REPO / "tools" / "build_index.py")
+        bi = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(bi)
+        cats, subs = bi.load_taxonomy()
+        rows = bi.build_rows(cats, subs)
+        live_hot = sum(1 for r in rows if r["depth"] == 0 and (r["hardware_opportunity"] or 0) >= 3)
+        self.assertEqual(len(cats), len(_SPINE), "category count drifted — rebuild the index")
+        self.assertEqual(len(subs), len(_TREE), "subcategory count drifted — rebuild the index")
+        self.assertEqual(live_hot, 35, "live HOT != 35 — taxonomy changed; rebuild + reconcile")
+
+
+class TestE3Fold(unittest.TestCase):
+    """plan-v6.1 E3a — the Explore tree folds to the 59-category spine; the app consumes the
+    index for HOT + the C1 card rollup (C2/D7), and does not recompute HOT or walk 999 nodes."""
+
+    SRC = APP_BUILD_SRC
+    HTML = (REPO / "app" / "index.html").read_text(encoding="utf-8")
+
+    def test_build_injects_the_index(self):
+        self.assertIn('"taxonomy_index"', self.SRC, "build_app must inject data/taxonomy_index.yaml")
+
+    def test_hot_reads_the_index_not_customer_pull(self):
+        """C2/D7: HOT is the index set, not a recomputed hardware_opportunity_by_buyer.customer filter."""
+        self.assertIn("const HOT_IDS=new Set(", self.SRC, "HOT_IDS must be built from the index")
+        self.assertIn("isHot=c=>HOT_IDS.has(c.id)", self.SRC, "isHot must read the index HOT set")
+        self.assertNotIn("hotN=l=>l.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3)", self.SRC,
+                         "hotN must no longer recompute HOT from customer-pull")
+
+    def test_tree_stops_at_category(self):
+        """the default tree renders category leaves (catNodeInto), not the recursive 999-node walk."""
+        self.assertIn("function catNodeInto(", self.SRC, "category-leaf renderer must exist")
+        self.assertIn("catNodeInto(b2,c)", self.SRC, "playTree must render category leaves")
+        self.assertNotIn("treeNodeInto(b2,c,0)", self.SRC,
+                         "playTree must NOT recurse the full tree (that is the 999-node wall)")
+
+    def test_card_shows_c1_rollup_from_index(self):
+        """C1: the card reads descendant_profiles + divergent_children from the index (IDX), not recomputed."""
+        self.assertIn("const IDX={}", self.SRC, "IDX lookup over the index rows must exist")
+        self.assertIn("ix.descendant_profiles", self.SRC, "card must render the C1 diversity line from the index")
+        self.assertIn("ix.divergent_children", self.SRC, "card must render the C1 divergent chips from the index")
+
+    def test_built_html_embeds_the_index(self):
+        """the shipped app actually carries the index rows (so the runtime rollup/HOT have data)."""
+        self.assertIn("descendant_profiles", self.HTML, "built app/index.html must embed the taxonomy index")
+
+
+class TestE3bSplit(unittest.TestCase):
+    """plan-v6.1 E3b/C3 — the archived L2+ tree ships in taxonomy_tree.js, loaded on demand via a
+    <script> element (file://-safe), NOT embedded in index.html and NOT via fetch. app/==docs/ parity."""
+
+    SRC = APP_BUILD_SRC
+    APP_HTML = (REPO / "app" / "index.html").read_text(encoding="utf-8")
+    APP_ARCHIVE = (REPO / "app" / "taxonomy_tree.js").read_text(encoding="utf-8")
+
+    def test_archive_ships_in_both_dirs_byte_identical(self):
+        a, d = REPO / "app" / "taxonomy_tree.js", REPO / "docs" / "taxonomy_tree.js"
+        self.assertTrue(a.exists() and d.exists(), "taxonomy_tree.js must ship in app/ AND docs/")
+        self.assertEqual(a.read_bytes(), d.read_bytes(), "taxonomy_tree.js must be byte-identical app==docs")
+
+    def test_archive_assigns_global(self):
+        self.assertTrue(self.APP_ARCHIVE.startswith("window.__ARCHIVE__="),
+                        "archive must assign window.__ARCHIVE__ (script-loaded, not fetched)")
+
+    def test_deep_subs_archived_not_embedded(self):
+        """a real L2+ sub must live in taxonomy_tree.js and be ABSENT from the shipped index.html."""
+        tree = yaml.safe_load((REPO / "data" / "taxonomy_tree_index.yaml").read_text(encoding="utf-8"))
+        deep_ids = sorted(r["id"] for r in tree["rows"] if r["depth"] >= 2)
+        self.assertTrue(deep_ids, "expected some L2+ subs")
+        sample = deep_ids[0]
+        self.assertIn('"' + sample + '"', self.APP_ARCHIVE, f"{sample} must be in the archive")
+        self.assertNotIn('"' + sample + '"', self.APP_HTML,
+                         f"{sample} (L2+) must NOT be embedded in index.html (default-only ship)")
+
+    def test_lazy_load_uses_script_not_fetch(self):
+        self.assertIn("function loadArchive(", self.SRC, "loadArchive must exist")
+        self.assertIn("createElement('script')", self.SRC, "archive loads via a <script> element (file://-safe)")
+        self.assertIn("loadArchive(()=>", self.SRC, "drilling must load the archive before rendering")
+        # the archive must NOT be pulled with fetch/XHR (blocked over file://)
+        self.assertNotIn("fetch('taxonomy_tree", self.SRC, "must not fetch the archive (breaks file://)")
+
+    def test_build_embeds_l1_only(self):
+        self.assertIn('taxonomy["subcategories"] = l1_subs', self.SRC,
+                      "build must embed only L1 subs; deep_subs go to taxonomy_tree.js")
+
+
+class TestE4aIntelFK(unittest.TestCase):
+    """plan-v6.1 E4a — every vendor_intel record carries a nullable vendor_id; non-null FKs resolve
+    to a REAL vendors.id (never invented). The app resolves intel by the FK first, name fallback second."""
+
+    _V = {v["id"] for v in yaml.safe_load((REPO / "data" / "vendors.yaml").read_text(encoding="utf-8"))["vendors"]}
+    _I = yaml.safe_load((REPO / "data" / "vendor_intel.yaml").read_text(encoding="utf-8"))["vendors"]
+    SRC = APP_BUILD_SRC
+
+    def test_every_record_has_vendor_id_field(self):
+        for r in self._I:
+            self.assertIn("vendor_id", r, f"{r.get('key')}: missing vendor_id (run migrate_intel_vendor_id.py)")
+
+    def test_nonnull_fk_resolves_to_real_vendor(self):
+        """the FK integrity guarantee — no invented slugs (CLAUDE.md: never fabricate)."""
+        for r in self._I:
+            vid = r.get("vendor_id")
+            if vid is not None:
+                self.assertIn(vid, self._V, f"{r['key']}: vendor_id '{vid}' is not a real vendors.id")
+
+    def test_coverage_recorded(self):
+        n = sum(1 for r in self._I if r.get("vendor_id"))
+        self.assertGreaterEqual(n, 250, f"FK coverage fell to {n}/{len(self._I)} — the migration may be broken")
+
+    def test_app_prefers_fk_then_name(self):
+        self.assertIn("const VINTEL_BY_ID={}", self.SRC, "app must build the vendor_id FK lookup")
+        self.assertIn("VINTEL_BY_ID[vn]||VINTEL[normVendor(vn)]", self.SRC,
+                      "vintelOf must try the FK first, then the normalized-name fallback")
+
+
+class TestE5Hygiene(unittest.TestCase):
+    """plan-v6.1 E5 — template extracted, no redundant reloads, search debounced, shared loader."""
+
+    BA = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    TPL = (REPO / "app" / "template.html").read_text(encoding="utf-8")
+
+    def test_template_extracted_to_file(self):
+        self.assertTrue((REPO / "app" / "template.html").exists(), "app/template.html must exist")
+        self.assertTrue(self.TPL.lstrip().startswith("<!doctype html>"), "template.html must be the HTML shell")
+        self.assertIn('TEMPLATE = (REPO / "app" / "template.html").read_text', self.BA,
+                      "build_app must READ the template file, not inline the literal")
+        self.assertNotIn('TEMPLATE = r"""', self.BA, "the giant TEMPLATE literal must be gone from build_app.py")
+
+    def test_no_redundant_reload_for_built_stamp(self):
+        self.assertNotIn("load(DATA / 'taxonomy.yaml').get('version'", self.BA,
+                         "the built stamp must not reload taxonomy.yaml (reuse the loaded object)")
+        self.assertIn("taxonomy.get('version'", self.BA, "built stamp reuses the loaded taxonomy")
+        self.assertIn('vendors = load(DATA / "vendors.yaml")', self.BA, "vendors loaded once, then reused")
+
+    def test_search_is_debounced(self):
+        self.assertIn("setTimeout(render,120)", self.TPL, "search input must debounce render (not fire per keystroke)")
+
+    def test_shared_loader_exists_and_used(self):
+        libp = REPO / "tools" / "lib" / "load.py"
+        self.assertTrue(libp.exists(), "tools/lib/load.py (the B-Load bridge) must exist")
+        self.assertIn("def load_yaml(", libp.read_text(encoding="utf-8"))
+        self.assertIn("from lib.load import load_yaml", self.BA, "build_app must use the shared loader")
 
 
 if __name__ == "__main__":

@@ -1,3 +1,8 @@
+> **ARCHIVED (2026-08-17, plan-v6.1 E1).** This is the original six-layer refinement plan from
+> 2026-07-24 (53 cats / 3 plays era). Its D1–D3 decisions shipped; the chain now holds 59
+> categories / 4 plays / 999 archived subcategories. **Superseded by `plan-v6/PLAN.md` (v6.1),
+> which is the only plan of record.** Kept for history — do not execute the layer schedule below.
+
 # Six-Layer Chain Refinement Plan
 
 > Pipeline: layer-by-layer refinement of
