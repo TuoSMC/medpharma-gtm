@@ -23,6 +23,11 @@ TRIGGERS = yaml.safe_load(open(REPO / "data" / "triggers.yaml", encoding="utf-8"
 SCORING = yaml.safe_load(open(REPO / "data" / "scoring.yaml", encoding="utf-8"))
 PLAYS = yaml.safe_load(open(REPO / "data" / "plays.yaml", encoding="utf-8"))
 CATS = TAX["categories"]
+# plan-v6.1 E5: the app's JS moved from build_app.py's TEMPLATE literal into app/template.html.
+# Tests that assert app JS/HTML read the COMBINED build source (Python assembler + the template).
+_BA = REPO / "tools" / "build_app.py"
+_TPL = REPO / "app" / "template.html"
+APP_BUILD_SRC = _BA.read_text(encoding="utf-8") + "\n<!--template-->\n" + _TPL.read_text(encoding="utf-8")
 ENUMS = TAX["enums"]
 
 # ---- D1: target enum vocabularies (lazy abbreviations expanded; GPU/CPU/NVMe
@@ -1212,7 +1217,7 @@ class TestNoUndefinedRenderRefs(unittest.TestCase):
         import subprocess
         subprocess.run([sys.executable, "tools/build_app.py"], cwd=str(REPO),
                        capture_output=True, text=True, timeout=60)
-        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        cls.src = APP_BUILD_SRC
 
     def test_every_render_into_called_is_defined(self):
         """Any render*Into wired into a subNav/renderAll must have a definition —
@@ -1246,7 +1251,7 @@ class TestVendorFiltersAndRanking(unittest.TestCase):
         import subprocess
         subprocess.run([sys.executable, "tools/build_app.py"], cwd=str(REPO),
                        capture_output=True, text=True, timeout=60)
-        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        cls.src = APP_BUILD_SRC
         cls.vd = yaml.safe_load(open(REPO / "data" / "vendors.yaml", encoding="utf-8"))
         cls.vs = cls.vd["vendors"]
 
@@ -1302,7 +1307,7 @@ class TestComputeClass(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        cls.src = APP_BUILD_SRC
 
     @staticmethod
     def _cc(c):
@@ -1511,7 +1516,7 @@ class TestSubcategories(unittest.TestCase):
 
     def test_app_renders_subcategories(self):
         """build_app.py must load and render the sub-markets tree."""
-        src = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+        src = APP_BUILD_SRC
         self.assertIn("subcategories", src, "build_app.py must read DATA.taxonomy.subcategories")
         self.assertIn("subcatsOf", src, "build_app.py must expose a subcatsOf helper")
 
@@ -1542,7 +1547,7 @@ class TestSubcategories(unittest.TestCase):
 # Explore redesign — the Play spine + the dead-control sweep (audit-driven)
 # ============================================================
 class TestExploreSpine(unittest.TestCase):
-    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    SRC = APP_BUILD_SRC
 
     def test_playtree_defined_and_routed(self):
         self.assertIn("function playTree(", self.SRC, "the Play-spine renderer must exist")
@@ -1653,7 +1658,7 @@ class TestE3Fold(unittest.TestCase):
     """plan-v6.1 E3a — the Explore tree folds to the 59-category spine; the app consumes the
     index for HOT + the C1 card rollup (C2/D7), and does not recompute HOT or walk 999 nodes."""
 
-    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    SRC = APP_BUILD_SRC
     HTML = (REPO / "app" / "index.html").read_text(encoding="utf-8")
 
     def test_build_injects_the_index(self):
@@ -1688,7 +1693,7 @@ class TestE3bSplit(unittest.TestCase):
     """plan-v6.1 E3b/C3 — the archived L2+ tree ships in taxonomy_tree.js, loaded on demand via a
     <script> element (file://-safe), NOT embedded in index.html and NOT via fetch. app/==docs/ parity."""
 
-    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    SRC = APP_BUILD_SRC
     APP_HTML = (REPO / "app" / "index.html").read_text(encoding="utf-8")
     APP_ARCHIVE = (REPO / "app" / "taxonomy_tree.js").read_text(encoding="utf-8")
 
@@ -1729,7 +1734,7 @@ class TestE4aIntelFK(unittest.TestCase):
 
     _V = {v["id"] for v in yaml.safe_load((REPO / "data" / "vendors.yaml").read_text(encoding="utf-8"))["vendors"]}
     _I = yaml.safe_load((REPO / "data" / "vendor_intel.yaml").read_text(encoding="utf-8"))["vendors"]
-    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    SRC = APP_BUILD_SRC
 
     def test_every_record_has_vendor_id_field(self):
         for r in self._I:
@@ -1750,6 +1755,35 @@ class TestE4aIntelFK(unittest.TestCase):
         self.assertIn("const VINTEL_BY_ID={}", self.SRC, "app must build the vendor_id FK lookup")
         self.assertIn("VINTEL_BY_ID[vn]||VINTEL[normVendor(vn)]", self.SRC,
                       "vintelOf must try the FK first, then the normalized-name fallback")
+
+
+class TestE5Hygiene(unittest.TestCase):
+    """plan-v6.1 E5 — template extracted, no redundant reloads, search debounced, shared loader."""
+
+    BA = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    TPL = (REPO / "app" / "template.html").read_text(encoding="utf-8")
+
+    def test_template_extracted_to_file(self):
+        self.assertTrue((REPO / "app" / "template.html").exists(), "app/template.html must exist")
+        self.assertTrue(self.TPL.lstrip().startswith("<!doctype html>"), "template.html must be the HTML shell")
+        self.assertIn('TEMPLATE = (REPO / "app" / "template.html").read_text', self.BA,
+                      "build_app must READ the template file, not inline the literal")
+        self.assertNotIn('TEMPLATE = r"""', self.BA, "the giant TEMPLATE literal must be gone from build_app.py")
+
+    def test_no_redundant_reload_for_built_stamp(self):
+        self.assertNotIn("load(DATA / 'taxonomy.yaml').get('version'", self.BA,
+                         "the built stamp must not reload taxonomy.yaml (reuse the loaded object)")
+        self.assertIn("taxonomy.get('version'", self.BA, "built stamp reuses the loaded taxonomy")
+        self.assertIn('vendors = load(DATA / "vendors.yaml")', self.BA, "vendors loaded once, then reused")
+
+    def test_search_is_debounced(self):
+        self.assertIn("setTimeout(render,120)", self.TPL, "search input must debounce render (not fire per keystroke)")
+
+    def test_shared_loader_exists_and_used(self):
+        libp = REPO / "tools" / "lib" / "load.py"
+        self.assertTrue(libp.exists(), "tools/lib/load.py (the B-Load bridge) must exist")
+        self.assertIn("def load_yaml(", libp.read_text(encoding="utf-8"))
+        self.assertIn("from lib.load import load_yaml", self.BA, "build_app must use the shared loader")
 
 
 if __name__ == "__main__":

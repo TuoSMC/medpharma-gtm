@@ -1298,7 +1298,7 @@ function renderTaxonomy(){
   window.exploreCompute=function(cc){catFilter=null;hotFilter=null;
     [fBucket,fSeg,fHw].forEach(x=>x.value='');fTxt.value='';
     fCompute.value=cc;setGroup('play');window.scrollTo(0,0);};
-  fTxt.oninput=()=>{hotFilter=null;catFilter=null;render();};setGroup('play');
+  let _searchT;fTxt.oninput=()=>{hotFilter=null;catFilter=null;clearTimeout(_searchT);_searchT=setTimeout(render,120);};setGroup('play');  // debounce search
 }
 
 // ================= VENDORS (enriched registry) =================
