@@ -557,8 +557,14 @@ class TestVendorsLayer(unittest.TestCase):
         used = set()
         for c in CATS:
             used |= set(c["vendors"])
+        # a vendor may be referenced at the sub-market level (sub_vendor_fk) or by intel (vendor_id),
+        # not only by a top-level category — those count as referenced too (E4b + registry expansion).
+        _fk = yaml.safe_load((REPO / "data" / "sub_vendor_fk.yaml").read_text(encoding="utf-8")).get("map", {})
+        used |= set(_fk.values())
+        _intel = yaml.safe_load((REPO / "data" / "vendor_intel.yaml").read_text(encoding="utf-8"))["vendors"]
+        used |= {r["vendor_id"] for r in _intel if r.get("vendor_id")}
         for v in VENDORS_DOC["vendors"]:
-            self.assertIn(v["id"], used, f"vendor {v['id']} referenced by no category")
+            self.assertIn(v["id"], used, f"vendor {v['id']} referenced by no category / sub-market / intel")
 
 
 

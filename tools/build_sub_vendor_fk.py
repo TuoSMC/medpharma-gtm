@@ -49,16 +49,20 @@ def main():
 
     def resolve(strn):
         cands = set()
+        ns = norm(strn)                       # company part (norm strips at "(")
         if slug(strn) in id_set:
             cands.add(slug(strn))
-        ns = norm(strn)
+        if slug(ns) in id_set:                # company-part slug -> matches vendor ids even when the
+            cands.add(slug(ns))               # stored vendor NAME is fuller (e.g. "Konica Minolta Healthcare")
         cands |= vnorm.get(ns, set())
         for nv, ids in prefixes.items():
             if ns == nv or ns.startswith(nv + " "):
                 cands |= ids
-        exact = slug(strn)
-        if exact in cands:          # exact company slug wins over product/duplicate variants
+        exact, comp = slug(strn), slug(ns)
+        if exact in cands:          # exact full-string slug wins
             return exact
+        if comp in cands:           # else the exact company-part slug (the canonical company)
+            return comp
         return next(iter(cands)) if len(cands) == 1 else None
 
     mentions = [str(vn) for s in subs for vn in (s.get("vendors") or [])]
