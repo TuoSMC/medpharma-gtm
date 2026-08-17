@@ -53,15 +53,22 @@ def main():
     def resolve(strn):
         cands = set()
         ns = norm(strn)                       # company part (norm strips at "(")
+        cs = slug(ns)                         # company-part slug
         if slug(strn) in id_set:
             cands.add(slug(strn))
-        if slug(ns) in id_set:                # company-part slug -> matches vendor ids even when the
-            cands.add(slug(ns))               # stored vendor NAME is fuller (e.g. "Konica Minolta Healthcare")
+        if cs in id_set:                      # company-part slug -> matches fuller stored names
+            cands.add(cs)
         cands |= vnorm.get(ns, set())
         for nv, ids in prefixes.items():
             if ns == nv or ns.startswith(nv + " "):
                 cands |= ids
-        exact, comp = slug(strn), slug(ns)
+        # company slug is a UNIQUE hyphen-prefix of a vendor id: "Baxter" -> baxter-international,
+        # "Veeva" -> veeva-systems. Deterministic alias fix (0 tokens); only when exactly one id matches.
+        if cs and len(cs) >= 4 and cs not in cands:
+            pref = [i for i in id_set if i == cs or i.startswith(cs + "-")]
+            if len(pref) == 1:
+                cands.add(pref[0])
+        exact, comp = slug(strn), cs
         if exact in cands:          # exact full-string slug wins
             return exact
         if comp in cands:           # else the exact company-part slug (the canonical company)

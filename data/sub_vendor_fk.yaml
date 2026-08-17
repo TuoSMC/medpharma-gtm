@@ -3,9 +3,9 @@ version: 1
 generated_by: tools/build_sub_vendor_fk.py
 counts:
   unique_strings: 3426
-  resolved: 1402
+  resolved: 1452
   total_mentions: 4416
-  resolved_mentions: 2072
+  resolved_mentions: 2129
 map:
   10x Genomics (Space Ranger / Xenium Ranger): 10x-genomics
   10x Genomics (Xenium Explorer / Loupe Browser): 10x-genomics
@@ -62,6 +62,10 @@ map:
   Agfa HealthCare (XERO): agfa-healthcare
   Agfa HealthCare XERO / Streaming Client: agfa-healthcare
   Agfa HealthCare — Enterprise Imaging Streaming Client: agfa-healthcare
+  Agilent (Lipid Annotator): agilent-technologies
+  Agilent (MassHunter BioConfirm): agilent-technologies
+  Agilent (MassHunter Profinder): agilent-technologies
+  Agilent (OpenLab CDS): agilent-technologies
   Aidoc: aidoc
   Aidoc (aiOS enterprise governance): aidoc
   Aidoc (aiOS on-prem/hybrid): aidoc
@@ -150,6 +154,19 @@ map:
   BD (Pyxis MedStation): bd
   BD (Rowa): bd
   BD (SurgiCount): bd
+  Baxter (DoseEdge): baxter-international
+  Baxter (Epiphany Cardio Server): baxter-international
+  Baxter (Hillrom): baxter-international
+  Baxter (Hillrom/Welch Allyn) Cardio Server / Mortara: baxter-international
+  Baxter (Mortara Surveyor / H-Scribe): baxter-international
+  Baxter (Mortara/Welch Allyn ELI-linked ECG management): baxter-international
+  Baxter / Epiphany (Cardio Server): baxter-international
+  Baxter / Hill-Rom (NaviCare WatchChild): baxter-international
+  Baxter / Hillrom (Cardio Server, formerly Epiphany): baxter-international
+  Baxter / Hillrom (Voalte Nurse Call): baxter-international
+  Baxter / Mortara (H-Scribe): baxter-international
+  Baxter/Hillrom (Helion): baxter-international
+  Baxter/Hillrom (Voalte / Amplion): baxter-international
   Bayesian Health: bayesian
   Bayesian Health (Sepsis Flagging Device / TREWS, FDA 510k K250680): bayesian
   Bayesian Health (TREWS Sepsis Flagging Device): bayesian
@@ -177,6 +194,7 @@ map:
   Bioinformatics Solutions Inc (PEAKS AB, DeepNovo-derived DL): bioinformatics-solutions
   Bioinformatics Solutions Inc (PEAKS deep-learning de novo): bioinformatics-solutions
   BlackBerry QNX (Neutrino): blackberry-qnx
+  Blackford (Bayer): blackford-analysis
   Blackford Analysis: blackford-analysis
   Blackford Analysis (Bayer): blackford-analysis
   Blackford Analysis marketplace catalog: blackford-analysis
@@ -200,10 +218,14 @@ map:
   Bruker Spatial Biology (AtoMx SIP): bruker-spatial-biology
   Bruker Spatial Biology (MERSCOPE Vizualizer / CosMx viewers): bruker-spatial-biology
   Bruker Spatial Biology / NanoString (CosMx SMI, AtoMx): bruker-spatial-biology
+  CARPL: carpl-ai
   CARPL.ai: carpl-ai
   CLEW: clew
   CLEW Medical: clew
   CLEW Medical (ClewICU): clew
+  Cadence: cadence-design-systems
+  Cadence/OpenEye (FRED/HYBRID): cadence-design-systems
+  Cadence/OpenEye (Orion): cadence-design-systems
   Canary Labs: canary-labs
   Canon Medical / Vital Images (Vitrea Enterprise): canon-medical
   Canon Medical / Vital Images (Vitrea): canon-medical
@@ -269,6 +291,8 @@ map:
   Cognizant TriZetto Facets: cognizant-trizetto
   Cognizant TriZetto QNXT: cognizant-trizetto
   Cognosos: cognosos
+  Cohere (North for Pharma/Healthcare): cohere-health
+  Cohere (North, sovereign deployment): cohere-health
   Cohere Health: cohere-health
   CompuGroup Medical (CGM LABDAQ / SCHUYLAB): compugroup
   ConcertAI: concertai
@@ -471,6 +495,7 @@ map:
   Google DeepVariant / PEPPER-Margin: google
   Green Hills Software (INTEGRITY): green-hills-software
   Greenway Health (Intergy): greenway
+  Hamamatsu (NanoZoomer): hamamatsu-photonics
   Health Catalyst: health-catalyst
   Health Catalyst (Healthcare.AI): health-catalyst
   Health Catalyst (PowerCosting / CORUS): health-catalyst
@@ -506,6 +531,8 @@ map:
   Honeywell Sparta Systems (TrackWise): honeywell
   Honeywell UniSim Operations: honeywell
   Hyland (Acuo VNA): hyland-acuo-vna
+  Hyland (OnBase / Brainware IDP): hyland-acuo-vna
+  Hyland (PACSgear / NilRead capture): hyland-acuo-vna
   IBM: ibm
   IBM (FileNet): ibm
   IBM (Initiate / InfoSphere MDM): ibm
@@ -515,6 +542,7 @@ map:
   IBM (Spectrum LSF): ibm
   IBM/Merge (Merative) CADstream (legacy): ibm
   ICON plc (NONMEM): icon-plc
+  INFINITT: infinitt-healthcare
   IQVIA: iqvia
   IQVIA (Cenduit): iqvia
   IQVIA (Literature): iqvia
@@ -778,6 +806,7 @@ map:
   Nabla: nabla
   Netsmart (myAvatar / CareFabric): netsmart
   Netsmart (myEvolv): netsmart
+  NextGen (Mirth) HIE: nextgen-healthcare
   NextGen Healthcare: nextgen-healthcare
   Nextech: nextech
   Nihon Kohden: nihon-kohden
@@ -796,6 +825,7 @@ map:
   Nuance/Microsoft (PowerConnect Workflow Orchestration): nuance
   Nuvolo: nuvolo
   Nuvolo (Connected Workplace): nuvolo
+  OPTEL: optel-group
   OPTEL Group: optel-group
   Olympus: olympus
   Olympus (EASYSUITE / nSPIRE): olympus
@@ -889,6 +919,7 @@ map:
   Oxford Nanopore Technologies (EPI2ME / Dorado + Clair3): oxford-nanopore
   Oxford Nanopore Technologies (EPI2ME / adaptive sampling): oxford-nanopore
   Oxford Nanopore Technologies (EPI2ME/Dorado): oxford-nanopore
+  PLEXIS Healthcare: plexis-healthcare-systems
   PLEXIS Healthcare Systems: plexis-healthcare-systems
   PLEXIS Healthcare Systems (Quantum Choice / Passport): plexis-healthcare-systems
   PacBio: pacbio
@@ -995,8 +1026,16 @@ map:
   RapidAI: rapidai
   RapidAI (RAPID CTP / iSchemaView): rapidai
   RapidAI (Rapid Edge Cloud on-prem/hybrid): rapidai
+  ? RaySearch (RayStation carbon-ion / RayBiology — LEM + MKM RBE-weighted dose and
+    inverse-LETd engine; installed at MedAustron, CNAO, HIT, SPHIC, Yamagata)
+  : raysearch-laboratories
   RaySearch Laboratories (RayStation deep-learning / MCO auto-planning): raysearch-laboratories
   RaySearch Laboratories (RayStation): raysearch-laboratories
+  Recursion: recursion-pharmaceuticals
+  Recursion (foundation models): recursion-pharmaceuticals
+  Recursion / MIT (Boltz-1x): recursion-pharmaceuticals
+  Recursion / MIT (Boltz-2): recursion-pharmaceuticals
+  Recursion / Valence Labs (Boltz-2): recursion-pharmaceuticals
   Recursion Pharmaceuticals (Phenom / BioHive): recursion-pharmaceuticals
   Recursion Pharmaceuticals (Phenom, BioHive supercomputer): recursion-pharmaceuticals
   Redox: redox
@@ -1202,6 +1241,7 @@ map:
   Surgical Information Systems (SIS Anesthesia): surgical-information-systems
   Surgical Information Systems (SIS Surgery): surgical-information-systems
   Surgical Information Systems (SIS): surgical-information-systems
+  Swisslog (SynQ): swisslog-healthcare
   Swisslog Healthcare (BoxPicker, PillPick): swisslog-healthcare
   Swisslog Healthcare (PillPick): swisslog-healthcare
   Syntegon: syntegon
@@ -1260,6 +1300,7 @@ map:
   TriNetX (EVIDEX): trinetx
   TruBridge (Evident / CPSI Thrive): trubridge
   Truveta: truveta
+  Tulip: tulip-interfaces
   Tulip Interfaces: tulip-interfaces
   UKG (Kronos / Pro WFM): ukg
   UKG (Kronos): ukg
@@ -1274,6 +1315,15 @@ map:
   Varian/Siemens Healthineers (Eclipse HyperArc): varian
   Varian/Siemens Healthineers (Ethos AI-driven online adaptive): varian
   Varian/Siemens Healthineers (RapidPlan KBP): varian
+  Veeva (Crossix / SafeMine): veeva-systems
+  Veeva (Safety.AI): veeva-systems
+  Veeva (Vault CTMS): veeva-systems
+  Veeva (Vault EDC/CDMS): veeva-systems
+  Veeva (Vault QMS): veeva-systems
+  Veeva (Vault Safety AI agents): veeva-systems
+  Veeva (Vault Safety): veeva-systems
+  Veeva (Vault eTMF): veeva-systems
+  Veeva (Vault) archive: veeva-systems
   Velsera (Seven Bridges): velsera
   Veradigm: veradigm
   Veradigm (Allscripts Professional EHR): veradigm
@@ -1295,6 +1345,7 @@ map:
   Vizgen (MERSCOPE / MERlin): vizgen
   Vizgen (MERSCOPE): vizgen
   Vocera (Stryker): vocera-stryker
+  Vocera / Stryker (Engage, EMDAN): vocera-stryker
   WTW (Igloo): wtw
   WTW (ResQ): wtw
   WTW (RiskAgility FM): wtw
@@ -1362,6 +1413,7 @@ map:
   ge-healthcare: ge-healthcare
   greenway-health: greenway
   hamamatsu-photonics: hamamatsu-photonics
+  hyland: hyland-acuo-vna
   iCAD (PowerLook Density / ProFound Density): icad
   iCAD (PowerLook Density Assessment, integrated with tomosynthesis systems): icad
   iCAD (ProFound AI): icad
