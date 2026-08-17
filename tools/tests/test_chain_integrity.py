@@ -1515,20 +1515,27 @@ class TestSubcategories(unittest.TestCase):
         self.assertIn("subcategories", src, "build_app.py must read DATA.taxonomy.subcategories")
         self.assertIn("subcatsOf", src, "build_app.py must expose a subcatsOf helper")
 
-    def test_tree_is_multi_level(self):
-        """the tree must actually go deeper than one level — at least one 孫 (a subcategory
-        whose parent is itself a subcategory), proving the recursive category→子市場→孫 model."""
+    def test_tree_depth_is_optional_but_wellformed(self):
+        """plan-v6 E1: depth is LEGAL, not REQUIRED. The old test forced grandchildren to exist
+        (the deepen-factory root cause). A flat 59→子 tree is now equally valid; but IF any 孫
+        exists (a subcategory whose parent is itself a subcategory), its parent must be a real
+        subcategory id. Structure check only — never forces the tree to go deeper.
+        (The spine-invariant guard that DOES assert 'default tree = 59' arrives in E3.)"""
         subids = {s["id"] for s in SUBS}
-        grandchildren = [s["id"] for s in SUBS if s["parent"] in subids]
-        self.assertTrue(grandchildren, "expected at least one grandchild sub-market (parent is a subcategory)")
+        for s in SUBS:
+            if s["parent"] in subids:  # this node is a grandchild-or-deeper
+                self.assertIn(s["parent"], subids,
+                              f"{s['id']}: deeper node's parent must be a real subcategory")
 
-    def test_every_play_has_some_depth(self):
-        """each play should carry at least one deepened category (not just Play A) so the tree is even."""
+    def test_play_depth_is_optional(self):
+        """plan-v6 E1: a play is NOT required to carry deepened categories. The old test forced
+        every play to have sub-markets (drove the factory). Now: depth per play is optional; if a
+        deepened category exists it must belong to a real category with a well-formed plays list."""
         by_cat = {c["id"]: c for c in CATS}
-        deepened_cat_ids = {s["parent"] for s in SUBS if s["parent"] in by_cat}
-        for pid in ("play-a", "play-b", "play-c", "play-d"):
-            plays_with_subs = [cid for cid in deepened_cat_ids if pid in (by_cat[cid].get("plays") or [])]
-            self.assertTrue(plays_with_subs, f"{pid} has no category with sub-markets yet")
+        for s in SUBS:
+            if s["parent"] in by_cat:  # a 子 hanging directly off a category
+                self.assertIsInstance(by_cat[s["parent"]].get("plays") or [], list,
+                                      f"{s['parent']}: plays must be a list")
 
 
 # ============================================================
