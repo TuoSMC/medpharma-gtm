@@ -1,16 +1,21 @@
-# App — single-file GTM hunt map
+# App — GTM hunt map (shell + on-demand archive)
 
-Status: **built.** `index.html` — one self-contained file, zero external deps.
-`app/index.html` == `docs/index.html` byte-identical (GitHub Pages deploys `docs/`).
+Status: **built.** A **shell** (`index.html`, ~2.2 MB) + an **on-demand archive**
+(`taxonomy_tree.js`, ~1.7 MB) that ship together — no remote deps (plan-v6.1 C3).
+The shell embeds the 59-category spine + L1 sub-markets + the retrieval index; the archived
+L2+ sub-tree loads lazily from `taxonomy_tree.js` on "Show deeper". Both files are byte-identical
+in `app/` and `docs/` (GitHub Pages deploys `docs/`).
 
 ## Build / refresh
 ```
-python3 tools/build_app.py     # reads /data/*.yaml -> writes app/index.html + docs/index.html
-open app/index.html            # file:// works; data is embedded
+python3 tools/build_index.py   # data/*.yaml -> data/taxonomy_index.yaml (+ tree index)  [run first]
+python3 tools/build_app.py     # -> app/index.html + app/taxonomy_tree.js  (+ docs/ copies)
+open app/index.html            # file:// works; the archive loads via a <script> element, not fetch
 ```
 Data is the single source of truth. To change a vendor, category, trigger, or account:
-edit the yaml in `/data`, re-run the build. **Never edit `index.html` by hand** — it is
-generated (CLAUDE.md rule). App code lives in `tools/build_app.py` and holds zero domain content.
+edit the yaml in `/data`, rebuild the index (if taxonomy changed), re-run the app build.
+**Never edit `index.html` or `taxonomy_tree.js` by hand** — both are generated. App code lives
+in `tools/build_app.py` and holds zero domain content.
 
 ## Tabs (live)
 - **Explore** — the Play spine. Play A/B/C/D → AI / No-AI → **category**. **59 locked categories**

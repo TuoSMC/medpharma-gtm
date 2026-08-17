@@ -1684,5 +1684,44 @@ class TestE3Fold(unittest.TestCase):
         self.assertIn("descendant_profiles", self.HTML, "built app/index.html must embed the taxonomy index")
 
 
+class TestE3bSplit(unittest.TestCase):
+    """plan-v6.1 E3b/C3 — the archived L2+ tree ships in taxonomy_tree.js, loaded on demand via a
+    <script> element (file://-safe), NOT embedded in index.html and NOT via fetch. app/==docs/ parity."""
+
+    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    APP_HTML = (REPO / "app" / "index.html").read_text(encoding="utf-8")
+    APP_ARCHIVE = (REPO / "app" / "taxonomy_tree.js").read_text(encoding="utf-8")
+
+    def test_archive_ships_in_both_dirs_byte_identical(self):
+        a, d = REPO / "app" / "taxonomy_tree.js", REPO / "docs" / "taxonomy_tree.js"
+        self.assertTrue(a.exists() and d.exists(), "taxonomy_tree.js must ship in app/ AND docs/")
+        self.assertEqual(a.read_bytes(), d.read_bytes(), "taxonomy_tree.js must be byte-identical app==docs")
+
+    def test_archive_assigns_global(self):
+        self.assertTrue(self.APP_ARCHIVE.startswith("window.__ARCHIVE__="),
+                        "archive must assign window.__ARCHIVE__ (script-loaded, not fetched)")
+
+    def test_deep_subs_archived_not_embedded(self):
+        """a real L2+ sub must live in taxonomy_tree.js and be ABSENT from the shipped index.html."""
+        tree = yaml.safe_load((REPO / "data" / "taxonomy_tree_index.yaml").read_text(encoding="utf-8"))
+        deep_ids = sorted(r["id"] for r in tree["rows"] if r["depth"] >= 2)
+        self.assertTrue(deep_ids, "expected some L2+ subs")
+        sample = deep_ids[0]
+        self.assertIn('"' + sample + '"', self.APP_ARCHIVE, f"{sample} must be in the archive")
+        self.assertNotIn('"' + sample + '"', self.APP_HTML,
+                         f"{sample} (L2+) must NOT be embedded in index.html (default-only ship)")
+
+    def test_lazy_load_uses_script_not_fetch(self):
+        self.assertIn("function loadArchive(", self.SRC, "loadArchive must exist")
+        self.assertIn("createElement('script')", self.SRC, "archive loads via a <script> element (file://-safe)")
+        self.assertIn("loadArchive(()=>", self.SRC, "drilling must load the archive before rendering")
+        # the archive must NOT be pulled with fetch/XHR (blocked over file://)
+        self.assertNotIn("fetch('taxonomy_tree", self.SRC, "must not fetch the archive (breaks file://)")
+
+    def test_build_embeds_l1_only(self):
+        self.assertIn('taxonomy["subcategories"] = l1_subs', self.SRC,
+                      "build must embed only L1 subs; deep_subs go to taxonomy_tree.js")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

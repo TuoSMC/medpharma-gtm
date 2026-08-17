@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
-"""Generate app/index.html from /data — single self-contained file, zero deps.
+"""Generate app/index.html from /data — a shell + an on-demand archive that ship together.
 
 Data stays the single source of truth: this reads every /data yaml and injects
 it as JSON into a static template. The template has NO domain content — updating
 a vendor list, category, trigger, or account means editing yaml and re-running
 this build, never touching app code (CLAUDE.md §8 rule 1).
 
+Output (plan-v6.1 C3/D8): the default-visible spine (59 categories + L1 sub-markets +
+the retrieval index) is embedded in index.html; the archived L2+ sub-tree ships beside it
+in taxonomy_tree.js, loaded lazily by a <script> element on "Show deeper". No remote deps —
+both files ship together in app/ AND docs/ (byte-identical each).
+
 Rendering is done entirely with DOM text nodes (no innerHTML with data), so the
 embedded content cannot execute as markup.
 
 Usage: python3 tools/build_app.py
-Open:  app/index.html directly in a browser (file:// works — data is embedded).
+Open:  app/index.html directly in a browser — file:// works; the archive loads via a
+       <script> element (permitted from file://, unlike fetch/XHR).
 """
 import glob
 import json
@@ -45,6 +51,39 @@ def main():
             if c["id"] in details:
                 c["detail"] = details[c["id"]]
 
+    # plan-v6.1 C3/D8: ship DEFAULT-ONLY HTML. Embed categories + L1 sub-markets (+ the index);
+    # push the archived L2+ tree to a sibling taxonomy_tree.js loaded lazily on drill (a <script>
+    # element load works from file://; fetch does not — see the app's loadArchive()).
+    all_subs = taxonomy.get("subcategories", []) or []
+    sub_by_id = {s["id"]: s for s in all_subs}
+    kids = {}
+    for s in all_subs:
+        kids.setdefault(s["parent"], []).append(s["id"])
+
+    def _depth(sid):
+        d, cur, seen = 0, sid, set()
+        while cur in sub_by_id and cur not in seen:
+            seen.add(cur); d += 1; cur = sub_by_id[cur]["parent"]
+        return d
+
+    def _deep_count(sid):  # transitive descendants (all archived below this node)
+        n, stack, seen = 0, list(kids.get(sid, [])), set()
+        while stack:
+            x = stack.pop()
+            if x in seen:
+                continue
+            seen.add(x); n += 1; stack.extend(kids.get(x, []))
+        return n
+
+    l1_subs, deep_subs = [], []
+    for s in all_subs:
+        if _depth(s["id"]) == 1:
+            s2 = dict(s); s2["_deep"] = _deep_count(s["id"])  # count of archived descendants (card hint)
+            l1_subs.append(s2)
+        else:
+            deep_subs.append(s)
+    taxonomy["subcategories"] = l1_subs  # only L1 ships inside index.html; L2+ -> taxonomy_tree.js
+
     data = {
         "taxonomy": taxonomy,
         "plays": load(DATA / "plays.yaml"),
@@ -66,8 +105,14 @@ def main():
     DOCS.parent.mkdir(exist_ok=True)
     DOCS.write_text(html, encoding="utf-8")            # GitHub Pages serves /docs
     (DOCS.parent / ".nojekyll").write_text("", encoding="utf-8")  # serve the file as-is
+    # C3/D8: the archived L2+ tree, shipped next to index.html in BOTH app/ and docs/ (byte-identical),
+    # loaded on demand by loadArchive() via a <script> element (file://-safe). Not a remote dependency.
+    archive_js = "window.__ARCHIVE__=" + json.dumps(deep_subs, ensure_ascii=False) + ";\n"
+    (OUT.parent / "taxonomy_tree.js").write_text(archive_js, encoding="utf-8")
+    (DOCS.parent / "taxonomy_tree.js").write_text(archive_js, encoding="utf-8")
     print(f"OK: wrote {OUT}")
     print(f"OK: wrote {DOCS}")
+    print(f"OK: wrote taxonomy_tree.js (archive: {len(deep_subs)} L2+ subs; {len(l1_subs)} L1 embedded)")
     print(f"    {len(data['taxonomy']['categories'])} categories, "
           f"{len(data['plays']['plays'])} plays, {len(data['triggers']['triggers'])} triggers, "
           f"{len(accounts)} accounts")
@@ -630,9 +675,24 @@ const IDX={};((DATA.taxonomy_index||{}).rows||[]).forEach(r=>IDX[r.id]=r);
 const HOT_IDS=new Set(Object.values(IDX).filter(r=>r.visibility==='default'&&(r.hardware_opportunity||0)>=3).map(r=>r.id));
 // taxonomy tree: level-2+ sub-markets nest under a category (or another subcategory) via `parent`.
 // The tree is arbitrary-depth: category → 子市場 → 孫 → 曾孫 … (a subcategory can parent another subcategory).
-const SUBCATS=(DATA.taxonomy.subcategories||[]);
+const SUBCATS=(DATA.taxonomy.subcategories||[]);   // only L1 ships in the HTML (C3); L2+ arrives via loadArchive()
 const SUBBYID={};SUBCATS.forEach(s=>SUBBYID[s.id]=s);
 function subcatsOf(id){return SUBCATS.filter(s=>s.parent===id);}
+// plan-v6.1 C3/D8 — the archived L2+ tree lives in a sibling taxonomy_tree.js (window.__ARCHIVE__).
+// Loaded lazily the first time the user drills below L1, via a <script> element — NOT fetch/XHR,
+// which is blocked from a file:// origin. A <script src> load IS permitted from file://, so "Show
+// deeper" works when the page is opened straight from disk. onerror degrades to L1-only (no crash).
+let ARCHIVE_LOADED=false, _archiveWaiters=[];
+function loadArchive(cb){
+  if(ARCHIVE_LOADED){cb&&cb();return;}
+  _archiveWaiters.push(cb);
+  if(_archiveWaiters.length>1)return;                 // a load is already in flight — just queue the cb
+  const done=()=>{ARCHIVE_LOADED=true;const w=_archiveWaiters;_archiveWaiters=[];w.forEach(f=>f&&f());};
+  const sc=document.createElement('script');sc.src='taxonomy_tree.js';
+  sc.onload=()=>{(window.__ARCHIVE__||[]).forEach(x=>{if(!SUBBYID[x.id]){SUBCATS.push(x);SUBBYID[x.id]=x;}});done();};
+  sc.onerror=()=>{done();};                            // archive missing/blocked — keep L1-only, don't crash
+  document.head.appendChild(sc);
+}
 // ---- vendor intel: per-vendor drawer (ISV identity · products · cloud-vs-on-prem · end-user count/who).
 //      keyed by a normalized company name; MUST match the python norm used to build data/vendor_intel.yaml.
 function normVendor(v){v=String(v).split(/[(\/—]/)[0].toLowerCase().replace(/\b(inc|llc|ltd|gmbh|corp|co|sa|ag|plc|the)\b/g,'');return v.replace(/[^a-z0-9]+/g,' ').trim();}
@@ -1044,8 +1104,9 @@ function renderTaxonomy(){
   }
   // clicking any sub-market (at any depth) shows ITS OWN card on the right — breadcrumb up to the root
   // category, its motion + SMCI box, its own children (孫), and vendors. This is what makes deep nesting work.
-  function showSubDetail(s){pushNav();selected=null;clear(detailPane);detailPane.append(subDetailCard(s));dv={kind:'sub',id:s.id};
-    [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.sub===s.id));}
+  // drilling into a sub-market shows ITS children — which live in the archive; load it first (C3).
+  function showSubDetail(s){loadArchive(()=>{pushNav();selected=null;clear(detailPane);detailPane.append(subDetailCard(s));dv={kind:'sub',id:s.id};
+    [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.sub===s.id));});}
   function subDetailCard(s){
     const cd=el('div',{class:'card'});
     const chain=chainOf(s),cr=el('div',{class:'crumb'});
@@ -1138,7 +1199,7 @@ function renderTaxonomy(){
           chip.onclick=(e)=>{e.stopPropagation();showSubDetail(s);};dv2.append(chip);});
         ss.append(dv2);
       }
-      subs.forEach(s=>{const sc=el('div',{class:'subcard',id:'sub-'+s.id});const gk=subcatsOf(s.id).length;const nv=(s.vendors||[]).length;
+      subs.forEach(s=>{const sc=el('div',{class:'subcard',id:'sub-'+s.id});const gk=(s._deep!=null?s._deep:subcatsOf(s.id).length);const nv=(s.vendors||[]).length;
         const scar=el('span',{class:'scar'},'▸');
         const sh=el('div',{class:'subhd'},scar,el('span',{class:'snm'},LANG==='zh'?s.name_zh:s.name_en),
           el('span',{class:'hw hw'+s.hardware_opportunity,title:OPP[s.hardware_opportunity]},String(s.hardware_opportunity)),
