@@ -1574,5 +1574,80 @@ class TestExploreSpine(unittest.TestCase):
         self.assertIn("function chainOf(", self.SRC, "breadcrumb ancestry walk must exist")
 
 
+# ============================================================
+# plan-v6.1 E2 — the retrieval index (data/taxonomy_index.yaml + _tree_index.yaml)
+# ============================================================
+def _load_index(name):
+    p = REPO / "data" / name
+    doc = yaml.safe_load(p.read_text(encoding="utf-8"))
+    return doc, {r["id"]: r for r in (doc.get("rows") or [])}
+
+
+_SPINE_DOC, _SPINE = _load_index("taxonomy_index.yaml")
+_TREE_DOC, _TREE = _load_index("taxonomy_tree_index.yaml")
+_INDEX = {**_SPINE, **_TREE}
+
+
+class TestTaxIndex(unittest.TestCase):
+    """The index is the single retrieval surface + source of truth for visibility/HOT (D7).
+    These guard E2: models query this instead of reading the 2.27 MB taxonomy.yaml (D2)."""
+
+    def test_spine_is_the_59_categories_default_visible(self):
+        self.assertEqual(len(_SPINE), len(CATS), "spine index must hold exactly the categories")
+        self.assertEqual({r["id"] for r in _SPINE.values()}, {c["id"] for c in CATS})
+        for r in _SPINE.values():
+            self.assertEqual(r["depth"], 0, r["id"])
+            self.assertEqual(r["visibility"], "default", r["id"])
+            self.assertIsNone(r["parent"], r["id"])
+
+    def test_hot_default_is_35(self):
+        """the acceptance gate (D4): default-visible categories with hardware_opportunity>=3 == 35.
+        If this is not 35 the index is stale or the taxonomy changed — rebuild + reconcile."""
+        hot = [r for r in _SPINE.values() if (r.get("hardware_opportunity") or 0) >= 3]
+        self.assertEqual(len(hot), 35, f"HOT_default={len(hot)} (expected 35)")
+        self.assertEqual(_SPINE_DOC["counts"]["hot_default"], 35, "spine header hot_default drifted from rows")
+
+    def test_tree_is_the_999_subs_depth_and_visibility(self):
+        self.assertEqual(len(_TREE), len(SUBS), "tree index must hold exactly the subcategories")
+        for r in _TREE.values():
+            self.assertGreaterEqual(r["depth"], 1, r["id"])
+            expected = "card" if r["depth"] == 1 else "archived"
+            self.assertEqual(r["visibility"], expected, f"{r['id']} depth {r['depth']} -> {r['visibility']}")
+
+    def test_every_index_row_parent_resolves(self):
+        for r in _TREE.values():
+            self.assertIn(r["parent"], _INDEX, f"{r['id']}: parent {r['parent']} not in index")
+
+    def test_c1_rollup_wellformed(self):
+        """C1: category rows carry child_count / descendant_profiles / divergent_children;
+        divergent is <=3 real L1 child ids whose profile-set or buyer differs from the parent."""
+        for r in _SPINE.values():
+            self.assertIn("divergent_children", r, r["id"])
+            self.assertLessEqual(len(r["divergent_children"]), 3, r["id"])
+            l1 = {s["id"] for s in SUBS if s["parent"] == r["id"]}
+            self.assertEqual(r["child_count"], len(l1), r["id"])
+            for cid in r["divergent_children"]:
+                self.assertIn(cid, l1, f"{r['id']}: divergent child {cid} is not an L1 child")
+
+    def test_spine_index_under_100kb(self):
+        """L1 lamp: the loadable retrieval surface stays small. (The tree index is machine-only.)"""
+        kb = (REPO / "data" / "taxonomy_index.yaml").stat().st_size / 1024
+        self.assertLess(kb, 100, f"spine index {kb:.1f} KB exceeds the 100 KB L1 target")
+
+    def test_index_not_stale(self):
+        """freshness signal (brain #4): rebuilding from taxonomy.yaml must reproduce the committed
+        counts. Catches 'edited taxonomy.yaml but forgot to run build_index.py'."""
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("build_index", REPO / "tools" / "build_index.py")
+        bi = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(bi)
+        cats, subs = bi.load_taxonomy()
+        rows = bi.build_rows(cats, subs)
+        live_hot = sum(1 for r in rows if r["depth"] == 0 and (r["hardware_opportunity"] or 0) >= 3)
+        self.assertEqual(len(cats), len(_SPINE), "category count drifted — rebuild the index")
+        self.assertEqual(len(subs), len(_TREE), "subcategory count drifted — rebuild the index")
+        self.assertEqual(live_hot, 35, "live HOT != 35 — taxonomy changed; rebuild + reconcile")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
