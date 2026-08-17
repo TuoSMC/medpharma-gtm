@@ -98,16 +98,27 @@ def main():
         "built": f"taxonomy v{taxonomy.get('version', '?')} · vendors v{vendors.get('version', '?')}",  # reuse loaded objs
     }
 
+    # C3 finish: relocate the two big blobs out of the HTML into sibling scripts. vendors (~612 KB) +
+    # vendor_intel (~643 KB) were half the page weight; they ship in vendors.js / vendor_intel.js
+    # (loaded before the app) and get reattached to DATA in the template. Pushes index.html to ~1 MB.
+    vendors_arr = data["vendors"].pop("vendors", [])       # keep version etc. inline; move the array out
+    vintel_arr = data["vendor_intel"].pop("vendors", [])
+
     html = TEMPLATE.replace("/*__DATA__*/null", json.dumps(data, ensure_ascii=False))
     OUT.write_text(html, encoding="utf-8")
     DOCS.parent.mkdir(exist_ok=True)
     DOCS.write_text(html, encoding="utf-8")            # GitHub Pages serves /docs
     (DOCS.parent / ".nojekyll").write_text("", encoding="utf-8")  # serve the file as-is
-    # C3/D8: the archived L2+ tree, shipped next to index.html in BOTH app/ and docs/ (byte-identical),
-    # loaded on demand by loadArchive() via a <script> element (file://-safe). Not a remote dependency.
-    archive_js = "window.__ARCHIVE__=" + json.dumps(deep_subs, ensure_ascii=False) + ";\n"
-    (OUT.parent / "taxonomy_tree.js").write_text(archive_js, encoding="utf-8")
-    (DOCS.parent / "taxonomy_tree.js").write_text(archive_js, encoding="utf-8")
+
+    def sib(name, glob_expr, arr):  # write a sibling JS asset to BOTH app/ and docs/ (byte-identical)
+        js = f"window.{glob_expr}=" + json.dumps(arr, ensure_ascii=False) + ";\n"
+        (OUT.parent / name).write_text(js, encoding="utf-8")
+        (DOCS.parent / name).write_text(js, encoding="utf-8")
+
+    # taxonomy_tree.js loads on demand (loadArchive); vendors/vendor_intel load before the app.
+    sib("taxonomy_tree.js", "__ARCHIVE__", deep_subs)
+    sib("vendors.js", "__VENDORS__", vendors_arr)
+    sib("vendor_intel.js", "__VINTEL__", vintel_arr)
     print(f"OK: wrote {OUT}")
     print(f"OK: wrote {DOCS}")
     print(f"OK: wrote taxonomy_tree.js (archive: {len(deep_subs)} L2+ subs; {len(l1_subs)} L1 embedded)")

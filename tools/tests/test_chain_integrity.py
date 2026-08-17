@@ -1786,5 +1786,37 @@ class TestE5Hygiene(unittest.TestCase):
         self.assertIn("from lib.load import load_yaml", self.BA, "build_app must use the shared loader")
 
 
+class TestC3Finish(unittest.TestCase):
+    """plan-v6.1 C3 finish — vendors + vendor_intel relocated out of index.html into sibling scripts
+    (loaded before the app, reattached to DATA). index.html lands under ~1 MB (the C3 target)."""
+
+    APP = REPO / "app"
+    HTML = (APP / "index.html").read_text(encoding="utf-8")
+    TPL = (APP / "template.html").read_text(encoding="utf-8")
+
+    def test_index_html_under_1mb(self):
+        kb = (self.APP / "index.html").stat().st_size / 1024
+        self.assertLess(kb, 1100, f"index.html is {kb:.0f} KB — the C3 ~1 MB target regressed "
+                                   f"(vendors/vendor_intel back inline?)")
+
+    def test_sibling_data_scripts_parity(self):
+        for name, glob in [("vendors.js", "window.__VENDORS__="), ("vendor_intel.js", "window.__VINTEL__=")]:
+            a, d = self.APP / name, REPO / "docs" / name
+            self.assertTrue(a.exists() and d.exists(), f"{name} must ship in app/ AND docs/")
+            self.assertEqual(a.read_bytes(), d.read_bytes(), f"{name} must be byte-identical app==docs")
+            self.assertTrue(a.read_text(encoding="utf-8").startswith(glob), f"{name} must assign {glob}")
+
+    def test_data_moved_to_siblings(self):
+        # the intel-only field 'deployment_note' must live in the sibling, proving the blob moved out
+        self.assertIn("deployment_note", (self.APP / "vendor_intel.js").read_text(encoding="utf-8"))
+        self.assertIn("market_position", (self.APP / "vendors.js").read_text(encoding="utf-8"))
+
+    def test_template_reattaches_arrays(self):
+        self.assertIn('<script src="vendors.js">', self.TPL, "vendors.js must load before the app")
+        self.assertIn('<script src="vendor_intel.js">', self.TPL, "vendor_intel.js must load before the app")
+        self.assertIn("DATA.vendors.vendors=window.__VENDORS__", self.TPL, "template must reattach vendors")
+        self.assertIn("DATA.vendor_intel.vendors=window.__VINTEL__", self.TPL, "template must reattach vendor_intel")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
