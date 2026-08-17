@@ -1992,3 +1992,1909 @@ vendors:
   market_position: No. 1 KLAS-rated decision support and cost accounting platform
     serving 2,300+ organizations with 95% customer satisfaction
   provenance: expand-registry
+- id: montrium
+  name: Montrium
+  categories:
+  - clinical-trial-suite
+  - rd-lab-informatics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: B
+  source: https://www.montrium.com/
+  sources:
+  - https://www.montrium.com/
+  - https://www.montrium.com/about
+  - https://www.cbinsights.com/company/montrium
+  - https://tracxn.com/d/companies/montrium
+  headquarters: Montreal, Quebec, Canada
+  founded: '2005'
+  market_position: Clinical operations and regulatory management platform for life
+    sciences
+  provenance: expand-registry
+- id: nextgate
+  name: NextGate
+  categories:
+  - hie-interoperability-engine
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: B
+  source: https://www.businesswire.com/news/home/20201201005326/en/
+  sources:
+  - https://www.businesswire.com/news/home/20201201005326/en/
+  - https://thesiliconreview.com/magazine/profile/healthcare-enterprise-identification-with-nextgate-solutions
+  - https://aithority.com/security/uhin-goes-live-with-nextgates-empi-solution-for-trusted-patient-identification-across-utah/
+  headquarters: Pasadena, California
+  founded: null
+  market_position: Enterprise Master Patient Index (EMPI) and patient identification
+    solutions
+  provenance: expand-registry
+- id: novopath
+  name: NovoPath
+  categories:
+  - lis
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: B
+  source: https://www.novopath.com/
+  sources:
+  - https://www.novopath.com/
+  - https://www.novopath.com/solutions/anatomic-pathology-lis-software/
+  - https://intuitionlabs.ai/software/clinical-laboratory-information-systems/anatomic-pathology-lis/novopath
+  headquarters: null
+  founded: '1993'
+  market_position: SaaS laboratory information system for anatomic and molecular pathology
+  provenance: expand-registry
+- id: sunquest
+  name: Sunquest
+  categories:
+  - lis
+  - ngs-lab-lims
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: B
+  source: https://www.sunquestinfo.com/
+  sources:
+  - https://www.sunquestinfo.com/
+  - https://www.clinisys.com/us/en/history/sunquest/
+  - https://en.wikipedia.org/wiki/Sunquest_Information_Systems
+  headquarters: Tucson, Arizona
+  founded: '1979'
+  market_position: Laboratory information system and blood bank management (now Clinisys
+    subsidiary)
+  provenance: expand-registry
+- id: syllable
+  name: Syllable
+  categories:
+  - healthcare-llm-serving
+  - patient-access-scheduling
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: B
+  source: https://tracxn.com/d/companies/syllable/
+  sources:
+  - https://tracxn.com/d/companies/syllable/
+  - https://www.fiercehealthcare.com/tech/28m-series-b-hand-syllable-looks-to-revamp-healthcare-customer-service-ai
+  - https://www.linkedin.com/company/syllableai
+  headquarters: San Francisco, California
+  founded: '2016'
+  market_position: AI-powered healthcare communication and patient automation platform
+  provenance: expand-registry
+- id: advantmed
+  name: Advantmed
+  categories:
+  - population-health-analytics
+  deployment_models:
+  - software-as-a-service
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: B
+  source: https://www.advantmed.com/
+  sources:
+  - https://www.advantmed.com/
+  - https://www.zoominfo.com/c/advantmed-llc/369459648
+  - https://www.businesswire.com/news/home/20260305682343/en/
+  headquarters: Santa Ana, California
+  founded: '2005'
+  market_position: Risk adjustment and quality analytics solutions for health plans
+  provenance: expand-registry
+- id: limbus-ai
+  name: Limbus AI
+  categories:
+  - radiation-oncology-tps-ois
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: B
+  source: https://limbus.ai/
+  sources:
+  - https://limbus.ai/
+  - https://pmc.ncbi.nlm.nih.gov/articles/PMC11135797/
+  - https://radformation.com/autocontour/autocontour
+  - https://academic.oup.com/bjr/article/97/1158/1125/7646846
+  headquarters: null
+  founded: null
+  market_position: AI-based automated contouring for radiation therapy (acquired by
+    Radformation, April 2024)
+  provenance: expand-registry
+- id: scm
+  name: Software for Chemistry & Materials
+  categories:
+  - comp-chem-simulation
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.scm.com/
+  sources:
+  - https://www.scm.com/
+  - https://www.scm.com/amsterdam-modeling-suite/
+  headquarters: Amsterdam, Netherlands
+  founded: '1995'
+  market_position: Computational chemistry software for pharma R&D, Fortune 500 companies
+    use AMS for molecular and materials properties prediction
+  provenance: expand-registry
+- id: seeq
+  name: Seeq Corporation
+  categories:
+  - plant-historian
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.seeq.com/about/
+  sources:
+  - https://www.seeq.com/about/
+  - https://www.gartner.com/reviews/product/seeq
+  headquarters: Seattle, Washington, USA
+  founded: '2013'
+  market_position: Industrial analytics and AI suite serving pharmaceutical, energy,
+    oil & gas, and specialty chemical industries
+  provenance: expand-registry
+- id: fovia
+  name: Fovia Medical
+  categories:
+  - advanced-visualization-3d
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - on-premises
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://fovia.com/
+  sources:
+  - https://fovia.com/
+  - https://fovia.ai/
+  headquarters: null
+  founded: null
+  market_position: Medical imaging visualization and 3D rendering software for PACS,
+    OEMs, and radiologists
+  provenance: expand-registry
+- id: iktos
+  name: Iktos
+  categories:
+  - ai-drug-discovery
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://iktos.ai/discovery-platform
+  sources:
+  - https://iktos.ai/discovery-platform
+  - https://www.prnewswire.com/news-releases/iktos-secures-prestigious-eic-accelerator-grant-to-advance-its-automated-ai-and-robotics-platform-for-drug-discovery-302380470.html
+  headquarters: Paris, France
+  founded: '2016'
+  market_position: AI and robotics platform for automated drug discovery with >50
+    pharma collaborations including Pfizer, Merck, Janssen
+  provenance: expand-registry
+- id: jvion
+  name: Jvion (Lightbeam Health Solutions)
+  categories:
+  - cdss-clinical-ai
+  - icu-central-monitoring
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.cbinsights.com/company/jvion
+  sources:
+  - https://www.cbinsights.com/company/jvion
+  - https://healthvelocitycapital.medium.com/jvion-secures-significant-strategic-growth-investment-to-expand-application-of-its-healthcare-ai-39b5218a9373
+  headquarters: Suwanee, Georgia, USA
+  founded: '2011'
+  market_position: Healthcare AI and prescriptive analytics for preventing harm and
+    reducing costs in healthcare systems
+  provenance: expand-registry
+- id: picis
+  name: Picis (Harris Healthcare)
+  categories:
+  - ehr-emr-core
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.picis.com/about/
+  sources:
+  - https://www.picis.com/about/
+  - https://www.picis.com/
+  headquarters: null
+  founded: null
+  market_position: High-acuity clinical solutions for perioperative and intensive
+    care, installed in 400+ hospitals worldwide
+  provenance: expand-registry
+- id: azenta
+  name: Azenta Life Sciences
+  categories:
+  - rd-lab-informatics
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.azenta.com/
+  sources:
+  - https://www.azenta.com/
+  - https://www.azenta.com/sample-management-lims
+  headquarters: null
+  founded: null
+  market_position: Automated cryogenic storage systems and sample management software
+    for biobanks and life sciences research
+  provenance: expand-registry
+- id: beamex
+  name: Beamex
+  categories:
+  - eqms-calibration
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.beamex.com/us/
+  sources:
+  - https://www.beamex.com/us/
+  - https://www.beamex.com/solutions/pharmaceutical-calibration/
+  headquarters: Finland
+  founded: '1975'
+  market_position: Calibration management software (CMX, LOGiCAL) for regulated pharma
+    and life sciences industries
+  provenance: expand-registry
+- id: biovia
+  name: BIOVIA (Dassault Systèmes)
+  categories:
+  - comp-chem-simulation
+  deployment_models:
+  - software-as-a-service
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.3ds.com/products/biovia
+  sources:
+  - https://www.3ds.com/products/biovia
+  - https://www.3ds.com/products/biovia/discovery-studio
+  headquarters: null
+  founded: null
+  market_position: Discovery Studio platform for small molecule and biotherapeutic
+    drug discovery with 30+ years of peer-reviewed research
+  provenance: expand-registry
+- id: dia-nn
+  name: DIA-NN
+  categories:
+  - ms-proteomics-metabolomics
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://aptila.bio/
+  sources:
+  - https://aptila.bio/
+  - https://github.com/vdemichev/DiaNN
+  - https://pubmed.ncbi.nlm.nih.gov/31768060/
+  - https://www.evosep.com/project/dia-nn-software-identifies-more-than-5000-proteins/
+  headquarters: null
+  founded: null
+  market_position: Leading universal software suite for DIA proteomics data analysis
+  provenance: expand-registry
+- id: idoven
+  name: Idoven
+  categories:
+  - medical-device-integration
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.idoven.ai/
+  sources:
+  - https://www.idoven.ai/
+  - https://www.insightpartners.com/ideas/behind-the-investment-idoven-improving-cardiovascular-care-with-ai/
+  - https://www.crunchbase.com/organization/idoven
+  headquarters: Madrid, Spain
+  founded: null
+  market_position: EU MDR Class IIa certified AI platform for ECG interpretation and
+    cardiac monitoring
+  provenance: expand-registry
+- id: inpher
+  name: Inpher
+  categories:
+  - bioinformatics-secondary
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.inpher.io/
+  sources:
+  - https://www.inpher.io/
+  - https://ventures.swisscom.com/portfolio/inpher/
+  - https://leadiq.com/c/inpher/5a1dac4a2300005200a1814a
+  headquarters: New York, USA
+  founded: '2015'
+  market_position: Privacy-preserving ML and analytics platform for sensitive healthcare
+    data collaboration
+  provenance: expand-registry
+- id: q-chem-inc
+  name: Q-Chem Inc
+  categories:
+  - comp-chem-simulation
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.q-chem.com/about/
+  sources:
+  - https://www.q-chem.com/about/
+  - https://www.q-chem.com/
+  - https://en.wikipedia.org/wiki/Q-Chem
+  headquarters: Pleasanton, California, USA
+  founded: '1993'
+  market_position: Leading quantum chemistry software for pharmaceutical and materials
+    science research
+  provenance: expand-registry
+- id: steris
+  name: STERIS
+  categories:
+  - hospital-erp
+  - or-surgical-video
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: original-equipment-manufacturer
+  confidence: C
+  source: https://www.steris.com/
+  sources:
+  - https://www.steris.com/
+  - https://www.steris-ast.com/industries/medical/medical-device-sterilization
+  - https://www.steris.com/healthcare/knowledge-center/sterile-processing/expanding-sterilization-options-medical-devices
+  headquarters: Mentor, Ohio, USA
+  founded: null
+  market_position: Major provider of medical device sterilization services and surgical
+    equipment
+  provenance: expand-registry
+- id: us2-ai
+  name: Us2.ai
+  categories:
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://us2.ai/us2-ai-receives-fda-clearance-for-us2-v2-transforming-cardiovascular-ultrasound-analysis/
+  sources:
+  - https://us2.ai/us2-ai-receives-fda-clearance-for-us2-v2-transforming-cardiovascular-ultrasound-analysis/
+  - https://www.pappas-capital.com/category/companies/us2-ai/
+  headquarters: Singapore
+  founded: null
+  market_position: FDA-cleared AI software for automated echocardiography reporting
+    and analysis
+  provenance: expand-registry
+- id: verato
+  name: Verato
+  categories:
+  - hie-interoperability-engine
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://verato.com/
+  sources:
+  - https://verato.com/
+  - https://www.businesswire.com/news/home/20220920005529/en/Verato-Introduces-the-Industrys-First-Master-Data-Management-for-Healthcare-hMDM-Solution-Redefining-MDM-for-Healthcare
+  - https://www.linkedin.com/company/verato
+  headquarters: McLean, Virginia, USA
+  founded: null
+  market_position: Healthcare identity and master data management platform serving
+    90+ healthcare organizations
+  provenance: expand-registry
+- id: vitech
+  name: Vitech
+  categories:
+  - payer-core-admin
+  deployment_models:
+  - vendor-managed
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://vitechteam.com/healthcare-software-development
+  sources:
+  - https://vitechteam.com/healthcare-software-development
+  - https://www.cbinsights.com/company/vitech
+  - https://vitechteam.com/service/medical-data-analysis-software-development-services
+  headquarters: Lviv, Ukraine
+  founded: '2007'
+  market_position: Healthcare software development and consulting services provider
+  provenance: expand-registry
+- id: xsolis
+  name: Xsolis
+  categories:
+  - payer-um-fraud-analytics
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.xsolis.com/
+  sources:
+  - https://www.xsolis.com/
+  - https://www.xsolis.com/about/
+  - https://www.prnewswire.com/news-releases/xsolis-recognized-as-one-of-modern-healthcares-best-in-business-in-the-ai-category-302327025.html
+  headquarters: Franklin, Tennessee, USA
+  founded: '2013'
+  market_position: Healthcare AI platform for medical necessity decisions and provider-payer
+    transparency
+  provenance: expand-registry
+- id: zontal
+  name: Zontal
+  categories:
+  - qc-lims-cds
+  - rd-lab-informatics
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://zontal.io/company/about
+  sources:
+  - https://zontal.io/company/about
+  - https://www.nasdaq.com/press-release/bruker-announces-acquisition-of-zontal-to-advance-the-digital-laboratory
+  - https://www.businesswire.com/news/home/20230508005324/en/Bruker-Announces-Acquisition-of-ZONTAL-to-Advance-the-Digital-Laboratory-Transformation-and-Integrated-Biopharma-Data-Solutions
+  headquarters: null
+  founded: null
+  market_position: Acquired by Bruker in 2023; integrated into Bruker BioSpin's Integrated
+    Data Solutions division
+  provenance: expand-registry
+- id: 4medica
+  name: 4medica
+  categories:
+  - hie-interoperability-engine
+  - lis
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.4medica.com/home/
+  sources:
+  - https://www.4medica.com/home/
+  - https://www.4medica.com/about-4medica-clinical-data-management-saas/
+  - https://www.linkedin.com/company/4medica
+  headquarters: Marina del Rey, California
+  founded: '1998'
+  market_position: Provider of real-time clinical data management and healthcare SaaS
+    solutions
+  provenance: expand-registry
+- id: anumana
+  name: Anumana
+  categories:
+  - medical-device-integration
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://anumana.ai/
+  sources:
+  - https://anumana.ai/
+  - https://anumana.ai/newsroom/ZSAhxxEAAB8Anu6y
+  - https://www.businesswire.com/news/home/20260327181824/en/Anumana-Secures-FDA-Clearance-for-First-of-Its-Kind-ECG-AI-Algorithm-for-Early-Detection-of-Pulmonary-Hypertension
+  headquarters: null
+  founded: null
+  market_position: FDA-cleared ECG-AI technology developer; multiple algorithms cleared
+    for cardiac disease detection
+  provenance: expand-registry
+- id: astrata
+  name: Astrata
+  categories:
+  - population-health-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.astrata.co/
+  sources:
+  - https://www.astrata.co/
+  - https://www.astrata.co/who-we-serve/what-astrata-is-and-isnt/
+  - https://www.crunchbase.com/organization/astrata
+  headquarters: Pittsburgh, Pennsylvania
+  founded: null
+  market_position: NLP-powered platform for health plan quality and HEDIS operations
+  provenance: expand-registry
+- id: axial3d
+  name: Axial3D
+  categories:
+  - advanced-visualization-3d
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://aws.amazon.com/blogs/startups/revolutionizing-3d-printing-with-amazon-sagemaker/
+  sources:
+  - https://aws.amazon.com/blogs/startups/revolutionizing-3d-printing-with-amazon-sagemaker/
+  - https://3dprint.com/314986/axial3d-partners-with-ge-healthcare-for-dicom-to-medical-model-3d-printing/
+  - https://www.linkedin.com/company/axial3d
+  headquarters: Northern Ireland
+  founded: null
+  market_position: 510k-cleared AI-driven cloud-based segmentation platform for medical
+    3D printing
+  provenance: expand-registry
+- id: cadwell
+  name: Cadwell
+  categories:
+  - medical-device-integration
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: operator
+  confidence: C
+  source: https://www.cadwell.com/arc-eeg-machine/
+  sources:
+  - https://www.cadwell.com/arc-eeg-machine/
+  - https://www.cadwell.com/apollo-eeg/
+  - https://www.prnewswire.com/news-releases/cadwell-launches-arc-apollo-eeg-300872895.html
+  headquarters: null
+  founded: null
+  market_position: Manufacturer of Arc EEG systems including Apollo+ wireless-capable
+    configurations
+  provenance: expand-registry
+- id: cosmian
+  name: Cosmian
+  categories:
+  - bioinformatics-secondary
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  - hybrid
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://cosmian.com/
+  sources:
+  - https://cosmian.com/
+  - https://cosmian.com/healthcare/
+  - https://docs.cosmian.com/
+  headquarters: Paris, France
+  founded: '2018'
+  market_position: Privacy-by-design confidential data intelligence platform; acquired
+    by Atos in 2025
+  provenance: expand-registry
+- id: datahow
+  name: DataHow
+  categories:
+  - pat-process-twin
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://datahow.ch/
+  sources:
+  - https://datahow.ch/
+  - https://datahow.ch/products/datahowlab/
+  - https://app.dealroom.co/companies/datahow
+  headquarters: Switzerland
+  founded: null
+  market_position: Cloud-based bioprocess development solution for biopharma; spin-off
+    from ETH Zurich
+  provenance: expand-registry
+- id: encevis
+  name: Encevis
+  categories:
+  - medical-device-integration
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.encevis.com/
+  sources:
+  - https://www.encevis.com/
+  - https://www.encevis.com/encevis-v2-1-receives-fda-clearance/
+  - https://www.accessdata.fda.gov/cdrh_docs/pdf21/K211452.pdf
+  headquarters: Austria
+  founded: null
+  market_position: FDA-cleared and CE-certified Class IIb medical device for EEG analysis
+    and monitoring
+  provenance: expand-registry
+- id: genpact
+  name: Genpact
+  categories:
+  - pv-regulatory-information
+  deployment_models:
+  - vendor-managed
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://www.genpact.com/industries/life-sciences/pharma
+  sources:
+  - https://www.genpact.com/industries/life-sciences/pharma
+  - https://www.genpact.com/industries/life-sciences/medtech
+  - https://www.prnewswire.com/news-releases/genpact-and-bpi-technologies-are-partnering-to-help-life-sciences-companies-transform-gross-to-net-sales-operations-300253502.html
+  headquarters: null
+  founded: null
+  market_position: Global BPO services provider for pharma and medical device companies;
+    acquired Pharmalink Consulting
+  provenance: expand-registry
+- id: grifols
+  name: Grifols
+  categories:
+  - lis
+  - pharmacy-automation
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: original-equipment-manufacturer
+  confidence: C
+  source: https://www.diagnostic.grifols.com/en/home
+  sources:
+  - https://www.diagnostic.grifols.com/en/home
+  - https://www.grifols.com/en/diagnostic
+  - https://www.grifols.com/en/view-news/-/news/grifols-expands-u-s-diagnostic-manufacturing-with-a-new-facility-in-san-diego
+  headquarters: Barcelona, Spain
+  founded: '1909'
+  market_position: Leading global healthcare company providing diagnostic solutions
+    and plasma-derived medicines
+  provenance: expand-registry
+- id: hologic
+  name: Hologic
+  categories:
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: customer
+  confidence: C
+  source: https://www.hologic.com/hologic-products/breast-health-solutions/genius-ai-detection-technology
+  sources:
+  - https://www.hologic.com/hologic-products/breast-health-solutions/genius-ai-detection-technology
+  - https://www.hologic.com/about/press-release/new-clinical-evidence-hologics-ai-powered-mammography-solutions-will-be
+  - https://www.hologic.com/genius-ai-detection
+  headquarters: null
+  founded: null
+  market_position: Medical device manufacturer with AI-powered mammography solutions
+    including Genius AI Detection
+  provenance: expand-registry
+- id: mdclone
+  name: MDClone
+  categories:
+  - clinical-data-lakehouse
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://mdclone.com/about-mdclone/
+  sources:
+  - https://mdclone.com/about-mdclone/
+  - https://www.prnewswire.com/news-releases/mdclone-developer-of-first-healthcare-synthetic-data-engine-raises-26-million-300906058.html
+  - https://tracxn.com/d/companies/mdclone/__4yRLFSr0EBfux2ea_6f4eetEgEGvdahMuWH-c9T-DoM
+  headquarters: Beer Sheba, Israel
+  founded: '2016'
+  market_position: Leader in healthcare synthetic data platform; serves 100% of Israeli
+    healthcare market; major US customers include NIH, Mayo partners, Intermountain
+  provenance: expand-registry
+- id: mindray
+  name: Mindray
+  categories:
+  - icu-central-monitoring
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: oem
+  buyer_signal: original-equipment-manufacturer
+  confidence: C
+  source: https://www.mindray.com/uk/products/patient-monitoring/centralized-monitoring/benevision-cms
+  sources:
+  - https://www.mindray.com/uk/products/patient-monitoring/centralized-monitoring/benevision-cms
+  - https://www.mindray.com/en/products/patient-monitoring/centralized-monitoring/benevision-cms-viewer
+  headquarters: null
+  founded: null
+  market_position: BeneVision CMS is a centralized patient monitoring system; supports
+    1200+ patient devices in single network
+  provenance: expand-registry
+- id: panalgo
+  name: Panalgo
+  categories:
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://panalgo.com/
+  sources:
+  - https://panalgo.com/
+  - https://www.businesswire.com/news/home/20230503005307/en/%C2%A0Panalgo-Wins-2023-MedTech-Breakthrough-Award-for-%E2%80%9CBest-Overall-Healthcare-Data-Analytics-Platform%E2%80%9D
+  - https://www.norstella.com/panalgo/
+  headquarters: null
+  founded: null
+  market_position: MedTech Breakthrough Award winner 2023 for Best Overall Healthcare
+    Data Analytics Platform; part of Norstella pharmaceutical solutions group
+  provenance: expand-registry
+- id: theator
+  name: Theator
+  categories:
+  - or-surgical-video
+  - rtls-asset-tracking
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://theator.io/out-of-body-time-in-the-operating-room/
+  sources:
+  - https://theator.io/out-of-body-time-in-the-operating-room/
+  - https://www.oracle.com/news/announcement/oracle-health-extends-ai-into-the-operating-room-in-collaboration-with-theator-2026-06-24/
+  - https://refreshmiami.com/news/theator-is-bringing-surgical-intelligence-into-the-operating-room/
+  headquarters: null
+  founded: '2018'
+  market_position: Surgical intelligence platform with AI-powered operative report
+    generation; Oracle Health partnership (2026); covers 9 specialties and 180+ procedure
+    types
+  provenance: expand-registry
+- id: trakcel
+  name: TrakCel
+  categories:
+  - mes-ebr
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://trakcel.com/
+  sources:
+  - https://trakcel.com/
+  - https://www.biopharminternational.com/view/manufacturers-five-cell-therapy-products-select-trakcel-s-ocellos-platform-manage-patient-treatment
+  - https://trakcel.com/news/trakcel-announces-ocellos-on-salesforce-appexchange/
+  headquarters: null
+  founded: null
+  market_position: OCELLOS platform adopted by 5 of 7 autologous/allogeneic cell therapy
+    products approved in 2024; operational at 300+ sites across 11 countries
+  provenance: expand-registry
+- id: verisma
+  name: Verisma
+  categories:
+  - him-coding
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://verisma.com/
+  sources:
+  - https://verisma.com/
+  - https://tracxn.com/d/companies/verisma-systems/__CGiz0iRzg_b-4FL0hxjKt77S1LsZjtg2_k8_XNya7d0
+  - https://www.zoominfo.com/c/verisma-systems-inc/160170062
+  headquarters: Alpharetta, Georgia
+  founded: '2002'
+  market_position: Health information lifecycle management; serves 20,000+ clients
+    across all 50 US states; processes millions of medical requests annually; HITRUST
+    certified
+  provenance: expand-registry
+- id: vizient
+  name: Vizient
+  categories:
+  - hospital-erp
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: service-provider
+  buyer_signal: customer
+  confidence: C
+  source: https://www.vizientinc.com/what-we-do/supply-chain
+  sources:
+  - https://www.vizientinc.com/what-we-do/supply-chain
+  - https://en.wikipedia.org/wiki/Vizient,_Inc.
+  - https://www.healthcarefinancenews.com/news/vha-uhc-supply-chain-company-rebrands-vizient-post-merger
+  headquarters: null
+  founded: '2015'
+  market_position: Nation's largest provider-driven healthcare performance company;
+    serves 2/3 of acute care and 1/3 ambulatory providers; $156B annual purchasing
+    volume; formed from VHA-UHC merger
+  provenance: expand-registry
+- id: binah-ai
+  name: Binah.ai
+  categories:
+  - samd-embedded-oem-platform
+  - smart-room-ambient-ai
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: original-equipment-manufacturer
+  confidence: C
+  source: https://www.binah.ai/
+  sources:
+  - https://www.binah.ai/
+  - https://www.binah.ai/healthcare-and-pharma/
+  - https://www.binah.ai/technology/
+  headquarters: null
+  founded: null
+  market_position: AI-powered contactless vital signs monitoring via smartphone/tablet
+    camera; remote photoplethysmography technology; medical-grade results in 35-60
+    seconds
+  provenance: expand-registry
+- id: deepgram
+  name: Deepgram
+  categories:
+  - healthcare-llm-serving
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://deepgram.com/solutions/medical-transcription
+  sources:
+  - https://deepgram.com/solutions/medical-transcription
+  - https://deepgram.com/learn/introducing-nova-3-medical-speech-to-text-api
+  - https://www.artificialintelligence-news.com/news/deepgram-nova-3-medical-ai-speech-model-healthcare-transcription-errors/
+  headquarters: null
+  founded: null
+  market_position: Nova-3 Medical speech-to-text API for clinical transcription; trained
+    on medical terminology; HIPAA-compliant; 5-40x faster than competitors; $0.0077/min
+    pricing
+  provenance: expand-registry
+- id: genedata
+  name: Genedata
+  categories:
+  - ms-proteomics-metabolomics
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.genedata.com/platform/expressionist
+  sources:
+  - https://www.genedata.com/platform/expressionist
+  - https://www.genedata.com/company/news/details/press-release/genedata-expressionist-120-sets-new-benchmark
+  - https://leadiq.com/c/genedata/5a1d8ad32400002400652304
+  headquarters: Basel, Switzerland
+  founded: null
+  market_position: Market-leading mass spectrometry data analysis platform (Expressionist)
+    for biotherapeutics characterization; part of Danaher; vendor-independent proteomics/metabolomics
+    platform
+  provenance: expand-registry
+- id: instamed
+  name: InstaMed
+  categories:
+  - patient-portal-engagement
+  - payer-core-admin
+  - rcm-billing-claims
+  deployment_models:
+  - public-cloud
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://www.instamed.com/
+  sources:
+  - https://www.instamed.com/
+  - https://www.jpmorganchase.com/newsroom/press-releases/2019/jpmc-to-acquire-instamed
+  - https://www.cnbc.com/2019/05/17/jp-morgan-buys-instamed-in-biggest-acquisition-since-financial-crisis.html
+  headquarters: null
+  founded: null
+  market_position: Healthcare payments platform; J.P. Morgan subsidiary since 2019;
+    private cloud-based; previously processed $94B annually; connects consumers, providers,
+    payers for healthcare transactions
+  provenance: expand-registry
+- id: novasign
+  name: Novasign
+  categories:
+  - pat-process-twin
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://novasign.at/
+  sources:
+  - https://novasign.at/
+  - https://novasign.at/products/
+  - https://novasign.at/technology/
+  headquarters: Austria
+  founded: null
+  market_position: Bioprocess modeling and digital twin software for pharmaceutical
+    manufacturing
+  provenance: expand-registry
+- id: mathworks
+  name: MathWorks
+  categories:
+  - pharmacometrics-modeling-simulation
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.mathworks.com/solutions/biotech-pharmaceutical/consulting.html
+  sources:
+  - https://www.mathworks.com/solutions/biotech-pharmaceutical/consulting.html
+  - https://en.wikipedia.org/wiki/The_MathWorks
+  - https://www.crunchbase.com/organization/mathworks
+  headquarters: Natick, Massachusetts, USA
+  founded: '1984'
+  market_position: Leading developer of mathematical computing; SimBiology used by
+    pharma companies for PK/PD modeling and systems biology
+  provenance: expand-registry
+- id: one-codex
+  name: One Codex
+  categories:
+  - bioinformatics-secondary
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.onecodex.com/
+  sources:
+  - https://www.onecodex.com/
+  - https://www.ycombinator.com/companies/one-codex
+  - https://www.linkedin.com/company/onecodex
+  headquarters: null
+  founded: '2014'
+  market_position: Leading bioinformatics platform for microbial genomics; HIPAA-compliant
+    clinical metagenomics decision support; thousands of users across institutions
+    and biotech
+  provenance: expand-registry
+- id: optibrium
+  name: Optibrium
+  categories:
+  - ai-drug-discovery
+  - comp-chem-simulation
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://optibrium.com/products/stardrop/
+  sources:
+  - https://optibrium.com/products/stardrop/
+  - https://www.news-medical.net/news/20231023/Optibrium-introduces-cloud-based-version-of-StarDrop-drug-discovery-platform.aspx
+  - https://optibrium.com/
+  headquarters: null
+  founded: null
+  market_position: StarDrop used by 160+ organizations including top global pharmaceutical
+    companies; small molecule drug discovery platform with AI augmentation (Inspyra
+    module)
+  provenance: expand-registry
+- id: syntellis
+  name: Syntellis
+  categories:
+  - hospital-erp
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.syntellis.com/axiom-software
+  sources:
+  - https://www.syntellis.com/axiom-software
+  - https://www.stratadecision.com/financial-reporting-analytics-solutions
+  - https://www.linkedin.com/company/syntellis-performance-solutions
+  headquarters: null
+  founded: null
+  market_position: Axiom platform serves 2,800+ healthcare organizations with 450,000
+    users; enterprise performance management and financial planning for healthcare
+  provenance: expand-registry
+- id: biomerieux
+  name: bioMérieux
+  categories:
+  - bioinformatics-secondary
+  - lab-middleware-automation
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: customer
+  confidence: C
+  source: https://www.biomerieux.com/us/en/our-offer/in-hospital-in-lab/clinical-laboratories.html
+  sources:
+  - https://www.biomerieux.com/us/en/our-offer/in-hospital-in-lab/clinical-laboratories.html
+  - https://www.biomerieux.com/corp/en.html
+  - https://www.zoominfo.com/c/biome%CC%81rieux-inc/20090875
+  headquarters: France
+  founded: null
+  market_position: World's second most widely installed immunoassay system (VIDAS);
+    multinational with automated diagnostic systems for infectious disease, cancer,
+    and molecular testing
+  provenance: expand-registry
+- id: biosolveit
+  name: BioSolveIT
+  categories:
+  - ai-drug-discovery
+  - comp-chem-simulation
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.biosolveit.de/drug-discovery-solutions/
+  sources:
+  - https://www.biosolveit.de/drug-discovery-solutions/
+  - https://www.biosolveit.de/products/
+  - https://www.biosolveit.de/
+  headquarters: Germany
+  founded: null
+  market_position: Cutting-edge molecular modeling toolkit; FlexX docking algorithm
+    widely used in structure-based drug design by medicinal chemists
+  provenance: expand-registry
+- id: mak-system
+  name: Mak-System
+  categories:
+  - lis
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.fda.gov/vaccines-blood-biologics/substantially-equivalent-510k-device-information/bk230986-eprogesa-v503
+  sources:
+  - https://www.fda.gov/vaccines-blood-biologics/substantially-equivalent-510k-device-information/bk230986-eprogesa-v503
+  - https://mak-system.com/products/eprogesa/
+  - https://www.crunchbase.com/organization/mak-system-international
+  headquarters: Paris, France
+  founded: '1984'
+  market_position: eProgesa blood bank and transfusion management software; FDA-cleared
+    (510k BK230986); presence in 35 countries with nearly 40 years experience
+  provenance: expand-registry
+- id: mvision-ai
+  name: MVision AI
+  categories:
+  - radiation-oncology-tps-ois
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://mvision.ai/
+  sources:
+  - https://mvision.ai/
+  - https://hlth.com/insights/news/more-personalised-cancer-treatments-in-the-pipeline-as-mvision-ai-gains-5-8m-in-funding-2023-03-24
+  - https://www.crunchbase.com/organization/mvision-ai
+  headquarters: Helsinki, Finland
+  founded: null
+  market_position: AI-powered auto-segmentation for radiotherapy planning; CE-marked
+    and FDA-cleared; Contour+ product used in 20+ countries; ranked top 10 Deloitte
+    Tech Fast 50 Finland 2024
+  provenance: expand-registry
+- id: avicenna-ai
+  name: Avicenna.AI
+  categories:
+  - pacs-vna
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://avicenna.ai/
+  sources:
+  - https://avicenna.ai/
+  - https://appliedradiology.com/articles/avicenna-ai-unveils-avi-platform-to-deliver-ai-imaging-insights-seamlessly-across-healthcare-workflows
+  - https://frenchhealthcare-association.fr/en/adherents/avicenna-ai/
+  headquarters: La Ciotat, France
+  founded: '2018'
+  market_position: AI solutions for radiology (CINA suite for intracranial hemorrhage,
+    LVO, stroke assessment); used by radiologists in 15+ countries; recently launched
+    AVI integration platform
+  provenance: expand-registry
+- id: beekeeperai
+  name: BeeKeeperAI
+  categories:
+  - bioinformatics-secondary
+  - healthcare-llm-serving
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.beekeeperai.com/beekeeperai-privacy-enhancing-innovation-press-release
+  sources:
+  - https://www.beekeeperai.com/beekeeperai-privacy-enhancing-innovation-press-release
+  - https://cdhi.ucsf.edu/beekeeperai
+  - https://www.businesswire.com/news/home/20250515805316/en/BeeKeeperAI-and-cStructure-Collaborate-to-Advance-Causal-AI-for-Scientific-Advancement-and-Healthcare-Innovation
+  headquarters: null
+  founded: null
+  market_position: Privacy-preserving AI platform with confidential computing for
+    healthcare; EscrowAI enables secure model deployment on patient data; federated
+    confidential computing for clinical trials
+  provenance: expand-registry
+- id: covermymeds
+  name: CoverMyMeds
+  categories:
+  - payer-um-fraud-analytics
+  deployment_models:
+  - vendor-managed
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://www.mckesson.com/business-solutions/our-businesses/covermymeds/
+  sources:
+  - https://www.mckesson.com/business-solutions/our-businesses/covermymeds/
+  - https://en.wikipedia.org/wiki/CoverMyMeds
+  - https://www.covermymeds.health/our-solutions/prior-authorization
+  headquarters: USA (McKesson subsidiary)
+  founded: null
+  market_position: Prior authorization platform connecting 500+ EHR systems, 49,000
+    pharmacies, 700,000 providers; wholly owned subsidiary of McKesson since 2017;
+    IntelligentPA solution automates PA process
+  provenance: expand-registry
+- id: readspeaker
+  name: ReadSpeaker
+  categories:
+  - healthcare-llm-serving
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.readspeaker.com/sectors/healthcare/
+  sources:
+  - https://www.readspeaker.com/sectors/healthcare/
+  - https://www.readspeaker.com/applications/healthcare/
+  headquarters: null
+  founded: null
+  market_position: Text-to-speech platform serving healthcare organizations, pharmaceutical
+    companies, and digital health providers in 50+ languages
+  provenance: expand-registry
+- id: surescripts
+  name: Surescripts
+  categories:
+  - payer-um-fraud-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://surescripts.com/
+  sources:
+  - https://surescripts.com/
+  - https://surescripts.com/what-we-do/e-prescribing
+  headquarters: null
+  founded: null
+  market_position: Nation's largest and most active e-prescribing network; connects
+    2.32M healthcare professionals, 98.3% of pharmacies; processed 2.5B electronic
+    prescriptions in 2023
+  provenance: expand-registry
+- id: midmark-rtls
+  name: Midmark RTLS
+  categories:
+  - hospital-erp
+  - rtls-asset-tracking
+  deployment_models:
+  - on-premises
+  - hybrid
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.midmark.com/medical/rtls
+  sources:
+  - https://www.midmark.com/medical/rtls
+  - https://www.midmark.com/medical/rtls/our-approach/rtls-technology
+  headquarters: null
+  founded: null
+  market_position: CareFlow RTLS hybrid BLE/IR solution for clinical workflow and
+    healthcare asset tracking
+  provenance: expand-registry
+- id: mim-software
+  name: MIM Software
+  categories:
+  - pacs-vna
+  - radiation-oncology-tps-ois
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.mimsoftware.com/
+  sources:
+  - https://www.mimsoftware.com/
+  - https://www.mimsoftware.com/radiation-oncology/mim-maestro/image-registration
+  headquarters: null
+  founded: '2003'
+  market_position: GE HealthCare Company; 3,300+ global healthcare organizations;
+    90% of world's top 50 hospitals use MIM solutions
+  provenance: expand-registry
+- id: paxerahealth
+  name: PaxeraHealth
+  categories:
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - hybrid
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://paxerahealth.com/
+  sources:
+  - https://paxerahealth.com/
+  - https://paxerahealth.com/about/
+  headquarters: Boston, MA
+  founded: null
+  market_position: Managing 220M imaging studies for 1,500 customers in 45 countries;
+    enterprise imaging platform with SOC 2 certification
+  provenance: expand-registry
+- id: vitalconnect
+  name: VitalConnect
+  categories:
+  - icu-central-monitoring
+  - medical-device-integration
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://vitalconnect.com/
+  sources:
+  - https://vitalconnect.com/
+  - https://vitalconnect.com/remote-patient-monitoring/
+  headquarters: null
+  founded: null
+  market_position: VitalPatch RTM wearable cardiac monitoring; Frost & Sullivan 2022
+    New Product Innovation Award recipient
+  provenance: expand-registry
+- id: apprentice-io
+  name: Apprentice.io
+  categories:
+  - mes-ebr
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.apprentice.io/
+  sources:
+  - https://www.apprentice.io/
+  - https://www.pharmasalmanac.com/articles/apprenticeio-is-driving-the-future-of-pharma-manufacturing-with-embedded-ai
+  headquarters: null
+  founded: null
+  market_position: AI-powered platform for life science manufacturers; supports pharma
+    process mapping and system integration
+  provenance: expand-registry
+- id: dentalxchange
+  name: DentalXChange
+  categories:
+  - payer-core-admin
+  deployment_models:
+  - software-as-a-service
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://www.dentalxchange.com/
+  sources:
+  - https://www.dentalxchange.com/
+  - https://www.themolarreport.com/reviews/dentalxchange
+  headquarters: null
+  founded: null
+  market_position: 99% first-pass claims acceptance; 200,000+ providers; 1,400 payer
+    connections; processes $90B+ annually and 300M+ dental claims per year
+  provenance: expand-registry
+- id: dicom-systems
+  name: Dicom Systems
+  categories:
+  - digital-pathology
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  - public-cloud
+  - hybrid
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://dcmsys.com/
+  sources:
+  - https://dcmsys.com/
+  - https://dcmsys.com/solutions/unifier-enterprise-imaging-platform/
+  headquarters: null
+  founded: null
+  market_position: Unifier enterprise imaging platform; processes 124B medical images
+    (548M studies) annually across 630+ sites globally
+  provenance: expand-registry
+- id: vatica-health
+  name: Vatica Health
+  categories:
+  - payer-actuarial-hpc
+  - population-health-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://vaticahealth.com/
+  sources:
+  - https://vaticahealth.com/
+  - https://www.businesswire.com/news/home/20250205875180/en/Vatica-Health-Earns-Third-Consecutive-Best-in-KLAS-Award
+  headquarters: null
+  founded: '2011'
+  market_position: Number 1 ranked risk adjustment and quality of care solution; 2025
+    Best in KLAS award for third consecutive year
+  provenance: expand-registry
+- id: ambry-genetics
+  name: Ambry Genetics
+  categories:
+  - bioinformatics-secondary
+  deployment_models:
+  - vendor-managed
+  partner_type: service-provider
+  buyer_signal: customer
+  confidence: C
+  source: https://www.ambrygen.com/providers
+  sources:
+  - https://www.ambrygen.com/providers
+  - https://www.ncbi.nlm.nih.gov/gtr/labs/61756/
+  headquarters: null
+  founded: '1999'
+  market_position: Over 20 years of experience in genetic testing; comprehensive diagnostic
+    menu for hereditary cancer, cardiac, and neurological conditions
+  provenance: expand-registry
+- id: arvato-systems
+  name: Arvato Systems
+  categories:
+  - serialization-track-trace
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.arvato-systems.com/industries/healthcare-pharma/
+  sources:
+  - https://www.arvato-systems.com/industries/healthcare-pharma/
+  - https://us.arvato-systems.com/industries/healthcare-pharma
+  headquarters: null
+  founded: null
+  market_position: Comprehensive healthcare and pharma IT solutions provider; part
+    of Bertelsmann Group; AWS partner for European Sovereign Cloud
+  provenance: expand-registry
+- id: care-logistics
+  name: Care Logistics
+  categories:
+  - capacity-command-center
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.carelogistics.com/
+  sources:
+  - https://www.carelogistics.com/
+  - https://www.carelogistics.com/our-purpose
+  headquarters: null
+  founded: '2008'
+  market_position: Enterprise hospital management system provider with CareEdge platform;
+    Jackson Healthcare company
+  provenance: expand-registry
+- id: chai-discovery
+  name: Chai Discovery
+  categories:
+  - ai-drug-discovery
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.businesswire.com/news/home/20260713849009/en/Chai-Discovery-Announces-$400M-Series-C-to-Advance-AI-Driven-Molecular-Design
+  sources:
+  - https://www.businesswire.com/news/home/20260713849009/en/Chai-Discovery-Announces-$400M-Series-C-to-Advance-AI-Driven-Molecular-Design
+  - https://www.fiercebiotech.com/biotech/chai-infuses-ai-drug-discovery-efforts-130m-series-b
+  headquarters: San Francisco, California
+  founded: null
+  market_position: AI-driven drug discovery platform; $400M Series C funding (July
+    2026); licensing with Eli Lilly and Pfizer
+  provenance: expand-registry
+- id: access-telecare
+  name: Access TeleCare
+  categories:
+  - icu-central-monitoring
+  - telehealth-platform
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://accesstelecare.com/telemedicine-solutions/
+  sources:
+  - https://accesstelecare.com/telemedicine-solutions/
+  - https://www.businesswire.com/news/home/20241016888107/en/Access-TeleCare-Celebrates-20-Years-of-Revolutionizing-Acute-Specialty-Telemedicine-for-Hospitals-and-Patients-Nationwide
+  headquarters: null
+  founded: '2004'
+  market_position: Country's largest provider of acute and specialty telemedicine;
+    serves 65% of U.S. population; Joint Commission Gold Seal accreditation
+  provenance: expand-registry
+- id: collette-health
+  name: Collette Health
+  categories:
+  - smart-room-ambient-ai
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.collettehealth.com/
+  sources:
+  - https://www.collettehealth.com/
+  - https://www.vonage.com/about-us/newsroom/press-releases/Collette-Health-Transforms-Virtual-Care-Delivery-with-Vonage/b744d0bf-f452-4307-a615-d1f21feae60d/
+  headquarters: null
+  founded: '2017'
+  market_position: '#1 recognition in 2026 Best in KLAS report (91.5 score); formerly
+    MedSitter; rebranded 2023'
+  provenance: expand-registry
+- id: protein-metrics
+  name: Protein Metrics
+  categories:
+  - ms-proteomics-metabolomics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.proteinmetrics.com/
+  sources:
+  - https://www.proteinmetrics.com/
+  - https://www.proteinmetrics.com/products/byos
+  headquarters: null
+  founded: null
+  market_position: Leading provider of mass spectrometry software for biotherapeutic
+    protein characterization; Byos platform for automated workflows
+  provenance: expand-registry
+- id: revvity-signals
+  name: Revvity Signals
+  categories:
+  - rd-lab-informatics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://revvitysignals.com/
+  sources:
+  - https://revvitysignals.com/
+  - https://revvitysignals.com/products/research/signals-one
+  headquarters: null
+  founded: null
+  market_position: AI-powered SaaS for pharma, biotech R&D; exclusive Spotfire provider
+    for scientific applications; clinical trial analytics
+  provenance: expand-registry
+- id: solidsoft-reply
+  name: Solidsoft Reply
+  categories:
+  - serialization-track-trace
+  deployment_models:
+  - public-cloud
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://www.reply.com/solidsoft-reply/en/
+  sources:
+  - https://www.reply.com/solidsoft-reply/en/
+  - https://www.reply.com/solidsoft-reply/en/trvst
+  headquarters: null
+  founded: null
+  market_position: Award-winning track and trace provider; 30+ years experience; supports
+    EMVS and TRVST global medicine verification systems; Microsoft AI Cloud partner
+  provenance: expand-registry
+- id: bernoulli-health
+  name: Bernoulli Health
+  categories:
+  - clinical-communication-collaboration
+  - icu-central-monitoring
+  - medical-device-integration
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.crunchbase.com/organization/bernoulli-health
+  sources:
+  - https://www.crunchbase.com/organization/bernoulli-health
+  - https://www.prnewswire.com/news-releases/capsule-technologies-acquires-bernoulli-health-300840000.html
+  headquarters: Milford, Connecticut
+  founded: '1988'
+  market_position: Vendor-neutral real-time clinical surveillance platform; acquired
+    by Capsule Technologies 2019
+  provenance: expand-registry
+- id: giles-scientific
+  name: Giles Scientific
+  categories:
+  - lab-middleware-automation
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: operator
+  confidence: C
+  source: https://www.biomic.com/
+  sources:
+  - https://www.biomic.com/
+  - https://www.biomic.com/about-us.html
+  headquarters: Santa Barbara, California
+  founded: '1984'
+  market_position: FDA-registered, ISO 13485:2016 certified microbiology system manufacturer;
+    BIOMIC V3 platform
+  provenance: expand-registry
+- id: mobile-heartbeat
+  name: Mobile Heartbeat
+  categories:
+  - clinical-communication-collaboration
+  - icu-central-monitoring
+  - medical-device-integration
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.mobileheartbeat.com/
+  sources:
+  - https://www.mobileheartbeat.com/
+  headquarters: null
+  founded: null
+  market_position: 300k+ monthly active users at major US health systems; MH-CURE
+    and Banyan platforms
+  provenance: expand-registry
+- id: nucleus-genomics
+  name: Nucleus Genomics
+  categories:
+  - bioinformatics-secondary
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.illumina.com/company/news-center/feature-articles/nucleus-genomics-whole-genome-sequencing.html
+  sources:
+  - https://www.illumina.com/company/news-center/feature-articles/nucleus-genomics-whole-genome-sequencing.html
+  - https://techcrunch.com/2025/01/30/controversial-genetics-testing-startup-nucleus-genomics-raises-14m-series-a/
+  headquarters: New York, New York
+  founded: null
+  market_position: Whole-genome sequencing with polygenic risk scoring; Nucleus Embryo
+    platform for IVF; $18M funded (Series A 2025)
+  provenance: expand-registry
+- id: powerful-medical
+  name: Powerful Medical
+  categories:
+  - medical-device-integration
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.powerfulmedical.com/
+  sources:
+  - https://www.powerfulmedical.com/
+  - https://www.businesswire.com/news/home/20250325333487/en/Powerful-Medical-Receives-FDA-Breakthrough-Device-Designation-for-PMcardio-STEMI-AI-ECG-Model
+  headquarters: null
+  founded: '2017'
+  market_position: CE-certified; FDA Breakthrough Device Designation for STEMI detection;
+    PMcardio platform; 100k+ clinicians
+  provenance: expand-registry
+- id: standard-biotools
+  name: Standard BioTools
+  categories:
+  - spatial-biology-omics
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: original-equipment-manufacturer
+  confidence: C
+  source: https://investors.standardbio.com/
+  sources:
+  - https://investors.standardbio.com/
+  - https://finance.yahoo.com/quote/LAB/
+  headquarters: Boston, Massachusetts
+  founded: '1999'
+  market_position: 'Public company (Nasdaq: LAB); ~615 employees; spatial/single-cell
+    analysis tools; $85M revenue'
+  provenance: expand-registry
+- id: abterra-biosciences
+  name: Abterra Biosciences
+  categories:
+  - ms-proteomics-metabolomics
+  deployment_models:
+  - vendor-managed
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://abterrabio.com/about-us/
+  sources:
+  - https://abterrabio.com/about-us/
+  - https://www.crunchbase.com/organization/digital-proteomics
+  headquarters: San Diego, California
+  founded: '2009'
+  market_position: Antibody sequencing & discovery platform for pharma/biotech; $200K
+    funding; 7 employees
+  provenance: expand-registry
+- id: synopsys-simpleware
+  name: Synopsys Simpleware
+  categories:
+  - advanced-visualization-3d
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.synopsys.com/medical.html
+  sources:
+  - https://www.synopsys.com/medical.html
+  - https://www.synopsys.com/simpleware.html
+  headquarters: null
+  founded: null
+  market_position: CE-marked and FDA 510k cleared ScanIP Medical; AI-based image segmentation
+    (Ortho/Cardio modules)
+  provenance: expand-registry
+- id: day-zero-diagnostics
+  name: Day Zero Diagnostics
+  categories:
+  - bioinformatics-secondary
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://www.biomerieux.com/us/en/journalists/press-releases/NGS-sequencing-acquisition-day-zero-diagnostics.html
+  sources:
+  - https://www.biomerieux.com/us/en/journalists/press-releases/NGS-sequencing-acquisition-day-zero-diagnostics.html
+  - https://innovationlabs.harvard.edu/venture/day-zero-diagnostics
+  headquarters: Boston, Massachusetts
+  founded: '2016'
+  market_position: Whole-genome sequencing for sepsis/bloodstream infections; culture-free
+    pathogen ID; acquired by bioMérieux June 2025
+  provenance: expand-registry
+- id: edwards-lifesciences
+  name: Edwards Lifesciences
+  categories:
+  - ehr-emr-core
+  - icu-central-monitoring
+  - medical-device-integration
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: customer
+  confidence: C
+  source: https://www.edwards.com/healthcare-professionals/products-services/surgical-heart
+  sources:
+  - https://www.edwards.com/healthcare-professionals/products-services/surgical-heart
+  - https://www.globaldata.com/company-profile/edwards-lifesciences-corp/
+  headquarters: Irvine, California
+  founded: null
+  market_position: Major medical device manufacturer; TAVR, surgical heart valves,
+    critical care devices
+  provenance: expand-registry
+- id: gainwell-technologies
+  name: Gainwell Technologies
+  categories:
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: service-provider
+  buyer_signal: operator
+  confidence: C
+  source: https://discover.gainwelltechnologies.com/about-us/
+  sources:
+  - https://discover.gainwelltechnologies.com/about-us/
+  - https://www.gainwelltechnologies.com/
+  headquarters: null
+  founded: '2020'
+  market_position: $2.8B revenue; 10k+ employees; serves all 50 US states; 60M Medicaid
+    beneficiaries; 50+ years healthcare history
+  provenance: expand-registry
+- id: lifepoint-informatics
+  name: Lifepoint Informatics
+  categories:
+  - lis
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: operator
+  confidence: C
+  source: https://lifepoint.com/
+  sources:
+  - https://lifepoint.com/
+  - https://www.linkedin.com/company/lifepoint-informatics
+  headquarters: null
+  founded: null
+  market_position: Trusted leader in healthcare information technology for clinical
+    integration and data interoperability
+  provenance: expand-registry
+- id: medis-medical-imaging
+  name: Medis Medical Imaging
+  categories:
+  - advanced-visualization-3d
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://medisimaging.com/
+  sources:
+  - https://medisimaging.com/
+  - https://www.linkedin.com/company/medis-medical-imaging
+  headquarters: Netherlands
+  founded: null
+  market_position: Leading provider of innovative software for quantifying medical
+    images in cardiovascular imaging; FDA 510k cleared
+  provenance: expand-registry
+- id: clever-culture-systems
+  name: Clever Culture Systems
+  categories:
+  - lab-middleware-automation
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: operator
+  confidence: C
+  source: https://www.cleverculturesystems.com/
+  sources:
+  - https://www.cleverculturesystems.com/
+  - https://www.thermofisher.com/order/catalog/product/R16001
+  headquarters: Adelaide, South Australia
+  founded: null
+  market_position: Provider of AI-powered APAS Independence instrument for automated
+    microbiology culture plate analysis; FDA-cleared
+  provenance: expand-registry
+- id: insilico-biotechnology
+  name: Insilico Biotechnology
+  categories:
+  - pat-process-twin
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.insilico-biotechnology.eu/en/about-us/company/company-profile
+  sources:
+  - https://www.insilico-biotechnology.eu/en/about-us/company/company-profile
+  - https://www.genengnews.com/topics/bioprocessing/yokogawa-acquires-insilico-biotechnology/
+  headquarters: Stuttgart, Germany
+  founded: '2001'
+  market_position: Digital twin technology provider for bioprocess development serving
+    6 of top 10 biopharma companies; acquired by Yokogawa
+  provenance: expand-registry
+- id: bonfiglioli-engineering
+  name: Bonfiglioli Engineering
+  categories:
+  - automated-visual-inspection
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  buyer_signal: original-equipment-manufacturer
+  confidence: C
+  source: https://www.bonfiglioliengineering.com/
+  sources:
+  - https://www.bonfiglioliengineering.com/
+  - https://www.linkedin.com/company/bonfiglioli-engineering
+  headquarters: Vigarano Pieve, Ferrara, Italy
+  founded: '1974'
+  market_position: Leading provider of automated inspection and leak detection systems
+    for pharmaceutical manufacturing; 50+ years in 87+ countries
+  provenance: expand-registry
+- id: dassault-systemes-biovia
+  name: Dassault Systèmes BIOVIA
+  categories:
+  - comp-chem-simulation
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.3ds.com/products/biovia/materials-studio/pharmaceutical-development
+  sources:
+  - https://www.3ds.com/products/biovia/materials-studio/pharmaceutical-development
+  - https://investor.3ds.com/news-releases/news-release-details/dassault-systemes-introduces-biovia-combines-accelrys-and-bioplm
+  headquarters: null
+  founded: null
+  market_position: Major division of Dassault Systèmes providing scientific collaborative
+    environment for drug discovery; serves 6 of top 10 pharma companies
+  provenance: expand-registry
+- id: clinical-computer-systems
+  name: Clinical Computer Systems, Inc.
+  categories:
+  - cdss-clinical-ai
+  - ehr-emr-core
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.obix.com/
+  sources:
+  - https://www.obix.com/
+  - https://www.linkedin.com/company/clinical-computer-systems
+  headquarters: United States
+  founded: null
+  market_position: Provider of OBIX Perinatal Data System; 8-time KLAS Category Leader
+    for Labor & Delivery
+  provenance: expand-registry
+- id: avant-garde-materials-simulation
+  name: Avant-garde Materials Simulation
+  categories:
+  - comp-chem-simulation
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  buyer_signal: customer
+  confidence: C
+  source: https://www.avmatsim.eu/
+  sources:
+  - https://www.avmatsim.eu/
+  - https://www.cbinsights.com/company/avant-garde-materials-simulation
+  headquarters: Paris, France
+  founded: '2002'
+  market_position: World leader in crystal structure prediction contract research
+    and software (GRACE); aids pharmaceutical drug development and form selection
+  provenance: expand-registry
