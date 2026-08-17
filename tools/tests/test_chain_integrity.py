@@ -523,6 +523,10 @@ class TestTriggerForeignKeys(unittest.TestCase):
 # Round-3 invariants: vendors layer
 # ============================================================
 VENDORS_DOC = yaml.safe_load(open(REPO / "data" / "vendors.yaml", encoding="utf-8"))
+# curated + provisional (web-sourced) vendor ids — the FK matchers resolve against both tiers.
+_PROV_PATH = REPO / "data" / "vendors_provisional.yaml"
+_PROV_VENDORS = ((yaml.safe_load(_PROV_PATH.read_text(encoding="utf-8")) or {}).get("vendors") or []) if _PROV_PATH.exists() else []
+ALL_VENDOR_IDS = {v["id"] for v in VENDORS_DOC["vendors"]} | {v["id"] for v in _PROV_VENDORS}
 
 
 class TestVendorsLayer(unittest.TestCase):
@@ -1738,7 +1742,7 @@ class TestE4aIntelFK(unittest.TestCase):
     """plan-v6.1 E4a — every vendor_intel record carries a nullable vendor_id; non-null FKs resolve
     to a REAL vendors.id (never invented). The app resolves intel by the FK first, name fallback second."""
 
-    _V = {v["id"] for v in yaml.safe_load((REPO / "data" / "vendors.yaml").read_text(encoding="utf-8"))["vendors"]}
+    _V = ALL_VENDOR_IDS  # curated + provisional — a FK may resolve to either tier
     _I = yaml.safe_load((REPO / "data" / "vendor_intel.yaml").read_text(encoding="utf-8"))["vendors"]
     SRC = APP_BUILD_SRC
 
@@ -1828,7 +1832,7 @@ class TestE4bSubVendorFK(unittest.TestCase):
     """plan-v6.1 E4b — {sub-vendor prose -> vendors.id} FK map (data/sub_vendor_fk.yaml). Deterministic;
     every mapped slug is a REAL vendor (never invented); the app resolves sub vendors via the FK first."""
 
-    _V = {v["id"] for v in yaml.safe_load((REPO / "data" / "vendors.yaml").read_text(encoding="utf-8"))["vendors"]}
+    _V = ALL_VENDOR_IDS  # curated + provisional — a FK may resolve to either tier
     _FK = yaml.safe_load((REPO / "data" / "sub_vendor_fk.yaml").read_text(encoding="utf-8"))
 
     def test_every_mapped_slug_is_real(self):
@@ -1850,6 +1854,45 @@ class TestE4bSubVendorFK(unittest.TestCase):
         self.assertIn('"sub_vendor_fk"', APP_BUILD_SRC, "build_app must inject sub_vendor_fk")
         self.assertIn("const SUBFK=", APP_BUILD_SRC, "app must build the SUBFK lookup")
         self.assertIn("s=SUBFK[vn]", APP_BUILD_SRC, "vintelOf must try the sub-vendor FK first")
+
+
+class TestVendorsProvisional(unittest.TestCase):
+    """expand-vendor-registry — the provisional (web-sourced) vendor tier. Lighter bar than the curated
+    vendors.yaml (no resolved listing/HQ), but still: sourced, kebab id unique vs curated, enum-valid,
+    flagged, and actually referenced by a sub-market/intel (it exists to resolve prose)."""
+
+    _CUR = {v["id"] for v in VENDORS_DOC["vendors"]}
+    _P = _PROV_VENDORS
+
+    def test_schema_and_sourced(self):
+        if not self._P:
+            self.skipTest("no provisional tier")
+        seen = set()
+        for v in self._P:
+            vid = v.get("id")
+            self.assertRegex(vid or "", r"^[a-z0-9]+(-[a-z0-9]+)*$", f"provisional id not kebab: {vid}")
+            self.assertNotIn(vid, self._CUR, f"provisional {vid} shadows a curated vendor")
+            self.assertNotIn(vid, seen, f"duplicate provisional id {vid}")
+            seen.add(vid)
+            self.assertTrue(v.get("name"), f"{vid}: name")
+            self.assertTrue(str(v.get("source", "")).strip(), f"{vid}: no source (never add unsourced)")
+            self.assertTrue(v.get("sources"), f"{vid}: no sources")
+            self.assertIn(v.get("confidence"), {"A", "B", "C", "D"}, f"{vid}: confidence")
+            self.assertIn(v.get("partner_type"),
+                          {"isv", "oem", "service-provider", "hyperscaler", "unknown"}, f"{vid}: partner_type")
+            self.assertEqual(v.get("provenance"), "expand-registry", f"{vid}: must be flagged provenance")
+            for dm in v.get("deployment_models") or []:
+                self.assertIn(dm, TARGET_ENUMS["deployment"], f"{vid}: bad deployment {dm}")
+
+    def test_referenced(self):
+        if not self._P:
+            self.skipTest("no provisional tier")
+        fk = yaml.safe_load((REPO / "data" / "sub_vendor_fk.yaml").read_text(encoding="utf-8")).get("map", {})
+        used = set(fk.values())
+        intel = yaml.safe_load((REPO / "data" / "vendor_intel.yaml").read_text(encoding="utf-8"))["vendors"]
+        used |= {r["vendor_id"] for r in intel if r.get("vendor_id")}
+        orphans = [v["id"] for v in self._P if v["id"] not in used]
+        self.assertEqual(orphans, [], f"provisional vendors referenced by nothing: {orphans}")
 
 
 if __name__ == "__main__":

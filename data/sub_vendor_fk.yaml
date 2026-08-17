@@ -3,9 +3,9 @@ version: 1
 generated_by: tools/build_sub_vendor_fk.py
 counts:
   unique_strings: 3426
-  resolved: 1184
+  resolved: 1402
   total_mentions: 4416
-  resolved_mentions: 1683
+  resolved_mentions: 2072
 map:
   10x Genomics (Space Ranger / Xenium Ranger): 10x-genomics
   10x Genomics (Xenium Explorer / Loupe Browser): 10x-genomics
@@ -13,11 +13,16 @@ map:
   10x Genomics (Xenium Onboard/Analyzer): 10x-genomics
   10x Genomics (Xenium built-in Cellpose-based segmentation): 10x-genomics
   1upHealth: 1uphealth
+  3D Systems: 3d-systems
+  3D Systems (D2P — DICOM to PRINT): 3d-systems
+  3D Systems (D2P): 3d-systems
+  3D Systems (VSP): 3d-systems
   ABB: abb
   ABB (800xA Batch): abb
   ABB (800xA): abb
   AGFA HealthCare (Enterprise Imaging VNA): agfa-healthcare
   AGFA HealthCare (RUBEE Orchestrator): agfa-healthcare
+  AKASA: akasa
   ARxIUM: arxium
   ARxIUM (MedSelect Flex/Aspire): arxium
   ARxIUM (OptiFill / PPS): arxium
@@ -34,6 +39,13 @@ map:
   AVEVA (System Platform / InTouch HMI): aveva
   AVEVA (resells Stratus ftServer for control room): aveva
   AVEVA (validated virtualization w/ Stratus everRun): aveva
+  Abbott (Accelerator / GLP): abbott
+  Abbott (Accelerator a3600): abbott
+  Abbott (AlinIQ AMS): abbott
+  Abbott (GLP systems / Accelerator a3600): abbott
+  Abbott (OPTIS Next OCT, iFR/FFR/RFR physiology): abbott
+  Abbott (RALS): abbott
+  Abbott (St. Jude WorkMate Claris): abbott
   Abridge: abridge
   Absci: absci
   Absci (Origin-1 / Integrated Drug Creation): absci
@@ -61,6 +73,7 @@ map:
   Akoya Biosciences / Quanterix: akoya-biosciences
   Akoya Biosciences / Quanterix (PhenoCycler-Fusion): akoya-biosciences
   Akoya Biosciences / Quanterix (inForm, phenoptrReports): akoya-biosciences
+  Allelica: allelica
   Altair (EDEM): altair
   Altair (Grid Engine / Univa): altair
   Altair (PBS Professional / Grid Engine): altair
@@ -68,6 +81,9 @@ map:
   Altera Digital Health (Sunrise Critical Care): altera-digital-health
   Altera Digital Health (Sunrise): altera-digital-health
   Ambience Healthcare: ambience
+  Ambient Clinical Analytics (AWARE predictive analytics): ambient-clinical-analytics
+  Ambient Clinical Analytics (AWARE virtual-ICU): ambient-clinical-analytics
+  Ambient Clinical Analytics (AWARE): ambient-clinical-analytics
   Amwell: amwell
   Amwell (Avizia): amwell
   Amwell (Carepoint): amwell
@@ -78,7 +94,13 @@ map:
   Antares Vision (rfxcel): antares-vision
   Antares Vision / Oròbix (AI-GO Studio): antares-vision
   Antares Vision / rfxcel: antares-vision
+  Apella: apella
+  Apheris: apheris
   Arcadia: arcadia
+  Aridhia: aridhia
+  Aridhia (Aridhia DRE): aridhia
+  Aridhia (DRE): aridhia
+  Aridhia DRE: aridhia
   ArisGlobal: arisglobal
   ArisGlobal (LifeSphere NavaX / Advanced Intake): arisglobal
   ArisGlobal (LifeSphere NavaX): arisglobal
@@ -116,6 +138,7 @@ map:
   AspenTech / CAMO (Unscrambler): aspentech
   AspenTech Aspen DMC3: aspentech
   AspenTech Aspen Operator Training (HYSYS Dynamics): aspentech
+  Assort Health: assort-health
   AvaSure: avasure
   Availity: availity
   BD (HealthSight Diversion Management): bd
@@ -139,10 +162,20 @@ map:
   Beckman Coulter (REMISOL Advance): beckman-coulter
   Beckman Coulter (Remisol Advance / DL2000): beckman-coulter
   Benchling: benchling
+  BioIntelliSense: biointellisense
+  BioIntelliSense (BioButton): biointellisense
+  BioIntelliSense (BioHub): biointellisense
+  BioIntelliSense / Medtronic (BioButton): biointellisense
   Biofourmis: biofourmis
   Biofourmis (Biovitals Analytics Engine): biofourmis
   Biognosys (Spectronaut): biognosys
   Biognosys (Spectronaut, directDIA library-free): biognosys
+  Bioinformatics Solutions (PEAKS de novo): bioinformatics-solutions
+  Bioinformatics Solutions (PEAKS): bioinformatics-solutions
+  Bioinformatics Solutions Inc (PEAKS / PEAKS AB): bioinformatics-solutions
+  Bioinformatics Solutions Inc (PEAKS AB): bioinformatics-solutions
+  Bioinformatics Solutions Inc (PEAKS AB, DeepNovo-derived DL): bioinformatics-solutions
+  Bioinformatics Solutions Inc (PEAKS deep-learning de novo): bioinformatics-solutions
   BlackBerry QNX (Neutrino): blackberry-qnx
   Blackford Analysis: blackford-analysis
   Blackford Analysis (Bayer): blackford-analysis
@@ -152,6 +185,11 @@ map:
   Brainlab (Buzz): brainlab
   Brainlab (Elements Cranial SRS / Multiple Brain Mets SRS): brainlab
   Brainlab Digital O.R.: brainlab
+  Brainomix: brainomix
+  Brainomix (e-CTP / e-Stroke): brainomix
+  Brainomix (e-Stroke): brainomix
+  Brevetti CEA: brevetti-cea
+  Brevetti CEA (K32S): brevetti-cea
   Bruker (CosMx SMI / AtoMx): bruker
   Bruker (MetaboScape lipidomics): bruker
   Bruker (MetaboScape): bruker
@@ -204,6 +242,9 @@ map:
   Circle Cardiovascular Imaging (cvi42 / cvi42 Plaque on-prem): circle-cvi
   Circle Cardiovascular Imaging (cvi42 AI modules): circle-cvi
   Circle Cardiovascular Imaging (cvi42): circle-cvi
+  ClarisHealth: clarishealth
+  ClarisHealth (Pareo Fraud Detection): clarishealth
+  ClarisHealth (Pareo): clarishealth
   Claroty (Medigate): claroty
   Claroty (Medigate/xDome): claroty
   Claroty (xDome Secure): claroty
@@ -228,7 +269,11 @@ map:
   Cognizant TriZetto Facets: cognizant-trizetto
   Cognizant TriZetto QNXT: cognizant-trizetto
   Cognosos: cognosos
+  Cohere Health: cohere-health
   CompuGroup Medical (CGM LABDAQ / SCHUYLAB): compugroup
+  ConcertAI: concertai
+  ConcertAI (Patient360): concertai
+  ConcertAI / TeraRecon: concertai
   Congenica: congenica
   Connexall: connexall
   Connexall (GlobeStar Systems): connexall
@@ -257,6 +302,13 @@ map:
   Databricks (Mosaic AI Training / MosaicML LLM Foundry): databricks
   Databricks (Mosaic AI training): databricks
   Databricks (Mosaic AI): databricks
+  Datavant: datavant
+  Datavant (Apixio): datavant
+  Datavant (Ciox Health): datavant
+  Datavant (Ciox): datavant
+  Datavant (formerly Apixio): datavant
+  Datavant (formerly Ciox Health): datavant
+  Datavant (on-site token agent): datavant
   DeepHealth / RadNet (DeepHealth OS): deephealth
   DeepScribe: deepscribe
   Dotmatics: dotmatics
@@ -265,6 +317,9 @@ map:
   EQ2 (HEMS): eq2
   EXTEDO EXTEDOpulse: extedo
   EXTEDO eCTDmanager: extedo
+  Edifecs: edifecs
+  Edifecs (Cotiviti): edifecs
+  Edifecs (Health Fidelity): edifecs
   Elekta (Elekta ONE / Unity MR-Linac): elekta
   Elekta (Monaco HD): elekta
   Elekta (Monaco mCycle a-priori MCO): elekta
@@ -272,6 +327,10 @@ map:
   Elekta (Unity MR-Linac / ONTARGET): elekta
   Ellab: ellab
   Ellab (EMSuite): ellab
+  Elsevier (ClinicalKey AI): elsevier
+  Elsevier (ClinicalKey): elsevier
+  Elsevier (Embase): elsevier
+  Elsevier Reaxys Predictive Retrosynthesis: elsevier
   Emerson: emerson
   Emerson (DeltaV Batch / redundant Batch Executive): emerson
   Emerson (DeltaV Mimic): emerson
@@ -281,6 +340,8 @@ map:
   Emerson (DeltaV Virtual Studio for Hyperconverged Infrastructure): emerson
   Emerson (DeltaV): emerson
   Emerson (Syncade / DeltaV MES): emerson
+  Enable Medicine: enable-medicine
+  Enable Medicine (Enable Cloud Platform): enable-medicine
   Ennov: ennov
   Ennov (PV-Works): ennov
   Epic: epic-care-everywhere-epic-nexus
@@ -323,6 +384,8 @@ map:
   FIS (Prophet): fis-prophet
   Fabric Genomics: fabric-genomics
   Fabric Genomics (GeneDx): fabric-genomics
+  Ferrum Health: ferrum-health
+  Ferrum Health (Private AI Hub / AI Governance Suite): ferrum-health
   FinThrive: finthrive
   FinThrive (Claims Manager): finthrive
   FinThrive (Contract Manager): finthrive
@@ -389,6 +452,11 @@ map:
   Gatan / Ametek (Latitude, K3/K2 detector support-PC): gatan
   Gatan / Ametek (detector-side recon / denoising): gatan
   Gatan/AMETEK (Latitude): gatan
+  Getinge: getinge
+  Getinge (T-DOC): getinge
+  Getinge (Tegris): getinge
+  Getinge Tegris: getinge
+  Getinge/Applikon: getinge
   Golden Helix (VarSeq): golden-helix
   Golden Helix VSClinical: golden-helix
   Google (DeepVariant): google
@@ -413,9 +481,13 @@ map:
   HealthEdge (HealthRules Payer): healthedge
   HealthEdge (Provider Data Management): healthedge
   HealthEdge (Source): healthedge
+  HealthVerity: healthverity
   HeartFlow (FFR-CT — operator/cloud): heartflow
   HeartFlow (FFRct Analysis): heartflow
   HeartFlow (Plaque Analysis): heartflow
+  Hicuity Health: hicuity-health
+  Hicuity Health (formerly Advanced ICU Care): hicuity-health
+  HighByte (Intelligence Hub): highbyte
   Hippocratic AI: hippocratic-ai
   Hippocratic AI (Polaris): hippocratic-ai
   Hippocratic AI (builds Polaris constellation): hippocratic-ai
@@ -473,6 +545,7 @@ map:
   Illumina Connected Analytics: illumina
   Illumina DRAGEN: illumina
   Illumina Emedgene: illumina
+  Incepto Medical: incepto-medical
   Indica Labs: indica-labs
   Indica Labs (HALO / HALO AI): indica-labs
   Indica Labs (HALO AI custom nuclei/membrane segmentation networks, train-by-example): indica-labs
@@ -481,10 +554,13 @@ map:
   Indica Labs (HALO Link / HALO AP, on-prem + AWS-managed): indica-labs
   Indica Labs (HALO): indica-labs
   Indica Labs (HALO, Highplex FL): indica-labs
+  Infinitus Systems: infinitus-systems
   Infor: infor
   Infor (CloudSuite Healthcare / Lawson): infor
   Infor (Lawson / CloudSuite private): infor
   Innovaccer: innovaccer
+  Inovalon: inovalon
+  Inovalon (Converged Quality): inovalon
   Insilico Medicine (Chemistry42): insilico-medicine
   Insilico Medicine (Robotics Lab): insilico-medicine
   Insitro: insitro
@@ -525,6 +601,9 @@ map:
   Karl Storz OR1: karl-storz
   Keyence: keyence
   Komodo Health: komodo-health
+  Konica Minolta (Exa PACS): konica-minolta
+  Konica Minolta (Exa PACS/RIS): konica-minolta
+  Konica Minolta (Exa): konica-minolta
   Kyruus Health: kyruus-health
   Körber (One WMS / HighJump): koerber
   Körber (Seidenader): koerber
@@ -548,6 +627,9 @@ map:
   Leica Biosystems (Aperio FL): leica-biosystems
   Leica Biosystems (Aperio GT 450 DX): leica-biosystems
   Leica Biosystems (Aperio eSlide Manager): leica-biosystems
+  Lifebit: lifebit
+  Lifebit (Federated TRE / CloudOS): lifebit
+  Lifebit (Federated): lifebit
   Lightbeam Health: lightbeam-health
   LigoLab: ligolab
   LookDeep Health: lookdeep-health
@@ -555,18 +637,41 @@ map:
   Lunit (INSIGHT MMG): lunit
   Lunit (SCOPE): lunit
   Lunit (Scorecard, vendor-neutral density validated with Tyrer-Cuzick v8): lunit
+  MEDHOST: medhost
   MEDITECH (Expanse Critical Care): meditech
   MEDITECH (Expanse): meditech
   MEDITECH (Expanse-as-a-Service): meditech
   MEDITECH (MHealth / Patient and Consumer Health Portal): meditech
   MEDITECH Expanse Oncology: meditech-expanse-laboratory
   MEDITECH LIS: meditech-expanse-laboratory
+  MRO: mro
+  Mach7 Technologies: mach7-technologies
+  Mach7 Technologies (eUnity clinical mode): mach7-technologies
+  Mach7 Technologies (eUnity): mach7-technologies
+  Mach7 Technologies eUnity: mach7-technologies
+  Mach7 Technologies — eUnity FDA-cleared zero-footprint diagnostic viewer: mach7-technologies
+  Mach7 Technologies — routing engine/universal worklist: mach7-technologies
   Manhattan Associates: manhattan-associates
+  Masimo: masimo
+  Masimo (Hospital Automation / MDI): masimo
+  Masimo (Patient SafetyNet / SafetyNet): masimo
+  Masimo (Patient SafetyNet): masimo
+  Masimo (Radius PPG / Root): masimo
+  Masimo (Radius VSM / Radius PPG): masimo
+  Masimo (Radius-7 / Root / Iris): masimo
+  Masimo (SafetyNet): masimo
   MasterControl: mastercontrol
   MasterControl (Mx): mastercontrol
   MasterControl (Quality Excellence): mastercontrol
   MasterControl (Validation Excellence): mastercontrol
   MasterControl (eDHR): mastercontrol
+  Materialise (3-matic / mass customization): materialise
+  Materialise (Mimics / Mimics Enterprise): materialise
+  Materialise (Mimics / Mimics Medical / Mimics inPrint): materialise
+  Materialise (Mimics / Mimics Medical): materialise
+  Materialise (Mimics / inPrint): materialise
+  Materialise (Mimics Enlight CMF / ProPlan CMF): materialise
+  Materialise (Mimics): materialise
   McKesson RelayHealth / CoverMyMeds: mckesson
   MediMizer: medimizer
   Medical Informatics Corp (Sickbay TSDE / digital twin): medical-informatics-corp
@@ -589,6 +694,9 @@ map:
   Medtronic (Vital Sync): medtronic
   Medtronic - BioIntelliSense (BioButton): medtronic
   Medtronic Touch Surgery Enterprise: medtronic
+  Mennen Medical: mennen-medical
+  Mennen Medical (Horizon XVu): mennen-medical
+  Mennen Medical (Horizon): mennen-medical
   Merative (IBM): merative
   Merative (Merge / Client Outlook): merative
   Merative (Merge CADstream, legacy): merative
@@ -616,6 +724,9 @@ map:
   Moody's Analytics (Market-Consistent ESG): moodys-analytics
   Moody's Analytics (Scenario Generator / Barrie & Hibbert): moodys-analytics
   Moody's Analytics (Scenario Generator): moodys-analytics
+  Movilitas: movilitas
+  Movilitas (Movilitas.Cloud Reports & Analysis, integrated with EMVO EAMS): movilitas
+  Movilitas (Movilitas.Cloud, now Engineering Group): movilitas
   NVIDIA: nvidia
   NVIDIA (ALCHEMI / BioNeMo): nvidia
   NVIDIA (BioNeMo / DiffDock hosting): nvidia
@@ -669,7 +780,20 @@ map:
   Netsmart (myEvolv): netsmart
   NextGen Healthcare: nextgen-healthcare
   Nextech: nextech
+  Nihon Kohden: nihon-kohden
+  Nihon Kohden (CNS central monitor): nihon-kohden
+  Nihon Kohden (CNS-6201 central station): nihon-kohden
+  Nihon Kohden (epilepsy monitoring): nihon-kohden
+  Nihon Kohden (neurology enterprise / DataStation): nihon-kohden
   Notable: notable
+  Novarad: novarad
+  Nuance / Microsoft (Dragon Medical, PowerScribe): nuance
+  Nuance / Microsoft (Precision Imaging Network — Azure-hosted cloud counterpart): nuance
+  Nuance / Microsoft (Precision Imaging Network): nuance
+  Nuance PowerScribe Follow-up Manager: nuance
+  Nuance PowerScribe One (Microsoft): nuance
+  Nuance PowerShare (Microsoft): nuance
+  Nuance/Microsoft (PowerConnect Workflow Orchestration): nuance
   Nuvolo: nuvolo
   Nuvolo (Connected Workplace): nuvolo
   OPTEL Group: optel-group
@@ -695,6 +819,10 @@ map:
   OpenClinica: openclinica
   OpenClinica Community Edition: openclinica
   OpenEvidence: openevidence
+  OpenText: opentext
+  OpenText (EMR-Link): opentext
+  OpenText (InfoArchive): opentext
+  OpenText Documentum: opentext
   Optum: optum
   Optum (Change Healthcare): optum
   Optum (Claims Edit System / CES): optum
@@ -751,8 +879,26 @@ map:
   Owkin: owkin
   Owkin (Substra / Owkin Connect): owkin
   Owkin (Substra): owkin
+  Oxford Nanopore (CPU wf-human-variation / Sniffles2 runs): oxford-nanopore
+  Oxford Nanopore (Dorado / Remora / modkit): oxford-nanopore
+  Oxford Nanopore (EPI2ME wf-human-variation, dorado GPU): oxford-nanopore
+  Oxford Nanopore (MinKNOW / Dorado): oxford-nanopore
+  Oxford Nanopore (Sniffles2 via EPI2ME wf-human-variation): oxford-nanopore
+  Oxford Nanopore (straglr / STRdust): oxford-nanopore
+  Oxford Nanopore Technologies: oxford-nanopore
+  Oxford Nanopore Technologies (EPI2ME / Dorado + Clair3): oxford-nanopore
+  Oxford Nanopore Technologies (EPI2ME / adaptive sampling): oxford-nanopore
+  Oxford Nanopore Technologies (EPI2ME/Dorado): oxford-nanopore
   PLEXIS Healthcare Systems: plexis-healthcare-systems
   PLEXIS Healthcare Systems (Quantum Choice / Passport): plexis-healthcare-systems
+  PacBio: pacbio
+  PacBio (Revio / SMRT Link): pacbio
+  PacBio (SMRT Link + DeepVariant/pbmm2): pacbio
+  PacBio (SMRT Link): pacbio
+  PacBio (TRGT + PureTarget Repeat Expansion Panel): pacbio
+  PacBio (pb-CpG-tools / Jasmine 5mC): pacbio
+  PacBio (pbsv / sawfish / Sawfish2): pacbio
+  PacBio (pbsv, SMRT Tools): pacbio
   Paige: paige-ai
   Paige (FullFocus / Paige Platform): paige-ai
   Paige (Paige Prostate Detect): paige-ai
@@ -816,12 +962,21 @@ map:
   Philips TraceMasterVue / IntelliSpace ECG: philips
   Phoenix Data Systems (AIMS): phoenix-data-systems
   Phreesia: phreesia
+  Pie Medical Imaging (3mensio Structural Heart): pie-medical-imaging
+  Pie Medical Imaging (CAAS vFFR): pie-medical-imaging
+  Pie Medical Imaging (CAAS): pie-medical-imaging
+  Pie Medical Imaging / Esaote (3mensio Structural Heart): pie-medical-imaging
   Plexis Healthcare Systems: plexis-healthcare-systems
   Premier: premier
   Premier TheraDoc: premier
+  Prenosis: prenosis
+  Prenosis (ImmunoScore): prenosis
+  Prenosis (Sepsis ImmunoScore): prenosis
+  Prenosis (Sepsis ImmunoScore, FDA De Novo DEN230036): prenosis
   Proscia (Concentriq AP-Dx): proscia
   Proscia (Concentriq ingest): proscia
   Proscia (Concentriq): proscia
+  Proximie: proximie
   QGenda: qgenda
   QIAGEN (CLC Microbial Genomics): qiagen
   QIAGEN (QCI / HGMD): qiagen
@@ -832,6 +987,11 @@ map:
   Qventus: qventus
   Qventus (Perioperative): qventus
   R1 RCM (Cloudmed): r1-rcm
+  RamSoft: ramsoft
+  RamSoft (OmegaAI): ramsoft
+  RamSoft (PowerServer): ramsoft
+  RamSoft (teleradiology platform): ramsoft
+  RamSoft — PowerServer/OmegaAI: ramsoft
   RapidAI: rapidai
   RapidAI (RAPID CTP / iSchemaView): rapidai
   RapidAI (Rapid Edge Cloud on-prem/hybrid): rapidai
@@ -841,9 +1001,15 @@ map:
   Recursion Pharmaceuticals (Phenom, BioHive supercomputer): recursion-pharmaceuticals
   Redox: redox
   Relatient: relatient
+  Reveleer: reveleer
+  Reveleer (Evidence Validation Engine): reveleer
+  Reveleer (HCC Analytics & Suspecting / Clinical Intelligence): reveleer
   Rhapsody (Lyniate): rhapsody
   Rhapsody Integration Engine (Rhapsody Health): rhapsody
   Rhapsody Semantic (Symedical): rhapsody
+  Rhino Health: rhino-health
+  Rhino Health (Rhino FCP): rhino-health
+  Rhino Health (on NVIDIA FLARE): rhino-health
   Roche: roche
   Roche (cobas IT / cobas infinity POC): roche
   Roche (cobas connection modules / CCM): roche
@@ -1012,6 +1178,9 @@ map:
   Solventum (3M) 360 Encompass Professional: solventum
   Solventum (Fluency Direct / Fluency for Imaging): solventum
   Solventum / M*Modal (Fluency Align ambient, on-prem speech heritage): solventum
+  Sony (NUCLeUS / eSATURNUS): sony
+  Sony (NUCLeUS storage): sony
+  Sony (NUCLeUS): sony
   Spok: spok
   Spok (Alarm Surveillance, powered by Bernoulli): spok
   Spok (Messenger / Care Connect): spok
@@ -1029,6 +1198,10 @@ map:
   Stryker Vocera: stryker
   Stryker/Vocera: stryker
   Suki: suki
+  Surgical Information Systems: surgical-information-systems
+  Surgical Information Systems (SIS Anesthesia): surgical-information-systems
+  Surgical Information Systems (SIS Surgery): surgical-information-systems
+  Surgical Information Systems (SIS): surgical-information-systems
   Swisslog Healthcare (BoxPicker, PillPick): swisslog-healthcare
   Swisslog Healthcare (PillPick): swisslog-healthcare
   Syntegon: syntegon
@@ -1055,6 +1228,9 @@ map:
   TeraRecon (ConcertAI) — AquariusNET/iNtuition render nodes: terarecon
   TeraRecon (Intuition): terarecon
   TeraRecon (iNtuition): terarecon
+  TetraScience: tetrascience
+  TetraScience (Tetra Data Platform / Scientific Data & AI Cloud): tetrascience
+  TetraScience (industrialized integrations): tetrascience
   The SSI Group: ssi-group
   Thermo Fisher Scientific (AI-enabled culture-plate imaging): thermo-fisher-scientific
   Thermo Fisher Scientific (Amira / Avizo): thermo-fisher-scientific
@@ -1088,6 +1264,16 @@ map:
   UKG (Kronos / Pro WFM): ukg
   UKG (Kronos): ukg
   Vaisala (viewLinc): vaisala
+  Varian (Siemens Healthineers) ARIA OIS Radiation Oncology: varian
+  Varian / Siemens Healthineers (Ethos adaptive): varian
+  Varian / Siemens Healthineers (Ethos): varian
+  Varian ARIA (Siemens Healthineers): varian
+  Varian ARIA OIS Medical Oncology: varian
+  Varian Eclipse (Siemens Healthineers): varian
+  Varian Eclipse for Proton Therapy (Siemens Healthineers): varian
+  Varian/Siemens Healthineers (Eclipse HyperArc): varian
+  Varian/Siemens Healthineers (Ethos AI-driven online adaptive): varian
+  Varian/Siemens Healthineers (RapidPlan KBP): varian
   Velsera (Seven Bridges): velsera
   Veradigm: veradigm
   Veradigm (Allscripts Professional EHR): veradigm
@@ -1130,9 +1316,16 @@ map:
   WellSky (Transfusion): wellsky
   WellSky Transfusion (formerly Mediware HCLL): wellsky
   Wind River (VxWorks Cert Edition): wind-river
-  Wolters Kluwer Health Language: wolters-kluwer-health
+  Wolters Kluwer (Invistics / Sentri7): wolters-kluwer
+  Wolters Kluwer (POC Advisor / Sentri7): wolters-kluwer
+  Wolters Kluwer (POC Advisor): wolters-kluwer
+  Wolters Kluwer (Sentri7 / Invistics Flowlytics): wolters-kluwer
+  Wolters Kluwer (UpToDate Expert AI): wolters-kluwer
+  Wolters Kluwer (UpToDate, Medi-Span, Sentri7): wolters-kluwer
+  Wolters Kluwer Sentri7: wolters-kluwer
   Workday: workday
   Workday Adaptive Planning: workday
+  Xandar Kardian: xandar-kardian
   Yokogawa (BR1000 Advanced Control): yokogawa
   Yokogawa (CENTUM VP): yokogawa
   Yokogawa (Exaquantum): yokogawa
@@ -1140,12 +1333,20 @@ map:
   Yokogawa / Omega Simulation (OmegaLand, Visual Modeler): yokogawa
   ZeOmega (Jiva): zeomega
   Zebra Technologies: zebra-technologies
+  Zelis: zelis
+  Zelis (Network360): zelis
+  Zelis (Payer Compass / Visium): zelis
+  Zelis (price transparency / SmartShopper data): zelis
   Ziosoft/Qi Imaging: ziosoft
   aiforia: aiforia
+  akasa: akasa
   altera-digital-health: altera-digital-health
   athenahealth: athenahealth
   athenahealth (athenaPatient): athenahealth
+  care.ai: care-ai
+  care.ai (Stryker): care-ai
   change-healthcare: change-enterprise-imaging
+  datavant: datavant
   deep-bio: deep-bio
   deepc: deepc
   deepc (deepcOS enterprise): deepc
@@ -1161,16 +1362,32 @@ map:
   ge-healthcare: ge-healthcare
   greenway-health: greenway
   hamamatsu-photonics: hamamatsu-photonics
+  iCAD (PowerLook Density / ProFound Density): icad
+  iCAD (PowerLook Density Assessment, integrated with tomosynthesis systems): icad
+  iCAD (ProFound AI): icad
+  iCAD (VersaVue Breast MRI): icad
+  iMDsoft: imdsoft
+  iMDsoft (MVcentral): imdsoft
+  iMDsoft (MetaVision Anesthesia): imdsoft
+  iMDsoft (MetaVision ICU): imdsoft
+  iMDsoft (MetaVision Neonatal): imdsoft
+  iMDsoft (MetaVision): imdsoft
   ibex-analytics: ibex-analytics
   indica-labs: indica-labs
   insitro: insitro
   leica-biosystems: leica-biosystems
   lunit: lunit
+  medhost: medhost
   meditech: meditech
   merative: merative
   mindpeak: mindpeak
+  mro: mro
   netsmart: netsmart
   nextgen-healthcare: nextgen-healthcare
+  novarad: novarad
+  nuance: nuance
+  nuance-powerscribe: nuance
+  opentext: opentext
   optum: optum
   oracle-health: oracle-health
   owkin: owkin
@@ -1178,6 +1395,7 @@ map:
   pathai: pathai
   philips: philips
   proscia: proscia
+  ramsoft: ramsoft
   roche: roche
   scimage: scimage
   sectra: sectra

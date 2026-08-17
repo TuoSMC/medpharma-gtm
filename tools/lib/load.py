@@ -21,3 +21,13 @@ def load_yaml(path):
     if not p.exists():
         raise FileNotFoundError(f"data file not found: {p}  (relative names resolve under {DATA})")
     return yaml.safe_load(p.read_text(encoding="utf-8"))
+
+
+def all_vendors():
+    """curated vendors.yaml + the provisional (web-sourced) tier, if present.
+    The FK matchers + build resolve against BOTH; only vendors.yaml is held to the strict tier."""
+    v = list(load_yaml("vendors.yaml")["vendors"])
+    prov = DATA / "vendors_provisional.yaml"
+    if prov.exists():
+        v += list((yaml.safe_load(prov.read_text(encoding="utf-8")) or {}).get("vendors") or [])
+    return v

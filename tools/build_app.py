@@ -82,6 +82,12 @@ def main():
     taxonomy["subcategories"] = l1_subs  # only L1 ships inside index.html; L2+ -> taxonomy_tree.js
 
     vendors = load(DATA / "vendors.yaml")  # load once; reused for the dict AND the built stamp (no reload)
+    # merge the provisional (web-sourced) tier, flagged, so sub-vendor/intel FK slugs resolve in the app
+    prov_path = DATA / "vendors_provisional.yaml"
+    if prov_path.exists():
+        for pv in (load(prov_path) or {}).get("vendors", []) or []:
+            pv["provisional"] = True
+            vendors["vendors"].append(pv)
     data = {
         "taxonomy": taxonomy,
         "plays": load(DATA / "plays.yaml"),

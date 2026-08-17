@@ -1,0 +1,1179 @@
+# GENERATED provisional vendor tier (expand-vendor-registry). Web-sourced, PARTIAL — lighter
+# schema than data/vendors.yaml (no resolved listing/HQ requirement). Regenerate from
+# private/vendor-drafts-ready.yaml with tools/build_vendors_provisional.py.
+provenance: expand-registry
+vendors:
+- id: datavant
+  name: Datavant Inc.
+  categories:
+  - hie-interoperability-engine
+  - him-coding
+  - population-health-analytics
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.datavant.com/
+  sources:
+  - https://www.datavant.com/
+  - https://www.datavant.com/press-release/datavant-raises-40-million-in-series-b-financing-to-expand-open-health-data-ecosystem
+  - https://www.datavant.com/press-release/datavant-and-ciox-health-announce-merger-creating-the-largest-neutral-and-secure-health-data-ecosystem
+  headquarters: Phoenix, Arizona
+  founded: '2017'
+  market_position: Largest health data ecosystem enabling 60+ million healthcare records
+    across 80,000+ hospitals and clinics; $7 billion valuation
+  provenance: expand-registry
+- id: inovalon
+  name: Inovalon Holdings Inc.
+  categories:
+  - payer-actuarial-hpc
+  - population-health-analytics
+  - rcm-billing-claims
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.inovalon.com/
+  sources:
+  - https://www.inovalon.com/
+  - https://www.inovalon.com/our-company/
+  - https://www.inovalon.com/products/
+  headquarters: Bowie, Maryland
+  founded: '1998'
+  market_position: Cloud-based healthcare SaaS platform serving 50,000+ active customers;
+    15 of top 15 US health plans; all top 25 US provider systems
+  provenance: expand-registry
+- id: nihon-kohden
+  name: Nihon Kohden Corporation
+  categories:
+  - icu-central-monitoring
+  - medical-device-integration
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: B
+  source: https://us.nihonkohden.com/
+  sources:
+  - https://us.nihonkohden.com/
+  - https://us.nihonkohden.com/about-us/
+  - https://en.wikipedia.org/wiki/Nihon_Kohden
+  headquarters: Tokyo, Japan
+  founded: '1951'
+  market_position: Global manufacturer of medical electronic equipment; largest supplier
+    of EEG products worldwide; products used in 120+ countries
+  provenance: expand-registry
+- id: lifebit
+  name: Lifebit Biotech Ltd.
+  categories:
+  - bioinformatics-secondary
+  - clinical-data-lakehouse
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://lifebit.ai/
+  sources:
+  - https://lifebit.ai/
+  - https://lifebit.ai/lifebit-federated-biomedical-data-platform/
+  - https://tech.eu/2020/04/30/lifebit-series-a/
+  headquarters: London, United Kingdom
+  founded: '2017'
+  market_position: Federated secure healthcare data platform enabling analysis of
+    250M+ patient records across 36+ countries; trusted by 10 world's largest biobanks
+  provenance: expand-registry
+- id: rhino-health
+  name: Rhino HealthTech Inc.
+  categories:
+  - bioinformatics-secondary
+  - clinical-data-lakehouse
+  - healthcare-llm-serving
+  - imaging-ai-deployment
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.crunchbase.com/organization/rhino-health
+  sources:
+  - https://www.crunchbase.com/organization/rhino-health
+  - https://www.preqin.com/data/profile/asset/rhino-healthtech--inc-/423519
+  - https://www.linkedin.com/company/rhinohealth
+  headquarters: Boston, Massachusetts
+  founded: '2020'
+  market_position: Federated computing platform for AI/ML in healthcare; trusted by
+    60+ leading organizations including 14 of 20 Newsweek Best Smart Hospitals
+  provenance: expand-registry
+- id: pacbio
+  name: Pacific Biosciences of California Inc.
+  categories:
+  - bioinformatics-secondary
+  - ngs-lab-lims
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: B
+  source: https://www.sec.gov/Archives/edgar/data/1299130/000129913024000054/pacb-20231231.htm
+  sources:
+  - https://www.sec.gov/Archives/edgar/data/1299130/000129913024000054/pacb-20231231.htm
+  - https://en.wikipedia.org/wiki/Pacific_Biosciences
+  - https://www.cbinsights.com/company/pacific-biosciences
+  headquarters: Menlo Park, California
+  founded: '2004'
+  market_position: NASDAQ-listed (PACB) life science technology company; develops
+    HiFi long-read and short-read sequencing systems; Nature Methods method of year
+    2022
+  provenance: expand-registry
+- id: reveleer
+  name: Reveleer Inc.
+  categories:
+  - payer-actuarial-hpc
+  - payer-core-admin
+  - population-health-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.reveleer.com/company
+  sources:
+  - https://www.reveleer.com/company
+  - https://www.prnewswire.com/news-releases/reveleer-secures-65-million-in-financing-to-drive-strategic-expansion-and-enhance-product-offerings-302070750.html
+  - https://aws.amazon.com/solutions/case-studies/case-study-reveleer/
+  headquarters: Glendale, California
+  founded: '2009'
+  market_position: AI-powered value-based care platform serving 70+ health plans covering
+    66 million lives; processes 400+ million patient records annually
+  provenance: expand-registry
+- id: zelis
+  name: Zelis Healthcare
+  categories:
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.zelis.com/
+  sources:
+  - https://www.zelis.com/
+  - https://www.zelis.com/company/
+  - https://mergr.com/company/zelis-healthcare
+  headquarters: Boston, Massachusetts
+  founded: '1995'
+  market_position: Leading provider of healthcare claims cost management and payments
+    solutions serving 725+ payers nationwide
+  provenance: expand-registry
+- id: abbott
+  name: Abbott Laboratories
+  categories:
+  - lab-middleware-automation
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: oem
+  confidence: B
+  source: https://www.abbott.com/
+  sources:
+  - https://www.abbott.com/
+  - https://www.abbott.com/corpnewsroom/strategy-and-strength/inside-abbotts-largest-business-spotlight-on-medical-devices.html
+  - https://abbott.mediaroom.com/2012-07-11-Abbott-Introduces-OneLab-a-Novel-Integrated-Web-Based-Software-Platform-to-Manage-the-Vast-Amounts-of-Information-Flowing-Through-the-Lab
+  headquarters: Chicago, Illinois
+  founded: '1888'
+  market_position: Global leader in diagnostics, medical devices, pharmaceuticals,
+    and healthcare informatics with 109,000+ employees
+  provenance: expand-registry
+- id: imdsoft
+  name: iMDsoft
+  categories:
+  - ehr-emr-core
+  - icu-central-monitoring
+  - telehealth-platform
+  deployment_models:
+  - on-premises
+  partner_type: isv
+  confidence: B
+  source: https://imd-soft.com/
+  sources:
+  - https://imd-soft.com/
+  - https://imd-soft.com/company/
+  - https://www.crunchbase.com/organization/imdsoft
+  headquarters: Israel
+  founded: '1996'
+  market_position: Global leader in clinical information systems for acute and critical
+    care; MetaVision Suite implemented in 400+ hospitals worldwide
+  provenance: expand-registry
+- id: mach7-technologies
+  name: Mach7 Technologies
+  categories:
+  - clinical-data-lakehouse
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - hybrid
+  - on-premises
+  partner_type: isv
+  confidence: B
+  source: https://www.mach7t.com/mach-speed
+  sources:
+  - https://www.mach7t.com/mach-speed
+  - https://www.prnewswire.com/news-releases/mach7-technologies-announces-highly-anticipated-product-launch-of-the-eunity-diagnostic-image-viewer-using-aws-healthimaging-302387696.html
+  - https://www.prnewswire.com/news-releases/mach7-technologies-launches-new-flight-path-for-medical-imaging--from-archive-to-architecture-at-rsna-2025-302622359.html
+  headquarters: South Burlington, Vermont
+  founded: '2007'
+  market_position: Leading enterprise imaging solution provider; ASX listed (M7T);
+    pioneer of vendor-neutral archive and cloud-based image viewing
+  provenance: expand-registry
+- id: masimo
+  name: Masimo Corporation
+  categories:
+  - cdss-clinical-ai
+  - clinical-communication-collaboration
+  - icu-central-monitoring
+  - medical-device-integration
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: oem
+  confidence: B
+  source: https://www.masimo.com/
+  sources:
+  - https://www.masimo.com/
+  - https://www.masimo.com/company/about/
+  - https://www.masimo.com/company/product-portfolio/
+  headquarters: Irvine, California
+  founded: '1989'
+  market_position: 'Leader in non-invasive patient monitoring and health technology;
+    NASDAQ: MASI; 3,600+ employees; $2.09B revenue (2024); being acquired by Danaher'
+  provenance: expand-registry
+- id: ramsoft
+  name: RamSoft
+  categories:
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.ramsoft.com/
+  sources:
+  - https://www.ramsoft.com/
+  - https://www.ramsoft.com/aboutus
+  - https://www.diagnosticimaging.com/view/your-imaging-patient-systems-connected-seamlessly
+  headquarters: Toronto, Canada
+  founded: '1994'
+  market_position: Cloud-first radiology software provider; trusted by 800+ practices
+    in 30+ countries; pioneered web-based imaging platform in 2003
+  provenance: expand-registry
+- id: clarishealth
+  name: ClarisHealth
+  categories:
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.clarishealth.com/about-us/
+  sources:
+  - https://www.clarishealth.com/about-us/
+  - https://www.clarishealth.com/
+  - https://www.inc.com/profile/clarishealth
+  headquarters: Franklin, Tennessee
+  founded: '2013'
+  market_position: Payment integrity operating system for health plans serving 70M+
+    members
+  provenance: expand-registry
+- id: healthverity
+  name: HealthVerity
+  categories:
+  - hie-interoperability-engine
+  - rwd-rwe-analytics
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://healthverity.com/about-us/
+  sources:
+  - https://healthverity.com/about-us/
+  - https://healthverity.com/
+  - https://www.fiercebiotech.com/medtech/healthverity-locks-down-100m-series-d-to-grow-real-world-data-management-platform
+  headquarters: Philadelphia, Pennsylvania
+  founded: null
+  market_position: Largest healthcare data ecosystem in US with 340M+ de-identified
+    patients
+  provenance: expand-registry
+- id: hicuity-health
+  name: Hicuity Health
+  categories:
+  - cdss-clinical-ai
+  - ehr-emr-core
+  - icu-central-monitoring
+  - telehealth-platform
+  deployment_models:
+  - software-as-a-service
+  partner_type: service-provider
+  confidence: B
+  source: https://hicuityhealth.com/about/
+  sources:
+  - https://hicuityhealth.com/about/
+  - https://hicuityhealth.com/
+  - https://startupintros.com/orgs/hicuity-health
+  headquarters: null
+  founded: '2005'
+  market_position: Premier independent acute and critical care telemedicine provider
+    serving 145+ hospitals
+  provenance: expand-registry
+- id: prenosis
+  name: Prenosis
+  categories:
+  - cdss-clinical-ai
+  - ehr-emr-core
+  - icu-central-monitoring
+  - medical-device-integration
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://prenosis.com/
+  sources:
+  - https://prenosis.com/
+  - https://www.crunchbase.com/organization/prenosis
+  - https://www.forbes.com/sites/michaelmillenson/2025/05/22/high-profile-start-ups-inato-and-prenosis-show-ai-best-practice/
+  headquarters: Chicago
+  founded: null
+  market_position: First FDA-authorized AI diagnostic for sepsis diagnosis and adverse
+    outcome prediction
+  provenance: expand-registry
+- id: apheris
+  name: Apheris
+  categories:
+  - bioinformatics-secondary
+  - clinical-data-lakehouse
+  - healthcare-llm-serving
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: B
+  source: https://www.apheris.com
+  sources:
+  - https://www.apheris.com
+  - https://siliconangle.com/2025/01/02/apheris-raises-8-25m-healthcare-focused-federated-ai-platform/
+  - https://www.crunchbase.com/organization/apheris-ai
+  headquarters: Berlin, Germany
+  founded: '2019'
+  market_position: Leading federated AI platform serving major pharma companies including
+    J&J, Roche, Sanofi, AbbVie, AstraZeneca
+  provenance: expand-registry
+- id: aridhia
+  name: Aridhia
+  categories:
+  - bioinformatics-secondary
+  - clinical-data-lakehouse
+  - rwd-rwe-analytics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: B
+  source: https://www.aridhia.com/about-us/
+  sources:
+  - https://www.aridhia.com/about-us/
+  - https://www.crunchbase.com/organization/aridhia-informatics
+  headquarters: Edinburgh, UK
+  founded: '2008'
+  market_position: Operates Digital Research Environment (DRE) serving researchers
+    in 80+ countries across 20+ hubs
+  provenance: expand-registry
+- id: brainomix
+  name: Brainomix
+  categories:
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: B
+  source: https://www.brainomix.com/company/
+  sources:
+  - https://www.brainomix.com/company/
+  - https://www.brainomix.com/
+  - https://www.prnewswire.com/news-releases/brainomix-completes-14m-18m-series-c-round-to-advance-its-transformative-ai-imaging-technology-in-healthcare-302406210.html
+  headquarters: Oxford, UK
+  founded: '2012'
+  market_position: Global pioneer in AI medical imaging with 350+ hospital deployments
+    worldwide
+  provenance: expand-registry
+- id: brevetti-cea
+  name: Brevetti CEA
+  categories:
+  - automated-visual-inspection
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: B
+  source: https://www.brevetti-cea.com/company/about-us
+  sources:
+  - https://www.brevetti-cea.com/company/about-us
+  - https://www.brevetti-cea.com/
+  - https://www.crunchbase.com/organization/brevetti-cea
+  headquarters: Sovizzo, Vicenza, Italy
+  founded: null
+  market_position: Internationally recognized inspection specialist with 2,700+ machines
+    installed globally serving pharmaceutical industry since late 1950s
+  provenance: expand-registry
+- id: cohere-health
+  name: Cohere Health
+  categories:
+  - payer-um-fraud-analytics
+  - rcm-billing-claims
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: B
+  source: https://www.coherehealth.com/
+  sources:
+  - https://www.coherehealth.com/
+  - https://www.crunchbase.com/organization/cohere-health
+  - https://startupintros.com/orgs/cohere-health
+  headquarters: Boston, Massachusetts
+  founded: '2019'
+  market_position: Recognized on TIME World's Top HealthTech Companies 2025; provides
+    clinical intelligence platform for health plan operations
+  provenance: expand-registry
+- id: getinge
+  name: Getinge
+  categories:
+  - hospital-erp
+  - or-surgical-video
+  - pat-process-twin
+  - rtls-asset-tracking
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: B
+  source: https://www.getinge.com/us/
+  sources:
+  - https://www.getinge.com/us/
+  - https://en.wikipedia.org/wiki/Getinge_Group
+  - https://www.globaldata.com/company-profile/getinge-ab/
+  headquarters: Gothenburg, Sweden
+  founded: '1904'
+  market_position: Top 100 global medical device company with ~12,000 employees and
+    SEK 34.7B revenue (2024); trusted by surgeons and scientists worldwide
+  provenance: expand-registry
+- id: highbyte
+  name: HighByte
+  categories:
+  - plant-historian
+  deployment_models:
+  - edge
+  - public-cloud
+  partner_type: isv
+  confidence: B
+  source: https://www.highbyte.com
+  sources:
+  - https://www.highbyte.com
+  - https://www.siemens.com/en-us/products/highbyte-intelligence-hub/
+  - https://www.koerber-pharma.com/en/about-us/press/koerber-and-highbyte-partner-to-accelerate-the-digital-transformation-of-manufacturing-in-life-sciences
+  headquarters: Portland, Maine
+  founded: '2018'
+  market_position: Industrial DataOps platform provider serving pharma manufacturers,
+    CDMOs, and life sciences
+  provenance: expand-registry
+- id: icad
+  name: iCAD
+  categories:
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  confidence: B
+  source: https://www.icadmed.com
+  sources:
+  - https://www.icadmed.com
+  - https://www.globenewswire.com/news-release/2025/03/05/3037700/0/en/iCAD-and-RamSoft-Announce-Partnership-to-Deliver-ProFound-AI-Powered-Mammography-Solutions-Across-North-America.html
+  headquarters: Nashua, New Hampshire
+  founded: null
+  market_position: AI-powered breast cancer detection and density assessment solutions;
+    acquired by RadNet (DeepHealth) in 2025
+  provenance: expand-registry
+- id: oxford-nanopore
+  name: Oxford Nanopore Technologies
+  categories:
+  - bioinformatics-secondary
+  - ngs-lab-lims
+  deployment_models:
+  - on-premises
+  - vendor-managed
+  partner_type: isv
+  confidence: B
+  source: https://nanoporetech.com
+  sources:
+  - https://nanoporetech.com
+  - https://nanoporetech.com/about/history
+  - https://nanoporetech.com/biopharma
+  headquarters: Oxford, United Kingdom
+  founded: '2005'
+  market_position: Leader in nanopore sequencing technology for biopharma R&D, biomarker
+    discovery, and cell/gene therapy
+  provenance: expand-registry
+- id: pie-medical-imaging
+  name: Pie Medical Imaging
+  categories:
+  - advanced-visualization-3d
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: B
+  source: https://www.piemedicalimaging.com
+  sources:
+  - https://www.piemedicalimaging.com
+  - https://www.prnewswire.com/news-releases/pie-medical-imaging-announces-the-global-release-of-its-latest-echocardiography-software-technology-caas-qardia-2-0--301721219.html
+  headquarters: Maastricht, Netherlands
+  founded: '1995'
+  market_position: Market leader in quantitative cardiovascular imaging analysis software
+    (CAAS platform)
+  provenance: expand-registry
+- id: surgical-information-systems
+  name: Surgical Information Systems
+  categories:
+  - ehr-emr-core
+  - or-surgical-video
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.sisfirst.com
+  sources:
+  - https://www.sisfirst.com
+  - https://www.sisfirst.com/about-sis
+  - https://www.zoominfo.com/c/surgical-information-systems-llc/37143214
+  headquarters: Alpharetta, Georgia
+  founded: '1996'
+  market_position: '#1 ASC software by KLAS; 11x Black Book winner; serves 2,700+
+    facilities, 55,000+ physicians'
+  provenance: expand-registry
+- id: tetrascience
+  name: TetraScience
+  categories:
+  - qc-lims-cds
+  - rd-lab-informatics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: B
+  source: https://www.tetrascience.com
+  sources:
+  - https://www.tetrascience.com
+  - https://www.tetrascience.com/news/tetrascience-launches-first-life-sciences-r-d-data-cloud-with-bidirectional-integration-2
+  headquarters: Boston, Massachusetts
+  founded: '2014'
+  market_position: Scientific Data Cloud provider for biopharma R&D; integrates lab
+    instruments and informatics software
+  provenance: expand-registry
+- id: xandar-kardian
+  name: Xandar Kardian
+  categories:
+  - samd-embedded-oem-platform
+  - smart-room-ambient-ai
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: B
+  source: https://website.kardian.com/about/
+  sources:
+  - https://website.kardian.com/about/
+  - https://innotechtoday.com/xandar-kardians-health-monitoring-radar-technology-earns-fda-clearance/
+  headquarters: Toronto, Canada
+  founded: '2016'
+  market_position: First and only FDA 510(k) Class II cleared radar-based vital signs
+    monitoring device
+  provenance: expand-registry
+- id: medhost
+  name: MEDHOST
+  categories:
+  - ehr-emr-core
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: B
+  source: https://www.medhost.com/about-us/
+  sources:
+  - https://www.medhost.com/about-us/
+  - https://www.healthcareittoday.com/2024/01/17/constellation-softwares-harris-operating-group-acquires-medhost-inc/
+  - https://www.gartner.com/reviews/market/healthcare-and-life-sciences/vendor/medhost
+  headquarters: Franklin, Tennessee
+  founded: '1984'
+  market_position: Leading EHR and clinical/financial solutions provider for community
+    and rural hospitals, acquired by Constellation Software's Harris in 2024
+  provenance: expand-registry
+- id: mro
+  name: MRO
+  categories:
+  - him-coding
+  - population-health-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: service-provider
+  confidence: B
+  source: https://mrocorp.com/about-us/
+  sources:
+  - https://mrocorp.com/about-us/
+  - https://mrocorp.com/
+  - https://www.zoominfo.com/c/mro-corp/344409632
+  headquarters: Norristown, Pennsylvania
+  founded: '2002'
+  market_position: Clinical data solutions provider serving 170,000+ providers; expanded
+    through acquisitions of Q-Centrix and Clinetic in 2025
+  provenance: expand-registry
+- id: bioinformatics-solutions
+  name: Bioinformatics Solutions Inc.
+  categories:
+  - ms-proteomics-metabolomics
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.bioinfor.com/
+  sources:
+  - https://www.bioinfor.com/
+  - https://www.bioinfor.com/about-us/
+  - https://www.bioinfor.com/peaks-studio/
+  headquarters: Waterloo, Ontario, Canada
+  founded: '2000'
+  market_position: AI-driven biotechnology company specializing in proteomics research
+    software; PEAKS software for LC-MS/MS used by pharma and biotech researchers
+  provenance: expand-registry
+- id: edifecs
+  name: Edifecs
+  categories:
+  - payer-actuarial-hpc
+  - payer-core-admin
+  - payer-um-fraud-analytics
+  - population-health-analytics
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.geekwire.com/2021/health-software-company-edifecs-continues-acquisition-run-swoops-up-health-fidelity/
+  sources:
+  - https://www.geekwire.com/2021/health-software-company-edifecs-continues-acquisition-run-swoops-up-health-fidelity/
+  - https://www.cotiviti.com/press-release/cotiviti-completes-acquisition-of-edifecs
+  - https://www.linkedin.com/company/edifecs
+  headquarters: Bellevue, Washington, USA
+  founded: '1996'
+  market_position: Leader in healthcare data interoperability; serves 350+ healthcare
+    companies managing coverage for 200M+ people; acquired by Cotiviti March 2025
+  provenance: expand-registry
+- id: ferrum-health
+  name: Ferrum Health
+  categories:
+  - cdss-clinical-ai
+  - imaging-ai-deployment
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.crunchbase.com/organization/ferrum-health
+  sources:
+  - https://www.crunchbase.com/organization/ferrum-health
+  - https://www.linkedin.com/company/ferrumhealth
+  - https://www.zoominfo.com/c/ferrum-health/506751782
+  headquarters: Sunnyvale, California, USA
+  founded: '2017'
+  market_position: AI-driven patient safety platform for health systems; $31M in funding;
+    collaborates with DeepLook Medical, Hoppr, and Avicenna AI
+  provenance: expand-registry
+- id: materialise
+  name: Materialise
+  categories:
+  - advanced-visualization-3d
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  - vendor-managed
+  partner_type: oem
+  confidence: C
+  source: https://www.materialise.com/en/healthcare
+  sources:
+  - https://www.materialise.com/en/healthcare
+  - https://en.wikipedia.org/wiki/Materialise_NV
+  - https://www.linkedin.com/company/materialise
+  headquarters: Leuven, Belgium
+  founded: '1990'
+  market_position: Leader in personalized medical 3D printing; FDA-cleared inPrint
+    software for surgical planning; Plymouth MI facility for titanium CMF implants
+  provenance: expand-registry
+- id: 3d-systems
+  name: 3D Systems
+  categories:
+  - advanced-visualization-3d
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  - vendor-managed
+  partner_type: oem
+  confidence: C
+  source: https://www.3dsystems.com/healthcare
+  sources:
+  - https://www.3dsystems.com/healthcare
+  - https://en.wikipedia.org/wiki/3D_Systems
+  - https://www.linkedin.com/showcase/3d-systems-healthcare
+  headquarters: Rock Hill, South Carolina, USA
+  founded: '1986'
+  market_position: Pioneer of SLA 3D printing; manufactured 2M+ medical implants;
+    supports 100+ CE-marked and FDA-cleared devices; 200K+ patient-specific cases
+  provenance: expand-registry
+- id: ambient-clinical-analytics
+  name: Ambient Clinical Analytics
+  categories:
+  - cdss-clinical-ai
+  - ehr-emr-core
+  - icu-central-monitoring
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://ambientclinical.com/
+  sources:
+  - https://ambientclinical.com/
+  - https://www.linkedin.com/company/ambient-clinical-analytics
+  - https://www.prweb.com/releases/ambient-clinical-analytics-secures-5m-strategic-investment--appoints-brian-tufts-as-ceo-to-accelerate-growth-of-clinical-analytics-decision-support--workflow-tools-302728317.html
+  headquarters: Rochester, Minnesota, USA
+  founded: null
+  market_position: FDA Class II cleared clinical analytics platform; $5M funding round
+    March 2026; leverages 1000+ Mayo Clinic algorithms for sepsis detection and clinical
+    workflow automation
+  provenance: expand-registry
+- id: biointellisense
+  name: BioIntelliSense
+  categories:
+  - cdss-clinical-ai
+  - icu-central-monitoring
+  - medical-device-integration
+  - patient-portal-engagement
+  - telehealth-platform
+  deployment_models:
+  - on-premises
+  - software-as-a-service
+  partner_type: oem
+  confidence: C
+  source: https://www.businesswire.com/news/home/20241125891507/en/BioIntelliSense-Announces-Observational-Study-in-Journal-of-Clinical-Medicine-Demonstrating-Early-Detection-of-Patient-Deterioration-with-FDA-cleared-BioButton-Continuous-Monitoring-Wearable-Device
+  sources:
+  - https://www.businesswire.com/news/home/20241125891507/en/BioIntelliSense-Announces-Observational-Study-in-Journal-of-Clinical-Medicine-Demonstrating-Early-Detection-of-Patient-Deterioration-with-FDA-cleared-BioButton-Continuous-Monitoring-Wearable-Device
+  - https://www.biointellisense.com/biointellisense-announces-fda-clearance-of-the-biobutton-multi-patientwearable-and-biodashboard-system-for-continuous-patient-monitoring/
+  - https://news.medtronic.com/Patient-Monitoring-business-at-Medtronic-partners-with-BioIntelliSense-for-exclusive-U-S-hospital-and-hospital-to-home-distribution-rights-of-the-BioButton-multi-parameter-wearable
+  headquarters: null
+  founded: null
+  market_position: Medical-grade continuous health monitoring and remote patient monitoring
+    platform
+  provenance: expand-registry
+- id: concertai
+  name: ConcertAI
+  categories:
+  - pacs-vna
+  - rwd-rwe-analytics
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.concertai.com/
+  sources:
+  - https://www.concertai.com/
+  - https://www.crunchbase.com/organization/concertai
+  - https://www.concertai.com/precision-suite
+  headquarters: Cambridge, Massachusetts
+  founded: null
+  market_position: Predictive and generative AI leader for healthcare and life sciences
+    research
+  provenance: expand-registry
+- id: novarad
+  name: Novarad
+  categories:
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.novarad.net/
+  sources:
+  - https://www.novarad.net/
+  - https://www.novarad.net/about
+  - https://www.itnonline.com/company/novarad
+  headquarters: Provo, Utah
+  founded: '1988'
+  market_position: 30+ year provider of digital medical imaging solutions with 1000+
+    global deployments
+  provenance: expand-registry
+- id: varian
+  name: Varian
+  categories:
+  - radiation-oncology-tps-ois
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: C
+  source: https://cancercare.siemens-healthineers.com/
+  sources:
+  - https://cancercare.siemens-healthineers.com/
+  - https://www.varian.com/about-varian/newsroom/press-releases/more-impact-together-varian-and-siemens-healthineers
+  headquarters: null
+  founded: null
+  market_position: Leading provider of radiation therapy equipment and cancer care
+    software (ARIA OIS) as Siemens Healthineers subsidiary
+  provenance: expand-registry
+- id: wolters-kluwer
+  name: Wolters Kluwer
+  categories:
+  - cdss-clinical-ai
+  - healthcare-llm-serving
+  - icu-central-monitoring
+  - medical-device-integration
+  - pharmacy-automation
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.wolterskluwer.com/en/solutions/sentri7-clinical-surveillance
+  sources:
+  - https://www.wolterskluwer.com/en/solutions/sentri7-clinical-surveillance
+  - https://finance.yahoo.com/news/wolters-kluwer-acquires-u-ai-160700186.html
+  headquarters: null
+  founded: null
+  market_position: Major healthcare IT vendor providing Sentri7 clinical surveillance
+    and AI-enabled drug diversion detection software
+  provenance: expand-registry
+- id: allelica
+  name: Allelica
+  categories:
+  - bioinformatics-secondary
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.crunchbase.com/organization/allelica
+  sources:
+  - https://www.crunchbase.com/organization/allelica
+  - https://tracxn.com/d/companies/allelica/
+  headquarters: New York
+  founded: '2017'
+  market_position: First company with SaaS and on-premise infrastructure for multi-ancestry
+    polygenic risk score analysis in clinical labs
+  provenance: expand-registry
+- id: apella
+  name: Apella
+  categories:
+  - ehr-emr-core
+  - or-surgical-video
+  - pacs-vna
+  - rtls-asset-tracking
+  deployment_models:
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://apella.io/
+  sources:
+  - https://apella.io/
+  - https://www.medicalandpharmainsider.com/post/apella-raises-21million-for-ai-technology-to-revolutionize-the-operating-room
+  headquarters: Oakland, CA
+  founded: '2020'
+  market_position: Operating room intelligence platform using ambient AI and computer
+    vision for surgical optimization
+  provenance: expand-registry
+- id: assort-health
+  name: Assort Health
+  categories:
+  - healthcare-llm-serving
+  - patient-access-scheduling
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.assorthealth.com
+  sources:
+  - https://www.assorthealth.com
+  - https://www.prnewswire.com/news-releases/assort-health-secures-102-million-to-scale-nations-first-agentic-ai-platform-that-solves-longstanding-frustrations-tied-to-patient-access-and-experience-302570046.html
+  headquarters: San Francisco, California
+  founded: '2023'
+  market_position: Described as nation's first agentic AI platform for patient access
+    and experience
+  provenance: expand-registry
+- id: care-ai
+  name: care.ai
+  categories:
+  - icu-central-monitoring
+  - smart-room-ambient-ai
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.care.ai/
+  sources:
+  - https://www.care.ai/
+  - https://www.prnewswire.com/news-releases/careai-builds-advanced-solutions-for-nurses-with-google-clouds-generative-ai-and-data-analytics-on-its-smart-care-facility-platform-301950221.html
+  - https://www.stryker.com/us/en/smart-care.html
+  headquarters: null
+  founded: null
+  market_position: Smart Care Facility Platform deployed across 1,500+ healthcare
+    settings; now part of Stryker SmartHospital
+  provenance: expand-registry
+- id: mennen-medical
+  name: Mennen Medical
+  categories:
+  - pacs-vna
+  - ris-cvis-workflow
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: C
+  source: https://www.mennenmedical.com/about/
+  sources:
+  - https://www.mennenmedical.com/about/
+  - https://www.bloomberg.com/profile/company/6213595Z:IT
+  headquarters: Israel
+  founded: '1963'
+  market_position: International medical device manufacturer providing cardiac catheterization
+    systems, patient monitoring, and neonatal phototherapy equipment
+  provenance: expand-registry
+- id: movilitas
+  name: Movilitas
+  categories:
+  - serialization-track-trace
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.indx.com/
+  sources:
+  - https://www.indx.com/
+  - https://www.movilitas.com/solutions/movilitas-cloud/manufacturer-for-pharma-application/
+  - https://www.prnewswire.com/in/news-releases/alter-pharma-group-adopts-movilitas-cloud-to-ensure-safer-goods-and-eu-fmd-compliance-throughout-the-product-path-and-changes-in-packaging-811850647.html
+  headquarters: null
+  founded: null
+  market_position: Pharma supply chain serialization and traceability software (Movilitas.Cloud);
+    compliance with DSCSA and EU FMD regulations
+  provenance: expand-registry
+- id: nuance
+  name: Nuance (Microsoft Healthcare)
+  categories:
+  - healthcare-llm-serving
+  - him-coding
+  - imaging-ai-deployment
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  partner_type: isv
+  confidence: C
+  source: https://www.nuance.com/healthcare/provider-solutions/speech-recognition/dragon-medical-one.html
+  sources:
+  - https://www.nuance.com/healthcare/provider-solutions/speech-recognition/dragon-medical-one.html
+  - https://marketplace.microsoft.com/en-us/product/saas/nuance_gskaff.dragon_medical_one_per_user?tab=overview
+  - https://www.microsoft.com/en-us/health-solutions
+  headquarters: null
+  founded: null
+  market_position: Clinical AI and speech recognition solutions (Dragon Medical One,
+    PowerScribe One, DAX Copilot); owned by Microsoft; used by 55% of US physicians
+    and 75% of radiologists
+  provenance: expand-registry
+- id: opentext
+  name: OpenText
+  categories:
+  - him-coding
+  - lis
+  - qc-lims-cds
+  - rd-lab-informatics
+  deployment_models:
+  - public-cloud
+  - on-premises
+  partner_type: isv
+  confidence: C
+  source: https://www.opentext.com/solutions/life-sciences-document-management
+  sources:
+  - https://www.opentext.com/solutions/life-sciences-document-management
+  - https://www.opentext.com/products/documentum-for-healthcare
+  - https://www.opentext.com/solutions/industry/healthcare
+  headquarters: null
+  founded: null
+  market_position: Enterprise document management and content solutions for life sciences/pharma
+    GxP compliance, healthcare interoperability, and clinical communication
+  provenance: expand-registry
+- id: proximie
+  name: Proximie
+  categories:
+  - or-surgical-video
+  - rtls-asset-tracking
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.proximie.com
+  sources:
+  - https://www.proximie.com
+  - https://aws.amazon.com/solutions/case-studies/proximie-case-study/
+  - https://www.cbinsights.com/company/proximie
+  headquarters: London, United Kingdom
+  founded: '2016'
+  market_position: Cloud-based surgical intelligence platform for operating room collaboration
+    and remote guidance
+  provenance: expand-registry
+- id: sony
+  name: Sony
+  categories:
+  - or-surgical-video
+  - rtls-asset-tracking
+  deployment_models:
+  - on-premises
+  partner_type: oem
+  confidence: C
+  source: https://pro.sony/en_BG/healthcare/digital-transformation-insights/e-saturnus
+  sources:
+  - https://pro.sony/en_BG/healthcare/digital-transformation-insights/e-saturnus
+  - https://www.sony.eu/presscentre/next-generation-nucleus-smart-medical-imaging-platform-hospitals
+  headquarters: Tokyo, Japan
+  founded: '1946'
+  market_position: Provides medical imaging platform (NUCLeUS) and video-over-IP solutions
+    (eSATURNUS) for hospital operating rooms
+  provenance: expand-registry
+- id: akasa
+  name: AKASA
+  categories:
+  - him-coding
+  - rcm-billing-claims
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://akasa.com/about-us/
+  sources:
+  - https://akasa.com/about-us/
+  - https://www.crunchbase.com/organization/akasahealth
+  - https://newsroom.clevelandclinic.org/2025/04/29/cleveland-clinic-and-akasa-announce-strategic-collaboration-to-launch-ai-tools-for-the-revenue-cycle/
+  headquarters: South San Francisco, California
+  founded: '2018'
+  market_position: Generative AI leader in healthcare revenue cycle automation
+  provenance: expand-registry
+- id: elsevier
+  name: Elsevier
+  categories:
+  - cdss-clinical-ai
+  - healthcare-llm-serving
+  - pv-regulatory-information
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.elsevier.com/products/clinicalkey
+  sources:
+  - https://www.elsevier.com/products/clinicalkey
+  - https://www.elsevier.com/about/press-releases/elsevier-health-launches-clinicalkey-ai-the-most-advanced-gen-ai-powered
+  headquarters: null
+  founded: null
+  market_position: Major provider of medical content and clinical decision support
+    tools
+  provenance: expand-registry
+- id: enable-medicine
+  name: Enable Medicine
+  categories:
+  - spatial-biology-omics
+  deployment_models:
+  - software-as-a-service
+  partner_type: unknown
+  confidence: C
+  source: https://www.cbinsights.com/company/enable-medicine-1
+  sources:
+  - https://www.cbinsights.com/company/enable-medicine-1
+  - https://pitchbook.com/profiles/company/442856-71
+  headquarters: Menlo Park, California
+  founded: '2019'
+  market_position: null
+  provenance: expand-registry
+- id: incepto-medical
+  name: Incepto Medical
+  categories:
+  - imaging-ai-deployment
+  - pacs-vna
+  deployment_models:
+  - public-cloud
+  - hybrid
+  partner_type: isv
+  confidence: C
+  source: https://incepto-medical.com/
+  sources:
+  - https://incepto-medical.com/
+  - https://www.crunchbase.com/organization/incepto-medical
+  - https://deephealth.com/press-releases/deephealth-and-incepto-announce-strategic-partnership-to-expand-access-to-ai-powered-medical-imaging/
+  headquarters: null
+  founded: '2018'
+  market_position: Leading AI medical imaging platform serving 300+ European clinical
+    sites
+  provenance: expand-registry
+- id: infinitus-systems
+  name: Infinitus Systems
+  categories:
+  - healthcare-llm-serving
+  - patient-access-scheduling
+  deployment_models:
+  - public-cloud
+  - software-as-a-service
+  partner_type: isv
+  confidence: C
+  source: https://www.infinitus.ai/why-infinitus/
+  sources:
+  - https://www.infinitus.ai/why-infinitus/
+  - https://www.crunchbase.com/organization/infinitus-systems
+  - https://startupintros.com/orgs/infinitus-systems
+  headquarters: San Francisco, California
+  founded: '2019'
+  market_position: Healthcare voice AI platform serving 50%+ Fortune 50 healthcare
+    companies
+  provenance: expand-registry
+- id: konica-minolta
+  name: Konica Minolta Healthcare
+  categories:
+  - pacs-vna
+  deployment_models:
+  - on-premises
+  - public-cloud
+  partner_type: oem
+  confidence: C
+  source: https://healthcare.konicaminolta.us/exa-pacsris
+  sources:
+  - https://healthcare.konicaminolta.us/exa-pacsris
+  - https://healthcare.konicaminolta.us/about-us/company-history
+  - https://www.globenewswire.com/news-release/2025/04/03/3055259/0/en/Konica-Minolta-Healthcare-Launches-the-Next-Generation-Exa-Platform-Featuring-Embedded-Advanced-Visualization-Functionality.html
+  headquarters: null
+  founded: '2003'
+  market_position: Medical imaging and healthcare IT solutions provider with 100+
+    years in medical imaging
+  provenance: expand-registry

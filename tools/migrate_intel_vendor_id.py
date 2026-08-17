@@ -23,6 +23,9 @@ VEN = REPO / "data" / "vendors.yaml"
 INT = REPO / "data" / "vendor_intel.yaml"
 UNRESOLVED = REPO / "private" / "unresolved-intel.txt"
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # tools/ for lib.load
+from lib.load import all_vendors  # resolve against curated + provisional vendor tiers
+
 
 def norm(v):
     """normalized company name — MUST match build_app.py normVendor()."""
@@ -36,7 +39,7 @@ def slug(s):
 
 
 def main():
-    vendors = yaml.safe_load(VEN.read_text(encoding="utf-8"))["vendors"]
+    vendors = all_vendors()  # curated + provisional
     intel = yaml.safe_load(INT.read_text(encoding="utf-8"))["vendors"]
 
     id_set = {v["id"] for v in vendors}

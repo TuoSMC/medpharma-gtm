@@ -25,6 +25,9 @@ DATA = REPO / "data"
 OUT = DATA / "sub_vendor_fk.yaml"
 UNRESOLVED = REPO / "private" / "unresolved-sub-vendors.txt"
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # tools/ for lib.load
+from lib.load import all_vendors  # resolve against curated + provisional vendor tiers
+
 
 def norm(v):
     v = re.split(r"[(/—]", str(v))[0].lower()
@@ -37,7 +40,7 @@ def slug(s):
 
 
 def main():
-    vendors = yaml.safe_load((DATA / "vendors.yaml").read_text(encoding="utf-8"))["vendors"]
+    vendors = all_vendors()  # curated + provisional
     subs = yaml.safe_load((DATA / "taxonomy.yaml").read_text(encoding="utf-8")).get("subcategories", [])
 
     id_set = {v["id"] for v in vendors}

@@ -72,7 +72,7 @@ vendors:
   confidence: B
   source: 3dsystems.com/healthcare (D2P, VSP pages); 3DPrint.com FDA-clearance coverage
   key: 3d systems
-  vendor_id: null
+  vendor_id: 3d-systems
   aliases: []
 - name: ABB
   isv_type: OEM
@@ -121,7 +121,7 @@ vendors:
   confidence: B
   source: corelaboratory.abbott AlinIQ AMS/BIS/Analytics pages; Abbott 2016 AlinIQ launch press release; Mercy AMS case study
   key: abbott
-  vendor_id: null
+  vendor_id: abbott
   aliases:
   - abbott starlims
 - name: Abridge
@@ -453,7 +453,7 @@ vendors:
   confidence: B
   source: akasa.com (company site, homepage + case studies), fetched 2026-08
   key: akasa
-  vendor_id: null
+  vendor_id: akasa
   aliases: []
 - name: Akoya Biosciences (a Quanterix company)
   isv_type: ISV
@@ -500,7 +500,7 @@ vendors:
   confidence: C
   source: allelica.com returned HTTP 403 (not fetchable this session); record based on general knowledge of Allelica's PRS products — treat as unverified/lower confidence.
   key: allelica
-  vendor_id: null
+  vendor_id: allelica
   aliases: []
 - name: Altair
   isv_type: ISV
@@ -621,7 +621,7 @@ vendors:
   confidence: B
   source: ambientclinical.com; CIOReview vendor profile; Healthcare IT News (Mayo Clinic bedside analytics); IntuitionLabs AWARE profile
   key: ambient clinical analytics
-  vendor_id: null
+  vendor_id: ambient-clinical-analytics
   aliases: []
 - name: Amwell (American Well)
   isv_type: ISV
@@ -745,7 +745,7 @@ vendors:
   confidence: A
   source: apella.io blog (Series A/B, deployment stats); fiercehealthcare.com; ascnews.com (Jan 2026)
   key: apella
-  vendor_id: null
+  vendor_id: apella
   aliases: []
 - name: Apheris
   isv_type: platform
@@ -776,7 +776,7 @@ vendors:
   confidence: B
   source: apheris.com (Gateway local-inference deployment; AISB network member list)
   key: apheris
-  vendor_id: null
+  vendor_id: apheris
   aliases: []
 - name: Arc Institute
   isv_type: academic
@@ -859,7 +859,7 @@ vendors:
   confidence: B
   source: 'https://www.aridhia.com/ (homepage: ''80+ countries'', Azure enterprise deployment, customer logos).'
   key: aridhia
-  vendor_id: null
+  vendor_id: aridhia
   aliases:
   - aridhia dre
 - name: ArisGlobal
@@ -1123,7 +1123,7 @@ vendors:
   confidence: B
   source: https://www.assorthealth.com/ (homepage + case-study logos).
   key: assort health
-  vendor_id: null
+  vendor_id: assort-health
   aliases: []
 - name: AssurX, Inc.
   isv_type: ISV
@@ -1544,7 +1544,7 @@ vendors:
   confidence: B
   source: bioinfor.com (about-us, peaks-software); en.wikipedia.org/wiki/PEAKS
   key: bioinformatics solutions
-  vendor_id: null
+  vendor_id: bioinformatics-solutions
   aliases: []
 - name: BioIntelliSense
   isv_type: ISV
@@ -1570,7 +1570,7 @@ vendors:
   confidence: B
   source: biointellisense.com; businesswire FDA-clearance releases (Oct 2024); HIT Consultant / Morningstar on Hicuity partnership (Feb 2025)
   key: biointellisense
-  vendor_id: null
+  vendor_id: biointellisense
   aliases: []
 - name: BlackBerry QNX
   isv_type: OEM
@@ -1697,7 +1697,7 @@ vendors:
   confidence: B
   source: brainomix.com/stroke (products, deployment, customer stats and named sites).
   key: brainomix
-  vendor_id: null
+  vendor_id: brainomix
   aliases: []
 - name: Brevetti CEA
   isv_type: OEM
@@ -1717,7 +1717,7 @@ vendors:
   confidence: A
   source: brevetti-cea.com (company, machines, products pages), brevetticea-group.com, CPHI Online profile
   key: brevetti cea
-  vendor_id: null
+  vendor_id: brevetti-cea
   aliases: []
 - name: Broad Institute
   isv_type: academic
@@ -1939,7 +1939,7 @@ vendors:
   confidence: B
   source: care.ai (installed-base figure); prnewswire.com (Google Cloud partnership); mddionline.com / Stryker (acquisition)
   key: care ai
-  vendor_id: null
+  vendor_id: care-ai
   aliases: []
 - name: Caregility
   isv_type: ISV
@@ -2163,7 +2163,7 @@ vendors:
   confidence: A
   source: clarishealth.com (Pareo product pages, About/Why ClarisHealth, blog '4 Reasons SaaS is Your Ticket to Total Payment Integrity'); Pamlico Capital portfolio page
   key: clarishealth
-  vendor_id: null
+  vendor_id: clarishealth
   aliases: []
 - name: Claroty
   isv_type: ISV
@@ -2385,7 +2385,7 @@ vendors:
   confidence: A
   source: 'coherehealth.com (homepage: 17 clients, 25M covered lives, 47M interactions, Humana & Geisinger named)'
   key: cohere health
-  vendor_id: null
+  vendor_id: cohere-health
   aliases: []
 - name: CompuGroup Medical (CGM LABDAQ / SCHUYLAB / AP EASY)
   isv_type: ISV
@@ -2433,7 +2433,7 @@ vendors:
   confidence: A
   source: concertai.com (home, Precision Trials, Precision Suite, Accelerated Clinical Trials news); Labcorp and Foundation Medicine partnership press releases
   key: concertai
-  vendor_id: null
+  vendor_id: concertai
   aliases: []
 - name: Congenica (SeqOne Genomics)
   isv_type: ISV
@@ -2724,7 +2724,7 @@ vendors:
   confidence: B
   source: datavant.com press releases (Snowflake Native App; AWS Clean Rooms cloud-first, Nov 2025); aws.amazon.com Marketplace Datavant Connect Tokenization listing; datavant.com corporate site
   key: datavant
-  vendor_id: null
+  vendor_id: datavant
   aliases: []
 - name: Dedalus
   isv_type: ISV
@@ -2979,7 +2979,7 @@ vendors:
   confidence: A
   source: edifecs.com Healthcare Interoperability Cloud page; businesswire.com 2025-02-04 press release; hitconsultant.net 2025-02-07
   key: edifecs
-  vendor_id: null
+  vendor_id: edifecs
   aliases: []
 - name: eHealth Exchange
   isv_type: service-provider
@@ -3142,7 +3142,7 @@ vendors:
   confidence: B
   source: elsevier.com Clinical Solutions content (ClinicalKey, ClinicalKey AI 2025, cloud-based Order Sets, care planning; cloud delivery stated; 1,000+ book titles content base)
   key: elsevier
-  vendor_id: null
+  vendor_id: elsevier
   aliases:
   - elsevier reaxys predictive retrosynthesis
 - name: Emerson (Emerson Electric Co.)
@@ -3223,7 +3223,7 @@ vendors:
   confidence: C
   source: enablemedicine.com
   key: enable medicine
-  vendor_id: null
+  vendor_id: enable-medicine
   aliases: []
 - name: Ennov
   isv_type: ISV
@@ -3567,7 +3567,7 @@ vendors:
   confidence: A
   source: ferrumhealth.com (ai-platform, ai-deployment-fabric, faqs); read.unicorner.news profile
   key: ferrum health
-  vendor_id: null
+  vendor_id: ferrum-health
   aliases: []
 - name: FinThrive, Inc.
   isv_type: ISV
@@ -3822,7 +3822,7 @@ vendors:
   confidence: C
   source: getinge.com/int/products (software product list); Getinge corporate
   key: getinge
-  vendor_id: null
+  vendor_id: getinge
   aliases:
   - getinge tegris
 - name: Gleamer
@@ -4125,7 +4125,7 @@ vendors:
   confidence: A
   source: healthverity.com (home, Marketplace/Data Ecosystem, About, HealthVerity for Commercial, AWS executive-conversation blog); BusinessWire $100M Series D release; Fierce Biotech
   key: healthverity
-  vendor_id: null
+  vendor_id: healthverity
   aliases: []
 - name: HeartFlow
   isv_type: ISV
@@ -4195,7 +4195,7 @@ vendors:
   confidence: A
   source: hicuityhealth.com (About, Tele-ICU / Systems pages); American Telemedicine Association rebrand announcement; AT&T Business customer story
   key: hicuity health
-  vendor_id: null
+  vendor_id: hicuity-health
   aliases: []
 - name: HighByte
   isv_type: ISV
@@ -4214,7 +4214,7 @@ vendors:
   confidence: A
   source: highbyte.com (intelligence-hub, FAQs), siemens.com HighByte Intelligence Hub page, businesswire 2025 release
   key: highbyte
-  vendor_id: null
+  vendor_id: highbyte
   aliases: []
 - name: Hippocratic AI
   isv_type: ISV
@@ -4428,7 +4428,7 @@ vendors:
   confidence: B
   source: icadmed.com (Breast Health suite, ProFound Cloud press release); GlobeNewswire; RamSoft partnership release.
   key: icad
-  vendor_id: null
+  vendor_id: icad
   aliases: []
 - name: ICON plc
   isv_type: service-provider
@@ -4529,7 +4529,7 @@ vendors:
   confidence: B
   source: imd-soft.com MetaVision ICU & customer-story pages (vendor-stated "over 400 hospitals"); AWS MetaVision Suite architecture diagram; Dedalus news release
   key: imdsoft
-  vendor_id: null
+  vendor_id: imdsoft
   aliases: []
 - name: Incepto Medical
   isv_type: platform
@@ -4559,7 +4559,7 @@ vendors:
   confidence: B
   source: incepto-medical.com (400+ medical centers, 8+ countries, hybrid deployment, TANGO/Cockpit products, named CHU/Affidea/Heidelberg customers, Siemens/Philips tech partners)
   key: incepto medical
-  vendor_id: null
+  vendor_id: incepto-medical
   aliases: []
 - name: Indica Labs
   isv_type: ISV
@@ -4640,7 +4640,7 @@ vendors:
   confidence: A
   source: infinitus.ai (company site, homepage), fetched 2026-08
   key: infinitus systems
-  vendor_id: null
+  vendor_id: infinitus-systems
   aliases: []
 - name: Infor (Koch Industries)
   isv_type: ISV
@@ -4730,7 +4730,7 @@ vendors:
   confidence: A
   source: inovalon.com/our-company, /products/payer-cloud, /provider-cloud, and news release on completion of pure-play cloud SaaS/DaaS transformation
   key: inovalon
-  vendor_id: null
+  vendor_id: inovalon
   aliases: []
 - name: Insilico Medicine
   isv_type: ISV
@@ -5212,7 +5212,7 @@ vendors:
   confidence: C
   source: healthcare.konicaminolta.us (Digital Radiography, Exa PACS/RIS, Support Services; 2M customers/150 countries corporate figure — not PACS-specific); deployment model inferred from Exa's known on-prem+cloud offering, not stated on the fetched page
   key: konica minolta
-  vendor_id: null
+  vendor_id: konica-minolta
   aliases:
   - konica minolta exa
 - name: Kontakt.io
@@ -5454,7 +5454,7 @@ vendors:
   confidence: B
   source: lifebit.ai platform and case-studies pages (vendor-stated deployments and record counts; customer count not independently disclosed)
   key: lifebit
-  vendor_id: null
+  vendor_id: lifebit
   aliases: []
 - name: Lightbeam Health Solutions
   isv_type: ISV
@@ -5665,7 +5665,7 @@ vendors:
   confidence: B
   source: mach7t.com (VNA/solutions pages); CIOReview profile; PRNewswire (AWS Partner Network); GlobeNewswire (Sentara go-live)
   key: mach7 technologies
-  vendor_id: null
+  vendor_id: mach7-technologies
   aliases:
   - mach7 technologies eunity
 - name: Machinify
@@ -5745,7 +5745,7 @@ vendors:
   confidence: C
   source: masimo.com hospital-automation & SafetyNet product pages; BioSpace (Alameda County Patient SafetyNet); >1,200-hospital figure from matrixbcg.com secondary blog (unverified, treated as low-confidence estimate)
   key: masimo corporation
-  vendor_id: null
+  vendor_id: masimo
   aliases: []
 - name: MasterControl
   isv_type: ISV
@@ -5822,7 +5822,7 @@ vendors:
   confidence: B
   source: 'materialise.com/en/healthcare/mimics; investors.materialise.com press releases; SEC filings (NASDAQ: MTLS)'
   key: materialise
-  vendor_id: null
+  vendor_id: materialise
   aliases: []
 - name: Matrix Science
   isv_type: ISV
@@ -5892,7 +5892,7 @@ vendors:
   confidence: B
   source: medhost.com (EHR/EDIS/RCM products, on-prem vs hosted/managed deployment, 40+ years, community/critical-access focus, named customer references)
   key: medhost
-  vendor_id: null
+  vendor_id: medhost
   aliases: []
 - name: Medical Informatics Corp (Sickbay)
   isv_type: ISV
@@ -6076,7 +6076,7 @@ vendors:
   confidence: C
   source: 'mennenmedical.com (product homepage: Menntor X9, XVu, DTR8, BiliCare, BiliWrap); ownership/customer counts not disclosed on site'
   key: mennen medical
-  vendor_id: null
+  vendor_id: mennen-medical
   aliases: []
 - name: Merative (Merge Healthcare)
   isv_type: ISV
@@ -6388,7 +6388,7 @@ vendors:
   confidence: C
   source: movilitas.com redirect to indx.com (company overview, products); ownership (Engineering Group vs prior Konica Minolta 2021 acquisition) not fully reconciled — flagged for verification
   key: movilitas
-  vendor_id: null
+  vendor_id: movilitas
   aliases: []
 - name: MRO
   isv_type: service-provider
@@ -6413,7 +6413,7 @@ vendors:
   confidence: B
   source: mrocorp.com (company site, homepage), fetched 2026-08
   key: mro
-  vendor_id: null
+  vendor_id: mro
   aliases: []
 - name: MSAID
   isv_type: ISV
@@ -6617,7 +6617,7 @@ vendors:
   confidence: C
   source: us.nihonkohden.com (Clinical/Digital Solutions); digitalhealthsolutions.com; MTEC Nihon Kohden Digital Health Solutions profile
   key: nihon kohden
-  vendor_id: null
+  vendor_id: nihon-kohden
   aliases: []
 - name: Nonlinear Dynamics (Waters Corporation)
   isv_type: ISV
@@ -6693,7 +6693,7 @@ vendors:
   confidence: B
   source: novarad.net (product + about pages, novapacs-enterprise-imaging); IntuitionLabs Novarad NovaPACS EI profile
   key: novarad
-  vendor_id: null
+  vendor_id: novarad
   aliases: []
 - name: Nuance
   isv_type: ISV
@@ -6717,7 +6717,7 @@ vendors:
   confidence: B
   source: nuance.com (Dragon Medical One / provider solutions pages); Nuance/Microsoft acquisition SEC filing; industry deep-dive reviews (RevCycleAI, Commure).
   key: nuance
-  vendor_id: null
+  vendor_id: nuance
   aliases:
   - nuance powerscribe
   - nuance powerscribe follow up manager
@@ -7022,7 +7022,7 @@ vendors:
   confidence: C
   source: General/established knowledge of OpenText portfolio (opentext.com healthcare pages did not fetch — HTTP 444); product-level healthcare specifics not web-verified this session
   key: opentext
-  vendor_id: null
+  vendor_id: opentext
   aliases:
   - opentext documentum
 - name: OPTEL Group
@@ -7308,7 +7308,7 @@ vendors:
   confidence: B
   source: nanoporetech.com/software and /products/analyse pages; nanoporetech.com MinKNOW update news; businesswire.com 2023-06-09 Geneyx partnership
   key: oxford nanopore technologies
-  vendor_id: null
+  vendor_id: oxford-nanopore
   aliases: []
 - name: PacBio (Pacific Biosciences of California, Inc.)
   isv_type: OEM
@@ -7336,7 +7336,7 @@ vendors:
   confidence: B
   source: pacb.com/smrt-link, pacb.com/revio; PacBio Q4 2024 earnings (marketbeat.com/tipranks); Wikipedia Pacific Biosciences
   key: pacbio
-  vendor_id: null
+  vendor_id: pacbio
   aliases: []
 - name: Paige (Tempus AI)
   isv_type: ISV
@@ -7538,7 +7538,7 @@ vendors:
   confidence: B
   source: piemedicalimaging.com product pages; citoday.com; cardiovascularbusiness.com
   key: pie medical imaging
-  vendor_id: null
+  vendor_id: pie-medical-imaging
   aliases: []
 - name: PLEXIS Healthcare Systems
   isv_type: ISV
@@ -7609,7 +7609,7 @@ vendors:
   confidence: B
   source: prnewswire De Novo authorization (Apr 2024); Roche navify marketplace listing; Fierce Healthcare LifeBridge deployment
   key: prenosis
-  vendor_id: null
+  vendor_id: prenosis
   aliases: []
 - name: Proscia
   isv_type: ISV
@@ -7673,7 +7673,7 @@ vendors:
   confidence: B
   source: proximie.com (500+ facilities, 50 countries, named partners/customers)
   key: proximie
-  vendor_id: null
+  vendor_id: proximie
   aliases: []
 - name: QGenda, LLC (Hearst Health)
   isv_type: ISV
@@ -7861,7 +7861,7 @@ vendors:
   confidence: B
   source: ramsoft.com (PowerServer product pages); PRNewswire press releases (Premier Radiology, Advanced Imaging)
   key: ramsoft
-  vendor_id: null
+  vendor_id: ramsoft
   aliases: []
 - name: Rapid Novor
   isv_type: service-provider
@@ -8066,7 +8066,7 @@ vendors:
   confidence: B
   source: reveleer.com/technology, reveleer.com/news/eve-hybrid-ai-risk-adjustment; thesaasnews/crunchbase funding
   key: reveleer
-  vendor_id: null
+  vendor_id: reveleer
   aliases: []
 - name: Rhapsody (Rhapsody Health, incl. Corepoint)
   isv_type: ISV
@@ -8120,7 +8120,7 @@ vendors:
   confidence: B
   source: rhinofcp.com (news/blog, rebrand and platform pages), GlobeNewswire (Google Cloud partnership 2024), AWS for Industries blog
   key: rhino health
-  vendor_id: null
+  vendor_id: rhino-health
   aliases: []
 - name: Riverain Technologies
   isv_type: ISV
@@ -8878,7 +8878,7 @@ vendors:
   confidence: C
   source: sonybiotechnology.com/us (product portfolio); Sony Group corporate/imaging & medical division
   key: sony
-  vendor_id: null
+  vendor_id: sony
   aliases:
   - sony nucleus
 - name: SOPHiA GENETICS
@@ -9101,7 +9101,7 @@ vendors:
   confidence: C
   source: sisfirst.com (product pages, cloud platform, named client references). Ownership specifics and customer counts not disclosed on site.
   key: surgical information systems
-  vendor_id: null
+  vendor_id: surgical-information-systems
   aliases: []
 - name: Swisslog Healthcare (KUKA AG)
   isv_type: OEM
@@ -9408,7 +9408,7 @@ vendors:
   confidence: B
   source: tetrascience.com (homepage lists platform/apps and named customers Alexion, Merck, Takeda, Bayer, Organon, Syngenta); AWS-native per company positioning
   key: tetrascience
-  vendor_id: null
+  vendor_id: tetrascience
   aliases: []
 - name: Thermo Fisher SampleManager
   isv_type: ISV
@@ -9716,7 +9716,7 @@ vendors:
   confidence: B
   source: Siemens Healthineers ARIA/Eclipse product pages; Varian SEC 8-K filings (FY17-FY19) on install base and market share
   key: varian
-  vendor_id: null
+  vendor_id: varian
   aliases:
   - varian aria
   - varian aria ois medical oncology
@@ -10195,7 +10195,7 @@ vendors:
   confidence: A
   source: wolterskluwer.com/en/health and news pages (UpToDate Enterprise, Connect, Epic integration, 3M clinicians, 2/3 US hospital systems)
   key: wolters kluwer
-  vendor_id: null
+  vendor_id: wolters-kluwer
   aliases:
   - wolters kluwer sentri7
 - name: Wolters Kluwer Health (UpToDate)
@@ -10293,7 +10293,7 @@ vendors:
   confidence: B
   source: xkcorp.com / kardian.com; fiercebiotech.com (FDA clearance); tenovi.com & ccnhealth.com (RPM partnership)
   key: xandar kardian
-  vendor_id: null
+  vendor_id: xandar-kardian
   aliases: []
 - name: Yokogawa
   isv_type: OEM
@@ -10395,7 +10395,7 @@ vendors:
   confidence: B
   source: zelis.com news (integrated payments/communications platform; ZAPP; ZAPP Edge; Duck Creek partnership); zelis.com/built-for/payers
   key: zelis
-  vendor_id: null
+  vendor_id: zelis
   aliases: []
 - name: ZeOmega, Inc.
   isv_type: ISV
