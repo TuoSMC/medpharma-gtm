@@ -52,6 +52,10 @@ def main():
         "scoring": load(DATA / "scoring.yaml"),
         "vendors": load(DATA / "vendors.yaml"),
         "vendor_intel": (load(DATA / "vendor_intel.yaml") if (DATA / "vendor_intel.yaml").exists() else {"vendors": []}),
+        # plan-v6.1 C2/D7: the ONE source of truth for visibility / HOT / the C1 card rollup.
+        # The app reads HOT + descendant_profiles + divergent_children from here; it does NOT recompute.
+        # Regenerate with tools/build_index.py after any taxonomy change.
+        "taxonomy_index": (load(DATA / "taxonomy_index.yaml") if (DATA / "taxonomy_index.yaml").exists() else {"rows": []}),
         "leaderboards": load(DATA / "leaderboards.yaml"),
         "accounts": accounts,
         "built": f"taxonomy v{load(DATA / 'taxonomy.yaml').get('version', '?')} · vendors v{load(DATA / 'vendors.yaml').get('version', '?')}",
@@ -618,6 +622,12 @@ const VNAME={};(DATA.vendors.vendors||[]).forEach(v=>VNAME[v.id]=v.name);
 // ---- relationship fusion: cross-tab lookups (category <-> vendor <-> leaderboard) ----
 const VBYID={};(DATA.vendors.vendors||[]).forEach(v=>VBYID[v.id]=v);
 const CATBYID={};(DATA.taxonomy.categories||[]).forEach(c=>CATBYID[c.id]=c);
+// plan-v6.1 C2/D7 — the retrieval index is the SINGLE source of visibility / HOT / the C1 rollup.
+// IDX[catId] carries child_count · descendant_profiles · divergent_children (computed once by
+// tools/build_index.py). HOT_IDS is the 35 default-visible categories with hardware_opportunity>=3 —
+// the SAME set `taxquery hot` prints. The app must NOT recompute HOT from hardware_opportunity_by_buyer.
+const IDX={};((DATA.taxonomy_index||{}).rows||[]).forEach(r=>IDX[r.id]=r);
+const HOT_IDS=new Set(Object.values(IDX).filter(r=>r.visibility==='default'&&(r.hardware_opportunity||0)>=3).map(r=>r.id));
 // taxonomy tree: level-2+ sub-markets nest under a category (or another subcategory) via `parent`.
 // The tree is arbitrary-depth: category → 子市場 → 孫 → 曾孫 … (a subcategory can parent another subcategory).
 const SUBCATS=(DATA.taxonomy.subcategories||[]);
@@ -671,7 +681,8 @@ const LB_BY_VID={};
     if(e.vendor_id){(LB_BY_VID[e.vendor_id]=LB_BY_VID[e.vendor_id]||[]).push({board:bk,rank:e.rank});}});});})();
 const lbBadge=vid=>{const r=LB_BY_VID[vid];return r?r.map(x=>(x.board==='ai'?'AI':'No-AI')+' #'+x.rank).join(' · '):null;};
 // ---- value signals (flagship=opp4, HOT=customer opp>=3) reused everywhere ----
-const isFlag=c=>c.hardware_opportunity===4, isHot=c=>(c.hardware_opportunity_by_buyer.customer||0)>=3;
+// HOT reads the index (C2/D7 — one source; matches `taxquery hot` = 35). isFlag = headline opportunity 4.
+const isFlag=c=>c.hardware_opportunity===4, isHot=c=>HOT_IDS.has(c.id);
 function catsVal(ids){let flag=0,hot=0;(ids||[]).forEach(id=>{const c=CATBYID[id];if(!c)return;if(isFlag(c))flag++;if(isHot(c))hot++;});return {flag,hot,n:(ids||[]).length};}
 const vendorVal=v=>catsVal(v.categories);
 // value badges (text, no icons): red flagship + green HOT
@@ -943,7 +954,7 @@ function renderTaxonomy(){
     body.append(el('div',{class:'tsub'},alab+' · '+sub.length));
     sub.slice().sort(byOpp).forEach(c=>body.append(catRow(c)));});}
   const flagN=l=>l.filter(c=>c.hardware_opportunity===4).length;
-  const hotN=l=>l.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3).length;
+  const hotN=l=>l.filter(c=>HOT_IDS.has(c.id)).length;  // HOT from the index (C2), not customer-pull
   function l1node(label,list,leaf,open){if(!list.length)return;
     if(open===undefined)open=true;
     const car=el('span',{class:'tcar'},open?'▾':'▸');
@@ -971,6 +982,18 @@ function renderTaxonomy(){
   function showPlayFromSpine(pid){pushNav();selected=null;clear(detailPane);detailPane.append(playBrief(pid));dv={kind:'play',id:pid};
     [...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.remove('sel'));const L=pid.split('-')[1].toUpperCase();const p=PLAY_BY[pid];
     setNote(el('span',{},el('span',{class:'play play'+L.toLowerCase()},'Play '+L),' ',el('b',{},p?p.name:''),T(' — brief on the right','— 右側簡報')));}
+  // plan-v6.1 E3 — the DEFAULT tree STOPS at the category (the spine). Sub-markets (子市場+) are not
+  // walked in the tree; they live on the open card (L1 + the C1 rollup) and behind "Show deeper" (archive).
+  // treeNodeInto (below) is retained for the sub-detail recursion + the archive drill, not the default tree.
+  function catNodeInto(container,c){
+    const row=el('div',{class:'trow l3cat'});row.dataset.id=c.id;row.style.paddingLeft='16px';
+    row.append(el('span',{class:'hw hw'+c.hardware_opportunity,style:'font-size:var(--f-1);padding:0 var(--s2)',title:OPP[c.hardware_opportunity]},String(c.hardware_opportunity)));
+    row.append(el('span',{class:'tcar ph'}));  // no expand caret — the tree is 59 categories, not 999 nodes
+    row.append(el('span',{class:'tname'},nm(c)),el('span',{class:'tby '+BUYER_C[c.primary_buyer],title:c.primary_buyer}));
+    const ix=IDX[c.id];if(ix&&ix.child_count)row.append(el('span',{class:'tcount',title:ix.child_count+T(' sub-markets — open the card','個子市場 — 開卡片')},String(ix.child_count)));
+    row.onclick=()=>viewCat(c);
+    container.append(row);
+  }
   // recursive node: a category (depth 0) or a sub-market (depth ≥1) + its children as a nested drawer.
   // Same shape every level, so the tree descends category → 子市場 → 孫 → 曾孫 … as far as the data.
   function treeNodeInto(container,obj,depth){
@@ -1014,7 +1037,7 @@ function renderTaxonomy(){
         const b2=el('div',{class:'tbody'});
         h2.onclick=()=>{const o=b2.style.display!=='none';b2.style.display=o?'none':'';c2.textContent=o?'▸':'▾';};
         body.append(h2,b2);
-        subl.slice().sort(byOpp).forEach(c=>treeNodeInto(b2,c,0));  // recursive: category → 子市場 → 孫 → …
+        subl.slice().sort(byOpp).forEach(c=>catNodeInto(b2,c));  // E3: tree stops at category (the spine)
       });
     });
     if(sel)[...treePane.querySelectorAll('.trow')].forEach(r=>r.classList.toggle('sel',r.dataset.id===sel.id));
@@ -1098,6 +1121,23 @@ function renderTaxonomy(){
     if(subs.length){
       const ss=el('div',{class:'dsec'});
       ss.append(el('div',{class:'dsh'},T('Sub-markets','子市場')+' · '+subs.length+T(' — click a row to expand · ↳ to drill deeper','—點一列展開 · ↳ 下鑽更深')));
+      // plan-v6.1 C1 rollup — read from the index (IDX), never recomputed: the hardware-diversity line
+      // ("splits into N pulling {boxes}") + the ≤3 sub-markets that change the bet (different box or buyer).
+      const ix=IDX[c.id]||{};
+      if((ix.descendant_profiles||[]).length){
+        const dl=el('div',{class:'vprose',style:'font-size:var(--f-2);color:var(--muted);margin:2px 0 6px'});
+        dl.append(el('b',{},T('Splits into ','分裂成 ')+(ix.child_count||subs.length)+T(' sub-markets','個子市場')+T(' · pulls: ','・拉：')));
+        ix.descendant_profiles.forEach(h=>dl.append(el('span',{class:'pill',style:'margin:0 2px',title:plineGloss(h)},smciFam(h))));
+        ss.append(dl);
+      }
+      if((ix.divergent_children||[]).length){
+        const dv2=el('div',{style:'margin:0 0 8px'});
+        dv2.append(el('span',{class:'tagk'},T('changes the bet','改變打法')+' '));
+        ix.divergent_children.forEach(cid=>{const s=SUBBYID[cid];if(!s)return;
+          const chip=el('span',{class:'chip',style:'cursor:pointer'},subName(s));
+          chip.onclick=(e)=>{e.stopPropagation();showSubDetail(s);};dv2.append(chip);});
+        ss.append(dv2);
+      }
       subs.forEach(s=>{const sc=el('div',{class:'subcard',id:'sub-'+s.id});const gk=subcatsOf(s.id).length;const nv=(s.vendors||[]).length;
         const scar=el('span',{class:'scar'},'▸');
         const sh=el('div',{class:'subhd'},scar,el('span',{class:'snm'},LANG==='zh'?s.name_zh:s.name_en),

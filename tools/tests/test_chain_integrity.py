@@ -1649,5 +1649,40 @@ class TestTaxIndex(unittest.TestCase):
         self.assertEqual(live_hot, 35, "live HOT != 35 — taxonomy changed; rebuild + reconcile")
 
 
+class TestE3Fold(unittest.TestCase):
+    """plan-v6.1 E3a — the Explore tree folds to the 59-category spine; the app consumes the
+    index for HOT + the C1 card rollup (C2/D7), and does not recompute HOT or walk 999 nodes."""
+
+    SRC = (REPO / "tools" / "build_app.py").read_text(encoding="utf-8")
+    HTML = (REPO / "app" / "index.html").read_text(encoding="utf-8")
+
+    def test_build_injects_the_index(self):
+        self.assertIn('"taxonomy_index"', self.SRC, "build_app must inject data/taxonomy_index.yaml")
+
+    def test_hot_reads_the_index_not_customer_pull(self):
+        """C2/D7: HOT is the index set, not a recomputed hardware_opportunity_by_buyer.customer filter."""
+        self.assertIn("const HOT_IDS=new Set(", self.SRC, "HOT_IDS must be built from the index")
+        self.assertIn("isHot=c=>HOT_IDS.has(c.id)", self.SRC, "isHot must read the index HOT set")
+        self.assertNotIn("hotN=l=>l.filter(c=>(c.hardware_opportunity_by_buyer.customer||0)>=3)", self.SRC,
+                         "hotN must no longer recompute HOT from customer-pull")
+
+    def test_tree_stops_at_category(self):
+        """the default tree renders category leaves (catNodeInto), not the recursive 999-node walk."""
+        self.assertIn("function catNodeInto(", self.SRC, "category-leaf renderer must exist")
+        self.assertIn("catNodeInto(b2,c)", self.SRC, "playTree must render category leaves")
+        self.assertNotIn("treeNodeInto(b2,c,0)", self.SRC,
+                         "playTree must NOT recurse the full tree (that is the 999-node wall)")
+
+    def test_card_shows_c1_rollup_from_index(self):
+        """C1: the card reads descendant_profiles + divergent_children from the index (IDX), not recomputed."""
+        self.assertIn("const IDX={}", self.SRC, "IDX lookup over the index rows must exist")
+        self.assertIn("ix.descendant_profiles", self.SRC, "card must render the C1 diversity line from the index")
+        self.assertIn("ix.divergent_children", self.SRC, "card must render the C1 divergent chips from the index")
+
+    def test_built_html_embeds_the_index(self):
+        """the shipped app actually carries the index rows (so the runtime rollup/HOT have data)."""
+        self.assertIn("descendant_profiles", self.HTML, "built app/index.html must embed the taxonomy index")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
