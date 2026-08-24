@@ -447,10 +447,16 @@ table.rankmatrix tr:hover td{background:var(--accentbg)}
 .scbar{display:inline-block;width:70px;height:7px;border-radius:var(--r-pill);background:var(--line);overflow:hidden;vertical-align:middle}
 .scbarfill{display:block;height:100%;background:var(--accent)}
 .rankmatrix .vflag,.rankmatrix .vhot{margin-right:4px}
+.portfolio-back{display:inline-flex;align-items:center;gap:var(--s3);min-height:44px;margin:0 0 var(--s4);padding:var(--s2) var(--s4);border:1px solid var(--line);border-radius:var(--r-tag);background:var(--panel);color:var(--accent);font-family:inherit;font-size:var(--f-3);font-weight:700;line-height:1.2;cursor:pointer}
+.portfolio-back:hover{border-color:var(--accent);background:var(--accentbg)}
+.portfolio-back:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:420px){.portfolio-back .portfolio-back-zh{display:none}}
+@media print{.portfolio-back{display:none}}
 </style>
 </head>
 <body>
 <header>
+  <button class="portfolio-back" type="button" aria-label="Back to previous page / 返回上一頁" onclick="window.history.length > 1 ? window.history.back() : window.close()"><span aria-hidden="true">←</span><span>Back</span><span class="portfolio-back-zh" lang="zh-Hant">/ 返回上一頁</span></button>
   <button id="langtog" style="position:absolute;top:14px;right:16px;padding:var(--s2) var(--s4);border:1px solid var(--line);border-radius:var(--r-card);background:var(--card);color:var(--fg);font-size:var(--f-4);font-weight:700;cursor:pointer">中文</button>
   <h1>SMCI Medical / Pharma GTM Playbook <span class="pill" id="ver"></span></h1>
   <div class="byline" id="byline"></div>
